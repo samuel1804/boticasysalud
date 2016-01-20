@@ -19,7 +19,7 @@ namespace WebBS.Models
             this.ALP_ORDEN_PREPARADO_INSUMO = new HashSet<ALP_ORDEN_PREPARADO_INSUMO>();
         }
     
-        public int cod_insumo { get; set; }
+        public string cod_insumo { get; set; }
         public string nom_insumo { get; set; }
         public string unidad_medida { get; set; }
         public int concentracion { get; set; }

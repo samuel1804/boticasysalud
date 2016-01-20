@@ -19,7 +19,7 @@ namespace WebBS.Models
             this.ALP_ORDEN_PREPARADO = new HashSet<ALP_ORDEN_PREPARADO>();
         }
     
-        public int cod_receta { get; set; }
+        public string cod_receta { get; set; }
         public string nom_preparado { get; set; }
         public string desc_receta { get; set; }
         public string nom_medico { get; set; }

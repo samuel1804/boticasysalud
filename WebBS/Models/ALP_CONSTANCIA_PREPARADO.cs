@@ -20,8 +20,8 @@ namespace WebBS.Models
             this.ALP_LIBRO_RECETA = new HashSet<ALP_LIBRO_RECETA>();
         }
     
-        public int num_constancia_preparado { get; set; }
-        public int num_orden_preparado { get; set; }
+        public string num_constancia_preparado { get; set; }
+        public string num_orden_preparado { get; set; }
         public System.DateTime fec_elaboracion { get; set; }
         public string motivo { get; set; }
         public string estado { get; set; }

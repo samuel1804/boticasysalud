@@ -15,7 +15,7 @@ namespace WebBS.Models
     public partial class ALP_LIBRO_RECETA
     {
         public int cod_libro_receta { get; set; }
-        public int num_constancia_preparado { get; set; }
+        public string num_constancia_preparado { get; set; }
         public int cod_quimico_laboratorista { get; set; }
         public System.DateTime fec_preparado { get; set; }
         public int cod_usu_regi { get; set; }

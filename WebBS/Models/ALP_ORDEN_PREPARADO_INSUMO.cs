@@ -14,8 +14,8 @@ namespace WebBS.Models
     
     public partial class ALP_ORDEN_PREPARADO_INSUMO
     {
-        public int num_orden_preparado { get; set; }
-        public int cod_insumo { get; set; }
+        public string num_orden_preparado { get; set; }
+        public string cod_insumo { get; set; }
         public int cant_insumo { get; set; }
         public int cod_usu_regi { get; set; }
         public System.DateTime fec_usu_regi { get; set; }

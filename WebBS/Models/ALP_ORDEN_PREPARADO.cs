@@ -20,8 +20,8 @@ namespace WebBS.Models
             this.ALP_ORDEN_PREPARADO_INSUMO = new HashSet<ALP_ORDEN_PREPARADO_INSUMO>();
         }
     
-        public int num_orden_preparado { get; set; }
-        public int cod_receta { get; set; }
+        public string num_orden_preparado { get; set; }
+        public string cod_receta { get; set; }
         public int cod_sucursal { get; set; }
         public int cod_empleado { get; set; }
         public System.DateTime fec_orden { get; set; }

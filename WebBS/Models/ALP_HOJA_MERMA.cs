@@ -14,8 +14,8 @@ namespace WebBS.Models
     
     public partial class ALP_HOJA_MERMA
     {
-        public int num_hoja_merma { get; set; }
-        public int num_constancia_preparado { get; set; }
+        public string num_hoja_merma { get; set; }
+        public string num_constancia_preparado { get; set; }
         public int cant_insumo_merma { get; set; }
         public string motivo { get; set; }
         public int cod_usu_regi { get; set; }
