@@ -203,6 +203,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ActividadPlanificadaController.cs" />
     <Compile Include="Controllers\ALP\ConstanciaController.cs" />
+    <Compile Include="Controllers\ALP\OrdenPreparadoController.cs" />
     <Compile Include="Controllers\ChoferController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -506,9 +507,6 @@
     <Compile Include="Models\RYA_UBICACIONES.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\usp_Chofer_GetAll_Result.cs">
-      <DependentUpon>BDBoticas.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -540,6 +538,7 @@
     <Content Include="Views\ActividadPlanificada\Edit.cshtml" />
     <Content Include="Views\ActividadPlanificada\Index.cshtml" />
     <Content Include="Views\ALP\Constancia\Index.cshtml" />
+    <Content Include="Views\ALP\Constancia\Nuevo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -549,6 +548,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ALP\OrdenPreparado\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

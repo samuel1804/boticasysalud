@@ -1,7 +1,69 @@
-﻿
+﻿@model IEnumerable<WebBS.Models.ALP_ORDEN_PREPARADO>
+
 @{
     ViewBag.Title = "Constancia de Preparado";
 }
 
-<h2>Constancia de Preparado</h2>
+<form id="frmBuscarOrden" class="form-inline" method="post" action="/OrdenPreparado/BuscarOrden">
+    <div class="form-group">
+        <label>Filtro</label>
+        <select id="selFiltro" name="filtro" class="form-control">
+            <option value="1">Nro Preparado</option>
+            <option value="2">Nombre Preparado</option>
+            <option value="3">Fecha</option>
+            <option value="4">Sucursal</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="txtCriterio">Criterio búsqueda</label>
+        <input type="text" name="criterio" class="form-control" id="txtCriterio" placeholder="Criterio búsqueda" required />
+    </div>
 
+    <button id="btnBuscar" type="button" class="btn btn-primary">Buscar</button>
+
+</form>
+<br />
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Resultado</div>
+
+    <div class="table-responsive">
+        <!-- Table -->
+        <table class="table table-striped table-bordered table-hover table-responsive">
+            <thead>
+                <tr>
+                    <th>Nro Orden</th>
+                    <th>Fecha</th>
+                    <th>Sucursal</th>
+                    <th>Nombre Preparado</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody id="tbOrdenContent">
+               @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.num_orden_preparado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fec_orden)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RRH_Sucursal.Nom_sucursal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ALP_RECETA.nom_preparado)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Nueva Constancia", "Nuevo", "Constancia", new { num_orden = item.num_orden_preparado }, null)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<br />
