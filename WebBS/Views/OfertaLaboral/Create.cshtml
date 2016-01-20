@@ -1,0 +1,232 @@
+﻿@model WebBS.Models.OfertaLaboral
+
+@{
+    ViewBag.Title = "Registrar Oferta Laboral";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Registrar Oferta Laboral</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true)
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Titulo, new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+             
+                @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } }) 
+                @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Perfil.IdArea, "Area", new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+
+                @Html.DropDownListFor(model=>model.IdArea, @ViewBag.IdArea as SelectList, "Seleccione", new { @class = "form-control" })
+
+                @Html.ValidationMessage("IdArea", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("IdPuesto", "Puesto", new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownListFor(model=>model.IdPuesto, @ViewBag.IdPuesto as SelectList, "Seleccione", new { @class = "form-control" })
+                @Html.ValidationMessage("IdPuesto", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdPerfil, "Perfil", new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownListFor(model => model.IdPerfil, (SelectList)ViewBag.DropList, "Seleccione", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdPerfil, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdSucursal, "Sucursal", new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownList("IdSucursal",  (SelectList)ViewBag.DropList, "Seleccione", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdSucursal, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Descripciones Funcionales", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextArea("Descripcion", new { @readonly = "readonly",@class = "form-control col-md-10", @rows = 3 })
+                @Html.ValidationMessage("Descripcion")
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Caracteristicas Especiales", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextArea("Caracteristicas", new { @readonly = "readonly",@class = "form-control col-md-10", @rows = 3 })
+                @Html.ValidationMessage("Caracteristicas")
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.Label("Funciones Adicionales", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.FuncionesAdicionales, new { @class = "form-control col-md-10", @placeholder = "Ingrese las Funciones Adicionales que desempeñara el empleado", @rows = 3 })
+                @Html.ValidationMessageFor(model => model.FuncionesAdicionales)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Tiempo de Validez", new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2">
+
+
+                @Html.TextBoxFor(model => model.TiempoValidez, new { @readonly = "readonly", @Value = "3", @class = "form-control" })
+
+               
+            </div>
+           @Html.Label("Meses", new { @class = "control-label" })
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" name="btnRegistrar"  value="Registrar" class="btn btn-default" />
+                <input type="submit" name="btnCancelar" value="Cancelar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Regresar", "Index")
+</div>
+
+
+
+
+<script language="javascript">
+        $(document).ready(function () {
+        //Dropdownlist Selectedchange event
+        $("#IdArea").change(function () {
+            $("#IdPuesto").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetPuestos")', // we are calling json method
+
+                dataType: 'json',
+
+                data: { id: $("#IdArea").val() },
+               // here we are get value of selected country and passing same value
+                 // as inputto json method GetStates.
+
+                success: function (puestos) {
+                    // states contains the JSON formatted list
+                    // of states passed from the controller
+
+                    $.each(puestos, function (i, puesto) {
+                        $("#IdPuesto").append('<option value="' + puesto.Value + '">' +
+                         puesto.Text + '</option>');
+                    // here we are adding option for States
+
+                    });
+
+                    $('#IdPuesto').change();
+
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        })
+
+
+
+
+            $("#IdPuesto").change(function () {
+                $("#IdPerfil").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetPerfiles")', // we are calling json method
+
+                    dataType: 'json',
+
+                    data: { id: $("#IdPuesto").val() },
+                    // here we are get value of selected country and passing same value
+                    // as inputto json method GetStates.
+
+                    success: function (perfiles) {
+                        // states contains the JSON formatted list
+                        // of states passed from the controller
+
+                        $.each(perfiles, function (i, perfil) {
+                            $("#IdPerfil").append('<option value="' + perfil.Value + '">' +
+                             perfil.Text + '</option>');
+                            // here we are adding option for States
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve states.' + ex);
+                    }
+                });
+                return false;
+            })
+
+
+
+
+
+            $("#IdPerfil").change(function () {
+                $("#Descripcion").empty();
+                $("#Caracteristicas").empty();
+                
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetPerfil")', // we are calling json method
+
+                    dataType: 'json',
+
+                    data: { id: $("#IdPerfil").val() },
+                    // here we are get value of selected country and passing same value
+                    // as inputto json method GetStates.
+
+                    success: function (perfil) {
+                        // states contains the JSON formatted list
+                        // of states passed from the controller
+
+                      
+                        $("#Descripcion").val("SA");
+                            // here we are adding option for States
+
+                 
+
+
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve states.' + ex);
+                    }
+                });
+                return false;
+            })
+
+
+
+        });
+
+
+
+
+</script>

@@ -1,0 +1,76 @@
+﻿@model IEnumerable<WebBS.Models.Perfil>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Competencias)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Caracteristicas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SueldoIni)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SueldoFin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Puesto.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Competencias)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Caracteristicas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SueldoIni)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SueldoFin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Puesto.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdPerfil }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdPerfil }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdPerfil })
+        </td>
+    </tr>
+}
+
+</table>
