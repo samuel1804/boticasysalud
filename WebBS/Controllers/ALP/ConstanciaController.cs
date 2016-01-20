@@ -8,6 +8,11 @@ namespace WebBS.Controllers.ALP
 {
     public class ConstanciaController : Controller
     {
-        
+
+        public ActionResult Index()
+        {
+            return View("~/Views/ALP/Constancia/Index.cshtml");
+        }
+
     }
 }
