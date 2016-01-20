@@ -24,9 +24,9 @@ namespace WebBS.Controllers
             return View();
         }
 
-        //public JsonResult FillIndex()
-        //{
-        //    return Json(db.NotaIngreso.ToList(), JsonRequestBehavior.AllowGet);
-        //}
+        public JsonResult FillIndex()
+        {
+            return Json(db.NotaIngreso.ToList(), JsonRequestBehavior.AllowGet);
+        }
 	}
 }
