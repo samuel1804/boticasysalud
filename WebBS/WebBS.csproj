@@ -43,11 +43,13 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -199,6 +201,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ActividadPlanificadaController.cs" />
     <Compile Include="Controllers\ChoferController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -208,10 +211,25 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Almacen.cs">
+    <Compile Include="Models\ALP_CONSTANCIA_PREPARADO.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Area.cs">
+    <Compile Include="Models\ALP_HOJA_MERMA.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ALP_INSUMO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ALP_LIBRO_RECETA.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ALP_ORDEN_PREPARADO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ALP_ORDEN_PREPARADO_INSUMO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ALP_RECETA.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BDBoticas.Context.cs">
@@ -229,61 +247,265 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BDBoticas.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Chofer.cs">
+    <Compile Include="Models\DIS_Control_Asignacion.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Control_Asignacion.cs">
+    <Compile Include="Models\DIS_HojaRuta.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DetalleKardex.cs">
+    <Compile Include="Models\DIS_HojaRutaDetalle.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DetalleNotaIngreso.cs">
+    <Compile Include="Models\DIS_Pedido.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DetalleNotaSalida.cs">
+    <Compile Include="Models\DIS_Pedido_Detalle.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DetallePedido.cs">
+    <Compile Include="Models\DIS_PresentacionProducto.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Kardex.cs">
+    <Compile Include="Models\DIS_Producto.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\NotaIngreso.cs">
+    <Compile Include="Models\DIS_TipoProducto.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\NotaSalida.cs">
+    <Compile Include="Models\DIS_Transportista.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OfertaLaboral.cs">
+    <Compile Include="Models\DIS_Vehiculo.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Pedido.cs">
+    <Compile Include="Models\GCC_CLIENTE.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Perfil.cs">
+    <Compile Include="Models\GCC_CLIENTE_JURIDICO.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Productos.cs">
+    <Compile Include="Models\GCC_CLIENTE_NATURAL.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Puesto.cs">
+    <Compile Include="Models\GCC_COMPROBANTE.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Sucursal.cs">
+    <Compile Include="Models\GCC_CONTRATO_CREDITO.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Ubicacion.cs">
+    <Compile Include="Models\GCC_CUENTA_CLIENTE.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UbicacionProducto.cs">
+    <Compile Include="Models\GCC_DOCUMENTO_RECHAZO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GCC_EMPLEADO_INF_CREDITICIO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GCC_EMPLEADO_SOL_CREDITO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GCC_INFORME_CREDITICIO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GCC_NOTIFICACION.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GCC_PLAN_CREDITO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GCC_POLITICAS_NOTIFICACION.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GCC_POLITICA_CREDITO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GCC_SOLICITUD_CREDITO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_ACCION.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_ACTIVIDAD.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_ACTIVIDAD_PLANIFICADA.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_ADQUISICION.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_ALERTA.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_ARTICULO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_BITACORA_EVENTO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_BL.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_CERTIFICADO_ISO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_CERTIFICADO_MANUFACTURA.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_CONCEPTO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_DAM.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_DEPARTAMENTO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_DESADUANAJE.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_DETALLE_FACTURA_COMERCIAL.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_DETALLE_ORDEN_COMPRA.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_DISTRITO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_EVENTO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_FACTURA_COMERCIAL.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_ORDEN_COMPRA.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_PAGO_IMPORTACION.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_PROVEEDOR.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_PROVINCIA.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_PUERTO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_RESOLUCION_DIGEMID.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_SOLICITUD.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_SOLICITUD_GESTION_PERMISO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_SOLICITUD_IMPORTACION.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_TIPO_ACTIVIDAD.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_TIPO_CAMBIO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_TIPO_EVENTO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_TIPO_MONEDA.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_TIPO_PAGO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_AlternativaAutoevaluacion.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_AlternativaEvaluacionTecnica.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_Area.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_Candidato.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_Criterio.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_CurriculumVitae.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_Empleado.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_OfertaLaboral.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_OfertaLaboral_Candidato.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_Perfil.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_PreguntaEvaluacionTecnica.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_PruebaAuotoevaluacion.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_PruebaEvaluacionTecnica.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_Puesto.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_Sucursal.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RYA_ACTARECEP_CAB.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RYA_ACTARECEP_DET.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RYA_ALMACENES.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RYA_LOTES.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RYA_MOVALM_CAB.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RYA_MOVALM_DET.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RYA_PEDIDO_CAB.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RYA_PEDIDO_DET.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RYA_PRODUCTO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RYA_STOCK.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RYA_SUCURSALES.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RYA_TRANSA_ALMA.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RYA_UBICACIONES.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\usp_Chofer_GetAll_Result.cs">
-      <DependentUpon>BDBoticas.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Vehiculo.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -311,6 +533,11 @@
     <Content Include="Views\OfertaLaboral\Details.cshtml" />
     <Content Include="Views\OfertaLaboral\Edit.cshtml" />
     <Content Include="Views\OfertaLaboral\Index.cshtml" />
+    <Content Include="Views\ActividadPlanificada\Create.cshtml" />
+    <Content Include="Views\ActividadPlanificada\Delete.cshtml" />
+    <Content Include="Views\ActividadPlanificada\Details.cshtml" />
+    <Content Include="Views\ActividadPlanificada\Edit.cshtml" />
+    <Content Include="Views\ActividadPlanificada\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

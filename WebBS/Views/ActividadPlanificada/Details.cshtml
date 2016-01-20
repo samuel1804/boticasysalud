@@ -1,0 +1,122 @@
+﻿@model WebBS.Models.IMP_ACTIVIDAD_PLANIFICADA
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>IMP_ACTIVIDAD_PLANIFICADA</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_planificacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_planificacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_cierre_planificacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_cierre_planificacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prioridad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prioridad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Adjunto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adjunto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cod_usu_regi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cod_usu_regi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_usu_regi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_usu_regi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cod_usu_modi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cod_usu_modi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_usu_modi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_usu_modi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IMP_ACTIVIDAD.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IMP_ACTIVIDAD.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IMP_SOLICITUD_GESTION_PERMISO.Cod_solicitud_gestion_permiso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IMP_SOLICITUD_GESTION_PERMISO.Cod_solicitud_gestion_permiso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RRH_Empleado.Nom_empleado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RRH_Empleado.Nom_empleado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Cod_actividad_planificada }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

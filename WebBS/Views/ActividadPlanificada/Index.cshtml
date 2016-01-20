@@ -1,0 +1,105 @@
+﻿@model IEnumerable<WebBS.Models.IMP_ACTIVIDAD_PLANIFICADA>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fec_planificacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fec_cierre_planificacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prioridad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adjunto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cod_usu_regi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fec_usu_regi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cod_usu_modi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fec_usu_modi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IMP_ACTIVIDAD.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IMP_SOLICITUD_GESTION_PERMISO.Cod_solicitud_gestion_permiso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RRH_Empleado.Nom_empleado)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fec_planificacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fec_cierre_planificacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prioridad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Adjunto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cod_usu_regi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fec_usu_regi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cod_usu_modi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fec_usu_modi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IMP_ACTIVIDAD.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IMP_SOLICITUD_GESTION_PERMISO.Cod_solicitud_gestion_permiso)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RRH_Empleado.Nom_empleado)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Cod_actividad_planificada }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Cod_actividad_planificada }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Cod_actividad_planificada })
+        </td>
+    </tr>
+}
+
+</table>
