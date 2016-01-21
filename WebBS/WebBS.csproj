@@ -177,6 +177,9 @@
       <LastGenOutput>BDBoticas.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\ALP\IndexConstancia.js" />
+    <Content Include="Scripts\ALP\NuevaConstancia.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -213,7 +216,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ALP\JsonResponseFactory.cs" />
     <Compile Include="Models\ALP_CONSTANCIA_PREPARADO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ALP_CONSTANCIA_PREPARADO_INSUMO.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ALP_HOJA_MERMA.cs">
@@ -505,6 +512,9 @@
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RYA_UBICACIONES.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
