@@ -26,6 +26,7 @@ namespace WebBS.Models
         }
     
         public virtual DbSet<ALP_CONSTANCIA_PREPARADO> ALP_CONSTANCIA_PREPARADO { get; set; }
+        public virtual DbSet<ALP_CONSTANCIA_PREPARADO_INSUMO> ALP_CONSTANCIA_PREPARADO_INSUMO { get; set; }
         public virtual DbSet<ALP_HOJA_MERMA> ALP_HOJA_MERMA { get; set; }
         public virtual DbSet<ALP_INSUMO> ALP_INSUMO { get; set; }
         public virtual DbSet<ALP_LIBRO_RECETA> ALP_LIBRO_RECETA { get; set; }
@@ -118,5 +119,6 @@ namespace WebBS.Models
         public virtual DbSet<RYA_SUCURSALES> RYA_SUCURSALES { get; set; }
         public virtual DbSet<RYA_TRANSA_ALMA> RYA_TRANSA_ALMA { get; set; }
         public virtual DbSet<RYA_UBICACIONES> RYA_UBICACIONES { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

@@ -12,12 +12,22 @@
           <Property Name="num_constancia_preparado" Type="char" MaxLength="20" Nullable="false" />
           <Property Name="num_orden_preparado" Type="char" MaxLength="20" Nullable="false" />
           <Property Name="fec_elaboracion" Type="date" Nullable="false" />
-          <Property Name="motivo" Type="nvarchar" MaxLength="250" />
           <Property Name="estado" Type="char" MaxLength="2" Nullable="false" />
           <Property Name="cod_usu_regi" Type="int" Nullable="false" />
           <Property Name="fec_usu_regi" Type="date" Nullable="false" />
           <Property Name="cod_usu_modi" Type="int" />
           <Property Name="fec_usu_modi" Type="date" />
+        </EntityType>
+        <EntityType Name="ALP_CONSTANCIA_PREPARADO_INSUMO">
+          <Key>
+            <PropertyRef Name="num_constancia_preparado" />
+            <PropertyRef Name="cod_insumo" />
+          </Key>
+          <Property Name="num_constancia_preparado" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="cod_insumo" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="cant_insumo_orden" Type="int" Nullable="false" />
+          <Property Name="cant_insumo_constancia" Type="int" Nullable="false" />
+          <Property Name="cant_insumo_diferencia" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ALP_HOJA_MERMA">
           <Key>
@@ -1367,6 +1377,40 @@
           <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_modi" Type="datetime" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__ALP_CONST__cod_i__2DB1C7EE">
+          <End Role="ALP_INSUMO" Type="Self.ALP_INSUMO" Multiplicity="1" />
+          <End Role="ALP_CONSTANCIA_PREPARADO_INSUMO" Type="Self.ALP_CONSTANCIA_PREPARADO_INSUMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_INSUMO">
+              <PropertyRef Name="cod_insumo" />
+            </Principal>
+            <Dependent Role="ALP_CONSTANCIA_PREPARADO_INSUMO">
+              <PropertyRef Name="cod_insumo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALP_CONST__num_c__2EA5EC27">
+          <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
+          <End Role="ALP_CONSTANCIA_PREPARADO_INSUMO" Type="Self.ALP_CONSTANCIA_PREPARADO_INSUMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_CONSTANCIA_PREPARADO">
+              <PropertyRef Name="num_constancia_preparado" />
+            </Principal>
+            <Dependent Role="ALP_CONSTANCIA_PREPARADO_INSUMO">
+              <PropertyRef Name="num_constancia_preparado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__ALP_CONST__num_o__3F115E1A">
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="1" />
           <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="*" />
@@ -2589,6 +2633,7 @@
         </Association>
         <EntityContainer Name="BDBoticasModelStoreContainer">
           <EntitySet Name="ALP_CONSTANCIA_PREPARADO" EntityType="Self.ALP_CONSTANCIA_PREPARADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ALP_CONSTANCIA_PREPARADO_INSUMO" EntityType="Self.ALP_CONSTANCIA_PREPARADO_INSUMO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALP_HOJA_MERMA" EntityType="Self.ALP_HOJA_MERMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALP_INSUMO" EntityType="Self.ALP_INSUMO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALP_LIBRO_RECETA" EntityType="Self.ALP_LIBRO_RECETA" Schema="dbo" store:Type="Tables" />
@@ -2681,6 +2726,15 @@
           <EntitySet Name="RYA_SUCURSALES" EntityType="Self.RYA_SUCURSALES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RYA_TRANSA_ALMA" EntityType="Self.RYA_TRANSA_ALMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RYA_UBICACIONES" EntityType="Self.RYA_UBICACIONES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ALP_CONST__cod_i__2DB1C7EE" Association="Self.FK__ALP_CONST__cod_i__2DB1C7EE">
+            <End Role="ALP_INSUMO" EntitySet="ALP_INSUMO" />
+            <End Role="ALP_CONSTANCIA_PREPARADO_INSUMO" EntitySet="ALP_CONSTANCIA_PREPARADO_INSUMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALP_CONST__num_c__2EA5EC27" Association="Self.FK__ALP_CONST__num_c__2EA5EC27">
+            <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
+            <End Role="ALP_CONSTANCIA_PREPARADO_INSUMO" EntitySet="ALP_CONSTANCIA_PREPARADO_INSUMO" />
+          </AssociationSet>
           <AssociationSet Name="FK__ALP_CONST__num_o__3F115E1A" Association="Self.FK__ALP_CONST__num_o__3F115E1A">
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
@@ -3098,15 +3152,28 @@
           <Property Name="num_constancia_preparado" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="num_orden_preparado" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="fec_elaboracion" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="motivo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="estado" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="cod_usu_regi" Type="Int32" Nullable="false" />
           <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO_INSUMO" Relationship="Self.FK__ALP_CONST__num_c__2EA5EC27" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_CONSTANCIA_PREPARADO_INSUMO" />
           <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="Self.FK__ALP_CONST__num_o__3F115E1A" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_ORDEN_PREPARADO" />
           <NavigationProperty Name="ALP_HOJA_MERMA" Relationship="Self.FK__ALP_HOJA___num_c__40058253" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_HOJA_MERMA" />
           <NavigationProperty Name="ALP_LIBRO_RECETA" Relationship="Self.FK__ALP_LIBRO__num_c__41EDCAC5" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_LIBRO_RECETA" />
+        </EntityType>
+        <EntityType Name="ALP_CONSTANCIA_PREPARADO_INSUMO">
+          <Key>
+            <PropertyRef Name="num_constancia_preparado" />
+            <PropertyRef Name="cod_insumo" />
+          </Key>
+          <Property Name="num_constancia_preparado" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="cod_insumo" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="cant_insumo_orden" Type="Int32" Nullable="false" />
+          <Property Name="cant_insumo_constancia" Type="Int32" Nullable="false" />
+          <Property Name="cant_insumo_diferencia" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="Self.FK__ALP_CONST__num_c__2EA5EC27" FromRole="ALP_CONSTANCIA_PREPARADO_INSUMO" ToRole="ALP_CONSTANCIA_PREPARADO" />
+          <NavigationProperty Name="ALP_INSUMO" Relationship="Self.FK__ALP_CONST__cod_i__2DB1C7EE" FromRole="ALP_CONSTANCIA_PREPARADO_INSUMO" ToRole="ALP_INSUMO" />
         </EntityType>
         <EntityType Name="ALP_HOJA_MERMA">
           <Key>
@@ -3135,6 +3202,7 @@
           <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO_INSUMO" Relationship="Self.FK__ALP_CONST__cod_i__2DB1C7EE" FromRole="ALP_INSUMO" ToRole="ALP_CONSTANCIA_PREPARADO_INSUMO" />
           <NavigationProperty Name="ALP_ORDEN_PREPARADO_INSUMO" Relationship="Self.FK__ALP_ORDEN__cod_i__45BE5BA9" FromRole="ALP_INSUMO" ToRole="ALP_ORDEN_PREPARADO_INSUMO" />
         </EntityType>
         <EntityType Name="ALP_LIBRO_RECETA">
@@ -4655,6 +4723,28 @@
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
           <NavigationProperty Name="RYA_LOTES" Relationship="Self.FK_RYA_UBICACIONES_RYA_LOTES" FromRole="RYA_UBICACIONES" ToRole="RYA_LOTES" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__ALP_CONST__num_c__2EA5EC27">
+          <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
+          <End Role="ALP_CONSTANCIA_PREPARADO_INSUMO" Type="Self.ALP_CONSTANCIA_PREPARADO_INSUMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_CONSTANCIA_PREPARADO">
+              <PropertyRef Name="num_constancia_preparado" />
+            </Principal>
+            <Dependent Role="ALP_CONSTANCIA_PREPARADO_INSUMO">
+              <PropertyRef Name="num_constancia_preparado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__ALP_CONST__num_o__3F115E1A">
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="1" />
           <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="*" />
@@ -4688,6 +4778,18 @@
             </Principal>
             <Dependent Role="ALP_LIBRO_RECETA">
               <PropertyRef Name="num_constancia_preparado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALP_CONST__cod_i__2DB1C7EE">
+          <End Role="ALP_INSUMO" Type="Self.ALP_INSUMO" Multiplicity="1" />
+          <End Role="ALP_CONSTANCIA_PREPARADO_INSUMO" Type="Self.ALP_CONSTANCIA_PREPARADO_INSUMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_INSUMO">
+              <PropertyRef Name="cod_insumo" />
+            </Principal>
+            <Dependent Role="ALP_CONSTANCIA_PREPARADO_INSUMO">
+              <PropertyRef Name="cod_insumo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5877,6 +5979,7 @@
         </Association>
         <EntityContainer Name="BDBoticasEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ALP_CONSTANCIA_PREPARADO" EntityType="Self.ALP_CONSTANCIA_PREPARADO" />
+          <EntitySet Name="ALP_CONSTANCIA_PREPARADO_INSUMO" EntityType="Self.ALP_CONSTANCIA_PREPARADO_INSUMO" />
           <EntitySet Name="ALP_HOJA_MERMA" EntityType="Self.ALP_HOJA_MERMA" />
           <EntitySet Name="ALP_INSUMO" EntityType="Self.ALP_INSUMO" />
           <EntitySet Name="ALP_LIBRO_RECETA" EntityType="Self.ALP_LIBRO_RECETA" />
@@ -5969,6 +6072,11 @@
           <EntitySet Name="RYA_SUCURSALES" EntityType="Self.RYA_SUCURSALES" />
           <EntitySet Name="RYA_TRANSA_ALMA" EntityType="Self.RYA_TRANSA_ALMA" />
           <EntitySet Name="RYA_UBICACIONES" EntityType="Self.RYA_UBICACIONES" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK__ALP_CONST__num_c__2EA5EC27" Association="Self.FK__ALP_CONST__num_c__2EA5EC27">
+            <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
+            <End Role="ALP_CONSTANCIA_PREPARADO_INSUMO" EntitySet="ALP_CONSTANCIA_PREPARADO_INSUMO" />
+          </AssociationSet>
           <AssociationSet Name="FK__ALP_CONST__num_o__3F115E1A" Association="Self.FK__ALP_CONST__num_o__3F115E1A">
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
@@ -5980,6 +6088,10 @@
           <AssociationSet Name="FK__ALP_LIBRO__num_c__41EDCAC5" Association="Self.FK__ALP_LIBRO__num_c__41EDCAC5">
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
             <End Role="ALP_LIBRO_RECETA" EntitySet="ALP_LIBRO_RECETA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALP_CONST__cod_i__2DB1C7EE" Association="Self.FK__ALP_CONST__cod_i__2DB1C7EE">
+            <End Role="ALP_INSUMO" EntitySet="ALP_INSUMO" />
+            <End Role="ALP_CONSTANCIA_PREPARADO_INSUMO" EntitySet="ALP_CONSTANCIA_PREPARADO_INSUMO" />
           </AssociationSet>
           <AssociationSet Name="FK__ALP_ORDEN__cod_i__45BE5BA9" Association="Self.FK__ALP_ORDEN__cod_i__45BE5BA9">
             <End Role="ALP_INSUMO" EntitySet="ALP_INSUMO" />
@@ -6386,12 +6498,22 @@
                 <ScalarProperty Name="num_constancia_preparado" ColumnName="num_constancia_preparado" />
                 <ScalarProperty Name="num_orden_preparado" ColumnName="num_orden_preparado" />
                 <ScalarProperty Name="fec_elaboracion" ColumnName="fec_elaboracion" />
-                <ScalarProperty Name="motivo" ColumnName="motivo" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="cod_usu_regi" ColumnName="cod_usu_regi" />
                 <ScalarProperty Name="fec_usu_regi" ColumnName="fec_usu_regi" />
                 <ScalarProperty Name="cod_usu_modi" ColumnName="cod_usu_modi" />
                 <ScalarProperty Name="fec_usu_modi" ColumnName="fec_usu_modi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ALP_CONSTANCIA_PREPARADO_INSUMO">
+            <EntityTypeMapping TypeName="BDBoticasModel.ALP_CONSTANCIA_PREPARADO_INSUMO">
+              <MappingFragment StoreEntitySet="ALP_CONSTANCIA_PREPARADO_INSUMO">
+                <ScalarProperty Name="num_constancia_preparado" ColumnName="num_constancia_preparado" />
+                <ScalarProperty Name="cod_insumo" ColumnName="cod_insumo" />
+                <ScalarProperty Name="cant_insumo_orden" ColumnName="cant_insumo_orden" />
+                <ScalarProperty Name="cant_insumo_constancia" ColumnName="cant_insumo_constancia" />
+                <ScalarProperty Name="cant_insumo_diferencia" ColumnName="cant_insumo_diferencia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -7827,6 +7949,17 @@
                 <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
                 <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
                 <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BDBoticasModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
