@@ -195,9 +195,9 @@
         <AssociationConnector Association="BDBoticasModel.FK_RYA_PEDIDO_CAB_RYA_SUCURSALES" />
         <AssociationConnector Association="BDBoticasModel.FK_RYA_PEDIDO_DET_RYA_PEDIDO_CAB" />
         <AssociationConnector Association="BDBoticasModel.FK_RYA_STOCK_RYA_PRODUCTO" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_Candidato" Width="1.5" PointX="0.75" PointY="1.625" />
         <EntityTypeShape EntityType="BDBoticasModel.RRH_ExperienciaLaboral" Width="1.5" PointX="3" PointY="3.75" />
         <EntityTypeShape EntityType="BDBoticasModel.RRH_GradoAcademico" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_Candidato" Width="1.5" PointX="0.75" PointY="7.875" />
         <AssociationConnector Association="BDBoticasModel.FK_OfertaLaboral_Candidato_Candidato" />
         <AssociationConnector Association="BDBoticasModel.FK_RRH_ExperienciaLaboral_RRH_ExperienciaLaboral" />
         <AssociationConnector Association="BDBoticasModel.FK_RRH_GradoAcademico_RRH_Candidato" />

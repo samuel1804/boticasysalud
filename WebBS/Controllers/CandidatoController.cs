@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -38,6 +39,9 @@ namespace WebBS.Controllers
         // GET: /Candidato/Create
         public ActionResult Create()
         {
+            ViewBag.Cod_ofertalaboral = new SelectList(db.RRH_OfertaLaboral, "Cod_ofertalaboral", "Titulo");
+            //ViewBag.Grados = db.RRH_GradoAcademico.ToList();
+            //ViewBag.IdPuesto = new SelectList(db.Puesto, "IdPuesto", "Nombre");
             return View();
         }
 
@@ -46,13 +50,49 @@ namespace WebBS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Cod_candidato,Nombre,ApellidoPaterno,ApellidoMaterno,DNI,Telefono,Direccion,Foto,Fec_postulacion,Cod_usu_regi,Fec_usu_regi,Cod_usu_modi,Fec_usu_modi")] RRH_Candidato rrh_candidato)
+        public ActionResult Create(HttpPostedFileBase file,[Bind(Include = "Cod_candidato,Cod_ofertalaboral,Nombre,ApellidoPaterno,ApellidoMaterno,DNI,Telefono,Direccion,Foto,Fec_postulacion,Cod_usu_regi,Fec_usu_regi,Cod_usu_modi,Fec_usu_modi")] RRH_Candidato rrh_candidato)
         {
-            if (ModelState.IsValid)
+
+            if (Request.Form["btnCancelar"] != null)
             {
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Cod_ofertalaboral = new SelectList(db.RRH_OfertaLaboral, "Cod_ofertalaboral", "Titulo", rrh_candidato.Cod_ofertalaboral);
+
+
+            if (ModelState.IsValid)
+            
+            {
+                string path=null;
+                if (file != null && file.ContentLength > 0)
+                {
+                    // extract only the filename
+                    var fileName = Path.GetFileName(file.FileName);
+                    // store the file inside ~/App_Data/uploads folder
+                    path = Path.Combine(Server.MapPath("~/Uploads"), fileName);
+                    file.SaveAs(path);
+                }
+              
+                rrh_candidato.Cod_candidato = db.RRH_Candidato.OrderByDescending(t => t.Cod_candidato).FirstOrDefault().Cod_candidato + 1;
+                rrh_candidato.Foto = path;
                 db.RRH_Candidato.Add(rrh_candidato);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                if (Request.Form["btnRegistrar"] != null)
+                {
+                    return RedirectToAction("Index");
+                }
+                else if (Request.Form["btnRegistrarMas"] != null)
+                {
+                    return RedirectToAction("Create");
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+
+               
             }
 
             return View(rrh_candidato);
@@ -78,7 +118,7 @@ namespace WebBS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Cod_candidato,Nombre,ApellidoPaterno,ApellidoMaterno,DNI,Telefono,Direccion,Foto,Fec_postulacion,Cod_usu_regi,Fec_usu_regi,Cod_usu_modi,Fec_usu_modi")] RRH_Candidato rrh_candidato)
+        public ActionResult Edit([Bind(Include = "Cod_candidato,Cod_ofertalaboral,Nombre,ApellidoPaterno,ApellidoMaterno,DNI,Telefono,Direccion,Foto,Fec_postulacion,Cod_usu_regi,Fec_usu_regi,Cod_usu_modi,Fec_usu_modi")] RRH_Candidato rrh_candidato)
         {
             if (ModelState.IsValid)
             {

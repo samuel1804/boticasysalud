@@ -118,9 +118,9 @@ namespace WebBS.Models
         public virtual DbSet<RYA_SUCURSALES> RYA_SUCURSALES { get; set; }
         public virtual DbSet<RYA_TRANSA_ALMA> RYA_TRANSA_ALMA { get; set; }
         public virtual DbSet<RYA_UBICACIONES> RYA_UBICACIONES { get; set; }
-        public virtual DbSet<RRH_Candidato> RRH_Candidato { get; set; }
         public virtual DbSet<RRH_ExperienciaLaboral> RRH_ExperienciaLaboral { get; set; }
         public virtual DbSet<RRH_GradoAcademico> RRH_GradoAcademico { get; set; }
+        public virtual DbSet<RRH_Candidato> RRH_Candidato { get; set; }
     
         public virtual int sp_DetalleReceta_Buscar(string wHERE)
         {
