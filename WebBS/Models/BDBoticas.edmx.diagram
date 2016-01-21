@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f06427c5c68941a795ec541a3be0727b" Name="Diagram1" ZoomLevel="63">
+      <Diagram DiagramId="f06427c5c68941a795ec541a3be0727b" Name="Diagram1" ZoomLevel="72">
         <EntityTypeShape EntityType="BDBoticasModel.ALP_CONSTANCIA_PREPARADO" Width="1.5" PointX="9.75" PointY="35.875" />
         <EntityTypeShape EntityType="BDBoticasModel.ALP_HOJA_MERMA" Width="1.5" PointX="12" PointY="36.125" />
         <EntityTypeShape EntityType="BDBoticasModel.ALP_INSUMO" Width="1.5" PointX="13.5" PointY="13" />
@@ -73,9 +73,7 @@
         <EntityTypeShape EntityType="BDBoticasModel.RRH_AlternativaAutoevaluacion" Width="1.5" PointX="5.25" PointY="55" />
         <EntityTypeShape EntityType="BDBoticasModel.RRH_AlternativaEvaluacionTecnica" Width="1.5" PointX="6" PointY="60.25" />
         <EntityTypeShape EntityType="BDBoticasModel.RRH_Area" Width="1.5" PointX="0.75" PointY="23.875" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_Candidato" Width="1.5" PointX="7.5" PointY="10.125" />
         <EntityTypeShape EntityType="BDBoticasModel.RRH_Criterio" Width="1.5" PointX="3" PointY="55.125" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_CurriculumVitae" Width="1.5" PointX="5.25" PointY="9.625" />
         <EntityTypeShape EntityType="BDBoticasModel.RRH_Empleado" Width="1.5" PointX="5.25" PointY="24.875" />
         <EntityTypeShape EntityType="BDBoticasModel.RRH_OfertaLaboral" Width="1.5" PointX="7.5" PointY="20.25" />
         <EntityTypeShape EntityType="BDBoticasModel.RRH_OfertaLaboral_Candidato" Width="1.5" PointX="9.75" PointY="15.75" />
@@ -175,8 +173,6 @@
         <AssociationConnector Association="BDBoticasModel.FK_RRH_PruebaAuotoevaluacion_RRH_AlternativaAutoevaluacion" />
         <AssociationConnector Association="BDBoticasModel.FK_RRH_PreguntaEvaluacionTecnica_RRH_AlternativaEvaluacionTecnica" />
         <AssociationConnector Association="BDBoticasModel.FK_Puesto_Area" />
-        <AssociationConnector Association="BDBoticasModel.FK_OfertaLaboral_Candidato_Candidato" />
-        <AssociationConnector Association="BDBoticasModel.FK_RRH_Candidato_RRH_CurriculumVitae" />
         <AssociationConnector Association="BDBoticasModel.FK_RRH_PreguntaEvaluacionTecnica_RRH_Criterio" />
         <AssociationConnector Association="BDBoticasModel.FK_RRH_Empleado_RRH_Puesto" />
         <AssociationConnector Association="BDBoticasModel.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" />
@@ -199,6 +195,12 @@
         <AssociationConnector Association="BDBoticasModel.FK_RYA_PEDIDO_CAB_RYA_SUCURSALES" />
         <AssociationConnector Association="BDBoticasModel.FK_RYA_PEDIDO_DET_RYA_PEDIDO_CAB" />
         <AssociationConnector Association="BDBoticasModel.FK_RYA_STOCK_RYA_PRODUCTO" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_Candidato" Width="1.5" PointX="0.75" PointY="1.625" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_ExperienciaLaboral" Width="1.5" PointX="3" PointY="3.75" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_GradoAcademico" Width="1.5" PointX="3" PointY="1.125" />
+        <AssociationConnector Association="BDBoticasModel.FK_OfertaLaboral_Candidato_Candidato" />
+        <AssociationConnector Association="BDBoticasModel.FK_RRH_ExperienciaLaboral_RRH_ExperienciaLaboral" />
+        <AssociationConnector Association="BDBoticasModel.FK_RRH_GradoAcademico_RRH_Candidato" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

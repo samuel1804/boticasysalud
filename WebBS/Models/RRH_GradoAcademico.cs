@@ -12,17 +12,14 @@ namespace WebBS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class RRH_OfertaLaboral_Candidato
+    public partial class RRH_GradoAcademico
     {
-        public int Cod_ofertalaboral_candidato { get; set; }
-        public Nullable<int> Cod_ofertalaboral { get; set; }
-        public Nullable<int> Cod_candidato { get; set; }
-        public string Cod_usu_regi { get; set; }
-        public Nullable<System.DateTime> Fec_usu_regi { get; set; }
-        public string Cod_usu_modi { get; set; }
-        public Nullable<System.DateTime> Fec_usu_modi { get; set; }
+        public int Cod_GradoAcademico { get; set; }
+        public int Cod_candidato { get; set; }
+        public string Especialidad { get; set; }
+        public string CentroEstudios { get; set; }
+        public System.DateTime Fec_Graduacion { get; set; }
     
-        public virtual RRH_OfertaLaboral RRH_OfertaLaboral { get; set; }
         public virtual RRH_Candidato RRH_Candidato { get; set; }
     }
 }

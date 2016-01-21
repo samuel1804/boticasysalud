@@ -202,6 +202,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ActividadPlanificadaController.cs" />
+    <Compile Include="Controllers\CandidatoController.cs" />
     <Compile Include="Controllers\ChoferController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -436,10 +437,13 @@
     <Compile Include="Models\RRH_Criterio.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RRH_CurriculumVitae.cs">
+    <Compile Include="Models\RRH_Empleado.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RRH_Empleado.cs">
+    <Compile Include="Models\RRH_ExperienciaLaboral.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_GradoAcademico.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RRH_OfertaLaboral.cs">
@@ -511,7 +515,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config" />
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
@@ -538,6 +544,11 @@
     <Content Include="Views\ActividadPlanificada\Details.cshtml" />
     <Content Include="Views\ActividadPlanificada\Edit.cshtml" />
     <Content Include="Views\ActividadPlanificada\Index.cshtml" />
+    <Content Include="Views\Candidato\Create.cshtml" />
+    <Content Include="Views\Candidato\Delete.cshtml" />
+    <Content Include="Views\Candidato\Details.cshtml" />
+    <Content Include="Views\Candidato\Edit.cshtml" />
+    <Content Include="Views\Candidato\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

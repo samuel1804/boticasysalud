@@ -17,6 +17,8 @@ namespace WebBS.Models
         public RRH_Candidato()
         {
             this.RRH_OfertaLaboral_Candidato = new HashSet<RRH_OfertaLaboral_Candidato>();
+            this.RRH_ExperienciaLaboral = new HashSet<RRH_ExperienciaLaboral>();
+            this.RRH_GradoAcademico = new HashSet<RRH_GradoAcademico>();
         }
     
         public int Cod_candidato { get; set; }
@@ -28,13 +30,13 @@ namespace WebBS.Models
         public string Direccion { get; set; }
         public string Foto { get; set; }
         public Nullable<System.DateTime> Fec_postulacion { get; set; }
-        public Nullable<int> Cod_cv_cand { get; set; }
         public string Cod_usu_regi { get; set; }
         public Nullable<System.DateTime> Fec_usu_regi { get; set; }
         public string Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
     
         public virtual ICollection<RRH_OfertaLaboral_Candidato> RRH_OfertaLaboral_Candidato { get; set; }
-        public virtual RRH_CurriculumVitae RRH_CurriculumVitae { get; set; }
+        public virtual ICollection<RRH_ExperienciaLaboral> RRH_ExperienciaLaboral { get; set; }
+        public virtual ICollection<RRH_GradoAcademico> RRH_GradoAcademico { get; set; }
     }
 }

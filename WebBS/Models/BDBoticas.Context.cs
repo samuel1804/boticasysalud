@@ -95,9 +95,7 @@ namespace WebBS.Models
         public virtual DbSet<RRH_AlternativaAutoevaluacion> RRH_AlternativaAutoevaluacion { get; set; }
         public virtual DbSet<RRH_AlternativaEvaluacionTecnica> RRH_AlternativaEvaluacionTecnica { get; set; }
         public virtual DbSet<RRH_Area> RRH_Area { get; set; }
-        public virtual DbSet<RRH_Candidato> RRH_Candidato { get; set; }
         public virtual DbSet<RRH_Criterio> RRH_Criterio { get; set; }
-        public virtual DbSet<RRH_CurriculumVitae> RRH_CurriculumVitae { get; set; }
         public virtual DbSet<RRH_Empleado> RRH_Empleado { get; set; }
         public virtual DbSet<RRH_OfertaLaboral> RRH_OfertaLaboral { get; set; }
         public virtual DbSet<RRH_OfertaLaboral_Candidato> RRH_OfertaLaboral_Candidato { get; set; }
@@ -120,6 +118,9 @@ namespace WebBS.Models
         public virtual DbSet<RYA_SUCURSALES> RYA_SUCURSALES { get; set; }
         public virtual DbSet<RYA_TRANSA_ALMA> RYA_TRANSA_ALMA { get; set; }
         public virtual DbSet<RYA_UBICACIONES> RYA_UBICACIONES { get; set; }
+        public virtual DbSet<RRH_Candidato> RRH_Candidato { get; set; }
+        public virtual DbSet<RRH_ExperienciaLaboral> RRH_ExperienciaLaboral { get; set; }
+        public virtual DbSet<RRH_GradoAcademico> RRH_GradoAcademico { get; set; }
     
         public virtual int sp_DetalleReceta_Buscar(string wHERE)
         {

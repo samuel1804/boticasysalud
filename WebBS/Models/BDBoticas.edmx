@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BDBoticasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BDBoticasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ALP_CONSTANCIA_PREPARADO">
           <Key>
             <PropertyRef Name="num_constancia_preparado" />
@@ -987,7 +987,6 @@
           <Property Name="Direccion" Type="varchar" MaxLength="100" />
           <Property Name="Foto" Type="varchar" MaxLength="50" />
           <Property Name="Fec_postulacion" Type="date" />
-          <Property Name="Cod_cv_cand" Type="int" />
           <Property Name="Cod_usu_regi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_regi" Type="datetime" />
           <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
@@ -1000,31 +999,6 @@
           <Property Name="Cod_criterio" Type="int" Nullable="false" />
           <Property Name="Desc_criterio" Type="varchar" MaxLength="150" />
           <Property Name="Fec_creacion" Type="date" />
-          <Property Name="Cod_usu_regi" Type="varchar" MaxLength="10" />
-          <Property Name="Fec_usu_regi" Type="datetime" />
-          <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
-          <Property Name="Fec_usu_modi" Type="datetime" />
-        </EntityType>
-        <EntityType Name="RRH_CurriculumVitae">
-          <Key>
-            <PropertyRef Name="Cod_cv_cand" />
-          </Key>
-          <Property Name="Cod_cv_cand" Type="int" Nullable="false" />
-          <Property Name="Estudios1_candidato" Type="varchar" MaxLength="50" />
-          <Property Name="Universidad1_candidato" Type="varchar" MaxLength="50" />
-          <Property Name="Estudios2_candidato" Type="varchar" MaxLength="50" />
-          <Property Name="Universidad2_candidato" Type="varchar" MaxLength="50" />
-          <Property Name="Estudios3_candidato" Type="varchar" MaxLength="50" />
-          <Property Name="Universidad3_candidato" Type="varchar" MaxLength="50" />
-          <Property Name="Expericiencialaboral1" Type="varchar" MaxLength="50" />
-          <Property Name="Desc_experiencialaboral1" Type="varchar" MaxLength="250" />
-          <Property Name="Expericiencialaboral2" Type="varchar" MaxLength="50" />
-          <Property Name="Desc_experiencialaboral2" Type="varchar" MaxLength="250" />
-          <Property Name="Anos_experiencialaboral" Type="int" />
-          <Property Name="Referencia1" Type="varchar" MaxLength="50" />
-          <Property Name="Desc_referencia1" Type="varchar" MaxLength="150" />
-          <Property Name="Referencia2" Type="varchar" MaxLength="50" />
-          <Property Name="Desc_referencia2" Type="varchar" MaxLength="150" />
           <Property Name="Cod_usu_regi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_regi" Type="datetime" />
           <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
@@ -1048,6 +1022,27 @@
           <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_modi" Type="datetime" />
           <Property Name="Cod_puesto" Type="int" />
+        </EntityType>
+        <EntityType Name="RRH_ExperienciaLaboral">
+          <Key>
+            <PropertyRef Name="Cod_ExperienciaLaboral" />
+          </Key>
+          <Property Name="Cod_ExperienciaLaboral" Type="int" Nullable="false" />
+          <Property Name="Cod_candidato" Type="int" Nullable="false" />
+          <Property Name="LugarTrabajo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Desc_Reponsabilidades" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Fec_Inicio_elaboral" Type="date" Nullable="false" />
+          <Property Name="Fec_Fin_elaboral" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RRH_GradoAcademico">
+          <Key>
+            <PropertyRef Name="Cod_GradoAcademico" />
+          </Key>
+          <Property Name="Cod_GradoAcademico" Type="int" Nullable="false" />
+          <Property Name="Cod_candidato" Type="int" Nullable="false" />
+          <Property Name="Especialidad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CentroEstudios" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fec_Graduacion" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="RRH_OfertaLaboral">
           <Key>
@@ -1367,7 +1362,7 @@
           <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_modi" Type="datetime" />
         </EntityType>
-        <Association Name="FK__ALP_CONST__num_o__44CA3770">
+        <Association Name="FK__ALP_CONST__num_o__45BE5BA9">
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="1" />
           <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1379,7 +1374,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_HOJA___num_c__45BE5BA9">
+        <Association Name="FK__ALP_HOJA___num_c__46B27FE2">
           <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
           <End Role="ALP_HOJA_MERMA" Type="Self.ALP_HOJA_MERMA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1391,7 +1386,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_LIBRO__cod_q__46B27FE2">
+        <Association Name="FK__ALP_LIBRO__cod_q__47A6A41B">
           <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="1" />
           <End Role="ALP_LIBRO_RECETA" Type="Self.ALP_LIBRO_RECETA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1403,7 +1398,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_LIBRO__num_c__47A6A41B">
+        <Association Name="FK__ALP_LIBRO__num_c__489AC854">
           <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
           <End Role="ALP_LIBRO_RECETA" Type="Self.ALP_LIBRO_RECETA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1415,7 +1410,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_e__489AC854">
+        <Association Name="FK__ALP_ORDEN__cod_e__498EEC8D">
           <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="1" />
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1427,7 +1422,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_i__4B7734FF">
+        <Association Name="FK__ALP_ORDEN__cod_i__4C6B5938">
           <End Role="ALP_INSUMO" Type="Self.ALP_INSUMO" Multiplicity="1" />
           <End Role="ALP_ORDEN_PREPARADO_INSUMO" Type="Self.ALP_ORDEN_PREPARADO_INSUMO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1439,7 +1434,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_r__498EEC8D">
+        <Association Name="FK__ALP_ORDEN__cod_r__4A8310C6">
           <End Role="ALP_RECETA" Type="Self.ALP_RECETA" Multiplicity="1" />
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1451,7 +1446,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_s__4A8310C6">
+        <Association Name="FK__ALP_ORDEN__cod_s__4B7734FF">
           <End Role="RRH_Sucursal" Type="Self.RRH_Sucursal" Multiplicity="1" />
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1463,7 +1458,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__num_o__4C6B5938">
+        <Association Name="FK__ALP_ORDEN__num_o__4D5F7D71">
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="1" />
           <End Role="ALP_ORDEN_PREPARADO_INSUMO" Type="Self.ALP_ORDEN_PREPARADO_INSUMO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1475,7 +1470,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DIS_Pedid__Cod_s__5224328E">
+        <Association Name="FK__DIS_Pedid__Cod_s__531856C7">
           <End Role="RRH_Sucursal" Type="Self.RRH_Sucursal" Multiplicity="0..1" />
           <End Role="DIS_Pedido" Type="Self.DIS_Pedido" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2335,18 +2330,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RRH_Candidato_RRH_CurriculumVitae">
-          <End Role="RRH_CurriculumVitae" Type="Self.RRH_CurriculumVitae" Multiplicity="0..1" />
-          <End Role="RRH_Candidato" Type="Self.RRH_Candidato" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RRH_CurriculumVitae">
-              <PropertyRef Name="Cod_cv_cand" />
-            </Principal>
-            <Dependent Role="RRH_Candidato">
-              <PropertyRef Name="Cod_cv_cand" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_RRH_Empleado_RRH_Puesto">
           <End Role="RRH_Puesto" Type="Self.RRH_Puesto" Multiplicity="0..1" />
           <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="*" />
@@ -2356,6 +2339,30 @@
             </Principal>
             <Dependent Role="RRH_Empleado">
               <PropertyRef Name="Cod_puesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_ExperienciaLaboral_RRH_ExperienciaLaboral">
+          <End Role="RRH_Candidato" Type="Self.RRH_Candidato" Multiplicity="1" />
+          <End Role="RRH_ExperienciaLaboral" Type="Self.RRH_ExperienciaLaboral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Candidato">
+              <PropertyRef Name="Cod_candidato" />
+            </Principal>
+            <Dependent Role="RRH_ExperienciaLaboral">
+              <PropertyRef Name="Cod_candidato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_GradoAcademico_RRH_Candidato">
+          <End Role="RRH_Candidato" Type="Self.RRH_Candidato" Multiplicity="1" />
+          <End Role="RRH_GradoAcademico" Type="Self.RRH_GradoAcademico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Candidato">
+              <PropertyRef Name="Cod_candidato" />
+            </Principal>
+            <Dependent Role="RRH_GradoAcademico">
+              <PropertyRef Name="Cod_candidato" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2658,8 +2665,9 @@
           <EntitySet Name="RRH_Area" EntityType="Self.RRH_Area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_Candidato" EntityType="Self.RRH_Candidato" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_Criterio" EntityType="Self.RRH_Criterio" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RRH_CurriculumVitae" EntityType="Self.RRH_CurriculumVitae" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_Empleado" EntityType="Self.RRH_Empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RRH_ExperienciaLaboral" EntityType="Self.RRH_ExperienciaLaboral" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RRH_GradoAcademico" EntityType="Self.RRH_GradoAcademico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_OfertaLaboral" EntityType="Self.RRH_OfertaLaboral" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_OfertaLaboral_Candidato" EntityType="Self.RRH_OfertaLaboral_Candidato" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_Perfil" EntityType="Self.RRH_Perfil" Schema="dbo" store:Type="Tables" />
@@ -2681,43 +2689,43 @@
           <EntitySet Name="RYA_SUCURSALES" EntityType="Self.RYA_SUCURSALES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RYA_TRANSA_ALMA" EntityType="Self.RYA_TRANSA_ALMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RYA_UBICACIONES" EntityType="Self.RYA_UBICACIONES" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__ALP_CONST__num_o__44CA3770" Association="Self.FK__ALP_CONST__num_o__44CA3770">
+          <AssociationSet Name="FK__ALP_CONST__num_o__45BE5BA9" Association="Self.FK__ALP_CONST__num_o__45BE5BA9">
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_HOJA___num_c__45BE5BA9" Association="Self.FK__ALP_HOJA___num_c__45BE5BA9">
+          <AssociationSet Name="FK__ALP_HOJA___num_c__46B27FE2" Association="Self.FK__ALP_HOJA___num_c__46B27FE2">
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
             <End Role="ALP_HOJA_MERMA" EntitySet="ALP_HOJA_MERMA" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_LIBRO__cod_q__46B27FE2" Association="Self.FK__ALP_LIBRO__cod_q__46B27FE2">
+          <AssociationSet Name="FK__ALP_LIBRO__cod_q__47A6A41B" Association="Self.FK__ALP_LIBRO__cod_q__47A6A41B">
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="ALP_LIBRO_RECETA" EntitySet="ALP_LIBRO_RECETA" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_LIBRO__num_c__47A6A41B" Association="Self.FK__ALP_LIBRO__num_c__47A6A41B">
+          <AssociationSet Name="FK__ALP_LIBRO__num_c__489AC854" Association="Self.FK__ALP_LIBRO__num_c__489AC854">
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
             <End Role="ALP_LIBRO_RECETA" EntitySet="ALP_LIBRO_RECETA" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_e__489AC854" Association="Self.FK__ALP_ORDEN__cod_e__489AC854">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_e__498EEC8D" Association="Self.FK__ALP_ORDEN__cod_e__498EEC8D">
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_i__4B7734FF" Association="Self.FK__ALP_ORDEN__cod_i__4B7734FF">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_i__4C6B5938" Association="Self.FK__ALP_ORDEN__cod_i__4C6B5938">
             <End Role="ALP_INSUMO" EntitySet="ALP_INSUMO" />
             <End Role="ALP_ORDEN_PREPARADO_INSUMO" EntitySet="ALP_ORDEN_PREPARADO_INSUMO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_r__498EEC8D" Association="Self.FK__ALP_ORDEN__cod_r__498EEC8D">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_r__4A8310C6" Association="Self.FK__ALP_ORDEN__cod_r__4A8310C6">
             <End Role="ALP_RECETA" EntitySet="ALP_RECETA" />
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_s__4A8310C6" Association="Self.FK__ALP_ORDEN__cod_s__4A8310C6">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_s__4B7734FF" Association="Self.FK__ALP_ORDEN__cod_s__4B7734FF">
             <End Role="RRH_Sucursal" EntitySet="RRH_Sucursal" />
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__num_o__4C6B5938" Association="Self.FK__ALP_ORDEN__num_o__4C6B5938">
+          <AssociationSet Name="FK__ALP_ORDEN__num_o__4D5F7D71" Association="Self.FK__ALP_ORDEN__num_o__4D5F7D71">
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
             <End Role="ALP_ORDEN_PREPARADO_INSUMO" EntitySet="ALP_ORDEN_PREPARADO_INSUMO" />
           </AssociationSet>
-          <AssociationSet Name="FK__DIS_Pedid__Cod_s__5224328E" Association="Self.FK__DIS_Pedid__Cod_s__5224328E">
+          <AssociationSet Name="FK__DIS_Pedid__Cod_s__531856C7" Association="Self.FK__DIS_Pedid__Cod_s__531856C7">
             <End Role="RRH_Sucursal" EntitySet="RRH_Sucursal" />
             <End Role="DIS_Pedido" EntitySet="DIS_Pedido" />
           </AssociationSet>
@@ -3001,13 +3009,17 @@
             <End Role="RRH_Criterio" EntitySet="RRH_Criterio" />
             <End Role="RRH_AlternativaAutoevaluacion" EntitySet="RRH_AlternativaAutoevaluacion" />
           </AssociationSet>
-          <AssociationSet Name="FK_RRH_Candidato_RRH_CurriculumVitae" Association="Self.FK_RRH_Candidato_RRH_CurriculumVitae">
-            <End Role="RRH_CurriculumVitae" EntitySet="RRH_CurriculumVitae" />
-            <End Role="RRH_Candidato" EntitySet="RRH_Candidato" />
-          </AssociationSet>
           <AssociationSet Name="FK_RRH_Empleado_RRH_Puesto" Association="Self.FK_RRH_Empleado_RRH_Puesto">
             <End Role="RRH_Puesto" EntitySet="RRH_Puesto" />
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_ExperienciaLaboral_RRH_ExperienciaLaboral" Association="Self.FK_RRH_ExperienciaLaboral_RRH_ExperienciaLaboral">
+            <End Role="RRH_Candidato" EntitySet="RRH_Candidato" />
+            <End Role="RRH_ExperienciaLaboral" EntitySet="RRH_ExperienciaLaboral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_GradoAcademico_RRH_Candidato" Association="Self.FK_RRH_GradoAcademico_RRH_Candidato">
+            <End Role="RRH_Candidato" EntitySet="RRH_Candidato" />
+            <End Role="RRH_GradoAcademico" EntitySet="RRH_GradoAcademico" />
           </AssociationSet>
           <AssociationSet Name="FK_RRH_PreguntaEvaluacionTecnica_RRH_AlternativaEvaluacionTecnica" Association="Self.FK_RRH_PreguntaEvaluacionTecnica_RRH_AlternativaEvaluacionTecnica">
             <End Role="RRH_AlternativaEvaluacionTecnica" EntitySet="RRH_AlternativaEvaluacionTecnica" />
@@ -3205,9 +3217,7 @@
           <EntitySet Name="RRH_AlternativaAutoevaluacion" EntityType="BDBoticasModel.RRH_AlternativaAutoevaluacion" />
           <EntitySet Name="RRH_AlternativaEvaluacionTecnica" EntityType="BDBoticasModel.RRH_AlternativaEvaluacionTecnica" />
           <EntitySet Name="RRH_Area" EntityType="BDBoticasModel.RRH_Area" />
-          <EntitySet Name="RRH_Candidato" EntityType="BDBoticasModel.RRH_Candidato" />
           <EntitySet Name="RRH_Criterio" EntityType="BDBoticasModel.RRH_Criterio" />
-          <EntitySet Name="RRH_CurriculumVitae" EntityType="BDBoticasModel.RRH_CurriculumVitae" />
           <EntitySet Name="RRH_Empleado" EntityType="BDBoticasModel.RRH_Empleado" />
           <EntitySet Name="RRH_OfertaLaboral" EntityType="BDBoticasModel.RRH_OfertaLaboral" />
           <EntitySet Name="RRH_OfertaLaboral_Candidato" EntityType="BDBoticasModel.RRH_OfertaLaboral_Candidato" />
@@ -3538,14 +3548,6 @@
             <End Role="RRH_Area" EntitySet="RRH_Area" />
             <End Role="RRH_Puesto" EntitySet="RRH_Puesto" />
           </AssociationSet>
-          <AssociationSet Name="FK_OfertaLaboral_Candidato_Candidato" Association="BDBoticasModel.FK_OfertaLaboral_Candidato_Candidato">
-            <End Role="RRH_Candidato" EntitySet="RRH_Candidato" />
-            <End Role="RRH_OfertaLaboral_Candidato" EntitySet="RRH_OfertaLaboral_Candidato" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RRH_Candidato_RRH_CurriculumVitae" Association="BDBoticasModel.FK_RRH_Candidato_RRH_CurriculumVitae">
-            <End Role="RRH_CurriculumVitae" EntitySet="RRH_CurriculumVitae" />
-            <End Role="RRH_Candidato" EntitySet="RRH_Candidato" />
-          </AssociationSet>
           <AssociationSet Name="FK_RRH_PreguntaEvaluacionTecnica_RRH_Criterio" Association="BDBoticasModel.FK_RRH_PreguntaEvaluacionTecnica_RRH_Criterio">
             <End Role="RRH_Criterio" EntitySet="RRH_Criterio" />
             <End Role="RRH_PreguntaEvaluacionTecnica" EntitySet="RRH_PreguntaEvaluacionTecnica" />
@@ -3633,6 +3635,21 @@
           <AssociationSet Name="FK_RYA_STOCK_RYA_PRODUCTO" Association="BDBoticasModel.FK_RYA_STOCK_RYA_PRODUCTO">
             <End Role="RYA_PRODUCTO" EntitySet="RYA_PRODUCTO" />
             <End Role="RYA_STOCK" EntitySet="RYA_STOCK" />
+          </AssociationSet>
+          <EntitySet Name="RRH_Candidato" EntityType="BDBoticasModel.RRH_Candidato" />
+          <EntitySet Name="RRH_ExperienciaLaboral" EntityType="BDBoticasModel.RRH_ExperienciaLaboral" />
+          <EntitySet Name="RRH_GradoAcademico" EntityType="BDBoticasModel.RRH_GradoAcademico" />
+          <AssociationSet Name="FK_OfertaLaboral_Candidato_Candidato" Association="BDBoticasModel.FK_OfertaLaboral_Candidato_Candidato">
+            <End Role="RRH_Candidato" EntitySet="RRH_Candidato" />
+            <End Role="RRH_OfertaLaboral_Candidato" EntitySet="RRH_OfertaLaboral_Candidato" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_ExperienciaLaboral_RRH_ExperienciaLaboral" Association="BDBoticasModel.FK_RRH_ExperienciaLaboral_RRH_ExperienciaLaboral">
+            <End Role="RRH_Candidato" EntitySet="RRH_Candidato" />
+            <End Role="RRH_ExperienciaLaboral" EntitySet="RRH_ExperienciaLaboral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_GradoAcademico_RRH_Candidato" Association="BDBoticasModel.FK_RRH_GradoAcademico_RRH_Candidato">
+            <End Role="RRH_Candidato" EntitySet="RRH_Candidato" />
+            <End Role="RRH_GradoAcademico" EntitySet="RRH_GradoAcademico" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="usp_Chofer_GetAll_Result">
@@ -4756,27 +4773,6 @@
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
           <NavigationProperty Name="RRH_Puesto" Relationship="BDBoticasModel.FK_Puesto_Area" FromRole="RRH_Area" ToRole="RRH_Puesto" />
         </EntityType>
-        <EntityType Name="RRH_Candidato">
-          <Key>
-            <PropertyRef Name="Cod_candidato" />
-          </Key>
-          <Property Name="Cod_candidato" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ApellidoPaterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ApellidoMaterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DNI" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Foto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Fec_postulacion" Type="DateTime" Precision="0" />
-          <Property Name="Cod_cv_cand" Type="Int32" />
-          <Property Name="Cod_usu_regi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
-          <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="RRH_OfertaLaboral_Candidato" Relationship="BDBoticasModel.FK_OfertaLaboral_Candidato_Candidato" FromRole="RRH_Candidato" ToRole="RRH_OfertaLaboral_Candidato" />
-          <NavigationProperty Name="RRH_CurriculumVitae" Relationship="BDBoticasModel.FK_RRH_Candidato_RRH_CurriculumVitae" FromRole="RRH_Candidato" ToRole="RRH_CurriculumVitae" />
-        </EntityType>
         <EntityType Name="RRH_Criterio">
           <Key>
             <PropertyRef Name="Cod_criterio" />
@@ -4790,32 +4786,6 @@
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
           <NavigationProperty Name="RRH_AlternativaAutoevaluacion" Relationship="BDBoticasModel.FK_RRH_AlternativaAutoevaluacion_RRH_Criterio" FromRole="RRH_Criterio" ToRole="RRH_AlternativaAutoevaluacion" />
           <NavigationProperty Name="RRH_PreguntaEvaluacionTecnica" Relationship="BDBoticasModel.FK_RRH_PreguntaEvaluacionTecnica_RRH_Criterio" FromRole="RRH_Criterio" ToRole="RRH_PreguntaEvaluacionTecnica" />
-        </EntityType>
-        <EntityType Name="RRH_CurriculumVitae">
-          <Key>
-            <PropertyRef Name="Cod_cv_cand" />
-          </Key>
-          <Property Name="Cod_cv_cand" Type="Int32" Nullable="false" />
-          <Property Name="Estudios1_candidato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Universidad1_candidato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Estudios2_candidato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Universidad2_candidato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Estudios3_candidato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Universidad3_candidato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Expericiencialaboral1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Desc_experiencialaboral1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Expericiencialaboral2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Desc_experiencialaboral2" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Anos_experiencialaboral" Type="Int32" />
-          <Property Name="Referencia1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Desc_referencia1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Referencia2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Desc_referencia2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Cod_usu_regi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
-          <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="RRH_Candidato" Relationship="BDBoticasModel.FK_RRH_Candidato_RRH_CurriculumVitae" FromRole="RRH_CurriculumVitae" ToRole="RRH_Candidato" />
         </EntityType>
         <EntityType Name="RRH_Empleado">
           <Key>
@@ -4875,8 +4845,8 @@
           <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
           <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="RRH_Candidato" Relationship="BDBoticasModel.FK_OfertaLaboral_Candidato_Candidato" FromRole="RRH_OfertaLaboral_Candidato" ToRole="RRH_Candidato" />
           <NavigationProperty Name="RRH_OfertaLaboral" Relationship="BDBoticasModel.FK_OfertaLaboral_Candidato_OfertaLaboral" FromRole="RRH_OfertaLaboral_Candidato" ToRole="RRH_OfertaLaboral" />
+          <NavigationProperty Name="RRH_Candidato" Relationship="BDBoticasModel.FK_OfertaLaboral_Candidato_Candidato" FromRole="RRH_OfertaLaboral_Candidato" ToRole="RRH_Candidato" />
         </EntityType>
         <EntityType Name="RRH_Perfil">
           <Key>
@@ -6140,30 +6110,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OfertaLaboral_Candidato_Candidato">
-          <End Type="BDBoticasModel.RRH_Candidato" Role="RRH_Candidato" Multiplicity="0..1" />
-          <End Type="BDBoticasModel.RRH_OfertaLaboral_Candidato" Role="RRH_OfertaLaboral_Candidato" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RRH_Candidato">
-              <PropertyRef Name="Cod_candidato" />
-            </Principal>
-            <Dependent Role="RRH_OfertaLaboral_Candidato">
-              <PropertyRef Name="Cod_candidato" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RRH_Candidato_RRH_CurriculumVitae">
-          <End Type="BDBoticasModel.RRH_CurriculumVitae" Role="RRH_CurriculumVitae" Multiplicity="0..1" />
-          <End Type="BDBoticasModel.RRH_Candidato" Role="RRH_Candidato" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RRH_CurriculumVitae">
-              <PropertyRef Name="Cod_cv_cand" />
-            </Principal>
-            <Dependent Role="RRH_Candidato">
-              <PropertyRef Name="Cod_cv_cand" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_RRH_PreguntaEvaluacionTecnica_RRH_Criterio">
           <End Type="BDBoticasModel.RRH_Criterio" Role="RRH_Criterio" Multiplicity="0..1" />
           <End Type="BDBoticasModel.RRH_PreguntaEvaluacionTecnica" Role="RRH_PreguntaEvaluacionTecnica" Multiplicity="*" />
@@ -6425,6 +6371,86 @@
             </Principal>
             <Dependent Role="RYA_STOCK">
               <PropertyRef Name="COD_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RRH_Candidato">
+          <Key>
+            <PropertyRef Name="Cod_candidato" />
+          </Key>
+          <Property Name="Cod_candidato" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoPaterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoMaterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DNI" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Foto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_postulacion" Type="DateTime" Precision="0" />
+          <Property Name="Cod_usu_regi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
+          <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="RRH_OfertaLaboral_Candidato" Relationship="BDBoticasModel.FK_OfertaLaboral_Candidato_Candidato" FromRole="RRH_Candidato" ToRole="RRH_OfertaLaboral_Candidato" />
+          <NavigationProperty Name="RRH_ExperienciaLaboral" Relationship="BDBoticasModel.FK_RRH_ExperienciaLaboral_RRH_ExperienciaLaboral" FromRole="RRH_Candidato" ToRole="RRH_ExperienciaLaboral" />
+          <NavigationProperty Name="RRH_GradoAcademico" Relationship="BDBoticasModel.FK_RRH_GradoAcademico_RRH_Candidato" FromRole="RRH_Candidato" ToRole="RRH_GradoAcademico" />
+        </EntityType>
+        <EntityType Name="RRH_ExperienciaLaboral">
+          <Key>
+            <PropertyRef Name="Cod_ExperienciaLaboral" />
+          </Key>
+          <Property Name="Cod_ExperienciaLaboral" Type="Int32" Nullable="false" />
+          <Property Name="Cod_candidato" Type="Int32" Nullable="false" />
+          <Property Name="LugarTrabajo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Desc_Reponsabilidades" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_Inicio_elaboral" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fec_Fin_elaboral" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="RRH_Candidato" Relationship="BDBoticasModel.FK_RRH_ExperienciaLaboral_RRH_ExperienciaLaboral" FromRole="RRH_ExperienciaLaboral" ToRole="RRH_Candidato" />
+        </EntityType>
+        <EntityType Name="RRH_GradoAcademico">
+          <Key>
+            <PropertyRef Name="Cod_GradoAcademico" />
+          </Key>
+          <Property Name="Cod_GradoAcademico" Type="Int32" Nullable="false" />
+          <Property Name="Cod_candidato" Type="Int32" Nullable="false" />
+          <Property Name="Especialidad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CentroEstudios" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_Graduacion" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="RRH_Candidato" Relationship="BDBoticasModel.FK_RRH_GradoAcademico_RRH_Candidato" FromRole="RRH_GradoAcademico" ToRole="RRH_Candidato" />
+        </EntityType>
+        <Association Name="FK_OfertaLaboral_Candidato_Candidato">
+          <End Type="BDBoticasModel.RRH_Candidato" Role="RRH_Candidato" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.RRH_OfertaLaboral_Candidato" Role="RRH_OfertaLaboral_Candidato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Candidato">
+              <PropertyRef Name="Cod_candidato" />
+            </Principal>
+            <Dependent Role="RRH_OfertaLaboral_Candidato">
+              <PropertyRef Name="Cod_candidato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_ExperienciaLaboral_RRH_ExperienciaLaboral">
+          <End Type="BDBoticasModel.RRH_Candidato" Role="RRH_Candidato" Multiplicity="1" />
+          <End Type="BDBoticasModel.RRH_ExperienciaLaboral" Role="RRH_ExperienciaLaboral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Candidato">
+              <PropertyRef Name="Cod_candidato" />
+            </Principal>
+            <Dependent Role="RRH_ExperienciaLaboral">
+              <PropertyRef Name="Cod_candidato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_GradoAcademico_RRH_Candidato">
+          <End Type="BDBoticasModel.RRH_Candidato" Role="RRH_Candidato" Multiplicity="1" />
+          <End Type="BDBoticasModel.RRH_GradoAcademico" Role="RRH_GradoAcademico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Candidato">
+              <PropertyRef Name="Cod_candidato" />
+            </Principal>
+            <Dependent Role="RRH_GradoAcademico">
+              <PropertyRef Name="Cod_candidato" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7466,26 +7492,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RRH_Candidato">
-            <EntityTypeMapping TypeName="BDBoticasModel.RRH_Candidato">
-              <MappingFragment StoreEntitySet="RRH_Candidato">
-                <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
-                <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
-                <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
-                <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
-                <ScalarProperty Name="Cod_cv_cand" ColumnName="Cod_cv_cand" />
-                <ScalarProperty Name="Fec_postulacion" ColumnName="Fec_postulacion" />
-                <ScalarProperty Name="Foto" ColumnName="Foto" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="DNI" ColumnName="DNI" />
-                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
-                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Cod_candidato" ColumnName="Cod_candidato" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="RRH_Criterio">
             <EntityTypeMapping TypeName="BDBoticasModel.RRH_Criterio">
               <MappingFragment StoreEntitySet="RRH_Criterio">
@@ -7496,32 +7502,6 @@
                 <ScalarProperty Name="Fec_creacion" ColumnName="Fec_creacion" />
                 <ScalarProperty Name="Desc_criterio" ColumnName="Desc_criterio" />
                 <ScalarProperty Name="Cod_criterio" ColumnName="Cod_criterio" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RRH_CurriculumVitae">
-            <EntityTypeMapping TypeName="BDBoticasModel.RRH_CurriculumVitae">
-              <MappingFragment StoreEntitySet="RRH_CurriculumVitae">
-                <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
-                <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
-                <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
-                <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
-                <ScalarProperty Name="Desc_referencia2" ColumnName="Desc_referencia2" />
-                <ScalarProperty Name="Referencia2" ColumnName="Referencia2" />
-                <ScalarProperty Name="Desc_referencia1" ColumnName="Desc_referencia1" />
-                <ScalarProperty Name="Referencia1" ColumnName="Referencia1" />
-                <ScalarProperty Name="Anos_experiencialaboral" ColumnName="Anos_experiencialaboral" />
-                <ScalarProperty Name="Desc_experiencialaboral2" ColumnName="Desc_experiencialaboral2" />
-                <ScalarProperty Name="Expericiencialaboral2" ColumnName="Expericiencialaboral2" />
-                <ScalarProperty Name="Desc_experiencialaboral1" ColumnName="Desc_experiencialaboral1" />
-                <ScalarProperty Name="Expericiencialaboral1" ColumnName="Expericiencialaboral1" />
-                <ScalarProperty Name="Universidad3_candidato" ColumnName="Universidad3_candidato" />
-                <ScalarProperty Name="Estudios3_candidato" ColumnName="Estudios3_candidato" />
-                <ScalarProperty Name="Universidad2_candidato" ColumnName="Universidad2_candidato" />
-                <ScalarProperty Name="Estudios2_candidato" ColumnName="Estudios2_candidato" />
-                <ScalarProperty Name="Universidad1_candidato" ColumnName="Universidad1_candidato" />
-                <ScalarProperty Name="Estudios1_candidato" ColumnName="Estudios1_candidato" />
-                <ScalarProperty Name="Cod_cv_cand" ColumnName="Cod_cv_cand" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -7881,6 +7861,48 @@
                 <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
                 <ScalarProperty Name="Cod_Lote" ColumnName="Cod_Lote" />
                 <ScalarProperty Name="Cod_Almacen" ColumnName="Cod_Almacen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RRH_Candidato">
+            <EntityTypeMapping TypeName="BDBoticasModel.RRH_Candidato">
+              <MappingFragment StoreEntitySet="RRH_Candidato">
+                <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
+                <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
+                <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
+                <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
+                <ScalarProperty Name="Fec_postulacion" ColumnName="Fec_postulacion" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Cod_candidato" ColumnName="Cod_candidato" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RRH_ExperienciaLaboral">
+            <EntityTypeMapping TypeName="BDBoticasModel.RRH_ExperienciaLaboral">
+              <MappingFragment StoreEntitySet="RRH_ExperienciaLaboral">
+                <ScalarProperty Name="Fec_Fin_elaboral" ColumnName="Fec_Fin_elaboral" />
+                <ScalarProperty Name="Fec_Inicio_elaboral" ColumnName="Fec_Inicio_elaboral" />
+                <ScalarProperty Name="Desc_Reponsabilidades" ColumnName="Desc_Reponsabilidades" />
+                <ScalarProperty Name="LugarTrabajo" ColumnName="LugarTrabajo" />
+                <ScalarProperty Name="Cod_candidato" ColumnName="Cod_candidato" />
+                <ScalarProperty Name="Cod_ExperienciaLaboral" ColumnName="Cod_ExperienciaLaboral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RRH_GradoAcademico">
+            <EntityTypeMapping TypeName="BDBoticasModel.RRH_GradoAcademico">
+              <MappingFragment StoreEntitySet="RRH_GradoAcademico">
+                <ScalarProperty Name="Fec_Graduacion" ColumnName="Fec_Graduacion" />
+                <ScalarProperty Name="CentroEstudios" ColumnName="CentroEstudios" />
+                <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
+                <ScalarProperty Name="Cod_candidato" ColumnName="Cod_candidato" />
+                <ScalarProperty Name="Cod_GradoAcademico" ColumnName="Cod_GradoAcademico" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,0 +1,115 @@
+﻿@model WebBS.Models.RRH_Candidato
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RRH_Candidato</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApellidoPaterno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApellidoPaterno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApellidoMaterno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApellidoMaterno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DNI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DNI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Direccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Direccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Foto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_postulacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_postulacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cod_usu_regi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cod_usu_regi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_usu_regi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_usu_regi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cod_usu_modi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cod_usu_modi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_usu_modi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_usu_modi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Cod_candidato }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
