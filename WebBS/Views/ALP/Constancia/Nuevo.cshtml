@@ -1,4 +1,4 @@
-﻿
+﻿@model WebBS.Models.ALP_ORDEN_PREPARADO
 @{
     ViewBag.Title = "Nueva Constancia Preparado";
 }
@@ -12,13 +12,13 @@
         <div class="form-group disabled">
             <label for="txtNroOrden" class="col-sm-2 control-label">Nro Orden</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="txtNroOrden" placeholder="Nro Orden" value="@ViewBag.nroOperacion">
+                <input type="text" class="form-control" id="txtNroOrden" placeholder="Nro Orden" value="@Html.DisplayFor(model => model.num_orden_preparado)">
             </div>
         </div>
         <div class="form-group disabled">
             <label for="txtNroOrden" class="col-sm-2 control-label">Nombre Preparado</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="txtNroOrden" placeholder="Nombre Preparado" value="@ViewBag.nroOperacion">
+                <input type="text" class="form-control" id="txtNroOrden" placeholder="Nombre Preparado" value="@Html.DisplayFor(model => model.ALP_RECETA.nom_preparado)">
             </div>
         </div>
         <div class="form-group disabled">
@@ -28,9 +28,9 @@
             </div>
         </div>
         <div class="form-group disabled">
-            <label for="txtFecConstancia" class="col-sm-2 control-label">Fecha Constancia</label>
+            <label for="txtFecConstancia" class="col-sm-2 control-label">Fecha Constancia (dd/mm/yyyy)</label>
             <div class="col-sm-10">
-                <input type="date" class="form-control" id="txtFecConstancia">
+                <input type="datetime" class="form-control" id="txtFecConstancia" value="@ViewBag.fechaConstancia">
             </div>
         </div>
     </fieldset>
@@ -50,7 +50,35 @@
                             <th>Diferencia</th>
                         </tr>
                     </thead>
-                    <tbody id="tbOrdenInsumoContent"></tbody>
+                    <tbody id="tbConstanciaInsumoContent">
+                        @foreach (var item in Model.ALP_ORDEN_PREPARADO_INSUMO)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ALP_INSUMO.cod_insumo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ALP_INSUMO.nom_insumo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ALP_INSUMO.unidad_medida)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.cant_insumo)
+                                </td>
+                                <td>
+                                    <div class="form-group disabled">
+                                        <div class="col-sm-7">
+                                            <input type="number" class="form-control" id="txtNroOrden" oninput="calcularDiferencia(this)" placeholder="Cantidad Utilizada" value="@Html.DisplayFor(model => item.cant_insumo)">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    0
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
 
                 </table>
             </div>
@@ -64,5 +92,9 @@
         <div class="col-md-1">@Html.ActionLink("Cancelar", "Index", "Constancia", new { @class = "btn btn-danger" })</div>
     </div>
 
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/nuevaConstancia")
 }
 
