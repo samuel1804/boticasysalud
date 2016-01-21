@@ -12,7 +12,14 @@ namespace WebBS.App_Start
                       "~/Content/css/Site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.min.js"));
+                      "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/bootbox.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/nuevaConstancia").Include(
+                        "~/Scripts/ALP/NuevaConstancia.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/IndexConstancia").Include(
+                        "~/Scripts/ALP/IndexConstancia.js"));
         }
     }
 }
