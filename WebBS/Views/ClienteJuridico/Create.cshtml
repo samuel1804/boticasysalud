@@ -1,0 +1,94 @@
+﻿@model WebBS.Models.GCC_CLIENTE
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Registro de Cliente Juridico</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Num_doc_identidad">RUC</label>
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Num_doc_identidad)
+                @Html.ValidationMessageFor(model => model.Num_doc_identidad)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Departamento</label>
+            <div class="col-md-10">
+                <select id="dep" name="dep">
+                    <option value=""></option>
+                    <option value="0">Lima</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Privincia</label>
+                <div class="col-md-10">
+                    <select id="prov" name="prov">
+                        <option value=""></option>
+                        <option value="0">Lima</option>
+                    </select>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Distrito</label>
+                <div class="col-md-10">
+                    <select id="dist" name="dist">
+                        <option value=""></option>
+                        <option value="0">Santiago de Surco</option>
+                        <option value="1">Los Olivos</option>
+                    </select>
+                </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Direccion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Direccion)
+                @Html.ValidationMessageFor(model => model.Direccion)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Telefono, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Telefono)
+                @Html.ValidationMessageFor(model => model.Telefono)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Correo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Correo)
+                @Html.ValidationMessageFor(model => model.Correo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="GCC_CLIENTE_JURIDICO_Razon_social">Razon social</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social)
+                @Html.ValidationMessageFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

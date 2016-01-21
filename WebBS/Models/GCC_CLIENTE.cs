@@ -11,6 +11,7 @@ namespace WebBS.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class GCC_CLIENTE
     {
@@ -18,12 +19,19 @@ namespace WebBS.Models
         {
             this.GCC_COMPROBANTE = new HashSet<GCC_COMPROBANTE>();
         }
-    
+     
         public int Cod_cliente { get; set; }
         public string Tipo_doc_identidad { get; set; }
+        [Required(ErrorMessage = "Ruc es requerido.")]
+        [RegularExpression("([0-9]+)", ErrorMessage = "Ingrese solo números")]
         public string Num_doc_identidad { get; set; }
+        [Required(ErrorMessage = "Direccion es requerido.")]
         public string Direccion { get; set; }
+        [Required(ErrorMessage = "Telefono es requerido.")]
+        [RegularExpression("([0-9]+)", ErrorMessage = "Ingrese solo números")]
         public string Telefono { get; set; }
+        [Required(ErrorMessage = "Email es requerido.")]
+        [RegularExpression("^([a-zA-Z0-9_\\-\\.]+)@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,3})$", ErrorMessage = "Email ingresado no es valido")]
         public string Correo { get; set; }
         public string Estado { get; set; }
         public int Cod_usu_regi { get; set; }
