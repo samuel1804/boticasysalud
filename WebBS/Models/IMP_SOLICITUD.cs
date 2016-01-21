@@ -22,13 +22,14 @@ namespace WebBS.Models
     
         public int Cod_solicitud { get; set; }
         public Nullable<System.DateTime> Fec_emision { get; set; }
-        public byte[] Descripcion { get; set; }
+        public string Descripcion { get; set; }
         public string Observaciones { get; set; }
         public string Estado { get; set; }
         public int Cod_usu_regi { get; set; }
         public System.DateTime Fec_usu_regi { get; set; }
         public Nullable<int> Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
+        public string Numero { get; set; }
     
         public virtual ICollection<IMP_SOLICITUD_GESTION_PERMISO> IMP_SOLICITUD_GESTION_PERMISO { get; set; }
         public virtual ICollection<IMP_SOLICITUD_IMPORTACION> IMP_SOLICITUD_IMPORTACION { get; set; }

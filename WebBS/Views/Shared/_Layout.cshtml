@@ -12,6 +12,7 @@
     <link href="~/Content/css/Site.css" rel="stylesheet" />
     <link href="~/Scripts/toastr/toastr.min.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.4.custom.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/toastr/toastr.min.js"></script>
     <script src="~/Scripts/knockout-3.4.0.js"></script>
@@ -20,21 +21,20 @@
     <script type="text/javascript">
         var urlPath = '@Url.Content("~")';
         toastr.options = { "progressBar": false, "positionClass": "toast-bottom-right", "closeButton": true, "showMethod": "slideDown" }
-    
-    
-   
-    
-    </script>
 
+
+
+
+    </script>
+    @Styles.Render("~/Content/cssControls")
     <script type="text/javascript">
     @if (TempData["notice"] != null)
     {
-        
-        @:alert('@TempData["notice"]');
-    }
-    
 
-  
+        @:alert('@TempData["notice"]');
+            }
+
+
     </script>
 </head>
 <body>
@@ -44,15 +44,15 @@
                 <!-- sidebar -->
                 <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
                     <ul class="nav">
-                        <li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+                        <li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i>Gestion de importaciones</a></li>
                     </ul>
                     <ul class="nav hidden-xs" id="lg-menu">
                         <li class="active">
-                            <a><i class="glyphicon glyphicon-list-alt"></i> Gestión de Inventarios</a>
+                            <a><i class="glyphicon glyphicon-list-alt"></i> Gestión de Permisos</a>
                             <ul>
                                 <li>
-                                    <a href="~/NotaIngreso/Crear">
-                                        <i class="glyphicon glyphicon-plus"></i> <span>Registrar nota de ingreso</span>
+                                    <a href="@Url.Action("Index","ActividadPlanificada")">
+                                        <i class="glyphicon glyphicon-plus"></i> <span>Actualizar Bitacora de Actividades Planificadas</span>
                                     </a>
                                 </li>
                                 <li>
@@ -77,35 +77,6 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>
-                            <a><i class="glyphicon glyphicon-list"></i> Recursos Humanos</a>
-                            <ul>
-                                <li>
-                                    <a href="~/OfertaLaboral/Create">
-                                        <i class="glyphicon glyphicon-plus"></i> <span>Registrar Oferta Laboral</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="~/Perfil/Create">
-                                        <i class="glyphicon glyphicon-plus"></i> <span>Registrar Perfil</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a><i class="glyphicon glyphicon-paperclip"></i> REPORTES</a>
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <i class="glyphicon glyphicon-plus"></i> <span>Consulta de Ficha Producto</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="glyphicon glyphicon-plus"></i> <span>Consulta de Trazabilidad</span>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
                     </ul>
                     <ul class="list-unstyled hidden-xs" id="sidebar-footer">
@@ -172,8 +143,11 @@
                     <!-- /top nav -->
                     <div class="padding">
                         <div class="full col-sm-9">
-                            @RenderBody()
-
+                            <section>
+                                
+                                    @RenderBody()
+                                
+                            </section>
                             @*<div class="row">
                                     <div class="col-sm-6">
                                         <a href="#">Twitter</a> <small class="text-muted">|</small> <a href="#">Facebook</a> <small class="text-muted">|</small> <a href="#">Google+</a>
@@ -190,10 +164,12 @@
                                     </div>
                                 </div>*@
                             <hr>
-                            <h4 class="text-center">
-                                <a href="#" >Sistema Integrado de Farmacia</a>
-                            </h4>
-                            <hr>
+                            <div class="footer">
+                                <h4 class=" text-center">
+                                    <a href="#">Sistema Integrado de Farmacia</a>
+                                </h4>
+                                <hr>
+                            </div>
                         </div><!-- /col-9 -->
                     </div><!-- /padding -->
                 </div>

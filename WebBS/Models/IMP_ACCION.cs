@@ -15,10 +15,10 @@ namespace WebBS.Models
     public partial class IMP_ACCION
     {
         public int Cod_accion { get; set; }
-        public Nullable<System.DateTime> Fec_accion { get; set; }
+        public System.DateTime Fec_accion { get; set; }
         public string Evidencia { get; set; }
         public string Observaciones { get; set; }
-        public Nullable<int> Cod_actividad_planificada { get; set; }
+        public int Cod_actividad_planificada { get; set; }
         public int Cod_usu_regi { get; set; }
         public System.DateTime Fec_usu_regi { get; set; }
         public Nullable<int> Cod_usu_modi { get; set; }

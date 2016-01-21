@@ -12,19 +12,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Descripcion)
+            @Html.DisplayNameFor(model => model.Observacion)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Fec_planificacion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Fec_planificacion)
+            @Html.DisplayFor(model => model.Observacion)
         </dd>
 
         <dt>
@@ -33,6 +25,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.Fec_cierre_planificacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_cierre_real)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_cierre_real)
         </dd>
 
         <dt>
@@ -52,11 +52,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Adjunto)
+            @Html.DisplayNameFor(model => model.RutaArchivo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Adjunto)
+            @Html.DisplayFor(model => model.RutaArchivo)
         </dd>
 
         <dt>
@@ -92,6 +92,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Cod_actividad_planificada_predecesora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cod_actividad_planificada_predecesora)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.IMP_ACTIVIDAD.Nombre)
         </dt>
 
@@ -100,11 +108,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IMP_SOLICITUD_GESTION_PERMISO.Cod_solicitud_gestion_permiso)
+            @Html.DisplayNameFor(model => model.IMP_SOLICITUD_GESTION_PERMISO.Estado)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IMP_SOLICITUD_GESTION_PERMISO.Cod_solicitud_gestion_permiso)
+            @Html.DisplayFor(model => model.IMP_SOLICITUD_GESTION_PERMISO.Estado)
         </dd>
 
         <dt>

@@ -177,18 +177,35 @@
       <LastGenOutput>BDBoticas.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Ajax\Ajax.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Calendar\Calendar.js" />
+    <Content Include="Scripts\Codemaleon\ns.js" />
+    <Content Include="Scripts\Dialog\Dialog.css" />
+    <Content Include="Scripts\Dialog\Dialog.js" />
+    <Content Include="Scripts\Dialog\Img\fancybox_overlay.png" />
+    <Content Include="Scripts\Dialog\Img\fancybox_sprite.png" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.10.4.custom.css" />
+    <Content Include="Scripts\jquery-ui-1.10.4.custom.js" />
+    <Content Include="Scripts\jquery.mask.js" />
+    <Content Include="Scripts\jquery.mask.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-3.4.0.debug.js" />
     <Content Include="Scripts\knockout-3.4.0.js" />
+    <Content Include="Scripts\Message\Message.css" />
+    <Content Include="Scripts\Message\Message.js" />
+    <Content Include="Scripts\ProgressBar\Imagenes\Cargando.gif" />
+    <Content Include="Scripts\ProgressBar\ProgressBar.css" />
+    <Content Include="Scripts\ProgressBar\ProgressBar.js" />
     <Content Include="Scripts\toastr\toastr.min.css" />
     <Content Include="Scripts\toastr\toastr.min.js" />
+    <Content Include="Scripts\Util.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -202,6 +219,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ActividadPlanificadaController.cs" />
+    <Compile Include="Controllers\BitacoraActividadPlanificadaController.cs" />
     <Compile Include="Controllers\ChoferController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -505,6 +523,9 @@
     <Compile Include="Models\RYA_UBICACIONES.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\usp_Chofer_GetAll_Result.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
@@ -538,6 +559,11 @@
     <Content Include="Views\ActividadPlanificada\Details.cshtml" />
     <Content Include="Views\ActividadPlanificada\Edit.cshtml" />
     <Content Include="Views\ActividadPlanificada\Index.cshtml" />
+    <Content Include="Views\BitacoraActividadPlanificada\Create.cshtml" />
+    <Content Include="Views\BitacoraActividadPlanificada\Delete.cshtml" />
+    <Content Include="Views\BitacoraActividadPlanificada\Details.cshtml" />
+    <Content Include="Views\BitacoraActividadPlanificada\Edit.cshtml" />
+    <Content Include="Views\BitacoraActividadPlanificada\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -547,6 +573,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\images\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

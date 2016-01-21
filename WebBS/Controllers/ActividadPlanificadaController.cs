@@ -19,7 +19,8 @@ namespace WebBS.Controllers
         public async Task<ActionResult> Index()
         {
             var iMP_ACTIVIDAD_PLANIFICADA = db.IMP_ACTIVIDAD_PLANIFICADA.Include(i => i.IMP_ACTIVIDAD).Include(i => i.IMP_SOLICITUD_GESTION_PERMISO).Include(i => i.RRH_Empleado);
-            return View(await iMP_ACTIVIDAD_PLANIFICADA.ToListAsync());
+            var result = await iMP_ACTIVIDAD_PLANIFICADA.OrderBy(a=> a.Cod_solicitud_gestion_permiso).ThenBy(a=> a.Fec_cierre_planificacion).ToListAsync();
+            return View(result);
         }
 
         // GET: ActividadPlanificada/Details/5
@@ -41,7 +42,7 @@ namespace WebBS.Controllers
         public ActionResult Create()
         {
             ViewBag.Cod_actividad = new SelectList(db.IMP_ACTIVIDAD, "Cod_actividad", "Nombre");
-            ViewBag.Cod_solicitud_gestion_permiso = new SelectList(db.IMP_SOLICITUD_GESTION_PERMISO, "Cod_solicitud_gestion_permiso", "Cod_solicitud_gestion_permiso");
+            ViewBag.Cod_solicitud_gestion_permiso = new SelectList(db.IMP_SOLICITUD_GESTION_PERMISO, "Cod_solicitud_gestion_permiso", "Estado");
             ViewBag.Cod_empleado = new SelectList(db.RRH_Empleado, "Cod_empleado", "Nom_empleado");
             return View();
         }
@@ -51,7 +52,7 @@ namespace WebBS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Cod_actividad_planificada,Descripcion,Fec_planificacion,Fec_cierre_planificacion,Estado,Prioridad,Adjunto,Cod_empleado,Cod_actividad,Cod_solicitud_gestion_permiso,Cod_usu_regi,Fec_usu_regi,Cod_usu_modi,Fec_usu_modi")] IMP_ACTIVIDAD_PLANIFICADA iMP_ACTIVIDAD_PLANIFICADA)
+        public async Task<ActionResult> Create([Bind(Include = "Cod_actividad_planificada,Observacion,Fec_cierre_planificacion,Fec_cierre_real,Estado,Prioridad,RutaArchivo,Cod_empleado,Cod_actividad,Cod_solicitud_gestion_permiso,Cod_usu_regi,Fec_usu_regi,Cod_usu_modi,Fec_usu_modi,Cod_actividad_planificada_predecesora")] IMP_ACTIVIDAD_PLANIFICADA iMP_ACTIVIDAD_PLANIFICADA)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +62,7 @@ namespace WebBS.Controllers
             }
 
             ViewBag.Cod_actividad = new SelectList(db.IMP_ACTIVIDAD, "Cod_actividad", "Nombre", iMP_ACTIVIDAD_PLANIFICADA.Cod_actividad);
-            ViewBag.Cod_solicitud_gestion_permiso = new SelectList(db.IMP_SOLICITUD_GESTION_PERMISO, "Cod_solicitud_gestion_permiso", "Cod_solicitud_gestion_permiso", iMP_ACTIVIDAD_PLANIFICADA.Cod_solicitud_gestion_permiso);
+            ViewBag.Cod_solicitud_gestion_permiso = new SelectList(db.IMP_SOLICITUD_GESTION_PERMISO, "Cod_solicitud_gestion_permiso", "Estado", iMP_ACTIVIDAD_PLANIFICADA.Cod_solicitud_gestion_permiso);
             ViewBag.Cod_empleado = new SelectList(db.RRH_Empleado, "Cod_empleado", "Nom_empleado", iMP_ACTIVIDAD_PLANIFICADA.Cod_empleado);
             return View(iMP_ACTIVIDAD_PLANIFICADA);
         }
@@ -79,7 +80,7 @@ namespace WebBS.Controllers
                 return HttpNotFound();
             }
             ViewBag.Cod_actividad = new SelectList(db.IMP_ACTIVIDAD, "Cod_actividad", "Nombre", iMP_ACTIVIDAD_PLANIFICADA.Cod_actividad);
-            ViewBag.Cod_solicitud_gestion_permiso = new SelectList(db.IMP_SOLICITUD_GESTION_PERMISO, "Cod_solicitud_gestion_permiso", "Cod_solicitud_gestion_permiso", iMP_ACTIVIDAD_PLANIFICADA.Cod_solicitud_gestion_permiso);
+            ViewBag.Cod_solicitud_gestion_permiso = new SelectList(db.IMP_SOLICITUD_GESTION_PERMISO, "Cod_solicitud_gestion_permiso", "Estado", iMP_ACTIVIDAD_PLANIFICADA.Cod_solicitud_gestion_permiso);
             ViewBag.Cod_empleado = new SelectList(db.RRH_Empleado, "Cod_empleado", "Nom_empleado", iMP_ACTIVIDAD_PLANIFICADA.Cod_empleado);
             return View(iMP_ACTIVIDAD_PLANIFICADA);
         }
@@ -89,7 +90,7 @@ namespace WebBS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Cod_actividad_planificada,Descripcion,Fec_planificacion,Fec_cierre_planificacion,Estado,Prioridad,Adjunto,Cod_empleado,Cod_actividad,Cod_solicitud_gestion_permiso,Cod_usu_regi,Fec_usu_regi,Cod_usu_modi,Fec_usu_modi")] IMP_ACTIVIDAD_PLANIFICADA iMP_ACTIVIDAD_PLANIFICADA)
+        public async Task<ActionResult> Edit([Bind(Include = "Cod_actividad_planificada,Observacion,Fec_cierre_planificacion,Fec_cierre_real,Estado,Prioridad,RutaArchivo,Cod_empleado,Cod_actividad,Cod_solicitud_gestion_permiso,Cod_usu_regi,Fec_usu_regi,Cod_usu_modi,Fec_usu_modi,Cod_actividad_planificada_predecesora")] IMP_ACTIVIDAD_PLANIFICADA iMP_ACTIVIDAD_PLANIFICADA)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +99,7 @@ namespace WebBS.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Cod_actividad = new SelectList(db.IMP_ACTIVIDAD, "Cod_actividad", "Nombre", iMP_ACTIVIDAD_PLANIFICADA.Cod_actividad);
-            ViewBag.Cod_solicitud_gestion_permiso = new SelectList(db.IMP_SOLICITUD_GESTION_PERMISO, "Cod_solicitud_gestion_permiso", "Cod_solicitud_gestion_permiso", iMP_ACTIVIDAD_PLANIFICADA.Cod_solicitud_gestion_permiso);
+            ViewBag.Cod_solicitud_gestion_permiso = new SelectList(db.IMP_SOLICITUD_GESTION_PERMISO, "Cod_solicitud_gestion_permiso", "Estado", iMP_ACTIVIDAD_PLANIFICADA.Cod_solicitud_gestion_permiso);
             ViewBag.Cod_empleado = new SelectList(db.RRH_Empleado, "Cod_empleado", "Nom_empleado", iMP_ACTIVIDAD_PLANIFICADA.Cod_empleado);
             return View(iMP_ACTIVIDAD_PLANIFICADA);
         }

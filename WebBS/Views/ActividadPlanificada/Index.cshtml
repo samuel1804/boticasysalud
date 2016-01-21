@@ -1,105 +1,125 @@
 ﻿@model IEnumerable<WebBS.Models.IMP_ACTIVIDAD_PLANIFICADA>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Actividades Planificadas";
 }
 
-<h2>Index</h2>
+<h3>Actividades Planificadas Asignadas</h3>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fec_planificacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fec_cierre_planificacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Estado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Prioridad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Adjunto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cod_usu_regi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fec_usu_regi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cod_usu_modi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fec_usu_modi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IMP_ACTIVIDAD.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IMP_SOLICITUD_GESTION_PERMISO.Cod_solicitud_gestion_permiso)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RRH_Empleado.Nom_empleado)
-        </th>
-        <th></th>
-    </tr>
+<div>
+    <div id="divMensajeInformativo">
+        <span class="fa fa-info-circle"></span>
+        <span id="lblMensajeInformativo">Usted tiene @Model.Count() actividades asignadas.</span>
+    </div>
+    <hr />
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fec_planificacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fec_cierre_planificacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Prioridad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Adjunto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cod_usu_regi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fec_usu_regi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cod_usu_modi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fec_usu_modi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IMP_ACTIVIDAD.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IMP_SOLICITUD_GESTION_PERMISO.Cod_solicitud_gestion_permiso)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RRH_Empleado.Nom_empleado)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Cod_actividad_planificada }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Cod_actividad_planificada }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Cod_actividad_planificada })
-        </td>
-    </tr>
-}
+    <table class="table-bordered">
+        <tr>
+            <th>
+                Clasificación
+            </th>
+            <th>
+                Título
+            </th>
 
-</table>
+            <th>
+                Fecha de Cierre Planificado
+            </th>
+
+            <th>
+                Estado
+            </th>
+            <th>
+                Prioridad
+            </th>
+            <th>
+                Observación
+            </th>
+            <th>
+                Responsable
+            </th>
+            <th></th>
+        </tr>
+        @{
+
+            var codigoSolicitud = 0;
+        }
+        @foreach (var item in Model)
+        {
+            if (codigoSolicitud != item.Cod_solicitud_gestion_permiso)
+            {
+                if (codigoSolicitud != 0)
+                {
+                    @Html.Raw("</tbody>")
+                }
+                codigoSolicitud = item.Cod_solicitud_gestion_permiso;
+                <tr class="rowGroup" data-toggle="collapse" data-target="#Panel_@item.Cod_solicitud_gestion_permiso">
+                    <td colspan="8">
+                        <h4>Solicitud : @item.IMP_SOLICITUD_GESTION_PERMISO.IMP_SOLICITUD.Numero</h4>
+                        <h5>Artículo : @item.IMP_SOLICITUD_GESTION_PERMISO.IMP_ARTICULO.Nombre</h5>
+                        <p>@item.IMP_SOLICITUD_GESTION_PERMISO.IMP_SOLICITUD.Observaciones</p>
+                    </td>
+                </tr>
+                @Html.Raw("<tbody" + " Id='Panel_" + item.Cod_solicitud_gestion_permiso + "' class='collapse'>")
+            }
+
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IMP_ACTIVIDAD.IMP_TIPO_ACTIVIDAD.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fec_cierre_planificacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prioridad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Observacion)
+                </td>
+                <td>
+                    @Html.Raw(item.RRH_Empleado.Nom_empleado + " " + item.RRH_Empleado.Ap_paterno)
+                </td>
+                <td>
+                    @if (item.Cod_actividad_planificada_predecesora.HasValue)
+                    {
+                        if (item.IMP_ACTIVIDAD_PLANIFICADA2.Estado == "C")
+                        {
+                            <a class="control-table text-center" href="@Url.Action("Index", "BitacoraActividadPlanificada",new  { Id=item.Cod_actividad_planificada })">
+
+                                <i class="fa fa-caret-square-o-right" data-toggle="tooltip" data-html="true"  data-placement="left" title="@Html.Raw("<table ><tr><td>Actividad : </td><td>" +item.IMP_ACTIVIDAD_PLANIFICADA2.Titulo+"</td></tr><tr><td>Fecha Cierre Planificado : </td><td>"+item.IMP_ACTIVIDAD_PLANIFICADA2.Fec_cierre_planificacion+"</td></tr></table>")"></i>
+                            </a>
+                        }
+                        else
+                        {
+                            <i class="fa fa-history" data-toggle="tooltip" data-placement="left" data-html="true" title="@Html.Raw("<table ><tr><td>Actividad : </td><td>" +item.IMP_ACTIVIDAD_PLANIFICADA2.Titulo+"</td></tr><tr><td>Fecha Cierre Planificado : </td><td>"+item.IMP_ACTIVIDAD_PLANIFICADA2.Fec_cierre_planificacion+"</td></tr></table>")"></i>
+                        }
+                    }
+                    else
+                    {
+                        <a class="control-table text-center" href="@Url.Action("Index", "BitacoraActividadPlanificada",new  { Id=item.Cod_actividad_planificada })">
+
+                            <i class="fa fa-caret-square-o-right"></i>
+                        </a>
+                    }
+
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.Cod_actividad_planificada }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Cod_actividad_planificada }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Cod_actividad_planificada })*@
+                </td>
+            </tr>
+        }
+        @Html.Raw("</tbody>")
+    </table>
+</div>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>

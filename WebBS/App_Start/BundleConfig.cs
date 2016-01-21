@@ -11,8 +11,24 @@ namespace WebBS.App_Start
                       "~/Content/css/bootstrap.min.css",
                       "~/Content/css/Site.css"));
 
+            bundles.Add(new StyleBundle("~/Content/cssControls").Include(
+          "~/Scripts/Dialog/Dialog.css",
+          "~/Scripts/Message/Message.css",
+          "~/Scripts/ProgressBar/ProgressBar.css",
+          "~/Scripts/jquery-ui-1.10.4.custom.css"));
+
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.min.js"));
+            bundles.Add(new ScriptBundle("~/bundles/Controls").Include(
+                     "~/Scripts/Codemaleon/ns.js",
+                     "~/Scripts/Dialog/Dialog.js",
+                     "~/Scripts/Calendar/Calendar.js",
+                     "~/Scripts/Message/Message.js",
+                     "~/Scripts/Codemaleon/ns.js",
+                     "~/Scripts/ProgressBar/ProgressBar.js",
+                     "~/Scripts/Ajax/Ajax.js",
+                      "~/Scripts/jquery.mask.min.js",
+                      "~/Scripts/Util.js"));
         }
     }
 }

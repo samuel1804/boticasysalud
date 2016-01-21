@@ -25,11 +25,13 @@ namespace WebBS.Models
         public int Cod_solicitud_gestion_permiso { get; set; }
         public Nullable<System.DateTime> Fec_aprobacion { get; set; }
         public Nullable<int> Cod_solicitud { get; set; }
-        public Nullable<int> Cod_articulo { get; set; }
+        public int Cod_articulo { get; set; }
         public int Cod_usu_regi { get; set; }
         public System.DateTime Fec_usu_regi { get; set; }
         public Nullable<int> Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
+        public int Cod_empleado { get; set; }
+        public string Estado { get; set; }
     
         public virtual ICollection<IMP_ACTIVIDAD_PLANIFICADA> IMP_ACTIVIDAD_PLANIFICADA { get; set; }
         public virtual IMP_ARTICULO IMP_ARTICULO { get; set; }
@@ -37,5 +39,6 @@ namespace WebBS.Models
         public virtual ICollection<IMP_CERTIFICADO_MANUFACTURA> IMP_CERTIFICADO_MANUFACTURA { get; set; }
         public virtual ICollection<IMP_RESOLUCION_DIGEMID> IMP_RESOLUCION_DIGEMID { get; set; }
         public virtual IMP_SOLICITUD IMP_SOLICITUD { get; set; }
+        public virtual RRH_Empleado RRH_Empleado { get; set; }
     }
 }

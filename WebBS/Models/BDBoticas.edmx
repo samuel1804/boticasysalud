@@ -483,10 +483,10 @@
             <PropertyRef Name="Cod_accion" />
           </Key>
           <Property Name="Cod_accion" Type="int" Nullable="false" />
-          <Property Name="Fec_accion" Type="datetime" />
-          <Property Name="Evidencia" Type="varchar" MaxLength="50" />
-          <Property Name="Observaciones" Type="varchar" MaxLength="150" />
-          <Property Name="Cod_actividad_planificada" Type="int" />
+          <Property Name="Fec_accion" Type="datetime" Nullable="false" />
+          <Property Name="Evidencia" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Observaciones" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Cod_actividad_planificada" Type="int" Nullable="false" />
           <Property Name="Cod_usu_regi" Type="int" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="datetime" Nullable="false" />
           <Property Name="Cod_usu_modi" Type="int" />
@@ -497,8 +497,8 @@
             <PropertyRef Name="Cod_actividad" />
           </Key>
           <Property Name="Cod_actividad" Type="int" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="150" />
-          <Property Name="Cod_tipo_actividad" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Cod_tipo_actividad" Type="int" Nullable="false" />
           <Property Name="Cod_usu_regi" Type="int" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="datetime" Nullable="false" />
           <Property Name="Cod_usu_modi" Type="int" />
@@ -509,15 +509,17 @@
             <PropertyRef Name="Cod_actividad_planificada" />
           </Key>
           <Property Name="Cod_actividad_planificada" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="150" />
-          <Property Name="Fec_planificacion" Type="datetime" />
-          <Property Name="Fec_cierre_planificacion" Type="datetime" />
-          <Property Name="Estado" Type="varchar" MaxLength="50" />
-          <Property Name="Prioridad" Type="varchar" MaxLength="50" />
-          <Property Name="Adjunto" Type="varchar" MaxLength="150" />
-          <Property Name="Cod_empleado" Type="int" />
-          <Property Name="Cod_actividad" Type="int" />
-          <Property Name="Cod_solicitud_gestion_permiso" Type="int" />
+          <Property Name="Titulo" Type="varchar" MaxLength="50" />
+          <Property Name="Observacion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Fec_cierre_planificacion" Type="datetime" Nullable="false" />
+          <Property Name="Fec_cierre_real" Type="datetime" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Prioridad" Type="int" Nullable="false" />
+          <Property Name="RutaArchivo" Type="varchar" MaxLength="150" />
+          <Property Name="Cod_empleado" Type="int" Nullable="false" />
+          <Property Name="Cod_actividad" Type="int" Nullable="false" />
+          <Property Name="Cod_solicitud_gestion_permiso" Type="int" Nullable="false" />
+          <Property Name="Cod_actividad_planificada_predecesora" Type="int" />
           <Property Name="Cod_usu_regi" Type="int" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="datetime" Nullable="false" />
           <Property Name="Cod_usu_modi" Type="int" />
@@ -841,13 +843,14 @@
           </Key>
           <Property Name="Cod_solicitud" Type="int" Nullable="false" />
           <Property Name="Fec_emision" Type="datetime" />
-          <Property Name="Descripcion" Type="varbinary" MaxLength="120" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="120" />
           <Property Name="Observaciones" Type="varchar" MaxLength="200" />
           <Property Name="Estado" Type="char" MaxLength="10" />
           <Property Name="Cod_usu_regi" Type="int" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="datetime" Nullable="false" />
           <Property Name="Cod_usu_modi" Type="int" />
           <Property Name="Fec_usu_modi" Type="datetime" />
+          <Property Name="Numero" Type="char" MaxLength="8" />
         </EntityType>
         <EntityType Name="IMP_SOLICITUD_GESTION_PERMISO">
           <Key>
@@ -856,11 +859,13 @@
           <Property Name="Cod_solicitud_gestion_permiso" Type="int" Nullable="false" />
           <Property Name="Fec_aprobacion" Type="datetime" />
           <Property Name="Cod_solicitud" Type="int" />
-          <Property Name="Cod_articulo" Type="int" />
+          <Property Name="Cod_articulo" Type="int" Nullable="false" />
           <Property Name="Cod_usu_regi" Type="int" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="datetime" Nullable="false" />
           <Property Name="Cod_usu_modi" Type="int" />
           <Property Name="Fec_usu_modi" Type="datetime" />
+          <Property Name="Cod_empleado" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="IMP_SOLICITUD_IMPORTACION">
           <Key>
@@ -883,7 +888,7 @@
             <PropertyRef Name="Cod_tipo_actividad" />
           </Key>
           <Property Name="Cod_tipo_actividad" Type="int" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Cod_usu_regi" Type="int" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="datetime" Nullable="false" />
           <Property Name="Cod_usu_modi" Type="int" />
@@ -1367,6 +1372,16 @@
           <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_modi" Type="datetime" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <Association Name="FK__ALP_CONST__num_o__44CA3770">
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="1" />
           <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="*" />
@@ -1742,7 +1757,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IMP_ACCION_IMP_ACTIVIDAD_PLANIFICADA">
-          <End Role="IMP_ACTIVIDAD_PLANIFICADA" Type="Self.IMP_ACTIVIDAD_PLANIFICADA" Multiplicity="0..1" />
+          <End Role="IMP_ACTIVIDAD_PLANIFICADA" Type="Self.IMP_ACTIVIDAD_PLANIFICADA" Multiplicity="1" />
           <End Role="IMP_ACCION" Type="Self.IMP_ACCION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IMP_ACTIVIDAD_PLANIFICADA">
@@ -1754,7 +1769,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IMP_ACTIVIDAD_IMP_TIPO_ACTIVIDAD">
-          <End Role="IMP_TIPO_ACTIVIDAD" Type="Self.IMP_TIPO_ACTIVIDAD" Multiplicity="0..1" />
+          <End Role="IMP_TIPO_ACTIVIDAD" Type="Self.IMP_TIPO_ACTIVIDAD" Multiplicity="1" />
           <End Role="IMP_ACTIVIDAD" Type="Self.IMP_ACTIVIDAD" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IMP_TIPO_ACTIVIDAD">
@@ -1766,7 +1781,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD">
-          <End Role="IMP_ACTIVIDAD" Type="Self.IMP_ACTIVIDAD" Multiplicity="0..1" />
+          <End Role="IMP_ACTIVIDAD" Type="Self.IMP_ACTIVIDAD" Multiplicity="1" />
           <End Role="IMP_ACTIVIDAD_PLANIFICADA" Type="Self.IMP_ACTIVIDAD_PLANIFICADA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IMP_ACTIVIDAD">
@@ -1777,8 +1792,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD_PLANIFICADA">
+          <End Role="IMP_ACTIVIDAD_PLANIFICADA" Type="Self.IMP_ACTIVIDAD_PLANIFICADA" Multiplicity="0..1" />
+          <End Role="IMP_ACTIVIDAD_PLANIFICADA1" Type="Self.IMP_ACTIVIDAD_PLANIFICADA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMP_ACTIVIDAD_PLANIFICADA">
+              <PropertyRef Name="Cod_actividad_planificada" />
+            </Principal>
+            <Dependent Role="IMP_ACTIVIDAD_PLANIFICADA1">
+              <PropertyRef Name="Cod_actividad_planificada_predecesora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_SOLICITUD_GESTION_PERMISO">
-          <End Role="IMP_SOLICITUD_GESTION_PERMISO" Type="Self.IMP_SOLICITUD_GESTION_PERMISO" Multiplicity="0..1" />
+          <End Role="IMP_SOLICITUD_GESTION_PERMISO" Type="Self.IMP_SOLICITUD_GESTION_PERMISO" Multiplicity="1" />
           <End Role="IMP_ACTIVIDAD_PLANIFICADA" Type="Self.IMP_ACTIVIDAD_PLANIFICADA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IMP_SOLICITUD_GESTION_PERMISO">
@@ -1790,7 +1817,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IMP_ACTIVIDAD_PLANIFICADA_RRH_Empleado">
-          <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="0..1" />
+          <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="1" />
           <End Role="IMP_ACTIVIDAD_PLANIFICADA" Type="Self.IMP_ACTIVIDAD_PLANIFICADA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RRH_Empleado">
@@ -2120,7 +2147,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IMP_SOLICITUD_GESTION_PERMISO_IMP_ARTICULO">
-          <End Role="IMP_ARTICULO" Type="Self.IMP_ARTICULO" Multiplicity="0..1" />
+          <End Role="IMP_ARTICULO" Type="Self.IMP_ARTICULO" Multiplicity="1" />
           <End Role="IMP_SOLICITUD_GESTION_PERMISO" Type="Self.IMP_SOLICITUD_GESTION_PERMISO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IMP_ARTICULO">
@@ -2140,6 +2167,18 @@
             </Principal>
             <Dependent Role="IMP_SOLICITUD_GESTION_PERMISO">
               <PropertyRef Name="Cod_solicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMP_SOLICITUD_GESTION_PERMISO_RRH_Empleado">
+          <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="1" />
+          <End Role="IMP_SOLICITUD_GESTION_PERMISO" Type="Self.IMP_SOLICITUD_GESTION_PERMISO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Empleado">
+              <PropertyRef Name="Cod_empleado" />
+            </Principal>
+            <Dependent Role="IMP_SOLICITUD_GESTION_PERMISO">
+              <PropertyRef Name="Cod_empleado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2681,6 +2720,7 @@
           <EntitySet Name="RYA_SUCURSALES" EntityType="Self.RYA_SUCURSALES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RYA_TRANSA_ALMA" EntityType="Self.RYA_TRANSA_ALMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RYA_UBICACIONES" EntityType="Self.RYA_UBICACIONES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__ALP_CONST__num_o__44CA3770" Association="Self.FK__ALP_CONST__num_o__44CA3770">
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
@@ -2817,6 +2857,10 @@
             <End Role="IMP_ACTIVIDAD" EntitySet="IMP_ACTIVIDAD" />
             <End Role="IMP_ACTIVIDAD_PLANIFICADA" EntitySet="IMP_ACTIVIDAD_PLANIFICADA" />
           </AssociationSet>
+          <AssociationSet Name="FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD_PLANIFICADA" Association="Self.FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD_PLANIFICADA">
+            <End Role="IMP_ACTIVIDAD_PLANIFICADA" EntitySet="IMP_ACTIVIDAD_PLANIFICADA" />
+            <End Role="IMP_ACTIVIDAD_PLANIFICADA1" EntitySet="IMP_ACTIVIDAD_PLANIFICADA" />
+          </AssociationSet>
           <AssociationSet Name="FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_SOLICITUD_GESTION_PERMISO" Association="Self.FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_SOLICITUD_GESTION_PERMISO">
             <End Role="IMP_SOLICITUD_GESTION_PERMISO" EntitySet="IMP_SOLICITUD_GESTION_PERMISO" />
             <End Role="IMP_ACTIVIDAD_PLANIFICADA" EntitySet="IMP_ACTIVIDAD_PLANIFICADA" />
@@ -2935,6 +2979,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_IMP_SOLICITUD_GESTION_PERMISO_IMP_SOLICITUD" Association="Self.FK_IMP_SOLICITUD_GESTION_PERMISO_IMP_SOLICITUD">
             <End Role="IMP_SOLICITUD" EntitySet="IMP_SOLICITUD" />
+            <End Role="IMP_SOLICITUD_GESTION_PERMISO" EntitySet="IMP_SOLICITUD_GESTION_PERMISO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMP_SOLICITUD_GESTION_PERMISO_RRH_Empleado" Association="Self.FK_IMP_SOLICITUD_GESTION_PERMISO_RRH_Empleado">
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="IMP_SOLICITUD_GESTION_PERMISO" EntitySet="IMP_SOLICITUD_GESTION_PERMISO" />
           </AssociationSet>
           <AssociationSet Name="FK_IMP_SOLICITUD_IMPORTACION_IMP_ORDEN_COMPRA" Association="Self.FK_IMP_SOLICITUD_IMPORTACION_IMP_ORDEN_COMPRA">
@@ -3230,6 +3278,7 @@
           <EntitySet Name="RYA_SUCURSALES" EntityType="BDBoticasModel.RYA_SUCURSALES" />
           <EntitySet Name="RYA_TRANSA_ALMA" EntityType="BDBoticasModel.RYA_TRANSA_ALMA" />
           <EntitySet Name="RYA_UBICACIONES" EntityType="BDBoticasModel.RYA_UBICACIONES" />
+          <EntitySet Name="sysdiagrams" EntityType="BDBoticasModel.sysdiagrams" />
           <AssociationSet Name="FK__ALP_CONST__num_o__44CA3770" Association="BDBoticasModel.FK__ALP_CONST__num_o__44CA3770">
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
@@ -3518,6 +3567,10 @@
             <End Role="IMP_SOLICITUD" EntitySet="IMP_SOLICITUD" />
             <End Role="IMP_SOLICITUD_IMPORTACION" EntitySet="IMP_SOLICITUD_IMPORTACION" />
           </AssociationSet>
+          <AssociationSet Name="FK_IMP_SOLICITUD_GESTION_PERMISO_RRH_Empleado" Association="BDBoticasModel.FK_IMP_SOLICITUD_GESTION_PERMISO_RRH_Empleado">
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+            <End Role="IMP_SOLICITUD_GESTION_PERMISO" EntitySet="IMP_SOLICITUD_GESTION_PERMISO" />
+          </AssociationSet>
           <AssociationSet Name="FK_IMP_TIPO_CAMBIO_IMP_TIPO_MONEDA" Association="BDBoticasModel.FK_IMP_TIPO_CAMBIO_IMP_TIPO_MONEDA">
             <End Role="IMP_TIPO_MONEDA" EntitySet="IMP_TIPO_MONEDA" />
             <End Role="IMP_TIPO_CAMBIO" EntitySet="IMP_TIPO_CAMBIO" />
@@ -3633,6 +3686,10 @@
           <AssociationSet Name="FK_RYA_STOCK_RYA_PRODUCTO" Association="BDBoticasModel.FK_RYA_STOCK_RYA_PRODUCTO">
             <End Role="RYA_PRODUCTO" EntitySet="RYA_PRODUCTO" />
             <End Role="RYA_STOCK" EntitySet="RYA_STOCK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD_PLANIFICADA" Association="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD_PLANIFICADA">
+            <End Role="IMP_ACTIVIDAD_PLANIFICADA" EntitySet="IMP_ACTIVIDAD_PLANIFICADA" />
+            <End Role="IMP_ACTIVIDAD_PLANIFICADA1" EntitySet="IMP_ACTIVIDAD_PLANIFICADA" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="usp_Chofer_GetAll_Result">
@@ -4186,10 +4243,10 @@
             <PropertyRef Name="Cod_accion" />
           </Key>
           <Property Name="Cod_accion" Type="Int32" Nullable="false" />
-          <Property Name="Fec_accion" Type="DateTime" Precision="3" />
-          <Property Name="Evidencia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Observaciones" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Cod_actividad_planificada" Type="Int32" />
+          <Property Name="Fec_accion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Evidencia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Observaciones" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_actividad_planificada" Type="Int32" Nullable="false" />
           <Property Name="Cod_usu_regi" Type="Int32" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Cod_usu_modi" Type="Int32" />
@@ -4201,8 +4258,8 @@
             <PropertyRef Name="Cod_actividad" />
           </Key>
           <Property Name="Cod_actividad" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Cod_tipo_actividad" Type="Int32" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_tipo_actividad" Type="Int32" Nullable="false" />
           <Property Name="Cod_usu_regi" Type="Int32" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Cod_usu_modi" Type="Int32" />
@@ -4215,24 +4272,28 @@
             <PropertyRef Name="Cod_actividad_planificada" />
           </Key>
           <Property Name="Cod_actividad_planificada" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Fec_planificacion" Type="DateTime" Precision="3" />
-          <Property Name="Fec_cierre_planificacion" Type="DateTime" Precision="3" />
-          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Prioridad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Adjunto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Cod_empleado" Type="Int32" />
-          <Property Name="Cod_actividad" Type="Int32" />
-          <Property Name="Cod_solicitud_gestion_permiso" Type="Int32" />
+          <Property Name="Observacion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_cierre_planificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fec_cierre_real" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Prioridad" Type="Int32" Nullable="false" />
+          <Property Name="RutaArchivo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_empleado" Type="Int32" Nullable="false" />
+          <Property Name="Cod_actividad" Type="Int32" Nullable="false" />
+          <Property Name="Cod_solicitud_gestion_permiso" Type="Int32" Nullable="false" />
           <Property Name="Cod_usu_regi" Type="Int32" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Cod_usu_modi" Type="Int32" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
+          <Property Name="Cod_actividad_planificada_predecesora" Type="Int32" />
           <NavigationProperty Name="IMP_ACCION" Relationship="BDBoticasModel.FK_IMP_ACCION_IMP_ACTIVIDAD_PLANIFICADA" FromRole="IMP_ACTIVIDAD_PLANIFICADA" ToRole="IMP_ACCION" />
           <NavigationProperty Name="IMP_ACTIVIDAD" Relationship="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD" FromRole="IMP_ACTIVIDAD_PLANIFICADA" ToRole="IMP_ACTIVIDAD" />
           <NavigationProperty Name="IMP_SOLICITUD_GESTION_PERMISO" Relationship="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_SOLICITUD_GESTION_PERMISO" FromRole="IMP_ACTIVIDAD_PLANIFICADA" ToRole="IMP_SOLICITUD_GESTION_PERMISO" />
           <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_RRH_Empleado" FromRole="IMP_ACTIVIDAD_PLANIFICADA" ToRole="RRH_Empleado" />
           <NavigationProperty Name="IMP_ALERTA" Relationship="BDBoticasModel.FK_IMP_ALERTA_IMP_ACTIVIDAD_PLANIFICADA" FromRole="IMP_ACTIVIDAD_PLANIFICADA" ToRole="IMP_ALERTA" />
+          <NavigationProperty Name="IMP_ACTIVIDAD_PLANIFICADA1" Relationship="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD_PLANIFICADA" FromRole="IMP_ACTIVIDAD_PLANIFICADA" ToRole="IMP_ACTIVIDAD_PLANIFICADA1" />
+          <NavigationProperty Name="IMP_ACTIVIDAD_PLANIFICADA2" Relationship="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD_PLANIFICADA" FromRole="IMP_ACTIVIDAD_PLANIFICADA1" ToRole="IMP_ACTIVIDAD_PLANIFICADA" />
+          <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="IMP_ADQUISICION">
           <Key>
@@ -4597,7 +4658,7 @@
           </Key>
           <Property Name="Cod_solicitud" Type="Int32" Nullable="false" />
           <Property Name="Fec_emision" Type="DateTime" Precision="3" />
-          <Property Name="Descripcion" Type="Binary" MaxLength="120" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="120" Unicode="false" FixedLength="false" />
           <Property Name="Observaciones" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Estado" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="Cod_usu_regi" Type="Int32" Nullable="false" />
@@ -4606,6 +4667,7 @@
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
           <NavigationProperty Name="IMP_SOLICITUD_GESTION_PERMISO" Relationship="BDBoticasModel.FK_IMP_SOLICITUD_GESTION_PERMISO_IMP_SOLICITUD" FromRole="IMP_SOLICITUD" ToRole="IMP_SOLICITUD_GESTION_PERMISO" />
           <NavigationProperty Name="IMP_SOLICITUD_IMPORTACION" Relationship="BDBoticasModel.FK_IMP_SOLICITUD_IMPORTACION_IMP_SOLICITUD" FromRole="IMP_SOLICITUD" ToRole="IMP_SOLICITUD_IMPORTACION" />
+          <Property Name="Numero" Type="String" MaxLength="8" Unicode="false" FixedLength="true" />
         </EntityType>
         <EntityType Name="IMP_SOLICITUD_GESTION_PERMISO">
           <Key>
@@ -4614,17 +4676,20 @@
           <Property Name="Cod_solicitud_gestion_permiso" Type="Int32" Nullable="false" />
           <Property Name="Fec_aprobacion" Type="DateTime" Precision="3" />
           <Property Name="Cod_solicitud" Type="Int32" />
-          <Property Name="Cod_articulo" Type="Int32" />
+          <Property Name="Cod_articulo" Type="Int32" Nullable="false" />
           <Property Name="Cod_usu_regi" Type="Int32" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Cod_usu_modi" Type="Int32" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
+          <Property Name="Cod_empleado" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="IMP_ACTIVIDAD_PLANIFICADA" Relationship="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_SOLICITUD_GESTION_PERMISO" FromRole="IMP_SOLICITUD_GESTION_PERMISO" ToRole="IMP_ACTIVIDAD_PLANIFICADA" />
           <NavigationProperty Name="IMP_ARTICULO" Relationship="BDBoticasModel.FK_IMP_SOLICITUD_GESTION_PERMISO_IMP_ARTICULO" FromRole="IMP_SOLICITUD_GESTION_PERMISO" ToRole="IMP_ARTICULO" />
           <NavigationProperty Name="IMP_CERTIFICADO_ISO" Relationship="BDBoticasModel.FK_IMP_CERTIFICADO_ISO_IMP_SOLICITUD_GESTION_PERMISO" FromRole="IMP_SOLICITUD_GESTION_PERMISO" ToRole="IMP_CERTIFICADO_ISO" />
           <NavigationProperty Name="IMP_CERTIFICADO_MANUFACTURA" Relationship="BDBoticasModel.FK_IMP_CERTIFICADO_MANUFACTURA_IMP_SOLICITUD_GESTION_PERMISO" FromRole="IMP_SOLICITUD_GESTION_PERMISO" ToRole="IMP_CERTIFICADO_MANUFACTURA" />
           <NavigationProperty Name="IMP_RESOLUCION_DIGEMID" Relationship="BDBoticasModel.FK_IMP_RESOLUCION_DIGEMID_IMP_SOLICITUD_GESTION_PERMISO" FromRole="IMP_SOLICITUD_GESTION_PERMISO" ToRole="IMP_RESOLUCION_DIGEMID" />
           <NavigationProperty Name="IMP_SOLICITUD" Relationship="BDBoticasModel.FK_IMP_SOLICITUD_GESTION_PERMISO_IMP_SOLICITUD" FromRole="IMP_SOLICITUD_GESTION_PERMISO" ToRole="IMP_SOLICITUD" />
+          <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_IMP_SOLICITUD_GESTION_PERMISO_RRH_Empleado" FromRole="IMP_SOLICITUD_GESTION_PERMISO" ToRole="RRH_Empleado" />
         </EntityType>
         <EntityType Name="IMP_SOLICITUD_IMPORTACION">
           <Key>
@@ -4654,7 +4719,7 @@
             <PropertyRef Name="Cod_tipo_actividad" />
           </Key>
           <Property Name="Cod_tipo_actividad" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Cod_usu_regi" Type="Int32" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Cod_usu_modi" Type="Int32" />
@@ -4840,6 +4905,7 @@
           <NavigationProperty Name="GCC_EMPLEADO_INF_CREDITICIO" Relationship="BDBoticasModel.FK_GCC_EMPLEADO_INF_CREDITICIO_RRH_EMPLEADO" FromRole="RRH_Empleado" ToRole="GCC_EMPLEADO_INF_CREDITICIO" />
           <NavigationProperty Name="GCC_EMPLEADO_SOL_CREDITO" Relationship="BDBoticasModel.FK_GCC_EMPLEADO_SOL_CREDITO_RRH_EMPLEADO" FromRole="RRH_Empleado" ToRole="GCC_EMPLEADO_SOL_CREDITO" />
           <NavigationProperty Name="IMP_ACTIVIDAD_PLANIFICADA" Relationship="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_RRH_Empleado" FromRole="RRH_Empleado" ToRole="IMP_ACTIVIDAD_PLANIFICADA" />
+          <NavigationProperty Name="IMP_SOLICITUD_GESTION_PERMISO" Relationship="BDBoticasModel.FK_IMP_SOLICITUD_GESTION_PERMISO_RRH_Empleado" FromRole="RRH_Empleado" ToRole="IMP_SOLICITUD_GESTION_PERMISO" />
           <NavigationProperty Name="RRH_Puesto" Relationship="BDBoticasModel.FK_RRH_Empleado_RRH_Puesto" FromRole="RRH_Empleado" ToRole="RRH_Puesto" />
           <NavigationProperty Name="RRH_PruebaAuotoevaluacion" Relationship="BDBoticasModel.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" FromRole="RRH_Empleado" ToRole="RRH_PruebaAuotoevaluacion" />
           <NavigationProperty Name="RRH_PruebaEvaluacionTecnica" Relationship="BDBoticasModel.FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado" FromRole="RRH_Empleado" ToRole="RRH_PruebaEvaluacionTecnica" />
@@ -5207,6 +5273,16 @@
           <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
           <NavigationProperty Name="RYA_LOTES" Relationship="BDBoticasModel.FK_RYA_UBICACIONES_RYA_LOTES" FromRole="RYA_UBICACIONES" ToRole="RYA_LOTES" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK__ALP_CONST__num_o__44CA3770">
           <End Type="BDBoticasModel.ALP_ORDEN_PREPARADO" Role="ALP_ORDEN_PREPARADO" Multiplicity="1" />
@@ -5631,7 +5707,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IMP_ACCION_IMP_ACTIVIDAD_PLANIFICADA">
-          <End Type="BDBoticasModel.IMP_ACTIVIDAD_PLANIFICADA" Role="IMP_ACTIVIDAD_PLANIFICADA" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.IMP_ACTIVIDAD_PLANIFICADA" Role="IMP_ACTIVIDAD_PLANIFICADA" Multiplicity="1" />
           <End Type="BDBoticasModel.IMP_ACCION" Role="IMP_ACCION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IMP_ACTIVIDAD_PLANIFICADA">
@@ -5643,7 +5719,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IMP_ACTIVIDAD_IMP_TIPO_ACTIVIDAD">
-          <End Type="BDBoticasModel.IMP_TIPO_ACTIVIDAD" Role="IMP_TIPO_ACTIVIDAD" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.IMP_TIPO_ACTIVIDAD" Role="IMP_TIPO_ACTIVIDAD" Multiplicity="1" />
           <End Type="BDBoticasModel.IMP_ACTIVIDAD" Role="IMP_ACTIVIDAD" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IMP_TIPO_ACTIVIDAD">
@@ -5655,7 +5731,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD">
-          <End Type="BDBoticasModel.IMP_ACTIVIDAD" Role="IMP_ACTIVIDAD" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.IMP_ACTIVIDAD" Role="IMP_ACTIVIDAD" Multiplicity="1" />
           <End Type="BDBoticasModel.IMP_ACTIVIDAD_PLANIFICADA" Role="IMP_ACTIVIDAD_PLANIFICADA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IMP_ACTIVIDAD">
@@ -5667,7 +5743,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_SOLICITUD_GESTION_PERMISO">
-          <End Type="BDBoticasModel.IMP_SOLICITUD_GESTION_PERMISO" Role="IMP_SOLICITUD_GESTION_PERMISO" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.IMP_SOLICITUD_GESTION_PERMISO" Role="IMP_SOLICITUD_GESTION_PERMISO" Multiplicity="1" />
           <End Type="BDBoticasModel.IMP_ACTIVIDAD_PLANIFICADA" Role="IMP_ACTIVIDAD_PLANIFICADA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IMP_SOLICITUD_GESTION_PERMISO">
@@ -5679,7 +5755,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IMP_ACTIVIDAD_PLANIFICADA_RRH_Empleado">
-          <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="1" />
           <End Type="BDBoticasModel.IMP_ACTIVIDAD_PLANIFICADA" Role="IMP_ACTIVIDAD_PLANIFICADA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RRH_Empleado">
@@ -5763,7 +5839,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IMP_SOLICITUD_GESTION_PERMISO_IMP_ARTICULO">
-          <End Type="BDBoticasModel.IMP_ARTICULO" Role="IMP_ARTICULO" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.IMP_ARTICULO" Role="IMP_ARTICULO" Multiplicity="1" />
           <End Type="BDBoticasModel.IMP_SOLICITUD_GESTION_PERMISO" Role="IMP_SOLICITUD_GESTION_PERMISO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IMP_ARTICULO">
@@ -6077,6 +6153,18 @@
             </Principal>
             <Dependent Role="IMP_SOLICITUD_IMPORTACION">
               <PropertyRef Name="Cod_solicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMP_SOLICITUD_GESTION_PERMISO_RRH_Empleado">
+          <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="1" />
+          <End Type="BDBoticasModel.IMP_SOLICITUD_GESTION_PERMISO" Role="IMP_SOLICITUD_GESTION_PERMISO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Empleado">
+              <PropertyRef Name="Cod_empleado" />
+            </Principal>
+            <Dependent Role="IMP_SOLICITUD_GESTION_PERMISO">
+              <PropertyRef Name="Cod_empleado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6425,6 +6513,18 @@
             </Principal>
             <Dependent Role="RYA_STOCK">
               <PropertyRef Name="COD_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD_PLANIFICADA">
+          <End Type="BDBoticasModel.IMP_ACTIVIDAD_PLANIFICADA" Role="IMP_ACTIVIDAD_PLANIFICADA" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.IMP_ACTIVIDAD_PLANIFICADA" Role="IMP_ACTIVIDAD_PLANIFICADA1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMP_ACTIVIDAD_PLANIFICADA">
+              <PropertyRef Name="Cod_actividad_planificada" />
+            </Principal>
+            <Dependent Role="IMP_ACTIVIDAD_PLANIFICADA1">
+              <PropertyRef Name="Cod_actividad_planificada_predecesora" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6968,6 +7068,8 @@
           <EntitySetMapping Name="IMP_ACTIVIDAD_PLANIFICADA">
             <EntityTypeMapping TypeName="BDBoticasModel.IMP_ACTIVIDAD_PLANIFICADA">
               <MappingFragment StoreEntitySet="IMP_ACTIVIDAD_PLANIFICADA">
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Cod_actividad_planificada_predecesora" ColumnName="Cod_actividad_planificada_predecesora" />
                 <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
                 <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
                 <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
@@ -6975,12 +7077,12 @@
                 <ScalarProperty Name="Cod_solicitud_gestion_permiso" ColumnName="Cod_solicitud_gestion_permiso" />
                 <ScalarProperty Name="Cod_actividad" ColumnName="Cod_actividad" />
                 <ScalarProperty Name="Cod_empleado" ColumnName="Cod_empleado" />
-                <ScalarProperty Name="Adjunto" ColumnName="Adjunto" />
+                <ScalarProperty Name="RutaArchivo" ColumnName="RutaArchivo" />
                 <ScalarProperty Name="Prioridad" ColumnName="Prioridad" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fec_cierre_real" ColumnName="Fec_cierre_real" />
                 <ScalarProperty Name="Fec_cierre_planificacion" ColumnName="Fec_cierre_planificacion" />
-                <ScalarProperty Name="Fec_planificacion" ColumnName="Fec_planificacion" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
                 <ScalarProperty Name="Cod_actividad_planificada" ColumnName="Cod_actividad_planificada" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7319,6 +7421,7 @@
           <EntitySetMapping Name="IMP_SOLICITUD">
             <EntityTypeMapping TypeName="BDBoticasModel.IMP_SOLICITUD">
               <MappingFragment StoreEntitySet="IMP_SOLICITUD">
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
                 <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
                 <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
                 <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
@@ -7334,6 +7437,8 @@
           <EntitySetMapping Name="IMP_SOLICITUD_GESTION_PERMISO">
             <EntityTypeMapping TypeName="BDBoticasModel.IMP_SOLICITUD_GESTION_PERMISO">
               <MappingFragment StoreEntitySet="IMP_SOLICITUD_GESTION_PERMISO">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Cod_empleado" ColumnName="Cod_empleado" />
                 <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
                 <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
                 <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
@@ -7881,6 +7986,17 @@
                 <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
                 <ScalarProperty Name="Cod_Lote" ColumnName="Cod_Lote" />
                 <ScalarProperty Name="Cod_Almacen" ColumnName="Cod_Almacen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BDBoticasModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
