@@ -11,6 +11,7 @@ namespace WebBS.Controllers
         // GET: HojaRuta2
         public ActionResult Index()
         {
+            //
             return View();
         }
     }
