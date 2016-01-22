@@ -19,7 +19,7 @@ namespace WebBS.Models
             this.DIS_HojaRutaDetalle = new HashSet<DIS_HojaRutaDetalle>();
         }
     
-        //comment
+       //modelo
 
         public int Cod_hoja_ruta { get; set; }
         public Nullable<int> Cod_control_asignacines { get; set; }
