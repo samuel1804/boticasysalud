@@ -216,6 +216,7 @@
     <Compile Include="Controllers\NotaIngresoController.cs" />
     <Compile Include="Controllers\OfertaLaboralController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
+    <Compile Include="Controllers\SolicitudDeCreditoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -550,6 +551,7 @@
     <Content Include="Views\ClienteJuridico\Create.cshtml" />
     <Content Include="Views\ClienteJuridico\Edit.cshtml" />
     <Content Include="Views\ClienteJuridico\Delete.cshtml" />
+    <Content Include="Views\SolicitudDeCredito\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

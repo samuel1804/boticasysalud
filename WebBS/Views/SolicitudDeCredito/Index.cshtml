@@ -1,0 +1,108 @@
+﻿@model PagedList.IPagedList<WebBS.Models.GCC_SOLICITUD_CREDITO>
+@using PagedList.Mvc;
+@using PagedList;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Consulta Solicitud de Crédito</h2>
+
+@using (Html.BeginForm("Index", "SolicitudDeCredito", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+
+    <div style="border:1px solid black;">
+        <table style="width:100%">
+            <tr>
+                <td>Nro Solicitud Crédito</td>
+                <td><input type="text" name="nroSolicitudCredito"></td>
+                <td>RUC</td>
+                <td><input type="number" name="ruc"></td>
+                <td>Estado</td>
+                <td><select name="estado"><option></option><option><option>Registrado</option><option>Modificado</option><option>Anulado</option></select></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Fecha Solicitud Inicio</td>
+                <td><input type="date" name="fechaSolicitudInicio" /></td>
+                <td>Fecha Solicitud Fin</td>
+                <td><input type="date" name="fechaSolicitudFin" /></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><input type="submit" value="Buscar" /></td>
+                <td><button type="submit" value="Registrar" formmethod="delete" formaction="/ClienteJuridico/Create">Nuevo</button></td>
+                <td></td>
+            </tr>
+        </table>
+
+    </div>
+
+}
+
+<p>
+    @Html.ActionLink("Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Codigo Solicitud de Crédito
+        </th>
+        <th>
+            Nro de Solicitud
+        </th>
+        <th>
+            RUC
+        </th>
+        <th>
+            Razón Social
+        </th>
+        <th>
+            Fecha Solicitud
+        </th>
+        <th>
+            Estado
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cod_solicitud_credito)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Num_solicitud)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GCC_CLIENTE_JURIDICO.Razon_social)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fec_solicitud)
+        </td>
+        <td>
+            ESTADO
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.Cod_solicitud_credito }) |
+            @Html.ActionLink("Anular", "Delete", new { id = item.Cod_solicitud_credito })
+        </td>
+    </tr>
+}
+
+</table>
