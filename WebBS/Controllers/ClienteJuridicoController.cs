@@ -93,6 +93,15 @@ namespace WebBS.Controllers
         {
             try
             {
+                //validacion de ruc
+                List<GCC_CLIENTE> clienteEncontrado = db.GCC_CLIENTE.Where(b => b.Num_doc_identidad.Contains(cliente.Num_doc_identidad)).ToList();
+
+                if (clienteEncontrado != null && clienteEncontrado.Count!=0)
+                {
+                    ModelState.AddModelError("Num_doc_identidad", "RUC ya esta registrado");
+                    return View();
+                }
+
                 cliente.Tipo_doc_identidad = "RUC";
                 cliente.GCC_CLIENTE_JURIDICO.Fec_usu_regi = DateTime.Now;
                 cliente.GCC_CLIENTE_JURIDICO.Cod_cliente = 1;
