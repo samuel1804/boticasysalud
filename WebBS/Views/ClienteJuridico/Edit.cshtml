@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Modificacion de Cliente Juridico</h2>
+<h2>Modificacion de Cliente Jurídico</h2>
 
 
 @using (Html.BeginForm())
@@ -23,7 +23,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Num_doc_identidad, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="Num_doc_identidad">RUC</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Num_doc_identidad)
                 @Html.ValidationMessageFor(model => model.Num_doc_identidad)
@@ -60,7 +60,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Direccion, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="Direccion">Dirección</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Direccion)
                 @Html.ValidationMessageFor(model => model.Direccion)
@@ -68,7 +68,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Telefono, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="Telefono">Teléfono</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Telefono)
                 @Html.ValidationMessageFor(model => model.Telefono)
@@ -84,7 +84,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="GCC_CLIENTE_JURIDICO_Razon_social">Razón social</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social)
                 @Html.ValidationMessageFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social)
@@ -93,7 +93,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Guardar" class="btn btn-default" />
             </div>
         </div>
     </div>

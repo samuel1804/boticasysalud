@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebBS.Models;
+using PagedList;
 
 namespace WebBS.Controllers
 {
@@ -15,37 +16,55 @@ namespace WebBS.Controllers
 
         //
         // GET: /ClienteJuridico/
-        public ActionResult Index(string razonSocial = null, string ruc = null)
+        public ActionResult Index(string razonSocial, string ruc, string sortOrder, string currentFilter, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.RUCSortParm = String.IsNullOrEmpty(sortOrder) ? "Num_doc_identidad" : "";
+            ViewBag.RazonSocialSortParm = sortOrder == "razonSocial" ? "razonSocial_desc" : "razonSocial";
+            
+            var clientes = from s in db.GCC_CLIENTE
+                           select s;            
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
             if (razonSocial != null || ruc != null)
             {
+
                 if (razonSocial != null && ruc != null){
-                    return View(db.GCC_CLIENTE.Where(b =>
-
+                    clientes = clientes.Where(b =>
                         (b.GCC_CLIENTE_JURIDICO.Razon_social.Contains(razonSocial))
-                       &&
-                       b.Num_doc_identidad.Contains(ruc)
-
-                        ));
+                       && b.Num_doc_identidad.Contains(ruc));
                 }
                 else if (razonSocial == null && ruc != null)
                 {
-                    return View(db.GCC_CLIENTE.Where(b => b.Num_doc_identidad.Contains(ruc)));
+                    clientes = clientes.Where(b => b.Num_doc_identidad.Contains(ruc));
                 }
                 else if (razonSocial != null && ruc == null)
                 {
-                    return View(db.GCC_CLIENTE.Where(b => b.GCC_CLIENTE_JURIDICO.Razon_social.Contains(razonSocial)));
-                }
-                else
-                {
-                    return View(db.GCC_CLIENTE.ToList());
+                    clientes = clientes.Where(b => b.GCC_CLIENTE_JURIDICO.Razon_social.Contains(razonSocial));
                 }
                 
             }
-            else
+
+            switch (sortOrder)
             {
-                return View(db.GCC_CLIENTE.ToList());
+                case "razonSocial":
+                    clientes = clientes.OrderByDescending(s => s.GCC_CLIENTE_JURIDICO.Razon_social);
+                    break;
+                case "razonSocial_desc":
+                    clientes = clientes.OrderBy(s => s.GCC_CLIENTE_JURIDICO.Razon_social);
+                    break;
+                case "Num_doc_identidad":
+                    clientes = clientes.OrderByDescending(s => s.Num_doc_identidad);
+                    break;
+                default:
+                    clientes = clientes.OrderBy(s => s.Num_doc_identidad);
+                    break;
             }
+            var clientesEncontrados = clientes.ToList();
+
+            return View(clientesEncontrados.ToPagedList(pageNumber, pageSize));
         }
 
         //

@@ -1,19 +1,23 @@
-﻿@model IEnumerable<WebBS.Models.GCC_CLIENTE>
+﻿@model PagedList.IPagedList<WebBS.Models.GCC_CLIENTE>
+@using PagedList.Mvc;
+@using PagedList;
+ 
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Consulta Cliente Juridico";
+    ViewBag.Title = "Consulta Cliente Jurídico";
 }
 
-<h2>Consulta Cliente Juridico</h2>
+<h2>Consulta Cliente Jurídico</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "ClienteJuridico", FormMethod.Get))
 {
     @Html.AntiForgeryToken()
 
     <div style="border:1px solid black;">
         <table style="width:100%" >
             <tr>
-                <td>Razon Social</td>
+                <td>Razón Social</td>
                 <td><input type="text" name="razonSocial"><br></td>
                 <td></td>
                 <td></td>
@@ -28,9 +32,9 @@
             </tr>
             <tr>
                 <td></td>
-                <td></td>
                 <td><input type="submit" value="Buscar" /></td>
-                <td><button type="submit" value="Registrar" formmethod="delete" formaction="/ClienteJuridico/Create">Registrar</button></td>
+                <td><button type="submit" value="Registrar" formmethod="delete" formaction="/ClienteJuridico/Create">Nuevo</button></td>
+                <td></td>
             </tr>
         </table>
 
@@ -41,25 +45,25 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Cod_cliente)
+            Código
         </th>
         <th>
-            RUC
+            @Html.ActionLink("RUC", "Index", new { sortOrder = ViewBag.RUCSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social)
+            @Html.ActionLink("Razón Social", "Index", new { sortOrder = ViewBag.RazonSocialSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Direccion)
+            Dirección
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Telefono)
+            Teléfono
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Correo)
+            Correo
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Estado)
+            Estado
         </th>
         <th></th>
     </tr>
@@ -96,3 +100,8 @@
 }
 
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
