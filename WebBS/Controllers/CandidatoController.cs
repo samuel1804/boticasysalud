@@ -79,7 +79,7 @@ namespace WebBS.Controllers
 
                 else if (Command == "Save")
                 {
-
+                     
 
                     RRH_GradoAcademico mobjcust = new RRH_GradoAcademico();
                     mobjcust.CentroEstudios = mCust.CentroEstudios;
@@ -87,7 +87,7 @@ namespace WebBS.Controllers
                    
                     Grados.Add(mobjcust);
                     /*
-                    bool check = mobjModel.CreateCustomer(mobjcust);
+                    bool check = mo bjModel.CreateCustomer(mobjcust);
                     if (check)
                     {
                         TempData["Msg"] = "El Cliente ha sido registrado satisfactoriamente";
