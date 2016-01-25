@@ -4,9 +4,9 @@
         ViewBag.Title = "Create";
         Layout = "~/Views/Shared/_Layout.cshtml";
 
-        List<WebBS.Models.RRH_GradoAcademico> Grados = ViewBag.GradosAcademicos;
+        
     }
-
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
     <h2>Registrar Candidato</h2>
 
 
@@ -26,9 +26,7 @@
                 @Html.Label("Oferta Laboral", new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
                
-                         @Html.DropDownListFor(model => model.Cod_ofertalaboral, @ViewBag.Cod_ofertalaboral as SelectList, "Seleccione", new { @class = "form-control" })
-
-                    @Html.ValidationMessage("Cod_ofertalaboral", "", new { @class = "text-danger" })
+                       
                 </div>
             </div>
 
@@ -131,27 +129,49 @@
 
                                 </tr>
                             </thead>
-
-                         
+                            @if (ViewBag.Grados == null) {
                                 <tr>
                                     <td>
-                                     
+                                   
                                     </td>
                                     <td>
-                                  
+                                 
                                     </td>
                                     <td>
                                        
                                     </td>
                                     <td class="text-right">
-                                        <a href="" onclick="AgregarEstudios()" title="">
+                                        <a id="CreateCustomer" href="..\Candidato\AdicionarGrado" title="">
                                             <i class="glyphicon glyphicon-plus"></i>
                                         </a>
 
                                     </td>
 
                                 </tr>
-                          
+ }
+                            else
+                            {
+                                foreach (var item in ViewBag.Grados)
+                                {                         
+                                <tr>
+                                    <td>
+                                     @item.Especialidad
+                                    </td>
+                                    <td>
+                                  @item.CentroEstudios
+                                    </td>
+                                    <td>
+                                       
+                                    </td>
+                                    <td class="text-right">
+                                        <a id="CreateCustomer" href="..\Candidato\AdicionarGrado" title="">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                        </a>
+
+                                    </td>
+
+                                </tr>
+ }}
 
                         </table>
                     </div>
@@ -233,6 +253,7 @@
                  </div>
              </div>
                 -->
+           
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" name="btnRegistrar"  value="Grabar" class="btn btn-default" />
@@ -244,6 +265,23 @@
 
 
         </div>
+      
+      
+     <div id="dialog-confirm" style="display: none">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+        Are you sure to delete ?
+    </p>
+</div>
+<div id="dialog-edit" style="display: none">
+</div>
+<div id="dialog-view" style="display: none">
+
+</div>
+
+
+      
+      
     }
 
     <div>
@@ -273,49 +311,139 @@
         $("#errmsg").html("Digits Only").show().fadeOut("slow");
                return false;
     }
-   });
+  });
+
+
+  $("#CreateCustomer").on("click", function (e) {
+      // e.preventDefault(); use this or return false
+      var url = $(this).attr('href');
+      $("#dialog-edit").dialog({
+          title: 'Grado Académico',
+          autoOpen: false,
+          resizable: false,
+          height: 300,
+          width: 600,
+          show: { effect: 'drop', direction: "up" },
+          modal: true,
+          draggable: true,
+          open: function (event, ui) {
+              $(this).load(url);
+
+          },
+          close: function (event, ui) {
+              $(this).dialog('close');
+          }
+      });
+
+      $("#dialog-edit").dialog('open');
+      return false;
+  });
+
+
+
+  $(".editDialog").on("click", function (e) {
+      // e.preventDefault(); use this or return false
+      var url = $(this).attr('href');
+      $("#dialog-edit").dialog({
+          title: 'Edit Customer',
+          autoOpen: false,
+          resizable: false,
+          height: 200,
+          width: 400,
+          show: { effect: 'drop', direction: "up" },
+          modal: true,
+          draggable: true,
+          open: function (event, ui) {
+              $(this).load(url);
+
+          },
+          close: function (event, ui) {
+              $(this).dialog('close');
+          }
+      });
+
+      $("#dialog-edit").dialog('open');
+      return false;
+  });
+
+  $(".confirmDialog").on("click", function (e) {
+
+      // e.preventDefault(); use this or return false
+      var url = $(this).attr('href');
+
+      $("#dialog-confirm").dialog({
+          autoOpen: false,
+          resizable: false,
+          height: 170,
+          width: 350,
+          show: { effect: 'drop', direction: "up" },
+          modal: true,
+          draggable: true,
+          buttons: {
+              "OK": function () {
+                  $(this).dialog("close");
+                  window.location = url;
+
+              },
+              "Cancel": function () {
+                  $(this).dialog("close");
+
+              }
+          }
+      });
+      $("#dialog-confirm").dialog('open');
+      return false;
+  });
+
+  $(".viewDialog").on("click", function (e) {
+      // e.preventDefault(); use this or return false
+      var url = $(this).attr('href');
+      $("#dialog-view").dialog({
+          title: 'View Customer',
+          autoOpen: false,
+          resizable: false,
+          height: 250,
+          width: 400,
+          show: { effect: 'drop', direction: "up" },
+          modal: true,
+          draggable: true,
+          open: function (event, ui) {
+              $(this).load(url);
+
+          },
+          buttons: {
+              "Close": function () {
+                  $(this).dialog("close");
+
+              }
+          },
+          close: function (event, ui) {
+              $(this).dialog('close');
+          }
+      });
+
+      $("#dialog-view").dialog('open');
+      return false;
+  });
+
+  $("#btncancel").on("click", function (e) {
+      // location.reload(true);
+      $("#dialog-edit").dialog('close');
+
+  });
+
+
+
+
+
 });
         </script>
 
-        <script type="text/javascript">
-            function AgregarEstudios() {
-                bootbox.dialog({
-                    title: "This is a form in a modal.",
-                    message: '<div class="row">  ' +
-                        '<div class="col-md-12"> ' +
-                        '<form class="form-horizontal"> ' +
-                        '<div class="form-group"> ' +
-                        '<label class="col-md-4 control-label" for="name">Name</label> ' +
-                        '<div class="col-md-4"> ' +
-                        '<input id="name" name="name" type="text" placeholder="Your name" class="form-control input-md"> ' +
-                        '<span class="help-block">Here goes your name</span> </div> ' +
-                        '</div> ' +
-                        '<div class="form-group"> ' +
-                        '<label class="col-md-4 control-label" for="awesomeness">How awesome is this?</label> ' +
-                        '<div class="col-md-4"> <div class="radio"> <label for="awesomeness-0"> ' +
-                        '<input type="radio" name="awesomeness" id="awesomeness-0" value="Really awesome" checked="checked"> ' +
-                        'Really awesome </label> ' +
-                        '</div><div class="radio"> <label for="awesomeness-1"> ' +
-                        '<input type="radio" name="awesomeness" id="awesomeness-1" value="Super awesome"> Super awesome </label> ' +
-                        '</div> ' +
-                        '</div> </div>' +
-                        '</form> </div>  </div>',
-                    buttons: {
-                        success: {
-                            label: "Save",
-                            className: "btn-success",
-                            callback: function () {
-                                var name = $('#name').val();
-                                var answer = $("input[name='awesomeness']:checked").val()
-                                Example.show("Hello " + name + ". You've chosen <b>" + answer + "</b>");
-                            }
-                        }
-                    }
-                }
-        );
-            }
 
-        </script>
 
+
+
+
+       
 
     }

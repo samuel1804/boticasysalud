@@ -1,0 +1,58 @@
+﻿@model WebBS.Models.RRH_GradoAcademico
+@{
+    Layout = null;
+}
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+
+@*@using (Ajax.BeginForm("EditCustomer", "Home", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "edit-Dialog" }))*@
+@using (Ajax.BeginForm("CreateEditCandidato", "Candidato", null))
+{
+    <fieldset>
+        <legend>Agregar Grado Académico</legend>
+        @* <div style="color: Green; font-weight: bold">
+                @ViewBag.Msg
+            </div>*@
+        @if (ViewBag.IsUpdate == true)
+        {
+            @Html.HiddenFor(model => model.Cod_GradoAcademico)
+        }
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Especialidad)
+        </div>
+        <div class="editor-field">
+
+            @Html.EditorFor(model => model.Especialidad)
+            @Html.ValidationMessageFor(model => model.Especialidad)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CentroEstudios)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CentroEstudios)
+            @Html.ValidationMessageFor(model => model.CentroEstudios)
+        </div>
+        <br />
+        <div style="float: right">
+            @if (ViewBag.IsUpdate == true)
+            {
+
+                <button type="submit" id="btnUpdate" name="Command" value="Update" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                    <span class="ui-button-text">Update</span>
+                </button>
+            }
+            else
+            {
+                <button type="submit" id="btnSave" name="Command" value="Save" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                    <span class="ui-button-text">Registrar</span>
+                </button>
+            }
+            &nbsp; &nbsp;
+            <button type="button" id="btncancel" value="Cancel" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                <span class="ui-button-text">Cancelar</span>
+            </button>
+        </div>
+    </fieldset>
+}

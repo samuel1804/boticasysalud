@@ -14,7 +14,7 @@ namespace WebBS.Controllers
     public class CandidatoController : Controller
     {
         private BDBoticasEntities db = new BDBoticasEntities();
-
+       public List<RRH_GradoAcademico> Grados = new List<RRH_GradoAcademico>();
         // GET: /Candidato/
         public ActionResult Index()
         {
@@ -40,9 +40,81 @@ namespace WebBS.Controllers
         public ActionResult Create()
         {
             ViewBag.Cod_ofertalaboral = new SelectList(db.RRH_OfertaLaboral, "Cod_ofertalaboral", "Titulo");
+            var Ga=new RRH_GradoAcademico();
+            Ga.Especialidad="sa";
+            Ga.CentroEstudios="centro es";
+            Grados.Add(Ga);
+            ViewBag.Grados = Grados;
             //ViewBag.Grados = db.RRH_GradoAcademico.ToList();
             //ViewBag.IdPuesto = new SelectList(db.Puesto, "IdPuesto", "Nombre");
             return View();
+        }
+
+
+        public ActionResult AdicionarGrado()
+        {
+            if (Request.IsAjaxRequest())
+            {
+                RRH_GradoAcademico cust = new RRH_GradoAcademico();
+                ViewBag.IsUpdate = false;
+                return View("_Grado", cust);
+            }
+            else
+                return View();
+        }
+
+
+        
+        public ActionResult CreateEditCandidato(RRH_GradoAcademico mCust, string Command)
+        {
+            // Validate the model being submitted
+            if (Request.IsAjaxRequest())
+            {
+                if (!ModelState.IsValid)
+                {
+
+                    return PartialView("_Grado", mCust);
+
+                }
+
+                else if (Command == "Save")
+                {
+
+
+                    RRH_GradoAcademico mobjcust = new RRH_GradoAcademico();
+                    mobjcust.CentroEstudios = mCust.CentroEstudios;
+                    mobjcust.Especialidad = mCust.Especialidad;
+                   
+                    Grados.Add(mobjcust);
+                    /*
+                    bool check = mobjModel.CreateCustomer(mobjcust);
+                    if (check)
+                    {
+                        TempData["Msg"] = "El Cliente ha sido registrado satisfactoriamente";
+                        ModelState.Clear();
+                        return RedirectToAction("WebGrid", "Home");
+                    }*/
+                }
+
+                else if (Command == "Update")
+                {
+                    /*Customer mobjcust = new Customer();
+                    mobjcust.Id = mCust.Id;
+                    mobjcust.Name = mCust.Name;
+                    mobjcust.Mobile = mCust.Mobile;
+
+                    bool check = mobjModel.UpdateCustomer(mobjcust);
+                    if (check)
+                    {
+                        TempData["Msg"] = "El Cliente ha sido actualizado satisfactoriamente";
+                        ModelState.Clear();
+                        return RedirectToAction("WebGrid", "Home");
+                    }*/
+
+                }
+            }
+
+           return RedirectToAction("Create");
         }
 
         // POST: /Candidato/Create
