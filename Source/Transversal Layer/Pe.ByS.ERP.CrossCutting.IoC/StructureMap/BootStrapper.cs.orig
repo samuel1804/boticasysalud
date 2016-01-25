@@ -1,0 +1,128 @@
+﻿using System.Data.Entity;
+using System.Web.Security;
+using SIGCOMT.Business.Logic;
+using SIGCOMT.Business.Logic.Inter;
+using SIGCOMT.Persistence.Core;
+using SIGCOMT.Persistence.EntityFramework;
+using SIGCOMT.Repository;
+using SIGCOMT.Repository.RepositoryContracts;
+using SIGCOMT.Repository.SqlServer;
+using SIGCOMT.Service;
+using SIGCOMT.Service.Inter;
+using StructureMap;
+using StructureMap.Configuration.DSL;
+
+namespace SIGCOMT.IoC.StructureMap
+{
+    public class BootStrapper
+    {
+        /// <summary>
+        /// Metodo que inserta en el StructureMap el registro con las inyecciones de dependencia.
+        /// </summary>
+        public static void ConfigureDependencies()
+        {
+            ObjectFactory.Initialize(x => 
+            {
+                x.AddRegistry<ControllerRegistry>();
+            });
+        }
+    }
+
+    public class ControllerRegistry : Registry
+    {
+        /// <summary>
+        /// Constructor que genera un registro que contiene todas las inyecciones de dependencia que se le agregarán al StructureMap
+        /// </summary>
+        public ControllerRegistry()
+        {
+            #region Repository
+
+            For<DbContext>().HybridHttpOrThreadLocalScoped().Use<DbContextBase>();             
+
+            For(typeof(IRepository<>)).Use(typeof(Repository<>));
+            For(typeof(IRepositoryWithTypedId<,>)).Use(typeof(RepositoryWithTypedId<,>));
+            For<IUsuarioRepository>().Use<UsuarioRepository>();            
+            For<IFormularioRepository>().Use<FormularioRepository>();            
+            For<IItemTablaRepository>().Use<ItemTablaRepository>();            
+            For<IPermisoUsuarioRepository>().Use<PermisoUsuarioRepository>();
+            For<IRolRepository>().Use<RolRepository>();
+            For<IBaseDatoRepository>().Use<BaseDatoRepository>();
+            For<IConectorServicioWebRepository>().Use<ConectorServicioWebRepository>();
+            For<IConectorFTPRepository>().Use<ConectorFTPRepository>();
+            For<IConectorWMIRepository>().Use<ConectorWMIRepository>();            
+            For<IConectorSSHRepository>().Use<ConectorSSHRepository>();
+            For<IConectorShellBatRepository>().Use<ConectorShellBatRepository>();
+            For<IConectorSAPRepository>().Use<ConectorSAPRepository>();
+            For<ITemasCorreoRepository>().Use<TemasCorreoRepository>();
+            For<IJerarquiaRepository>().Use<JerarquiaRepository>();
+            For<IParametroRepository>().Use<ParametroRepository>();
+            For<IPlantillaRepository>().Use<PlantillaRepository>();
+            For<IPlantillaCabeceraRepository>().Use<PlantillaCabeceraRepository>();
+            For<ILogGeneralRepository>().Use<LogGeneralRepository>();
+            For<IPaqueteRepository>().Use<PaqueteRepository>();
+            For<IProcesoRepository>().Use<ProcesoRepository>();
+            For<IParametroProcesoConectorShellBatRepository>().Use<ParametroProcesoConectorShellBatRepository>();
+            For<IParametroProcesoConectorSAPRepository>().Use<ParametroProcesoConectorSAPRepository>();
+            For<IProcesoConectorShellBatRepository>().Use<ProcesoConectorShellBatRepository>();
+            For<IProcesoConectorSAPRepository>().Use<ProcesoConectorSAPRepository>();
+            For<IProcesoTemasCorreoRepository>().Use<ProcesoTemasCorreoRepository>();
+            For<IProcesoServicioWebRepository>().Use<ProcesoServicioWebRepository>();
+            For<IMetodoRepository>().Use<MetodoRepository>();
+<<<<<<< HEAD
+            For<INivelEscalamientoRepository>().Use<NivelEscalamientoRepository>();
+            For<IGrupoSoporteRepository>().Use<GrupoSoporteRepository>();
+            For<IDetUsuarioGrupoSoporteRepository>().Use<DetUsuarioGrupoSoporteRepository>();
+            For<IDetUsuarioNivelEscalamientoRepository>().Use<DetUsuarioNivelEscalamientoRepository>();
+=======
+            For<IProcesoConectorFTPRepository>().Use<ProcesoConectorFTPRepository>();
+            For<IProcesoConectorWMIRepository>().Use<ProcesoConectorWMIRepository>();
+            For<IProcesoConectorSSHRepository>().Use<ProcesoConectorSSHRepository>();
+>>>>>>> 0af9a1056a85abf5a9b37fb0215b9bc39931a913
+	        #endregion
+	    
+            #region Business Logic
+
+            For<IUsuarioBL>().Use<UsuarioBL>();
+            For<IFormularioBL>().Use<FormularioBL>();
+            For<IItemTablaBL>().Use<ItemTablaBL>();
+            For<IPermisoUsuarioBL>().Use<PermisoUsuarioBL>();
+            For<IRolBL>().Use<RolBL>();
+            For<IBaseDatoBL>().Use<BaseDatoBL>();
+            For<IConectorServicioWebBL>().Use<ConectorServicioWebBL>();
+            For<IConectorFTPBL>().Use<ConectorFTPBL>();
+            For<IConectorWMIBL>().Use<ConectorWMIBL>();
+            For<IConectorSSHBL>().Use<ConectorSSHBL>();
+            For(typeof(IFormsAuthenticationService)).Use(typeof(FormsAuthenticationService));
+            For<IConectorShellBatBL>().Use<ConectorShellBatBL>();
+            For<IConectorSAPBL>().Use<ConectorSAPBL>();
+            For<ITemasCorreoBL>().Use<TemasCorreoBL>();
+            For<IJerarquiaBL>().Use<JerarquiaBL>();
+            For<IParametroBL>().Use<ParametroBL>();
+            For<IPlantillaBL>().Use<PlantillaBL>();
+            For<IPlantillaCabeceraBL>().Use<PlantillaCabeceraBL>();
+            For<IPaqueteBL>().Use<PaqueteBL>();
+            For<IProcesoBL>().Use<ProcesoBL>();
+            For<IParametroProcesoConectorShellBatBL>().Use<ParametroProcesoConectorShellBatBL>();
+            For<IParametroProcesoConectorSAPBL>().Use<ParametroProcesoConectorSAPBL>();
+            For<IProcesoConectorShellBatBL>().Use<ProcesoConectorShellBatBL>();
+            For<IProcesoConectorSAPBL>().Use<ProcesoConectorSAPBL>();
+            For<IProcesoTemasCorreoBL>().Use<ProcesoTemasCorreoBL>();
+            For<IProcesoServicioWebBL>().Use<ProcesoServicioWebBL>();
+            For<IMetodoBL>().Use<MetodoBL>();
+<<<<<<< HEAD
+            For<INivelEscalamientoBL>().Use<NivelEscalamientoBL>();
+            For<IDetUsuarioNivelEscalamientoBL>().Use<DetUsuarioNivelEscalamientoBL>();
+=======
+            For<IProcesoConectorFTPBL>().Use<ProcesoConectorFTPBL>();
+            For<IProcesoConectorWMIBL>().Use<ProcesoConectorWMIBL>();
+            For<IProcesoConectorSSHBL>().Use<ProcesoConectorSSHBL>();
+>>>>>>> 0af9a1056a85abf5a9b37fb0215b9bc39931a913
+            #endregion
+
+            #region Authentication
+            For<IMembershipService>().Use<AccountMembershipService>();
+            For<MembershipProvider>().Use(Membership.Provider); 
+            #endregion
+        }
+    }
+}

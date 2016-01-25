@@ -1,0 +1,211 @@
+﻿@using Pe.ByS.Importacion.Presentacion.Core.Helper
+@using Pe.ByS.Importacion.Presentacion.Resource.Base
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>SISVEN</title>
+
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+</head>
+<body>   
+    <p>hola</p>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 page-user text-left clearfix">
+
+                <div class="pull-right" style="width: auto;">
+                    <ul id="mnuSeleccionCultura" class="menu ui-menu ui-widget ui-widget-content ui-corner-all" style="width: 70px; text-align: center; border: none; background: none;margin-bottom: 0px;" role="menu" tabindex="0">
+                        <li>ES-<img src="~/Theme/images/icon/ES-PE.png" class="logo" /></li>
+                    </ul>
+                    <div style="width: auto; float: right;">
+                        <div style="margin-top: 5px;">
+                            <span class="link">&nbsp;|&nbsp;
+                            <span class=" glyphicon glyphicon-user"></span>
+                                ByS Empleado
+                            </span>
+                            <a href= "@Url.Action("Logut", "Cuenta", new { Area = "Sistema" })" class="btn-default btn-sm">Cerrar Sesion</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="page-header clearfix">
+
+                    <div class="col-md-4">
+                        <div class="pull-left">
+                            <a>
+                                <img src="@Url.Content("~/Theme/images/system/logo.png")" class="logo" height="30" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="pull-right">
+                            <div class="pull-left comp-BtnNotification btn-group hidden">
+                                <button class="btn dropdown-toggle" data-toggle="dropdown" type="button">
+                                    <i class="fa fa-bell-o">
+                                        <span class="total">4</span>
+                                    </i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <div class="title">Notificaciones</div>
+                                    <div>
+                                        <div>
+                                            <a href="#"><i class="icon-not icon-not-pend"></i>Tienes un pendiente hasta el 8/09/2012<span class="time">Hace 32 min</span></a>
+                                        </div>
+                                        <div>
+                                            <a href="#"><i class="icon-not icon-not-val"></i>Ha sido validado<span class="time">Hace 32 min</span></a>
+                                        </div>
+                                        <div>
+                                            <a href="#"><i class="icon-not icon-not-new"></i>Tienes un nuevo<span class="time">Hace una hora</span></a>
+                                        </div>
+                                        <div>
+                                            <a href="#"><i class="icon-not icon-not-del"></i>No se ha podido validar<span class="time">Hace una hora</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row pos-rel">
+
+            <div class="col-md-3 u-module-nav">
+                <div>
+                    <ul class="list-group u-action-nav">
+                        <li class="list-group-item ">
+                            <a href="#" class="item item-menu" id="toggle-menu">
+                                <span class="fa fa-bars"></span>
+                                <span class="u-label">Menú</span>
+                                <span class="fa fa-angle-double-left pull-right"></span>
+                            </a>
+                        </li>
+
+
+                        <li id="mnuImportacion" class="list-group-item w-submenu">
+                            <a href="#" class="btn-submenu">
+                                <span class="fa fa-truck"></span><span class="u-label">&nbsp;Importación</span>
+                            </a>
+                            <ul id="ulSubMenuGestionPermiso">
+                                <li>
+                                    <a  id="subMenuSolicitudPermiso" href='@Url.Action("Index", "SolicitudPermiso", new { Area = "GestionPermiso" })' >
+                                        <span class="fa fa-chevron-right"></span>
+                                        <span class="u-label">Solicitud Gestión Permiso</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a  id="subMenuPlanificarActividades" href='@Url.Action("Buscar", "SolicitudPermiso", new { Area = "GestionPermiso" })' >
+                                        <span class="fa fa-chevron-right"></span>
+                                        <span class="u-label">Planificar Actividades</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-9 u-module-panel" style="min-height: 395px;">
+                @RenderSection("featured", required: false)
+                <section>
+                    @RenderBody()
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <div class="col-xs-12">
+                <p class="pull-left">Boticas y Salud - Todos los Derechos Reservados @DateTime.Now.Year V.1.0.0.B0</p>
+                <p class="pull-right">
+                    Powered by <a href="#" tabindex="50">TP-2</a>
+                </p>
+            </div>
+        </div>
+
+ <script type="text/javascript">
+        ns('Pe.GMD.UI.Web.Formato');
+        Pe.GMD.UI.Web.Formato.Fecha = 'dd/mm/yy';
+        Pe.GMD.UI.Web.Formato.FechaMascara = '00/00/0000';
+        Pe.GMD.UI.Web.Formato.Decimal = '##0.00';
+        Pe.GMD.UI.Web.Formato.DecimalSeparadorDecimal = '.';
+        Pe.GMD.UI.Web.Formato.DecimalSeparadorMiles = '';
+        Pe.GMD.UI.Web.Formato.EnteroSeparadorMiles = '';
+
+        ns('Pe.ByS.ERP.Web.Global.MenuSeleccionado');
+        Pe.ByS.ERP.Web.Global.MenuSeleccionado.Modulo = 'mnuImportacion';
+        Pe.ByS.ERP.Web.Global.MenuSeleccionado.SubModulo = 'subMenuPlanificarActividades';
+
+        ns('Pe.ByS.ERP.Web.Global.Politicas');
+        Pe.ByS.ERP.Web.Global.Politicas.Menu = {
+            FormaMenuDesplegable: '1'
+        };
+
+        ns('Pe.ByS.ERP.Web.Enumerados.FormaPresentacionMenu');
+        Pe.ByS.ERP.Web.Enumerados.FormaPresentacionMenu.FormaExtendido = '0';
+        Pe.ByS.ERP.Web.Enumerados.FormaPresentacionMenu.FormaContraido = '1';
+        Pe.ByS.ERP.Web.Enumerados.CurrentDate = '@DateTime.Now.ToString("dd/MM/yyyy")'
+
+        //Mensajes Genericos
+        ns('Pe.ByS.ERP.Presentacion.Base.MensajeGenerico');
+@*        Pe.ByS.ERP.Presentacion.Base.MensajeGenerico.SeGuardoInformacionExito = '@Html.Raw(MensajeResource.SeGuardoInformacionExito)';
+        /*Validación de Carga de Archivo*/
+        Pe.ByS.ERP.Presentacion.Base.MensajeGenerico.MsjValidaEligeArchivo = '@Html.Raw(MensajeResource.MsjValidaEligeArchivo)';
+        Pe.ByS.ERP.Presentacion.Base.MensajeGenerico.MsjValidaExtensionArchivo = '@Html.Raw(MensajeResource.MsjValidaExtensionArchivo)';*@
+
+        //Mensajes
+        ns('Pe.ByS.ERP.Presentacion.Base.MensajeResource');
+@*        Pe.ByS.ERP.Presentacion.Base.MensajeResource.ConfirmacionEliminacion = '@Html.Raw(MensajeResource.ConfirmacionEliminacion)';
+        Pe.ByS.ERP.Presentacion.Base.MensajeResource.ConfirmacionGuardar = '@Html.Raw(MensajeResource.ConfirmacionGuardar)';
+        Pe.ByS.ERP.Presentacion.Base.MensajeResource.EtiquetaErrorRegistro = '@Html.Raw(MensajeResource.EtiquetaErrorRegistro)';
+        Pe.ByS.ERP.Presentacion.Base.MensajeResource.SeGuardoInformacionExito = '@Html.Raw(MensajeResource.SeGuardoInformacionExito)';
+        Pe.ByS.ERP.Presentacion.Base.MensajeResource.SeleccionarRegistroEliminar = '@Html.Raw(MensajeResource.SeleccionarRegistroEliminar)';
+        Pe.ByS.ERP.Presentacion.Base.MensajeResource.SeleccioneFiltro = '@Html.Raw(MensajeResource.SeleccioneFiltro)';*@
+
+        //Recurso Genérico
+        ns('Pe.ByS.ERP.Presentacion.Base.GenericoResource');
+        @*      Pe.ByS.ERP.Presentacion.Base.GenericoResource.EtiquetaEditar = '@Html.Raw(GenericoResource.EtiquetaEditar)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.EtiquetaEliminar = '@Html.Raw(GenericoResource.EtiquetaEliminar)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.GridDescargar = '@Html.Raw(GenericoResource.GridDescargar)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.EtiquetaNo = '@Html.Raw(GenericoResource.EtiquetaNo)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.EtiquetaSi = '@Html.Raw(GenericoResource.EtiquetaSi)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.EtiquetaSeleccionar = '@Html.Raw(GenericoResource.EtiquetaSeleccionar)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.EtiquetaNotificar = '@Html.Raw(GenericoResource.EtiquetaNotificar)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.GridAcciones = '@Html.Raw(GenericoResource.GridAcciones)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.GridEstadios = '@Html.Raw(GenericoResource.GridEstadios)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.GridPredecesora = '@Html.Raw(GenericoResource.GridPredecesora)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.GridPdf = '@Html.Raw(GenericoResource.GridPdf)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.GridAdjunto = '@Html.Raw(GenericoResource.GridAdjunto)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.GridObservacion = '@Html.Raw(GenericoResource.GridObservacion)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.GridConsulta = '@Html.Raw(GenericoResource.GridConsulta)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.GridAprobar = '@Html.Raw(GenericoResource.GridAprobar)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.GridDetalle = '@Html.Raw(GenericoResource.GridDetalle)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.EtiquetaCopiar = '@Html.Raw(GenericoResource.GridCopiar)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.GridParrafo = '@Html.Raw(GenericoResource.GridParrafo)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.EtiquetaCopiarEstadio = '@Html.Raw(GenericoResource.GridCopiarEstadio)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.EtiquetaVerificar = '@Html.Raw(GenericoResource.EtiquetaVerificar)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.EtiquetaGridFileUpload = '@Html.Raw(GenericoResource.EtiquetaGridFileUpload)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.GridValorAlquiler = '@Html.Raw(GenericoResource.GridValorAlquiler)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.GridVistaPrevia = '@Html.Raw(GenericoResource.GridVistaPrevia)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.GridContrato = '@Html.Raw(GenericoResource.GridContrato)';
+        Pe.ByS.ERP.Presentacion.Base.GenericoResource.EtiquetaEditarContenidoContrato = '@Html.Raw(GenericoResource.EtiquetaEditarContenidoContrato)';*@
+
+
+
+
+    </script>
+
+</body>
+</html>

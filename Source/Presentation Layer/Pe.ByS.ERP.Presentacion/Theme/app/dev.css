@@ -1,0 +1,355 @@
+/* variables */
+/* color rojo predominandte */
+/* color plomo leer mas */
+/* end variables */
+/* clearfix */
+/* For modern browsers */
+.cf:before,
+.cf:after {
+    content: "";
+    display: table;
+}
+
+.cf:after {
+    clear: both;
+}
+
+/* For IE 6/7 (trigger hasLayout) */
+.cf {
+    zoom: 1;
+}
+
+/* end clearfix */
+/* font face */
+/* @font-face {
+     
+
+}  
+ 
+/* end font face */
+/*globales*/
+/* border radius */
+/*end border radius */
+.w-title-1 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #343434;
+    border-bottom: 1px solid #c2c2c2;
+    padding-bottom: 10px;
+    text-align: left;
+}
+
+.w-title-2 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #343434;
+    text-align: left;
+    padding-bottom: 2px;
+}
+
+.w-bar-progress {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.w-alerta-1 {
+    min-width: 220px;
+    max-width: 100%;
+    padding: 15px;
+    background-color: #efefef;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+    .w-alerta-1 img {
+        margin-bottom: 10px;
+    }
+
+#fancybox-close {
+    top: -14px !important;
+    right: -60px !important;
+}
+
+.w-formulario-popup {
+    /*width: 490px;*/
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #efefef;
+    padding: 15px;
+}
+
+    .w-formulario-popup .w-form .w-item {
+        /*width: 360px;*/
+        margin: 30px auto;
+    }
+
+        .w-formulario-popup .w-form .w-item td {
+            padding-bottom: 10px;
+        }
+
+        .w-formulario-popup .w-form .w-item .w-subtitle {
+            font-size: 14px;
+            color: #343434;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .w-formulario-popup .w-form .w-item .w-size-1 {
+            width: 175px;
+        }
+
+        .w-formulario-popup .w-form .w-item .w-input {
+            border: 1px solid #ccc;
+            height: 28px;
+            width: 180px;
+            padding-left: 10px;
+            -webkit-border-radius: 7px;
+            -moz-border-radius: 7px;
+            -ms-border-radius: 7px;
+            -o-border-radius: 7px;
+            border-radius: 7px;
+        }
+
+    .w-formulario-popup .w-form .ui-spinner {
+        border-top-left-radius: 9px;
+        border-bottom-left-radius: 9px;
+    }
+
+.ui-spinner .w-input {
+    background-color: white;
+    margin: 0px;
+}
+
+.w-formulario-popup .w-form .w-item .w-textarea {
+    width: 100%;
+    height: 75px;
+    margin-top: 15px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+    border-radius: 7px;
+}
+
+.w-formulario-popup .cnt-button {
+    text-align: center;
+}
+
+    .w-formulario-popup .cnt-button button {
+        margin-left: 10px;
+    }
+
+.w-formulario-popup .w-detalle-proceso-terminado {
+    margin-top: 25px;
+}
+
+    .w-formulario-popup .w-detalle-proceso-terminado table {
+        margin: auto;
+    }
+
+        .w-formulario-popup .w-detalle-proceso-terminado table td {
+            padding-bottom: 10px;
+        }
+
+    .w-formulario-popup .w-detalle-proceso-terminado .w-text {
+        width: 260px;
+        padding: 0px 20px;
+    }
+
+    .w-formulario-popup .w-detalle-proceso-terminado .cnt-button {
+        margin-top: 20px;
+    }
+
+.ui-tooltip, .arrow:after {
+    background: black;
+    border: 0px;
+}
+
+.ui-tooltip {
+    color: white;
+    border-radius: 4px;
+    font-size: 12px;
+    box-shadow: 0 0 7px black;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 0px;
+}
+
+.arrow {
+    width: 70px;
+    height: 12px;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    margin-left: -33px;
+    bottom: -7px;
+}
+
+    .arrow.top {
+        top: -16px;
+        bottom: auto;
+    }
+
+    .arrow.left {
+        left: 20%;
+    }
+
+    .arrow:after {
+        content: "";
+        position: absolute;
+        left: 20px;
+        top: -20px;
+        width: 25px;
+        height: 25px;
+        box-shadow: 6px 5px 9px -9px black;
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        tranform: rotate(45deg);
+    }
+
+    .arrow.top:after {
+        bottom: -20px;
+        top: auto;
+    }
+
+.datepicker1 {
+    text-align: center;
+}
+
+.subtitle {
+    box-sizing: border-box;
+    color: rgb(52, 52, 52);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    height: 20px;
+    line-height: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.spinner-error {
+    border: 1px solid #a94442;
+    color: #f00;
+}
+
+:disabled {
+    background: #dddddd;
+}
+
+.form-control-static {
+    margin-bottom: 0;
+    color: #999;
+}
+
+.enabled {
+    color: #333;
+}
+
+    .enabled:hover {
+        color: #333;
+    }
+
+.tableTransactionCredit {
+    width: 100%;
+}
+
+    .tableTransactionCredit th {
+        padding-left: 2px;
+        padding-right: 2px;
+        padding-bottom: 5px;
+        font-weight: normal;
+    }
+
+    .tableTransactionCredit td {
+        padding-left: 2px;
+        padding-right: 2px;
+        padding-bottom: 5px;
+        font-weight: normal;
+        text-align:center;
+    }
+
+
+    /**********************************************
+File : table.css;
+-----------------------------------------------
+Description:
+   - Reglas 
+     especificas para tablas
+-----------------------------------------------
+Assigned to: Sebastian Yabiku        
+/*********************************************/
+
+/*----.controls .control-table*/
+/*********************************************/
+.controls .control-table{
+	display: inline-block;
+	font-size: 16px;
+	color: #aaa;
+	margin-right: 10px;
+	cursor:pointer;
+	border:none;
+	background:none;
+	padding:0px;
+}
+.controls .control-table:last-child,
+.controls .control-table:hover:last-child,
+.controls > span:last-child{
+    /*margin-right:0px!important;
+    padding:0px!important;
+    position:inherit;*/
+}
+    .controls .control-table:hover .fa,
+    .controls .control-table.is-active .fa{
+        color:#ee1621;
+    }
+
+
+/*----.hidden-edit*/
+/*********************************************/
+.hidden-edit .input-group .input-group-addon{
+	display:none;
+}
+.hidden-edit input[readonly]{
+	background: none;
+	border: none;
+	box-shadow: none;
+}
+.hidden-edit input[readonly]:focus,
+.hidden-edit input[readonly]:hover,
+.hidden-edit .input-group:hover{
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	-moz-box-shadow:none;
+}
+.hidden-edit input[type="text"],
+.hidden-edit input[type="password"]{
+	text-align:center;
+}
+
+/*----.table*/
+/*********************************************/
+.table .text-left{
+    text-align:left;
+}
+.table .text-center{
+    text-align:center;
+}
+.table .text-right {
+    text-align: right;
+}
+
+.ui-spinner input[type='text'] {
+    border:none;
+}

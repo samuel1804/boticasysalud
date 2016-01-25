@@ -1,0 +1,340 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutI.cshtml";
+}
+
+
+
+@model Pe.ByS.ERP.Aplicacion.TransferObject.Response.OrdenPedidoResponse
+
+
+<input id="hfIdentificadorDetalle" type="hidden" />
+<div id='dialog-DetalleProducto' style="display: none;">
+</div>
+<div id='dialog-DetalleEliminar' style="display: none;">
+    Seguro de eliminar?
+</div>
+@*<div id='dialog-ListaProducto' style="display: none;">
+</div>*@
+
+<div id="Msg-EntradaAlmacen">
+    <div class="msgModel" style="display: none">
+        <div class="tips loading">
+            Procesando
+        </div>
+        <div class="tips merror">
+        </div>
+        <div class="tips mexito">
+        </div>
+    </div>
+</div>
+
+<div class="grupocontenido2 scrollTotal">
+    <div>
+
+        @*<button type="button" value='Guardar' id="btnGuardarCerrar" class="BotonGuardar" title='Guardar'></button>*@
+        
+    </div>
+
+    <table border="0" id="tableOrdenCompraProducto" class="tablelayoutI">
+        <tr>
+            <td class="right" style="width: 130px;">
+                <b>
+
+                    <label>Codigo:</label>
+                </b>
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.NumeroPedido, new { @class = "inp-form", @id = "txtCodigo" })
+                @Html.HiddenFor(model => model.Codigo, new { @id = "IdPedido" })
+                
+            </td>
+        </tr>
+       
+        <tr>           
+            <td colspan="3">
+                @*<button type="button" value='Agregar' id="btnAgregar" class="BotonGuardar" title='Agregar Detalle'></button>*@
+                <button type="button" value='Nuevo' id="btnNuevo" class="" title='Guardar'>Nuevo</button>
+                <button type="button" value='Nuevo' id="btnGuardarCerrar" class="" title='Guardar'>Guardar y Cerrar</button>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+</div>
+
+<table style="width: 100%" id="tablaDetalle"></table>
+<div style="width: 100%" id="barraDetalle">
+</div>
+
+<script type='text/javascript' id="ListarProducto">
+
+    var grillaProductosOrdenCompra = 'tablaDetalle';
+    var dialogDelete = 'dialog-DetalleEliminar';
+    var dialogAlter = 'dialog-alert';
+    var SeleccioneRegistro = 'Seleccione';
+    var titleBtn1 = 'Aceptar';
+    var titleBtn2 = 'Cancelar';
+    var TituloEliminar = 'Eliminar';
+
+    var ListaTodosOrdenCompraDetalle = new Array();
+    var idEditar = 0;
+
+    $(document).ready(function () {
+        debugger;
+        ListarOrdenCompraDetalle();
+        CargarOrdenCompraDetalle();
+        
+        jQuery("#btnNuevo").click(function (e) {
+            debugger;
+            NuevoDetalle();
+            e.preventDefault();
+        });
+
+        jQuery("#btnBuscar").click(function () {
+            BuscarProducto();
+
+        });
+
+        jQuery("#btnGuardarCerrar").click(function () {
+            SIG.Alert('Pedido', 'El proceso se realizó correctamente', null);
+        }
+        );
+        //jQuery("#btnGuardarCerrar").click(function (e) {
+        //    GuardarCerrar();
+        //    e.preventDefault();
+        //});
+
+        CrearDialogPopUp();
+
+        var arrayDialogConfirm = [
+        { name: dialogDelete, height: 150, width: 300, title: TituloEliminar, titleBtn1: TituloEliminar, titleBtn2: titleBtn2, strFun: 'EliminarDetalle' }
+        ];
+        SIG.CreateDialogsConfirm(arrayDialogConfirm);
+
+    });
+
+    function NuevoDetalle()
+    {       
+        window.location.href = "/OrdenPedido/OrdenPedido/MantenimientoDetalle/" + $("#IdPedido").val();
+     }
+    function CrearDialogPopUp() {
+        var arrayDialog = [
+            { name: "dialog-ListaProducto", width: '570', height: '300', title: 'Lista de Productos', resizable: false }
+        ];
+        SIG.CreateDialogs(arrayDialog);
+    }
+
+
+    function BuscarProducto() {
+        var url = "/OrdenPedido/OrdenPedido/ListaArticulo"
+
+        SIG.MostrarInformacionPopup(url, null, "dialog-ListaProducto");
+
+    }
+
+    function CreateDialogsConfirmAndDeleteDetalle() {
+        var arrayDialog = [{ name: "dialog-DetalleProducto", width: '910', height: '580', title: 'OrdenCompra' }];
+        SIG.CreateDialogs(arrayDialog);
+
+        var arrayDialogConfirm = [
+            { name: dialogDelete, height: 150, width: 300, title: TituloEliminar, titleBtn1: TituloEliminar, titleBtn2: titleBtn2, strFun: 'EliminarDetalle' }
+        ];
+
+        SIG.CreateDialogsConfirm(arrayDialogConfirm);
+    }
+
+    function ListarOrdenCompraDetalle() {
+
+        var IdArticulo = 'IdArticulo';
+        var Producto = 'Producto';
+        var Cantidad = 'Cantidad';
+        var IdOrdenPedido = 'IdOrdenPedido';
+        var NumeroPedido = 'NumeroPedido';
+
+        $('#' + grillaProductosOrdenCompra).jqGrid('GridUnload');
+
+        var colNames = ["Id", IdOrdenPedido, Producto, IdArticulo, Cantidad];
+        var colModels = [
+            { name: 'Id', index: 'Id', align: 'center', hidden: true, width: 40 },
+            { name: 'IdOrdenPedido', index: 'IdOrdenPedido', align: 'center', hidden: true, width: 40 },
+            { name: 'Producto', index: 'Producto', align: 'center', width: 270 },
+            { name: 'IdArticulo', index: 'IdArticulo', align: 'center', hidden: true, width: 100 },
+            { name: 'Cantidad', index: 'Cantidad', align: 'center', width: 200 },
+
+        ];
+
+        var opciones = {
+            GridLocal: true,
+            nuevo: false,
+            editar: false,
+            eliminar: true,
+            search: false,
+            Lenguaje: 'es',
+            NuevoCaption: 'Nuevo',
+            NuevoCommand: NuevoProductoOrdenCompra,
+            EditarCaption: 'Editar',
+            EliminarCaption: 'Eliminar',
+            dialogDelete: dialogDelete,
+            Mensaje: 'SeleccioneRegistro',
+            SinRegistro: 'SinRegistro',
+            AlertTitle: 'Detalle',
+            DblClickHandler: DblClickHandlerOrdenCompra,
+            rowNumbers: [5, 10, 15, 20, 50],
+            rowNumber: 5,
+            footerrow: true,
+            LoadCompleteHandler: LoadCompleteHandlerOrdenCompra
+        };
+        SIG.Grilla(grillaProductosOrdenCompra, 'barraDetalle', 'hfIdentificadorDetalle', 'auto', 'auto', '', '', 'IdOrdenPedido', colNames, colModels, 'IdArticulo', opciones);
+        $("#" + grillaProductosOrdenCompra).parents('div.ui-jqgrid-bdiv').css("max-height", "85px");
+    }
+
+    function DblClickHandlerOrdenCompra(rowid) {
+        if (SIG.stringToBoolean('true')) {
+            EditarProductoOrdenCompra(rowid);
+        }
+        else {
+            SIG.Alert('OrdenCompra', 'NoTienePermisoParaEditar', null);
+        }
+    }
+
+    function LoadCompleteHandlerOrdenCompra(miGrid) {
+    }
+
+    function CargarOrdenCompraDetalle() {
+        debugger;
+        var opciones = {
+            url: '@Url.Action("ObtenerListaProducto", "OrdenPedido", new { Area = "OrdenPedido" })',
+              parametros: {
+                  Id: $("#IdPedido").val()
+              }
+          };
+
+          SIG.Ajax(opciones, function (response) {
+              if (response.Success) {
+                  ManageListaOrdenDetalle(response.Data);
+                  ListaTodosOrdenCompraDetalle = jQuery("#" + grillaProductosOrdenCompra).jqGrid('getGridParam', 'data');
+                  jQuery("#" + grillaProductosOrdenCompra).trigger('reloadGrid');
+              }
+          });
+    }
+
+
+    function EliminarDetalle() {
+            $('#' + dialogDelete).dialog("close");
+          var rowkey = jQuery("#" + grillaProductosOrdenCompra).jqGrid('getGridParam', 'selrow');
+          rowItem = jQuery("#" + grillaProductosOrdenCompra).jqGrid('getRowData', rowkey);
+          $('#' + grillaProductosOrdenCompra).jqGrid('delRowData', rowkey);
+          //window.location.href = "/OrdenPedido/OrdenPedido/Formulario" + "/" + rowItem.Id;
+          var iddetalle = rowItem.Id;        
+        
+        var opciones = {
+            url: '@Url.Action("EliminarDetalle", "OrdenPedido", new { Area = "OrdenPedido" })', //'@Url.Action("ListarDetalleOrdenCompra", "Movimiento", new { area = "Administracion" })',
+                 parametros: {
+                     Id: iddetalle,
+                     IdPedido:jQuery("#IdPedido").val() 
+                 }
+             };
+
+             SIG.Ajax(opciones, function (response) {
+                 if (response.Success) {
+                     //$('#' + grillaProductosOrdenCompra).jqGrid('GridUnload');
+                     //jQuery("#" + grillaProductosOrdenCompra).trigger('reloadGrid');
+                     ManageListaOrdenDetalle(response.Data);
+                     //ListaTodosOrdenCompraDetalle = jQuery("#" + grillaProductosOrdenCompra).jqGrid('getGridParam', 'data');
+                     //jQuery("#" + grillaProductosOrdenCompra).trigger('reloadGrid');
+                 }
+             });
+
+        //$('#' + dialogDelete).dialog("close");
+        //var rowkey = jQuery("#" + grillaProductosOrdenCompra).jqGrid('getGridParam', 'selrow');
+        //$('#' + grillaProductosOrdenCompra).jqGrid('delRowData', rowkey);
+        //jQuery("#" + grillaProductosOrdenCompra).trigger('reloadGrid');
+        //ListaTodosOrdenCompraDetalle = jQuery("#" + grillaProductosOrdenCompra).jqGrid('getGridParam', 'data');
+    }
+
+    function ManageListaOrdenDetalleEliminar(response) {
+        var agregar = true;
+        $.each(response, function (i, v) {
+            agregar = true;
+            //ListaTodosOrdenCompraDetalle = jQuery("#" + grillaProductosOrdenCompra).jqGrid('getGridParam', 'data');
+            //var myGrid = jQuery("#" + grillaProductosOrdenCompra); // the variable you probably have already somewhere
+            //var gridBody = jQuery("#" + grillaProductosOrdenCompra).children("tbody");
+            //var firstRow = gridBody.children("tr.jqgfirstrow");
+            //gridBody.empty().append(firstRow);
+
+            $.each(ListaTodosOrdenCompraDetalle, function (j, b) {
+                $('#' + grillaProductosOrdenCompra).jqGrid('delRowData');
+                //if (b.ProductoId == v.ProductoId) {
+                //    agregar = false;
+                //    return;
+                //}
+            });
+
+            if (agregar) {
+                var myData =
+                {
+                    Id: v.IdDetalleOrdenPedido,
+                    IdArticulo: v.IdArticulo,
+                    Producto: v.Producto,
+                    Cantidad: v.Cantidad,
+                    IdOrdenPedido: v.IdOrdenPedido
+                };
+                jQuery("#" + grillaProductosOrdenCompra).jqGrid('addRowData', v.Id, myData);
+                //jQuery("#" + grillaProductosOrdenCompra).jqGrid('addRowData', v.Id, myData);
+            }
+            else {
+               // SIG.Alert('Pedido', 'El producto ya se encuentra incluido en el detalle', null);
+            }
+        });
+        jQuery("#" + grillaProductosOrdenCompra).trigger('reloadGrid');
+        ListaTodosOrdenCompraDetalle = jQuery("#" + grillaProductosOrdenCompra).jqGrid('getGridParam', 'data');
+    }
+
+
+
+    function ManageListaOrdenDetalle(response) {
+        var agregar = true;
+        $.each(response, function (i, v) {
+            agregar = true;
+            $.each(ListaTodosOrdenCompraDetalle, function (j, b) {
+                if (b.ProductoId == v.ProductoId) {
+                    agregar = false;
+                    return;
+                }
+            });
+
+            if (agregar) {
+                var myData =
+                {
+                    Id: v.IdDetalleOrdenPedido,
+                    IdArticulo: v.IdArticulo,
+                    Producto: v.Producto,
+                    Cantidad: v.Cantidad,
+                    IdOrdenPedido: v.IdOrdenPedido
+                };
+                jQuery("#" + grillaProductosOrdenCompra).jqGrid('addRowData', v.Id, myData);
+                //jQuery("#" + grillaProductosOrdenCompra).jqGrid('addRowData', v.Id, myData);
+            }
+            else {
+                SIG.Alert('Pedido', 'El producto ya se encuentra incluido en el detalle', null);
+            }
+        });
+        ListaTodosOrdenCompraDetalle = jQuery("#" + grillaProductosOrdenCompra).jqGrid('getGridParam', 'data');
+    }
+
+    function NuevoProductoOrdenCompra() {
+
+        var url = '@Url.Action("ListaArticulo", "OrdenPedido", new { Area = "OrdenPedido" })';
+        //SIG.MostrarInformacionPopup(url, null, "dialog-DetalleProducto");
+    }
+
+
+
+
+
+
+
+
+</script>

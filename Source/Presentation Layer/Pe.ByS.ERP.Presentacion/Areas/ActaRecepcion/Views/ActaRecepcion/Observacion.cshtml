@@ -1,0 +1,129 @@
+﻿@model Pe.ByS.ERP.Aplicacion.TransferObject.Response.DetalleActaRecepcionResponse
+
+<table border="0"  class="tablelayoutI">
+    <tr>
+        <td class="right" style="width: 130px;">
+            <b>
+
+                <label>Observacion:</label>
+            </b>
+        </td>
+        <td>
+            @Html.TextAreaFor(model => model.Observacion, new { rows = "3", cols = "30", @style = "width:auto;" })                                                
+            @Html.HiddenFor(model => model.IdActaRecepcion)
+            @Html.HiddenFor(model => model.Articulo)
+            @Html.HiddenFor(model => model.Cantidad)
+            @Html.HiddenFor(model => model.CantidadArticuloGuia)
+            @Html.HiddenFor(model => model.CantidadArticuloPedido)
+            @Html.HiddenFor(model => model.Comentario)
+            @Html.HiddenFor(model => model.DescripcionArticuloGuia)
+            @Html.HiddenFor(model => model.DescripcionArticuloPedido)
+            @Html.HiddenFor(model => model.IdArticuloPedido)
+            @Html.HiddenFor(model => model.IdArticulo)
+            @Html.HiddenFor(model => model.IdArticuloGuia)
+            @Html.HiddenFor(model => model.idGuiaFijo)
+            @Html.HiddenFor(model => model.IdGuiaRemision)
+            @Html.HiddenFor(model => model.IdOrdenPedido)
+            @Html.HiddenFor(model => model.idPedidoFijo)
+            @Html.HiddenFor(model => model.NumeroPedido)
+            @Html.HiddenFor(model => model.Producto)
+            @Html.HiddenFor(model => model.SerieGuia)
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2">
+            <button type="button" value='Aceptar' id="btnAceptar" class="" title='Guardar'>Aceptar</button>
+           
+        </td>
+    </tr>
+
+
+</table>
+
+<script type='text/javascript' id="ListarActa">
+
+
+
+
+        $(document).ready(function () {
+          
+            $("#btnAceptar").click(function () {
+                DblClickHandlerProductos()
+            });
+        });
+      
+        function DblClickHandlerProductos() {
+     
+            debugger;
+            var detalle = new Object();
+            detalle.IdActaRecepcion = jQuery("#IdActaRecepcion").val();
+            detalle.Articulo = jQuery("#Articulo").val();
+            detalle.Cantidad = jQuery("#Cantidad").val();
+            detalle.CantidadArticuloGuia = jQuery("#CantidadArticuloGuia").val();
+            detalle.CantidadArticuloPedido = jQuery("#CantidadArticuloPedido").val();
+            detalle.Comentario = jQuery("#Comentario").val();
+            detalle.DescripcionArticuloGuia = jQuery("#DescripcionArticuloGuia").val();
+            detalle.DescripcionArticuloPedido = jQuery("#DescripcionArticuloPedido").val();
+            detalle.IdArticuloPedido = jQuery("#IdArticuloPedido").val();
+            detalle.IdArticulo = jQuery("#IdArticulo").val();
+            detalle.IdArticuloGuia = jQuery("#IdArticuloGuia").val();
+            detalle.idGuiaFijo = jQuery("#idGuiaFijo").val();
+            detalle.IdGuiaRemision = jQuery("#IdGuiaRemision").val();
+            detalle.IdOrdenPedido = jQuery("#IdOrdenPedido").val();
+            detalle.idPedidoFijo = jQuery("#idPedidoFijo").val();
+            detalle.NumeroPedido = jQuery("#NumeroPedido").val();
+            detalle.Producto = jQuery("#Producto").val();
+            detalle.SerieGuia = jQuery("#SerieGuia").val();
+            detalle.SerieGuia = jQuery("#SerieGuia").val();
+            detalle.Observacion = jQuery("#Observacion").val();
+
+            ModificarLista(detalle);
+            jQuery("#dialog-DetalleObservacion").dialog("close");
+           
+        }
+
+        function LoadCompleteHandlerOrdenCompra(miGrid) {
+        }
+
+        function CargarProductos() {
+            var opciones = {
+                url: '@Url.Action("ListarDetalle", "OrdenPedido", new { Area = "OrdenPedido" })', 
+                parametros: {
+                    Id: $("#Codigo").val()
+                }
+            };
+
+            SIG.Ajax(opciones, function (response) {
+                if (response.Success) {
+                    ManageListaOrdenDetalle(response.Data);
+                    ListaTodosProducto = jQuery("#" + grillaProductos).jqGrid('getGridParam', 'data');
+                    debugger;
+                    jQuery("#" + grillaProductos).trigger('reloadGrid');
+                }
+            });
+        }
+
+
+        function ManageListaOrdenDetalle(response) {
+            var agregar = true;
+            $.each(response, function (i, v) {
+      
+                    var myData =
+                    {
+                        Id: v.Id,
+                        Codigo: v.Codigo,
+                        NombreArticulo: v.NombreArticulo,
+                        UnidadMedida: v.UnidadMedida,
+                        Precio: v.Precio,
+                    };
+                    jQuery("#" + grillaProductos).jqGrid('addRowData', v.Id, myData);
+                    //jQuery("#" + grillaProductos).jqGrid('addRowData', v.Id, myData);
+                
+             
+            });
+        }
+
+
+
+</script>

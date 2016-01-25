@@ -1,0 +1,119 @@
+﻿@using Pe.ByS.Importacion.Presentacion.Core.Helper
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Pe.ByS.ERP.Aplicacion.TransferObject.Response.Importacion.SolicitudPermisoResponse
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>Planificar Actividades Requeridas</strong>
+    </div>
+    <div class="panel-body" style="min-height: 330px;">
+        <div id="divMensajeInformativo">
+            <span class="fa fa-info-circle"></span>
+
+            @if (Model.PermiteEditar)
+            { 
+                <span>Usted puede gestionar las actividades para la solicitud de permiso.</span>
+            }
+            else
+            {
+                <span>La solicitud se encuentra en estado "@Model.Estado". Ustede no podrá realizar cambios.</span>
+            }
+        </div>
+        <hr />
+        <div id="divResultadoBusqueda" class="form form-high">
+            <div>
+                <strong>Información de la solicitud</strong>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Número de solicitud:</label>
+                            <div class="col-sm-7">
+                                <p class="form-control-static">@Model.NumeroSolicitud</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Producto:</label>
+                            <div class="col-sm-7">
+                                <p class="form-control-static">@Model.Articulo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Fecha Solicitud:</label>
+                            <div class="col-sm-7">
+                                <p class="form-control-static">@Model.FechaSolicitud</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Solicitante:</label>
+                            <div class="col-sm-7">
+                                <p class="form-control-static">@Model.Solicitante</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-6" style="margin-top: 5px;">
+                    <strong>Actividades planificadas</strong>
+                </div>
+                <div class="col-sm-6 text-right">
+                    @if (Model.PermiteEditar)
+                    { 
+                        <button id="btnNuevaActividad" class="btn btn-primary">Nueva Actividad</button>
+                    }
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div id="divGridMensaje" class="col-md-12">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <p class="form-control-static">No existen actividades planificadas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="divGridContent" class="table-responsive" style="display: none">
+                    <div id="grdActividades">
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <input id="btnRegresar" type="button" class="btn btn-default popup" value="Regresar" />
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="hdnCodigoSolicitud" value="@Model.Codigo" />
+@section Scripts {
+
+    @CustomHtmlHelper.RenderViewJs("gestionpermisoactividadsolicitudpermisoformularioactividad")
+    @CustomHtmlHelper.RenderViewJs("gestionpermisoactividadsolicitudpermisoconfiguraralerta")
+    <script type="text/javascript">
+        ns('Pe.ByS.ERP.GestionPermiso.ActividadSolicitudPermiso.Actions');
+        Pe.ByS.ERP.GestionPermiso.ActividadSolicitudPermiso.Actions.Listar = '@Url.Action("Listar", "ActividadSolicitudPermiso", new { Area = "GestionPermiso" })';
+        Pe.ByS.ERP.GestionPermiso.ActividadSolicitudPermiso.Actions.FormularioActividad = '@Url.Action("FormularioActividad", "ActividadSolicitudPermiso", new { Area = "GestionPermiso" })';
+        Pe.ByS.ERP.GestionPermiso.ActividadSolicitudPermiso.Actions.ListarActividad = '@Url.Action("ListarActividad", "ActividadSolicitudPermiso", new { Area = "GestionPermiso" })';
+        Pe.ByS.ERP.GestionPermiso.ActividadSolicitudPermiso.Actions.GuardarPlanificacionActividad = '@Url.Action("GuardarPlanificacionActividad", "ActividadSolicitudPermiso", new { Area = "GestionPermiso" })';
+        Pe.ByS.ERP.GestionPermiso.ActividadSolicitudPermiso.Actions.EliminarActividadPlanificada = '@Url.Action("EliminarActividadPlanificada", "ActividadSolicitudPermiso", new { Area = "GestionPermiso" })';
+
+        Pe.ByS.ERP.GestionPermiso.ActividadSolicitudPermiso.Actions.ConfigurarAlerta = '@Url.Action("ConfigurarAlerta", "ActividadSolicitudPermiso", new { Area = "GestionPermiso" })';
+        Pe.ByS.ERP.GestionPermiso.ActividadSolicitudPermiso.Actions.GuardarAlertaActividad = '@Url.Action("GuardarAlertaActividad", "ActividadSolicitudPermiso", new { Area = "GestionPermiso" })';
+        Pe.ByS.ERP.GestionPermiso.ActividadSolicitudPermiso.Actions.EliminarAlertaActividad = '@Url.Action("EliminarAlertaActividad", "ActividadSolicitudPermiso", new { Area = "GestionPermiso" })';
+        Pe.ByS.ERP.GestionPermiso.ActividadSolicitudPermiso.Actions.ListarAlertaActividad = '@Url.Action("ListarAlertaActividad", "ActividadSolicitudPermiso", new { Area = "GestionPermiso" })';        
+
+        ns('Pe.ByS.ERP.GestionPermiso.ActividadSolicitudPermiso.Configuracion');
+        Pe.ByS.ERP.GestionPermiso.ActividadSolicitudPermiso.Configuracion.PermiteEditar = @Html.Raw(Model.PermiteEditar.ToString().ToLower());
+    </script>
+}

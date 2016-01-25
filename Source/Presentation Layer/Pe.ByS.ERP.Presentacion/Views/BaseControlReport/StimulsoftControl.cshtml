@@ -1,0 +1,37 @@
+﻿@using Stimulsoft.Report.Mvc
+@model Pe.ByS.ERP.Presentacion.Core.ViewerOptions
+
+@Html.Stimulsoft().StiMvcViewer("StiReporte", new StiMvcViewerOptions
+{
+    Actions =
+    {
+        GetReportSnapshot = Model.GetReportSnapshot,
+        ViewerEvent = Model.ViewerEvent,
+        PrintReport = Model.PrintReport,
+        ExportReport = Model.ExportReport,
+        Interaction = Model.Interaction
+    },
+    Toolbar =
+    {
+        MenuAnimation = false,
+        ShowMenuMode = StiShowMenuMode.Click,
+        ShowFullScreenButton = false
+    },
+    Appearance =
+    {
+        ShowPageShadow = false
+    },
+    Exports =
+    {
+        ShowExportDialog = false
+    },
+    Server =
+    {
+        Controller = Model.Controller,
+        PassFormValues = true,
+        CacheTimeout = 10,
+        RequestTimeout = 600
+    },
+    Theme = StiTheme.Office2013,
+    Localization = string.Format("~/Content/Localization/es.xml")
+})

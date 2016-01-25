@@ -1,0 +1,409 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutI.cshtml";
+}
+@using Pe.ByS.ERP.CrossCutting.Common
+@model Pe.ByS.ERP.Application.DTO.ActaRecepcionDto
+
+<div class="grupocontenido2 scrollTotal">
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group form-group-sm">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12">Sucursal:</label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        @Html.DropDownListFor(model => model.SucursalId, new SelectList(Model.SucursalList, "Key", "Value", Model.SucursalId), new {@class = "form-control"})
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group form-group-sm">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12">Almacén:</label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        @Html.DropDownListFor(model => model.AlmacenId, new SelectList(new List<KeyValuePair<int, string>>(), "Key", "Value", Model.AlmacenId), new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group form-group-sm">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12">Verificador:</label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        @Html.DropDownListFor(model => model.VerificadorId, new SelectList(Model.VerificadorList, "Key", "Value", Model.VerificadorId), new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group form-group-sm">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12">Fecha:</label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.Fecha, new { @class = "form-control", @disabled = "disabled" })
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12">Número de Pedido:</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.NumeroPedido, new {@class = "form-control"})
+                            @Html.HiddenFor(p => p.OrdenPedidoId)
+                            <span class="input-group-btn">
+                                <button type="button" id="btnPedidos" class="btn btn-info btn-flat">...</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div class="col-md-5">
+                <div class="form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12">Número de Guia:</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.NumeroGuia, new {@class = "form-control"})
+                            @Html.HiddenFor(p => p.GuiaRemisionId)
+                            <span class="input-group-btn">
+                                <button type="button" id="btnGuias" class="btn btn-info btn-flat">...</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+            <div class="col-md-5">
+                <div class="form-group form-group-sm">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12">Número de Guia:</label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        @Html.TextBoxFor(model => model.NumeroGuia, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group form-group-sm">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12">Glosa:</label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        @Html.TextBoxFor(model => model.Glosa, new {@class = "form-control"})
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group form-group-sm">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12">Fecha de Guia:</label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.FechaGuia, new { @class = "form-control", @id = "txtFechaGuia" })
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="button" class="btn btn-info" id="btnGuardarCerrar">
+                    <i class="fa fa-floppy-o"></i>
+                    Generar Acta Recepción
+                </button>
+                @*&nbsp; &nbsp; &nbsp;
+                <button type="button" class="btn btn-info" id="btnExportar">
+                    <i class="fa fa-floppy-o"></i>
+                    Exportar
+                </button>*@
+                &nbsp; &nbsp; &nbsp;
+                <button type="button" class="btn btn-danger" id="btnCancelar">
+                    <i class="fa fa-remove"></i>
+                    Cancelar
+                </button>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;"></div>
+    </div>
+</div>
+<div>
+    <table style="width: 100%" id="tablaDetalleActa"></table>
+    <div style="width: 100%" id="barraDetalle"></div>
+</div>
+
+<script type='text/javascript'>
+    var grdDetalleActa = 'tablaDetalleActa';
+    var dialogDelete = 'dialog-DetalleEliminar';
+
+    $(document).ready(function () {
+        ListarActaDetalle();
+    });
+
+    function Exportar() {
+        SIG.Ajax({
+            url: '@Url.Action("StimulsoftControl", "BaseControlReport", new { area = "" })',
+            parametros: {
+                Parameters: 1,
+                Controller: "Anteproyecto"
+            },
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            datatype: 'html'
+        }, function (result) {
+            $("#divExportar .modal-body").html(result);
+            $("#divExportar").modal("show");
+        });
+    }
+
+    $("#btnExportar").click(function (e) {
+        e.preventDefault();
+        Exportar();
+    });
+
+    $("#txtFechaGuia").datepicker({
+        changeYear: true,
+        changeMonth: true,
+        showButtonPanel: true,
+        minDate: '@DateTime.Today.AddDays(-90).ConvertToDdmmaaaa()'
+    });
+
+    $("#btnGuardarCerrar").click(function (e) {
+        e.preventDefault();
+        GuardarCerrar();
+    });
+
+    $("#btnCancelar").click(function () {
+        window.location.href = '@Url.Action("Edit", "ActaRecepcion", new { Area = "ActaRecepcion" })';
+    });
+
+    $("#btnPedidos").click(function () {
+        var opciones = {
+            title: 'Ordenes de Pedidos',
+            url: '@Url.Action("ListOrdenPedido", "OrdenPedido", new {Area = "OrdenPedido"})',
+            height: 450,
+            width: 300,
+            buttonsConfig: {
+                guardarText: 'Seleccionar',
+                guardarIcon: 'ui-icon ui-icon-check',
+                GuardarHandlerFunction: 'SeleccionarPedido',
+                cancelarText: 'Cancelar',
+                parametroHandlers: {
+                    functionOk: function (rowData) {
+                        var numPedido = rowData['NumeroPedido'];
+                        $('#NumeroPedido').val(numPedido);
+                        $('#OrdenPedidoId').val(rowData['Id']);
+                        cargarDetallePedidos(numPedido);
+                    }
+                }
+            }
+        };
+        SIG.CreateDialogPopUpForm(opciones);
+    });
+
+    $("#btnGuias").click(function () {
+        var opciones = {
+            title: 'Guias de Remisión',
+            url: '@Url.Action("ListGuiaRemision", "GuiaRemision", new {Area = "GuiaRemision"})',
+            height: 450,
+            width: 300,
+            buttonsConfig: {
+                guardarText: 'Seleccionar',
+                guardarIcon: 'ui-icon ui-icon-check',
+                GuardarHandlerFunction: 'SeleccionarGuia',
+                cancelarText: 'Cancelar',
+                parametroHandlers: {
+                    functionOk: function (rowData) {
+                        $('#NumeroGuia').val(rowData['Serie']);
+                        $('#GuiaRemisionId').val(rowData['Id']);
+                    }
+                }
+            }
+        };
+        SIG.CreateDialogPopUpForm(opciones);
+    });
+
+    $("#SucursalId").change(function () {
+        var id = $(this).val();
+        var opciones = {
+            url: '@Url.Action("ObtenerAlmacenes", "ActaRecepcion", new {area = "ActaRecepcion"})',
+            parametros: { id: id }
+        };
+
+        SIG.Ajax(opciones, function (response) {
+            if (response.Success) {
+                var $almacen = $("#AlmacenId");
+                $almacen.empty();
+                $almacen.append('<option value="">-- Seleccionar --</option>');
+
+                $.each(response.Data, function (key, value) {
+                    $almacen.append('<option value=' + value.Key + '>' + value.Value + '</option>');
+                });
+            }
+        });
+    });
+
+    function cargarDetallePedidos(numPedido) {
+        var opciones = {
+            url: '@Url.Action("GetDetallePedido", "OrdenPedido", new {area = "OrdenPedido"})',
+            parametros: { numPedido: numPedido }
+        };
+
+        SIG.Ajax(opciones, function(response) {
+            if (response.Success) {
+                var $grilla = $("#" + grdDetalleActa);
+                var item;
+                $grilla.jqGrid('clearGridData');
+
+                for (var i = 0; i < response.Data.length; i++) {
+                    item = response.Data[i];
+                    $grilla.addRowData(item.Id, {
+                        Id: item.Id,
+                        ProductoId: item.ProductoId,
+                        ArticuloCodigo: item.ProductoId,
+                        ArticuloNombre: item.ArticuloNombre,
+                        ArticuloUnidad: item.ArticuloUnidad,
+                        CantidadPedida: item.Cantidad
+                    });
+                }
+            }
+        });
+    }
+
+    function ListarActaDetalle() {
+        var colNames = [
+            'ProductoId', 'Código', 'Articulo', 'Unidad', 'Lote', 'Cant. Ped', 'Cant. Rec', 'Saldo', 'Observacion'
+        ];
+        var colModels = [
+            { name: 'ProductoId', index: 'ProductoId', align: 'center', hidden: true },
+            { name: 'ArticuloCodigo', index: 'ArticuloCodigo', align: 'center', width: 60 },
+            { name: 'ArticuloNombre', index: 'ArticuloNombre', align: 'left', width: 150 },
+            { name: 'ArticuloUnidad', index: 'ArticuloUnidad', align: 'center', width: 60 },
+            { name: 'Lote', index: 'Lote', align: 'center', width: 60, editable: true },
+            { name: 'CantidadPedida', index: 'CantidadPedida', align: 'right', width: 65 },
+            {
+                name: 'CantidadRecepcionada',
+                index: 'CantidadRecepcionada',
+                align: 'right',
+                width: 65,
+                editable: true,
+                editrules: { custom: true, custom_func: validarCantidadRecepcionada }
+            },
+            { name: 'Saldo', index: 'Saldo', align: 'right', width: 60 },
+            { name: 'Observacion', index: 'Observacion', align: 'left', width: 200, editable: true }
+        ];
+
+        var opciones = {
+            gridLocal: true,
+            nuevo: false,
+            editar: false,
+            eliminar: false,
+            search: false,
+            refresh: false,
+            editarCaption: 'Editar',
+            eliminarCaption: 'Eliminar',
+            dialogDelete: dialogDelete,
+            mensaje: 'Seleccione un registro',
+            sinRegistro: 'Sin registro',
+            alertTitle: 'Alerta',
+            caption: 'Detalle',
+            grilla: grdDetalleActa,
+            pager: 'barraDetalle',
+            identificador: 'hfIdentificadorDetalle',
+            height: 210,
+            width: 'auto',
+            id: 'id',
+            colsNames: colNames,
+            colsModel: colModels,
+            sortName: 'Id',
+            pgbuttons: false,
+            rowNumbers: [],
+            viewrecords: false,
+            pginput: false,
+            EditingOptions: {
+                canEditRowInline: true,
+                editUrl: 'clientArray',
+                AfterSaveFunc: afterSaveDetalle
+            }
+        };
+
+        SIG.GrillaUpgrade(opciones);
+    }
+
+    function afterSaveDetalle(id) {
+        var data = $(this).getRowData(id);
+        if (isNaN(data.CantidadRecepcionada))
+            return;
+
+        data.Saldo = data.CantidadPedida - data.CantidadRecepcionada;
+        $(this).setRowData(id, data);
+    }
+
+    function validarCantidadRecepcionada(value, colname) {
+        var rowKey = $(this).getGridParam('selrow');
+        var data = $(this).getRowData(rowKey);
+
+        if (value * 1 <= data.CantidadPedida * 1)
+            return [true, "", ""];
+
+        return [false, "No se puede ingresar una cantidad mayor a la Cant. Ped", ""];
+    }
+
+    function GuardarCerrar() {
+        var model = {
+            SucursalId: $('#SucursalId').val(),
+            AlmacenId: $('#AlmacenId').val(),
+            VerificadorId: $('#VerificadorId').val(),
+            Fecha: $('#Fecha').val(),
+            OrdenPedidoId: $('#OrdenPedidoId').val(),
+            NumeroGuia: $('#NumeroGuia').val(),
+            Glosa: $('#NumeroGuia').val(),
+            FechaGuia: $('#txtFechaGuia').val(),
+            DetalleList: $("#" + grdDetalleActa).jqGrid('getGridParam', 'data')
+        };
+
+        var msj = "";
+        if (model.SucursalId === "")
+            msj += "- Seleccione una sucursal<br />";
+        if (model.AlmacenId == null || model.AlmacenId === "")
+            msj += "- Seleccione un almacén<br />";
+        if (model.VerificadorId === "")
+            msj += "- Seleccione un verificador<br />";
+        if ($("#NumeroPedido").val() === "")
+            msj += "- Seleccione o ingrese el número de pedido<br />";
+        if (model.NumeroGuia === "")
+            msj += "- Ingrese un número de guia<br />";
+        if (model.FechaGuia === "")
+            msj += "- Ingrese una fecha de guia<br />";
+
+        var item;
+        debugger;
+        for (var i = 0; i < model.DetalleList.length; i++) {
+            item = model.DetalleList[i];
+            if (!item.CantidadRecepcionada || !item.Saldo) {
+                msj += "- Ingrese los lotes y cant. rec del detalle";
+                break;
+            }
+        }
+
+        if (msj !== "") {
+            SIG.Alert('Alerta', msj, null);
+            return;
+        }
+
+        var opciones = {
+            url: '@Url.Action("GenerarActa", "ActaRecepcion", new {area = "ActaRecepcion"})',
+            parametros: model
+        };
+
+        SIG.Ajax(opciones, function(response) {
+            if (response.Success) {
+                SIG.Alert('Alerta', 'Acta registrada correctamente', null);
+                @*window.location.href = '@Url.Action("Edit", "ActaRecepcion", new { Area = "ActaRecepcion" })';*@
+            } else {
+                SIG.Alert('Alerta', response.Message, null);
+            }
+        });
+    }
+</script>

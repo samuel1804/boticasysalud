@@ -1,0 +1,62 @@
+﻿<input id="hfIdentGuiaRem" type="hidden" /><br />
+<div id="divPlantillaGuiaRem" style="padding: 0 10px 10px 0;">
+    <table id="tablaGuiaRem"></table>
+    <div id="barraGuiaRem">
+    </div>
+</div>
+
+<script type="text/javascript">
+    var gridGuiaRem = 'tablaGuiaRem';
+
+    $(document).ready(function () {
+        Listar();
+    });
+
+    function Listar() {
+        var colNames = ['Id', 'Fecha', 'Serie'];
+        var colModels = [
+            { name: 'Id', index: 'Id', align: 'center', hidden: true },
+            { name: 'FechaGuia', index: 'FechaGuia', align: 'center', width: 120, search: false },
+            { name: 'Serie', index: 'Serie', align: 'center', width: 200, searchoptions: { sopt: ['cn', 'bw'] } }
+        ];
+
+        var opciones = {
+            nuevo: false,
+            editar: false,
+            eliminar: false,
+            search: false,
+            refresh: false,
+            mensaje: 'Seleccione un registro',
+            sinRegistro: 'Sin registro',
+            alertTitle: 'Alerta',
+            grilla: gridGuiaRem,
+            pager: 'barraGuiaRem',
+            identificador: 'hfIdentGuiaRem',
+            height: 210,
+            width: 'auto',
+            caption: 'Guias de remisión',
+            urlListar: '@Url.Action("Listar", "GuiaRemision", new { area = "GuiaRemision" })',
+            id: 'id',
+            colsNames: colNames,
+            colsModel: colModels,
+            sortName: 'Id'
+        };
+
+        SIG.GrillaUpgrade(opciones);
+        $("#" + gridGuiaRem).filterToolbar({ searchOnEnter: true, stringResult: true, defaultSearch: "cn" });
+    }
+
+    function SeleccionarGuia(popupObj, parametroHandlers) {
+        var $grilla = $("#" + gridGuiaRem);
+        var rowKey = $grilla.getGridParam('selrow');
+
+        if (rowKey != null) {
+            var rowData = $grilla.getRowData(rowKey);
+            parametroHandlers.functionOk(rowData);
+            $(popupObj).dialog("close");
+        } else {
+            SIG.Alert('Alerta', 'Seleccione un registro', null);
+        }
+    }
+
+</script>

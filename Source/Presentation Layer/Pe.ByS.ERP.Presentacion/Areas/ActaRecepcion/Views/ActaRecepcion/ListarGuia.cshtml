@@ -1,0 +1,142 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutI.cshtml";
+}
+
+@model Pe.ByS.ERP.Aplicacion.TransferObject.Response.GuiaResponse
+
+<input id="hfIdentificadorDetalle" type="hidden" />
+
+@*<div id='dialog-ListaProducto' style="display: none;">
+</div>*@
+
+
+<div class="grupocontenido2 scrollTotal"> 
+
+    <div style="height:100px"></div>
+</div>
+
+<table style="width: 100%" id="tablaguia"></table>
+<div style="width: 100%" id="barraDetalle">
+</div>
+
+<script type='text/javascript' id="ListarProducto">
+
+    var grillaguias = 'tablaguia';
+    var dialogDelete = 'dialog-DetalleEliminar';
+    var dialogAlter = 'dialog-alert';
+    var SeleccioneRegistro = 'Seleccione';
+    var titleBtn1 = 'Aceptar';
+    var titleBtn2 = 'Cancelar';
+    var TituloEliminar = 'Eliminar';
+
+    var ListaTodos = new Array();
+    var idEditar = 0;
+
+
+    $(document).ready(function () {      
+        Listarguia();
+        CargarGuia();
+        
+
+    });
+  
+
+    function Listarguia() {
+
+        var IdArticulo = 'IdArticulo';
+        var Producto = 'Producto';
+        var Cantidad = 'Cantidad';
+        var IdOrdenPedido = 'IdOrdenPedido';
+        var NumeroPedido = 'NumeroPedido';
+
+        $('#' + grillaguias).jqGrid('GridUnload');
+
+        var colNames = ['Serie Guia', 'Estado', 'Direccion'];
+        var colModels = [                    
+            { name: 'Serie', index: 'Serie', align: 'center', width: 100 },            
+            { name: 'EstadoString', index: 'EstadoString', align: 'center', width: 120 },
+            { name: 'Direccion', index: 'Direccion', align: 'center', width: 120 }
+            
+        ];
+
+        var opciones = {
+            GridLocal: true,
+            nuevo: false,
+            editar: false,
+            eliminar: false,
+            search: false,
+            Lenguaje: 'es',
+            NuevoCaption: 'Nuevo',            
+            EditarCaption: 'Editar',
+            EliminarCaption: 'Eliminar',
+            dialogDelete: dialogDelete,
+            Mensaje: 'SeleccioneRegistro',
+            SinRegistro: 'SinRegistro',
+            AlertTitle: 'Detalle',
+            DblClickHandler: DblClickHandlerObservacion,
+            rowNumbers: [10, 20, 30, 40, 50],
+            rowNumber: 10,
+            LoadCompleteHandler: LoadCompleteHandlerOrdenCompra
+        };
+        SIG.Grilla(grillaguias, 'barraDetalle', 'hfIdentificadorDetalle', 'auto', 'auto', '', '', 'IdOrdenPedido', colNames, colModels, 'IdArticulo', opciones);
+        $("#" + grillaguias).parents('div.ui-jqgrid-bdiv').css("max-height", "250px");
+    }
+
+    function DblClickHandlerObservacion(rowid) {
+
+    }
+
+
+   
+
+    function LoadCompleteHandlerOrdenCompra(miGrid) {
+    }
+
+    function CargarGuia() {
+        
+        var opciones = {
+            url: '@Url.Action("Listarguias", "ActaRecepcion", new { Area = "ActaRecepcion" })'            
+          };
+
+        SIG.Ajax(opciones, function (response) {
+            debugger;
+              //if (response.Success) {
+                  ManageListaOrdenDetalle(response);
+                  ListaTodos = jQuery("#" + grillaguias).jqGrid('getGridParam', 'data');
+                  jQuery("#" + grillaguias).trigger('reloadGrid');
+              //}
+          });
+    }    
+
+    function ManageListaOrdenDetalle(response) {
+        debugger;
+        var agregar = true;
+        $.each(response, function (i, v) {
+            agregar = true;
+            $.each(ListaTodos, function (j, b) {
+                if (b.ProductoId == v.ProductoId) {
+                    agregar = false;
+                    return;
+                }
+            });
+            debugger;
+            if (agregar) {
+                var myData =
+                {
+                    Direccion: v.Direccion,
+                    Serie: v.Serie,
+                    EstadoString: v.EstadoString
+                };
+                jQuery("#" + grillaguias).jqGrid('addRowData', v.Id, myData);
+                //jQuery("#" + grillaguias).jqGrid('addRowData', v.Id, myData);
+            }
+            else {
+               // SIG.Alert('Pedido', 'El producto ya se encuentra incluido en el detalle', null);
+            }
+        });
+        ListaTodos = jQuery("#" + grillaguias).jqGrid('getGridParam', 'data');
+    }
+
+   
+    
+</script>

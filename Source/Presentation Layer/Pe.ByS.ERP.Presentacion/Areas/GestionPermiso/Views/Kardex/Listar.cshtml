@@ -1,0 +1,176 @@
+﻿
+@using Pe.ByS.Importacion.Presentacion.Core.Helper
+
+@{
+    Layout = "~/Views/Shared/_LayoutI.cshtml";
+}
+
+
+<input id="hfIdentificadorKardex" type="hidden" />
+
+ <div id='dialog-DetalleEliminar' style="display: none;">
+    Esta seguro de Eliminar?
+</div>
+<button type="button" value='Nuevo' id="btnDetalle" class="" title='Guardar'>Detalles</button> 
+<button type="button" value='Agregar' id="btnEliminar" class="" title='Detalle'>Elimnar</button>           
+<div style="margin-top:50px">
+    <table id="tablaKardex">
+    </table>
+    <div id="barraKardex" >
+    </div>
+</div>
+<div id='dialog-Producto'>
+</div>
+
+<script id="BusquedaKardex" type="text/javascript">
+
+    var grillaKardex = 'tablaKardex';
+
+    $(document).ready(function () {
+       
+       // CrearDialogPopUp();
+
+        ListarKardex();
+        //showGrid();
+        jQuery("#btnEliminar").click(function (e) {
+            Eliminar();
+        });
+        jQuery("#btnDetalle").click(function () {
+            IrDetalle();
+
+        });
+    });
+
+    function CrearDialogPopUp() {
+        //var arrayDialog = [
+        //    { name: "dialog-Producto", width: '1120', height: '580', title: 'BusquedaProductos', resizable: false }
+        //];
+        //SIG.CreateDialogs(arrayDialog);
+    }
+    
+    function IrDetalle()
+    {
+        var rowkey = jQuery("#" + grillaKardex).jqGrid('getGridParam', 'selrow');
+        rowItem = jQuery("#" + grillaKardex).jqGrid('getRowData', rowkey);
+        if (rowItem.Codigo != undefined)
+        {
+            window.location.href = "/OrdenPedido/OrdenPedido/Pedido/" + rowItem.Codigo;
+        }
+    }
+
+    function Eliminar() {
+
+        var rowkey = jQuery("#" + grillaKardex).jqGrid('getGridParam', 'selrow');
+        rowItem = jQuery("#" + grillaKardex).jqGrid('getRowData', rowkey);
+        if (rowItem.Codigo != undefined) {            
+            window.location.href = "/GestionPermiso/Kardex/EliminarPedido/" + rowItem.Codigo;
+        }
+
+        
+    }
+
+    function ListarKardex() {
+                
+        var urlListar = '@Url.Action("ListarViewKardex", "Kardex", new { area = "GestionPermiso" })';
+        $('#' + grillaKardex).jqGrid('GridUnload');
+
+
+        var colNames = ['Codigo', 'NumeroPedido', 'Direccion'];
+        var colModels = [            
+            { name: 'Codigo', index: 'Codigo', align: 'right', width: 100, hidden: false },
+            { name: 'NumeroPedido', index: 'NumeroPedido', align: 'left', width: 300, sortable: true },
+            { name: 'Direccion', index: 'Direccion', align: 'left', width: 300, sortable: false }
+        ];
+        var opciones = {            
+            nuevo: true,
+            editar: true,
+            eliminar: false,
+            search: false,
+            refresh: false,
+            Lenguaje: 'es',
+            NuevoCaption: 'Agregar',
+            NuevoCommand: NuevoMovimiento,
+            EditarCaption: 'Editar',
+            EditarCommand:EditarMovimiento,
+            EliminarCaption: 'Eliminar',
+            EliminarCommand:EliminarDetalle,
+            Mensaje: 'SeleccioneRegistro',
+            SinRegistro: 'SinRegistro',
+            AlertTitle: 'TituloAlerta',
+            rules: true,
+            GetRulesMethod: GetRulesKardexView,
+            rowNumbers: [10, 20, 30, 100, 200],
+            rowNumber: 10            
+        };
+
+
+        SIG.Grilla(grillaKardex, 'barraKardex', 'hfIdentificadorKardex', 'auto', 'auto', '', urlListar, 'Id', colNames, colModels, 'Id', opciones);
+        $("#" + grillaKardex).parents('div.ui-jqgrid-bdiv').css("max-height", "250px");
+
+       // SIG.Grilla(grillaMovimientos, 'barraMovimientos', 'hfIdentificadorMovimientos', 'auto', 'auto', '', urlListar, 'id', colNames, colModels, 'FechaRegistro', opciones);
+        //$("#" + grillaMovimientos).parents('div.ui-jqgrid-bdiv').css("max-height", "315px");
+
+    }
+
+    function GetRulesKardexView() {        
+        var rules = [           
+        ]     
+        return rules;
+    }
+
+
+
+    function NuevoMovimiento(rowkey) {
+       @*    var opciones = {
+            url: '@Url.Action("Formulario", "OrdenPedido", new { area = "OrdenPedido" })' 
+        }
+        SIG.Ajax(opciones, function (response) {            
+        });*@
+        window.location.href = "/OrdenPedido/OrdenPedido/Formulario";
+            @*@Html.Action("Formulario", "OrdenPedido", new { id=0});*@
+        
+   @*     //@Html.Action("action", "controller", id)*@
+     @*   //@Url.Action("Formulario", "OrdenPedido", new{ area = "OrdenPedido" });*@
+    }
+
+    function EditarMovimiento(rowkey) {
+        rowItem = jQuery("#" + grillaKardex).jqGrid('getRowData', rowkey);
+        window.location.href = "/OrdenPedido/OrdenPedido/Formulario" + "/" + rowItem.Codigo;
+        
+    @*  rowItem =jQuery("#" + grillaKardex).jqGrid('getRowData', rowkey);
+        //jQuery("#" + grillaKardex).jqGrid('getGridParam', 'selrow');
+        var opciones = {
+            url: '@Url.Action("Formulario", "OrdenPedido", new { area = "OrdenPedido" })' + "/" + rowItem.Codigo
+        }
+        SIG.Ajax(opciones, function (response) {
+        });*@
+       
+        
+       
+
+            //$('#' + dialogDelete).dialog("close");
+            //var rowkey = jQuery("#" + grillaKardex).jqGrid('getGridParam', 'selrow');
+            //$('#' + grillaKardex).jqGrid('delRowData', rowkey);
+            //jQuery("#" + grillaKardex).trigger('reloadGrid');
+            //ListaTodosOrdenCompraDetalle = jQuery("#" + grillaProductosOrdenCompra).jqGrid('getGridParam', 'data');
+        }
+
+    function EliminarDetalle() {
+        debugger;
+        rowItem = jQuery("#" + grillaKardex).jqGrid('getRowData', rowkey);
+        window.location.href = "/GestionPermiso/Kardex/Eliminar" + "/" + rowItem.Codigo;
+        @*var opciones = {
+            url: '@Url.Action("Eliminar", "Kardex", new { area = "GestionPermiso" })' + rowItem.Codigo
+        }
+        SIG.Ajax(opciones, function (response) {
+            if (response.Succes == true)
+            { SIG.Alert('Producto', 'Se elimino el registro correctamente', null); }
+            else {
+                SIG.Alert('Producto', 'No se elimino el registro', null);
+            }
+        });*@
+    }    
+
+
+</script>
+

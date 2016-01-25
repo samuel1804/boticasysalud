@@ -1,0 +1,367 @@
+﻿/*.ui-jqgrid tr.jqgrow td {
+  white-space: normal !important;
+  vertical-align:text-center;
+  padding:0 2px;
+}
+*/
+/*
+    formulario --> los span tienen el diseño de btn
+*/
+.generar
+{
+    height:auto;
+    display:block;
+    overflow:auto;
+}
+.generar span
+{
+    text-align:center;
+    margin:5px 10px 10px 10px ;
+    background:#E6EEF8;
+    border: 1px solid #6693cf;
+    border-radius:5px;
+    box-shadow: 0px 0px 3px #000000;
+    display:inline-block;
+    cursor:pointer;
+}   
+.generar b
+{
+    padding:5px;
+    margin:0;
+    display:block;
+}        
+.generar span :Hover
+{
+    background:#6693cf;
+    color:#E6EEF8;
+}  
+/*
+el icono para show o hide el contenido
+*/
+.displayNo, .displaySi
+{
+    margin: 0px 5px;
+    border: 1px solid Transparent;
+    /*box-shadow: rgb(119, 119, 119) 0px 2px 7px;
+    border-radius: 2px;*/
+    padding: 0px 2px;
+    cursor:pointer;
+} 
+.displayNo:hover, .displaySi:hover
+{
+    border: 1px solid #777;
+    /*box-shadow: rgb(119, 119, 119) 0px 2px 7px;*/
+    border-radius: 5px;
+} 
+/* contenido de la pagina*/
+.pagetitle {
+    border-bottom:3px solid #6693cf;
+    padding:0 0 10px 0;
+    margin:0 0 25px 0;
+}
+.pagetitle span{
+    color: #6693cf;
+    font-weight: 600;
+    font-size: 1.2em;
+}
+.pagepie {
+    border-top:3px solid #6693cf;
+    padding:10px 0;
+    margin:25px 0 0 0;
+}
+/*
+titulo del grupo 
+*/   
+.grupotitle
+{
+    /* background-repeat: no-repeat;
+    background-position: 1px 4px;
+    color: #f7f7f7;*/
+    padding: 3px 15px 0px 15px;
+    margin: 0;
+    font-family: Calibri;
+    font-size: 12pt;
+    font-weight: bold;
+    height: 31px;
+    background-color: #dfeffc;
+   /* cursor: pointer;*/
+    border:1px solid #6693cf;
+}
+.grupocontenido
+{
+    margin: 0;
+    padding:0 10px 10px 10px;
+    /*padding:0px;*/
+    border:1px solid #6693cf;
+}
+
+.grupocontenido2
+{
+    margin: 0;
+    padding:0px;
+    /*border:1px solid #6693cf;*/
+}
+
+
+
+/*
+para los pasos del todo la pantalla, indicar cual esta activo
+*/
+.numerosPasosActivo
+{
+    background:#6693cf !important;
+    border: 1px solid #E6EEF8 !important;
+}
+.numerosPasos, .changePasos, .generar
+{
+    height:auto;
+    display:block;
+    overflow:auto;
+}
+.numerosPasos
+{
+    position: relative;
+    top: -30px;
+    overflow: initial;
+}
+.numerosPasos div
+{
+    float:right;
+}
+.numerosPasos span, .generar span
+{
+    text-align:center;
+    margin:5px;
+    background:#E6EEF8;
+    border: 1px solid #6693cf;
+    border-radius:5px;
+    box-shadow: 0px 0px 3px #000000;
+    display:inline-block;
+    font-size: 16px;
+    font-family: monospace;
+    color:#000000;
+}
+.numerosPasos span
+{
+    padding:5px;
+}
+.btnPaso
+{
+    border-radius:5px;
+    box-shadow: 0px 0px 3px #777777;            
+    background:#E6EEF8;
+    border: 1px solid #6693cf;
+    color:#2e6e9e;
+    text-align:center;
+    display:inline-block;
+    cursor:pointer;
+    width:70px;
+    margin:10px 5px;
+    font-size: 12px;
+    font-family: monospace;
+}
+.btnPaso span
+{
+    padding:5px;
+    display:block;
+}
+.btnPaso :Hover, .generar span :Hover
+{
+    background:#6693cf;
+    color:#E6EEF8;
+}
+
+#nameActivarActualizar
+{
+    cursor:pointer;
+}       
+.left
+{
+    text-align:left;
+    padding: 0 10px;
+}
+ 
+/* checkbox personalizado con label */
+
+input[type="checkbox"] + label {
+    color:#000000;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+}
+
+input[type="checkbox"] + label span {
+    display:inline-block;
+    width:17px;
+    height:15px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    background:url(img/check_radio_sheet.png) left top no-repeat;
+    cursor:pointer;
+    background-size: 75px 15px;
+}
+
+input[type="checkbox"]:checked + label span {
+    background:url(img/check_radio_sheet.png) -19px top no-repeat;
+    background-size: 75px 15px;
+}
+ 
+ 
+/* seleccionar  */
+
+.A-link:Hover
+{
+    cursor:pointer;
+    color: #0072C6;
+    border-bottom: 2px solid #0072C6;
+}
+
+a.BotonBusqueda
+{
+    background:url(images/buscar.png) !important;
+    background-size: 32px 32px;
+    cursor:pointer;
+    padding: 5px 17px 5px 17px;
+}
+
+a.BotonLimpiar
+{
+    background:url(images/limpiar.png) !important;
+    background-size: 32px 32px;
+    cursor:pointer;
+    padding: 5px 17px 5px 17px;
+}
+
+a.BotonGuardar
+{
+    background:url(images/guardar.png) !important;
+    background-size: 32px 32px;
+    cursor:pointer;
+    padding: 5px 17px 5px 17px;
+}
+
+a.BotonCancelar
+{
+    background:url(images/cancel.png) !important;
+    background-size: 32px 32px;
+    cursor:pointer;
+    padding: 5px 17px 5px 17px;
+}
+
+button.BotonBusqueda
+{
+    background:url(images/buscar.png) !important;
+    background-size: 32px 32px;
+    cursor:pointer;
+    padding: 5px 17px 5px 17px;
+    height:32px;
+    border:0;
+    top: -4px;
+    position: relative;
+     width:20px;
+}
+
+button.BotonLimpiar
+{
+    background:url(images/limpiar.png) !important;
+    background-size: 32px 32px;
+    cursor:pointer;
+    padding: 5px 17px 5px 17px;
+    height:32px;
+    border:0;
+    top: -4px;
+    position: relative;
+     width:20px;
+}
+
+button.BotonGuardar
+{
+    background:url(images/guardar.png) !important;
+    background-size: 32px 32px;
+    cursor:pointer;
+    padding: 5px 17px 5px 17px;
+    height:32px;
+    border:0;
+    top: -4px;
+    position: relative;
+     width:20px;
+}
+
+button.BotonCancelar
+{
+    background:url(images/cancel.png) !important;
+    background-size: 32px 32px;
+    cursor:pointer;
+    padding: 5px 17px 5px 17px;
+    height:32px;
+    border:0;
+    top: -4px;
+    position: relative;
+     width:20px;
+}
+button.BotonEditar
+{
+    background:url(images/editar.png) !important;
+    background-size: 32px 32px;
+    cursor:pointer;
+    padding: 5px 17px 5px 17px;
+    height:32px;
+    border:0;
+    top: -4px;
+    position: relative;
+    width:20px;
+}
+button.BotonGuardar2
+{
+    background:url(images/ordenes32.png) !important;
+    background-size: 32px 32px;
+    cursor:pointer;
+    padding: 5px 17px 5px 17px;
+    height:32px;
+    border:0;
+    top: -4px;
+    position: relative;
+     width:20px;
+}
+
+button.VistaPreliminar
+{
+    background:url(images/escalamiento.png) !important;
+    background-size: 32px 32px;
+    cursor:pointer;
+    padding: 5px 17px 5px 17px;
+    height:32px;
+    border:0;
+    top: -4px;
+    position: relative;
+     width:20px;
+}
+
+button.BotonImprimir
+{
+    background:url(images/imprimir.png) !important;
+    background-size: 32px 32px;
+    cursor:pointer;
+    padding: 5px 17px 5px 17px;
+    height:32px;
+    border:0;
+    top: -4px;
+    position: relative;
+     width:20px;
+}
+
+button.BotonVistaPrevia
+{
+    background:url(images/VistaPrevia.png) !important;
+    background-size: 32px 32px;
+    cursor:pointer;
+    padding: 5px 17px 5px 17px;
+    height:32px;
+    border:0;
+    top: -4px;
+    position: relative;
+     width:20px;
+}
+
+.colCellPaddingRight {
+    padding-right: 16px !important;
+}

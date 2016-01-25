@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{95C572A0-951A-4DF7-9D03-BA4680F6EC0E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Pe.ByS.ERP.Infrastructure.Repository</RootNamespace>
+    <AssemblyName>Pe.ByS.ERP.Infrastructure.Repository</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IActaRecepcionRepository.cs" />
+    <Compile Include="IGuiaRemisionRepository.cs" />
+    <Compile Include="IOrdenPedidoRepository.cs" />
+    <Compile Include="ISucursalRepository.cs" />
+    <Compile Include="ITiendaRepository.cs" />
+    <Compile Include="IUsuarioRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryContracts\IRepository.cs" />
+    <Compile Include="RepositoryContracts\IRepositoryQueryExecutor.cs" />
+    <Compile Include="RepositoryContracts\IRepositoryWithTypedId.cs" />
+    <Compile Include="Specifications\AdHocSpecification.cs" />
+    <Compile Include="Specifications\IQuerySpecification.cs" />
+    <Compile Include="Specifications\QuerySpecification.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain Layer\Pe.ByS.ERP.Domain\Pe.ByS.ERP.Domain.csproj">
+      <Project>{2A607E15-4B8A-4217-95A9-2CC30CDC7F38}</Project>
+      <Name>Pe.ByS.ERP.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Transversal Layer\Pe.ByS.ERP.CrossCutting.Common\Pe.ByS.ERP.CrossCutting.Common.csproj">
+      <Project>{1660BE26-F3CC-4B61-A604-6772210CD657}</Project>
+      <Name>Pe.ByS.ERP.CrossCutting.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

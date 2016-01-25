@@ -1,0 +1,378 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutI.cshtml";
+}
+
+@model Pe.ByS.ERP.Aplicacion.TransferObject.Response.OrdenPedidoResponse
+
+
+<input id="hfIdentificadorDetalle" type="hidden" />
+<div id='dialog-DetalleProducto' style="display: none;">
+</div>
+<div id='dialog-DetalleEliminar' style="display: none;">
+    Seguro de eliminar?
+</div>
+<div id='dialog-ListaProducto' style="display: none;">
+</div>
+
+<div id="Msg-EntradaAlmacen">
+    <div class="msgModel" style="display: none">
+        <div class="tips loading">
+            Procesando
+        </div>
+        <div class="tips merror">
+        </div>
+        <div class="tips mexito">
+        </div>
+    </div>
+</div>
+
+<div class="grupocontenido2 scrollTotal">
+    <div>
+        <button type="button" value='Guardar' id="btnGuardarCerrar" class="" title='Guardar'>Guardar y Cerrar</button>
+        <button type="button" value='Agregar' id="btnGuardarNuevo" class="" title='Agregar Detalle'>Guardar y Nuevo</button>
+    </div>
+
+    <table border="0" id="tableOrdenCompraProducto" class="tablelayoutI">
+        <tr>
+            <td class="right" style="width: 130px;">
+                <b>
+
+                    <label>Codigo:</label>
+                </b>
+            </td>
+            <td>
+                @*@Html.TextBox("CodigoProducto", "", new { @class = "form-control text-uppercase", @id = "txtCodigoProducto", @validable = "required ValidarNombre", maxlength = "30" })                    *@
+
+                @*@Html.Hidden("txtCodigoProducto", new { @id = "txtCodigoProducto" })*@
+
+                @Html.TextBoxFor(model => model.NumeroPedido, new { @class = "inp-form", @id = "txtCodigo" })
+                @Html.HiddenFor(model => model.Codigo, new { @id = "IdPedido" })
+                @Html.Hidden("IdArticulo", new { @id = "IdArticulo" })
+                @* <input id="IdArticulo" type="hidden" />*@
+            </td>
+        </tr>
+        <tr>
+            <td class="right" style="width: 130px;">
+                <b>
+                    <label>NombreProducto:</label>
+                </b>
+            </td>
+            <td>
+                @Html.TextBox("Nombre", "", new { @class = "form-control text-uppercase", @id = "txtNombre", @validable = "required ValidarNombre", maxlength = "30", @ReadOnly = "true" })
+            </td>
+            <td>
+                <button type="button" value='Buscar' id="btnBuscar" class="BotonBusqueda" title='Buscar Producto'></button>
+            </td>
+        </tr>
+        <tr>
+            <td class="right" style="width: 130px;">
+                <b>
+                    <label>Cantidad:</label>
+                </b>
+            </td>
+            <td>
+                @Html.TextBox("Cantidad", "", new { @class = "form-control text-uppercase", @id = "txtCantidad", @validable = "required ValidarNombre", maxlength = "30" })
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+
+
+    </table>
+
+
+</div>
+
+<table style="width: 100%" id="tablaDetalle"></table>
+<div style="width: 100%" id="barraDetalle">
+</div>
+
+<script type='text/javascript' id="ListarProducto">
+
+    var grillaProductosOrdenCompra = 'tablaDetalle';
+    var dialogDelete = 'dialog-DetalleEliminar';
+    var dialogAlter = 'dialog-alert';
+    var SeleccioneRegistro = 'Seleccione';
+    var titleBtn1 = 'Aceptar';
+    var titleBtn2 = 'Cancelar';
+    var TituloEliminar = 'Eliminar';
+
+    //var ListaTodosOrdenCompraDetalle = new Array();
+    var idEditar = 0;
+
+    //ListaTodosOrdenCompraDetalle = model.DetalleOrdenPedido;
+
+    $(document).ready(function () {
+       // ListarOrdenCompraDetalle();
+        CargarOrdenCompraDetalle();
+        CrearDialogPopUp();
+        jQuery("#btnGuardarNuevo").click(function (e) {
+            debugger;
+            GuardarCerrar(1);
+            e.preventDefault();
+        });
+
+        jQuery("#btnBuscar").click(function () {
+            BuscarProducto();
+        });
+
+        jQuery("#btnGuardarCerrar").click(function (e) {
+            //GuardarCerrar(0);
+            window.location.href = "/OrdenPedido/OrdenPedido/Pedido/" + jQuery("#IdPedido").val(); 
+            e.preventDefault();
+        });
+
+    });
+
+    function CrearDialogPopUp() {
+        var arrayDialog = [
+            { name: "dialog-ListaProducto", width: '500', height: '300', title: 'Lista de Productos', resizable: false }
+        ];
+        SIG.CreateDialogs(arrayDialog);
+    }
+
+    function BuscarProducto() {
+        debugger;
+        var url = "/OrdenPedido/OrdenPedido/ListaArticulo";
+
+        SIG.MostrarInformacionPopup(url, null, "dialog-ListaProducto");
+
+    }
+
+    function CreateDialogsConfirmAndDeleteDetalle() {
+        var arrayDialog = [{ name: "dialog-DetalleProducto", width: '910', height: '580', title: 'OrdenCompra' }];
+        SIG.CreateDialogs(arrayDialog);
+
+        var arrayDialogConfirm = [
+            { name: dialogDelete, height: 150, width: 300, title: TituloEliminar, titleBtn1: TituloEliminar, titleBtn2: titleBtn2, strFun: 'EliminarDetalle' }
+        ];
+
+        SIG.CreateDialogsConfirm(arrayDialogConfirm);
+    }
+
+  
+    function DblClickHandlerOrdenCompra(rowid) {
+        if (SIG.stringToBoolean('true')) {
+            EditarProductoOrdenCompra(rowid);
+        }
+        else {
+            SIG.Alert('OrdenCompra', 'NoTienePermisoParaEditar', null);
+        }
+    }
+
+    function LoadCompleteHandlerOrdenCompra(miGrid) {
+    }
+
+    function CargarOrdenCompraDetalle() {
+        var opciones = {
+            url: '@Url.Action("Buscar", "SolicitudPermiso", new { Area = "GestionPermiso" })', //'@Url.Action("ListarDetalleOrdenCompra", "Movimiento", new { area = "Administracion" })',
+            parametros: {
+                Id: $("#Codigo").val()
+            }
+        };
+
+        SIG.Ajax(opciones, function (response) {
+            if (response.Success) {
+                ManageListaOrdenDetalle(response.Data);
+                //ListaTodosOrdenCompraDetalle = jQuery("#" + grillaProductosOrdenCompra).jqGrid('getGridParam', 'data');
+                jQuery("#" + grillaProductosOrdenCompra).trigger('reloadGrid');
+            }
+        });
+    }
+
+
+    function GuardarProducto() {
+        var IdArticulo = jQuery("#IdArticulo").val();
+
+
+        if (jQuery("#txtNombreArticulo").val() == '') {
+            SIG.Alert('Producto', 'Seleccione Producto', null);
+            return false;
+        }
+        if (jQuery("#txtCantidad").val() <= '0') {
+            SIG.Alert('Producto', 'La cantidad debe ser mayor a cero', null);
+            return false;
+        }
+        var detalle = new Object();
+        detalle.IdArticulo = jQuery("#IdArticulo").val();
+        detalle.Producto = jQuery("#txtNombreArticulo").val();
+        detalle.Cantidad = jQuery("#txtCantidad").val();
+        detalle.IdOrdenPedido = jQuery("#IdPedido").val();
+        AgregarOrdenCompraProducto(detalle);
+    }
+
+
+    function LimpiarControles()
+    {
+        jQuery("#IdArticulo").val('');
+        jQuery("#txtNombreArticulo").val('');
+        jQuery("#txtCantidad").val('');
+    }
+
+
+    function ManageListaOrdenDetalle(response) {
+        var agregar = true;
+        $.each(response, function (i, v) {
+            agregar = true;
+            //$.each(ListaTodosOrdenCompraDetalle, function (j, b) {
+            //    if (b.ProductoId == v.ProductoId) {
+            //        agregar = false;
+            //        return;
+            //    }
+            //});
+
+            if (agregar) {
+                var myData =
+                {
+                    Id: v.Id,
+                    IdArticulo: v.IdArticulo,
+                    Producto: v.NombreArticulo,
+                    Cantidad: v.Cantidad,
+                    IdOrdenPedido: v.IdOrdenPedido,
+                };
+                jQuery("#" + grillaProductosOrdenCompra).jqGrid('addRowData', v.Id, myData);
+                //jQuery("#" + grillaProductosOrdenCompra).jqGrid('addRowData', v.Id, myData);
+            }
+            else {
+                SIG.Alert('OrdenCompra', 'NoPuedeIngresarMismoProducto', null);
+            }
+        });
+    }
+
+    function NuevoProductoOrdenCompra() {
+
+        var url = '@Url.Action("ListaArticulo", "OrdenPedido", new { Area = "OrdenPedido" })';
+        //SIG.MostrarInformacionPopup(url, null, "dialog-DetalleProducto");
+    }
+
+    function AgregarOrdenCompraProducto(detalle) {
+        var agregar = true;
+        //$.each(ListaTodosOrdenCompraDetalle, function (index, item) {
+        //    if (item.IdArticulo == detalle.IdArticulo) {
+        //        agregar = false;
+        //        return;
+        //    }
+        //});
+
+        if (agregar) {
+            jQuery("#" + grillaProductosOrdenCompra).jqGrid('addRowData', detalle.IdArticulo, detalle);
+        }
+        else {
+            SIG.Alert('Mensaje', 'No puede ingresar el mismo detalle', null);
+        }
+        //ListaTodosOrdenCompraDetalle = jQuery("#" + grillaProductosOrdenCompra).jqGrid('getGridParam', 'data');
+        jQuery("#" + grillaProductosOrdenCompra).trigger('reloadGrid');
+    }
+
+
+    function GuardarCerrar(tipo) {
+        debugger;
+        var model = new Object();
+        model.Codigo = jQuery("#IdPedido").val();
+        model.NumeroPedido = jQuery("#txtNumeroPedido").val();
+        var IdArticulo = jQuery("#IdArticulo").val();
+
+        if (jQuery("#txtNombreArticulo").val() == '') {
+            SIG.Alert('Producto', 'Seleccione Producto', null);
+            return false;
+        }
+        if (jQuery("#txtCantidad").val() <= '0') {
+            SIG.Alert('Producto', 'La cantidad debe ser mayor a cero', null);
+            return false;
+        }
+        var lista = new Array();
+        var detalle = new Object();
+        detalle.IdArticulo = jQuery("#IdArticulo").val();
+        detalle.Producto = jQuery("#txtNombreArticulo").val();
+        detalle.Cantidad = jQuery("#txtCantidad").val();
+        detalle.IdOrdenPedido = jQuery("#IdPedido").val();
+        lista.push(detalle);
+
+        //jQuery.each(ListaTodosOrdenCompraDetalle, function (i, v) {
+        //    delete v.id;
+        //});
+        model.DetalleOrdenPedido = lista;
+        // model.DetalleOrdenPedido = ListaTodosOrdenCompraDetalle;
+        var opciones = {
+            url: '@Url.Action("GuardarDetalleOrdenPedidoMantenimiento", "OrdenPedido")',
+            parametros: model
+        };
+
+        SIG.Ajax(opciones, function (response) {                    
+            //SIG.msgConfirmPopup("Msg-EntradaAlmacen", "frmModelOrdenCompra", response.Success, response.Message, CancelarMantenimientoNotaIngreso(response.Success));            
+                SIG.Alert('Mensaje', 'Se proceso correctamente el detalle', null);
+                LimpiarControles();                                    
+            }
+        );
+
+    }
+
+    function GuardaryNuevo() {
+
+        debugger;
+        var model = new Object();
+        model.Codigo = jQuery("#IdPedido").val();
+        model.NumeroPedido = jQuery("#txtNumeroPedido").val();
+        //jQuery.each(ListaTodosOrdenCompraDetalle, function (i, v) {
+        //    delete v.id;
+        //});
+        //model.DetalleOrdenPedido = ListaTodosOrdenCompraDetalle;
+        // model.DetalleOrdenPedido = ListaTodosOrdenCompraDetalle;
+        var opciones = {
+            url: '@Url.Action("GuardarDetalleOrdenPedido", "OrdenPedido")',
+            parametros: model
+        };
+
+        SIG.Ajax(opciones, function (response) {
+            //SIG.msgConfirmPopup("Msg-EntradaAlmacen", "frmModelOrdenCompra", response.Success, response.Message, CancelarMantenimientoNotaIngreso(response.Success));
+        });
+    }
+
+
+    @*function EditarProductoOrdenCompra(rowkey) {
+        idEditar = rowkey;
+        var movimientoProductoModel = jQuery("#" + grillaProductosOrdenCompra).jqGrid("getRowData", rowkey);
+        var url = '@Url.Action("ProductoEditar", "OrdenCompra", new { area = "Administracion" })';
+        SIG.MostrarInformacionPopup(url, movimientoProductoModel, "dialog-DetalleProducto");
+    }
+
+
+    function ModificarOrdenCompraProducto(detalle) {
+
+        var $myGrid = jQuery("#" + grillaProductosOrdenCompra);
+        var data = $myGrid.jqGrid('getGridParam', 'data');
+        var index = $myGrid.jqGrid('getGridParam', '_index');
+        var rowId = idEditar == 0 ? detalle.Id : idEditar;
+        var itemIndex = index[rowId];
+        var rowItem = data[itemIndex];
+
+        rowItem.ProductoId = detalle.ProductoId;
+        rowItem.CodigoProducto = detalle.CodigoProducto;
+        rowItem.NombreProducto = detalle.NombreProducto;
+        rowItem.Cantidad = detalle.Cantidad;
+        rowItem.Importe = detalle.Importe;
+        rowItem.TipoUnidadMedida = detalle.TipoUnidadMedida;
+        rowItem.MontoDescuento = detalle.MontoDescuento;
+        rowItem.PrecioUnitario = detalle.PrecioUnitario;
+        rowItem.PorcentajeDescuento = detalle.PorcentajeDescuento;
+        rowItem.MontoImpuesto = detalle.MontoImpuesto;
+        rowItem.Gramos = detalle.Gramos;
+        rowItem.AfectoIGV = detalle.AfectoIGV;
+        rowItem.FactorConversionUnidadMedida = detalle.FactorConversionUnidadMedida;
+        rowItem.Peso = parseFloat(detalle.FactorConversionUnidadMedida * detalle.Gramos * detalle.Cantidad);
+
+        $myGrid.trigger('reloadGrid');
+        ListaTodosOrdenCompraDetalle = jQuery("#" + grillaProductosOrdenCompra).jqGrid('getGridParam', 'data');
+        $('#dialog-DetalleProducto').html('');
+    }
+
+    function EliminarDetalle() {
+        $('#' + dialogDelete).dialog("close");
+        var rowkey = jQuery("#" + grillaProductosOrdenCompra).jqGrid('getGridParam', 'selrow');
+        $('#' + grillaProductosOrdenCompra).jqGrid('delRowData', rowkey);
+        jQuery("#" + grillaProductosOrdenCompra).trigger('reloadGrid');
+        ListaTodosOrdenCompraDetalle = jQuery("#" + grillaProductosOrdenCompra).jqGrid('getGridParam', 'data');
+    }*@
+
+</script>

@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>@ViewBag.Title</title>
+    @*@Styles.Render("~/Content/css")*@
+    <link href="@Url.Content("~/fonts/font-awesome-4.3.0/css/font-awesome.min.css")" rel="stylesheet"/>
+    <link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet"/>
+    <link href="@Url.Content("~/Content/css/styles.css")" rel="stylesheet"/>
+    <link href="@Url.Content("~/Content/css/Site.css")" rel="stylesheet"/>
+    <link href="@Url.Content("~/Scripts/toastr/toastr.min.css")" rel="stylesheet"/>
+
+    <script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/toastr/toastr.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/knockout-3.4.0.js")"></script>
+
+    <link href="@Url.Content("~/Content/images/favicon.ico")" rel="shortcut icon" type="image/x-icon"/>
+    <link href="@Url.Content("~/Content/CRM/Impresion.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Content/CRM/reset.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Content/CRM/complex.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Content/CRM/css/site.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Content/CRM/pasos-grupo.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Content/themes/SigOne_css/jquery-ui-1.10.4.custom.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Content/jqgrid/css/ui.jqgrid.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Scripts/uploadify/uploadify.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Scripts/Qtip2/jquery.qtip.css")" rel="stylesheet" type="text/css"/>
+
+    @*<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>*@
+    <script src="@Url.Content("~/Scripts/jquery-migrate-1.2.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.realTime.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Scripts/autocomplete.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SIG.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.10.4.custom.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.cookie.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.treeview.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/tabscrolling/Fader.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/tabscrolling/TabPanel.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/tabscrolling/Math.uuid.js")" type="text/javascript"></script>
+
+    <link href="@Url.Content("~/Content/CRM/TabPanel.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Content/CRM/notificaciones.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Content/CRM/forms.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Content/CRM/dp.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Content/CRM/Validation.css")" rel="stylesheet" type="text/css"/>
+
+    <script src="@Url.Content("~/Content/jqgrid/js/i18n/grid.locale-es.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/jqgrid/js/jquery.jqGrid.src.js")" type="text/javascript"></script>
+    @*<script src="@Url.Content("~/Content/jqgrid/js/i18n/grid.locale-en.js")" type="text/javascript"></script>*@
+
+    <script src="@Url.Content("~/Scripts/jquery.alphanumeric.pack.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/uploadify/swfobject.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/uploadify/jquery.uploadify.v2.1.4.js")" type="text/javascript"></script>
+
+
+    <link href="@Url.Content("~/Content/themes/jquery.multiselect.css")" rel="stylesheet" type="text/css"/>
+    <script src="@Url.Content("~/Scripts/jquery.multiselect.js")" type="text/javascript"></script>
+
+    <link href="@Url.Content("~/Content/themes/jquery.multiselect.filter.css")" rel="stylesheet" type="text/css"/>
+    <script src="@Url.Content("~/Scripts/jquery.multiselect.filter.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Scripts/jquery.jstree.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.blockUI.js")" type="text/javascript"></script>
+
+    <link href="@Url.Content("~/Content/PasswordLength/style.css")" rel="stylesheet" type="text/css"/>
+    <script src="@Url.Content("~/Content/PasswordLength/jquery.pwstrength.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Scripts/ui.datepicker-es.js")" type="text/javascript"></script>
+    @*<script src="@Url.Content("~/Scripts/ui.datepicker-pt.js")" type="text/javascript"></script>*@
+
+    <script src="@Url.Content("~/Scripts/JSLINQ.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Scripts/jquery.jgrowl.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Scripts/ext-all-debug.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/Sencha/ext-theme-classic-all-debug.css")" rel="stylesheet" type="text/css"/>
+
+    <link href="@Url.Content("~/Content/Notificaciones/jquery.jgrowl.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Scripts/TimePicker/jquery-ui-timepicker-addon.css")" rel="stylesheet" type="text/css"/>
+    <script src="@Url.Content("~/Scripts/TimePicker/jquery-ui-timepicker-addon.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.printElement.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Qtip2/jquery.qtip.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Content/js/util.js")"></script>
+    <script src="@Url.Content("~/Content/js/app.js")"></script>
+    <script type="text/javascript">
+        var urlPath = '@Url.Content("~")';
+        toastr.options = { "progressBar": false, "positionClass": "toast-bottom-right", "closeButton": true, "showMethod": "slideDown" }
+    </script>
+
+    <script type="text/javascript">
+        @if (TempData["notice"] != null)
+        {
+            @:alert('@TempData["notice"]');
+        } 
+    </script>
+</head>
+
+<body>
+<div class="wrapper">
+    <div class="box">
+        <div class="row row-offcanvas row-offcanvas-left">
+            <!-- sidebar -->
+            <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+                    <li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"> <i class="glyphicon glyphicon-chevron-right"></i> </a></li>
+                </ul>
+                <ul class="nav hidden-xs" id="lg-menu">
+                    <li class="active">
+                        <a><i class="glyphicon glyphicon-list-alt"></i> Gestión de Abastecimiento</a>
+                        <ul>
+                            <li> <a href="@Url.Action("Index", "Kardex", new {area = "GestionPermiso"})"> <i class="glyphicon glyphicon-plus"></i> <span>Orden de pedido</span> </a> </li>
+                            <li> <a href="@Url.Action("Edit", "ActaRecepcion", new { Area = "ActaRecepcion" })"> <i class="glyphicon glyphicon-plus"></i> <span>Acta de Recepción</span> </a> </li>
+                            <li> <a href="@Url.Action("ListadoGuia", "ActaRecepcion", new {area = "ActaRecepcion"})"> <i class="glyphicon glyphicon-plus"></i> <span>Guia</span> </a> </li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a><i class="glyphicon glyphicon-list-alt"></i> Gestión de Inventarios</a> <ul>
+                            <li> <a href="~/NotaIngreso/Crear"> <i class="glyphicon glyphicon-plus"></i> <span>Registrar nota de ingreso</span> </a></li>
+                            <li> <a href="~/Picking/SeleccionarPedido"> <i class="glyphicon glyphicon-plus"></i> <span>Realizar Picking de Pedidos</span> </a> </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a><i class="glyphicon glyphicon-list"></i> Gestión de Distribución de Productos</a>
+                        <ul>
+                            <li> <a href="#"> <i class="glyphicon glyphicon-plus"></i> <span>Asignación de chofer a vehículo</span> </a> </li>
+                            <li> <a href="~/Inventario/Index"> <i class="glyphicon glyphicon-plus"></i> <span>Generación de Hoja de Ruta</span> </a> </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a><i class="glyphicon glyphicon-list"></i> Recursos Humanos</a>
+                        <ul>
+                            <li> <a href="~/OfertaLaboral/Create"> <i class="glyphicon glyphicon-plus"></i> <span>Registrar Oferta Laboral</span> </a> </li>
+                            <li> <a href="~/Perfil/Create"> <i class="glyphicon glyphicon-plus"></i> <span>Registrar Perfil</span> </a> </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a><i class="glyphicon glyphicon-paperclip"></i> REPORTES</a>
+                        <ul>
+                            <li> <a href="#"> <i class="glyphicon glyphicon-plus"></i> <span>Consulta de Ficha Producto</span> </a> </li>
+                            <li> <a href="#"> <i class="glyphicon glyphicon-plus"></i> <span>Consulta de Trazabilidad</span> </a> </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="list-unstyled hidden-xs" id="sidebar-footer">
+                    <li>
+                        <a href="#">
+                            <h3>Boticas y Salud</h3>
+                        </a> <span>Dedicados a cuidate</span>
+                    </li>
+                </ul> <!-- tiny only nav--> <ul class="nav visible-xs" id="xs-menu">
+                    <li><a href="#featured" class="text-center"><i class="glyphicon glyphicon-list-alt"></i></a></li>
+                    <li><a href="#stories" class="text-center"><i class="glyphicon glyphicon-list"></i></a></li>
+                    <li><a href="#" class="text-center"><i class="glyphicon glyphicon-paperclip"></i></a></li>
+                </ul>
+            </div>
+            <!-- /sidebar -->
+            <!-- main right col -->
+            <div class="column col-sm-10 col-xs-11" id="main">
+                <!-- top nav -->
+                <div class="navbar navbar-blue navbar-static-top">
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Menú</span>  <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>  </button> @*<a href="/" class="navbar-brand logo">b</a>*@ <a href="~/Home" class="navbar-brand logo"> <img src="~/Content/images/logo.png" class="img-responsive"/> </a>
+                    </div>
+                    <nav class="collapse navbar-collapse" role="navigation">
+                        <form class="navbar-form navbar-left">
+                            <div class="input-group input-group-sm" style="max-width: 360px;">
+                                <input type="text" class="form-control" placeholder="Buscar" name="srch-term" id="srch-term">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                        <ul class="nav navbar-nav">
+                            <li> <a href="~/Home"><i class="glyphicon glyphicon-home"></i> Inicio</a> </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right" style="padding-right: 10px">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-user"></i> Usuario </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="">Perfil de usuario</a></li>
+                                    <li role="separator" class="divider hidden-xs"></li>
+                                    <li><a href="~/">Salir del sistema</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- /top nav -->
+                <div class="padding">
+                    <div class="full col-sm-9">
+                        @RenderBody()
+                    </div><!-- /col-9 -->
+                </div><!-- /padding -->
+            </div>
+            <!-- /main -->
+
+        </div>
+    </div>
+</div>
+@RenderSection("ScriptContent", false)
+</body>
+</html>

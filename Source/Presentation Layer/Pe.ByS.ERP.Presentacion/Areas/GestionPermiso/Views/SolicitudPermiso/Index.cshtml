@@ -1,0 +1,159 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>Solicitud de Gestión de Permiso</strong>
+    </div>
+    <div class="panel-body" style="min-height: 330px;">
+        <div id="divMensajeInformativo">
+            <span class="fa fa-info-circle"></span>
+            <span id="lblMensajeInformativo">Por favor seleccione una opción del sistema.</span>
+        </div>
+        <hr />
+        <form id="frmCriterioBusqueda" class="form-inline form-search" role="form" style="display: none">
+            <div class="form-group">
+                <label class="control-label" for="numero-order">Filtro Separado<span class="danger">*</span>:</label>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtBusquedaCodigoConsultora" maxlength="7" class="form-control text-search input-sm" validable="required CodigoConsultora" placeholder="Campo" />
+            </div>
+            <input id="btnBuscarConsultora" data-bind="visible: BuscarConsultora.Visible, enable: BuscarConsultora.Enabled" type="button" class="btn btn-default btn-filter" value="Buscar" />
+            &nbsp;&nbsp;
+            <input id="btnBuscar" data-bind="visible: Buscar.Visible, enable: Buscar.Enabled" type="button" class="btn btn-primary" value="Mostrar" />
+
+        </form>
+
+        <div id="divResultadoBusqueda" class="form form-high">
+            <div>
+                <strong>Información de la solicitud</strong>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Filtro 1:</label>
+                            <div class="col-sm-7">
+                                <p class="form-control-static" id="txtNombreDirectora"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Filtro 2:</label>
+                            <div class="col-sm-7">
+                                <p class="form-control-static" id="txtCodigoConsultora"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Filtro 3:</label>
+                            <div class="col-sm-7">
+                                <p class="form-control-static" id="txtNombreConsultora"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Filtro 4:</label>
+                            <div class="col-sm-7">
+                                <p class="form-control-static" id="txtTipoConsultora"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Filtro 5:</label>
+                            <div class="col-sm-7">
+                                <p class="form-control-static" id="txtFechaUltimoPedido"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Filtro 6:</label>
+                            <div class="col-sm-7">
+                                <p class="form-control-static" id="txtSegmento"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Filtro 7:</label>
+                            <div class="col-sm-7">
+                                <p class="form-control-static" id="txtDeudaVencida"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Filtro 8:</label>
+                            <div class="col-sm-7">
+                                <p class="form-control-static" id="txtDeudaPorVencer"></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Filtro 9:</label>
+                            <div class="col-sm-7">
+                                <p class="form-control-static" id="txtNumeroSolicitud"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Filtro 10:</label>
+                            <div class="col-sm-7">
+                                <p class="form-control-static" id="txtEstadoCredito"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Filtro 11:</label>
+                            <div class="col-sm-7">
+                                <p class="form-control-static" id="txtProductoCredito"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Filtro 12:</label>
+                            <div class="col-sm-7">
+                                <p class="form-control-static" id="txtNivelCredito"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Filtro 13:</label>
+                            <div class="col-sm-7">
+                                <p class="form-control-static" id="txtLineaCredito"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Filtro 14:</label>
+                            <div class="col-sm-7">
+                                <p class="form-control-static" id="txtDisponible"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Filtro 15:</label>
+                            <div class="col-sm-7">
+                                <p class="form-control-static" id="txtEstadoPedido"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Filtro 16:</label>
+                            <div class="col-sm-7">
+                                <p class="form-control-static" id="txtIndiceMorosidad"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <input id="btnRegistroCredito" type="button" class="btn btn-default popup" value="Boton 1" style="display: none" />
+                <input id="btnNivelCredito" type="button" class="btn btn-default popup" data-bind="visible: NivelCredito.Visible, enable: NivelCredito.Enabled" value="Boton 2" />
+                <input id="btnEstadoCredito" type="button" class="btn btn-default popup" data-bind="visible: EstadoCredito.Visible, enable: EstadoCredito.Enabled" value="Boton 3" />
+                <input id="btnLineaCredito" type="button" class="btn btn-default popup" data-bind="visible: LineaCredito.Visible, enable: LineaCredito.Enabled" value="Boton 4" />
+                <input id="btnSansionComercial" type="button" class="btn btn-default popup" data-bind="visible: SancionComercial.Visible, enable: SancionComercial.Enabled" value="Boton 5" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+        ns('Pe.ByS.ERP.GestionPermiso.SolicitudPermiso.Actions');        
+        Pe.ByS.ERP.GestionPermiso.SolicitudPermiso.Actions.Buscar = '@Url.Action("Buscar", "BusquedaColaborador", new { Area = "General" })';
+    </script>
+}

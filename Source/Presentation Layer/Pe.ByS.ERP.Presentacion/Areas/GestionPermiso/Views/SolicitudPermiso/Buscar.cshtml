@@ -1,0 +1,224 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>Solicitud de Gestión de Permiso</strong>
+    </div>
+    <div class="panel-body" style="min-height: 330px;">
+        <div id="divMensajeInformativo">
+            <span class="fa fa-info-circle"></span>
+            <span id="lblMensajeInformativo">Por favor seleccione una opción del sistema.</span>
+        </div>
+        <hr />
+        <div class="row" style="display: none">
+            <div class="col-md-6">
+                <div class="form-horizontal" role="form">
+                    <div class="form-group" style="">
+                        <label class="col-sm-5 control-label">filtro separado:</label>
+                        <div class="col-sm-7">
+                            <input id="txtDirectora" type="text" class="form-control" placeholder="filtro separado">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="form-horizontal" role="form">
+                    <div class="form-group" style="">
+                        <label class="col-sm-5">
+                            <input id="btnBuscarDirectora" type="button" value="Buscar" class="btn btn-default btn-filter" data-bind="visible: BuscarDirectora.Visible,enable: BuscarDirectora.Enabled" /></label>
+                        <div class="col-sm-7">
+                            &nbsp;            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <form id="frmAdministracionMasivo">
+            <div id="divCriterioBusqueda">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-12 control-label">filtro n:</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">filtro n:</label>
+                                <div class="col-sm-7">
+                                    <textarea id="txtListaCodigoConsultora" class="form-control" rows="4" maxlength="12000" title="filtro n"></textarea>
+                                </div>
+                            </div>
+                            <div id="divZonaGeograficaNivel1" class="form-group" style="display: none">
+                                <label id="lblZonaGeograficaNivel1" class="col-sm-5 control-label" style="padding-right: 10px"></label>
+                                <div class="col-sm-7">
+                                    <select id="slcZonaGeograficaNivel1" class="form-control">
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="divZonaGeograficaNivel2" class="form-group" style="display: none">
+                                <label id="lblZonaGeograficaNivel2" class="col-sm-5 control-label" style="padding-right: 10px;"></label>
+                                <div class="col-sm-7">
+                                    <select id="slcZonaGeograficaNivel2" class="form-control">
+                                        <option value="">filtro n</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="divZonaGeograficaNivel3" class="form-group" style="display: none">
+                                <label id="lblZonaGeograficaNivel3" class="col-sm-5 control-label" style="padding-right: 10px;"></label>
+                                <div class="col-sm-7">
+                                    <select id="slcZonaGeograficaNivel3" class="form-control">
+                                        <option value="">filtro n</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">filtro n:</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <div class="col-sm-12" style="padding: 0px">
+                                            <div class="col-sm-3 control-label" style="padding-top: 7px; width: 31%; min-width: 35px">
+                                                filtro Desde
+                                            </div>
+                                            <div class="col-sm-9" style="width: 69%">
+                                                <table border="0">
+                                                    <tr>
+                                                        <td>
+                                                            <input id="spnPuntajeYanbalInicial" class="form-control" maxlength="4" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom: 0px">
+                                        <div class="col-sm-12" style="padding: 0px">
+                                            <div class="col-sm-3 control-label" style="padding-top: 7px; width: 31%; min-width: 35px">
+                                                filtro Hasta
+                                            </div>
+                                            <div class="col-sm-9" style="width: 69%">
+                                                <table border="0">
+                                                    <tr>
+                                                        <td>
+                                                            <input id="spnPuntajeYanbalFinal" class="form-control" maxlength="4" />
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">filtro n:</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <div class="col-sm-12" style="padding: 0px">
+                                            <div class="col-sm-3 control-label" style="padding-top: 7px; width: 31%; min-width: 35px">
+                                                filtro Desde
+                                            </div>
+                                            <div class="col-sm-9" style="width: 69%">
+                                                <table border="0">
+                                                    <tr>
+                                                        <td>
+                                                            <input id="calDesde" type="text" class="form-control-custom text-search input-sm datepicker1" style="padding: 1px; text-align: center; margin: 0px; width: 90%" validable="DateTime true FechaDesdeCorrecto" maxlength="10" />
+                                                        </td>
+                                                        <td><i class="fa fa-calendar"></i></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom: 0px">
+                                        <div class="col-sm-12" style="padding: 0px">
+                                            <div class="col-sm-3 control-label" style="padding-top: 7px; width: 31%; min-width: 35px">
+                                                filtro hasta
+                                            </div>
+                                            <div class="col-sm-9" style="width: 69%">
+                                                <table border="0">
+                                                    <tr>
+                                                        <td>
+                                                            <input id="calHasta" type="text" class="form-control-custom text-search input-sm datepicker1" style="padding: 1px; text-align: center; margin: 0px; width: 90%" validable="DateTime true FechaHastaCorrecto" maxlength="10" /></td>
+                                                        <td><i class="fa fa-calendar"></i></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">filtro n:</label>
+                                <div class="col-sm-7">
+                                    <select id="slcEstadoCredito" class="form-control" data-bind="options: ListaEstadoCredito, optionsText: 'Name', optionsValue: 'Id', optionsCaption: 'Seleccionar'">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">filtro n:</label>
+                                <div class="col-sm-7">
+                                    <select id="slcProductoCredito" class="form-control" data-bind="options: ListaProductoCredito, optionsText: 'Name', optionsValue: 'Id', optionsCaption: 'Seleccionar'">
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-sm-5"></div>
+                                <div class="col-sm-7" style="text-align: right;">
+                                    <input id="btnLimpiarFormulario" class="btn btn-default btn-filter" type="button" value="Limpiar" data-bind="visible: Limpiar.Visible, enable: Limpiar.Enabled" />
+                                    <input id="btnBuscar" type="button" value="Mostrar" class="btn btn-primary   " data-bind="visible: MostrarResultado.Visible,enable: MostrarResultado.Enabled" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Resultado de la busqueda</h3>
+            </div>
+            <div class="col-sm-6 text-right">
+                <div class="form-group" style="display: none">
+                    <button id="btnEliminarBien" class="btn btn-info">Eliminar</button>
+                    <button id="btnAgregarBien" class="btn btn-primary">Añadir</button>
+                </div>
+            </div>
+        </div>
+        <div id="divResultadoBusqueda" style="display: none">
+            <div class="table-responsive">
+                <div id="grdResultado">
+                </div>
+            </div>
+            <br />
+            <div>
+                <input id="btnNivelCredito" type="button" value="boton 1" data-bind="visible: NivelCredito.Visible,enable: NivelCredito.Enabled" class="btn btn-default btn-filter" />
+                <input id="btnEstadoCredito" type="button" value="boton 2" data-bind="visible: EstadoCredito.Visible,enable: EstadoCredito.Enabled" class="btn btn-default btn-filter" />
+                <input id="btnAmpliacion" type="button" value="boton 3" data-bind="visible: LineaCredito.Visible,enable: LineaCredito.Enabled" class="btn btn-default btn-filter" />
+                <input id="btnInhabilitacion" type="button" value="boton 4" data-bind="visible: SancionComercial.Visible,enable: SancionComercial.Enabled" class="btn btn-default btn-filter" />
+            </div>
+        </div>
+
+    </div>
+</div>
+@section Scripts {
+
+    <script type="text/javascript">
+        ns('Pe.ByS.ERP.GestionPermiso.SolicitudPermiso.Actions');
+        Pe.ByS.ERP.GestionPermiso.SolicitudPermiso.Actions.Buscar = '@Url.Action("Buscar", "SolicitudPermiso", new { Area = "GestionPermiso" })';
+
+        Pe.ByS.ERP.GestionPermiso.SolicitudPermiso.Actions.Return = '@Url.Action("Index", "ActividadSolicitudPermiso", new { Area = "GestionPermiso" })'
+    </script>
+}

@@ -1,0 +1,62 @@
+﻿<input id="hfIdentOrden" type="hidden" /><br />
+<div id="divPlantillaOrden" style="padding: 0 10px 10px 0;">
+    <table id="tablaOrden"></table>
+    <div id="barraOrden">
+    </div>
+</div>
+
+<script type="text/javascript">
+    var gridOrden = 'tablaOrden';
+
+    $(document).ready(function () {
+        Listar();
+    });
+
+    function Listar() {
+        var colNames = ['Id', 'Fecha', 'Pedido'];
+        var colModels = [
+            { name: 'Id', index: 'Id', align: 'center', hidden: true },
+            { name: 'Fecha', index: 'Fecha', align: 'center', width: 120, search: false },
+            { name: 'NumeroPedido', index: 'NumeroPedido', align: 'center', width: 200, searchoptions: { sopt: ['cn', 'bw'] } }
+        ];
+
+        var opciones = {
+            nuevo: false,
+            editar: false,
+            eliminar: false,
+            search: false,
+            refresh: false,
+            mensaje: 'Seleccione un registro',
+            sinRegistro: 'Sin registro',
+            alertTitle: 'Alerta',
+            grilla: gridOrden,
+            pager: 'barraOrden',
+            identificador: 'hfIdentOrden',
+            height: 210,
+            width: 'auto',
+            caption: 'Pedidos',
+            urlListar: '@Url.Action("Listar", "OrdenPedido", new { area = "OrdenPedido" })',
+            id: 'id',
+            colsNames: colNames,
+            colsModel: colModels,
+            sortName: 'Id'
+        };
+
+        SIG.GrillaUpgrade(opciones);
+        $("#" + gridOrden).filterToolbar({ searchOnEnter: true, stringResult: true, defaultSearch: "cn" });
+    }
+    
+    function SeleccionarPedido(popupObj, parametroHandlers) {
+        var $grilla = $("#" + gridOrden);
+        var rowKey = $grilla.getGridParam('selrow');
+
+        if (rowKey != null) {
+            var rowData = $grilla.getRowData(rowKey);
+            parametroHandlers.functionOk(rowData);
+            $(popupObj).dialog("close");
+        } else {
+            SIG.Alert('Alerta', 'Seleccione un registro', null);
+        }
+    }
+
+</script>

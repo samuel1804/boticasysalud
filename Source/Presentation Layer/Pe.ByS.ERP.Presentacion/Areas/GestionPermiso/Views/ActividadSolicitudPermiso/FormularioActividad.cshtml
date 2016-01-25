@@ -1,0 +1,107 @@
+﻿@model Pe.ByS.Importacion.Presentacion.Core.ViewModel.GestionPermiso.FormularioActividadPlanificadaViewModel
+
+<form id="frmPlanificarActividad">
+    @Html.HiddenFor(model => model.ActividadSolicitudPermisoResponse.Estado, new { @id = "hdnEstadoActividad" })
+    @Html.HiddenFor(model => model.ActividadSolicitudPermisoResponse.FechaCierreReal, new { @id = "hdnFechacierreRealActividad" })
+    <div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">Tipo Requerimiento:</label>
+                        <div class="col-sm-7">
+                            @if (Model != null && Model.ActividadSolicitudPermisoResponse != null && Model.ActividadSolicitudPermisoResponse.EnProceso)
+                            {
+                                @Html.DropDownListFor(model => model.ActividadSolicitudPermisoResponse.CodigoTipoActividad, Model.TiposActividad, null, new { @class = "form-control", id = "slcTipoActividad", @validable = "required ValidarTipoActividad", @disabled = "disabled" })                          
+                            }
+                            else
+                            {
+                                @Html.DropDownListFor(model => model.ActividadSolicitudPermisoResponse.CodigoTipoActividad, Model.TiposActividad, null, new { @class = "form-control", id = "slcTipoActividad", @validable = "required ValidarTipoActividad" })
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label" for="txtFechaPlanificadaCierre">Fecha Cierre:</label>
+                        <div class="col-sm-7 ">
+                            @Html.TextBoxFor(model => model.ActividadSolicitudPermisoResponse.FechaCierrePlanificado, new { @class = "form-control text-uppercase", @id = "txtFechaPlanificadaCierre", @validable = "required ValidarFechaCierre" })
+                           
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">Actividad:</label>
+                        <div class="col-sm-7">
+                            @if (Model != null && Model.ActividadSolicitudPermisoResponse != null && Model.ActividadSolicitudPermisoResponse.EnProceso)
+                            {
+                                @Html.DropDownListFor(model => model.ActividadSolicitudPermisoResponse.CodigoActividad, Model.Actividades, null, new { @class = "form-control", id = "slcActividad", @validable = "required ValidarActividad", @disabled = "disabled" })
+                            }
+                            else
+                            {
+                                @Html.DropDownListFor(model => model.ActividadSolicitudPermisoResponse.CodigoActividad, Model.Actividades, null, new { @class = "form-control", id = "slcActividad", @validable = "required ValidarActividad" })
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">Prioridad:</label>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(model => model.ActividadSolicitudPermisoResponse.Prioridad, Model.Prioridades, null, new { @class = "form-control", id = "slcPrioridad", @validable = "required ValidarPrioridad" })
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Responsable:</label>
+                        <div class="col-sm-8">
+                            @Html.DropDownListFor(model => model.ActividadSolicitudPermisoResponse.CodigoEmpleado, Model.Empleados, null, new { @class = "form-control", id = "slcResponsable", @validable = "required ValidarEmpleado" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Actividad Predecesora:</label>
+                        <div class="col-sm-8">
+                            @Html.DropDownListFor(model => model.ActividadSolicitudPermisoResponse.CodigoActividadPredecesora, Model.Predecesoras, null, new { @class = "form-control", id = "slcActividadPredecesora" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Adjunto:</label>
+                        <div class="col-sm-8">
+                            <input type="file" id="uplAdjunto" />
+                            @if (Model != null && Model.ActividadSolicitudPermisoResponse != null && !string.IsNullOrWhiteSpace(Model.ActividadSolicitudPermisoResponse.Adjunto))
+                            { 
+                                <a href="@Url.Content("~/Files/" + Model.ActividadSolicitudPermisoResponse.Adjunto)" target="_blank">Archivo</a>                                
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Observaciones:</label>
+                        <div class="col-sm-8">
+                            @Html.TextAreaFor(model => model.ActividadSolicitudPermisoResponse.Observacion, new { @class = "form-control text-uppercase", @id = "txtObservacion", @validable = "required ValidarObservacion", @row = "4", maxlength = "300" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-sm-12" style="text-align: right;">
+                        <input id="btnCerrarActividad" class="btn btn-default btn-filter" type="button" value="Cerrar" />
+                        @if (Model == null || Model.ActividadSolicitudPermisoResponse == null || Model.ActividadSolicitudPermisoResponse.PermiteEditar)
+                        { 
+                            <input id="btnGuardarActividad" class="btn btn-primary" type="button" value="Guardar" />                                
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

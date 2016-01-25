@@ -1,0 +1,202 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutI.cshtml";
+}
+
+@model Pe.ByS.Importacion.Presentacion.Core.ViewModel.OrdenPedido.OrdenPedidoViewModel
+<div id='dialog-confirmOrdenCompra' style="display: none">
+   Esta seguro que desea guardar?
+</div>
+<div id='dialog-VisualizarOrdenCompra' style="display: none">
+</div>
+<div id="Msg-OrdenCompra">
+    <div class="msgModel" style="display: none">
+        <div class="tips loading">
+           Procesando
+        </div>
+        <div class="tips merror">
+        </div>
+        <div class="tips mexito">
+        </div>
+    </div>
+</div>
+
+
+@*@if (Model.OrdenPedidoResponse.Accion =="Editar")
+    {        
+       
+    }*@
+    @Html.HiddenFor(model => model.OrdenPedidoResponse.Codigo, new { @id = "hdnCodigo" })
+    @Html.HiddenFor(model => model.OrdenPedidoResponse.FechaString, new { @id = "FechaString" })
+
+  <table class="tablelayoutI">
+        <tr>
+            <td style="width:130px">
+                <table style="width:130px; padding:10px">
+                    <tr>
+                        <td><label>Codigo </label> </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.OrdenPedidoResponse.NumeroPedido, new { @class = "form-control text-uppercase", @style="width:200px", @id = "txtCodigo"})
+                            
+                        </td>
+                        </tr>
+                    <tr>
+                        <td><label>Fecha </label> </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.OrdenPedidoResponse.Fecha, new { @id = "txtFecha",@style="width:200px" })
+                             
+                         </td>
+                    </tr>
+
+
+                    <tr>
+                        <td><label>Estado </label> </td>
+                        <td>
+
+
+                            @if (Model != null && Model.Estados != null)
+                            {
+                                @Html.DropDownListFor(model => model.OrdenPedidoResponse.IdEstado, Model.Estados, null, new {  @class = "form-control text-uppercase", id = "hestado", @validable = "required ValidarActividad",@style="width:202px" })
+                            }
+                            
+                        </td>
+                        </tr><tr>
+                        <td><label>Tienda </label> </td>
+                        <td>
+                            
+                            @if (Model != null && Model.Tiendas != null)
+                            {
+                                @Html.DropDownListFor(model => model.OrdenPedidoResponse.IdTienda, Model.Tiendas, null, new { @class = "form-control text-uppercase", id = "htienda", @validable = "required ValidarActividad",@style="width:202px"})
+                            }
+                          
+
+                        </td>
+                    </tr>
+                    <tr>                        
+                        <td colspan="2">
+                            <br /> <br /> <br />
+                            <button type="button" value='Agregar' id="btnGuardarCerrar" class="" title='GuardarPedido'>Guardar y Cerrar</button>
+                            <button type="button" value='Agregar' id="btnDetalle" class="" title='Detalle'>Guardar y Nuevo</button>
+                            <button type="button" value='Agregar' id="btnirDetalle" class="" title='Detalle'>Detalle</button>                            
+                        </td>
+                    </tr>                   
+                </table>
+            </td>
+        </tr>
+    </table>
+
+<script type='text/javascript'>
+
+    var criterioBloqueo = true;
+    var ListaLotes = new Array();
+    var contadorLotes = -1;
+    var pasarNotaIngreso = 0;
+    var tituloPestana = "Orden Pedido";
+
+    jQuery(document).ready(function () {
+        
+        //CargarAgrupadores();
+        //CreateDialogsConfirmOrdenCompra();
+        //CrearDialogPopUp();
+        $("#NumeroPedido").prop("readonly", "true");
+        $("#txtFecha").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            firstDay: 1,
+            changeFirstDay: false
+        });
+
+
+        $("#txtFecha").datetimepicker();
+        
+        $("#txtFecha").val($("#FechaString").val());
+        jQuery("#btnAgregar").click(function (e) {
+            debugger;
+            Guardar();
+            e.preventDefault();
+        });
+
+        jQuery("#btnGuardarCerrar").click(function (e) {
+            Guardar(0);
+            //window.location.href = "/OrdenPedido/OrdenPedido/Pedido/" + jQuery("#hdnCodigo").val();
+            //SIG.Alert('Orden Pedido', 'Se guardo el registro correctamente', null);
+            //e.preventDefault();
+        });
+
+
+        jQuery("#btnDetalle").click(function (e) {
+            Guardar(1);           
+            e.preventDefault();
+        });
+
+        jQuery("#btnirDetalle").click(function (e) {
+            IrDetalle();
+            e.preventDefault();
+        });
+        
+     
+        $('#htienda').attr('selected', 'selected');
+    });
+
+
+
+    function Guardar(tipo) {       
+       
+        var model = new Object();//formulario
+        //var responsepedido = new Object();
+
+       // responsepedido.Codigo = jQuery("#txtCodigo").val();
+        model.NumeroPedido = jQuery("#txtCodigo").val();
+       model.Fecha = jQuery("#txtFecha").val();
+       model.IdEstado = jQuery("#hestado").val();
+       model.IdTienda = $("#htienda").val();
+       //model.OrdenPedidoRequest = responsepedido;
+        
+       var opciones = {
+           url: '@Url.Action("GuardarPedido", "OrdenPedido",new { Area = "OrdenPedido" })',
+           parametros:{
+               model:model
+               }
+        }
+
+        SIG.Ajax(opciones, function (response) {
+            debugger;
+            $("#hdnCodigo").val(response.Result);
+            SIG.Alert('Producto', 'Se guardo el registro correctamente', null);
+            if (tipo == 1)
+            {
+                window.location.href = "/OrdenPedido/OrdenPedido/Pedido/" + jQuery("#hdnCodigo").val();
+            }
+            //SIG.msgConfirmPopup("Msg-EntradaAlmacen", "frmModelOrdenCompra", response.Success, response.Message, CancelarMantenimientoNotaIngreso(response.Success));
+        });
+
+        @*var opciones = {
+             url: '@Url.Action("GuardarPedido", "OrdenPedido")',
+         
+            parametros: {
+                model: model
+            }
+        };
+
+        SIG.Ajax(opciones, function (response) {
+            SIG.msgConfirmPopup("Msg-OrdenCompra", "frmModelOrdenCompra", response.Success, response.Message, CancelarOrdenCompra(response.Data));
+        });*@
+    }
+
+
+    function IrDetalle()
+    {
+        debugger;
+         SIG.Alert('Producto', 'Se elimino el registro correctamente', null);
+        window.location.href = "/OrdenPedido/OrdenPedido/Pedido/" + jQuery("#hdnCodigo").val();
+       
+    }
+
+   
+
+    function CancelarOrdenCompra(id) {
+
+    }
+
+    
+</script>

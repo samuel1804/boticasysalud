@@ -1,0 +1,712 @@
+﻿
+div#ContenedorImpresionDocumento {
+    height: 680px;
+    width: 838px;
+    border: 1px solid #000;
+}
+
+div#ContenedorImpresionGuia {
+    height: 752px;
+    width: 838px;
+    border: 1px solid #000;
+}
+
+div#SuperiorTitulo {
+    height: 149px;
+    border-bottom: 1px solid #000;
+}
+
+div#SupLeft {
+    height: 149px;
+    width: 569px;
+    border-right: 1px solid black;
+    float: left;
+}
+
+div#SupRight {
+    height: 149px;
+    width: 266px;
+    float: right;
+}
+
+div#SupRightContent {
+    height: 128px;
+    width: 249px;
+    margin-top: 3px;
+    margin-left: 2px;
+    border: 1px solid #000;
+    margin-bottom: 2px;
+    padding: 10px 5px 3px 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}
+
+div#SupRightContentDocumento {
+    height: 90px;
+}
+
+div#SupRightContentSerie {
+    height: 30px;
+    vertical-align: bottom;
+    text-align: left;
+    padding-left: 15px;
+}
+
+div#SupLeftSup {
+    background: url(images/FondoDocumento.png) !important;
+    height: 115px;
+    border-bottom: 1px solid #000;
+}
+
+div#SupLeftInf {
+}
+
+div#SupLeftInfSup {
+    height: 18px;
+    font-size: 12px;
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+#NombreEmpresa {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+div#SupLeftInfInf {
+    height: 17px;
+    font-size: 10px;
+    padding-left: 10px;
+}
+
+#DireccionEmpresa {
+    height: 20px;
+    text-transform: uppercase;
+}
+
+div#Barra1 {
+    height: 83px;
+    border-bottom: 1px solid #000;
+}
+
+div#Barra10 {
+    height: 71px;
+}
+
+div#Barra11 {
+    height: 55px;
+    border-bottom: 1px solid #000;
+}
+
+div#Barra1Left {
+    height: 75px;
+    width: 443px;
+    margin: 2px;
+    border: 1px solid #000;
+    float: left;
+    padding-left: 5px;
+}
+
+div#Barra10Left {
+    height: 65px;
+    width: 443px;
+    margin: 2px;
+    border: 1px solid #000;
+    float: left;
+    padding-left: 5px;
+}
+
+div#Barra11Left {
+    height: 48px;
+    width: 443px;
+    margin: 2px;
+    border: 1px solid #000;
+    float: left;
+    padding-left: 5px;
+}
+
+div#Barra1Right {
+    height: 75px;
+    width: 370px;
+    margin: 2px;
+    border: 1px solid #000;
+    float: right;
+    padding-left: 5px;
+}
+
+div#Barra10Right {
+    height: 65px;
+    width: 370px;
+    margin: 2px;
+    border: 1px solid #000;
+    float: right;
+    padding-left: 5px;
+}
+
+div#Barra11Right {
+    height: 48px;
+    width: 370px;
+    margin: 2px;
+    border: 1px solid #000;
+    float: right;
+    padding-left: 5px;
+}
+
+div#Barra2 {
+    height: 28px;
+    width: 838px;
+    border-bottom: 1px solid #000;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+.ColumnaSupCodigo {
+    width: 60px;
+    border-right: 1px solid #000;
+    height: 28px;
+    text-align: center;
+}
+
+.ColumnaSupCantidad {
+    width: 80px;
+    border-right: 1px solid #000;
+    height: 28px;
+    text-align: center;
+}
+
+.ColumnaSupUnidad {
+    width: 100px;
+    border-right: 1px solid #000;
+    height: 28px;
+    text-align: center;
+}
+
+.ColumnaSupDescripcion {
+    width: 317px;
+    border-right: 1px solid #000;
+    height: 28px;
+    text-align: center;
+}
+
+.ColumnaSupValor {
+    width: 90px;
+    border-right: 1px solid #000;
+    height: 28px;
+    text-align: center;
+}
+
+.ColumnaSupDescuento {
+    width: 90px;
+    border-right: 1px solid #000;
+    height: 28px;
+    text-align: center;
+}
+
+.ColumnaSupTotal {
+    width: 95px;
+    height: 28px;
+    text-align: center;
+}
+
+.ColumnaSupTotalGuia {
+    width: 110px;
+    height: 28px;
+    text-align: center;
+}
+
+.ColumnaSupCodigoD {
+    width: 60px;
+    border-right: 1px solid #000;
+    height: 23px;
+    text-align: center;
+}
+
+.ColumnaSupCodigoDGuia {
+    width: 59px;
+    border-right: 1px solid #000;
+    height: 23px;
+    text-align: center;
+}
+
+.ColumnaSupCantidadD {
+    width: 80px;
+    border-right: 1px solid #000;
+    height: 23px;
+    text-align: center;
+}
+
+.ColumnaSupCantidadDGuia {
+    width: 80px;
+    border-right: 1px solid #000;
+    height: 23px;
+    text-align: center;
+}
+
+.ColumnaSupUnidadD {
+    width: 100px;
+    border-right: 1px solid #000;
+    height: 23px;
+    text-align: center;
+}
+
+.ColumnaSupUnidadDGuia {
+    width: 100px;
+    border-right: 1px solid #000;
+    height: 23px;
+    text-align: center;
+}
+
+.ColumnaSupDescripcionD {
+    width: 317px;
+    border-right: 1px solid #000;
+    height: 23px;
+    text-align: center;
+}
+
+.ColumnaSupDescripcionDGuia {
+    width: 480px;
+    border-right: 1px solid #000;
+    height: 23px;
+    text-align: left;
+    padding-right: 5px;
+}
+
+.ColumnaSupDescripcionGuia {
+    width: 485px;
+    border-right: 1px solid #000;
+    height: 23px;
+    text-align: center;
+}
+
+.ColumnaSupValorD {
+    width: 88px;
+    border-right: 1px solid #000;
+    height: 23px;
+    text-align: right;
+    padding-right: 2px;
+}
+
+.ColumnaSupDescuentoD {
+    width: 90px;
+    border-right: 1px solid #000;
+    height: 23px;
+    text-align: center;
+}
+
+.ColumnaSupTotalD {
+    width: 93px;
+    height: 23px;
+    text-align: right;
+    padding-right: 2px;
+}
+
+.ColumnaSupTotalDGuia {
+    width: 108px;
+    height: 23px;
+    text-align: right;
+    padding-right: 2px;
+}
+
+
+div#Barra3 {
+    height: 304px;
+    width: 838px;
+    border-bottom: 1px solid #000;
+}
+
+div#Barra4 {
+    height: 112px;
+    width: 838px;
+}
+
+div#toPrint {
+    font-family: 'Courier New';
+}
+
+div#InfLeft {
+    width: 651px;
+    padding-top: 5px;
+    height: 100px;
+    float: left;
+}
+
+div#InfLeftSup {
+    width: 651px;
+    border-bottom: 1px solid #000;
+}
+
+div#InfRight {
+    width: 185px;
+    height: 67px;
+    float: left;
+    border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
+    text-align: right;
+}
+
+div#CanceladoLeft {
+    float: left;
+    width: 485px;
+    height: 69px;
+    border-top: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+div#CanceladoLeftGuia {
+    float: left;
+    width: 385px;
+    height: 141px;
+    border-right: 1px solid #000;
+}
+
+div#CanceladoRight {
+    float: right;
+    width: 148px;
+    height: 69px;
+    border-top: 1px solid #000;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    margin-right: 5px;
+}
+
+div#CanceladoRightGuia {
+    float: right;
+    width: 448px;
+    height: 141px;
+    border-left: 1px solid #000;
+}
+
+div#CanceladoTop {
+    height: 20px;
+    width: 485px;
+    text-align: center;
+}
+
+div#CanceladoTopGuia {
+    height: 20px;
+    width: 385px;
+    text-align: center;
+}
+
+div#CanceladoCenter {
+    height: 28px;
+    border-bottom: 1px dashed #000;
+    border-top: 1px solid #000;
+    width: 485px;
+}
+
+div#CanceladoCenterGuia {
+    height: 100px;
+    border-bottom: 1px dashed #000;
+    border-top: 1px solid #000;
+    width: 385px;
+}
+
+div#CanceladoBottom {
+    height: 20px;
+    width: 485px;
+}
+
+div#CanceladoBottomGuia {
+    height: 20px;
+    width: 385px;
+}
+
+div#CanceladoTop2 {
+    padding-left: 2px;
+    height: 20px;
+}
+
+div#CanceladoCenter2 {
+    padding-left: 2px;
+    padding-top: 8px;
+    height: 20px;
+}
+
+div#CanceladoBottom2 {
+    padding-left: 2px;
+    height: 20px;
+}
+
+.clearDiv {
+    clear: both;
+}
+
+.textSize {
+    font-size: 10px;
+    width: 80px;
+}
+
+.textSize2 {
+    font-size: 10px;
+    width: 140px;
+}
+
+.AlturaFila {
+    height: 28px;
+    font-size: 12px;
+}
+
+.AlturaFilaD {
+    height: 23px;
+    font-size: 12px;
+}
+
+.textSize3 {
+    font-size: 11px;
+}
+
+.FilaIgv {
+    border-left: 1px solid #000;
+    width: 92px;
+    text-align: right;
+    padding-right: 2px;
+}
+
+.AlturaFilaIgv {
+    width: 90px;
+    height: 22px;
+}
+
+.textoCancelado {
+    width: 160px;
+    text-align: center;
+}
+
+.imagenDocumento {
+    top: -10px;
+    position: relative;
+    width: 22px;
+    height: 22px;
+}
+
+span#spnNombreDocumento {
+    font-size: 25px;
+}
+
+span#DineroLetras{
+    text-transform: uppercase;
+}
+
+/*Impresión*/
+.AlturaFilaI{
+    height: 46px;
+    font-size: 12px;
+}
+
+.ColumnaSupCodigoI{
+    width: 60px;
+    border-right: 1px solid #000;
+    height: 46px;
+    text-align: center;
+}
+
+.ColumnaSupCantidadI{
+    width: 80px;
+    border-right: 1px solid #000;
+    height: 46px;
+    text-align: center;
+}
+
+.ColumnaSupUnidadI{
+    width: 100px;
+    border-right: 1px solid #000;
+    height: 46px;
+    text-align: center;
+}
+
+.ColumnaSupDescripcionI{
+    width: 317px;
+    border-right: 1px solid #000;
+    height: 46px;
+    text-align: center;
+}
+
+.ColumnaSupValorI{
+    width: 88px;
+    border-right: 1px solid #000;
+    height: 46px;
+    text-align: right;
+    padding-right: 2px;
+}
+
+.ColumnaSupDescuentoI{
+    width: 90px;
+    border-right: 1px solid #000;
+    height: 46px;
+    text-align: center;
+}
+
+.ColumnaSupTotalI{
+    width: 108px;
+    height: 46px;
+    text-align: right;
+    padding-right: 2px;
+}
+
+.DivLogo {
+    width: 66%;
+    float: left;
+    border: 1px solid #000;
+    padding: 5px;
+    background: url(images/FondoDocumento.png) !important;
+    height: 100px;
+    margin-bottom: 2px;
+    margin-right: 2px;
+}
+
+.DivDireccion {
+    width: 56%;
+    float: left;
+    border: 0px;
+    padding: 5px;
+    height: 35px;
+    margin-bottom: 2px;
+    margin-top: -48px;
+}
+
+.DivRuc {
+    width: 30%;
+    float: left;
+    border: 1px solid #000;
+    padding: 5px;
+    height: 140px;
+    margin-bottom: 2px;
+}
+
+.DivCabecera {
+    width: 70%;
+    float: left;
+    border: 1px solid #000;
+    padding: 5px;
+}
+
+.DivMotivo {
+    width: 26%;
+    float: left;
+    border: 1px solid #000;
+    padding: 5px;
+}
+
+.DivCuerpo {
+    width: 97.8%;
+    float: left;
+    border: 1px solid #000;
+    padding: 5px;
+}
+
+
+
+.DivFirma {
+    width: 74.8%;
+    float: left;
+    border: 1px solid #000;
+    padding: 5px;
+    margin-top: -35px;
+}
+
+.DivMonto {
+    width: 75%;
+    float: left;
+    border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
+    padding: 5px;
+}
+
+.DivIgv {
+    width: 21.5%;
+    float: left;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    padding: 5px;
+    margin-top: -2px;
+}
+
+
+.divMitad {
+    width: 48%;
+    float: left;
+    padding: 5px;
+}
+
+.DivFirmaAutorizado {
+    width: 48%;
+    float: left;
+    border-top: 1px solid #000;
+    padding: 5px;
+}
+
+.Ruc {
+    font-size: 14px;
+    font-weight: bold;
+    color: #666;
+}
+
+.tablelayoutDetalle td label  {
+    font-size: 11px;
+    font-weight: bold;
+    color: #666;
+}
+
+.tablelayoutDetalle tr input {
+    font-size: 11px;
+    height: 15px;
+    font-family: 'Courier New';
+}
+
+.tablelayoutDetalle td span {
+    font-size: 11px;
+    height: 15px;
+    font-family: 'Courier New';
+}
+
+.tablelayoutCabecera tr input {
+    height: 35px;
+    font-family: 'Courier New';
+}
+
+.tablelayoutTitulo td {
+    font-size: 11px;
+    text-align: center;
+    border-width: 1px;
+    border: 1px solid #000;
+    font-family: 'Courier New';
+}
+
+.TextBoxAsLabel {
+    border: none;
+    background-color: #fff;
+    background: transparent;
+}
+
+.TableMotivoTraslado{
+    font-size: 7px;
+    padding-left: 2px;
+}
+
+.TituloMotivoTraslado{
+    height: 20px;
+    font-size: 11px;
+    width: 215px;
+}
+
+.heightCheckBox
+{
+    height: 10px;
+    text-align: right;
+    padding-right: 1px;
+}
+
+li#base:hover{
+    background: url(../images/areaButton.png) repeat-x;
+    height: 32px;
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+    background-position: left top;
+    position: relative;
+}

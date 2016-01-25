@@ -1,0 +1,91 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutI.cshtml";
+}
+
+<input id="hfIdentificadorDetalle" type="hidden" />
+
+<div id="Msg-EntradaAlmacen">
+    <div class="msgModel" style="display: none">
+        <div class="tips loading">
+            Procesando
+        </div>
+        <div class="tips merror">
+        </div>
+        <div class="tips mexito">
+        </div>
+    </div>
+</div>
+
+<table style="width: 100%" id="tablaActa"></table>
+<div style="width: 100%" id="barraDetalle">
+</div>
+
+<script type='text/javascript' id="ListarProducto">
+    var grillaActas = 'tablaActa';
+
+    var ListaTodos = new Array();
+    var idEditar = 0;
+
+    $(document).ready(function () {
+        ListarActa();
+    });
+
+    function Agregar() {
+        window.location.href = '@Url.Action("Edit", "ActaRecepcion", new { Area = "ActaRecepcion" })';
+    }
+
+    function Exportar() {
+        SIG.Ajax({
+            url: '@Url.Action("StimulsoftControl", "BaseControlReport", new { area = "" })',
+            parametros: {
+                Parameters: 1,
+                Controller: "Anteproyecto"
+            },
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            datatype: 'html'
+        }, function (result) {
+            $("#divExportar .modal-body").html(result);
+            $("#divExportar").modal("show");
+        });
+    }
+
+    function ListarActa() {
+        var colNames = ['Id', 'Número Pedido de Orden', 'Serie Guia de Remisión', 'Tipo de Acta'];
+        var colModels = [
+            { name: 'Id', index: 'Id', align: 'center', hidden: true, width: 80 },
+            { name: 'NumeroPedido', index: 'NumeroPedido', align: 'center', width: 100 },
+            { name: 'SerieGuia', index: 'SerieGuia', align: 'center', width: 120 },
+            { name: 'TipoActa', index: 'TipoActa', align: 'center', width: 120 }
+        ];
+
+        var opciones = {
+            nuevo: true,
+            editar: true,
+            eliminar: false,
+            search: false,
+            refresh: false,
+            nuevoCaption: 'Agregar',
+            NuevoCommand: Agregar,
+            EditarCommand: Exportar,
+            editarCaption: 'Exportar',
+            eliminarCaption: 'Eliminar',
+            mensaje: 'Seleccione un registro',
+            sinRegistro: 'Sin registro',
+            alertTitle: 'Alerta',
+            caption: 'Listado de Acta de Recepción',
+            urlListar: '@Url.Action("Listar", "ActaRecepcion", new { area = "ActaRecepcion" })',
+            grilla: grillaActas,
+            pager: 'barraDetalle',
+            identificador: 'hfIdentificadorDetalle',
+            height: 210,
+            width: 'auto',
+            id: 'id',
+            colsNames: colNames,
+            colsModel: colModels,
+            sortName: 'Id'
+        };
+
+        SIG.GrillaUpgrade(opciones);
+    }
+
+</script>
