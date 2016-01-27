@@ -37,11 +37,11 @@
 
                 if (data.Success) {
                     
-                    if (data.Object.length == 0)
+                    /*if (data.Object.length == 0)
                     {
                         bootbox.alert("No Hay Ordenes de Preparado para el criterio de búsqueda");
                         return;
-                    }
+                    }*/
 
                     var html = "";
 

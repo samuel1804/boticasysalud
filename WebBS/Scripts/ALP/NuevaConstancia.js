@@ -5,6 +5,9 @@
     function GuardarConstancia() {
         var arrInsumos = new Array();
 
+        var tmpCodInsumo = "";
+        var isValid = true;
+
         $("#tbConstanciaInsumoContent tr").each(function (index, value) {
             var row = $(value);
             var tds = row.find("td");
@@ -18,8 +21,20 @@
             var cantConstancia = cantidad;
             var cantDiferencia = $.trim($(tds[5]).text());
 
+            if (cantConstancia < cantOrden) {
+                tmpCodInsumo = codInsumo;
+                isValid = false;
+                return false;
+            }
+
             arrInsumos.push(codInsumo + "|" + cantOrden + "|" + cantConstancia + "|" + cantDiferencia);
         });
+
+        if (!isValid)
+        {
+            bootbox.alert("La cantidad real no puede ser menor a la cantidad solicitada del insumo : " + tmpCodInsumo);
+            return;
+        }
 
         var nroOrden = $("#txtNroOrden").val();
 
