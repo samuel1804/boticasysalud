@@ -34,7 +34,7 @@ namespace WebBS.Models
         [Required(ErrorMessage = "Ingrese Apellido Materno")]
         public string ApellidoMaterno { get; set; }
         [Required(ErrorMessage = "Ingrese DNI")]
-        [StringLength(8,MinimumLength=8, ErrorMessage = "DNI debe tener 8 Dígitos")]
+        [StringLength(8, MinimumLength = 8, ErrorMessage = "DNI debe tener 8 Dígitos")]
         public string DNI { get; set; }
 
         public string Telefono { get; set; }

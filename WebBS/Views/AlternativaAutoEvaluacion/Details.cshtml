@@ -1,0 +1,83 @@
+﻿@model WebBS.Models.RRH_AlternativaAutoevaluacion
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RRH_AlternativaAutoevaluacion</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Respuesta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Respuesta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_creacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_creacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cod_usu_regi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cod_usu_regi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_usu_regi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_usu_regi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cod_usu_modi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cod_usu_modi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_usu_modi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_usu_modi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cod_criterio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cod_criterio)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Cod_alternativa_autoevaluacion }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
