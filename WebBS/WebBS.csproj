@@ -213,6 +213,8 @@
     <Compile Include="Controllers\NotaIngresoController.cs" />
     <Compile Include="Controllers\OfertaLaboralController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
+    <Compile Include="Controllers\PruebaAutoevaluacionController.cs" />
+    <Compile Include="DTO\AlternativaAutoevaluacionDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -562,6 +564,11 @@
     <Content Include="Views\AlternativaAutoEvaluacion\Details.cshtml" />
     <Content Include="Views\AlternativaAutoEvaluacion\Edit.cshtml" />
     <Content Include="Views\AlternativaAutoEvaluacion\Index.cshtml" />
+    <Content Include="Views\PruebaAutoevaluacion\Create.cshtml" />
+    <Content Include="Views\PruebaAutoevaluacion\Delete.cshtml" />
+    <Content Include="Views\PruebaAutoevaluacion\Details.cshtml" />
+    <Content Include="Views\PruebaAutoevaluacion\Edit.cshtml" />
+    <Content Include="Views\PruebaAutoevaluacion\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

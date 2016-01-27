@@ -1,0 +1,76 @@
+﻿@model IEnumerable<WebBS.Models.RRH_PruebaAutoevaluacion>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fec_evaluacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VersionEvaluacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cod_usu_regi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fec_usu_regi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cod_usu_modi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fec_usu_modi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PuntajeTotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RRH_Empleado.Nom_empleado)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fec_evaluacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VersionEvaluacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cod_usu_regi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fec_usu_regi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cod_usu_modi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fec_usu_modi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PuntajeTotal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RRH_Empleado.Nom_empleado)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Cod_autoevaluacion }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Cod_autoevaluacion }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Cod_autoevaluacion })
+        </td>
+    </tr>
+}
+
+</table>

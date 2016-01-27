@@ -1,101 +1,100 @@
 ﻿@model WebBS.Models.RRH_AlternativaAutoevaluacion
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Elaborar AutoEvaluación";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<h2>Elaborar AutoEvaluación</h2>
 
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>RRH_AlternativaAutoevaluacion</h4>
+        
         <hr />
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Cod_alternativa_autoevaluacion, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Cod_alternativa_autoevaluacion)
-                @Html.ValidationMessageFor(model => model.Cod_alternativa_autoevaluacion)
+            @Html.LabelFor(model => model.Cod_criterio,"Criterio", new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+
+                @Html.DropDownListFor(model => model.Cod_criterio, @ViewBag.Cod_criterio as SelectList, "Seleccione", new { @class = "form-control" })
+
+                @Html.ValidationMessageFor(model => model.Cod_criterio, "", new { @class = "text-danger" })
+
+
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Respuesta, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Respuesta)
-                @Html.ValidationMessageFor(model => model.Respuesta)
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Respuesta, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Respuesta, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Valor, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Valor)
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Valor)
+
+                
             </div>
+
+            <input id="add" type="button" value="Agregar" class="btn btn-default" />
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Fec_creacion, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Fec_creacion)
-                @Html.ValidationMessageFor(model => model.Fec_creacion)
-            </div>
-        </div>
+        <fieldset>
+            <div class="panel panel-default">
+                <!-- Table -->
+                <div id="orderItems" class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th width="0%" hidden="hidden"></th>
+                                <th>Criterio</th>
+                                <th>Respuesta</th>
+                                <th>Valor</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                       @foreach (var i in ViewBag.Alternativas) { 
+                            <tr>
+                                <td class="cod_alternativa" width="0px" hidden="hidden">@i.Cod_alternativa_autoevaluacion</td>
+                                <td>@i.Desc_criterio</td>
+                                <td>@i.Respuesta</td>
+                                <td>@i.Valor</td>
+                                <td width="5%"><a href="#" class="delete" data-id="@i.Cod_alternativa_autoevaluacion" title="">
+    <i class="glyphicon glyphicon-remove"></i>
+</a></td>
+                                
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Cod_usu_regi, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Cod_usu_regi)
-                @Html.ValidationMessageFor(model => model.Cod_usu_regi)
-            </div>
-        </div>
+                            </tr>
+                       }
+                            
+                              
+                            
+                       
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Fec_usu_regi, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Fec_usu_regi)
-                @Html.ValidationMessageFor(model => model.Fec_usu_regi)
+                    </table>
+                </div>
             </div>
-        </div>
+        </fieldset>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Cod_usu_modi, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Cod_usu_modi)
-                @Html.ValidationMessageFor(model => model.Cod_usu_modi)
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Fec_usu_modi, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Fec_usu_modi)
-                @Html.ValidationMessageFor(model => model.Fec_usu_modi)
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Cod_criterio, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Cod_criterio)
-                @Html.ValidationMessageFor(model => model.Cod_criterio)
-            </div>
-        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input id="submit" type="button" value="Grabar AutoEvaluación" class="btn btn-default" />
             </div>
         </div>
+
+
     </div>
-}
+
 
 <div>
     @Html.ActionLink("Back to List", "Index")
@@ -103,4 +102,159 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            var orderItems = [];
+            var ItemsDeleted=[];
+
+
+
+            var array = @Html.Raw(Json.Encode(@ViewBag.Alternativas));
+for(var i = 0; i < array.length; i++) {
+    orderItems[i] = array[i];
+}
+
+
+clickeliminar=function() {
+    alert('sa');
+    var storeId = $(this).closest('tr').find('td:first').text();
+
+    var tr = $(this).closest('tr');
+    tr.remove();
+    
+    ItemsDeleted.push({
+        Cod_alternativa_autoevaluacion: storeId,
+        Cod_criterio: 0,
+        cod_operacion: 2,
+        Desc_criterio: "",
+        Respuesta: "",
+        Valor: 0
+    });
+
+    orderItems.splice(tr,1);
+}
+$('.delete').click(clickeliminar);
+
+
+
+            //Add button click function
+            $('#add').click(function () {
+                //Check validation of order item
+                var isValidItem = true;
+
+
+
+
+                //Add item to list if valid
+                if (isValidItem) {
+                    orderItems.push({
+                        Cod_alternativa_autoevaluacion: 0,
+                        Cod_criterio: parseInt($('#Cod_criterio').val()),
+                        cod_operacion: 1,
+                        Desc_criterio: $('#Cod_criterio option:selected').text(),
+                        Respuesta: $('#Respuesta').val(),
+                        Valor: parseInt($('#Valor').val())
+                    });
+                    
+
+                    //Clear fields
+                    $('#Respuesta').val('').focus();
+                    $('#Cod_criterio,#Valor').val('');
+
+                }
+                //populate order items
+                GeneratedItemsTable();
+
+            });
+            //Save button click function
+            $('#submit').click(function () {
+                //validation of order
+                var isAllValid = true;
+                if (orderItems.length == 0) {
+                    $('#orderItems').html('<span style="color:red;">Ingrese preguntas para la Autoevaluación</span>');
+
+                }
+
+                
+
+                orderItems=$.merge(orderItems,ItemsDeleted);
+
+
+                //Save if valid
+
+                    var data = {
+                        //Cod_criterio: $('#Cod_criterio').val().trim(),
+                        //Respuesta: $('#Respuesta').val().trim(),
+                        //Sorry forgot to add Description Field
+                        //Valor: $('#Valor').val().trim(),
+                        OrderDetails: orderItems
+                    }
+
+                    $(this).val('Por favor espere...');
+
+                    $.ajax({
+                        url: '/AlternativaAutoEvaluacion/SaveOrder',
+                        type: "POST",
+                        data: JSON.stringify(data),
+                        dataType: "JSON",
+                        contentType: "application/json",
+                        success: function (d) {
+                            //check is successfully save to database
+                            if (d.status == true) {
+                                //will send status from server side
+                                alert('Autoevaluación Registrada.');
+                                //clear form
+                                //orderItems = [];
+                                $('#Cod_criterio').val('');
+                                $('#Respuesta').val('');
+                                $('#Valor').val('');
+                            }
+                            else {
+                                alert('Error');
+                            }
+                            $('#submit').val('Grabar Autoevaluación');
+                        },
+                        error: function () {
+                            alert('Error. Por favor intente de nuevo.');
+                            $('#submit').val('Grabar Autoevaluación');
+                        }
+                    });
+
+
+            });
+            //function for show added items in table
+            function GeneratedItemsTable() {
+                if (orderItems.length > 0) {
+                    var $table = $('<table class="table table-striped table-bordered table-hover"/>');
+                    $table.append('<thead><tr><th hidden="hidden"></th><th>Criterio</th><th>Respuesta</th><th>Valor</th><th>Eliminar</th></tr></thead>');
+                    var $tbody = $('<tbody/>');
+                    $.each(orderItems, function (i, val) {
+                        var $row = $('<tr/>');
+                        
+                        $row.append($('<td class="cod_alternativa" width="0px" hidden="hidden">'+val.Cod_alternativa_autoevaluacion+'</td>'));
+                        $row.append($('<td/>').html(val.Desc_criterio));
+                        $row.append($('<td/>').html(val.Respuesta));
+                        $row.append($('<td/>').html(val.Valor));
+                        $row.append($('<td width="5%"><a href="#" onclick="clickeliminar();" class="delete" data-id="'+val.Cod_alternativa_autoevaluacion+'" title=""><i class="glyphicon glyphicon-remove"></i></a></td>'));
+
+
+                        $tbody.append($row);
+                    });
+                    $table.append($tbody);
+                    $('#orderItems').html($table);
+                }
+            }
+        });
+
+
+
+    </script>
+
+
+
 }

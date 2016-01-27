@@ -15,6 +15,7 @@ namespace WebBS.Controllers
     {
         private BDBoticasEntities db = new BDBoticasEntities();
        public List<RRH_GradoAcademico> Grados = new List<RRH_GradoAcademico>();
+      
         // GET: /Candidato/
         public ActionResult Index()
         {
@@ -44,15 +45,20 @@ namespace WebBS.Controllers
             Ga.Especialidad="sa";
             Ga.CentroEstudios="centro es";
             Grados.Add(Ga);
-            ViewBag.Grados = Grados;
+            ViewData["Grados"] = Grados;
             //ViewBag.Grados = db.RRH_GradoAcademico.ToList();
             //ViewBag.IdPuesto = new SelectList(db.Puesto, "IdPuesto", "Nombre");
             return View();
+        
         }
 
 
         public ActionResult AdicionarGrado()
         {
+
+            var value = ViewData["Grados"];
+            
+
             if (Request.IsAjaxRequest())
             {
                 RRH_GradoAcademico cust = new RRH_GradoAcademico();
