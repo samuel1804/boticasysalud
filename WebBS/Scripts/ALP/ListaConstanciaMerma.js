@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    
+
     var now = new Date();
 
     var day = ("0" + now.getDate()).slice(-2);
@@ -7,26 +7,26 @@
 
     var today = now.getFullYear() + "-" + (month) + "-" + (day);
 
-    $('#txtFecOrden').val(today);
+    $('#txtFecConstancia').val(today);
 
-    $("#btnBuscar").on("click", BuscarOrden);
+    $("#btnBuscar").on("click", BuscarConstancia);
 
-    BuscarOrden();
+    BuscarConstancia();
 
-    function BuscarOrden() {
-        
-        var nroOrden = $("#txtNroOrden").val();
-        var fechaOrden = $("#txtFecOrden").val();
+    function BuscarConstancia() {
+
+        var nroConstancia = $("#txtNroConstancia").val();
+        var fechaConstancia = $("#txtFecConstancia").val();
         var nomPreparado = $("#txtNomPreparado").val();
         var sucursal = parseInt($("#selSucursal").val());
 
-        var params = { nroOrden: nroOrden, fechaOrden: fechaOrden, nomPreparado: nomPreparado, sucursal: sucursal };
+        var params = { nroConstancia: nroConstancia, fechaConstancia: fechaConstancia, nomPreparado: nomPreparado, sucursal: sucursal };
 
         var data = JSON.stringify(params);
 
         $.ajax({
             type: "POST",
-            url: "/OrdenPreparado/BuscarOrden",
+            url: "/Constancia/BuscarConstancia",
             data: data,
             contentType: "application/json; charset=utf-8",
             DataType: "json",
@@ -37,20 +37,23 @@
 
                 if (data.Success) {
 
+                    if (data.Object.length == 0)
+                        bootbox.alert("No hay constancias para el criterio de búsqueda");
+
                     var html = "";
 
                     $.each(data.Object, function (index, value) {
                         html += "<tr>";
-                        html += "<td>" + value.nroOrden + "</td>";
-                        html += "<td>" + value.fechaOrden + "</td>";
+                        html += "<td>" + value.nroConstancia + "</td>";
+                        html += "<td>" + value.fechaConstancia + "</td>";
                         html += "<td>" + value.sucursal + "</td>";
                         html += "<td>" + value.nomPreparado + "</td>";
-                        html += "<td><a href='../Constancia/Nuevo?num_orden=" + value.nroOrden + "'>Nueva Constancia</a></td>";
+                        html += "<td><a href='../ControlMerma/Nuevo?num_constancia=" + value.nroConstancia + "'>Registrar Merma</a></td>";
                         html += "<tr>";
                     });
 
-                    $("#tbOrdenContent").html(html);
-                                        
+                    $("#tbConstanciaContent").html(html);
+
                 }
 
             }
