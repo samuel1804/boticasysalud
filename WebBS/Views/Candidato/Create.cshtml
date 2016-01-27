@@ -129,7 +129,7 @@
 
                                 </tr>
                             </thead>
-                            @if (ViewBag.Grados == null) {
+                            @if (Model.RRH_GradoAcademico.ToList() == null) {
                                 <tr>
                                     <td>
                                    
@@ -151,7 +151,7 @@
  }
                             else
                             {
-                                foreach (var item in ViewBag.Grados)
+                                foreach (var item in Model.RRH_GradoAcademico.ToList())
                                 {                         
                                 <tr>
                                     <td>
