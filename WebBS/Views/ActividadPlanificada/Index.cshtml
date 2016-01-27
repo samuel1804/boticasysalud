@@ -1,7 +1,9 @@
-﻿@model IEnumerable<WebBS.Models.IMP_ACTIVIDAD_PLANIFICADA>
+﻿@using WebBS.Implement;
+@model IEnumerable<WebBS.Models.IMP_ACTIVIDAD_PLANIFICADA>
 
 @{
     ViewBag.Title = "Actividades Planificadas";
+    
 }
 
 <h3>Actividades Planificadas Asignadas</h3>
@@ -72,13 +74,13 @@
                     @Html.DisplayFor(modelItem => item.Titulo)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Fec_cierre_planificacion)
+                    @item.Fec_cierre_planificacion.ToString("dd/MM/yyyy")
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Estado)
+                    @Html.Raw(TablaDefinicion.ObtenerValor(item.Estado, TablaDefinicion.EstadoActividadPlanificada))
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Prioridad)
+                    @Html.Raw(TablaDefinicion.ObtenerValor(item.Prioridad, TablaDefinicion.Prioridad))
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Observacion)
@@ -89,7 +91,7 @@
                 <td>
                     @if (item.Cod_actividad_planificada_predecesora.HasValue)
                     {
-                        if (item.IMP_ACTIVIDAD_PLANIFICADA2.Estado == "C")
+                        if (item.IMP_ACTIVIDAD_PLANIFICADA2.Estado == DatosConstantes.EstadoActividadPlanificada.Cerrado)
                         {
                             <a class="control-table text-center" href="@Url.Action("Index", "BitacoraActividadPlanificada",new  { Id=item.Cod_actividad_planificada })">
 

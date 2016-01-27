@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebBS.Models;
+using WebBS.Implement;
 
 namespace WebBS.Controllers
 {
@@ -19,7 +20,7 @@ namespace WebBS.Controllers
         public async Task<ActionResult> Index()
         {
             var iMP_ACTIVIDAD_PLANIFICADA = db.IMP_ACTIVIDAD_PLANIFICADA.Include(i => i.IMP_ACTIVIDAD).Include(i => i.IMP_SOLICITUD_GESTION_PERMISO).Include(i => i.RRH_Empleado);
-            var result = await iMP_ACTIVIDAD_PLANIFICADA.OrderBy(a=> a.Cod_solicitud_gestion_permiso).ThenBy(a=> a.Fec_cierre_planificacion).ToListAsync();
+            var result = await iMP_ACTIVIDAD_PLANIFICADA.Where(a=>a.Estado != DatosConstantes.EstadoActividadPlanificada.Cerrado).OrderBy(a=> a.Cod_solicitud_gestion_permiso).ThenBy(a=> a.Fec_cierre_planificacion).ToListAsync();
             return View(result);
         }
 

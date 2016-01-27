@@ -2,20 +2,36 @@
 
 @{
     ViewBag.Title = "Details";
+    WebBS.Models.IMP_ACTIVIDAD_PLANIFICADA iMP_ACTIVIDAD_PLANIFICADA = (WebBS.Models.IMP_ACTIVIDAD_PLANIFICADA)TempData["ActividadPlanificada"];
 }
 
-<h2>Details</h2>
-
+<h2>Detalle de Acción</h2>
+<div id="divMensajeInformativo">
+    <span class="fa fa-info-circle"></span>
+    <span id="lblMensajeInformativo">Datos completos de la acción.</span>
+</div>
+<hr />
 <div>
-    <h4>IMP_ACCION</h4>
+    <h4>Actividad</h4>
+    <table class="table-bordered">
+        <tr class="rowGroup" data-toggle="collapse" data-target="#Panel_@iMP_ACTIVIDAD_PLANIFICADA.Cod_solicitud_gestion_permiso">
+            <td>
+                <h4>Tipo : @iMP_ACTIVIDAD_PLANIFICADA.IMP_ACTIVIDAD.IMP_TIPO_ACTIVIDAD.Nombre</h4>
+                <h5>Actividad : @iMP_ACTIVIDAD_PLANIFICADA.Titulo</h5>
+                <p>Fecha cierre planificado: @iMP_ACTIVIDAD_PLANIFICADA.Fec_cierre_planificacion.ToString("dd/MM/yyyy")</p>
+            </td>
+        </tr>
+    </table>
     <hr />
     <dl class="dl-horizontal">
+
+
         <dt>
-            @Html.DisplayNameFor(model => model.Fec_accion)
+            Fecha de acción
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Fec_accion)
+            @Html.Raw(Model.Fec_accion.ToString("dd/MM/yyyy"))
         </dd>
 
         <dt>
@@ -23,7 +39,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Evidencia)
+            <a href="@Url.Content(Model.Evidencia)" class="control-table text-center" target="_blank"><i class="fa fa-file-archive-o"></i></a>
         </dd>
 
         <dt>
@@ -31,52 +47,28 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Observaciones)
+            <p> @Html.DisplayFor(model => model.Observaciones)</p>
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.Cod_usu_regi)
+            Fecha de Registro
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Cod_usu_regi)
+            @Html.Raw(Model.Fec_usu_regi.ToString("dd/MM/yyyy"))
         </dd>
+        @if (Model.Fec_usu_modi.HasValue)
+        {
+            <dt>
+                Fecha de última modificación
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Fec_usu_regi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Fec_usu_regi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Cod_usu_modi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Cod_usu_modi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Fec_usu_modi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Fec_usu_modi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IMP_ACTIVIDAD_PLANIFICADA.Observacion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IMP_ACTIVIDAD_PLANIFICADA.Observacion)
-        </dd>
-
+            <dd>
+                @Html.Raw(Model.Fec_usu_modi.Value.ToString("dd/MM/yyyy"))
+            </dd>
+        }
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Cod_accion }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a id="btnCancelar" class="btn btn-primary" href="@Url.Action("Edit", "BitacoraActividadPlanificada",new  { Id=Model.Cod_accion })">Editar</a>
+    <a id="btnCancelar" class="btn btn-default" href="@Url.Action("Index", "BitacoraActividadPlanificada",new  { Id=Model.Cod_actividad_planificada })">Cancelar</a>
 </p>

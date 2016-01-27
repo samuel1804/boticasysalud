@@ -15,7 +15,8 @@ namespace WebBS.App_Start
           "~/Scripts/Dialog/Dialog.css",
           "~/Scripts/Message/Message.css",
           "~/Scripts/ProgressBar/ProgressBar.css",
-          "~/Scripts/jquery-ui-1.10.4.custom.css"));
+          "~/Scripts/jquery-ui-1.10.4.custom.css",
+          "~/Scripts/File/css/fileinput.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.min.js"));
@@ -28,7 +29,9 @@ namespace WebBS.App_Start
                      "~/Scripts/ProgressBar/ProgressBar.js",
                      "~/Scripts/Ajax/Ajax.js",
                       "~/Scripts/jquery.mask.min.js",
-                      "~/Scripts/Util.js"));
+                      "~/Scripts/Util.js",
+                      "~/Scripts/validator.js",
+                      "~/Scripts/File/js/fileinput.js"));
         }
     }
 }

@@ -185,6 +185,13 @@
     <Content Include="Scripts\Dialog\Dialog.js" />
     <Content Include="Scripts\Dialog\Img\fancybox_overlay.png" />
     <Content Include="Scripts\Dialog\Img\fancybox_sprite.png" />
+    <Content Include="Scripts\File\css\fileinput.css" />
+    <Content Include="Scripts\File\css\fileinput.min.css" />
+    <Content Include="Scripts\File\js\fileinput.js" />
+    <Content Include="Scripts\File\js\fileinput.min.js" />
+    <Content Include="Scripts\File\js\fileinput_locale_es.js" />
+    <Content Include="Scripts\File\js\plugins\canvas-to-blob.js" />
+    <Content Include="Scripts\File\js\plugins\canvas-to-blob.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -206,6 +213,7 @@
     <Content Include="Scripts\toastr\toastr.min.css" />
     <Content Include="Scripts\toastr\toastr.min.js" />
     <Content Include="Scripts\Util.js" />
+    <Content Include="Scripts\validator.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -229,6 +237,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Implement\CodigoValor.cs" />
+    <Compile Include="Implement\DatosConstantes.cs" />
+    <Compile Include="Implement\TablaDefinicion.cs" />
     <Compile Include="Models\ALP_CONSTANCIA_PREPARADO.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
@@ -573,6 +584,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Evidencias\" />
     <Folder Include="Scripts\images\" />
   </ItemGroup>
   <ItemGroup>

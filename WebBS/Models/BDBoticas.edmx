@@ -482,7 +482,7 @@
           <Key>
             <PropertyRef Name="Cod_accion" />
           </Key>
-          <Property Name="Cod_accion" Type="int" Nullable="false" />
+          <Property Name="Cod_accion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Fec_accion" Type="datetime" Nullable="false" />
           <Property Name="Evidencia" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Observaciones" Type="varchar" MaxLength="150" Nullable="false" />

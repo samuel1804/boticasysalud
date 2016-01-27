@@ -30,7 +30,7 @@ Pe.GMD.UI.Web.Components.Message.prototype = {
         opts.title = '<strong>' + opts.title + ' : </strong>'
         opts.message = opts.title + opts.message;
         opts.message = '<div class="alert alert-success">' + opts.message + '</div>';
-        opts.modal = false;
+        opts.modal = true;
         opts.minWidth = 550;
         opts.minHeight = 60;
         this._privateFunction.show.apply(this, [opts]);

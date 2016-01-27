@@ -358,11 +358,15 @@ small.text-muted {
 
 
 .table-bordered .rowGroup {
-    background-color:#0090D7;
-    color:#ffffff !important;
+    background-color: #0090D7;
+    color: #ffffff !important;
 }
 
-.table-bordered .rowGroup .fa{
-    background-color:#0090D7;
-    color:#ffffff !important;
+    .table-bordered .rowGroup .fa {
+        background-color: #0090D7;
+        color: #ffffff !important;
+    }
+
+.file-caption {
+    z-index: 1 !important;
 }
