@@ -178,7 +178,11 @@
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ALP\IndexConstancia.js" />
+    <Content Include="Scripts\ALP\ListaConstancia.js" />
+    <Content Include="Scripts\ALP\ListaConstanciaMerma.js" />
+    <Content Include="Scripts\ALP\ModificarConstancia.js" />
     <Content Include="Scripts\ALP\NuevaConstancia.js" />
+    <Content Include="Scripts\ALP\NuevoControlMerma.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -206,6 +210,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ActividadPlanificadaController.cs" />
     <Compile Include="Controllers\ALP\ConstanciaController.cs" />
+    <Compile Include="Controllers\ALP\ControlMermaController.cs" />
     <Compile Include="Controllers\ALP\OrdenPreparadoController.cs" />
     <Compile Include="Controllers\ChoferController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -549,6 +554,10 @@
     <Content Include="Views\ActividadPlanificada\Index.cshtml" />
     <Content Include="Views\ALP\Constancia\Index.cshtml" />
     <Content Include="Views\ALP\Constancia\Nuevo.cshtml" />
+    <Content Include="Views\ALP\Constancia\Lista.cshtml" />
+    <Content Include="Views\ALP\Constancia\Modificar.cshtml" />
+    <Content Include="Views\ALP\ControlMerma\Lista.cshtml" />
+    <Content Include="Views\ALP\ControlMerma\Nuevo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

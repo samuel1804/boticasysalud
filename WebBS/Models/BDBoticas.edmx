@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BDBoticasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BDBoticasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ALP_CONSTANCIA_PREPARADO">
           <Key>
             <PropertyRef Name="num_constancia_preparado" />
@@ -17,6 +17,7 @@
           <Property Name="fec_usu_regi" Type="date" Nullable="false" />
           <Property Name="cod_usu_modi" Type="int" />
           <Property Name="fec_usu_modi" Type="date" />
+          <Property Name="motivo" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="ALP_CONSTANCIA_PREPARADO_INSUMO">
           <Key>
@@ -3140,8 +3141,7 @@
             <End Role="RYA_UBICACIONES" EntitySet="RYA_UBICACIONES" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BDBoticasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -3161,6 +3161,7 @@
           <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="Self.FK__ALP_CONST__num_o__3F115E1A" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_ORDEN_PREPARADO" />
           <NavigationProperty Name="ALP_HOJA_MERMA" Relationship="Self.FK__ALP_HOJA___num_c__40058253" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_HOJA_MERMA" />
           <NavigationProperty Name="ALP_LIBRO_RECETA" Relationship="Self.FK__ALP_LIBRO__num_c__41EDCAC5" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_LIBRO_RECETA" />
+          <Property Name="motivo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ALP_CONSTANCIA_PREPARADO_INSUMO">
           <Key>
@@ -6495,6 +6496,7 @@
           <EntitySetMapping Name="ALP_CONSTANCIA_PREPARADO">
             <EntityTypeMapping TypeName="BDBoticasModel.ALP_CONSTANCIA_PREPARADO">
               <MappingFragment StoreEntitySet="ALP_CONSTANCIA_PREPARADO">
+                <ScalarProperty Name="motivo" ColumnName="motivo" />
                 <ScalarProperty Name="num_constancia_preparado" ColumnName="num_constancia_preparado" />
                 <ScalarProperty Name="num_orden_preparado" ColumnName="num_orden_preparado" />
                 <ScalarProperty Name="fec_elaboracion" ColumnName="fec_elaboracion" />

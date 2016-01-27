@@ -20,6 +20,18 @@ namespace WebBS.App_Start
 
             bundles.Add(new ScriptBundle("~/bundles/IndexConstancia").Include(
                         "~/Scripts/ALP/IndexConstancia.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ListaConstancia").Include(
+                        "~/Scripts/ALP/ListaConstancia.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ListaConstanciaMerma").Include(
+                        "~/Scripts/ALP/ListaConstanciaMerma.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ModificarConstancia").Include(
+                        "~/Scripts/ALP/ModificarConstancia.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/NuevoControlMerma").Include(
+                        "~/Scripts/ALP/NuevoControlMerma.js"));
         }
     }
 }
