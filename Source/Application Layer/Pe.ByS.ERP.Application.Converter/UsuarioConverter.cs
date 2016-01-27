@@ -13,8 +13,7 @@ namespace Pe.ByS.ERP.Application.Converter
                 Nombre = usuario.Nombre,
                 Apellido = usuario.Apellido,
                 Username = usuario.Username,
-                Email = usuario.Email,
-                Estado = usuario.Estado
+                Email = usuario.Email
             };
         }
 
@@ -26,7 +25,6 @@ namespace Pe.ByS.ERP.Application.Converter
             {
                 Nombre = usuario.Nombre,
                 Apellido = usuario.Apellido,
-                Estado = usuario.Estado,
                 Password = guid
             };
         }

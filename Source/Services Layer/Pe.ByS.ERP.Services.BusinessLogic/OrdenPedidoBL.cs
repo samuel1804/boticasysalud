@@ -24,7 +24,6 @@ namespace Pe.ByS.ERP.Services.BusinessLogic
         [TryCatch(ExceptionTypeExpected = typeof(Exception), RethrowException = true)]
         public OrdenPedido Get(Expression<Func<OrdenPedido, bool>> where)
         {
-            where = where.And(p => p.Estado == (int) TipoEstado.Activo);
             return _ordenRepository.FindOne(where);
         }
 

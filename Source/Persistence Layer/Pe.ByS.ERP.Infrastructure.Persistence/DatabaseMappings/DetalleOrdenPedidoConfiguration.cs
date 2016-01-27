@@ -13,7 +13,9 @@ namespace Pe.ByS.ERP.Infrastructure.Persistence.DatabaseMappings
             Property(p => p.OrdenPedidoId).HasColumnName("NumPedido");
             Property(p => p.Cantidad).HasColumnName("Cant");
             Property(p => p.UnidadMedida).HasMaxLength(3);
-            Property(p => p.Lote).IsRequired().HasMaxLength(15);
+            Property(p => p.CantidadAprobada).HasColumnName("Cant_Aprob");
+            Property(p => p.CantidadAtendida).HasColumnName("Cant_Atendida");
+            Property(p => p.Observacion).HasMaxLength(120).HasColumnName("Obs");
 
             HasRequired(p => p.Producto).WithMany().HasForeignKey(p => p.ProductoId);
             HasRequired(p => p.OrdenPedido).WithMany(p => p.DetalleOrdenPedidoList).HasForeignKey(p => p.OrdenPedidoId);

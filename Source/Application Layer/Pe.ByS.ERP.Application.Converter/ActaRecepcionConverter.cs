@@ -12,7 +12,7 @@ namespace Pe.ByS.ERP.Application.Converter
     {
         public static ActaRecepcionDto DataInicial(List<Sucursal> sucursalList)
         {
-            var list = sucursalList.ConvertAll(p => new KeyValuePair<string, string>(p.Id.ToString(), p.Descripcion));
+            var list = sucursalList.ConvertAll(p => new KeyValuePair<string, string>(p.Id.ToString(), p.Nombre));
             list.Insert(0, new KeyValuePair<string, string>("", "-- Seleccionar --"));
 
             return new ActaRecepcionDto
@@ -34,15 +34,16 @@ namespace Pe.ByS.ERP.Application.Converter
             return new ActaRecepcion
             {
                 OrdenPedidoId = acta.OrdenPedidoId,
+                NumGuia = acta.NumeroGuia,
                 Glosa = acta.Glosa,
                 AlmacenId = acta.AlmacenId,
-                FecActa = DateTime.Now,
+                FechaActa = DateTime.Now,
+                FechaGuia = Convert.ToDateTime(acta.FechaGuia),
                 VerificadorId = acta.VerificadorId,
                 DetalleActaRecepcion = acta.DetalleList.Select(p => new DetalleActaRecepcion
                 {
                     Cantidad = p.CantidadRecepcionada,
                     ProductoId = p.ProductoId,
-                    Estado = (int) TipoEstado.Activo,
                     Lote = p.Lote,
                     UsuarioCreacion = "Administrador",
                     Diferencia = p.Saldo,
@@ -50,8 +51,7 @@ namespace Pe.ByS.ERP.Application.Converter
                     FechaCreacion = DateTime.Now
                 }).ToList(),
                 UsuarioCreacion = "Aministrador",
-                FechaCreacion = DateTime.Now,
-                Estado = (int) TipoEstado.Activo
+                FechaCreacion = DateTime.Now
             };
         }
     }

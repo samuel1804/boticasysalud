@@ -14,8 +14,8 @@ namespace Pe.ByS.ERP.Application.Converter
                 Id = p.Id,
                 ProductoId = p.ProductoId,
                 Cantidad = p.Cantidad,
-                ArticuloNombre = p.Producto.Nombre,
-                ArticuloUnidad = p.Producto.UnidadMedida,
+                ProductoNombre = p.Producto.Nombre,
+                UnidadMedida = p.UnidadMedida,
                 OrdenPedidoId = p.OrdenPedidoId,
                 NumeroPedido = p.OrdenPedido.NumeroPedido
             }).ToList();

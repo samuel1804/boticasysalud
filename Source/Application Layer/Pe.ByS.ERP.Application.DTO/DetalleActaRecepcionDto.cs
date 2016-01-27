@@ -2,7 +2,7 @@
 {
     public class DetalleActaRecepcionDto
     {
-        public string ProductoId { get; set; }
+        public int ProductoId { get; set; }
         public string Lote { get; set; }
         public int CantidadRecepcionada { get; set; }
         public int Saldo { get; set; }

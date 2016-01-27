@@ -30,7 +30,6 @@ namespace Pe.ByS.ERP.Services.BusinessLogic
         [TryCatch(ExceptionTypeExpected = typeof(Exception), RethrowException = true)]
         public IQueryable<Sucursal> FindAll(Expression<Func<Sucursal, bool>> where)
         {
-            where = where.And(p => p.Estado == (int) TipoEstado.Activo);
             return _sucursalRepository.FindAll(where);
         }
 

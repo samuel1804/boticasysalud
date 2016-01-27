@@ -8,11 +8,12 @@ namespace Pe.ByS.ERP.Domain
     {
         public string NumeroPedido { get; set; }
         public DateTime FechaPedido { get; set; }
-        public int EstadoPedido { get; set; }
+        public string Estado { get; set; }
         public int SolicitanteId { get; set; }
         public int SucursalId { get; set; }
         public string Glosa { get; set; }
 
+        public virtual Empleado Solicitante { get; set; }
         public virtual Sucursal Sucursal { get; set; }
         public virtual ICollection<DetalleOrdenPedido> DetalleOrdenPedidoList { get; set; }
     }

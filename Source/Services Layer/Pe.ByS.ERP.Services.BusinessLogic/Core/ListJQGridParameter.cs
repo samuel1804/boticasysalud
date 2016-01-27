@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Pe.ByS.ERP.CrossCutting.Common;
-using Pe.ByS.ERP.CrossCutting.Common.Enums;
 using Pe.ByS.ERP.CrossCutting.Common.JQGrid;
 using Pe.ByS.ERP.Domain.Core;
 using Pe.ByS.ERP.Services.BusinessLogic.Inter;
@@ -31,18 +30,7 @@ namespace Pe.ByS.ERP.Services.BusinessLogic.Core
             }
         }
 
-        private Expression<Func<T, bool>> _filtrosAdicionales;
-        public Expression<Func<T, bool>> FiltrosAdicionales 
-        {
-            get
-            {
-                return _filtrosAdicionales ?? (p => !MostrarSoloActivos || p.Estado == (int) TipoEstado.Activo);
-            }
-            set
-            {
-                _filtrosAdicionales = MostrarSoloActivos ? value.And(p => p.Estado == (int) TipoEstado.Activo) : value;
-            }
-        }
+        public Expression<Func<T, bool>> FiltrosAdicionales { get; set; }
 
         public GridTable Grid { get; set; }
         public Func<T, Row> SelecctionFormat { get; set; }

@@ -2,6 +2,6 @@
 {
     public class EntityBase
     {
-        public int Estado { get; set; }
+        //public int Estado { get; set; }
     }
 }

@@ -11,6 +11,7 @@ namespace Pe.ByS.ERP.Infrastructure.Persistence.DatabaseMappings
 
             Property(p => p.Id).HasColumnName("Cod_Almacen");
             Property(p => p.Descripcion).IsRequired().HasMaxLength(100);
+            Property(p => p.SucursalId).HasColumnName("Cod_Sucursal");
             Property(p => p.Encargado).HasMaxLength(100);
             Property(p => p.FechaCreacion).HasColumnName("Fec_Usu_Regi");
             Property(p => p.FechaModificacion).HasColumnName("Fec_Usu_Modi");
