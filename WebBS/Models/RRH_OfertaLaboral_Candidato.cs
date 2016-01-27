@@ -22,7 +22,7 @@ namespace WebBS.Models
         public string Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
     
-        public virtual RRH_OfertaLaboral RRH_OfertaLaboral { get; set; }
         public virtual RRH_Candidato RRH_Candidato { get; set; }
+        public virtual RRH_OfertaLaboral RRH_OfertaLaboral { get; set; }
     }
 }

@@ -1,0 +1,89 @@
+﻿@model WebBS.Models.RRH_AlternativaAutoevaluacion
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>RRH_AlternativaAutoevaluacion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Respuesta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Respuesta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_creacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_creacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cod_usu_regi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cod_usu_regi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_usu_regi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_usu_regi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cod_usu_modi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cod_usu_modi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_usu_modi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_usu_modi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cod_criterio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cod_criterio)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

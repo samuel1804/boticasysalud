@@ -21,7 +21,7 @@ namespace WebBS.Models
             this.GCC_EMPLEADO_INF_CREDITICIO = new HashSet<GCC_EMPLEADO_INF_CREDITICIO>();
             this.GCC_EMPLEADO_SOL_CREDITO = new HashSet<GCC_EMPLEADO_SOL_CREDITO>();
             this.IMP_ACTIVIDAD_PLANIFICADA = new HashSet<IMP_ACTIVIDAD_PLANIFICADA>();
-            this.RRH_PruebaAuotoevaluacion = new HashSet<RRH_PruebaAuotoevaluacion>();
+            this.RRH_PruebaAutoevaluacion = new HashSet<RRH_PruebaAutoevaluacion>();
             this.RRH_PruebaEvaluacionTecnica = new HashSet<RRH_PruebaEvaluacionTecnica>();
         }
     
@@ -46,7 +46,7 @@ namespace WebBS.Models
         public virtual ICollection<GCC_EMPLEADO_SOL_CREDITO> GCC_EMPLEADO_SOL_CREDITO { get; set; }
         public virtual ICollection<IMP_ACTIVIDAD_PLANIFICADA> IMP_ACTIVIDAD_PLANIFICADA { get; set; }
         public virtual RRH_Puesto RRH_Puesto { get; set; }
-        public virtual ICollection<RRH_PruebaAuotoevaluacion> RRH_PruebaAuotoevaluacion { get; set; }
+        public virtual ICollection<RRH_PruebaAutoevaluacion> RRH_PruebaAutoevaluacion { get; set; }
         public virtual ICollection<RRH_PruebaEvaluacionTecnica> RRH_PruebaEvaluacionTecnica { get; set; }
     }
 }
