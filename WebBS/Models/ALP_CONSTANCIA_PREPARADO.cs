@@ -29,6 +29,7 @@ namespace WebBS.Models
         public System.DateTime fec_usu_regi { get; set; }
         public Nullable<int> cod_usu_modi { get; set; }
         public Nullable<System.DateTime> fec_usu_modi { get; set; }
+        public string motivo { get; set; }
     
         public virtual ICollection<ALP_CONSTANCIA_PREPARADO_INSUMO> ALP_CONSTANCIA_PREPARADO_INSUMO { get; set; }
         public virtual ALP_ORDEN_PREPARADO ALP_ORDEN_PREPARADO { get; set; }
