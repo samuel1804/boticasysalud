@@ -17,13 +17,13 @@ namespace WebBS.Models
         public int Cod_detalle_orden_compra { get; set; }
         public Nullable<int> Cantidad { get; set; }
         public Nullable<int> Cod_orden_compra { get; set; }
-        public Nullable<int> Cod_articulo { get; set; }
+        public Nullable<int> Cod_Producto { get; set; }
         public int Cod_usu_regi { get; set; }
         public System.DateTime Fec_usu_regi { get; set; }
         public Nullable<int> Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
     
-        public virtual IMP_ARTICULO IMP_ARTICULO { get; set; }
+        public virtual DIS_Producto DIS_Producto { get; set; }
         public virtual IMP_ORDEN_COMPRA IMP_ORDEN_COMPRA { get; set; }
     }
 }

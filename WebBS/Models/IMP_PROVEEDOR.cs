@@ -27,6 +27,9 @@ namespace WebBS.Models
         public System.DateTime Fec_usu_regi { get; set; }
         public Nullable<int> Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
+        public string Tipo { get; set; }
+        public string Telefono { get; set; }
+        public string Origen { get; set; }
     
         public virtual ICollection<IMP_ORDEN_COMPRA> IMP_ORDEN_COMPRA { get; set; }
         public virtual ICollection<IMP_SOLICITUD_IMPORTACION> IMP_SOLICITUD_IMPORTACION { get; set; }

@@ -704,7 +704,7 @@
           <Property Name="Cod_detalle_orden_compra" Type="int" Nullable="false" />
           <Property Name="Cantidad" Type="int" />
           <Property Name="Cod_orden_compra" Type="int" />
-          <Property Name="Cod_articulo" Type="int" />
+          <Property Name="Cod_Producto" Type="int" />
           <Property Name="Cod_usu_regi" Type="int" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="datetime" Nullable="false" />
           <Property Name="Cod_usu_modi" Type="int" />
@@ -793,6 +793,9 @@
           <Property Name="Fec_usu_regi" Type="datetime" Nullable="false" />
           <Property Name="Cod_usu_modi" Type="int" />
           <Property Name="Fec_usu_modi" Type="datetime" />
+          <Property Name="Tipo" Type="char" MaxLength="1" />
+          <Property Name="Telefono" Type="varchar" MaxLength="15" />
+          <Property Name="Origen" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="IMP_PROVINCIA">
           <Key>
@@ -845,7 +848,7 @@
           <Property Name="Fec_emision" Type="datetime" />
           <Property Name="Descripcion" Type="varchar" MaxLength="120" />
           <Property Name="Observaciones" Type="varchar" MaxLength="200" />
-          <Property Name="Estado" Type="char" MaxLength="10" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
           <Property Name="Cod_usu_regi" Type="int" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="datetime" Nullable="false" />
           <Property Name="Cod_usu_modi" Type="int" />
@@ -1972,15 +1975,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_IMP_DETALLE_ORDEN_COMPRA_IMP_ARTICULO">
-          <End Role="IMP_ARTICULO" Type="Self.IMP_ARTICULO" Multiplicity="0..1" />
+        <Association Name="FK_IMP_DETALLE_ORDEN_COMPRA_DIS_Producto">
+          <End Role="DIS_Producto" Type="Self.DIS_Producto" Multiplicity="0..1" />
           <End Role="IMP_DETALLE_ORDEN_COMPRA" Type="Self.IMP_DETALLE_ORDEN_COMPRA" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="IMP_ARTICULO">
-              <PropertyRef Name="Cod_articulo" />
+            <Principal Role="DIS_Producto">
+              <PropertyRef Name="Cod_producto" />
             </Principal>
             <Dependent Role="IMP_DETALLE_ORDEN_COMPRA">
-              <PropertyRef Name="Cod_articulo" />
+              <PropertyRef Name="Cod_Producto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2917,8 +2920,8 @@
             <End Role="IMP_FACTURA_COMERCIAL" EntitySet="IMP_FACTURA_COMERCIAL" />
             <End Role="IMP_DETALLE_FACTURA_COMERCIAL" EntitySet="IMP_DETALLE_FACTURA_COMERCIAL" />
           </AssociationSet>
-          <AssociationSet Name="FK_IMP_DETALLE_ORDEN_COMPRA_IMP_ARTICULO" Association="Self.FK_IMP_DETALLE_ORDEN_COMPRA_IMP_ARTICULO">
-            <End Role="IMP_ARTICULO" EntitySet="IMP_ARTICULO" />
+          <AssociationSet Name="FK_IMP_DETALLE_ORDEN_COMPRA_DIS_Producto" Association="Self.FK_IMP_DETALLE_ORDEN_COMPRA_DIS_Producto">
+            <End Role="DIS_Producto" EntitySet="DIS_Producto" />
             <End Role="IMP_DETALLE_ORDEN_COMPRA" EntitySet="IMP_DETALLE_ORDEN_COMPRA" />
           </AssociationSet>
           <AssociationSet Name="FK_IMP_DETALLE_ORDEN_COMPRA_IMP_ORDEN_COMPRA" Association="Self.FK_IMP_DETALLE_ORDEN_COMPRA_IMP_ORDEN_COMPRA">
@@ -3351,6 +3354,10 @@
             <End Role="DIS_PresentacionProducto" EntitySet="DIS_PresentacionProducto" />
             <End Role="DIS_Producto" EntitySet="DIS_Producto" />
           </AssociationSet>
+          <AssociationSet Name="FK_IMP_DETALLE_ORDEN_COMPRA_DIS_Producto" Association="BDBoticasModel.FK_IMP_DETALLE_ORDEN_COMPRA_DIS_Producto">
+            <End Role="DIS_Producto" EntitySet="DIS_Producto" />
+            <End Role="IMP_DETALLE_ORDEN_COMPRA" EntitySet="IMP_DETALLE_ORDEN_COMPRA" />
+          </AssociationSet>
           <AssociationSet Name="FK_Producto_TipoProducto" Association="BDBoticasModel.FK_Producto_TipoProducto">
             <End Role="DIS_TipoProducto" EntitySet="DIS_TipoProducto" />
             <End Role="DIS_Producto" EntitySet="DIS_Producto" />
@@ -3431,6 +3438,10 @@
             <End Role="IMP_ACTIVIDAD" EntitySet="IMP_ACTIVIDAD" />
             <End Role="IMP_ACTIVIDAD_PLANIFICADA" EntitySet="IMP_ACTIVIDAD_PLANIFICADA" />
           </AssociationSet>
+          <AssociationSet Name="FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD_PLANIFICADA" Association="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD_PLANIFICADA">
+            <End Role="IMP_ACTIVIDAD_PLANIFICADA" EntitySet="IMP_ACTIVIDAD_PLANIFICADA" />
+            <End Role="IMP_ACTIVIDAD_PLANIFICADA1" EntitySet="IMP_ACTIVIDAD_PLANIFICADA" />
+          </AssociationSet>
           <AssociationSet Name="FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_SOLICITUD_GESTION_PERMISO" Association="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_SOLICITUD_GESTION_PERMISO">
             <End Role="IMP_SOLICITUD_GESTION_PERMISO" EntitySet="IMP_SOLICITUD_GESTION_PERMISO" />
             <End Role="IMP_ACTIVIDAD_PLANIFICADA" EntitySet="IMP_ACTIVIDAD_PLANIFICADA" />
@@ -3458,10 +3469,6 @@
           <AssociationSet Name="FK_IMP_DETALLE_FACTURA_COMERCIAL_IMP_ARTICULO" Association="BDBoticasModel.FK_IMP_DETALLE_FACTURA_COMERCIAL_IMP_ARTICULO">
             <End Role="IMP_ARTICULO" EntitySet="IMP_ARTICULO" />
             <End Role="IMP_DETALLE_FACTURA_COMERCIAL" EntitySet="IMP_DETALLE_FACTURA_COMERCIAL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_IMP_DETALLE_ORDEN_COMPRA_IMP_ARTICULO" Association="BDBoticasModel.FK_IMP_DETALLE_ORDEN_COMPRA_IMP_ARTICULO">
-            <End Role="IMP_ARTICULO" EntitySet="IMP_ARTICULO" />
-            <End Role="IMP_DETALLE_ORDEN_COMPRA" EntitySet="IMP_DETALLE_ORDEN_COMPRA" />
           </AssociationSet>
           <AssociationSet Name="FK_IMP_SOLICITUD_GESTION_PERMISO_IMP_ARTICULO" Association="BDBoticasModel.FK_IMP_SOLICITUD_GESTION_PERMISO_IMP_ARTICULO">
             <End Role="IMP_ARTICULO" EntitySet="IMP_ARTICULO" />
@@ -3686,10 +3693,6 @@
           <AssociationSet Name="FK_RYA_STOCK_RYA_PRODUCTO" Association="BDBoticasModel.FK_RYA_STOCK_RYA_PRODUCTO">
             <End Role="RYA_PRODUCTO" EntitySet="RYA_PRODUCTO" />
             <End Role="RYA_STOCK" EntitySet="RYA_STOCK" />
-          </AssociationSet>
-          <AssociationSet Name="FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD_PLANIFICADA" Association="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD_PLANIFICADA">
-            <End Role="IMP_ACTIVIDAD_PLANIFICADA" EntitySet="IMP_ACTIVIDAD_PLANIFICADA" />
-            <End Role="IMP_ACTIVIDAD_PLANIFICADA1" EntitySet="IMP_ACTIVIDAD_PLANIFICADA" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="usp_Chofer_GetAll_Result">
@@ -3933,6 +3936,7 @@
           <Property Name="fec_usu_modi" Type="DateTime" Precision="3" />
           <NavigationProperty Name="DIS_Pedido_Detalle" Relationship="BDBoticasModel.FK_Pedido_Detalle_Producto" FromRole="DIS_Producto" ToRole="DIS_Pedido_Detalle" />
           <NavigationProperty Name="DIS_PresentacionProducto" Relationship="BDBoticasModel.FK_Producto_PresentacionProducto" FromRole="DIS_Producto" ToRole="DIS_PresentacionProducto" />
+          <NavigationProperty Name="IMP_DETALLE_ORDEN_COMPRA" Relationship="BDBoticasModel.FK_IMP_DETALLE_ORDEN_COMPRA_DIS_Producto" FromRole="DIS_Producto" ToRole="IMP_DETALLE_ORDEN_COMPRA" />
           <NavigationProperty Name="DIS_TipoProducto" Relationship="BDBoticasModel.FK_Producto_TipoProducto" FromRole="DIS_Producto" ToRole="DIS_TipoProducto" />
         </EntityType>
         <EntityType Name="DIS_TipoProducto">
@@ -4242,7 +4246,7 @@
           <Key>
             <PropertyRef Name="Cod_accion" />
           </Key>
-          <Property Name="Cod_accion" Type="Int32" Nullable="false" />
+          <Property Name="Cod_accion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Fec_accion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Evidencia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Observaciones" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
@@ -4272,6 +4276,7 @@
             <PropertyRef Name="Cod_actividad_planificada" />
           </Key>
           <Property Name="Cod_actividad_planificada" Type="Int32" Nullable="false" />
+          <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Observacion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Fec_cierre_planificacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Fec_cierre_real" Type="DateTime" Precision="3" />
@@ -4281,19 +4286,18 @@
           <Property Name="Cod_empleado" Type="Int32" Nullable="false" />
           <Property Name="Cod_actividad" Type="Int32" Nullable="false" />
           <Property Name="Cod_solicitud_gestion_permiso" Type="Int32" Nullable="false" />
+          <Property Name="Cod_actividad_planificada_predecesora" Type="Int32" />
           <Property Name="Cod_usu_regi" Type="Int32" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Cod_usu_modi" Type="Int32" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
-          <Property Name="Cod_actividad_planificada_predecesora" Type="Int32" />
           <NavigationProperty Name="IMP_ACCION" Relationship="BDBoticasModel.FK_IMP_ACCION_IMP_ACTIVIDAD_PLANIFICADA" FromRole="IMP_ACTIVIDAD_PLANIFICADA" ToRole="IMP_ACCION" />
           <NavigationProperty Name="IMP_ACTIVIDAD" Relationship="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD" FromRole="IMP_ACTIVIDAD_PLANIFICADA" ToRole="IMP_ACTIVIDAD" />
+          <NavigationProperty Name="IMP_ACTIVIDAD_PLANIFICADA1" Relationship="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD_PLANIFICADA" FromRole="IMP_ACTIVIDAD_PLANIFICADA" ToRole="IMP_ACTIVIDAD_PLANIFICADA1" />
+          <NavigationProperty Name="IMP_ACTIVIDAD_PLANIFICADA2" Relationship="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD_PLANIFICADA" FromRole="IMP_ACTIVIDAD_PLANIFICADA1" ToRole="IMP_ACTIVIDAD_PLANIFICADA" />
           <NavigationProperty Name="IMP_SOLICITUD_GESTION_PERMISO" Relationship="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_SOLICITUD_GESTION_PERMISO" FromRole="IMP_ACTIVIDAD_PLANIFICADA" ToRole="IMP_SOLICITUD_GESTION_PERMISO" />
           <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_RRH_Empleado" FromRole="IMP_ACTIVIDAD_PLANIFICADA" ToRole="RRH_Empleado" />
           <NavigationProperty Name="IMP_ALERTA" Relationship="BDBoticasModel.FK_IMP_ALERTA_IMP_ACTIVIDAD_PLANIFICADA" FromRole="IMP_ACTIVIDAD_PLANIFICADA" ToRole="IMP_ALERTA" />
-          <NavigationProperty Name="IMP_ACTIVIDAD_PLANIFICADA1" Relationship="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD_PLANIFICADA" FromRole="IMP_ACTIVIDAD_PLANIFICADA" ToRole="IMP_ACTIVIDAD_PLANIFICADA1" />
-          <NavigationProperty Name="IMP_ACTIVIDAD_PLANIFICADA2" Relationship="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD_PLANIFICADA" FromRole="IMP_ACTIVIDAD_PLANIFICADA1" ToRole="IMP_ACTIVIDAD_PLANIFICADA" />
-          <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="IMP_ADQUISICION">
           <Key>
@@ -4344,7 +4348,6 @@
           <Property Name="Cod_usu_modi" Type="Int32" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
           <NavigationProperty Name="IMP_DETALLE_FACTURA_COMERCIAL" Relationship="BDBoticasModel.FK_IMP_DETALLE_FACTURA_COMERCIAL_IMP_ARTICULO" FromRole="IMP_ARTICULO" ToRole="IMP_DETALLE_FACTURA_COMERCIAL" />
-          <NavigationProperty Name="IMP_DETALLE_ORDEN_COMPRA" Relationship="BDBoticasModel.FK_IMP_DETALLE_ORDEN_COMPRA_IMP_ARTICULO" FromRole="IMP_ARTICULO" ToRole="IMP_DETALLE_ORDEN_COMPRA" />
           <NavigationProperty Name="IMP_SOLICITUD_GESTION_PERMISO" Relationship="BDBoticasModel.FK_IMP_SOLICITUD_GESTION_PERMISO_IMP_ARTICULO" FromRole="IMP_ARTICULO" ToRole="IMP_SOLICITUD_GESTION_PERMISO" />
         </EntityType>
         <EntityType Name="IMP_BITACORA_EVENTO">
@@ -4495,12 +4498,12 @@
           <Property Name="Cod_detalle_orden_compra" Type="Int32" Nullable="false" />
           <Property Name="Cantidad" Type="Int32" />
           <Property Name="Cod_orden_compra" Type="Int32" />
-          <Property Name="Cod_articulo" Type="Int32" />
+          <Property Name="Cod_Producto" Type="Int32" />
           <Property Name="Cod_usu_regi" Type="Int32" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Cod_usu_modi" Type="Int32" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="IMP_ARTICULO" Relationship="BDBoticasModel.FK_IMP_DETALLE_ORDEN_COMPRA_IMP_ARTICULO" FromRole="IMP_DETALLE_ORDEN_COMPRA" ToRole="IMP_ARTICULO" />
+          <NavigationProperty Name="DIS_Producto" Relationship="BDBoticasModel.FK_IMP_DETALLE_ORDEN_COMPRA_DIS_Producto" FromRole="IMP_DETALLE_ORDEN_COMPRA" ToRole="DIS_Producto" />
           <NavigationProperty Name="IMP_ORDEN_COMPRA" Relationship="BDBoticasModel.FK_IMP_DETALLE_ORDEN_COMPRA_IMP_ORDEN_COMPRA" FromRole="IMP_DETALLE_ORDEN_COMPRA" ToRole="IMP_ORDEN_COMPRA" />
         </EntityType>
         <EntityType Name="IMP_DISTRITO">
@@ -4603,6 +4606,9 @@
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
           <NavigationProperty Name="IMP_ORDEN_COMPRA" Relationship="BDBoticasModel.FK_IMP_ORDEN_COMPRA_IMP_PROVEEDOR" FromRole="IMP_PROVEEDOR" ToRole="IMP_ORDEN_COMPRA" />
           <NavigationProperty Name="IMP_SOLICITUD_IMPORTACION" Relationship="BDBoticasModel.FK_IMP_SOLICITUD_IMPORTACION_IMP_PROVEEDOR" FromRole="IMP_PROVEEDOR" ToRole="IMP_SOLICITUD_IMPORTACION" />
+          <Property Name="Tipo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Origen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="IMP_PROVINCIA">
           <Key>
@@ -4658,16 +4664,16 @@
           </Key>
           <Property Name="Cod_solicitud" Type="Int32" Nullable="false" />
           <Property Name="Fec_emision" Type="DateTime" Precision="3" />
-          <Property Name="Descripcion" Type="String" MaxLength="120" Unicode="false" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
           <Property Name="Observaciones" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="Cod_usu_regi" Type="Int32" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Cod_usu_modi" Type="Int32" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
+          <Property Name="Numero" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="IMP_SOLICITUD_GESTION_PERMISO" Relationship="BDBoticasModel.FK_IMP_SOLICITUD_GESTION_PERMISO_IMP_SOLICITUD" FromRole="IMP_SOLICITUD" ToRole="IMP_SOLICITUD_GESTION_PERMISO" />
           <NavigationProperty Name="IMP_SOLICITUD_IMPORTACION" Relationship="BDBoticasModel.FK_IMP_SOLICITUD_IMPORTACION_IMP_SOLICITUD" FromRole="IMP_SOLICITUD" ToRole="IMP_SOLICITUD_IMPORTACION" />
-          <Property Name="Numero" Type="String" MaxLength="8" Unicode="false" FixedLength="true" />
         </EntityType>
         <EntityType Name="IMP_SOLICITUD_GESTION_PERMISO">
           <Key>
@@ -5500,6 +5506,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IMP_DETALLE_ORDEN_COMPRA_DIS_Producto">
+          <End Type="BDBoticasModel.DIS_Producto" Role="DIS_Producto" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.IMP_DETALLE_ORDEN_COMPRA" Role="IMP_DETALLE_ORDEN_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIS_Producto">
+              <PropertyRef Name="Cod_producto" />
+            </Principal>
+            <Dependent Role="IMP_DETALLE_ORDEN_COMPRA">
+              <PropertyRef Name="Cod_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Producto_TipoProducto">
           <End Type="BDBoticasModel.DIS_TipoProducto" Role="DIS_TipoProducto" Multiplicity="0..1" />
           <End Type="BDBoticasModel.DIS_Producto" Role="DIS_Producto" Multiplicity="*" />
@@ -5742,6 +5760,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD_PLANIFICADA">
+          <End Type="BDBoticasModel.IMP_ACTIVIDAD_PLANIFICADA" Role="IMP_ACTIVIDAD_PLANIFICADA" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.IMP_ACTIVIDAD_PLANIFICADA" Role="IMP_ACTIVIDAD_PLANIFICADA1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMP_ACTIVIDAD_PLANIFICADA">
+              <PropertyRef Name="Cod_actividad_planificada" />
+            </Principal>
+            <Dependent Role="IMP_ACTIVIDAD_PLANIFICADA1">
+              <PropertyRef Name="Cod_actividad_planificada_predecesora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_SOLICITUD_GESTION_PERMISO">
           <End Type="BDBoticasModel.IMP_SOLICITUD_GESTION_PERMISO" Role="IMP_SOLICITUD_GESTION_PERMISO" Multiplicity="1" />
           <End Type="BDBoticasModel.IMP_ACTIVIDAD_PLANIFICADA" Role="IMP_ACTIVIDAD_PLANIFICADA" Multiplicity="*" />
@@ -5822,18 +5852,6 @@
               <PropertyRef Name="Cod_articulo" />
             </Principal>
             <Dependent Role="IMP_DETALLE_FACTURA_COMERCIAL">
-              <PropertyRef Name="Cod_articulo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_IMP_DETALLE_ORDEN_COMPRA_IMP_ARTICULO">
-          <End Type="BDBoticasModel.IMP_ARTICULO" Role="IMP_ARTICULO" Multiplicity="0..1" />
-          <End Type="BDBoticasModel.IMP_DETALLE_ORDEN_COMPRA" Role="IMP_DETALLE_ORDEN_COMPRA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="IMP_ARTICULO">
-              <PropertyRef Name="Cod_articulo" />
-            </Principal>
-            <Dependent Role="IMP_DETALLE_ORDEN_COMPRA">
               <PropertyRef Name="Cod_articulo" />
             </Dependent>
           </ReferentialConstraint>
@@ -6516,18 +6534,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD_PLANIFICADA">
-          <End Type="BDBoticasModel.IMP_ACTIVIDAD_PLANIFICADA" Role="IMP_ACTIVIDAD_PLANIFICADA" Multiplicity="0..1" />
-          <End Type="BDBoticasModel.IMP_ACTIVIDAD_PLANIFICADA" Role="IMP_ACTIVIDAD_PLANIFICADA1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="IMP_ACTIVIDAD_PLANIFICADA">
-              <PropertyRef Name="Cod_actividad_planificada" />
-            </Principal>
-            <Dependent Role="IMP_ACTIVIDAD_PLANIFICADA1">
-              <PropertyRef Name="Cod_actividad_planificada_predecesora" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -7068,12 +7074,11 @@
           <EntitySetMapping Name="IMP_ACTIVIDAD_PLANIFICADA">
             <EntityTypeMapping TypeName="BDBoticasModel.IMP_ACTIVIDAD_PLANIFICADA">
               <MappingFragment StoreEntitySet="IMP_ACTIVIDAD_PLANIFICADA">
-                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
-                <ScalarProperty Name="Cod_actividad_planificada_predecesora" ColumnName="Cod_actividad_planificada_predecesora" />
                 <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
                 <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
                 <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
                 <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
+                <ScalarProperty Name="Cod_actividad_planificada_predecesora" ColumnName="Cod_actividad_planificada_predecesora" />
                 <ScalarProperty Name="Cod_solicitud_gestion_permiso" ColumnName="Cod_solicitud_gestion_permiso" />
                 <ScalarProperty Name="Cod_actividad" ColumnName="Cod_actividad" />
                 <ScalarProperty Name="Cod_empleado" ColumnName="Cod_empleado" />
@@ -7083,6 +7088,7 @@
                 <ScalarProperty Name="Fec_cierre_real" ColumnName="Fec_cierre_real" />
                 <ScalarProperty Name="Fec_cierre_planificacion" ColumnName="Fec_cierre_planificacion" />
                 <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
                 <ScalarProperty Name="Cod_actividad_planificada" ColumnName="Cod_actividad_planificada" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7278,7 +7284,7 @@
                 <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
                 <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
                 <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
-                <ScalarProperty Name="Cod_articulo" ColumnName="Cod_articulo" />
+                <ScalarProperty Name="Cod_Producto" ColumnName="Cod_Producto" />
                 <ScalarProperty Name="Cod_orden_compra" ColumnName="Cod_orden_compra" />
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="Cod_detalle_orden_compra" ColumnName="Cod_detalle_orden_compra" />
@@ -7363,6 +7369,9 @@
           <EntitySetMapping Name="IMP_PROVEEDOR">
             <EntityTypeMapping TypeName="BDBoticasModel.IMP_PROVEEDOR">
               <MappingFragment StoreEntitySet="IMP_PROVEEDOR">
+                <ScalarProperty Name="Origen" ColumnName="Origen" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
                 <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
                 <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
                 <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />

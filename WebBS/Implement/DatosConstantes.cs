@@ -12,6 +12,7 @@ namespace WebBS.Implement
             public const string Pendiente = "P";
             public const string Aprobado = "A";
             public const string Rechazado = "R";
+            public const string Proceso = "E";
         }
 
         public sealed class EstadoActividadPlanificada
@@ -19,6 +20,13 @@ namespace WebBS.Implement
             public const string Pendiente = "P";
             public const string Proceso = "E";
             public const string Cerrado = "C";
+        }
+
+        public sealed class TipoProveedor
+        {
+            public const string AgenteCarga = "C";
+            public const string AgenteAduana = "A";
+            public const string Venta = "V";
         }
 
         public enum Prioridad

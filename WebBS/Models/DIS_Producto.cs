@@ -17,6 +17,7 @@ namespace WebBS.Models
         public DIS_Producto()
         {
             this.DIS_Pedido_Detalle = new HashSet<DIS_Pedido_Detalle>();
+            this.IMP_DETALLE_ORDEN_COMPRA = new HashSet<IMP_DETALLE_ORDEN_COMPRA>();
         }
     
         public int Cod_producto { get; set; }
@@ -34,6 +35,7 @@ namespace WebBS.Models
     
         public virtual ICollection<DIS_Pedido_Detalle> DIS_Pedido_Detalle { get; set; }
         public virtual DIS_PresentacionProducto DIS_PresentacionProducto { get; set; }
+        public virtual ICollection<IMP_DETALLE_ORDEN_COMPRA> IMP_DETALLE_ORDEN_COMPRA { get; set; }
         public virtual DIS_TipoProducto DIS_TipoProducto { get; set; }
     }
 }

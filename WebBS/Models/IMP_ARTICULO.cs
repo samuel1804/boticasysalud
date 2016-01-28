@@ -17,7 +17,6 @@ namespace WebBS.Models
         public IMP_ARTICULO()
         {
             this.IMP_DETALLE_FACTURA_COMERCIAL = new HashSet<IMP_DETALLE_FACTURA_COMERCIAL>();
-            this.IMP_DETALLE_ORDEN_COMPRA = new HashSet<IMP_DETALLE_ORDEN_COMPRA>();
             this.IMP_SOLICITUD_GESTION_PERMISO = new HashSet<IMP_SOLICITUD_GESTION_PERMISO>();
         }
     
@@ -33,7 +32,6 @@ namespace WebBS.Models
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
     
         public virtual ICollection<IMP_DETALLE_FACTURA_COMERCIAL> IMP_DETALLE_FACTURA_COMERCIAL { get; set; }
-        public virtual ICollection<IMP_DETALLE_ORDEN_COMPRA> IMP_DETALLE_ORDEN_COMPRA { get; set; }
         public virtual ICollection<IMP_SOLICITUD_GESTION_PERMISO> IMP_SOLICITUD_GESTION_PERMISO { get; set; }
     }
 }

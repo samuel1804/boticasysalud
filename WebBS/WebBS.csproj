@@ -234,6 +234,7 @@
     <Compile Include="Controllers\NotaIngresoController.cs" />
     <Compile Include="Controllers\OfertaLaboralController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
+    <Compile Include="Controllers\SolicitudAdquisicionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -575,6 +576,11 @@
     <Content Include="Views\BitacoraActividadPlanificada\Details.cshtml" />
     <Content Include="Views\BitacoraActividadPlanificada\Edit.cshtml" />
     <Content Include="Views\BitacoraActividadPlanificada\Index.cshtml" />
+    <Content Include="Views\SolicitudAdquisicion\Create.cshtml" />
+    <Content Include="Views\SolicitudAdquisicion\Delete.cshtml" />
+    <Content Include="Views\SolicitudAdquisicion\Details.cshtml" />
+    <Content Include="Views\SolicitudAdquisicion\Edit.cshtml" />
+    <Content Include="Views\SolicitudAdquisicion\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
