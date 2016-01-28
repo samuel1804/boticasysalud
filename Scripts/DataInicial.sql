@@ -18,11 +18,11 @@ INSERT INTO RRH_Empleado(Nom_Empleado, Fec_Ingreso, Cod_Puesto) VALUES('Empleado
 GO
 
 
-INSERT INTO RYA_PEDIDO_CAB(NumPedido, FchPedido, Estado, Cod_Sucursal, CodSolicitante) VALUES('OP000001', GETDATE(), '1', 1, 1)
+INSERT INTO RYA_PEDIDO_CAB(NumPedido, FchPedido, FchEntrega, Estado, Cod_Sucursal, CodSolicitante) VALUES('OP000001', GETDATE(), GETDATE(), '1', 1, 1)
 GO
-INSERT INTO RYA_PEDIDO_CAB(NumPedido, FchPedido, Estado, Cod_Sucursal, CodSolicitante) VALUES('OP000002', GETDATE(), '1', 1, 1)
+INSERT INTO RYA_PEDIDO_CAB(NumPedido, FchPedido, FchEntrega, Estado, Cod_Sucursal, CodSolicitante) VALUES('OP000002', GETDATE(), GETDATE(), '1', 1, 1)
 GO
-INSERT INTO RYA_PEDIDO_CAB(NumPedido, FchPedido, Estado, Cod_Sucursal, CodSolicitante) VALUES('OP000003', GETDATE(), '1', 1, 1)
+INSERT INTO RYA_PEDIDO_CAB(NumPedido, FchPedido, FchEntrega, Estado, Cod_Sucursal, CodSolicitante) VALUES('OP000003', GETDATE(), GETDATE(), '1', 1, 1)
 GO
 
 
