@@ -1,0 +1,196 @@
+﻿@using WebBS.Implement
+@model WebBS.Models.IMP_ACTIVIDAD_PLANIFICADA
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Bitacora de Actividad Planificada</h2>
+<div id="divMensajeInformativo">
+    <span class="fa fa-info-circle"></span>
+    <span id="lblMensajeInformativo">Usted Puede registrar sus acciones.</span>
+</div>
+<hr />
+<div>
+    <table class="table-bordered">
+        <tr class="rowGroup" data-toggle="collapse" data-target="#Panel_@Model.Cod_solicitud_gestion_permiso">
+            <td colspan="8">
+                <h4>Solicitud : @Model.IMP_SOLICITUD_GESTION_PERMISO.IMP_SOLICITUD.Numero</h4>
+                <h5>Artículo : @Model.IMP_SOLICITUD_GESTION_PERMISO.IMP_ARTICULO.Nombre</h5>
+                <p>@Model.IMP_SOLICITUD_GESTION_PERMISO.IMP_SOLICITUD.Observaciones</p>
+            </td>
+        </tr>
+    </table>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>@Html.DisplayFor(model => model.IMP_ACTIVIDAD.IMP_TIPO_ACTIVIDAD.Nombre) - @Model.Titulo</h4>
+        </div>
+        <div class="col-sm-6 text-right">
+            <div class="form-group">
+                <button id="btnCerrarActividad" class="btn btn-primary">Cerrar Actividad</button>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-3">
+            Fecha Planificada de cierre
+        </div>
+
+        <div>
+            @Html.Raw(Model.Fec_cierre_planificacion.ToString("dd/MM/yyyy"))
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            Estado
+        </div>
+
+        <div>
+            @Html.Raw(TablaDefinicion.ObtenerValor(Model.Estado, TablaDefinicion.EstadoActividadPlanificada))
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            Prioridad
+        </div>
+
+        <div>
+            @Html.Raw(TablaDefinicion.ObtenerValor(Model.Prioridad, TablaDefinicion.Prioridad))
+        </div>
+
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(Model.RutaArchivo))
+    {
+        <div class="row">
+            <div class="col-sm-3">
+                Archivo
+            </div>
+            <div>
+                <a target="_blank" href="@Model.RutaArchivo">Ver</a>
+            </div>
+        </div>
+    }
+
+    @if (Model.Cod_actividad_planificada_predecesora.HasValue)
+    {
+
+        <div class="row">
+            <div class="col-sm-3">
+                Actividad Predecesora
+            </div>
+
+            <div>
+                @Html.DisplayFor(model => model.IMP_ACTIVIDAD_PLANIFICADA2.Titulo)
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-sm-3">
+            Observaciones
+        </div>
+
+        <div>
+            <p> @Html.DisplayFor(model => model.Observacion)</p>
+        </div>
+
+    </div>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-sm-6">
+        <h4>Acciones registradas</h4>
+    </div>
+    <div class="col-sm-6 text-right">
+        <div class="form-group">
+            @Html.ActionLink("Añadir", "Create", new { id = Model.Cod_actividad_planificada }, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+</div>
+<table class="table-bordered">
+    <tr>
+        <th>
+            Fecha de acción
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IMP_ACCION.FirstOrDefault().Observaciones)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IMP_ACCION.FirstOrDefault().Evidencia)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.IMP_ACCION)
+    {
+        <tr>
+            <td>
+                @Html.Raw(item.Fec_accion.ToString("dd/MM/yyyy"))
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observaciones)
+            </td>
+            <td>
+                <a href="@Url.Content(item.Evidencia)" class="control-table text-center" target="_blank"><i class="fa fa-file-archive-o"></i></a>
+            </td>
+            <td>
+                <a class="control-table text-center" href="@Url.Action("Edit", "BitacoraActividadPlanificada",new  { Id=item.Cod_accion })">
+
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a class="control-table text-center" href="@Url.Action("Details", "BitacoraActividadPlanificada",new  { Id=item.Cod_accion })">
+
+                    <i class="fa fa-eye"></i>
+                </a>
+                <a class="control-table text-center" href="@Url.Action("Delete", "BitacoraActividadPlanificada",new  { Id=item.Cod_accion })">
+
+                    <i class="fa fa-trash-o"></i>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="row">
+    <div class="col-sm-12 text-right">
+        <a id="btnCancelar" class="btn btn-default" href="@Url.Action("Index", "ActividadPlanificada")">Cancelar</a>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/Controls")
+    <script>
+
+        var mensaje= new Pe.GMD.UI.Web.Components.Message();
+
+        var ajax = new Pe.GMD.UI.Web.Components.Ajax({
+            action: '@Url.Action("CerrarActividad")',
+            autoSubmit: false,
+            onSuccess: function () {
+
+                setTimeout(function () {
+                    mensaje.Information({
+                        title: 'Cerrar Actividad',
+                        message: 'Se cerro la actividad correctamente',
+                        onClose : function(){
+                            window.location.href= $('#btnCancelar').attr("href");}
+                    });
+                }, 1000);
+            }
+        });
+
+
+        $('#btnCerrarActividad').click(function(){
+            mensaje.Confirmation({
+                title: 'Cerrar Actividad',
+                message: '¿Está seguro que desea cerrar la actividad?<br/><br/>Una vez cerrada se retirará de su lista de pendientes y no podra trabajar sobre ella.',
+                onAccept: function () {
+                    ajax.send({id:@Model.Cod_actividad_planificada});
+                }
+            });
+        });
+    </script>
+}
