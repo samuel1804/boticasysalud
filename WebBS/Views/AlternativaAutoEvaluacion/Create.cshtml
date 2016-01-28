@@ -121,7 +121,7 @@ for(var i = 0; i < array.length; i++) {
 
 
 clickeliminar=function() {
-    alert('sa');
+    
     var storeId = $(this).closest('tr').find('td:first').text();
 
     var tr = $(this).closest('tr');
@@ -173,6 +173,11 @@ $('.delete').click(clickeliminar);
             });
             //Save button click function
             $('#submit').click(function () {
+
+
+
+
+
                 //validation of order
                 var isAllValid = true;
                 if (orderItems.length == 0) {

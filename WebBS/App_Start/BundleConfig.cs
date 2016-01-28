@@ -6,7 +6,8 @@ namespace WebBS.App_Start
     public class BundleConfig
     {
         public static void RegisterBundles(BundleCollection bundles)
-        {            
+        {
+            BundleTable.EnableOptimizations = false;
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/css/bootstrap.min.css",
                       "~/Content/css/Site.css"));

@@ -22,14 +22,16 @@
 
 
 
+
             <div class="form-group">
-                @Html.Label("Oferta Laboral", new { @class = "control-label col-md-2" })
-                <div class="col-md-4">
-               
-                       
+                @Html.Label("Oferta Laboral", "Oferta", new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+
+                    @Html.DropDownListFor(model => model.Cod_ofertalaboral, @ViewBag.Cod_ofertalaboral as SelectList, "Seleccione", new { @class = "form-control" })
+
+                    @Html.ValidationMessageFor(model => model.Cod_ofertalaboral, "", new { @class = "text-danger" })
                 </div>
             </div>
-
 
 
             <div class="form-group">

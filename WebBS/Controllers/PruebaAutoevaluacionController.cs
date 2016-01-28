@@ -63,6 +63,58 @@ namespace WebBS.Controllers
             return View(rrh_pruebaautoevaluacion);
         }
 
+
+
+        [HttpPost]
+        public JsonResult SaveOrder(List<AlternativaAutoevaluacionDTO> OrderDetails)
+        {
+            
+
+
+            
+            bool status = false;
+            if (ModelState.IsValid)
+            {
+
+
+
+                //Inserta Cabecera
+                var Prueba = new RRH_PruebaAutoevaluacion();
+                Prueba.Cod_autoevaluacion = db.RRH_PruebaAutoevaluacion.OrderByDescending(t => t.Cod_autoevaluacion).FirstOrDefault() == null ? 1 : db.RRH_PruebaAutoevaluacion.OrderByDescending(t => t.Cod_autoevaluacion).FirstOrDefault().Cod_autoevaluacion+1 ;
+                Prueba.Cod_empleado = 1;
+                Prueba.PuntajeTotal = OrderDetails.Sum(t => t.Valor);
+                db.RRH_PruebaAutoevaluacion.Add(Prueba);
+                db.SaveChanges();
+
+                foreach (var i in OrderDetails)
+                {
+                    var criterio = new RRH_Criterio_PruebaAutoevaluacion()
+                        {
+                            Cod_alternatica_autoevaluacion = i.Cod_alternativa_autoevaluacion,
+                            Cod_criterio =(int) i.Cod_criterio,
+                            Cod_autoevaluacion = Prueba.Cod_autoevaluacion
+                            
+                        };
+
+
+                        db.RRH_Criterio_PruebaAutoevaluacion.Add(criterio);
+
+                        db.SaveChanges();
+                    }
+
+
+
+
+                status = true;
+
+            }
+            else
+            {
+                status = false;
+            }
+            return new JsonResult { Data = new { status = status } };
+        }
+
         // GET: /PruebaAutoevaluacion/Edit/5
         public ActionResult Edit(int? id)
         {

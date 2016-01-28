@@ -41,11 +41,7 @@ namespace WebBS.Controllers
         public ActionResult Create()
         {
             ViewBag.Cod_ofertalaboral = new SelectList(db.RRH_OfertaLaboral, "Cod_ofertalaboral", "Titulo");
-            var Ga=new RRH_GradoAcademico();
-            Ga.Especialidad="sa";
-            Ga.CentroEstudios="centro es";
-            Grados.Add(Ga);
-            ViewData["Grados"] = Grados;
+           
             //ViewBag.Grados = db.RRH_GradoAcademico.ToList();
             //ViewBag.IdPuesto = new SelectList(db.Puesto, "IdPuesto", "Nombre");
             return View();
@@ -56,7 +52,7 @@ namespace WebBS.Controllers
         public ActionResult AdicionarGrado()
         {
 
-            var value = ViewData["Grados"];
+         
             
 
             if (Request.IsAjaxRequest())
