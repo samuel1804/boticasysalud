@@ -1,0 +1,83 @@
+﻿@model WebBS.Models.GCC_SOLICITUD_CREDITO
+
+@{
+    ViewBag.Title = "Nueva Solicitud de Crédito";
+}
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Nueva Solicitud de Crédito</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group" style="display: none;">
+            @Html.LabelFor(model => model.GCC_CLIENTE_JURIDICO.Cod_cliente, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GCC_CLIENTE_JURIDICO.Cod_cliente)
+                @Html.ValidationMessageFor(model => model.GCC_CLIENTE_JURIDICO.Cod_cliente)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Num_solicitud, new { @class = "control-label col-md-2" })*
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Num_solicitud, new { @readonly = "readonly", Style = "background:#D3D3D3;" })*
+                @Html.ValidationMessageFor(model => model.Num_solicitud)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Num_doc_identidad">RUC</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad, new { @readonly = "readonly", Style = "background:#D3D3D3;" })*
+                @Html.ValidationMessageFor(model => model.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad, null, new { @class = "text-danger" }) <button type="submit" formaction="/ClienteJuridico/Search">Buscar Cliente</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="GCC_CLIENTE_JURIDICO_Razon_social">Razón social</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social, new { @readonly = "readonly", Style = "background:#D3D3D3;" })*
+                @Html.ValidationMessageFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social, null, new { @class = "text-danger" })
+            </div>
+        </div>       
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fec_solicitud, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Fec_solicitud, new {  id = "datepicker" })*
+                @Html.ValidationMessageFor(model => model.Fec_solicitud, null, new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Estado_cliente_str, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Estado_cliente_str, new { @readonly = "readonly", Style = "background:#D3D3D3;" })*
+                @Html.ValidationMessageFor(model => model.Estado_cliente_str, null, new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group editor-multiline-field">
+            @Html.LabelFor(model => model.Observacion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Observacion)
+                @Html.ValidationMessageFor(model => model.Observacion, null, new { @class = "text-danger" })
+            </div>
+           
+        </div>         
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Crear" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

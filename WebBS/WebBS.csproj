@@ -552,6 +552,10 @@
     <Content Include="Views\ClienteJuridico\Edit.cshtml" />
     <Content Include="Views\ClienteJuridico\Delete.cshtml" />
     <Content Include="Views\SolicitudDeCredito\Index.cshtml" />
+    <Content Include="Views\SolicitudDeCredito\Create.cshtml" />
+    <Content Include="Views\ClienteJuridico\Search.cshtml" />
+    <Content Include="Views\SolicitudDeCredito\Edit.cshtml" />
+    <Content Include="Views\SolicitudDeCredito\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

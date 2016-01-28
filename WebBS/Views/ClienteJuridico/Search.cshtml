@@ -1,0 +1,61 @@
+﻿@model IEnumerable<WebBS.Models.GCC_CLIENTE>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Consulta de Cliente Jurídico</h2>
+
+@using (Html.BeginForm("Search", "ClienteJuridico", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+
+    <div style="border:1px solid black;">
+        <table style="width:100%">
+            <tr>
+                <td>Razón Social</td>
+                <td><input type="text" name="razonSocial"><br></td>
+            </tr>
+            <tr>
+                <td>Ruc</td>
+                <td><input type="number" name="ruc"><br></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Buscar" /></td>
+            </tr>
+        </table>
+
+    </div>
+
+}
+
+<table class="table">
+    <tr>        
+        <th>
+            RUC
+        </th>
+        <th>
+            Razón Social
+        </th>        
+        <th>
+            
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>        
+        <td>
+            @Html.DisplayFor(modelItem => item.Num_doc_identidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GCC_CLIENTE_JURIDICO.Razon_social)
+        </td>        
+        <td>
+            @Html.ActionLink("Selecionar", "Select", "SolicitudDeCredito", new { id = item.Cod_cliente }, null)
+        </td>
+    </tr>
+}
+
+</table>

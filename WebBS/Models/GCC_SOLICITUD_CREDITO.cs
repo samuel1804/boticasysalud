@@ -11,7 +11,9 @@ namespace WebBS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class GCC_SOLICITUD_CREDITO
     {
         public GCC_SOLICITUD_CREDITO()
@@ -19,21 +21,34 @@ namespace WebBS.Models
             this.GCC_CONTRATO_CREDITO = new HashSet<GCC_CONTRATO_CREDITO>();
             this.GCC_EMPLEADO_SOL_CREDITO = new HashSet<GCC_EMPLEADO_SOL_CREDITO>();
             this.GCC_INFORME_CREDITICIO = new HashSet<GCC_INFORME_CREDITICIO>();
+            this.Fec_solicitud = DateTime.Now;
         }
-    
+
         public int Cod_solicitud_credito { get; set; }
         public int Cod_cliente { get; set; }
+        [Display(Name = "Fecha Solicitud")]
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime Fec_solicitud { get; set; }
+        [Display(Name = "Nro. Solicitud")]
         public string Num_solicitud { get; set; }
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Observación")]
         public string Observacion { get; set; }
         public int Cod_usu_regi { get; set; }
         public System.DateTime Fec_usu_regi { get; set; }
         public Nullable<int> Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
-    
+
         public virtual GCC_CLIENTE_JURIDICO GCC_CLIENTE_JURIDICO { get; set; }
         public virtual ICollection<GCC_CONTRATO_CREDITO> GCC_CONTRATO_CREDITO { get; set; }
         public virtual ICollection<GCC_EMPLEADO_SOL_CREDITO> GCC_EMPLEADO_SOL_CREDITO { get; set; }
         public virtual ICollection<GCC_INFORME_CREDITICIO> GCC_INFORME_CREDITICIO { get; set; }
+        [Display(Name = "Estado Actual")]
+        public string Estado_actual { get; set; }
+        public string Estado_cliente { get; set; }
+        [Display(Name = "Estado Cliente")]
+        public string Estado_cliente_str { get; set; }
     }
 }

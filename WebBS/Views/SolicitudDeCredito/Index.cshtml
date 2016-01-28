@@ -5,7 +5,7 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Consulta Solicitud de Crédito";
 }
 
 <h2>Consulta Solicitud de Crédito</h2>
@@ -22,7 +22,7 @@
                 <td>RUC</td>
                 <td><input type="number" name="ruc"></td>
                 <td>Estado</td>
-                <td><select name="estado"><option></option><option><option>Registrado</option><option>Modificado</option><option>Anulado</option></select></td>
+                <td><select name="estado"><option></option><option>Registrado</option><option>Modificado</option><option>Anulado</option></select></td>
                 <td></td>
                 <td></td>
             </tr>
@@ -43,7 +43,7 @@
                 <td></td>
                 <td></td>
                 <td><input type="submit" value="Buscar" /></td>
-                <td><button type="submit" value="Registrar" formmethod="delete" formaction="/ClienteJuridico/Create">Nuevo</button></td>
+                <td><button type="submit" value="Registrar" formaction="/SolicitudDeCredito/Create">Nuevo</button></td>
                 <td></td>
             </tr>
         </table>
@@ -57,9 +57,6 @@
 </p>
 <table class="table">
     <tr>
-        <th>
-            Codigo Solicitud de Crédito
-        </th>
         <th>
             Nro de Solicitud
         </th>
@@ -81,9 +78,6 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Cod_solicitud_credito)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Num_solicitud)
         </td>
         <td>
@@ -96,7 +90,7 @@
             @Html.DisplayFor(modelItem => item.Fec_solicitud)
         </td>
         <td>
-            ESTADO
+            @Html.DisplayFor(modelItem => item.Estado_actual)
         </td>
         <td>
             @Html.ActionLink("Editar", "Edit", new { id = item.Cod_solicitud_credito }) |
@@ -106,3 +100,8 @@
 }
 
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

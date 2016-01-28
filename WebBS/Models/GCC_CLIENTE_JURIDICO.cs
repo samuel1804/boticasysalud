@@ -11,7 +11,6 @@ namespace WebBS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class GCC_CLIENTE_JURIDICO
     {
@@ -21,7 +20,6 @@ namespace WebBS.Models
         }
     
         public int Cod_cliente { get; set; }
-        [Required(ErrorMessage = "Razon social es requerido.")]
         public string Razon_social { get; set; }
         public string Categoria { get; set; }
         public int Cod_usu_regi { get; set; }

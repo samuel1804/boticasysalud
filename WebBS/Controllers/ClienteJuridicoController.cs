@@ -215,5 +215,38 @@ namespace WebBS.Controllers
                 return View();
             }
         }
+
+       public ActionResult Search(string razonSocial, string ruc)
+       {
+           var clientes = from s in db.GCC_CLIENTE
+                          select s;
+
+           if (razonSocial != null || ruc != null)
+           {
+
+               if (razonSocial != null && ruc != null)
+               {
+                   clientes = clientes.Where(b =>
+                       (b.GCC_CLIENTE_JURIDICO.Razon_social.Contains(razonSocial))
+                      && b.Num_doc_identidad.Contains(ruc)
+                      && b.Estado != "D");
+               }
+               else if (razonSocial == null && ruc != null)
+               {
+                   clientes = clientes.Where(b => b.Num_doc_identidad.Contains(ruc)
+                       && b.Estado != "D");
+               }
+               else if (razonSocial != null && ruc == null)
+               {
+                   clientes = clientes.Where(b => b.GCC_CLIENTE_JURIDICO.Razon_social.Contains(razonSocial)
+                       && b.Estado != "D");
+               }
+
+           }
+
+           var result = clientes.Where(b => b.Estado != "D").ToList();
+           return View(result);
+        }
+
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BDBoticasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BDBoticasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ALP_CONSTANCIA_PREPARADO">
           <Key>
             <PropertyRef Name="num_constancia_preparado" />
@@ -477,6 +477,7 @@
           <Property Name="Fec_usu_regi" Type="date" Nullable="false" />
           <Property Name="Cod_usu_modi" Type="int" />
           <Property Name="Fec_usu_modi" Type="date" />
+          <Property Name="Estado_cliente" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="IMP_ACCION">
           <Key>
@@ -1367,7 +1368,7 @@
           <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_modi" Type="datetime" />
         </EntityType>
-        <Association Name="FK__ALP_CONST__num_o__44CA3770">
+        <Association Name="FK__ALP_CONST__num_o__3F115E1A">
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="1" />
           <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1379,7 +1380,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_HOJA___num_c__45BE5BA9">
+        <Association Name="FK__ALP_HOJA___num_c__40058253">
           <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
           <End Role="ALP_HOJA_MERMA" Type="Self.ALP_HOJA_MERMA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1391,7 +1392,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_LIBRO__cod_q__46B27FE2">
+        <Association Name="FK__ALP_LIBRO__cod_q__40F9A68C">
           <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="1" />
           <End Role="ALP_LIBRO_RECETA" Type="Self.ALP_LIBRO_RECETA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1403,7 +1404,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_LIBRO__num_c__47A6A41B">
+        <Association Name="FK__ALP_LIBRO__num_c__41EDCAC5">
           <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
           <End Role="ALP_LIBRO_RECETA" Type="Self.ALP_LIBRO_RECETA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1415,7 +1416,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_e__489AC854">
+        <Association Name="FK__ALP_ORDEN__cod_e__42E1EEFE">
           <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="1" />
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1427,7 +1428,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_i__4B7734FF">
+        <Association Name="FK__ALP_ORDEN__cod_i__45BE5BA9">
           <End Role="ALP_INSUMO" Type="Self.ALP_INSUMO" Multiplicity="1" />
           <End Role="ALP_ORDEN_PREPARADO_INSUMO" Type="Self.ALP_ORDEN_PREPARADO_INSUMO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1439,7 +1440,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_r__498EEC8D">
+        <Association Name="FK__ALP_ORDEN__cod_r__43D61337">
           <End Role="ALP_RECETA" Type="Self.ALP_RECETA" Multiplicity="1" />
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1451,7 +1452,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_s__4A8310C6">
+        <Association Name="FK__ALP_ORDEN__cod_s__44CA3770">
           <End Role="RRH_Sucursal" Type="Self.RRH_Sucursal" Multiplicity="1" />
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1463,7 +1464,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__num_o__4C6B5938">
+        <Association Name="FK__ALP_ORDEN__num_o__46B27FE2">
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="1" />
           <End Role="ALP_ORDEN_PREPARADO_INSUMO" Type="Self.ALP_ORDEN_PREPARADO_INSUMO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1475,7 +1476,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DIS_Pedid__Cod_s__5224328E">
+        <Association Name="FK__DIS_Pedid__Cod_s__4C6B5938">
           <End Role="RRH_Sucursal" Type="Self.RRH_Sucursal" Multiplicity="0..1" />
           <End Role="DIS_Pedido" Type="Self.DIS_Pedido" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2681,43 +2682,43 @@
           <EntitySet Name="RYA_SUCURSALES" EntityType="Self.RYA_SUCURSALES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RYA_TRANSA_ALMA" EntityType="Self.RYA_TRANSA_ALMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RYA_UBICACIONES" EntityType="Self.RYA_UBICACIONES" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__ALP_CONST__num_o__44CA3770" Association="Self.FK__ALP_CONST__num_o__44CA3770">
+          <AssociationSet Name="FK__ALP_CONST__num_o__3F115E1A" Association="Self.FK__ALP_CONST__num_o__3F115E1A">
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_HOJA___num_c__45BE5BA9" Association="Self.FK__ALP_HOJA___num_c__45BE5BA9">
+          <AssociationSet Name="FK__ALP_HOJA___num_c__40058253" Association="Self.FK__ALP_HOJA___num_c__40058253">
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
             <End Role="ALP_HOJA_MERMA" EntitySet="ALP_HOJA_MERMA" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_LIBRO__cod_q__46B27FE2" Association="Self.FK__ALP_LIBRO__cod_q__46B27FE2">
+          <AssociationSet Name="FK__ALP_LIBRO__cod_q__40F9A68C" Association="Self.FK__ALP_LIBRO__cod_q__40F9A68C">
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="ALP_LIBRO_RECETA" EntitySet="ALP_LIBRO_RECETA" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_LIBRO__num_c__47A6A41B" Association="Self.FK__ALP_LIBRO__num_c__47A6A41B">
+          <AssociationSet Name="FK__ALP_LIBRO__num_c__41EDCAC5" Association="Self.FK__ALP_LIBRO__num_c__41EDCAC5">
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
             <End Role="ALP_LIBRO_RECETA" EntitySet="ALP_LIBRO_RECETA" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_e__489AC854" Association="Self.FK__ALP_ORDEN__cod_e__489AC854">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_e__42E1EEFE" Association="Self.FK__ALP_ORDEN__cod_e__42E1EEFE">
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_i__4B7734FF" Association="Self.FK__ALP_ORDEN__cod_i__4B7734FF">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_i__45BE5BA9" Association="Self.FK__ALP_ORDEN__cod_i__45BE5BA9">
             <End Role="ALP_INSUMO" EntitySet="ALP_INSUMO" />
             <End Role="ALP_ORDEN_PREPARADO_INSUMO" EntitySet="ALP_ORDEN_PREPARADO_INSUMO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_r__498EEC8D" Association="Self.FK__ALP_ORDEN__cod_r__498EEC8D">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_r__43D61337" Association="Self.FK__ALP_ORDEN__cod_r__43D61337">
             <End Role="ALP_RECETA" EntitySet="ALP_RECETA" />
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_s__4A8310C6" Association="Self.FK__ALP_ORDEN__cod_s__4A8310C6">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_s__44CA3770" Association="Self.FK__ALP_ORDEN__cod_s__44CA3770">
             <End Role="RRH_Sucursal" EntitySet="RRH_Sucursal" />
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__num_o__4C6B5938" Association="Self.FK__ALP_ORDEN__num_o__4C6B5938">
+          <AssociationSet Name="FK__ALP_ORDEN__num_o__46B27FE2" Association="Self.FK__ALP_ORDEN__num_o__46B27FE2">
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
             <End Role="ALP_ORDEN_PREPARADO_INSUMO" EntitySet="ALP_ORDEN_PREPARADO_INSUMO" />
           </AssociationSet>
-          <AssociationSet Name="FK__DIS_Pedid__Cod_s__5224328E" Association="Self.FK__DIS_Pedid__Cod_s__5224328E">
+          <AssociationSet Name="FK__DIS_Pedid__Cod_s__4C6B5938" Association="Self.FK__DIS_Pedid__Cod_s__4C6B5938">
             <End Role="RRH_Sucursal" EntitySet="RRH_Sucursal" />
             <End Role="DIS_Pedido" EntitySet="DIS_Pedido" />
           </AssociationSet>
@@ -4180,6 +4181,7 @@
           <NavigationProperty Name="GCC_CONTRATO_CREDITO" Relationship="BDBoticasModel.FK_GCC_CONTRATO_CREDITO_GCC_SOLICITUD_CREDITO" FromRole="GCC_SOLICITUD_CREDITO" ToRole="GCC_CONTRATO_CREDITO" />
           <NavigationProperty Name="GCC_EMPLEADO_SOL_CREDITO" Relationship="BDBoticasModel.FK_GCC_EMPLEADO_SOL_CREDITO_GCC_SOLICITUD_CREDITO" FromRole="GCC_SOLICITUD_CREDITO" ToRole="GCC_EMPLEADO_SOL_CREDITO" />
           <NavigationProperty Name="GCC_INFORME_CREDITICIO" Relationship="BDBoticasModel.FK_GCC_INFORME_CREDITICIO_GCC_SOLICITUD_CREDITO" FromRole="GCC_SOLICITUD_CREDITO" ToRole="GCC_INFORME_CREDITICIO" />
+          <Property Name="Estado_cliente" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="IMP_ACCION">
           <Key>
@@ -6925,6 +6927,7 @@
           <EntitySetMapping Name="GCC_SOLICITUD_CREDITO">
             <EntityTypeMapping TypeName="BDBoticasModel.GCC_SOLICITUD_CREDITO">
               <MappingFragment StoreEntitySet="GCC_SOLICITUD_CREDITO">
+                <ScalarProperty Name="Estado_cliente" ColumnName="Estado_cliente" />
                 <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
                 <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
                 <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />

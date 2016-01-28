@@ -1,0 +1,77 @@
+﻿@model WebBS.Models.GCC_SOLICITUD_CREDITO
+
+@{
+    ViewBag.Title = "Anular";
+}
+
+
+<h3>Esta seguro que desea anular?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt style="display: none;">
+            @Html.DisplayNameFor(model => model.Cod_solicitud_credito)
+        </dt>
+
+        <dd style="display: none;">
+            @Html.DisplayFor(model => model.Cod_solicitud_credito)
+        </dd>
+
+        <dt>
+            RUC
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_solicitud)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_solicitud)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Num_solicitud)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Num_solicitud)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado_actual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado_actual)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Anular" class="btn btn-default" />
+        </div>
+    }
+</div>

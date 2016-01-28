@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f06427c5c68941a795ec541a3be0727b" Name="Diagram1" ZoomLevel="63">
+      <Diagram DiagramId="f06427c5c68941a795ec541a3be0727b" Name="Diagram1" ZoomLevel="100">
         <EntityTypeShape EntityType="BDBoticasModel.ALP_CONSTANCIA_PREPARADO" Width="1.5" PointX="9.75" PointY="35.875" />
         <EntityTypeShape EntityType="BDBoticasModel.ALP_HOJA_MERMA" Width="1.5" PointX="12" PointY="36.125" />
         <EntityTypeShape EntityType="BDBoticasModel.ALP_INSUMO" Width="1.5" PointX="13.5" PointY="13" />

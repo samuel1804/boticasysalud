@@ -1,0 +1,159 @@
+﻿@model WebBS.Models.GCC_SOLICITUD_CREDITO
+
+@{
+    ViewBag.Title = "ctualizar Solicitud de Crédito";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Actualizar Solicitud de Crédito</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        <div class="form-group" style="display: none;">
+            @Html.LabelFor(model => model.Cod_solicitud_credito, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Cod_solicitud_credito)
+                @Html.ValidationMessageFor(model => model.Cod_solicitud_credito)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Num_solicitud, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Num_solicitud, new { @readonly = "readonly", Style = "background:#D3D3D3;" })
+                @Html.ValidationMessageFor(model => model.Num_solicitud)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Num_doc_identidad">RUC</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad, new { @readonly = "readonly", Style = "background:#D3D3D3;" })
+                @Html.ValidationMessageFor(model => model.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social, new { @readonly = "readonly", Style = "background:#D3D3D3;" })
+                @Html.ValidationMessageFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social)
+            </div>
+        </div>     
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fec_solicitud, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Fec_solicitud, new { id = "datepicker" })
+                @Html.ValidationMessageFor(model => model.Fec_solicitud)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Observacion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Observacion)
+                @Html.ValidationMessageFor(model => model.Observacion)
+            </div>
+        </div>
+
+        <div class="form-group" style="display: none;">
+            @Html.LabelFor(model => model.Cod_usu_regi, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Cod_usu_regi)
+                @Html.ValidationMessageFor(model => model.Cod_usu_regi)
+            </div>
+        </div>
+
+        <div class="form-group" style="display: none;">
+            @Html.LabelFor(model => model.Fec_usu_regi, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Fec_usu_regi)
+                @Html.ValidationMessageFor(model => model.Fec_usu_regi)
+            </div>
+        </div>
+
+        <div class="form-group" style="display: none;">
+            @Html.LabelFor(model => model.Cod_usu_modi, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Cod_usu_modi)
+                @Html.ValidationMessageFor(model => model.Cod_usu_modi)
+            </div>
+        </div>
+
+        <div class="form-group" style="display: none;">
+            @Html.LabelFor(model => model.Fec_usu_modi, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Fec_usu_modi)
+                @Html.ValidationMessageFor(model => model.Fec_usu_modi)
+            </div>
+        </div>
+
+        <div class="form-group" style="display: none;">
+            @Html.LabelFor(model => model.Cod_cliente, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Cod_cliente)
+                @Html.ValidationMessageFor(model => model.Cod_cliente)
+            </div>
+        </div>
+
+        <div class="form-group" style="display: none;">
+            @Html.LabelFor(model => model.GCC_CLIENTE_JURIDICO, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GCC_CLIENTE_JURIDICO)
+                @Html.ValidationMessageFor(model => model.GCC_CLIENTE_JURIDICO)
+            </div>
+        </div>
+
+        <div class="form-group" style="display: none;">
+            @Html.LabelFor(model => model.GCC_CLIENTE_JURIDICO.GCC_CLIENTE, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GCC_CLIENTE_JURIDICO.GCC_CLIENTE)
+                @Html.ValidationMessageFor(model => model.GCC_CLIENTE_JURIDICO.GCC_CLIENTE)
+            </div>
+        </div>
+
+        <div class="form-group" style="display: none;">
+            @Html.LabelFor(model => model.GCC_EMPLEADO_SOL_CREDITO, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GCC_EMPLEADO_SOL_CREDITO)
+                @Html.ValidationMessageFor(model => model.GCC_EMPLEADO_SOL_CREDITO)
+            </div>
+        </div>
+
+        <div class="form-group" style="display: none;">
+            @Html.LabelFor(model => model.Estado_cliente, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Estado_cliente)
+                @Html.ValidationMessageFor(model => model.Estado_cliente)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Estado_actual, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Estado_actual, new { @readonly = "readonly", Style = "background:#D3D3D3;"})
+                @Html.ValidationMessageFor(model => model.Estado_actual)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Estado_cliente_str, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Estado_cliente_str, new { @readonly = "readonly", Style = "background:#D3D3D3;" })
+                @Html.ValidationMessageFor(model => model.Estado_cliente_str)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Actualizar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
