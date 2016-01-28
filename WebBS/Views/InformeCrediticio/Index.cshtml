@@ -1,0 +1,91 @@
+﻿@model IEnumerable<WebBS.Models.GCC_INFORME_CREDITICIO>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Consulta Solicitud de Crédito";
+}
+
+<h2>Consulta Solicitud de Crédito</h2>
+
+@using (Html.BeginForm("Index", "InformeCrediticio", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+
+    <div style="border:1px solid black;">
+        <table style="width:100%">
+            <tr>
+                <td>Nro Solicitud</td>
+                <td><input type="text" name="numerosol"><br></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Ruc</td>
+                <td><input type="number" name="ruc"><br></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Buscar" /></td>
+                <td></td>
+            </tr>
+        </table>
+
+    </div>
+
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Nro Solicitud
+        </th>
+        <th>
+            Fecha Solicitud
+        </th>
+        <th>
+            RUC
+        </th>
+        <th>
+            Razón Social
+        </th>
+        <th>
+            Estado
+        </th>
+        <th>
+            Observaciones
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.GCC_SOLICITUD_CREDITO.Num_solicitud)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GCC_SOLICITUD_CREDITO.Fec_solicitud)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.Razon_social)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GCC_SOLICITUD_CREDITO.Cod_cliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GCC_SOLICITUD_CREDITO.Observacion)
+        </td>
+        <td>
+            @Html.ActionLink("Generar Contrato", "GenerarContrato", new { id=item.Cod_informe_crediticio }) |
+        </td>
+    </tr>
+}
+
+</table>

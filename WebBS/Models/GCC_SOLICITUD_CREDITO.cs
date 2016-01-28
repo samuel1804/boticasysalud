@@ -26,6 +26,7 @@ namespace WebBS.Models
         public System.DateTime Fec_solicitud { get; set; }
         public string Num_solicitud { get; set; }
         public string Observacion { get; set; }
+        public string Situacion_cliente { get; set; }
         public int Cod_usu_regi { get; set; }
         public System.DateTime Fec_usu_regi { get; set; }
         public Nullable<int> Cod_usu_modi { get; set; }

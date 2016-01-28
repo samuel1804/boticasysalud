@@ -11,6 +11,7 @@ namespace WebBS.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class GCC_INFORME_CREDITICIO
     {
@@ -29,7 +30,11 @@ namespace WebBS.Models
         public System.DateTime Fec_ultima_evaluacion { get; set; }
         public byte[] Reporte_infocorp { get; set; }
         public decimal Monto_linea_credito_eval { get; set; }
+
+        [Required(ErrorMessage = "Importe Requerido")]
+        [Range(50000, 75000, ErrorMessage = "El Importe debe estar entre 50,000 y 75,000 soles.")]
         public decimal Monto_linea_credito_aprob { get; set; }
+
         public int Cod_usu_regi { get; set; }
         public System.DateTime Fec_usu_regi { get; set; }
         public Nullable<int> Cod_usu_modi { get; set; }
