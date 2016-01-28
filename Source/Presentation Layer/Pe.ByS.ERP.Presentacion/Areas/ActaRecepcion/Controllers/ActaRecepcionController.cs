@@ -115,7 +115,7 @@ namespace Pe.ByS.ERP.Presentacion.Areas.ActaRecepcion.Controllers
             return Json(jsonResponse, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
+        //[HttpPost]
         public ActionResult GetReportSnapshot()
         {
             //var filters = CommonUtils.ToObject<List<WhereFilter>>(ParametrosReport);

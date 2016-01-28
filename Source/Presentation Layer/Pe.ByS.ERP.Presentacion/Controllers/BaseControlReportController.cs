@@ -28,12 +28,12 @@ namespace Pe.ByS.ERP.Presentacion.Controllers
             return PartialView(options);
         }
 
-        public ActionResult ViewerEvent(string parameters)
-        {
-            return StiMvcViewer.ViewerEventResult();
-        }
+        //public ActionResult ViewerEvent(string parameters)
+        //{
+        //    return StiMvcViewer.ViewerEventResult();
+        //}
 
-        [HttpPost]
+        //[HttpPost]
         public ActionResult ViewerEvent()
         {
             return StiMvcViewer.ViewerEventResult();

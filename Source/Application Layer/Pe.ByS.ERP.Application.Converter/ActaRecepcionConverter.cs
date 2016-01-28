@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Pe.ByS.ERP.Application.DTO;
 using Pe.ByS.ERP.CrossCutting.Common;
-using Pe.ByS.ERP.CrossCutting.Common.Enums;
 using Pe.ByS.ERP.Domain;
 
 namespace Pe.ByS.ERP.Application.Converter
@@ -21,8 +20,7 @@ namespace Pe.ByS.ERP.Application.Converter
                 VerificadorList = new List<KeyValuePair<string, string>>
                 {
                     new KeyValuePair<string, string>("", "-- Seleccionar --"),
-                    new KeyValuePair<string, string>("1", "Verificador 1"),
-                    new KeyValuePair<string, string>("2", "Verificador 2"),
+                    new KeyValuePair<string, string>("1", "Verificador 1")
                 },
                 Fecha = DateTime.Now.ConvertToDdmmaaaa(),
                 FechaGuia = DateTime.Now.ConvertToDdmmaaaa()

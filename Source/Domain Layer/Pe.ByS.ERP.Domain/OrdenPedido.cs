@@ -8,6 +8,7 @@ namespace Pe.ByS.ERP.Domain
     {
         public string NumeroPedido { get; set; }
         public DateTime FechaPedido { get; set; }
+        public DateTime FechaEntrega { get; set; }
         public string Estado { get; set; }
         public int SolicitanteId { get; set; }
         public int SucursalId { get; set; }

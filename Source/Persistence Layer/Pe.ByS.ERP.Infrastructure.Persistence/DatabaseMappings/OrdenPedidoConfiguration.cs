@@ -14,7 +14,8 @@ namespace Pe.ByS.ERP.Infrastructure.Persistence.DatabaseMappings
             Property(p => p.NumeroPedido).IsRequired().HasColumnName("NumPedido");
             Property(p => p.SolicitanteId).HasColumnName("CodSolicitante");
             Property(p => p.Glosa).IsOptional().HasMaxLength(200);
-            Property(p => p.FechaPedido).IsRequired().HasColumnName("FchPedido");
+            Property(p => p.FechaPedido).HasColumnName("FchPedido");
+            Property(p => p.FechaEntrega).HasColumnName("FchEntrega");
 
             HasRequired(p => p.Solicitante).WithMany().HasForeignKey(p => p.SolicitanteId).WillCascadeOnDelete(false);
             HasRequired(p => p.Sucursal).WithMany().HasForeignKey(p => p.SucursalId).WillCascadeOnDelete(false);

@@ -1,1 +1,62 @@
-﻿
+﻿@{
+    Layout = "~/Views/Shared/_LayoutI.cshtml";
+}
+
+<input id="hfIdentPedido" type="hidden" />
+
+<table style="width: 100%" id="tablaPedido"></table>
+<div style="width: 100%" id="barraPedido">
+</div>
+
+<script type='text/javascript' id="ListarProducto">
+    var grillaPedido = 'tablaPedido';
+
+    $(document).ready(function () {
+        ListarActa();
+    });
+
+    function Agregar() {
+        window.location.href = '@Url.Action("Edit", "OrdenPedido", new { Area = "OrdenPedido" })';
+    }
+
+    function ListarActa() {
+        var colNames = ['ID', 'Número Pedido', 'Fecha Solicitud', 'Fecha Entrega', 'Solicitante', 'Estado'];
+        var colModels = [
+            { name: 'Id', index: 'Id', align: 'center', hidden: true },
+            { name: 'NumeroPedido', index: 'NumeroPedido', align: 'center', width: 100 },
+            { name: 'FechaPedido', index: 'FechaPedido', align: 'center', width: 120 },
+            { name: 'FechaEntrega', index: 'FechaEntrega', align: 'center', width: 120 },
+            { name: 'SolicitanteNombre', index: 'SolicitanteNombre', align: 'center', width: 120 },
+            { name: 'Estado', index: 'Estado', align: 'center', width: 120 }
+        ];
+
+        var opciones = {
+            nuevo: true,
+            editar: true,
+            eliminar: true,
+            search: false,
+            refresh: false,
+            nuevoCaption: 'Agregar',
+            EditarCaption: 'Actualizar',
+            EliminarCaption: 'Eliminar',
+            NuevoCommand: Agregar,
+            mensaje: 'Seleccione un registro',
+            sinRegistro: 'Sin registro',
+            alertTitle: 'Alerta',
+            caption: 'Listado de Ordenes de Pedido',
+            urlListar: '@Url.Action("ListarPedidos", "OrdenPedido", new { area = "OrdenPedido" })',
+            grilla: grillaPedido,
+            pager: 'barraPedido',
+            identificador: 'hfIdentPedido',
+            height: 210,
+            width: 'auto',
+            id: 'id',
+            colsNames: colNames,
+            colsModel: colModels,
+            sortName: 'Id'
+        };
+
+        SIG.GrillaUpgrade(opciones);
+    }
+
+</script>

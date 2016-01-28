@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Pe.ByS.ERP.Application.Converter;
 using Pe.ByS.ERP.CrossCutting.Common;
@@ -14,14 +15,16 @@ namespace Pe.ByS.ERP.Presentacion.Areas.OrdenPedido.Controllers
         #region Variables Privadas
 
         private readonly IOrdenPedidoBL _ordenBL;
+        private readonly ISucursalBL _sucursalBL;
 
         #endregion
 
         #region Constructor
 
-        public OrdenPedidoController(IOrdenPedidoBL ordenBL)
+        public OrdenPedidoController(IOrdenPedidoBL ordenBL, ISucursalBL sucursalBL)
         {
             _ordenBL = ordenBL;
+            _sucursalBL = sucursalBL;
         }
 
         #endregion
@@ -46,6 +49,61 @@ namespace Pe.ByS.ERP.Presentacion.Areas.OrdenPedido.Controllers
                         }
                     }
                 });
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                return MensajeError();
+            }
+        }
+
+        [HttpPost]
+        public virtual JsonResult ListarPedidos(GridTable grid)
+        {
+            try
+            {
+                return ListarJqGrid(new ListJQGridParameter<Domain.OrdenPedido>
+                {
+                    Grid = grid,
+                    BusinessLogicClass = _ordenBL,
+                    SelecctionFormat = item => new Row
+                    {
+                        id = item.Id,
+                        cell = new[]
+                        {
+                            Convert.ToString(item.Id),
+                            item.NumeroPedido,
+                            item.FechaPedido.ConvertToDdmmaaaa(),
+                            item.FechaEntrega.ConvertToDdmmaaaa(),
+                            item.Solicitante.Nombre,
+                            item.Estado
+                        }
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                return MensajeError();
+            }
+        }
+
+        public ActionResult Index()
+        {
+            return View("Index");
+        }
+
+        public ActionResult Edit()
+        {
+            var sucursalList = _sucursalBL.FindAll(p => true).ToList();
+            return View("Edit", OrdenPedidoConverter.DataInicial(sucursalList));
+        }
+
+        public ActionResult ViewProducto()
+        {
+            try
+            {
+                return PartialView();
             }
             catch (Exception ex)
             {
