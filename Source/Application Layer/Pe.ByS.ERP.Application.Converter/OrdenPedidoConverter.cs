@@ -31,6 +31,14 @@ namespace Pe.ByS.ERP.Application.Converter
             };
         }
 
+        public static List<KeyValuePair<string, string>> ProductoList(List<Producto> productolList)
+        {
+            var list = productolList.ConvertAll(p => new KeyValuePair<string, string>(p.Id.ToString(), p.Nombre));
+            list.Insert(0, new KeyValuePair<string, string>("", "-- Seleccionar --"));
+
+            return list;
+        }
+
         public static List<DetalleOrdenPedidoDto> DomainToDtoDetalleOrdenPedido(OrdenPedido pedido)
         {
             return pedido.DetalleOrdenPedidoList.Select(p => new DetalleOrdenPedidoDto

@@ -9,5 +9,6 @@
         public string UnidadMedida { get; set; }
         public int OrdenPedidoId { get; set; }
         public string NumeroPedido { get; set; }
+        public string Observacion { get; set; }
     }
 }

@@ -42,6 +42,7 @@
     <Compile Include="IActaRecepcionRepository.cs" />
     <Compile Include="IGuiaRemisionRepository.cs" />
     <Compile Include="IOrdenPedidoRepository.cs" />
+    <Compile Include="IProductoRepository.cs" />
     <Compile Include="ISucursalRepository.cs" />
     <Compile Include="ITiendaRepository.cs" />
     <Compile Include="IUsuarioRepository.cs" />

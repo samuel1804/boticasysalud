@@ -16,15 +16,17 @@ namespace Pe.ByS.ERP.Presentacion.Areas.OrdenPedido.Controllers
 
         private readonly IOrdenPedidoBL _ordenBL;
         private readonly ISucursalBL _sucursalBL;
+        private readonly IProductoBL _productoBL;
 
         #endregion
 
         #region Constructor
 
-        public OrdenPedidoController(IOrdenPedidoBL ordenBL, ISucursalBL sucursalBL)
+        public OrdenPedidoController(IOrdenPedidoBL ordenBL, ISucursalBL sucursalBL, IProductoBL productoBL)
         {
             _ordenBL = ordenBL;
             _sucursalBL = sucursalBL;
+            _productoBL = productoBL;
         }
 
         #endregion
@@ -103,7 +105,8 @@ namespace Pe.ByS.ERP.Presentacion.Areas.OrdenPedido.Controllers
         {
             try
             {
-                return PartialView();
+                var list = _productoBL.FindAll(p => true).ToList();
+                return PartialView(OrdenPedidoConverter.ProductoList(list));
             }
             catch (Exception ex)
             {

@@ -54,6 +54,7 @@
     <Compile Include="ActaRecepcionRepository.cs" />
     <Compile Include="GuiaRemisionRepository.cs" />
     <Compile Include="OrdenPedidoRepository.cs" />
+    <Compile Include="ProductoRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SucursalRepository.cs" />
     <Compile Include="TiendaRepository.cs" />
