@@ -113,7 +113,7 @@ namespace WebBS.Controllers.ALP
 
             var constancia = db.ALP_CONSTANCIA_PREPARADO.Where(o => o.num_constancia_preparado.Contains(num_constancia)).FirstOrDefault();
 
-            //ViewBag.tecnicoLaboratorista = constancia. .ALP_ORDEN_PREPARADO.RRH_Empleado.Nom_empleado + " " + constancia.ALP_ORDEN_PREPARADO.RRH_Empleado.Ap_paterno + " " + constancia.ALP_ORDEN_PREPARADO.RRH_Empleado.Ap_materno;
+            ViewBag.tecnicoLaboratorista = constancia.RRH_Empleado.Nom_empleado + " " + constancia.RRH_Empleado.Ap_paterno + " " + constancia.RRH_Empleado.Ap_materno;
             ViewBag.tecnicoFarmaceutico = constancia.ALP_ORDEN_PREPARADO.RRH_Empleado.Nom_empleado + " " + constancia.ALP_ORDEN_PREPARADO.RRH_Empleado.Ap_paterno + " " + constancia.ALP_ORDEN_PREPARADO.RRH_Empleado.Ap_materno;
             ViewBag.fechaConstancia = constancia.fec_elaboracion.ToString("dd/MM/yyyy");
 

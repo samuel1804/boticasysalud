@@ -48,9 +48,11 @@
                         html += "<td>" + value.fechaConstancia + "</td>";
                         html += "<td>" + value.sucursal + "</td>";
                         html += "<td>" + value.nomPreparado + "</td>";
-                        html += "<td><a href='../Constancia/Modificar?num_constancia=" + value.nroConstancia + "'>Modifcar Constancia</a> <a href='../ControlMerma/Registrar?num_constancia=" + value.nroConstancia + "'>Control Merma</a></td>";
+                        html += "<td><a href='../Constancia/Modificar?num_constancia=" + value.nroConstancia + "'>Modifcar Constancia</a></td>";
                         html += "<tr>";
                     });
+
+                    //<a href='../ControlMerma/Registrar?num_constancia=" + value.nroConstancia + "'>Control Merma</a>
 
                     $("#tbConstanciaContent").html(html);
 

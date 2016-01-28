@@ -2,6 +2,15 @@
 
 $(document).ready(function () {
 
+    var now = new Date();
+
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+    var today = (day) + "-" + (month) + "-" + now.getFullYear();
+
+    $('#txtFecMerma').val(today);
+
     $("#btnGuardar").on("click", ActualizarConstancia);
 
     function ActualizarConstancia() {
@@ -24,11 +33,18 @@ $(document).ready(function () {
             var cantConstancia = $.trim($(tds[4]).text());
             var cantDiferencia = $.trim($(tds[5]).text());
 
+            if (cantDiferencia > 0 && motivo.length == 0)
+            {
+                tmpCodInsumo = codInsumo;
+                isValid = false;
+                return false;
+            }
+
             arrInsumos.push(codInsumo + "|" + cantOrden + "|" + cantConstancia + "|" + cantDiferencia + "|" + motivo);
         });
 
         if (!isValid) {
-            bootbox.alert("La cantidad real no puede ser menor a la cantidad solicitada del insumo : " + tmpCodInsumo);
+            bootbox.alert("Debe ingresar motivo de merma para el insumo : " + tmpCodInsumo);
             return;
         }
 

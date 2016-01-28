@@ -40,9 +40,15 @@
             </div>
         </div>
         <div class="form-group disabled">
-            <label for="txtFecConstancia" class="col-sm-2 control-label">Fecha Constancia (dd/mm/yyyy)</label>
+            <label for="txtTecnico" class="col-sm-2 control-label">Encargado</label>
             <div class="col-sm-10">
-                <input type="datetime" class="form-control" id="txtFecConstancia" value="@ViewBag.fechaConstancia">
+                <input type="text" class="form-control" id="txtTecnico" placeholder="Encargado" value="@ViewBag.tecnicoLaboratorista">
+            </div>
+        </div>
+        <div class="form-group disabled">
+            <label for="txtFecMerma" class="col-sm-2 control-label">Fecha Control Merma (dd/mm/yyyy)</label>
+            <div class="col-sm-10">
+                <input type="datetime" class="form-control" id="txtFecMerma">
             </div>
         </div>
     </fieldset>
@@ -88,7 +94,9 @@
                                 <td>
                                     <div class="form-group disabled">
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" placeholder="Motivo">
+                                            @if (item.cant_insumo_diferencia > 0) { 
+                                                <input type="text" class="form-control" placeholder="Motivo">
+                                            }
                                         </div>
                                     </div>
                                 </td>
