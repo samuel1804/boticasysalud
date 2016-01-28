@@ -28,11 +28,13 @@ namespace WebBS.Models
         public virtual DbSet<ALP_CONSTANCIA_PREPARADO> ALP_CONSTANCIA_PREPARADO { get; set; }
         public virtual DbSet<ALP_CONSTANCIA_PREPARADO_INSUMO> ALP_CONSTANCIA_PREPARADO_INSUMO { get; set; }
         public virtual DbSet<ALP_HOJA_MERMA> ALP_HOJA_MERMA { get; set; }
+        public virtual DbSet<ALP_HOJA_MERMA_INSUMO> ALP_HOJA_MERMA_INSUMO { get; set; }
         public virtual DbSet<ALP_INSUMO> ALP_INSUMO { get; set; }
         public virtual DbSet<ALP_LIBRO_RECETA> ALP_LIBRO_RECETA { get; set; }
         public virtual DbSet<ALP_ORDEN_PREPARADO> ALP_ORDEN_PREPARADO { get; set; }
         public virtual DbSet<ALP_ORDEN_PREPARADO_INSUMO> ALP_ORDEN_PREPARADO_INSUMO { get; set; }
         public virtual DbSet<ALP_RECETA> ALP_RECETA { get; set; }
+        public virtual DbSet<ALP_SOLICITUD_TRANSPORTE> ALP_SOLICITUD_TRANSPORTE { get; set; }
         public virtual DbSet<DIS_Control_Asignacion> DIS_Control_Asignacion { get; set; }
         public virtual DbSet<DIS_HojaRuta> DIS_HojaRuta { get; set; }
         public virtual DbSet<DIS_HojaRutaDetalle> DIS_HojaRutaDetalle { get; set; }

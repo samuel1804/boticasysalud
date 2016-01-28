@@ -231,6 +231,9 @@
     <Compile Include="Models\ALP_HOJA_MERMA.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ALP_HOJA_MERMA_INSUMO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ALP_INSUMO.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
@@ -244,6 +247,9 @@
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ALP_RECETA.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ALP_SOLICITUD_TRANSPORTE.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BDBoticas.Context.cs">

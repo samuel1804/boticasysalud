@@ -17,8 +17,9 @@ namespace WebBS.Models
         public ALP_CONSTANCIA_PREPARADO()
         {
             this.ALP_CONSTANCIA_PREPARADO_INSUMO = new HashSet<ALP_CONSTANCIA_PREPARADO_INSUMO>();
-            this.ALP_HOJA_MERMA = new HashSet<ALP_HOJA_MERMA>();
             this.ALP_LIBRO_RECETA = new HashSet<ALP_LIBRO_RECETA>();
+            this.ALP_HOJA_MERMA = new HashSet<ALP_HOJA_MERMA>();
+            this.ALP_SOLICITUD_TRANSPORTE = new HashSet<ALP_SOLICITUD_TRANSPORTE>();
         }
     
         public string num_constancia_preparado { get; set; }
@@ -30,10 +31,13 @@ namespace WebBS.Models
         public Nullable<int> cod_usu_modi { get; set; }
         public Nullable<System.DateTime> fec_usu_modi { get; set; }
         public string motivo { get; set; }
+        public Nullable<int> cod_empleado { get; set; }
     
         public virtual ICollection<ALP_CONSTANCIA_PREPARADO_INSUMO> ALP_CONSTANCIA_PREPARADO_INSUMO { get; set; }
         public virtual ALP_ORDEN_PREPARADO ALP_ORDEN_PREPARADO { get; set; }
-        public virtual ICollection<ALP_HOJA_MERMA> ALP_HOJA_MERMA { get; set; }
         public virtual ICollection<ALP_LIBRO_RECETA> ALP_LIBRO_RECETA { get; set; }
+        public virtual ICollection<ALP_HOJA_MERMA> ALP_HOJA_MERMA { get; set; }
+        public virtual ICollection<ALP_SOLICITUD_TRANSPORTE> ALP_SOLICITUD_TRANSPORTE { get; set; }
+        public virtual RRH_Empleado RRH_Empleado { get; set; }
     }
 }

@@ -18,6 +18,7 @@
           <Property Name="cod_usu_modi" Type="int" />
           <Property Name="fec_usu_modi" Type="date" />
           <Property Name="motivo" Type="varchar" MaxLength="255" />
+          <Property Name="cod_empleado" Type="int" />
         </EntityType>
         <EntityType Name="ALP_CONSTANCIA_PREPARADO_INSUMO">
           <Key>
@@ -36,12 +37,24 @@
           </Key>
           <Property Name="num_hoja_merma" Type="char" MaxLength="20" Nullable="false" />
           <Property Name="num_constancia_preparado" Type="char" MaxLength="20" Nullable="false" />
-          <Property Name="cant_insumo_merma" Type="int" Nullable="false" />
-          <Property Name="motivo" Type="nvarchar" MaxLength="250" />
           <Property Name="cod_usu_regi" Type="int" Nullable="false" />
           <Property Name="fec_usu_regi" Type="date" Nullable="false" />
           <Property Name="cod_usu_modi" Type="int" />
           <Property Name="fec_usu_modi" Type="date" />
+          <Property Name="fec_merma" Type="date" Nullable="false" />
+          <Property Name="estado" Type="char" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ALP_HOJA_MERMA_INSUMO">
+          <Key>
+            <PropertyRef Name="num_hoja_merma" />
+            <PropertyRef Name="cod_insumo" />
+          </Key>
+          <Property Name="num_hoja_merma" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="cod_insumo" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="cant_insumo" Type="int" Nullable="false" />
+          <Property Name="motivo" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="cant_constancia" Type="int" Nullable="false" />
+          <Property Name="cant_diferencia" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ALP_INSUMO">
           <Key>
@@ -115,6 +128,20 @@
           <Property Name="fec_usu_regi" Type="date" Nullable="false" />
           <Property Name="cod_usu_modi" Type="int" />
           <Property Name="fec_usu_modi" Type="date" />
+        </EntityType>
+        <EntityType Name="ALP_SOLICITUD_TRANSPORTE">
+          <Key>
+            <PropertyRef Name="num_solicitud" />
+          </Key>
+          <Property Name="num_solicitud" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="num_constancia_preparado" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="cod_empleado" Type="int" Nullable="false" />
+          <Property Name="observacion" Type="varchar" MaxLength="255" />
+          <Property Name="fec_solicitud" Type="date" Nullable="false" />
+          <Property Name="cod_usu_regi" Type="int" Nullable="false" />
+          <Property Name="fec_usu_regi" Type="date" Nullable="false" />
+          <Property Name="cod_usu_modi" Type="int" Nullable="false" />
+          <Property Name="fec_usu_modi" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="DIS_Control_Asignacion">
           <Key>
@@ -1424,18 +1451,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_HOJA___num_c__40058253">
-          <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
-          <End Role="ALP_HOJA_MERMA" Type="Self.ALP_HOJA_MERMA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ALP_CONSTANCIA_PREPARADO">
-              <PropertyRef Name="num_constancia_preparado" />
-            </Principal>
-            <Dependent Role="ALP_HOJA_MERMA">
-              <PropertyRef Name="num_constancia_preparado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__ALP_LIBRO__cod_q__40F9A68C">
           <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="1" />
           <End Role="ALP_LIBRO_RECETA" Type="Self.ALP_LIBRO_RECETA" Multiplicity="*" />
@@ -1529,6 +1544,78 @@
             </Principal>
             <Dependent Role="DIS_Pedido">
               <PropertyRef Name="Cod_sucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ALP_CONSTANCIA_PREPARADO_RRHH_EMPLEADO">
+          <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="0..1" />
+          <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Empleado">
+              <PropertyRef Name="Cod_empleado" />
+            </Principal>
+            <Dependent Role="ALP_CONSTANCIA_PREPARADO">
+              <PropertyRef Name="cod_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ALP_HOJA_MERMA_ALP_CONSTANCIA_PREPARADO">
+          <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
+          <End Role="ALP_HOJA_MERMA" Type="Self.ALP_HOJA_MERMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_CONSTANCIA_PREPARADO">
+              <PropertyRef Name="num_constancia_preparado" />
+            </Principal>
+            <Dependent Role="ALP_HOJA_MERMA">
+              <PropertyRef Name="num_constancia_preparado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ALP_HOJA_MERMA_INSUMO_ALP_HOJA_MERMA">
+          <End Role="ALP_HOJA_MERMA" Type="Self.ALP_HOJA_MERMA" Multiplicity="1" />
+          <End Role="ALP_HOJA_MERMA_INSUMO" Type="Self.ALP_HOJA_MERMA_INSUMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_HOJA_MERMA">
+              <PropertyRef Name="num_hoja_merma" />
+            </Principal>
+            <Dependent Role="ALP_HOJA_MERMA_INSUMO">
+              <PropertyRef Name="num_hoja_merma" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ALP_HOJA_MERMA_INSUMO_ALP_INSUMO">
+          <End Role="ALP_INSUMO" Type="Self.ALP_INSUMO" Multiplicity="1" />
+          <End Role="ALP_HOJA_MERMA_INSUMO" Type="Self.ALP_HOJA_MERMA_INSUMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_INSUMO">
+              <PropertyRef Name="cod_insumo" />
+            </Principal>
+            <Dependent Role="ALP_HOJA_MERMA_INSUMO">
+              <PropertyRef Name="cod_insumo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ALP_SOLICITUD_TRANSPORTE_ALP_CONSTANCIA_PREPARADO">
+          <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
+          <End Role="ALP_SOLICITUD_TRANSPORTE" Type="Self.ALP_SOLICITUD_TRANSPORTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_CONSTANCIA_PREPARADO">
+              <PropertyRef Name="num_constancia_preparado" />
+            </Principal>
+            <Dependent Role="ALP_SOLICITUD_TRANSPORTE">
+              <PropertyRef Name="num_constancia_preparado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ALP_SOLICITUD_TRANSPORTE_RRHH_EMPLEADO">
+          <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="1" />
+          <End Role="ALP_SOLICITUD_TRANSPORTE" Type="Self.ALP_SOLICITUD_TRANSPORTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Empleado">
+              <PropertyRef Name="Cod_empleado" />
+            </Principal>
+            <Dependent Role="ALP_SOLICITUD_TRANSPORTE">
+              <PropertyRef Name="cod_empleado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2636,11 +2723,13 @@
           <EntitySet Name="ALP_CONSTANCIA_PREPARADO" EntityType="Self.ALP_CONSTANCIA_PREPARADO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALP_CONSTANCIA_PREPARADO_INSUMO" EntityType="Self.ALP_CONSTANCIA_PREPARADO_INSUMO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALP_HOJA_MERMA" EntityType="Self.ALP_HOJA_MERMA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ALP_HOJA_MERMA_INSUMO" EntityType="Self.ALP_HOJA_MERMA_INSUMO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALP_INSUMO" EntityType="Self.ALP_INSUMO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALP_LIBRO_RECETA" EntityType="Self.ALP_LIBRO_RECETA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALP_ORDEN_PREPARADO" EntityType="Self.ALP_ORDEN_PREPARADO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALP_ORDEN_PREPARADO_INSUMO" EntityType="Self.ALP_ORDEN_PREPARADO_INSUMO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALP_RECETA" EntityType="Self.ALP_RECETA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ALP_SOLICITUD_TRANSPORTE" EntityType="Self.ALP_SOLICITUD_TRANSPORTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DIS_Control_Asignacion" EntityType="Self.DIS_Control_Asignacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DIS_HojaRuta" EntityType="Self.DIS_HojaRuta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DIS_HojaRutaDetalle" EntityType="Self.DIS_HojaRutaDetalle" Schema="dbo" store:Type="Tables" />
@@ -2740,10 +2829,6 @@
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_HOJA___num_c__40058253" Association="Self.FK__ALP_HOJA___num_c__40058253">
-            <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
-            <End Role="ALP_HOJA_MERMA" EntitySet="ALP_HOJA_MERMA" />
-          </AssociationSet>
           <AssociationSet Name="FK__ALP_LIBRO__cod_q__40F9A68C" Association="Self.FK__ALP_LIBRO__cod_q__40F9A68C">
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="ALP_LIBRO_RECETA" EntitySet="ALP_LIBRO_RECETA" />
@@ -2775,6 +2860,30 @@
           <AssociationSet Name="FK__DIS_Pedid__Cod_s__4C6B5938" Association="Self.FK__DIS_Pedid__Cod_s__4C6B5938">
             <End Role="RRH_Sucursal" EntitySet="RRH_Sucursal" />
             <End Role="DIS_Pedido" EntitySet="DIS_Pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ALP_CONSTANCIA_PREPARADO_RRHH_EMPLEADO" Association="Self.FK_ALP_CONSTANCIA_PREPARADO_RRHH_EMPLEADO">
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+            <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ALP_HOJA_MERMA_ALP_CONSTANCIA_PREPARADO" Association="Self.FK_ALP_HOJA_MERMA_ALP_CONSTANCIA_PREPARADO">
+            <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
+            <End Role="ALP_HOJA_MERMA" EntitySet="ALP_HOJA_MERMA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ALP_HOJA_MERMA_INSUMO_ALP_HOJA_MERMA" Association="Self.FK_ALP_HOJA_MERMA_INSUMO_ALP_HOJA_MERMA">
+            <End Role="ALP_HOJA_MERMA" EntitySet="ALP_HOJA_MERMA" />
+            <End Role="ALP_HOJA_MERMA_INSUMO" EntitySet="ALP_HOJA_MERMA_INSUMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ALP_HOJA_MERMA_INSUMO_ALP_INSUMO" Association="Self.FK_ALP_HOJA_MERMA_INSUMO_ALP_INSUMO">
+            <End Role="ALP_INSUMO" EntitySet="ALP_INSUMO" />
+            <End Role="ALP_HOJA_MERMA_INSUMO" EntitySet="ALP_HOJA_MERMA_INSUMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ALP_SOLICITUD_TRANSPORTE_ALP_CONSTANCIA_PREPARADO" Association="Self.FK_ALP_SOLICITUD_TRANSPORTE_ALP_CONSTANCIA_PREPARADO">
+            <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
+            <End Role="ALP_SOLICITUD_TRANSPORTE" EntitySet="ALP_SOLICITUD_TRANSPORTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ALP_SOLICITUD_TRANSPORTE_RRHH_EMPLEADO" Association="Self.FK_ALP_SOLICITUD_TRANSPORTE_RRHH_EMPLEADO">
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+            <End Role="ALP_SOLICITUD_TRANSPORTE" EntitySet="ALP_SOLICITUD_TRANSPORTE" />
           </AssociationSet>
           <AssociationSet Name="FK_Control_Asignacion_Chofer" Association="Self.FK_Control_Asignacion_Chofer">
             <End Role="DIS_Transportista" EntitySet="DIS_Transportista" />
@@ -3157,11 +3266,14 @@
           <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
+          <Property Name="motivo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO_INSUMO" Relationship="Self.FK__ALP_CONST__num_c__2EA5EC27" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_CONSTANCIA_PREPARADO_INSUMO" />
           <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="Self.FK__ALP_CONST__num_o__3F115E1A" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_ORDEN_PREPARADO" />
-          <NavigationProperty Name="ALP_HOJA_MERMA" Relationship="Self.FK__ALP_HOJA___num_c__40058253" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_HOJA_MERMA" />
           <NavigationProperty Name="ALP_LIBRO_RECETA" Relationship="Self.FK__ALP_LIBRO__num_c__41EDCAC5" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_LIBRO_RECETA" />
-          <Property Name="motivo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ALP_HOJA_MERMA" Relationship="Self.FK_ALP_HOJA_MERMA_ALP_CONSTANCIA_PREPARADO" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_HOJA_MERMA" />
+          <NavigationProperty Name="ALP_SOLICITUD_TRANSPORTE" Relationship="Self.FK_ALP_SOLICITUD_TRANSPORTE_ALP_CONSTANCIA_PREPARADO" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_SOLICITUD_TRANSPORTE" />
+          <Property Name="cod_empleado" Type="Int32" />
+          <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_ALP_CONSTANCIA_PREPARADO_RRHH_EMPLEADO" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="RRH_Empleado" />
         </EntityType>
         <EntityType Name="ALP_CONSTANCIA_PREPARADO_INSUMO">
           <Key>
@@ -3182,13 +3294,28 @@
           </Key>
           <Property Name="num_hoja_merma" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="num_constancia_preparado" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="cant_insumo_merma" Type="Int32" Nullable="false" />
-          <Property Name="motivo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="cod_usu_regi" Type="Int32" Nullable="false" />
           <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="Self.FK__ALP_HOJA___num_c__40058253" FromRole="ALP_HOJA_MERMA" ToRole="ALP_CONSTANCIA_PREPARADO" />
+          <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="Self.FK_ALP_HOJA_MERMA_ALP_CONSTANCIA_PREPARADO" FromRole="ALP_HOJA_MERMA" ToRole="ALP_CONSTANCIA_PREPARADO" />
+          <NavigationProperty Name="ALP_HOJA_MERMA_INSUMO" Relationship="Self.FK_ALP_HOJA_MERMA_INSUMO_ALP_HOJA_MERMA" FromRole="ALP_HOJA_MERMA" ToRole="ALP_HOJA_MERMA_INSUMO" />
+          <Property Name="fec_merma" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ALP_HOJA_MERMA_INSUMO">
+          <Key>
+            <PropertyRef Name="num_hoja_merma" />
+            <PropertyRef Name="cod_insumo" />
+          </Key>
+          <Property Name="num_hoja_merma" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="cod_insumo" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="cant_insumo" Type="Int32" Nullable="false" />
+          <Property Name="motivo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ALP_HOJA_MERMA" Relationship="Self.FK_ALP_HOJA_MERMA_INSUMO_ALP_HOJA_MERMA" FromRole="ALP_HOJA_MERMA_INSUMO" ToRole="ALP_HOJA_MERMA" />
+          <NavigationProperty Name="ALP_INSUMO" Relationship="Self.FK_ALP_HOJA_MERMA_INSUMO_ALP_INSUMO" FromRole="ALP_HOJA_MERMA_INSUMO" ToRole="ALP_INSUMO" />
+          <Property Name="cant_constancia" Type="Int32" Nullable="false" />
+          <Property Name="cant_diferencia" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="ALP_INSUMO">
           <Key>
@@ -3204,6 +3331,7 @@
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
           <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO_INSUMO" Relationship="Self.FK__ALP_CONST__cod_i__2DB1C7EE" FromRole="ALP_INSUMO" ToRole="ALP_CONSTANCIA_PREPARADO_INSUMO" />
+          <NavigationProperty Name="ALP_HOJA_MERMA_INSUMO" Relationship="Self.FK_ALP_HOJA_MERMA_INSUMO_ALP_INSUMO" FromRole="ALP_INSUMO" ToRole="ALP_HOJA_MERMA_INSUMO" />
           <NavigationProperty Name="ALP_ORDEN_PREPARADO_INSUMO" Relationship="Self.FK__ALP_ORDEN__cod_i__45BE5BA9" FromRole="ALP_INSUMO" ToRole="ALP_ORDEN_PREPARADO_INSUMO" />
         </EntityType>
         <EntityType Name="ALP_LIBRO_RECETA">
@@ -3274,6 +3402,22 @@
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
           <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="Self.FK__ALP_ORDEN__cod_r__43D61337" FromRole="ALP_RECETA" ToRole="ALP_ORDEN_PREPARADO" />
+        </EntityType>
+        <EntityType Name="ALP_SOLICITUD_TRANSPORTE">
+          <Key>
+            <PropertyRef Name="num_solicitud" />
+          </Key>
+          <Property Name="num_solicitud" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="num_constancia_preparado" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="cod_empleado" Type="Int32" Nullable="false" />
+          <Property Name="observacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="fec_solicitud" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cod_usu_regi" Type="Int32" Nullable="false" />
+          <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cod_usu_modi" Type="Int32" Nullable="false" />
+          <Property Name="fec_usu_modi" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="Self.FK_ALP_SOLICITUD_TRANSPORTE_ALP_CONSTANCIA_PREPARADO" FromRole="ALP_SOLICITUD_TRANSPORTE" ToRole="ALP_CONSTANCIA_PREPARADO" />
+          <NavigationProperty Name="RRH_Empleado" Relationship="Self.FK_ALP_SOLICITUD_TRANSPORTE_RRHH_EMPLEADO" FromRole="ALP_SOLICITUD_TRANSPORTE" ToRole="RRH_Empleado" />
         </EntityType>
         <EntityType Name="DIS_Control_Asignacion">
           <Key>
@@ -4353,12 +4497,14 @@
           <Property Name="Cod_puesto" Type="Int32" />
           <NavigationProperty Name="ALP_LIBRO_RECETA" Relationship="Self.FK__ALP_LIBRO__cod_q__40F9A68C" FromRole="RRH_Empleado" ToRole="ALP_LIBRO_RECETA" />
           <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="Self.FK__ALP_ORDEN__cod_e__42E1EEFE" FromRole="RRH_Empleado" ToRole="ALP_ORDEN_PREPARADO" />
+          <NavigationProperty Name="ALP_SOLICITUD_TRANSPORTE" Relationship="Self.FK_ALP_SOLICITUD_TRANSPORTE_RRHH_EMPLEADO" FromRole="RRH_Empleado" ToRole="ALP_SOLICITUD_TRANSPORTE" />
           <NavigationProperty Name="GCC_EMPLEADO_INF_CREDITICIO" Relationship="Self.FK_GCC_EMPLEADO_INF_CREDITICIO_RRH_EMPLEADO" FromRole="RRH_Empleado" ToRole="GCC_EMPLEADO_INF_CREDITICIO" />
           <NavigationProperty Name="GCC_EMPLEADO_SOL_CREDITO" Relationship="Self.FK_GCC_EMPLEADO_SOL_CREDITO_RRH_EMPLEADO" FromRole="RRH_Empleado" ToRole="GCC_EMPLEADO_SOL_CREDITO" />
           <NavigationProperty Name="IMP_ACTIVIDAD_PLANIFICADA" Relationship="Self.FK_IMP_ACTIVIDAD_PLANIFICADA_RRH_Empleado" FromRole="RRH_Empleado" ToRole="IMP_ACTIVIDAD_PLANIFICADA" />
           <NavigationProperty Name="RRH_Puesto" Relationship="Self.FK_RRH_Empleado_RRH_Puesto" FromRole="RRH_Empleado" ToRole="RRH_Puesto" />
           <NavigationProperty Name="RRH_PruebaAuotoevaluacion" Relationship="Self.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" FromRole="RRH_Empleado" ToRole="RRH_PruebaAuotoevaluacion" />
           <NavigationProperty Name="RRH_PruebaEvaluacionTecnica" Relationship="Self.FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado" FromRole="RRH_Empleado" ToRole="RRH_PruebaEvaluacionTecnica" />
+          <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="BDBoticasModel.FK_ALP_CONSTANCIA_PREPARADO_RRHH_EMPLEADO" FromRole="RRH_Empleado" ToRole="ALP_CONSTANCIA_PREPARADO" />
         </EntityType>
         <EntityType Name="RRH_OfertaLaboral">
           <Key>
@@ -4758,18 +4904,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_HOJA___num_c__40058253">
-          <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
-          <End Role="ALP_HOJA_MERMA" Type="Self.ALP_HOJA_MERMA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ALP_CONSTANCIA_PREPARADO">
-              <PropertyRef Name="num_constancia_preparado" />
-            </Principal>
-            <Dependent Role="ALP_HOJA_MERMA">
-              <PropertyRef Name="num_constancia_preparado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__ALP_LIBRO__num_c__41EDCAC5">
           <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
           <End Role="ALP_LIBRO_RECETA" Type="Self.ALP_LIBRO_RECETA" Multiplicity="*" />
@@ -4782,6 +4916,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ALP_HOJA_MERMA_ALP_CONSTANCIA_PREPARADO">
+          <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
+          <End Role="ALP_HOJA_MERMA" Type="Self.ALP_HOJA_MERMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_CONSTANCIA_PREPARADO">
+              <PropertyRef Name="num_constancia_preparado" />
+            </Principal>
+            <Dependent Role="ALP_HOJA_MERMA">
+              <PropertyRef Name="num_constancia_preparado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ALP_SOLICITUD_TRANSPORTE_ALP_CONSTANCIA_PREPARADO">
+          <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
+          <End Role="ALP_SOLICITUD_TRANSPORTE" Type="Self.ALP_SOLICITUD_TRANSPORTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_CONSTANCIA_PREPARADO">
+              <PropertyRef Name="num_constancia_preparado" />
+            </Principal>
+            <Dependent Role="ALP_SOLICITUD_TRANSPORTE">
+              <PropertyRef Name="num_constancia_preparado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__ALP_CONST__cod_i__2DB1C7EE">
           <End Role="ALP_INSUMO" Type="Self.ALP_INSUMO" Multiplicity="1" />
           <End Role="ALP_CONSTANCIA_PREPARADO_INSUMO" Type="Self.ALP_CONSTANCIA_PREPARADO_INSUMO" Multiplicity="*" />
@@ -4790,6 +4948,30 @@
               <PropertyRef Name="cod_insumo" />
             </Principal>
             <Dependent Role="ALP_CONSTANCIA_PREPARADO_INSUMO">
+              <PropertyRef Name="cod_insumo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ALP_HOJA_MERMA_INSUMO_ALP_HOJA_MERMA">
+          <End Role="ALP_HOJA_MERMA" Type="Self.ALP_HOJA_MERMA" Multiplicity="1" />
+          <End Role="ALP_HOJA_MERMA_INSUMO" Type="Self.ALP_HOJA_MERMA_INSUMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_HOJA_MERMA">
+              <PropertyRef Name="num_hoja_merma" />
+            </Principal>
+            <Dependent Role="ALP_HOJA_MERMA_INSUMO">
+              <PropertyRef Name="num_hoja_merma" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ALP_HOJA_MERMA_INSUMO_ALP_INSUMO">
+          <End Role="ALP_INSUMO" Type="Self.ALP_INSUMO" Multiplicity="1" />
+          <End Role="ALP_HOJA_MERMA_INSUMO" Type="Self.ALP_HOJA_MERMA_INSUMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_INSUMO">
+              <PropertyRef Name="cod_insumo" />
+            </Principal>
+            <Dependent Role="ALP_HOJA_MERMA_INSUMO">
               <PropertyRef Name="cod_insumo" />
             </Dependent>
           </ReferentialConstraint>
@@ -4863,6 +5045,18 @@
             </Principal>
             <Dependent Role="ALP_ORDEN_PREPARADO_INSUMO">
               <PropertyRef Name="num_orden_preparado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ALP_SOLICITUD_TRANSPORTE_RRHH_EMPLEADO">
+          <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="1" />
+          <End Role="ALP_SOLICITUD_TRANSPORTE" Type="Self.ALP_SOLICITUD_TRANSPORTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Empleado">
+              <PropertyRef Name="Cod_empleado" />
+            </Principal>
+            <Dependent Role="ALP_SOLICITUD_TRANSPORTE">
+              <PropertyRef Name="cod_empleado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5982,11 +6176,13 @@
           <EntitySet Name="ALP_CONSTANCIA_PREPARADO" EntityType="Self.ALP_CONSTANCIA_PREPARADO" />
           <EntitySet Name="ALP_CONSTANCIA_PREPARADO_INSUMO" EntityType="Self.ALP_CONSTANCIA_PREPARADO_INSUMO" />
           <EntitySet Name="ALP_HOJA_MERMA" EntityType="Self.ALP_HOJA_MERMA" />
+          <EntitySet Name="ALP_HOJA_MERMA_INSUMO" EntityType="Self.ALP_HOJA_MERMA_INSUMO" />
           <EntitySet Name="ALP_INSUMO" EntityType="Self.ALP_INSUMO" />
           <EntitySet Name="ALP_LIBRO_RECETA" EntityType="Self.ALP_LIBRO_RECETA" />
           <EntitySet Name="ALP_ORDEN_PREPARADO" EntityType="Self.ALP_ORDEN_PREPARADO" />
           <EntitySet Name="ALP_ORDEN_PREPARADO_INSUMO" EntityType="Self.ALP_ORDEN_PREPARADO_INSUMO" />
           <EntitySet Name="ALP_RECETA" EntityType="Self.ALP_RECETA" />
+          <EntitySet Name="ALP_SOLICITUD_TRANSPORTE" EntityType="Self.ALP_SOLICITUD_TRANSPORTE" />
           <EntitySet Name="DIS_Control_Asignacion" EntityType="Self.DIS_Control_Asignacion" />
           <EntitySet Name="DIS_HojaRuta" EntityType="Self.DIS_HojaRuta" />
           <EntitySet Name="DIS_HojaRutaDetalle" EntityType="Self.DIS_HojaRutaDetalle" />
@@ -6082,17 +6278,29 @@
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_HOJA___num_c__40058253" Association="Self.FK__ALP_HOJA___num_c__40058253">
-            <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
-            <End Role="ALP_HOJA_MERMA" EntitySet="ALP_HOJA_MERMA" />
-          </AssociationSet>
           <AssociationSet Name="FK__ALP_LIBRO__num_c__41EDCAC5" Association="Self.FK__ALP_LIBRO__num_c__41EDCAC5">
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
             <End Role="ALP_LIBRO_RECETA" EntitySet="ALP_LIBRO_RECETA" />
           </AssociationSet>
+          <AssociationSet Name="FK_ALP_HOJA_MERMA_ALP_CONSTANCIA_PREPARADO" Association="Self.FK_ALP_HOJA_MERMA_ALP_CONSTANCIA_PREPARADO">
+            <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
+            <End Role="ALP_HOJA_MERMA" EntitySet="ALP_HOJA_MERMA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ALP_SOLICITUD_TRANSPORTE_ALP_CONSTANCIA_PREPARADO" Association="Self.FK_ALP_SOLICITUD_TRANSPORTE_ALP_CONSTANCIA_PREPARADO">
+            <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
+            <End Role="ALP_SOLICITUD_TRANSPORTE" EntitySet="ALP_SOLICITUD_TRANSPORTE" />
+          </AssociationSet>
           <AssociationSet Name="FK__ALP_CONST__cod_i__2DB1C7EE" Association="Self.FK__ALP_CONST__cod_i__2DB1C7EE">
             <End Role="ALP_INSUMO" EntitySet="ALP_INSUMO" />
             <End Role="ALP_CONSTANCIA_PREPARADO_INSUMO" EntitySet="ALP_CONSTANCIA_PREPARADO_INSUMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ALP_HOJA_MERMA_INSUMO_ALP_HOJA_MERMA" Association="Self.FK_ALP_HOJA_MERMA_INSUMO_ALP_HOJA_MERMA">
+            <End Role="ALP_HOJA_MERMA" EntitySet="ALP_HOJA_MERMA" />
+            <End Role="ALP_HOJA_MERMA_INSUMO" EntitySet="ALP_HOJA_MERMA_INSUMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ALP_HOJA_MERMA_INSUMO_ALP_INSUMO" Association="Self.FK_ALP_HOJA_MERMA_INSUMO_ALP_INSUMO">
+            <End Role="ALP_INSUMO" EntitySet="ALP_INSUMO" />
+            <End Role="ALP_HOJA_MERMA_INSUMO" EntitySet="ALP_HOJA_MERMA_INSUMO" />
           </AssociationSet>
           <AssociationSet Name="FK__ALP_ORDEN__cod_i__45BE5BA9" Association="Self.FK__ALP_ORDEN__cod_i__45BE5BA9">
             <End Role="ALP_INSUMO" EntitySet="ALP_INSUMO" />
@@ -6117,6 +6325,10 @@
           <AssociationSet Name="FK__ALP_ORDEN__num_o__46B27FE2" Association="Self.FK__ALP_ORDEN__num_o__46B27FE2">
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
             <End Role="ALP_ORDEN_PREPARADO_INSUMO" EntitySet="ALP_ORDEN_PREPARADO_INSUMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ALP_SOLICITUD_TRANSPORTE_RRHH_EMPLEADO" Association="Self.FK_ALP_SOLICITUD_TRANSPORTE_RRHH_EMPLEADO">
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+            <End Role="ALP_SOLICITUD_TRANSPORTE" EntitySet="ALP_SOLICITUD_TRANSPORTE" />
           </AssociationSet>
           <AssociationSet Name="FK_Control_Asignacion_Chofer" Association="Self.FK_Control_Asignacion_Chofer">
             <End Role="DIS_Transportista" EntitySet="DIS_Transportista" />
@@ -6486,7 +6698,23 @@
             <End Role="RYA_PRODUCTO" EntitySet="RYA_PRODUCTO" />
             <End Role="RYA_STOCK" EntitySet="RYA_STOCK" />
           </AssociationSet>
+          <AssociationSet Name="FK_ALP_CONSTANCIA_PREPARADO_RRHH_EMPLEADO" Association="BDBoticasModel.FK_ALP_CONSTANCIA_PREPARADO_RRHH_EMPLEADO">
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+            <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_ALP_CONSTANCIA_PREPARADO_RRHH_EMPLEADO">
+          <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.ALP_CONSTANCIA_PREPARADO" Role="ALP_CONSTANCIA_PREPARADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Empleado">
+              <PropertyRef Name="Cod_empleado" />
+            </Principal>
+            <Dependent Role="ALP_CONSTANCIA_PREPARADO">
+              <PropertyRef Name="cod_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6496,7 +6724,7 @@
           <EntitySetMapping Name="ALP_CONSTANCIA_PREPARADO">
             <EntityTypeMapping TypeName="BDBoticasModel.ALP_CONSTANCIA_PREPARADO">
               <MappingFragment StoreEntitySet="ALP_CONSTANCIA_PREPARADO">
-                <ScalarProperty Name="motivo" ColumnName="motivo" />
+                <ScalarProperty Name="cod_empleado" ColumnName="cod_empleado" />
                 <ScalarProperty Name="num_constancia_preparado" ColumnName="num_constancia_preparado" />
                 <ScalarProperty Name="num_orden_preparado" ColumnName="num_orden_preparado" />
                 <ScalarProperty Name="fec_elaboracion" ColumnName="fec_elaboracion" />
@@ -6505,6 +6733,7 @@
                 <ScalarProperty Name="fec_usu_regi" ColumnName="fec_usu_regi" />
                 <ScalarProperty Name="cod_usu_modi" ColumnName="cod_usu_modi" />
                 <ScalarProperty Name="fec_usu_modi" ColumnName="fec_usu_modi" />
+                <ScalarProperty Name="motivo" ColumnName="motivo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -6522,14 +6751,26 @@
           <EntitySetMapping Name="ALP_HOJA_MERMA">
             <EntityTypeMapping TypeName="BDBoticasModel.ALP_HOJA_MERMA">
               <MappingFragment StoreEntitySet="ALP_HOJA_MERMA">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fec_merma" ColumnName="fec_merma" />
                 <ScalarProperty Name="num_hoja_merma" ColumnName="num_hoja_merma" />
                 <ScalarProperty Name="num_constancia_preparado" ColumnName="num_constancia_preparado" />
-                <ScalarProperty Name="cant_insumo_merma" ColumnName="cant_insumo_merma" />
-                <ScalarProperty Name="motivo" ColumnName="motivo" />
                 <ScalarProperty Name="cod_usu_regi" ColumnName="cod_usu_regi" />
                 <ScalarProperty Name="fec_usu_regi" ColumnName="fec_usu_regi" />
                 <ScalarProperty Name="cod_usu_modi" ColumnName="cod_usu_modi" />
                 <ScalarProperty Name="fec_usu_modi" ColumnName="fec_usu_modi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ALP_HOJA_MERMA_INSUMO">
+            <EntityTypeMapping TypeName="BDBoticasModel.ALP_HOJA_MERMA_INSUMO">
+              <MappingFragment StoreEntitySet="ALP_HOJA_MERMA_INSUMO">
+                <ScalarProperty Name="cant_diferencia" ColumnName="cant_diferencia" />
+                <ScalarProperty Name="cant_constancia" ColumnName="cant_constancia" />
+                <ScalarProperty Name="num_hoja_merma" ColumnName="num_hoja_merma" />
+                <ScalarProperty Name="cod_insumo" ColumnName="cod_insumo" />
+                <ScalarProperty Name="cant_insumo" ColumnName="cant_insumo" />
+                <ScalarProperty Name="motivo" ColumnName="motivo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -6603,6 +6844,21 @@
                 <ScalarProperty Name="motivo" ColumnName="motivo" />
                 <ScalarProperty Name="fec_emision" ColumnName="fec_emision" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="cod_usu_regi" ColumnName="cod_usu_regi" />
+                <ScalarProperty Name="fec_usu_regi" ColumnName="fec_usu_regi" />
+                <ScalarProperty Name="cod_usu_modi" ColumnName="cod_usu_modi" />
+                <ScalarProperty Name="fec_usu_modi" ColumnName="fec_usu_modi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ALP_SOLICITUD_TRANSPORTE">
+            <EntityTypeMapping TypeName="BDBoticasModel.ALP_SOLICITUD_TRANSPORTE">
+              <MappingFragment StoreEntitySet="ALP_SOLICITUD_TRANSPORTE">
+                <ScalarProperty Name="num_solicitud" ColumnName="num_solicitud" />
+                <ScalarProperty Name="num_constancia_preparado" ColumnName="num_constancia_preparado" />
+                <ScalarProperty Name="cod_empleado" ColumnName="cod_empleado" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="fec_solicitud" ColumnName="fec_solicitud" />
                 <ScalarProperty Name="cod_usu_regi" ColumnName="cod_usu_regi" />
                 <ScalarProperty Name="fec_usu_regi" ColumnName="fec_usu_regi" />
                 <ScalarProperty Name="cod_usu_modi" ColumnName="cod_usu_modi" />
