@@ -19,8 +19,8 @@ namespace WebBS.Models
         public Nullable<System.DateTime> Fecha { get; set; }
         public string Consignador { get; set; }
         public string Consignatario { get; set; }
-        public byte[] Descripcion { get; set; }
-        public byte[] Archivo { get; set; }
+        public string Descripcion { get; set; }
+        public string Archivo { get; set; }
         public Nullable<int> Cod_adquisicion { get; set; }
         public int Cod_usu_regi { get; set; }
         public System.DateTime Fec_usu_regi { get; set; }

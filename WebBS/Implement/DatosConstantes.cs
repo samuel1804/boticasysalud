@@ -13,6 +13,7 @@ namespace WebBS.Implement
             public const string Aprobado = "A";
             public const string Rechazado = "R";
             public const string Proceso = "E";
+            public const string Cerrado = "C";
         }
 
         public sealed class EstadoActividadPlanificada

@@ -33,10 +33,11 @@
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a data-toggle="tab" href="#home">Orden de Compra</a></li>
         @if (Model.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado == WebBS.Implement.DatosConstantes.EstadoSolicitud.Pendiente ||
-                                                    Model.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado == WebBS.Implement.DatosConstantes.EstadoSolicitud.Proceso)
+                                                                            Model.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado == WebBS.Implement.DatosConstantes.EstadoSolicitud.Proceso ||
+                                                                            Model.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado == WebBS.Implement.DatosConstantes.EstadoSolicitud.Cerrado)
         {
             <li role="presentation"><a data-toggle="tab" href="#menu1">Agente de Carga</a></li>
-            <li role="presentation"><a data-toggle="tab" href="#menu2">Cerrar</a></li>
+            <li role="presentation"><a data-toggle="tab" href="#menu2">Cierre de solicitud</a></li>
         }
     </ul>
     <div class="tab-content">
@@ -193,7 +194,7 @@
                             <input id="txtTelefono" type="text" class="form-control" readonly />
                         </div>
                     </div>
-                    @if (Model.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado != WebBS.Implement.DatosConstantes.EstadoSolicitud.Aprobado)
+                    @if (Model.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado != WebBS.Implement.DatosConstantes.EstadoSolicitud.Cerrado)
                     {
 
                         <div class="form-group">
@@ -207,8 +208,103 @@
             </div>
         </div>
         <div id="menu2" role="tabpanel" class="tab-pane fade">
-            <h3>Menu 2</h3>
-            <p>Some content in menu 2.</p>
+            <br />
+            <div id="divSinAgenteCerrar">
+                @if (Model.IMP_SOLICITUD_IMPORTACION.IMP_PROVEEDOR == null)
+                {
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+
+                            <h4>Primero debe agregar un agente de carga</h4>
+
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <script>
+                        $(document).ready(function(){
+                            $('#divCerrarSolicitud').show();
+                        });
+
+                    </script>
+                }
+            </div>
+            <div id="divCerrarSolicitud" hidden>
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="Fec_accion">Fecha de Embarque :</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.Fec_Embarque, new { htmlAttributes = new { @class = "form-control", id = "txtFechaEmbarque", required = "", placeholder = "Fecha de embarque" } })
+                        </div>
+                        <label class="control-label col-md-2" for="Fec_accion">Fecha de llegada :</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.Fec_programada_llegada, new { htmlAttributes = new { @class = "form-control", id = "txtFechaLlegada", required = "", placeholder = "Fecha de llegada" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="Fec_accion">Puerto de llegada :</label>
+                        <div class="col-md-3">
+                            <select id="slcPuerto" class="form-control">
+                                <option value="0">Seleccione</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="Fec_accion">Factura Comercial :</label>
+                        <div class="col-md-3">
+                            @if (Model.IMP_FACTURA_COMERCIAL.FirstOrDefault() == null)
+                            {
+                                <p>No se ha registrado la factura comercial</p>
+                            }
+                            else
+                            {
+                                <a href="@Url.Content(Model.IMP_FACTURA_COMERCIAL.FirstOrDefault().Archivo)" class="control-table text-center" target="_blank"><i class="fa fa-file-archive-o"></i></a>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="Fec_accion">Bill of lading :</label>
+                        <div class="col-md-3">
+                            @if (Model.IMP_BL.FirstOrDefault() == null)
+                            {
+                                <p>No se ha registrado el Bill of lading</p>
+                            }
+                            else
+                            {
+                                <a href="@Url.Content(Model.IMP_BL.FirstOrDefault().Archivo)" class="control-table text-center" target="_blank"><i class="fa fa-file-archive-o"></i></a>
+                            }
+                        </div>
+                    </div>
+                    @if (Model.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado != WebBS.Implement.DatosConstantes.EstadoSolicitud.Cerrado)
+                    {
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2"></label>
+                            <div class="col-md-2">
+                                <input type="button" id="btnGuardarCierre" value="Solo Guardar" class="btn btn-primary" />
+                            </div>
+                            <div class="col-md-8 text-right">
+                                @if (Model.IMP_FACTURA_COMERCIAL.FirstOrDefault() == null || Model.IMP_BL.FirstOrDefault() == null)
+                                {
+                                    <span title="No puede cerrar la solicitud si falta registrar la Factura Comercial o el BL" data-toggle="tooltip" data-html="true" data-placement="left">
+                                        <input type="button" id="btnGuardarFinalizarCierre" value="Guardar y finalizar solicitud" class="btn btn-primary" disabled="disabled" />
+                                    </span>
+                                }
+                                else
+                                {
+                                    <input type="button" id="btnGuardarFinalizarCierre" value="Guardar y finalizar solicitud" class="btn btn-primary" />
+                                }
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
     </div>
 
@@ -263,11 +359,17 @@
         $(document).ready(
             function(){
                 var lista= @Html.Raw(Json.Encode(TempData["ActividadPlanificada"]));
+                var listaPuerto= @Html.Raw(Json.Encode(TempData["ListaPuerto"]));
                 var mensaje = new Pe.GMD.UI.Web.Components.Message();
 
                 $.each(lista , function(index,value){
                     $('<option/>').appendTo($('#slcAgente')).val(value.Cod_proveedor).html(value.Razon_social);
                 });
+
+                $.each(listaPuerto , function(index,value){
+                    $('<option/>').appendTo($('#slcPuerto')).val(value.Cod_puerto).html(value.Nombre);
+                });
+
                 $('#slcAgente').change(function(){
                     $('#txtTelefono').val('');
                     $('#txtRUC').val('');
@@ -280,10 +382,11 @@
                     });
                 });
                 var seleccionado = @Html.Raw(Model.IMP_SOLICITUD_IMPORTACION.IMP_PROVEEDOR != null ? Model.IMP_SOLICITUD_IMPORTACION.IMP_PROVEEDOR.Cod_proveedor : 0);
+                var seleccionadoPuerto = @Html.Raw(Model.Cod_Puerto.HasValue? Model.Cod_Puerto : 0);
 
                 $('#slcAgente').val(seleccionado);
                 $('#slcAgente').change();
-
+                $('#slcPuerto').val(seleccionadoPuerto);
 
                 var ajax = new Pe.GMD.UI.Web.Components.Ajax({
                     action: '@Url.Action("RechazarSolicitud")',
@@ -309,6 +412,19 @@
                             mensaje.Information({
                                 title: 'Rechazar Solicitud de Adquisición',
                                 message: 'Se asignó el agente de carga correctamente'
+                            });
+                        }, 500);
+                    }
+                });
+
+                var ajaxCierre = new Pe.GMD.UI.Web.Components.Ajax({
+                    action: '@Url.Action("CerrarSolicitud")',
+                    autoSubmit: false,
+                    onSuccess: function () {
+                        setTimeout(function () {
+                            mensaje.Information({
+                                title: 'Cerrar Solicitud de Adquisición',
+                                message: 'La acción finalizó correctamente'
                             });
                         }, 500);
                     }
@@ -366,6 +482,53 @@
                     }
                 });
 
+                function GuardarCierre(finalizar){
+                    ajaxCierre.send({
+                        codigoSolicitud:@Model.Cod_adquisicion,
+                        codigoPuerto : $('#slcPuerto').val(),
+                        fechaEmbarque : $('#txtFechaEmbarque').val(),
+                        fechaLlegada  : $('#txtFechaLlegada').val(),
+                        finalizar : finalizar
+                    });
+                }
+
+                $('#btnGuardarCierre').click(function(){
+                    GuardarCierre(false);
+                });
+
+                $('#btnGuardarFinalizarCierre').click(function(){
+                    if($('#slcPuerto').val()=="0" ||  $('#txtFechaEmbarque').val()=='' ||  $('#txtFechaLlegada').val()=='' ){
+                        mensaje.Warning({
+                            title: 'Cierre Solicitud',
+                            message: 'Todos los campos de la pestaña son requeridos'
+                        });
+                    }
+                    else{
+                        mensaje.Confirmation({
+                            title: 'Cierre Solicitud',
+                            message: '¿Desea dar por cerrada la solicitud de desaduanaje?',
+                            onAccept: function () {
+                                GuardarCierre(true);
+                            }
+                        });
+                    }
+                });
+                new Pe.GMD.UI.Web.Components.Calendar({
+                    inputFrom: $("#txtFechaEmbarque"),
+                    maxDateFrom: new Date(),
+                    inputTo: $("#txtFechaLlegada"),
+                    maxDateTo: new Date()
+                });
+                $('[data-toggle="tooltip"]').tooltip();
+
+                var cerrada=@Html.Raw(Json.Encode(Model.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado == WebBS.Implement.DatosConstantes.EstadoSolicitud.Cerrado));
+
+                if(cerrada){
+                    $('#slcAgente').attr('disabled','disabled');
+                    $('#slcPuerto').attr('disabled','disabled');
+                    $('#txtFechaEmbarque').attr('disabled','disabled');
+                    $('#txtFechaLlegada').attr('disabled','disabled');
+                }
 
             }
             );

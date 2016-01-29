@@ -537,6 +537,8 @@
           <Property Name="Fec_usu_regi" Type="datetime" Nullable="false" />
           <Property Name="Cod_usu_modi" Type="int" />
           <Property Name="Fec_usu_modi" Type="datetime" />
+          <Property Name="Fec_Embarque" Type="datetime" />
+          <Property Name="Cod_Puerto" Type="int" />
         </EntityType>
         <EntityType Name="IMP_ALERTA">
           <Key>
@@ -595,8 +597,8 @@
           <Property Name="Fecha" Type="datetime" />
           <Property Name="Consignador" Type="varchar" MaxLength="50" />
           <Property Name="Consignatario" Type="varchar" MaxLength="50" />
-          <Property Name="Descripcion" Type="varbinary" MaxLength="150" />
-          <Property Name="Archivo" Type="varbinary" MaxLength="150" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="150" />
+          <Property Name="Archivo" Type="varchar" MaxLength="150" />
           <Property Name="Cod_adquisicion" Type="int" />
           <Property Name="Cod_usu_regi" Type="int" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="datetime" Nullable="false" />
@@ -880,7 +882,6 @@
           <Property Name="Fec_cierre" Type="datetime" />
           <Property Name="Cod_proveedor" Type="int" />
           <Property Name="Cod_orden_compra" Type="int" />
-          <Property Name="Cod_puerto" Type="int" />
           <Property Name="Cod_usu_regi" Type="int" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="datetime" Nullable="false" />
           <Property Name="Cod_usu_modi" Type="int" />
@@ -1831,6 +1832,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IMP_ADQUISICION_IMP_PUERTO">
+          <End Role="IMP_PUERTO" Type="Self.IMP_PUERTO" Multiplicity="0..1" />
+          <End Role="IMP_ADQUISICION" Type="Self.IMP_ADQUISICION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMP_PUERTO">
+              <PropertyRef Name="Cod_puerto" />
+            </Principal>
+            <Dependent Role="IMP_ADQUISICION">
+              <PropertyRef Name="Cod_Puerto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IMP_ADQUISICION_IMP_SOLICITUD_IMPORTACION">
           <End Role="IMP_SOLICITUD_IMPORTACION" Type="Self.IMP_SOLICITUD_IMPORTACION" Multiplicity="0..1" />
           <End Role="IMP_ADQUISICION" Type="Self.IMP_ADQUISICION" Multiplicity="*" />
@@ -2206,18 +2219,6 @@
             </Principal>
             <Dependent Role="IMP_SOLICITUD_IMPORTACION">
               <PropertyRef Name="Cod_proveedor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_IMP_SOLICITUD_IMPORTACION_IMP_PUERTO">
-          <End Role="IMP_PUERTO" Type="Self.IMP_PUERTO" Multiplicity="0..1" />
-          <End Role="IMP_SOLICITUD_IMPORTACION" Type="Self.IMP_SOLICITUD_IMPORTACION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="IMP_PUERTO">
-              <PropertyRef Name="Cod_puerto" />
-            </Principal>
-            <Dependent Role="IMP_SOLICITUD_IMPORTACION">
-              <PropertyRef Name="Cod_puerto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2872,6 +2873,10 @@
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="IMP_ACTIVIDAD_PLANIFICADA" EntitySet="IMP_ACTIVIDAD_PLANIFICADA" />
           </AssociationSet>
+          <AssociationSet Name="FK_IMP_ADQUISICION_IMP_PUERTO" Association="Self.FK_IMP_ADQUISICION_IMP_PUERTO">
+            <End Role="IMP_PUERTO" EntitySet="IMP_PUERTO" />
+            <End Role="IMP_ADQUISICION" EntitySet="IMP_ADQUISICION" />
+          </AssociationSet>
           <AssociationSet Name="FK_IMP_ADQUISICION_IMP_SOLICITUD_IMPORTACION" Association="Self.FK_IMP_ADQUISICION_IMP_SOLICITUD_IMPORTACION">
             <End Role="IMP_SOLICITUD_IMPORTACION" EntitySet="IMP_SOLICITUD_IMPORTACION" />
             <End Role="IMP_ADQUISICION" EntitySet="IMP_ADQUISICION" />
@@ -2994,10 +2999,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_IMP_SOLICITUD_IMPORTACION_IMP_PROVEEDOR" Association="Self.FK_IMP_SOLICITUD_IMPORTACION_IMP_PROVEEDOR">
             <End Role="IMP_PROVEEDOR" EntitySet="IMP_PROVEEDOR" />
-            <End Role="IMP_SOLICITUD_IMPORTACION" EntitySet="IMP_SOLICITUD_IMPORTACION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_IMP_SOLICITUD_IMPORTACION_IMP_PUERTO" Association="Self.FK_IMP_SOLICITUD_IMPORTACION_IMP_PUERTO">
-            <End Role="IMP_PUERTO" EntitySet="IMP_PUERTO" />
             <End Role="IMP_SOLICITUD_IMPORTACION" EntitySet="IMP_SOLICITUD_IMPORTACION" />
           </AssociationSet>
           <AssociationSet Name="FK_IMP_SOLICITUD_IMPORTACION_IMP_SOLICITUD" Association="Self.FK_IMP_SOLICITUD_IMPORTACION_IMP_SOLICITUD">
@@ -3454,6 +3455,10 @@
             <End Role="IMP_ACTIVIDAD_PLANIFICADA" EntitySet="IMP_ACTIVIDAD_PLANIFICADA" />
             <End Role="IMP_ALERTA" EntitySet="IMP_ALERTA" />
           </AssociationSet>
+          <AssociationSet Name="FK_IMP_ADQUISICION_IMP_PUERTO" Association="BDBoticasModel.FK_IMP_ADQUISICION_IMP_PUERTO">
+            <End Role="IMP_PUERTO" EntitySet="IMP_PUERTO" />
+            <End Role="IMP_ADQUISICION" EntitySet="IMP_ADQUISICION" />
+          </AssociationSet>
           <AssociationSet Name="FK_IMP_ADQUISICION_IMP_SOLICITUD_IMPORTACION" Association="BDBoticasModel.FK_IMP_ADQUISICION_IMP_SOLICITUD_IMPORTACION">
             <End Role="IMP_SOLICITUD_IMPORTACION" EntitySet="IMP_SOLICITUD_IMPORTACION" />
             <End Role="IMP_ADQUISICION" EntitySet="IMP_ADQUISICION" />
@@ -3556,10 +3561,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_IMP_SOLICITUD_IMPORTACION_IMP_PROVEEDOR" Association="BDBoticasModel.FK_IMP_SOLICITUD_IMPORTACION_IMP_PROVEEDOR">
             <End Role="IMP_PROVEEDOR" EntitySet="IMP_PROVEEDOR" />
-            <End Role="IMP_SOLICITUD_IMPORTACION" EntitySet="IMP_SOLICITUD_IMPORTACION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_IMP_SOLICITUD_IMPORTACION_IMP_PUERTO" Association="BDBoticasModel.FK_IMP_SOLICITUD_IMPORTACION_IMP_PUERTO">
-            <End Role="IMP_PUERTO" EntitySet="IMP_PUERTO" />
             <End Role="IMP_SOLICITUD_IMPORTACION" EntitySet="IMP_SOLICITUD_IMPORTACION" />
           </AssociationSet>
           <AssociationSet Name="FK_IMP_RESOLUCION_DIGEMID_IMP_SOLICITUD_GESTION_PERMISO" Association="BDBoticasModel.FK_IMP_RESOLUCION_DIGEMID_IMP_SOLICITUD_GESTION_PERMISO">
@@ -4311,6 +4312,9 @@
           <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Cod_usu_modi" Type="Int32" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
+          <Property Name="Fec_Embarque" Type="DateTime" Precision="3" />
+          <Property Name="Cod_Puerto" Type="Int32" />
+          <NavigationProperty Name="IMP_PUERTO" Relationship="BDBoticasModel.FK_IMP_ADQUISICION_IMP_PUERTO" FromRole="IMP_ADQUISICION" ToRole="IMP_PUERTO" />
           <NavigationProperty Name="IMP_SOLICITUD_IMPORTACION" Relationship="BDBoticasModel.FK_IMP_ADQUISICION_IMP_SOLICITUD_IMPORTACION" FromRole="IMP_ADQUISICION" ToRole="IMP_SOLICITUD_IMPORTACION" />
           <NavigationProperty Name="IMP_BL" Relationship="BDBoticasModel.FK_IMP_BL_IMP_ADQUISICION" FromRole="IMP_ADQUISICION" ToRole="IMP_BL" />
           <NavigationProperty Name="IMP_FACTURA_COMERCIAL" Relationship="BDBoticasModel.FK_IMP_FACTURA_COMERCIAL_IMP_ADQUISICION" FromRole="IMP_ADQUISICION" ToRole="IMP_FACTURA_COMERCIAL" />
@@ -4378,8 +4382,8 @@
           <Property Name="Fecha" Type="DateTime" Precision="3" />
           <Property Name="Consignador" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Consignatario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="Binary" MaxLength="150" FixedLength="false" />
-          <Property Name="Archivo" Type="Binary" MaxLength="150" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Archivo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Cod_adquisicion" Type="Int32" />
           <Property Name="Cod_usu_regi" Type="Int32" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
@@ -4604,11 +4608,11 @@
           <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Cod_usu_modi" Type="Int32" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="IMP_ORDEN_COMPRA" Relationship="BDBoticasModel.FK_IMP_ORDEN_COMPRA_IMP_PROVEEDOR" FromRole="IMP_PROVEEDOR" ToRole="IMP_ORDEN_COMPRA" />
-          <NavigationProperty Name="IMP_SOLICITUD_IMPORTACION" Relationship="BDBoticasModel.FK_IMP_SOLICITUD_IMPORTACION_IMP_PROVEEDOR" FromRole="IMP_PROVEEDOR" ToRole="IMP_SOLICITUD_IMPORTACION" />
           <Property Name="Tipo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="Telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Origen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="IMP_ORDEN_COMPRA" Relationship="BDBoticasModel.FK_IMP_ORDEN_COMPRA_IMP_PROVEEDOR" FromRole="IMP_PROVEEDOR" ToRole="IMP_ORDEN_COMPRA" />
+          <NavigationProperty Name="IMP_SOLICITUD_IMPORTACION" Relationship="BDBoticasModel.FK_IMP_SOLICITUD_IMPORTACION_IMP_PROVEEDOR" FromRole="IMP_PROVEEDOR" ToRole="IMP_SOLICITUD_IMPORTACION" />
         </EntityType>
         <EntityType Name="IMP_PROVINCIA">
           <Key>
@@ -4638,8 +4642,8 @@
           <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Cod_usu_modi" Type="Int32" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="IMP_ADQUISICION" Relationship="BDBoticasModel.FK_IMP_ADQUISICION_IMP_PUERTO" FromRole="IMP_PUERTO" ToRole="IMP_ADQUISICION" />
           <NavigationProperty Name="IMP_DISTRITO" Relationship="BDBoticasModel.FK_IMP_PUERTO_IMP_DISTRITO" FromRole="IMP_PUERTO" ToRole="IMP_DISTRITO" />
-          <NavigationProperty Name="IMP_SOLICITUD_IMPORTACION" Relationship="BDBoticasModel.FK_IMP_SOLICITUD_IMPORTACION_IMP_PUERTO" FromRole="IMP_PUERTO" ToRole="IMP_SOLICITUD_IMPORTACION" />
         </EntityType>
         <EntityType Name="IMP_RESOLUCION_DIGEMID">
           <Key>
@@ -4707,7 +4711,6 @@
           <Property Name="Fec_cierre" Type="DateTime" Precision="3" />
           <Property Name="Cod_proveedor" Type="Int32" />
           <Property Name="Cod_orden_compra" Type="Int32" />
-          <Property Name="Cod_puerto" Type="Int32" />
           <Property Name="Cod_usu_regi" Type="Int32" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Cod_usu_modi" Type="Int32" />
@@ -4717,7 +4720,6 @@
           <NavigationProperty Name="IMP_ORDEN_COMPRA" Relationship="BDBoticasModel.FK_IMP_SOLICITUD_IMPORTACION_IMP_ORDEN_COMPRA" FromRole="IMP_SOLICITUD_IMPORTACION" ToRole="IMP_ORDEN_COMPRA" />
           <NavigationProperty Name="IMP_PAGO_IMPORTACION" Relationship="BDBoticasModel.FK_IMP_PAGO_IMPORTACION_IMP_SOLICITUD_IMPORTACION" FromRole="IMP_SOLICITUD_IMPORTACION" ToRole="IMP_PAGO_IMPORTACION" />
           <NavigationProperty Name="IMP_PROVEEDOR" Relationship="BDBoticasModel.FK_IMP_SOLICITUD_IMPORTACION_IMP_PROVEEDOR" FromRole="IMP_SOLICITUD_IMPORTACION" ToRole="IMP_PROVEEDOR" />
-          <NavigationProperty Name="IMP_PUERTO" Relationship="BDBoticasModel.FK_IMP_SOLICITUD_IMPORTACION_IMP_PUERTO" FromRole="IMP_SOLICITUD_IMPORTACION" ToRole="IMP_PUERTO" />
           <NavigationProperty Name="IMP_SOLICITUD" Relationship="BDBoticasModel.FK_IMP_SOLICITUD_IMPORTACION_IMP_SOLICITUD" FromRole="IMP_SOLICITUD_IMPORTACION" ToRole="IMP_SOLICITUD" />
         </EntityType>
         <EntityType Name="IMP_TIPO_ACTIVIDAD">
@@ -5808,6 +5810,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IMP_ADQUISICION_IMP_PUERTO">
+          <End Type="BDBoticasModel.IMP_PUERTO" Role="IMP_PUERTO" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.IMP_ADQUISICION" Role="IMP_ADQUISICION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMP_PUERTO">
+              <PropertyRef Name="Cod_puerto" />
+            </Principal>
+            <Dependent Role="IMP_ADQUISICION">
+              <PropertyRef Name="Cod_Puerto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IMP_ADQUISICION_IMP_SOLICITUD_IMPORTACION">
           <End Type="BDBoticasModel.IMP_SOLICITUD_IMPORTACION" Role="IMP_SOLICITUD_IMPORTACION" Multiplicity="0..1" />
           <End Type="BDBoticasModel.IMP_ADQUISICION" Role="IMP_ADQUISICION" Multiplicity="*" />
@@ -6123,18 +6137,6 @@
             </Principal>
             <Dependent Role="IMP_SOLICITUD_IMPORTACION">
               <PropertyRef Name="Cod_proveedor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_IMP_SOLICITUD_IMPORTACION_IMP_PUERTO">
-          <End Type="BDBoticasModel.IMP_PUERTO" Role="IMP_PUERTO" Multiplicity="0..1" />
-          <End Type="BDBoticasModel.IMP_SOLICITUD_IMPORTACION" Role="IMP_SOLICITUD_IMPORTACION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="IMP_PUERTO">
-              <PropertyRef Name="Cod_puerto" />
-            </Principal>
-            <Dependent Role="IMP_SOLICITUD_IMPORTACION">
-              <PropertyRef Name="Cod_puerto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7096,6 +7098,8 @@
           <EntitySetMapping Name="IMP_ADQUISICION">
             <EntityTypeMapping TypeName="BDBoticasModel.IMP_ADQUISICION">
               <MappingFragment StoreEntitySet="IMP_ADQUISICION">
+                <ScalarProperty Name="Cod_Puerto" ColumnName="Cod_Puerto" />
+                <ScalarProperty Name="Fec_Embarque" ColumnName="Fec_Embarque" />
                 <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
                 <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
                 <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
@@ -7466,7 +7470,6 @@
                 <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
                 <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
                 <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
-                <ScalarProperty Name="Cod_puerto" ColumnName="Cod_puerto" />
                 <ScalarProperty Name="Cod_orden_compra" ColumnName="Cod_orden_compra" />
                 <ScalarProperty Name="Cod_proveedor" ColumnName="Cod_proveedor" />
                 <ScalarProperty Name="Fec_cierre" ColumnName="Fec_cierre" />

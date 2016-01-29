@@ -27,7 +27,6 @@ namespace WebBS.Models
         public Nullable<System.DateTime> Fec_cierre { get; set; }
         public Nullable<int> Cod_proveedor { get; set; }
         public Nullable<int> Cod_orden_compra { get; set; }
-        public Nullable<int> Cod_puerto { get; set; }
         public int Cod_usu_regi { get; set; }
         public System.DateTime Fec_usu_regi { get; set; }
         public Nullable<int> Cod_usu_modi { get; set; }
@@ -38,7 +37,6 @@ namespace WebBS.Models
         public virtual IMP_ORDEN_COMPRA IMP_ORDEN_COMPRA { get; set; }
         public virtual ICollection<IMP_PAGO_IMPORTACION> IMP_PAGO_IMPORTACION { get; set; }
         public virtual IMP_PROVEEDOR IMP_PROVEEDOR { get; set; }
-        public virtual IMP_PUERTO IMP_PUERTO { get; set; }
         public virtual IMP_SOLICITUD IMP_SOLICITUD { get; set; }
     }
 }

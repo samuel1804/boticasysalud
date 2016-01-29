@@ -18,7 +18,8 @@ namespace WebBS.Implement
                     new CodigoValor () { Codigo =DatosConstantes.EstadoSolicitud.Pendiente , Valor="Pendiente" },
                     new CodigoValor () { Codigo =DatosConstantes.EstadoSolicitud.Aprobado, Valor="Aprobado" },
                     new CodigoValor () { Codigo =DatosConstantes.EstadoSolicitud.Rechazado , Valor="Rechazado" },
-                    new CodigoValor () { Codigo =DatosConstantes.EstadoSolicitud.Proceso , Valor="En Proceso" }
+                    new CodigoValor () { Codigo =DatosConstantes.EstadoSolicitud.Proceso , Valor="En Proceso" },
+                    new CodigoValor () { Codigo =DatosConstantes.EstadoSolicitud.Proceso , Valor="Cerrado" }
                 };
             }
         }

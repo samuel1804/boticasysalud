@@ -28,7 +28,10 @@ namespace WebBS.Models
         public System.DateTime Fec_usu_regi { get; set; }
         public Nullable<int> Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
+        public Nullable<System.DateTime> Fec_Embarque { get; set; }
+        public Nullable<int> Cod_Puerto { get; set; }
     
+        public virtual IMP_PUERTO IMP_PUERTO { get; set; }
         public virtual IMP_SOLICITUD_IMPORTACION IMP_SOLICITUD_IMPORTACION { get; set; }
         public virtual ICollection<IMP_BL> IMP_BL { get; set; }
         public virtual ICollection<IMP_FACTURA_COMERCIAL> IMP_FACTURA_COMERCIAL { get; set; }

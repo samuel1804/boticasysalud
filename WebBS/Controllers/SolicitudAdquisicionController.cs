@@ -61,7 +61,12 @@ namespace WebBS.Controllers
             }
 
             var lista = await db.IMP_PROVEEDOR.Where(p => p.Tipo == DatosConstantes.TipoProveedor.AgenteCarga).ToListAsync();
-
+            var listaPuerto = await db.IMP_PUERTO.ToListAsync();
+            TempData["ListaPuerto"] = listaPuerto.Select(p => new IMP_PUERTO()
+            {
+                Cod_puerto = p.Cod_puerto,
+                Nombre = p.IMP_DISTRITO.IMP_PROVINCIA.IMP_DEPARTAMENTO.Nombre + " - " + p.Nombre
+            });
             TempData["ActividadPlanificada"] = lista.Select(a => new IMP_PROVEEDOR()
             {
                 Cod_proveedor = a.Cod_proveedor,
@@ -183,5 +188,33 @@ namespace WebBS.Controllers
             await db.SaveChangesAsync();
             return Json(new { IsSuccess = true });
         }
+
+        public async Task<ActionResult> CerrarSolicitud(int codigoSolicitud, int codigoPuerto, string fechaEmbarque, string fechaLLegada, bool finalizar)
+        {
+            var entidad = await db.IMP_ADQUISICION.FindAsync(codigoSolicitud);
+
+            if (!string.IsNullOrWhiteSpace(fechaEmbarque))
+            {
+                entidad.Fec_Embarque = DateTime.ParseExact(fechaEmbarque, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
+            if (!string.IsNullOrWhiteSpace(fechaLLegada))
+            {
+                entidad.Fec_programada_llegada = DateTime.ParseExact(fechaLLegada, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
+            if (codigoPuerto > 0)
+            {
+                entidad.Cod_Puerto = codigoPuerto;
+            }
+            if (finalizar)
+            {
+                entidad.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado = DatosConstantes.EstadoSolicitud.Cerrado;
+            }
+            entidad.Fec_usu_modi = DateTime.Now;
+            entidad.Cod_usu_modi = 1;
+
+            await db.SaveChangesAsync();
+            return Json(new { IsSuccess = true });
+        }
+
     }
 }
