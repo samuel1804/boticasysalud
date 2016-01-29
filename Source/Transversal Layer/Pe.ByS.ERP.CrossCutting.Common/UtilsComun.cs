@@ -347,5 +347,15 @@ namespace Pe.ByS.ERP.CrossCutting.Common
         }
 
         #endregion
+
+        /// <summary>
+        /// Pone nombre al reporte basado en fecha actual
+        /// </summary>
+        /// <param name="name">Nombre del reporte</param>
+        /// <returns></returns>
+        public static string GetReporteName(string name)
+        {
+            return string.Format("{0}_{1}", name, DateTime.Now.ToString("yyyyMMddHHmmss"));
+        }
     }
 }

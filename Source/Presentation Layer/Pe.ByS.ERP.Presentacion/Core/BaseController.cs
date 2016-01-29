@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Net;
 using System.Web.Mvc;
 using Common.Logging;
+using Microsoft.Reporting.WinForms;
 using Pe.ByS.ERP.CrossCutting.Common;
 using Pe.ByS.ERP.CrossCutting.Common.JQGrid;
 using Pe.ByS.ERP.Domain.Core;
@@ -152,6 +153,66 @@ namespace Pe.ByS.ERP.Presentacion.Core
         }
 
         #endregion Control Error
+
+        #region Reportes
+
+        /// <summary>
+        /// Renderiza un reporte con sus datos
+        /// </summary>
+        /// <param name="report">Nombre del reporte</param>
+        /// <param name="ds">Conjunto de Datos</param>
+        /// <param name="data">Datos</param>
+        /// <param name="formato">Formato PDF o Excel</param>
+        /// <param name="parametros"></param>
+        public void RenderReport(string report, string ds, object data, string formato, ReportParameter[] parametros = null)
+        {
+            string reportPath = Server.MapPath(string.Format("~/Reports/{0}.rdlc", report));
+            var localReport = new LocalReport { ReportPath = reportPath };
+            var reportDataSource = new ReportDataSource(ds, data);
+
+            localReport.DataSources.Add(reportDataSource);
+            if (parametros != null)
+                localReport.SetParameters(parametros);
+
+            string reportType;
+            string deviceInfo = string.Empty;
+
+            switch (formato)
+            {
+                case "PDF":
+                    reportType = "PDF";
+                    deviceInfo =
+                        string.Format(
+                            "<DeviceInfo><OutputFormat>{0}</OutputFormat><PageWidth>8.9in</PageWidth><PageHeight>11in</PageHeight><MarginTop>0.2in</MarginTop><MarginLeft>0.2in</MarginLeft><MarginRight>0.2in</MarginRight><MarginBottom>0.2in</MarginBottom></DeviceInfo>",
+                            reportType);
+                    break;
+                case "EXCEL":
+                    reportType = "Excel";
+
+                    break;
+                default:
+                    return;
+            }
+
+            string mimeType;
+            string encoding;
+            string fileNameExtension;
+            Warning[] warnings;
+            string[] streams;
+
+            byte[] renderedBytes = localReport.Render(reportType, deviceInfo, out mimeType, out encoding,
+                                                      out fileNameExtension, out streams, out warnings);
+
+            Response.Clear();
+            Response.ContentType = mimeType;
+            Response.AddHeader("content-disposition",
+                                                   string.Format("attachment; filename={0}.{1}",
+                                                                 UtilsComun.GetReporteName(report), fileNameExtension));
+            Response.BinaryWrite(renderedBytes);
+            Response.End();
+        }
+
+        #endregion
 
         #endregion
     }

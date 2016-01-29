@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutI.cshtml";
 }
+
 @model Pe.ByS.ERP.Application.DTO.OrdenPedidoDto
 
 <div class="grupocontenido2 scrollTotal">
@@ -100,6 +101,7 @@
         </button>
     </div>
 </div>
+
 <script type='text/javascript'>
     var grdDetalle = 'tablaDetalle';
     var dialogDelete = 'dialog-DetalleEliminar';
@@ -136,7 +138,7 @@
                 cancelarText: 'Cancelar',
                 parametroHandlers: {
                     functionOk: function (rowData) {
-                        
+                        $("#" + grdDetalle).addRowData(rowData.ProductoId, rowData);
                     }
                 }
             }
@@ -172,14 +174,13 @@
 
     function ListarActaDetalle() {
         var colNames = [
-            'Código', 'Articulo', 'Unidad', 'Cant. Pedida', 'Cant. Aprobada', 'Observacion'
+            'Código', 'Articulo', 'Unidad', 'Cant. Pedida', 'Observacion'
         ];
         var colModels = [
             { name: 'ProductoId', index: 'ProductoId', align: 'center', width: 60 },
             { name: 'ProductoNombre', index: 'ProductoNombre', align: 'left', width: 150 },
             { name: 'UnidadMedida', index: 'UnidadMedida', align: 'center', width: 60 },
             { name: 'CantidadPedida', index: 'CantidadPedida', align: 'right', width: 65 },
-            { name: 'CantidadAprobada', index: 'CantidadAprobada', align: 'right', width: 65 },
             { name: 'Observacion', index: 'Observacion', align: 'left', width: 200 }
         ];
 

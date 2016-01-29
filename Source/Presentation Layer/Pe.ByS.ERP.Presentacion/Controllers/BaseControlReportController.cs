@@ -33,7 +33,7 @@ namespace Pe.ByS.ERP.Presentacion.Controllers
         //    return StiMvcViewer.ViewerEventResult();
         //}
 
-        [HttpPost]
+        //[HttpPost]
         public ActionResult ViewerEvent()
         {
             return StiMvcViewer.ViewerEventResult();

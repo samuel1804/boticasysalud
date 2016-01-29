@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Microsoft.Reporting.WinForms;
 using Pe.ByS.ERP.Application.Converter;
 using Pe.ByS.ERP.Application.DTO;
 using Pe.ByS.ERP.CrossCutting.Common;
@@ -9,6 +10,7 @@ using Pe.ByS.ERP.CrossCutting.Common.JQGrid;
 using Pe.ByS.ERP.Presentacion.Controllers;
 using Pe.ByS.ERP.Services.BusinessLogic.Core;
 using Pe.ByS.ERP.Services.BusinessLogic.Inter;
+using Stimulsoft.Base.Json;
 using Stimulsoft.Report;
 using Stimulsoft.Report.Mvc;
 using Acta = Pe.ByS.ERP.Domain.ActaRecepcion;
@@ -105,6 +107,7 @@ namespace Pe.ByS.ERP.Presentacion.Areas.ActaRecepcion.Controllers
             try
             {
                 _actaBL.Add(ActaRecepcionConverter.DtoToDomain(acta));
+                TempData["Reporte1"] = acta;
                 jsonResponse.Success = true;
             }
             catch (Exception ex)
@@ -115,7 +118,7 @@ namespace Pe.ByS.ERP.Presentacion.Areas.ActaRecepcion.Controllers
             return Json(jsonResponse, JsonRequestBehavior.AllowGet);
         }
 
-        //[HttpPost]
+        [HttpPost]
         public ActionResult GetReportSnapshot()
         {
             //var filters = CommonUtils.ToObject<List<WhereFilter>>(ParametrosReport);
@@ -126,6 +129,24 @@ namespace Pe.ByS.ERP.Presentacion.Areas.ActaRecepcion.Controllers
             report.RegBusinessObject("Proyecto", "Proyecto", null);
 
             return StiMvcViewer.GetReportSnapshotResult(report);
+        }
+
+        [HttpGet]
+        public void GetReporte()
+        {
+            var data = (ActaRecepcionDto)TempData["Reporte1"];
+            var parametros = new ReportParameter[8];
+
+            parametros[0] = new ReportParameter("NumeroGuia", data.NumeroGuia);
+            parametros[1] = new ReportParameter("SucursalNombre", data.SucursalNombre);
+            parametros[2] = new ReportParameter("AlmacenNombre", data.AlmacenNombre);
+            parametros[3] = new ReportParameter("VerificadorNombre", data.VerificadorNombre);
+            parametros[4] = new ReportParameter("Fecha", data.Fecha);
+            parametros[5] = new ReportParameter("FechaGuia", data.FechaGuia);
+            parametros[6] = new ReportParameter("NumeroPedido", data.NumeroPedido);
+            parametros[7] = new ReportParameter("Glosa", data.Glosa);
+
+            RenderReport("ActaRecepcion", "DetalleActa", data.DetalleList, "PDF", parametros);
         }
     }
 }

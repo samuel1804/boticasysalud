@@ -72,6 +72,10 @@
     <Compile Include="UsuarioBL.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Application Layer\Pe.ByS.ERP.Application.DTO\Pe.ByS.ERP.Application.DTO.csproj">
+      <Project>{2A302195-A933-4498-BABC-E8233B767F38}</Project>
+      <Name>Pe.ByS.ERP.Application.DTO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Domain Layer\Pe.ByS.ERP.Domain\Pe.ByS.ERP.Domain.csproj">
       <Project>{2A607E15-4B8A-4217-95A9-2CC30CDC7F38}</Project>
       <Name>Pe.ByS.ERP.Domain</Name>

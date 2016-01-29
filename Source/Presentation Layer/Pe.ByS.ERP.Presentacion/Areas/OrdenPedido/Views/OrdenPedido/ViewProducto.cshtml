@@ -40,7 +40,15 @@
 <script type="text/javascript">
 
     function AgregarProducto(popupObj, parametroHandlers) {
-        parametroHandlers.functionOk();
+        var model = {
+            ProductoId: $('#selArticulo').val(),
+            ProductoNombre: $('#SolicitanteId option:selected').text(),
+            UnidadMedida: $('#txtUnidad').val(),
+            CantidadPedida: $('#txtCantidad').val(),
+            Observacion: $('#txtObservacion').val()
+        };
+
+        parametroHandlers.functionOk(model);
     }
 
 </script>

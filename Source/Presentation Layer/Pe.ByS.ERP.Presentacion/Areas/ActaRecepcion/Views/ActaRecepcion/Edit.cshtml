@@ -114,11 +114,11 @@
                     <i class="fa fa-floppy-o"></i>
                     Generar Acta Recepción
                 </button>
-                &nbsp; &nbsp; &nbsp;
+                @*&nbsp; &nbsp; &nbsp;
                 <button type="button" class="btn btn-info" id="btnExportar">
                     <i class="fa fa-floppy-o"></i>
                     Exportar
-                </button>
+                </button>*@
                 &nbsp; &nbsp; &nbsp;
                 <button type="button" class="btn btn-danger" id="btnCancelar">
                     <i class="fa fa-remove"></i>
@@ -152,8 +152,8 @@
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             datatype: 'html'
         }, function (result) {
-            $("#divExportar .modal-body").html(result);
-            $("#divExportar").modal("show");
+            $("#divExportar").html(result);
+            //$("#divExportar").modal("show");
         });
     }
 
@@ -250,7 +250,7 @@
             parametros: { numPedido: numPedido }
         };
 
-        SIG.Ajax(opciones, function(response) {
+        SIG.Ajax(opciones, function (response) {
             if (response.Success) {
                 var $grilla = $("#" + grdDetalleActa);
                 var item;
@@ -351,12 +351,16 @@
     function GuardarCerrar() {
         var model = {
             SucursalId: $('#SucursalId').val(),
+            SucursalNombre: $('#SucursalId :selected').text(),
             AlmacenId: $('#AlmacenId').val(),
+            AlmacenNombre: $('#AlmacenId :selected').text(),
             VerificadorId: $('#VerificadorId').val(),
+            VerificadorNombre: $('#VerificadorId :selected').text(),
             Fecha: $('#Fecha').val(),
             OrdenPedidoId: $('#OrdenPedidoId').val(),
             NumeroGuia: $('#NumeroGuia').val(),
-            Glosa: $('#NumeroGuia').val(),
+            NumeroPedido: $('#NumeroPedido').val(),
+            Glosa: $('#Glosa').val(),
             FechaGuia: $('#txtFechaGuia').val(),
             DetalleList: $("#" + grdDetalleActa).jqGrid('getGridParam', 'data')
         };
@@ -394,10 +398,11 @@
             parametros: model
         };
 
-        SIG.Ajax(opciones, function(response) {
+        SIG.Ajax(opciones, function (response) {
             if (response.Success) {
                 SIG.Alert('Alerta', 'Acta registrada correctamente', null);
                 @*window.location.href = '@Url.Action("Edit", "ActaRecepcion", new { Area = "ActaRecepcion" })';*@
+                window.location.href = '@Url.Action("GetReporte", "ActaRecepcion", new { area = "ActaRecepcion" })';
             } else {
                 SIG.Alert('Alerta', response.Message, null);
             }
