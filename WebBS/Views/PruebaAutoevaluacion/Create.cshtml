@@ -1,0 +1,237 @@
+﻿@model WebBS.Models.RRH_PruebaAutoevaluacion
+
+@{
+    ViewBag.Title = "Completar Autoevaluación";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Completar Autoevaluación</h2>
+
+
+
+    
+    <div class="form-horizontal">
+      
+        <hr />
+        @Html.ValidationSummary(true)
+
+
+
+     
+       
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Empleado:</label>
+            <div class="col-md-10">
+                <label class="control-label col-md-6" style="text-align:left">Samuel Flores Hernandez</label>
+
+                <label class="control-label col-md-2">Fecha:</label>
+                <label class="control-label col-md-2">27/01/2016</label>
+            </div>
+        </div>
+
+       <!-- <div class="form-group">
+            @Html.LabelFor(model => model.PuntajeTotal, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PuntajeTotal)
+                @Html.ValidationMessageFor(model => model.PuntajeTotal)
+            </div>
+        </div>
+           -->
+
+
+
+        <hr />
+    
+
+        @foreach (var item in ViewBag.Criterios)
+{
+    
+        <div class="form-group">
+
+            <label class="control-label col-md-2">Criterio:</label>
+            <div class="col-md-6">
+
+                <input type="text" class="form-control" value="@item.Desc_criterio" style="background-color:white" readonly="readonly">
+            </div>
+        </div>
+
+        <br />
+
+        <fieldset>
+            <div class="panel panel-default">
+                <!-- Table -->
+                <div id="orderItems" class="table-responsive">
+
+                    <table  class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Respuesta</th>
+                                <th hidden="hidden">cod_criterio</th>
+                                <th hidden="hidden">Cod_alternativa_autoevaluacion</th>
+                                <th hidden="hidden">Valor</th>
+                            </tr>
+                        </thead>
+
+                        @foreach (var i in ViewBag.Alternativas)
+                        {
+                            if (@item.Cod_criterio == @i.Cod_criterio)
+                            {
+
+                                <tr>
+                                    <td width="20%"><input type="radio" id="rbRespuesta" name="@item.Cod_criterio" /></td>
+                                    <td width="80%">@i.Respuesta</td>
+                                    <td hidden="hidden">@i.Cod_criterio</td>
+                                    <td hidden="hidden">@i.Cod_alternativa_autoevaluacion</td>
+                                    <td hidden="hidden">@i.Valor</td>
+                                </tr>
+                            }
+
+                        }
+
+
+
+
+                    </table>
+
+                </div>
+            </div>
+        </fieldset>
+   
+}
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="submit" type="button" value="Guardar Respuestas" class="btn btn-default" />
+             
+                <input id="resultados" type="submit" value="Mostrar Resultados" class="btn btn-default" disabled="disabled"  />
+   
+            </div>
+
+            
+        </div>
+    </div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+
+    <script>
+
+        $(document).ready(function () {
+            var orderItems = [];
+            $('#submit').click(function () {
+                
+                var tables = document.getElementsByTagName("table")
+               
+
+                var data = [];
+                var falta = 0;
+                for (var i = 0, l = tables.length; i < l; i++) {
+                    // first row needs to be headers
+                    
+                    table = tables[i];
+                    
+                    var headers = [];
+                    for (var k = 0; k < table.rows[0].cells.length; k++) {
+                        headers[k] = table.rows[0].cells[k].innerHTML.toLowerCase().replace(/ /gi, '');
+                        
+                    }
+                    alert('rows lenght:' + table.rows.length);
+
+                    // go through cells
+                    for (var m = 1; m < table.rows.length; m++) {
+                        
+                        var tableRow = table.rows[m];
+                        if (tableRow.cells[0].getElementsByTagName('input')[0].checked == true){
+                            var rowData = {};
+                       
+                        for (var j = 0; j < tableRow.cells.length; j++) {
+                            
+                            rowData[headers[j]] = tableRow.cells[j].innerHTML;
+
+                        }
+
+                        data.push(rowData);
+
+                    }
+                    }
+                    
+
+                }
+
+
+
+        //validation of order
+        var isAllValid = true;
+        if (data.length == 0) {
+            $('#orderItems').html('<span style="color:red;">Ingrese preguntas para la Autoevaluación</span>');
+
+        }
+
+
+
+        //Save if valid
+
+        var data = {
+            //Cod_criterio: $('#Cod_criterio').val().trim(),
+            //Respuesta: $('#Respuesta').val().trim(),
+            //Sorry forgot to add Description Field
+            //Valor: $('#Valor').val().trim(),
+            OrderDetails: data
+        }
+
+        $(this).val('Por favor espere...');
+
+        $.ajax({
+            url: '/PruebaAutoEvaluacion/SaveOrder',
+            type: "POST",
+            data: JSON.stringify(data),
+            dataType: "JSON",
+            contentType: "application/json",
+            success: function (d) {
+                //check is successfully save to database
+                if (d.status == true) {
+                    //will send status from server side
+                    alert('Autoevaluación Registrada.');
+                    //clear form
+                    //orderItems = [];
+
+                    //$('#Cod_criterio').val('');
+                    //$('#Respuesta').val('');
+                    //$('#Valor').val('');
+                    $("#resultados").prop('disabled', false);
+                    $('#resultados').click(function(){
+                        location.href='@Url.Action("Details/1", "PruebaAutoevaluacion")'
+
+                    });
+
+                }
+                else {
+                    alert('Error');
+                }
+                $('#submit').val('Grabar Respuestas');
+            },
+            error: function () {
+                alert('Error. Por favor intente de nuevo.');
+                $('#submit').val('Grabar Respuestas');
+            }
+        });
+
+
+    });
+        });
+
+    </script>
+
+
+}
