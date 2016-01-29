@@ -192,6 +192,7 @@
     <Content Include="Scripts\knockout-3.4.0.js" />
     <Content Include="Scripts\toastr\toastr.min.css" />
     <Content Include="Scripts\toastr\toastr.min.js" />
+    <Content Include="Views\PruebaAutoevaluacion\Create.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -564,7 +565,6 @@
     <Content Include="Views\AlternativaAutoEvaluacion\Details.cshtml" />
     <Content Include="Views\AlternativaAutoEvaluacion\Edit.cshtml" />
     <Content Include="Views\AlternativaAutoEvaluacion\Index.cshtml" />
-    <Content Include="Views\PruebaAutoevaluacion\Create.cshtml" />
     <Content Include="Views\PruebaAutoevaluacion\Delete.cshtml" />
     <Content Include="Views\PruebaAutoevaluacion\Details.cshtml" />
     <Content Include="Views\PruebaAutoevaluacion\Edit.cshtml" />
