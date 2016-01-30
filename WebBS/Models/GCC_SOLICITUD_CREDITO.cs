@@ -45,10 +45,10 @@ namespace WebBS.Models
         public virtual ICollection<GCC_CONTRATO_CREDITO> GCC_CONTRATO_CREDITO { get; set; }
         public virtual ICollection<GCC_EMPLEADO_SOL_CREDITO> GCC_EMPLEADO_SOL_CREDITO { get; set; }
         public virtual ICollection<GCC_INFORME_CREDITICIO> GCC_INFORME_CREDITICIO { get; set; }
-        [Display(Name = "Estado Actual")]
+        [Display(Name = "Estado")]
         public string Estado_actual { get; set; }
         public string Estado_cliente { get; set; }
-        [Display(Name = "Estado Cliente")]
+        [Display(Name = "Situación de cliente")]
         public string Estado_cliente_str { get; set; }
     }
 }

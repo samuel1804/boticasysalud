@@ -1,0 +1,104 @@
+﻿@model PagedList.IPagedList<WebBS.Models.GCC_INFORME_CREDITICIO>
+@using PagedList.Mvc;
+@using PagedList;
+
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+    @{
+        ViewBag.Title = "Mantenimiento de Informe Crediticio";
+    }
+
+    <h2>Mantenimiento de Informe Crediticio</h2>
+
+    @using (Html.BeginForm("Index", "InformeCrediticio", FormMethod.Get))
+    {
+        @Html.AntiForgeryToken()
+
+        <div style="border:1px solid black;">
+            <table style="width:100%">
+                <tr>
+                    <td>Nro. Inf. Créd.</td>
+                    <td><input type="text" name="nroInformeCredito"></td>
+                    <td>RUC</td>
+                    <td><input type="number" name="ruc"></td>
+                    <td>Estado</td>
+                    <td><select name="estado"><option></option><option>Registrado</option><option>Modificado</option><option>Aprobado</option><option>Anulado</option><option>Rechazado</option></select></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Fecha Inicio Informe Crediticio</td>
+                    <td><input type="date" name="fechaInformeInicio" /></td>
+                    <td>Fecha Inicio Informe Crediticio</td>
+                    <td><input type="date" name="fechaInformeFin" /></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><input type="submit" value="Buscar" /></td>
+                    <td><button type="submit" value="Registrar" formaction="/InformeCrediticio/Create">Nuevo</button></td>
+                    <td></td>
+                </tr>
+            </table>
+
+        </div>
+
+    }
+
+    <table class="table">
+        <tr>
+            <th>
+                Nro Inf. Créd.
+            </th>
+            <th>
+                RUC
+            </th>
+            <th>
+                Razón Social
+            </th>
+            <th>
+                Rep Info
+            </th>
+            <th>
+                Estado
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cod_informe_crediticio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.Razon_social)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nivel_riesgo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado_actual)
+                </td>
+                <td>
+                    @Html.ActionLink("Generar Contrato", "GenerarContrato", new { id = item.Cod_informe_crediticio }) |
+                </td>
+            </tr>
+        }
+
+    </table>
+<br />
+Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

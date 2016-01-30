@@ -1,0 +1,114 @@
+﻿@model WebBS.Models.GCC_INFORME_CREDITICIO
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>GCC_INFORME_CREDITICIO</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Num_doc_identidad">RUC</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad)*
+                @Html.ValidationMessageFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad, null, new { @class = "text-danger" }) <button type="submit" formaction="/InformeCrediticio/BuscarCliente">Buscar Cliente</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="GCC_CLIENTE_JURIDICO_Razon_social">Razón social</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.Razon_social, new { @readonly = "readonly", Style = "background:#D3D3D3;" })*
+                @Html.ValidationMessageFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.Razon_social, null, new { @class = "text-danger" })
+            </div>
+        </div>   
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GCC_SOLICITUD_CREDITO.Num_solicitud, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.GCC_SOLICITUD_CREDITO.Num_solicitud, new { @readonly = "readonly", Style = "background:#D3D3D3;" })*
+                @Html.ValidationMessageFor(model => model.GCC_SOLICITUD_CREDITO.Num_solicitud)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GCC_SOLICITUD_CREDITO.Fec_solicitud, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.GCC_SOLICITUD_CREDITO.Fec_solicitud, new { id = "datepicker", @readonly = "readonly", Style = "background:#D3D3D3;" })*
+                @Html.ValidationMessageFor(model => model.GCC_SOLICITUD_CREDITO.Fec_solicitud, null, new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group editor-multiline-field">
+            @Html.LabelFor(model => model.GCC_SOLICITUD_CREDITO.Observacion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.GCC_SOLICITUD_CREDITO.Observacion, new { @readonly = "readonly", Style = "background:#D3D3D3;" })
+                @Html.ValidationMessageFor(model => model.GCC_SOLICITUD_CREDITO.Observacion, null, new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        <div class="form-group" style="display: none;">
+            @Html.LabelFor(model => model.Cod_solicitud_credito, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Cod_solicitud_credito)
+                @Html.ValidationMessageFor(model => model.Cod_solicitud_credito)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nivel_riesgo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Nivel_riesgo, new SelectList(ViewBag.RiesgoSelection, "Value", "Text"), "  -----Select List-----  ")
+                @Html.ValidationMessageFor(model => model.Nivel_riesgo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Capacidad_crediticia, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Capacidad_crediticia, new { @readonly = "readonly", Style = "background:#D3D3D3;" })<button type="submit" formaction="/InformeCrediticio/EvaluarCliente">Evaluar Cliente</button>
+                @Html.ValidationMessageFor(model => model.Capacidad_crediticia)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Monto_linea_credito_eval, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Monto_linea_credito_eval)
+                @Html.ValidationMessageFor(model => model.Monto_linea_credito_eval)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Monto_linea_credito_aprob, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Monto_linea_credito_aprob)
+                @Html.ValidationMessageFor(model => model.Monto_linea_credito_aprob)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Estado_actual, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Estado_actual)
+                @Html.ValidationMessageFor(model => model.Estado_actual)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+

@@ -8,7 +8,7 @@
     ViewBag.Title = "Consulta Solicitud de Crédito";
 }
 
-<h2>Consulta Solicitud de Crédito</h2>
+<h2>Mantenimiento de Solicitud de Crédito</h2>
 
 @using (Html.BeginForm("Index", "SolicitudDeCredito", FormMethod.Get))
 {
@@ -22,14 +22,14 @@
                 <td>RUC</td>
                 <td><input type="number" name="ruc"></td>
                 <td>Estado</td>
-                <td><select name="estado"><option></option><option>Registrado</option><option>Modificado</option><option>Anulado</option></select></td>
+                <td><select name="estado"><option></option><option>Registrado</option><option>Modificado</option><option>Aprobado</option><option>Anulado</option><option>Rechazado</option></select></td>
                 <td></td>
                 <td></td>
             </tr>
             <tr>
-                <td>Fecha Solicitud Inicio</td>
+                <td>Fecha Solicitud Desde</td>
                 <td><input type="date" name="fechaSolicitudInicio" /></td>
-                <td>Fecha Solicitud Fin</td>
+                <td>Fecha Solicitud Hasta</td>
                 <td><input type="date" name="fechaSolicitudFin" /></td>
                 <td></td>
                 <td></td>
@@ -52,9 +52,6 @@
 
 }
 
-<p>
-    @Html.ActionLink("Nuevo", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -93,7 +90,7 @@
             @Html.DisplayFor(modelItem => item.Estado_actual)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id = item.Cod_solicitud_credito }) |
+            @Html.ActionLink("Modificar", "Edit", new { id = item.Cod_solicitud_credito }) |
             @Html.ActionLink("Anular", "Delete", new { id = item.Cod_solicitud_credito })
         </td>
     </tr>
@@ -101,7 +98,7 @@
 
 </table>
 <br />
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
 @Html.PagedListPager(Model, page => Url.Action("Index",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

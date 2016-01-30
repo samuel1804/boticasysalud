@@ -5,7 +5,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-    @*@Styles.Render("~/Content/css")*@
+    @Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
     <link href="~/fonts/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/css/styles.css" rel="stylesheet" />
@@ -36,8 +38,10 @@
 
   
     </script>
+
 </head>
 <body>
+
     <div class="wrapper">
         <div class="box">
             <div class="row row-offcanvas row-offcanvas-left">
@@ -103,7 +107,12 @@
                                         <i class="glyphicon glyphicon-plus"></i> <span>Mantenimiento Cliente Jurídico</span>
                                     </a>
                                     <a href="~/SolicitudDeCredito/Index">
-                                        <i class="glyphicon glyphicon-plus"></i> <span>Consulta Solicitud de Crédito</span>
+                                        <i class="glyphicon glyphicon-plus"></i> <span>Mantenimiento de Solicitud de Crédito</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="~/InformeCrediticio/Index">
+                                        <i class="glyphicon glyphicon-plus"></i> <span>Mantenimiento de Informe Crediticio</span>
                                     </a>
                                 </li>
                             </ul>
@@ -218,6 +227,9 @@
             </div>
         </div>
     </div>
-    @RenderSection("Scripts", required: false)
+
+   
+    @RenderSection("scripts", required: false)
+
 </body>
 </html>

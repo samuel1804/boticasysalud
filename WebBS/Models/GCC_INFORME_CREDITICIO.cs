@@ -39,5 +39,7 @@ namespace WebBS.Models
         public virtual ICollection<GCC_EMPLEADO_INF_CREDITICIO> GCC_EMPLEADO_INF_CREDITICIO { get; set; }
         public virtual GCC_POLITICA_CREDITO GCC_POLITICA_CREDITO { get; set; }
         public virtual GCC_SOLICITUD_CREDITO GCC_SOLICITUD_CREDITO { get; set; }
+
+        public string Estado_actual { get; set; }
     }
 }

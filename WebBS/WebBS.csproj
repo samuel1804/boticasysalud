@@ -212,6 +212,7 @@
     <Compile Include="Controllers\ChoferController.cs" />
     <Compile Include="Controllers\ClienteJuridicoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InformeCrediticioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NotaIngresoController.cs" />
     <Compile Include="Controllers\OfertaLaboralController.cs" />
@@ -556,6 +557,10 @@
     <Content Include="Views\ClienteJuridico\Search.cshtml" />
     <Content Include="Views\SolicitudDeCredito\Edit.cshtml" />
     <Content Include="Views\SolicitudDeCredito\Delete.cshtml" />
+    <Content Include="Views\InformeCrediticio\Index.cshtml" />
+    <Content Include="Views\InformeCrediticio\GenerarContrato.cshtml" />
+    <Content Include="Views\SolicitudDeCredito\_Dialog.cshtml" />
+    <Content Include="Views\InformeCrediticio\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

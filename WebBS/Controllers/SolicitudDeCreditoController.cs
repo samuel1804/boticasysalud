@@ -62,9 +62,17 @@ namespace WebBS.Controllers
                     {
                         estado_actual = "Registrado";
                     }
+                    else if (estado_actual == "M")
+                    {
+                        estado_actual = "Modificado";
+                    }
                     else if (estado_actual == "O")
                     {
                         estado_actual = "Anulado";
+                    }
+                    else if (estado_actual == "Z")
+                    {
+                        estado_actual = "Rechazado";
                     }
 
                     item.Estado_actual = estado_actual;
@@ -73,7 +81,10 @@ namespace WebBS.Controllers
                
                 if (!string.IsNullOrEmpty(estado))
                 {
-                    if (estado == "Registrado")
+                    if (estado == "Aprobado")
+                    {
+                        estado = "A";
+                    } else if (estado == "Registrado")
                     {
                         estado = "R";
                     }
@@ -84,6 +95,10 @@ namespace WebBS.Controllers
                     else if (estado == "Anulado")
                     {
                         estado = "O";
+                    }
+                    else if (estado == "Rechazado")
+                    {
+                        estado = "Z";
                     }
 
                     List<GCC_SOLICITUD_CREDITO> listFiltered = new List<GCC_SOLICITUD_CREDITO>();
@@ -128,12 +143,20 @@ namespace WebBS.Controllers
                     {
                         estado_actual = "Registrado";
                     }
+                    else if (estado_actual == "M")
+                    {
+                        estado_actual = "Modificado";
+                    }
                     else if (estado_actual == "O")
                     {
                         estado_actual = "Anulado";
                     }
+                    else if (estado_actual == "Z")
+                    {
+                        estado_actual = "Rechazado";
+                    }
 
-                    item.Estado_actual = estado_actual;                   
+                    item.Estado_actual = estado_actual;                 
 
                 }
 
@@ -260,6 +283,7 @@ namespace WebBS.Controllers
         // GET: /SolicitudDeCredito/Edit/5
         public ActionResult Edit(int id)
         {
+            
             GCC_SOLICITUD_CREDITO solicitud = db.GCC_SOLICITUD_CREDITO.Find(id);
             if (solicitud == null)
             {
@@ -307,6 +331,16 @@ namespace WebBS.Controllers
         {
             try
             {
+                //rechazado Z o anulado O
+                
+                GCC_EMPLEADO_SOL_CREDITO vvv = db.GCC_EMPLEADO_SOL_CREDITO.Where(b => b.Cod_solicitud_credito == solicitud.Cod_solicitud_credito).ToList().Last();
+                string ultimoEstado = vvv.Estado;
+
+                if (ultimoEstado == "A" || ultimoEstado == "Z" || ultimoEstado == "O")
+                {
+                    ModelState.AddModelError("Num_solicitud", "No de puede editar una solicitud aprobada/anulada/rechazada");
+                    return View();
+                }
                 // TODO: Add update logic here
 
                 if (solicitud.Observacion == null)

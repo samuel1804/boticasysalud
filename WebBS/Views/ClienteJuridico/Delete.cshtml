@@ -4,9 +4,9 @@
     ViewBag.Title = "DeleteConfirmed";
 }
 
-<h2>Confirmación de eliminación</h2>
+<h2>Confirmación de anulación</h2>
 
-<h3>Seguro que desea eliminar el cliente jurídico?</h3>
+<h3>Seguro que desea anular el cliente jurídico?</h3>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -24,6 +24,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.Num_doc_identidad)
+        </dd>
+
+        <dt>
+            Razón Social
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social)
         </dd>
 
         <dt>
@@ -50,20 +58,14 @@
             @Html.DisplayFor(model => model.Correo)
         </dd>
 
-        <dt>
-            Razón Social
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social)
-        </dd>
+        
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-default" />
+            <input type="submit" value="Anular" class="btn btn-default" />
         </div>
     }
 </div>

@@ -8,7 +8,7 @@
     ViewBag.Title = "Consulta Cliente Jurídico";
 }
 
-<h2>Consulta Cliente Jurídico</h2>
+<h2>Mantenimineto Cliente Jurídico</h2>
 
 @using (Html.BeginForm("Index", "ClienteJuridico", FormMethod.Get))
 {
@@ -16,16 +16,17 @@
 
     <div style="border:1px solid black;">
         <table style="width:100%" >
+            
             <tr>
-                <td>Razón Social</td>
-                <td><input type="text" name="razonSocial"><br></td>
+                <td>Ruc</td>
+                <td><input type="number" name="ruc"><br></td>
                 <td></td>
                 <td></td>
                 <td></td>
             </tr>
             <tr>
-                <td>Ruc</td>
-                <td><input type="number" name="ruc"><br></td>
+                <td>Razón Social</td>
+                <td><input type="text" name="razonSocial"><br></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -44,9 +45,7 @@
 
 <table class="table">
     <tr>
-        <th>
-            Código
-        </th>
+      
         <th>
             @Html.ActionLink("RUC", "Index", new { sortOrder = ViewBag.RUCSortParm })
         </th>
@@ -72,9 +71,6 @@
 {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Cod_cliente)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Num_doc_identidad)
         </td>
         <td>
@@ -94,14 +90,14 @@
         </td>
         <td>
             @Html.ActionLink("Modificar", "Edit", new { id = item.Cod_cliente }) |
-            @Html.ActionLink("Eliminar", "Delete", new { id = item.Cod_cliente })
+            @Html.ActionLink("Anular", "Delete", new { id = item.Cod_cliente })
         </td>
     </tr>
 }
 
 </table>
 <br />
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
 @Html.PagedListPager(Model, page => Url.Action("Index",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

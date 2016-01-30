@@ -11,6 +11,7 @@ namespace WebBS.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class GCC_CLIENTE_JURIDICO
     {
@@ -18,15 +19,16 @@ namespace WebBS.Models
         {
             this.GCC_SOLICITUD_CREDITO = new HashSet<GCC_SOLICITUD_CREDITO>();
         }
-    
+
         public int Cod_cliente { get; set; }
+        [Required(ErrorMessage = "Razon social es requerido.")]
         public string Razon_social { get; set; }
         public string Categoria { get; set; }
         public int Cod_usu_regi { get; set; }
         public System.DateTime Fec_usu_regi { get; set; }
         public Nullable<int> Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
-    
+
         public virtual GCC_CLIENTE GCC_CLIENTE { get; set; }
         public virtual ICollection<GCC_SOLICITUD_CREDITO> GCC_SOLICITUD_CREDITO { get; set; }
     }

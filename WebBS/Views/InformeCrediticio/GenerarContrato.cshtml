@@ -1,0 +1,150 @@
+﻿@model WebBS.Models.GCC_INFORME_CREDITICIO
+
+@{
+    ViewBag.Title = "Generar Contrato";
+}
+
+<h2>Generar Contrato</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            <div class="col-md-10" style="display: none;">
+                @Html.EditorFor(model => model.Cod_informe_crediticio)
+                @Html.ValidationMessageFor(model => model.Cod_informe_crediticio)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="GCC_SOLICITUD_CREDITO.Num_solicitud">Nro Solicitud</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GCC_SOLICITUD_CREDITO.Num_solicitud, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                @Html.ValidationMessageFor(model => model.GCC_SOLICITUD_CREDITO.Num_solicitud, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="GCC_SOLICITUD_CREDITO.Fec_solicitud">Fecha Solicitud</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GCC_SOLICITUD_CREDITO.Fec_solicitud, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                @Html.ValidationMessageFor(model => model.GCC_SOLICITUD_CREDITO.Fec_solicitud, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad">RUC</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                @Html.ValidationMessageFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.Razon_social">Razón Social</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.Razon_social, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                @Html.ValidationMessageFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.Razon_social, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Direccion">Dirección</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Direccion, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                @Html.ValidationMessageFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Direccion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="GCC_SOLICITUD_CREDITO.Cod_cliente">Estado</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GCC_SOLICITUD_CREDITO.Cod_cliente, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                @Html.ValidationMessageFor(model => model.GCC_SOLICITUD_CREDITO.Cod_cliente, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="GCC_SOLICITUD_CREDITO.Observacion">Observaciones</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GCC_SOLICITUD_CREDITO.Observacion, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                @Html.ValidationMessageFor(model => model.GCC_SOLICITUD_CREDITO.Observacion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="model.Fecha_informe">Fecha Informe</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Fecha_informe, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                @Html.ValidationMessageFor(model => model.Fecha_informe, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="model.Fecha_informe">Nivel de Riesgo</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nivel_riesgo, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                @Html.ValidationMessageFor(model => model.Nivel_riesgo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="model.Fecha_informe">Capacidad Crediticia</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Capacidad_crediticia, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                @Html.ValidationMessageFor(model => model.Capacidad_crediticia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="model.Monto_linea_credito_eval">Línea de Crédito Evaluada</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Monto_linea_credito_eval, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                @Html.ValidationMessageFor(model => model.Monto_linea_credito_eval, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="model.Monto_linea_credito_aprob">Línea de Crédito Aprobada</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Monto_linea_credito_aprob, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Monto_linea_credito_aprob, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="GCC_POLITICA_CREDITO.GCC_PLAN_CREDITO.Rango_inicio">Rango Inicio Plan de Crédito</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GCC_POLITICA_CREDITO.GCC_PLAN_CREDITO.Rango_inicio, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                @Html.ValidationMessageFor(model => model.GCC_POLITICA_CREDITO.GCC_PLAN_CREDITO.Rango_inicio, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="GCC_POLITICA_CREDITO.GCC_PLAN_CREDITO.Rango_fin">Rango Fin Plan de Crédito</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GCC_POLITICA_CREDITO.GCC_PLAN_CREDITO.Rango_fin, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                @Html.ValidationMessageFor(model => model.GCC_POLITICA_CREDITO.GCC_PLAN_CREDITO.Rango_fin, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Generar Contrato" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Consulta Solicitud de Crédito", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
