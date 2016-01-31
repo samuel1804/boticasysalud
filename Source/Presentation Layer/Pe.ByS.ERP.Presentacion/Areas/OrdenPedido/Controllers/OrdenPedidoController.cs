@@ -92,7 +92,7 @@ namespace Pe.ByS.ERP.Presentacion.Areas.OrdenPedido.Controllers
 
         public ActionResult Index()
         {
-            return View("Index");
+            return View("Index", OrdenPedidoConverter.EstadoOrdenPedidoList());
         }
 
         public ActionResult Edit()

@@ -1,11 +1,77 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutI.cshtml";
 }
+@model List<KeyValuePair<string, string>>
 
-<input id="hfIdentPedido" type="hidden" />
+<div class="form-horizontal">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group form-group-sm">
+                <label class="control-label col-md-4 col-sm-4 col-xs-12">Estado:</label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    @Html.DropDownList("selEstado", new SelectList(Model, "Key", "Value", 0), new {@class = "form-control"})
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group form-group-sm">
+                <label class="control-label col-md-4 col-sm-4 col-xs-12">Fecha de Entrega de Pedido:</label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <div class="input-group">
+                        @Html.TextBox("txtFechaEntrega", "", new {@class = "form-control"})
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group form-group-sm">
+                <label class="control-label col-md-4 col-sm-4 col-xs-12">Número de Orden de Pedido:</label>
+                <div class="col-sm-8 col-sm-8 col-xs-12">
+                    @Html.TextBox("txtNumeroPedido", "", new {@class = "form-control"})
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-success" id="btnBuscar">
+                <i class="fa fa-search"></i>
+                Buscar
+            </button>
+        </div>
+    </div>
+    <div class="row" style="padding-bottom: 20px;"></div>
+</div>
 
-<table style="width: 100%" id="tablaPedido"></table>
-<div style="width: 100%" id="barraPedido">
+<div>
+    <input id="hfIdentPedido" type="hidden"/>
+    <table style="width: 100%" id="tablaPedido"></table>
+    <div style="width: 100%" id="barraPedido"></div>
+</div>
+
+<div class="form-horizontal">
+    <div class="row" style="padding-bottom: 20px;"></div>
+    <div class="box-footer">
+        <div class="col-md-offset-3 col-md-9">
+            <button type="button" class="btn btn-info" id="btnAgregar">
+                <i class="fa fa-plus"></i>
+                Agregar
+            </button>
+            &nbsp; &nbsp; &nbsp;
+            <button type="button" class="btn btn-info" id="btnActualizar">
+                <i class="fa fa-pencil"></i>
+                Actualizar
+            </button>
+            &nbsp; &nbsp; &nbsp;
+            <button type="button" class="btn btn-danger" id="btnEliminar">
+                <i class="fa fa-remove"></i>
+                Eliminar
+            </button>
+        </div>
+    </div>
 </div>
 
 <script type='text/javascript' id="ListarProducto">
@@ -15,9 +81,15 @@
         ListarActa();
     });
 
-    function Agregar() {
+    $("#txtFechaEntrega").datepicker({
+        changeYear: true,
+        changeMonth: true,
+        showButtonPanel: true
+    });
+
+    $("#btnAgregar").click(function() {
         window.location.href = '@Url.Action("Edit", "OrdenPedido", new { Area = "OrdenPedido" })';
-    }
+    });
 
     function ListarActa() {
         var colNames = ['ID', 'Número Pedido', 'Fecha Solicitud', 'Fecha Entrega', 'Solicitante', 'Estado'];
@@ -31,15 +103,14 @@
         ];
 
         var opciones = {
-            nuevo: true,
-            editar: true,
-            eliminar: true,
+            nuevo: false,
+            editar: false,
+            eliminar: false,
             search: false,
             refresh: false,
             nuevoCaption: 'Agregar',
             EditarCaption: 'Actualizar',
             EliminarCaption: 'Eliminar',
-            NuevoCommand: Agregar,
             mensaje: 'Seleccione un registro',
             sinRegistro: 'Sin registro',
             alertTitle: 'Alerta',

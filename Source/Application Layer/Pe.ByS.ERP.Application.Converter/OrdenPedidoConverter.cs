@@ -31,6 +31,15 @@ namespace Pe.ByS.ERP.Application.Converter
             };
         }
 
+        public static List<KeyValuePair<string, string>> EstadoOrdenPedidoList()
+        {
+            return new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("", "-- Seleccionar --"),
+                new KeyValuePair<string, string>("1", "Pendiente")
+            };
+        }
+
         public static List<KeyValuePair<string, string>> ProductoList(List<Producto> productolList)
         {
             var list = productolList.ConvertAll(p => new KeyValuePair<string, string>(p.Id.ToString(), p.Nombre));
