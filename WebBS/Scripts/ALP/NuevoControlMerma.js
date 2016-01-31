@@ -20,6 +20,8 @@ $(document).ready(function () {
         var tmpCodInsumo = "";
         var isValid = true;
 
+
+
         $("#tbConstanciaInsumoContent tr").each(function (index, value) {
             var row = $(value);
             var tds = row.find("td");
@@ -35,6 +37,12 @@ $(document).ready(function () {
 
             if (cantDiferencia > 0 && motivo.length == 0)
             {
+                tmpCodInsumo = codInsumo;
+                isValid = false;
+                return false;
+            }
+
+            if (cantDiferencia > 0 && motivo.length == 0) {
                 tmpCodInsumo = codInsumo;
                 isValid = false;
                 return false;

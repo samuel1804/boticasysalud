@@ -160,7 +160,8 @@ namespace WebBS.Controllers.ALP
                     cod_usu_regi = 2,
                     fec_usu_regi = DateTime.Now.Date,
                     cod_usu_modi = 2,
-                    fec_usu_modi = DateTime.Now.Date                    
+                    fec_usu_modi = DateTime.Now.Date,        
+                    cod_empleado = 2
                 };
 
                 db.ALP_CONSTANCIA_PREPARADO.Add(constancia_preparado);
