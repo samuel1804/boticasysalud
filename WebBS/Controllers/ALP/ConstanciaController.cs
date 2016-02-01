@@ -96,6 +96,42 @@ namespace WebBS.Controllers.ALP
 
         }
 
+        [HttpPost]
+        public ActionResult BuscarConstancia2(string nroConstancia, string fechaConstancia, string nomPreparado, int sucursal)
+        {
+
+            try
+            {
+
+                DateTime tmpFechaConstancia = DateTime.Parse(fechaConstancia);
+
+                var lstConstancia = db.ALP_CONSTANCIA_PREPARADO.Where(o => o.estado == "03" &&
+                                                              o.ALP_SOLICITUD_TRANSPORTE.Count == 0 &&
+                                                              o.num_constancia_preparado.Contains(String.IsNullOrEmpty(nroConstancia) ? o.num_constancia_preparado : nroConstancia) &&
+                                                              o.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado.Contains(String.IsNullOrEmpty(nomPreparado) ? o.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado : nomPreparado) &&
+                                                              o.ALP_ORDEN_PREPARADO.RRH_Sucursal.Cod_sucursal == (sucursal == -1 ? o.ALP_ORDEN_PREPARADO.RRH_Sucursal.Cod_sucursal : sucursal) &&
+                                                              o.fec_elaboracion.Year == (tmpFechaConstancia.Year > 0 ? tmpFechaConstancia.Year : o.fec_elaboracion.Year) &&
+                                                              o.fec_elaboracion.Month == (tmpFechaConstancia.Month > 0 ? tmpFechaConstancia.Month : o.fec_elaboracion.Month) &&
+                                                              o.fec_elaboracion.Day == (tmpFechaConstancia.Day > 0 ? tmpFechaConstancia.Day : o.fec_elaboracion.Day)).ToList()
+                            .Select(x => new
+                            {
+                                nroConstancia = x.num_constancia_preparado,
+                                nomPreparado = x.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado,
+                                fechaConstancia = x.fec_elaboracion.ToString("dd/MM/yyyy"),
+                                sucursal = x.ALP_ORDEN_PREPARADO.RRH_Sucursal.Nom_sucursal
+                            }).ToList();
+               
+                return Json(JsonResponseFactory.SuccessResponse(lstConstancia));
+
+
+            }
+            catch (Exception ex)
+            {
+                return Json(JsonResponseFactory.ErrorResponse(ex.Message));
+            }
+
+        }
+
         public ActionResult Nuevo(string num_orden = null)
         {
 
