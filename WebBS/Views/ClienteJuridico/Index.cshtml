@@ -1,0 +1,107 @@
+﻿@model PagedList.IPagedList<WebBS.Models.GCC_CLIENTE>
+@using PagedList.Mvc;
+@using PagedList;
+ 
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Consulta Cliente Jurídico";
+}
+
+<h2>Consulta Cliente Jurídico</h2>
+
+@using (Html.BeginForm("Index", "ClienteJuridico", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+
+    <div style="border:1px solid black;">
+        <table style="width:100%" >
+            <tr>
+                <td>Razón Social</td>
+                <td><input type="text" name="razonSocial"><br></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Ruc</td>
+                <td><input type="number" name="ruc"><br></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Buscar" /></td>
+                <td><button type="submit" value="Registrar" formmethod="delete" formaction="/ClienteJuridico/Create">Nuevo</button></td>
+                <td></td>
+            </tr>
+        </table>
+
+    </div>
+    
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Código
+        </th>
+        <th>
+            @Html.ActionLink("RUC", "Index", new { sortOrder = ViewBag.RUCSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Razón Social", "Index", new { sortOrder = ViewBag.RazonSocialSortParm })
+        </th>
+        <th>
+            Dirección
+        </th>
+        <th>
+            Teléfono
+        </th>
+        <th>
+            Correo
+        </th>
+        <th>
+            Estado
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cod_cliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Num_doc_identidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GCC_CLIENTE_JURIDICO.Razon_social)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Direccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Correo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+        <td>
+            @Html.ActionLink("Modificar", "Edit", new { id = item.Cod_cliente }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id = item.Cod_cliente })
+        </td>
+    </tr>
+}
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
