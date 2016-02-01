@@ -43,6 +43,7 @@
           <Property Name="fec_usu_modi" Type="date" />
           <Property Name="fec_merma" Type="date" Nullable="false" />
           <Property Name="estado" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="cod_empleado" Type="int" />
         </EntityType>
         <EntityType Name="ALP_HOJA_MERMA_INSUMO">
           <Key>
@@ -142,6 +143,8 @@
           <Property Name="fec_usu_regi" Type="date" Nullable="false" />
           <Property Name="cod_usu_modi" Type="int" Nullable="false" />
           <Property Name="fec_usu_modi" Type="date" Nullable="false" />
+          <Property Name="estado" Type="char" MaxLength="2" />
+          <Property Name="cod_sucursal_destino" Type="int" />
         </EntityType>
         <EntityType Name="DIS_Control_Asignacion">
           <Key>
@@ -1595,6 +1598,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ALP_HOJA_MERMA_RRHH_EMPLEADO">
+          <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="0..1" />
+          <End Role="ALP_HOJA_MERMA" Type="Self.ALP_HOJA_MERMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Empleado">
+              <PropertyRef Name="Cod_empleado" />
+            </Principal>
+            <Dependent Role="ALP_HOJA_MERMA">
+              <PropertyRef Name="cod_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ALP_SOLICITUD_TRANSPORTE_ALP_CONSTANCIA_PREPARADO">
           <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
           <End Role="ALP_SOLICITUD_TRANSPORTE" Type="Self.ALP_SOLICITUD_TRANSPORTE" Multiplicity="*" />
@@ -2877,6 +2892,10 @@
             <End Role="ALP_INSUMO" EntitySet="ALP_INSUMO" />
             <End Role="ALP_HOJA_MERMA_INSUMO" EntitySet="ALP_HOJA_MERMA_INSUMO" />
           </AssociationSet>
+          <AssociationSet Name="FK_ALP_HOJA_MERMA_RRHH_EMPLEADO" Association="Self.FK_ALP_HOJA_MERMA_RRHH_EMPLEADO">
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+            <End Role="ALP_HOJA_MERMA" EntitySet="ALP_HOJA_MERMA" />
+          </AssociationSet>
           <AssociationSet Name="FK_ALP_SOLICITUD_TRANSPORTE_ALP_CONSTANCIA_PREPARADO" Association="Self.FK_ALP_SOLICITUD_TRANSPORTE_ALP_CONSTANCIA_PREPARADO">
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
             <End Role="ALP_SOLICITUD_TRANSPORTE" EntitySet="ALP_SOLICITUD_TRANSPORTE" />
@@ -3302,6 +3321,8 @@
           <NavigationProperty Name="ALP_HOJA_MERMA_INSUMO" Relationship="Self.FK_ALP_HOJA_MERMA_INSUMO_ALP_HOJA_MERMA" FromRole="ALP_HOJA_MERMA" ToRole="ALP_HOJA_MERMA_INSUMO" />
           <Property Name="fec_merma" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="estado" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="cod_empleado" Type="Int32" />
+          <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_ALP_HOJA_MERMA_RRHH_EMPLEADO" FromRole="ALP_HOJA_MERMA" ToRole="RRH_Empleado" />
         </EntityType>
         <EntityType Name="ALP_HOJA_MERMA_INSUMO">
           <Key>
@@ -3418,6 +3439,8 @@
           <Property Name="fec_usu_modi" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="Self.FK_ALP_SOLICITUD_TRANSPORTE_ALP_CONSTANCIA_PREPARADO" FromRole="ALP_SOLICITUD_TRANSPORTE" ToRole="ALP_CONSTANCIA_PREPARADO" />
           <NavigationProperty Name="RRH_Empleado" Relationship="Self.FK_ALP_SOLICITUD_TRANSPORTE_RRHH_EMPLEADO" FromRole="ALP_SOLICITUD_TRANSPORTE" ToRole="RRH_Empleado" />
+          <Property Name="estado" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="cod_sucursal_destino" Type="Int32" />
         </EntityType>
         <EntityType Name="DIS_Control_Asignacion">
           <Key>
@@ -4505,6 +4528,7 @@
           <NavigationProperty Name="RRH_PruebaAuotoevaluacion" Relationship="Self.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" FromRole="RRH_Empleado" ToRole="RRH_PruebaAuotoevaluacion" />
           <NavigationProperty Name="RRH_PruebaEvaluacionTecnica" Relationship="Self.FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado" FromRole="RRH_Empleado" ToRole="RRH_PruebaEvaluacionTecnica" />
           <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="BDBoticasModel.FK_ALP_CONSTANCIA_PREPARADO_RRHH_EMPLEADO" FromRole="RRH_Empleado" ToRole="ALP_CONSTANCIA_PREPARADO" />
+          <NavigationProperty Name="ALP_HOJA_MERMA" Relationship="BDBoticasModel.FK_ALP_HOJA_MERMA_RRHH_EMPLEADO" FromRole="RRH_Empleado" ToRole="ALP_HOJA_MERMA" />
         </EntityType>
         <EntityType Name="RRH_OfertaLaboral">
           <Key>
@@ -6702,6 +6726,10 @@
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
           </AssociationSet>
+          <AssociationSet Name="FK_ALP_HOJA_MERMA_RRHH_EMPLEADO" Association="BDBoticasModel.FK_ALP_HOJA_MERMA_RRHH_EMPLEADO">
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+            <End Role="ALP_HOJA_MERMA" EntitySet="ALP_HOJA_MERMA" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_ALP_CONSTANCIA_PREPARADO_RRHH_EMPLEADO">
           <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="0..1" />
@@ -6711,6 +6739,18 @@
               <PropertyRef Name="Cod_empleado" />
             </Principal>
             <Dependent Role="ALP_CONSTANCIA_PREPARADO">
+              <PropertyRef Name="cod_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ALP_HOJA_MERMA_RRHH_EMPLEADO">
+          <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.ALP_HOJA_MERMA" Role="ALP_HOJA_MERMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Empleado">
+              <PropertyRef Name="Cod_empleado" />
+            </Principal>
+            <Dependent Role="ALP_HOJA_MERMA">
               <PropertyRef Name="cod_empleado" />
             </Dependent>
           </ReferentialConstraint>
@@ -6751,6 +6791,7 @@
           <EntitySetMapping Name="ALP_HOJA_MERMA">
             <EntityTypeMapping TypeName="BDBoticasModel.ALP_HOJA_MERMA">
               <MappingFragment StoreEntitySet="ALP_HOJA_MERMA">
+                <ScalarProperty Name="cod_empleado" ColumnName="cod_empleado" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="fec_merma" ColumnName="fec_merma" />
                 <ScalarProperty Name="num_hoja_merma" ColumnName="num_hoja_merma" />
@@ -6854,6 +6895,8 @@
           <EntitySetMapping Name="ALP_SOLICITUD_TRANSPORTE">
             <EntityTypeMapping TypeName="BDBoticasModel.ALP_SOLICITUD_TRANSPORTE">
               <MappingFragment StoreEntitySet="ALP_SOLICITUD_TRANSPORTE">
+                <ScalarProperty Name="cod_sucursal_destino" ColumnName="cod_sucursal_destino" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="num_solicitud" ColumnName="num_solicitud" />
                 <ScalarProperty Name="num_constancia_preparado" ColumnName="num_constancia_preparado" />
                 <ScalarProperty Name="cod_empleado" ColumnName="cod_empleado" />

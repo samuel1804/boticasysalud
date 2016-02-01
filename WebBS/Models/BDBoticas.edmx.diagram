@@ -210,6 +210,7 @@
         <AssociationConnector Association="BDBoticasModel.FK_RYA_PEDIDO_DET_RYA_PEDIDO_CAB" ManuallyRouted="false" />
         <AssociationConnector Association="BDBoticasModel.FK_RYA_STOCK_RYA_PRODUCTO" ManuallyRouted="false" />
         <AssociationConnector Association="BDBoticasModel.FK_ALP_CONSTANCIA_PREPARADO_RRHH_EMPLEADO" />
+        <AssociationConnector Association="BDBoticasModel.FK_ALP_HOJA_MERMA_RRHH_EMPLEADO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

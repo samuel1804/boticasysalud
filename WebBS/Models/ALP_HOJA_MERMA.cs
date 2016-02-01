@@ -27,8 +27,10 @@ namespace WebBS.Models
         public Nullable<System.DateTime> fec_usu_modi { get; set; }
         public System.DateTime fec_merma { get; set; }
         public string estado { get; set; }
+        public Nullable<int> cod_empleado { get; set; }
     
         public virtual ALP_CONSTANCIA_PREPARADO ALP_CONSTANCIA_PREPARADO { get; set; }
         public virtual ICollection<ALP_HOJA_MERMA_INSUMO> ALP_HOJA_MERMA_INSUMO { get; set; }
+        public virtual RRH_Empleado RRH_Empleado { get; set; }
     }
 }
