@@ -75,7 +75,7 @@
 </div>
 
 <script type='text/javascript' id="ListarProducto">
-    var grillaPedido = 'tablaPedido';
+    var grdPedido = 'tablaPedido';
 
     $(document).ready(function () {
         ListarActa();
@@ -87,6 +87,28 @@
         showButtonPanel: true
     });
 
+    $("#btnBuscar").click(function() {
+        var rules = [];
+        var estado = $("#selEstado").val();
+        if (estado !== "")
+            rules.push({ field: "Estado", op: "eq", data: estado });
+
+        var pedido = $("#txtNumeroPedido").val();
+        if (pedido !== "")
+            rules.push({ field: "NumeroPedido", op: "cn", data: pedido });
+
+        var fecha = $("#txtFechaEntrega").val();
+        if (fecha !== "") {
+            rules.push({ field: "FechaEntrega", op: "gt", data: fecha });
+            rules.push({ field: "FechaEntrega", op: "lt", data: fecha.concat(" 23:59:59") });
+        }
+
+        var filters = { groupOp: "AND", rules: rules };
+        var $grid = $("#" + grdPedido);
+        $grid.jqGrid('getGridParam').postData.filters = JSON.stringify(filters);
+        $grid.trigger("reloadGrid");
+    });
+
     $("#btnAgregar").click(function() {
         window.location.href = '@Url.Action("Edit", "OrdenPedido", new { Area = "OrdenPedido" })';
     });
@@ -95,11 +117,11 @@
         var colNames = ['ID', 'Número Pedido', 'Fecha Solicitud', 'Fecha Entrega', 'Solicitante', 'Estado'];
         var colModels = [
             { name: 'Id', index: 'Id', align: 'center', hidden: true },
-            { name: 'NumeroPedido', index: 'NumeroPedido', align: 'center', width: 100 },
+            { name: 'NumeroPedido', index: 'NumeroPedido', align: 'center', width: 100, searchoptions: { sopt: ['cn', 'bw'] } },
             { name: 'FechaPedido', index: 'FechaPedido', align: 'center', width: 120 },
-            { name: 'FechaEntrega', index: 'FechaEntrega', align: 'center', width: 120 },
+            { name: 'FechaEntrega', index: 'FechaEntrega', align: 'center', width: 120, searchoptions: { sopt: ['cn', 'bw'] } },
             { name: 'SolicitanteNombre', index: 'SolicitanteNombre', align: 'center', width: 120 },
-            { name: 'Estado', index: 'Estado', align: 'center', width: 120 }
+            { name: 'Estado', index: 'Estado', align: 'center', width: 120, searchoptions: { sopt: ['cn', 'bw'] } }
         ];
 
         var opciones = {
@@ -116,7 +138,7 @@
             alertTitle: 'Alerta',
             caption: 'Listado de Ordenes de Pedido',
             urlListar: '@Url.Action("ListarPedidos", "OrdenPedido", new { area = "OrdenPedido" })',
-            grilla: grillaPedido,
+            grilla: grdPedido,
             pager: 'barraPedido',
             identificador: 'hfIdentPedido',
             height: 210,
@@ -128,6 +150,7 @@
         };
 
         SIG.GrillaUpgrade(opciones);
+        $("#" + grdPedido).filterToolbar({ searchOnEnter: true, stringResult: true, defaultSearch: "cn" });
     }
 
 </script>

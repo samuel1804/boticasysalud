@@ -64,6 +64,7 @@ namespace Pe.ByS.ERP.Presentacion.Areas.OrdenPedido.Controllers
         {
             try
             {
+                var estados = OrdenPedidoConverter.EstadoOrdenPedidoList();
                 return ListarJqGrid(new ListJQGridParameter<Domain.OrdenPedido>
                 {
                     Grid = grid,
@@ -78,7 +79,7 @@ namespace Pe.ByS.ERP.Presentacion.Areas.OrdenPedido.Controllers
                             item.FechaPedido.ConvertToDdmmaaaa(),
                             item.FechaEntrega.ConvertToDdmmaaaa(),
                             item.Solicitante.Nombre,
-                            item.Estado
+                            estados.First(p => p.Key == item.Estado).Value
                         }
                     }
                 });
