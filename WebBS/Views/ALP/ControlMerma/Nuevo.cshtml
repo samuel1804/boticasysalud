@@ -5,6 +5,7 @@
 
 <h2>Registrar Control Merma</h2>
 
+<input id="txtCantMerma" type="hidden" value="@ViewBag.cantidadMerma" />
 @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     <fieldset disabled>
@@ -99,7 +100,7 @@
                                             }
                                             else
                                             {
-                                                <input type="text" class="form-control" placeholder="Motivo" value="No Aplica" readonly>
+                                                <input type="text" class="form-control" placeholder="Motivo" value="No Aplica" disabled>
                                             }
                                         </div>
                                     </div>

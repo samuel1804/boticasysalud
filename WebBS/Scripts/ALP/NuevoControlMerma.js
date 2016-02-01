@@ -11,16 +11,22 @@ $(document).ready(function () {
 
     $('#txtFecMerma').val(today);
 
-    $("#btnGuardar").on("click", ActualizarConstancia);
+    $("#btnGuardar").on("click", GuardarMerma);
 
-    function ActualizarConstancia() {
+    function GuardarMerma() {
+
+        var cantMerma = $("#txtCantMerma").val();
+
+        if (cantMerma == 0)
+        {
+            bootbox.alert("No Existen mermas para registrar");
+            return;
+        }
 
         var arrInsumos = new Array();
 
         var tmpCodInsumo = "";
         var isValid = true;
-
-
 
         $("#tbConstanciaInsumoContent tr").each(function (index, value) {
             var row = $(value);
