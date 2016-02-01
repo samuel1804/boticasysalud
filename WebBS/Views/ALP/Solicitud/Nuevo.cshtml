@@ -1,0 +1,71 @@
+﻿@model WebBS.Models.ALP_CONSTANCIA_PREPARADO
+
+@{
+    ViewBag.Title = "Nuevo";
+}
+
+<h2>Nueva Solicitud de Transporte</h2>
+
+<input id="txtDefaultSucursal" type="hidden" value="@ViewBag.SelSucursal"/>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="col-md-12">Número Constancia</label>
+            <div class="col-md-12">
+                <input id="txtNroConstancia" class="form-control" placeholder="Nro Constancia" value="@Html.DisplayFor(model => model.num_constancia_preparado)" disabled />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-12">Fecha Solicitud</label>
+            <div class="col-md-12">
+                <input class="form-control" placeholder="Fecha Solicitud" value="@ViewBag.fechaSolicitud" disabled/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-12">Nombre Preparado</label>
+            <div class="col-md-12">
+                <input class="form-control" placeholder="Nombre Preparado" value="@Html.DisplayFor(model => model.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado)" disabled />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-12">Sucursal Orden</label>
+            <div class="col-md-12">
+                <input class="form-control" placeholder="Sucursal" value="@Html.DisplayFor(model => model.ALP_ORDEN_PREPARADO.RRH_Sucursal.Nom_sucursal)" disabled />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-12">Sucursal Destino</label>
+            <div class="col-md-12">
+                @Html.DropDownList("Sucursales", new SelectList(ViewBag.Sucursales, "Value", "Text"), new { @id = "selSucursal", @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-12">Químico Laboratorista</label>
+            <div class="col-md-12">
+                <input class="form-control" placeholder="Químico Laboratorista" value="@ViewBag.Quimico" disabled/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="control-label col-md-12">Observación</label>
+            <div class="col-md-12">
+                <textarea id="txtObs" class="form-control form-group" rows="16" placeholder="Obsevcación"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+
+    <div class="text-left col-md-6">
+        <a id="btnEmitir" class="btn btn-success" >Emitir</a>
+    </div>
+    <div class="text-right col-md-6">
+        <a href="../Solicitud/ListaConstancia" class="btn btn-danger">Cancelar</a>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/NuevaSolicitud")
+}
+

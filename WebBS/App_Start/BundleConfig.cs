@@ -32,6 +32,18 @@ namespace WebBS.App_Start
 
             bundles.Add(new ScriptBundle("~/bundles/NuevoControlMerma").Include(
                         "~/Scripts/ALP/NuevoControlMerma.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ListaSolicitud").Include(
+                        "~/Scripts/ALP/ListaSolicitud.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ListaConstanciaSolicitud").Include(
+                        "~/Scripts/ALP/ListaConstanciaSolicitud.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/NuevaSolicitud").Include(
+                        "~/Scripts/ALP/NuevaSolicitud.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ModificarSolicitud").Include(
+                        "~/Scripts/ALP/ModificarSolicitud.js"));
         }
     }
 }
