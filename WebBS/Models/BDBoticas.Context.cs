@@ -92,24 +92,25 @@ namespace WebBS.Models
         public virtual DbSet<IMP_TIPO_EVENTO> IMP_TIPO_EVENTO { get; set; }
         public virtual DbSet<IMP_TIPO_MONEDA> IMP_TIPO_MONEDA { get; set; }
         public virtual DbSet<IMP_TIPO_PAGO> IMP_TIPO_PAGO { get; set; }
-        public virtual DbSet<RRH_AlternativaAutoevaluacion> RRH_AlternativaAutoevaluacion { get; set; }
         public virtual DbSet<RRH_AlternativaEvaluacionTecnica> RRH_AlternativaEvaluacionTecnica { get; set; }
         public virtual DbSet<RRH_Area> RRH_Area { get; set; }
         public virtual DbSet<RRH_Candidato> RRH_Candidato { get; set; }
         public virtual DbSet<RRH_Criterio> RRH_Criterio { get; set; }
-        public virtual DbSet<RRH_Criterio_PruebaAutoevaluacion> RRH_Criterio_PruebaAutoevaluacion { get; set; }
+        public virtual DbSet<RRH_Distrito> RRH_Distrito { get; set; }
         public virtual DbSet<RRH_Empleado> RRH_Empleado { get; set; }
+        public virtual DbSet<RRH_EvaluacionTecnica> RRH_EvaluacionTecnica { get; set; }
         public virtual DbSet<RRH_ExperienciaLaboral> RRH_ExperienciaLaboral { get; set; }
         public virtual DbSet<RRH_GradoAcademico> RRH_GradoAcademico { get; set; }
         public virtual DbSet<RRH_OfertaLaboral> RRH_OfertaLaboral { get; set; }
         public virtual DbSet<RRH_OfertaLaboral_Candidato> RRH_OfertaLaboral_Candidato { get; set; }
+        public virtual DbSet<RRH_Option> RRH_Option { get; set; }
         public virtual DbSet<RRH_Perfil> RRH_Perfil { get; set; }
         public virtual DbSet<RRH_PreguntaEvaluacionTecnica> RRH_PreguntaEvaluacionTecnica { get; set; }
-        public virtual DbSet<RRH_PruebaAutoevaluacion> RRH_PruebaAutoevaluacion { get; set; }
-        public virtual DbSet<RRH_PruebaEvaluacionTecnica> RRH_PruebaEvaluacionTecnica { get; set; }
         public virtual DbSet<RRH_Puesto> RRH_Puesto { get; set; }
         public virtual DbSet<RRH_ReferenciaLaboral> RRH_ReferenciaLaboral { get; set; }
+        public virtual DbSet<RRH_RespuestaAutoevaluacion> RRH_RespuestaAutoevaluacion { get; set; }
         public virtual DbSet<RRH_Sucursal> RRH_Sucursal { get; set; }
+        public virtual DbSet<RRH_Usuario> RRH_Usuario { get; set; }
         public virtual DbSet<RYA_ACTARECEP_CAB> RYA_ACTARECEP_CAB { get; set; }
         public virtual DbSet<RYA_ACTARECEP_DET> RYA_ACTARECEP_DET { get; set; }
         public virtual DbSet<RYA_ALMACENES> RYA_ALMACENES { get; set; }
@@ -123,6 +124,9 @@ namespace WebBS.Models
         public virtual DbSet<RYA_SUCURSALES> RYA_SUCURSALES { get; set; }
         public virtual DbSet<RYA_TRANSA_ALMA> RYA_TRANSA_ALMA { get; set; }
         public virtual DbSet<RYA_UBICACIONES> RYA_UBICACIONES { get; set; }
+        public virtual DbSet<RRH_Puesto_Option> RRH_Puesto_Option { get; set; }
+        public virtual DbSet<RRH_PruebaAutoevaluacion> RRH_PruebaAutoevaluacion { get; set; }
+        public virtual DbSet<RRH_PruebaEvaluacionTecnica> RRH_PruebaEvaluacionTecnica { get; set; }
     
         public virtual int sp_DetalleReceta_Buscar(string wHERE)
         {

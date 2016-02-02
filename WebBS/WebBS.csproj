@@ -213,6 +213,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NotaIngresoController.cs" />
     <Compile Include="Controllers\OfertaLaboralController.cs" />
+    <Compile Include="Controllers\OptionController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\PruebaAutoevaluacionController.cs" />
     <Compile Include="DTO\AlternativaAutoevaluacionDTO.cs" />
@@ -429,9 +430,6 @@
     <Compile Include="Models\IMP_TIPO_PAGO.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RRH_AlternativaAutoevaluacion.cs">
-      <DependentUpon>BDBoticas.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\RRH_AlternativaEvaluacionTecnica.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
@@ -444,10 +442,13 @@
     <Compile Include="Models\RRH_Criterio.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RRH_Criterio_PruebaAutoevaluacion.cs">
+    <Compile Include="Models\RRH_Distrito.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RRH_Empleado.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_EvaluacionTecnica.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RRH_ExperienciaLaboral.cs">
@@ -460,6 +461,9 @@
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RRH_OfertaLaboral_Candidato.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_Option.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RRH_Perfil.cs">
@@ -477,10 +481,19 @@
     <Compile Include="Models\RRH_Puesto.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RRH_Puesto_Option.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RRH_ReferenciaLaboral.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RRH_RespuestaAutoevaluacion.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RRH_Sucursal.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_Usuario.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RYA_ACTARECEP_CAB.cs">
@@ -567,11 +580,11 @@
     <Content Include="Views\AlternativaAutoEvaluacion\Delete.cshtml" />
     <Content Include="Views\AlternativaAutoEvaluacion\Details.cshtml" />
     <Content Include="Views\AlternativaAutoEvaluacion\Edit.cshtml" />
-    <Content Include="Views\AlternativaAutoEvaluacion\Index.cshtml" />
     <Content Include="Views\PruebaAutoevaluacion\Delete.cshtml" />
     <Content Include="Views\PruebaAutoevaluacion\Details.cshtml" />
     <Content Include="Views\PruebaAutoevaluacion\Edit.cshtml" />
     <Content Include="Views\PruebaAutoevaluacion\Index.cshtml" />
+    <Content Include="Views\Option\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

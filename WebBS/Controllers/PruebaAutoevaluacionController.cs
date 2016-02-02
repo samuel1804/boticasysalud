@@ -28,7 +28,12 @@ namespace WebBS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RRH_PruebaAutoevaluacion rrh_pruebaautoevaluacion = db.RRH_PruebaAutoevaluacion.Find(id);
+            RRH_PruebaAutoevaluacion rrh_pruebaautoevaluacion = db.RRH_PruebaAutoevaluacion.OrderByDescending(t => t.Cod_prueba_autoevaluacion).Where(a => a.Cod_empleado == id).FirstOrDefault();
+            
+            
+            //rrh_pruebaautoevaluacion.PuntajeTotal =  db.RRH_AlternativaEvaluacionTecnica.Where(t=>t.d)
+
+
             if (rrh_pruebaautoevaluacion == null)
             {
                 return HttpNotFound();
@@ -40,7 +45,9 @@ namespace WebBS.Controllers
         public ActionResult Create()
         {
             ViewBag.Cod_empleado = new SelectList(db.RRH_Empleado, "Cod_empleado", "Nom_empleado");
-            ViewBag.Alternativas = db.RRH_AlternativaAutoevaluacion.ToList();
+            List<RRH_RespuestaAutoevaluacion> resp = db.RRH_RespuestaAutoevaluacion.ToList();
+
+            ViewBag.Alternativas = resp;
             ViewBag.Criterios = db.RRH_Criterio.ToList();
             return View();
         }
@@ -69,38 +76,30 @@ namespace WebBS.Controllers
         public JsonResult SaveOrder(List<AlternativaAutoevaluacionDTO> OrderDetails)
         {
             
-
-
-            
             bool status = false;
             if (ModelState.IsValid)
             {
 
+                RRH_Usuario usuario = (RRH_Usuario)Session["Usuario"];
 
-
-                //Inserta Cabecera
-                var Prueba = new RRH_PruebaAutoevaluacion();
-                Prueba.Cod_autoevaluacion = db.RRH_PruebaAutoevaluacion.OrderByDescending(t => t.Cod_autoevaluacion).FirstOrDefault() == null ? 1 : db.RRH_PruebaAutoevaluacion.OrderByDescending(t => t.Cod_autoevaluacion).FirstOrDefault().Cod_autoevaluacion+1 ;
-                Prueba.Cod_empleado = 1;
-                Prueba.PuntajeTotal = OrderDetails.Sum(t => t.Valor);
-                db.RRH_PruebaAutoevaluacion.Add(Prueba);
-                db.SaveChanges();
-
+           
                 foreach (var i in OrderDetails)
                 {
-                    var criterio = new RRH_Criterio_PruebaAutoevaluacion()
+                    var Prueba = new RRH_PruebaAutoevaluacion()
                         {
-                            Cod_alternatica_autoevaluacion = i.Cod_alternativa_autoevaluacion,
-                            Cod_criterio =(int) i.Cod_criterio,
-                            Cod_autoevaluacion = Prueba.Cod_autoevaluacion
+                             Cod_prueba_autoevaluacion = db.RRH_PruebaAutoevaluacion.OrderByDescending(t => t.Cod_prueba_autoevaluacion).FirstOrDefault() == null ? 1 : db.RRH_PruebaAutoevaluacion.OrderByDescending(t => t.Cod_prueba_autoevaluacion).FirstOrDefault().Cod_prueba_autoevaluacion+1 ,
+                            Cod_resp_autoevaluacion = i.Cod_resp_autoevaluacion,
+                    Cod_empleado = usuario.Cod_Empleado,        
+                    //Cod_criterio =(int) i.Cod_criterio,
+                            //Cod_prueba_autoevaluacion = Prueba.Cod_prueba_autoevaluacion
                             
                         };
 
 
-                        db.RRH_Criterio_PruebaAutoevaluacion.Add(criterio);
+                    db.RRH_PruebaAutoevaluacion.Add(Prueba);
 
                         db.SaveChanges();
-                    }
+                 }
 
 
 

@@ -7,9 +7,9 @@ namespace WebBS.DTO
 {
     public class AlternativaAutoevaluacionDTO
     {
-        public int Cod_alternativa_autoevaluacion { get; set; }
+        public int Cod_resp_autoevaluacion { get; set; }
         public string Respuesta { get; set; }
-        public Nullable<int> Valor { get; set; }
+        public Nullable<int> Puntaje { get; set; }
         public Nullable<System.DateTime> Fec_creacion { get; set; }
         public string Cod_usu_regi { get; set; }
         public Nullable<System.DateTime> Fec_usu_regi { get; set; }

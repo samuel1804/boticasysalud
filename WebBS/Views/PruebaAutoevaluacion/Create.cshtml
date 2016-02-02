@@ -1,5 +1,5 @@
 ﻿@model WebBS.Models.RRH_PruebaAutoevaluacion
-
+@using WebBS.Models
 @{
     ViewBag.Title = "Completar Autoevaluación";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -23,7 +23,7 @@
         <div class="form-group">
             <label class="control-label col-md-2">Empleado:</label>
             <div class="col-md-10">
-                <label class="control-label col-md-6" style="text-align:left">Samuel Flores Hernandez</label>
+                <label class="control-label col-md-6" style="text-align:left">@(((RRH_Usuario)Session["Usuario"]).RRH_Empleado.Nom_empleado) @(((RRH_Usuario)Session["Usuario"]).RRH_Empleado.Ap_paterno) @(((RRH_Usuario)Session["Usuario"]).RRH_Empleado.Ap_materno)</label>
 
                 <label class="control-label col-md-2">Fecha:</label>
                 <label class="control-label col-md-2">27/01/2016</label>
@@ -31,10 +31,9 @@
         </div>
 
        <!-- <div class="form-group">
-            @Html.LabelFor(model => model.PuntajeTotal, new { @class = "control-label col-md-2" })
+           
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PuntajeTotal)
-                @Html.ValidationMessageFor(model => model.PuntajeTotal)
+              
             </div>
         </div>
            -->
@@ -69,8 +68,8 @@
                                 <th></th>
                                 <th>Respuesta</th>
                                 <th hidden="hidden">cod_criterio</th>
-                                <th hidden="hidden">Cod_alternativa_autoevaluacion</th>
-                                <th hidden="hidden">Valor</th>
+                                <th hidden="hidden">Cod_resp_autoevaluacion</th>
+                                <th hidden="hidden">Puntaje</th>
                             </tr>
                         </thead>
 
@@ -83,8 +82,8 @@
                                     <td width="20%"><input type="radio" id="rbRespuesta" name="@item.Cod_criterio" /></td>
                                     <td width="80%">@i.Respuesta</td>
                                     <td hidden="hidden">@i.Cod_criterio</td>
-                                    <td hidden="hidden">@i.Cod_alternativa_autoevaluacion</td>
-                                    <td hidden="hidden">@i.Valor</td>
+                                    <td hidden="hidden">@i.Cod_resp_autoevaluacion</td>
+                                    <td hidden="hidden">@i.Puntaje</td>
                                 </tr>
                             }
 
@@ -117,7 +116,7 @@
 
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+
 </div>
 
 @section Scripts {
@@ -146,7 +145,7 @@
                         headers[k] = table.rows[0].cells[k].innerHTML.toLowerCase().replace(/ /gi, '');
                         
                     }
-                    alert('rows lenght:' + table.rows.length);
+                   
 
                     // go through cells
                     for (var m = 1; m < table.rows.length; m++) {

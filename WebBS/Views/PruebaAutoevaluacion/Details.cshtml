@@ -1,83 +1,48 @@
 ﻿@model WebBS.Models.RRH_PruebaAutoevaluacion
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Resultados";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var conc = Model.RRH_Empleado.Nom_empleado + " " + Model.RRH_Empleado.Ap_paterno +" " + Model.RRH_Empleado.Ap_materno; 
 }
 
-<h2>Details</h2>
+<h2>Resultados</h2>
 
 <div>
-    <h4>RRH_PruebaAutoevaluacion</h4>
+    <h4></h4>
 	<hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Fec_evaluacion)
+            @Html.DisplayName("Fecha Evaluación:")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Fec_evaluacion)
         </dd>
 
+        
+
         <dt>
-            @Html.DisplayNameFor(model => model.VersionEvaluacion)
+            @Html.DisplayName("Nombres:" )
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.VersionEvaluacion)
+            
+            @Html.DisplayFor(model => conc)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Cod_usu_regi)
+            @Html.DisplayName("Puntaje Total:")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Cod_usu_regi)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Fec_usu_regi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Fec_usu_regi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Cod_usu_modi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Cod_usu_modi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Fec_usu_modi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Fec_usu_modi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PuntajeTotal)
-        </dt>
-
-        <dd>
             @Html.DisplayFor(model => model.PuntajeTotal)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RRH_Empleado.Nom_empleado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RRH_Empleado.Nom_empleado)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Cod_autoevaluacion }) |
+
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -18,6 +18,7 @@ namespace WebBS.Models
         {
             this.ALP_ORDEN_PREPARADO = new HashSet<ALP_ORDEN_PREPARADO>();
             this.DIS_Pedido = new HashSet<DIS_Pedido>();
+            this.RRH_Empleado = new HashSet<RRH_Empleado>();
             this.RRH_OfertaLaboral = new HashSet<RRH_OfertaLaboral>();
         }
     
@@ -32,6 +33,7 @@ namespace WebBS.Models
     
         public virtual ICollection<ALP_ORDEN_PREPARADO> ALP_ORDEN_PREPARADO { get; set; }
         public virtual ICollection<DIS_Pedido> DIS_Pedido { get; set; }
+        public virtual ICollection<RRH_Empleado> RRH_Empleado { get; set; }
         public virtual ICollection<RRH_OfertaLaboral> RRH_OfertaLaboral { get; set; }
     }
 }

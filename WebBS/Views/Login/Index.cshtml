@@ -1,6 +1,8 @@
-﻿@{
+﻿@model WebBS.Models.RRH_Usuario
+@{
     Layout = null;
 }
+
 
 <!DOCTYPE html>
 <html>
@@ -67,8 +69,10 @@
         }
     </style>
 </head>
+@using (Html.BeginForm("Autenticar", "Login", FormMethod.Post))
+{
 <body>
-    <form id="form1" method="post" action="Login"></form>
+  
     <div class="container-fluid">
         <div class="card-login">
             <div class="logo form-group">
@@ -77,19 +81,47 @@
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-addon"><i class="glyphicon glyphicon-user"></i></div>
-                    <input type="text" class="form-control" placeholder="Usuario" />
+                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", htmlAttributes = new { placeholder = " Usuario" } })
+                   
+                    
+                   
                 </div>
+                @Html.ValidationMessageFor(model => model.UserName, "", new { style = "color:white" })
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></div>
-                    <input type="password" class="form-control" placeholder="Contraseña" />
+                    @Html.PasswordFor(model => model.Contrasena, new { @class = "form-control", htmlAttributes = new { placeholder = " Contraseña" } })
+                 
+                    
                 </div>
+                @Html.ValidationMessageFor(model => model.Contrasena, "", new { style = "color:white" })
+
+                @if (ViewBag.Message != null)
+                {
+               <label style="color:white">@ViewBag.Message</label>
+                }
             </div>
             <div class="form-group text-right login-opciones">
-                <a href="~/Home/Index" class="btn btn-primary">Iniciar sesión</a>
+                <input type="submit" value="Iniciar sesión" class="btn btn-primary" />
+              
             </div>
         </div>
     </div>
 </body>
+}
 </html>
+
+
+
+<script type="text/javascript">
+    function navigate(target) {
+        //Grab your values
+        var UserName = document.getElementById('UserName').value;
+        var Contrasenia = document.getElementById('Contrasenia').value;
+
+        //Perform your navigation
+        window.location.href = target + '?UserName=' + UserName + '&Contrasenia=' + Contrasenia;
+    }
+
+</script>

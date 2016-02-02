@@ -18,7 +18,7 @@ namespace WebBS.Controllers
         // GET: /AlternativaAutoEvaluacion/
         public ActionResult Index()
         {
-            return View(db.RRH_AlternativaAutoevaluacion.ToList());
+            return View(db.RRH_RespuestaAutoevaluacion.ToList());
         }
 
         // GET: /AlternativaAutoEvaluacion/Details/5
@@ -28,7 +28,7 @@ namespace WebBS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RRH_AlternativaAutoevaluacion rrh_alternativaautoevaluacion = db.RRH_AlternativaAutoevaluacion.Find(id);
+            RRH_RespuestaAutoevaluacion rrh_alternativaautoevaluacion = db.RRH_RespuestaAutoevaluacion.Find(id);
             if (rrh_alternativaautoevaluacion == null)
             {
                 return HttpNotFound();
@@ -40,14 +40,14 @@ namespace WebBS.Controllers
         public ActionResult Create()
         {
             ViewBag.Cod_criterio = new SelectList(db.RRH_Criterio, "Cod_criterio", "Desc_criterio");
-            ViewBag.Alternativas = from a in db.RRH_AlternativaAutoevaluacion
+            ViewBag.Alternativas = from a in db.RRH_RespuestaAutoevaluacion
                                    join c in db.RRH_Criterio on a.Cod_criterio equals c.Cod_criterio
                                    select new AlternativaAutoevaluacionDTO{
-                                   Cod_alternativa_autoevaluacion=a.Cod_alternativa_autoevaluacion,
+                                       Cod_resp_autoevaluacion = a.Cod_resp_autoevaluacion,
                                    Cod_criterio=a.Cod_criterio,
                                    Desc_criterio=c.Desc_criterio,
                                    Respuesta=a.Respuesta,
-                                   Valor=a.Valor,
+                                   Puntaje=a.Puntaje,
                                    cod_operacion=0
                                    };
             return View();
@@ -79,26 +79,29 @@ namespace WebBS.Controllers
             {
                 foreach (var i in OrderDetails)
                     {
-                        if (i.cod_operacion == 1 && i.Cod_alternativa_autoevaluacion == null) { 
+                        if (i.cod_operacion == 1 && i.Cod_resp_autoevaluacion == 0)
+                        { 
                             //Insertar
-                        i.Cod_alternativa_autoevaluacion = db.RRH_AlternativaAutoevaluacion.OrderByDescending(t => t.Cod_alternativa_autoevaluacion).FirstOrDefault() == null ? 1 : db.RRH_AlternativaAutoevaluacion.OrderByDescending(t => t.Cod_alternativa_autoevaluacion).FirstOrDefault().Cod_alternativa_autoevaluacion+1;
-                        var Alternativa = new RRH_AlternativaAutoevaluacion()
+                            i.Cod_resp_autoevaluacion = db.RRH_RespuestaAutoevaluacion.OrderByDescending(t => t.Cod_resp_autoevaluacion).FirstOrDefault() == null ? 1 : db.RRH_RespuestaAutoevaluacion.OrderByDescending(t => t.Cod_resp_autoevaluacion).FirstOrDefault().Cod_resp_autoevaluacion + 1;
+                            var Alternativa = new RRH_RespuestaAutoevaluacion()
                         {
-                            Cod_alternativa_autoevaluacion = i.Cod_alternativa_autoevaluacion,
-                            Cod_criterio = i.Cod_criterio,
+                            Cod_resp_autoevaluacion = i.Cod_resp_autoevaluacion,
+                            Cod_criterio = (int)i.Cod_criterio,
                             Respuesta = i.Respuesta,
-                            Valor = i.Valor
+                            Puntaje = (int)i.Puntaje
                         };
 
 
-                        db.RRH_AlternativaAutoevaluacion.Add(Alternativa);
+                            db.RRH_RespuestaAutoevaluacion.Add(Alternativa);
                         db.SaveChanges();
-                }else if(i.cod_operacion==2 && i.Cod_alternativa_autoevaluacion!=null){
-                    var itemToRemove = db.RRH_AlternativaAutoevaluacion.SingleOrDefault(x => x.Cod_alternativa_autoevaluacion == i.Cod_alternativa_autoevaluacion); //returns a single item.
+                        }
+                        else if (i.cod_operacion == 2 && i.Cod_resp_autoevaluacion != null)
+                        {
+                    var itemToRemove = db.RRH_RespuestaAutoevaluacion.SingleOrDefault(x => x.Cod_resp_autoevaluacion == i.Cod_resp_autoevaluacion); //returns a single item.
 
                     if (itemToRemove != null)
                     {
-                        db.RRH_AlternativaAutoevaluacion.Remove(itemToRemove);
+                        db.RRH_RespuestaAutoevaluacion.Remove(itemToRemove);
                         db.SaveChanges();
                     }
                 }
@@ -124,7 +127,7 @@ namespace WebBS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RRH_AlternativaAutoevaluacion rrh_alternativaautoevaluacion = db.RRH_AlternativaAutoevaluacion.Find(id);
+            RRH_RespuestaAutoevaluacion rrh_alternativaautoevaluacion = db.RRH_RespuestaAutoevaluacion.Find(id);
             if (rrh_alternativaautoevaluacion == null)
             {
                 return HttpNotFound();
@@ -137,7 +140,7 @@ namespace WebBS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Cod_alternativa_autoevaluacion,Respuesta,Valor,Fec_creacion,Cod_usu_regi,Fec_usu_regi,Cod_usu_modi,Fec_usu_modi,Cod_criterio")] RRH_AlternativaAutoevaluacion rrh_alternativaautoevaluacion)
+        public ActionResult Edit([Bind(Include="Cod_alternativa_autoevaluacion,Respuesta,Valor,Fec_creacion,Cod_usu_regi,Fec_usu_regi,Cod_usu_modi,Fec_usu_modi,Cod_criterio")] RRH_RespuestaAutoevaluacion rrh_alternativaautoevaluacion)
         {
             if (ModelState.IsValid)
             {
@@ -155,7 +158,7 @@ namespace WebBS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RRH_AlternativaAutoevaluacion rrh_alternativaautoevaluacion = db.RRH_AlternativaAutoevaluacion.Find(id);
+            RRH_RespuestaAutoevaluacion rrh_alternativaautoevaluacion = db.RRH_RespuestaAutoevaluacion.Find(id);
             if (rrh_alternativaautoevaluacion == null)
             {
                 return HttpNotFound();
@@ -168,8 +171,8 @@ namespace WebBS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            RRH_AlternativaAutoevaluacion rrh_alternativaautoevaluacion = db.RRH_AlternativaAutoevaluacion.Find(id);
-            db.RRH_AlternativaAutoevaluacion.Remove(rrh_alternativaautoevaluacion);
+            RRH_RespuestaAutoevaluacion rrh_alternativaautoevaluacion = db.RRH_RespuestaAutoevaluacion.Find(id);
+            db.RRH_RespuestaAutoevaluacion.Remove(rrh_alternativaautoevaluacion);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

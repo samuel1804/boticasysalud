@@ -1,0 +1,64 @@
+﻿@model IEnumerable<WebBS.Models.RRH_Option>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+    <ul class="nav hidden-xs" id="lg-menu">
+
+@foreach (var it in Model.Where(t => t.OptionMainId == 1).ToList())
+{
+    if (@it.OptionMainId == 1) {
+        <li>
+            <a><i class="glyphicon glyphicon-list"></i> @it.OptionDes</a>
+            <ul>
+                
+@foreach (var item in Model.Where(t=>t.OptionMainId==@it.OptionId).ToList()){
+   
+                <li>
+                    <a href="@Url.Action(@item.Action, @item.Controller)">
+                        <i class="glyphicon glyphicon-plus"></i><span>@item.OptionDes</span>
+                    </a>
+                </li>
+    
+}
+
+            </ul>
+        </li>
+}
+}
+
+
+
+    </ul>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+</body>
+</html>

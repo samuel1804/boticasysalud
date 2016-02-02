@@ -16,12 +16,15 @@ namespace WebBS.Models
     {
         public int Cod_ReferenciaLaboral { get; set; }
         public Nullable<int> Cod_candidato { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
+        public string Nom_Persona { get; set; }
+        public string Nom_empresa { get; set; }
         public string Email { get; set; }
         public string Telefono { get; set; }
-        public Nullable<int> TipoReferencia { get; set; }
         public string Puesto { get; set; }
+        public string Cod_usu_regi { get; set; }
+        public Nullable<System.DateTime> Fec_usu_regi { get; set; }
+        public string Cod_usu_modi { get; set; }
+        public Nullable<System.DateTime> Fec_usu_modi { get; set; }
     
         public virtual RRH_Candidato RRH_Candidato { get; set; }
     }

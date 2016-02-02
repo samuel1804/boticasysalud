@@ -14,24 +14,21 @@ namespace WebBS.Models
     
     public partial class RRH_PruebaEvaluacionTecnica
     {
-        public int Cod_evaluaciontecnica { get; set; }
+        public int Cod_pruebaevaluaciontecnica { get; set; }
         public Nullable<System.DateTime> Fec_evaluacion { get; set; }
-        public string VersionEvaluacion { get; set; }
         public string Evaluador { get; set; }
         public string Observacion { get; set; }
-        public Nullable<int> ResultadoPreg1 { get; set; }
-        public Nullable<int> ResultadoPreg2 { get; set; }
-        public Nullable<int> ResultadoPreg3 { get; set; }
-        public Nullable<int> ResultadoPreg4 { get; set; }
-        public Nullable<int> ResultadoPreg5 { get; set; }
+        public string RespuestaPreg { get; set; }
+        public Nullable<int> ResultadoPreg { get; set; }
         public string Cod_usu_regi { get; set; }
         public Nullable<System.DateTime> Fec_usu_regi { get; set; }
         public string Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
         public Nullable<int> Cod_empleado { get; set; }
         public Nullable<int> Cod_preg_eva_tec { get; set; }
+        public Nullable<int> Cod_evaluaciontecnica { get; set; }
     
         public virtual RRH_Empleado RRH_Empleado { get; set; }
-        public virtual RRH_PreguntaEvaluacionTecnica RRH_PreguntaEvaluacionTecnica { get; set; }
+        public virtual RRH_EvaluacionTecnica RRH_EvaluacionTecnica { get; set; }
     }
 }

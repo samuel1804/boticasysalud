@@ -85,7 +85,7 @@ namespace WebBS.Controllers
 
                     RRH_GradoAcademico mobjcust = new RRH_GradoAcademico();
                     mobjcust.CentroEstudios = mCust.CentroEstudios;
-                    mobjcust.Especialidad = mCust.Especialidad;
+                    mobjcust.Titulo = mCust.Titulo;
                    
                     Grados.Add(mobjcust);
                     /*
@@ -132,7 +132,7 @@ namespace WebBS.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Cod_ofertalaboral = new SelectList(db.RRH_OfertaLaboral, "Cod_ofertalaboral", "Titulo", rrh_candidato.Cod_ofertalaboral);
+           // ViewBag.Cod_ofertalaboral = new SelectList(db.RRH_OfertaLaboral, "Cod_ofertalaboral", "Titulo", rrh_candidato.Cod_ofertalaboral);
 
 
             if (ModelState.IsValid)

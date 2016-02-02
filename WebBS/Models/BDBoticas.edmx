@@ -936,20 +936,6 @@
           <Property Name="Cod_usu_modi" Type="int" />
           <Property Name="Fec_usu_modi" Type="datetime" />
         </EntityType>
-        <EntityType Name="RRH_AlternativaAutoevaluacion">
-          <Key>
-            <PropertyRef Name="Cod_alternativa_autoevaluacion" />
-          </Key>
-          <Property Name="Cod_alternativa_autoevaluacion" Type="int" Nullable="false" />
-          <Property Name="Respuesta" Type="varchar" MaxLength="100" />
-          <Property Name="Valor" Type="int" />
-          <Property Name="Fec_creacion" Type="date" />
-          <Property Name="Cod_usu_regi" Type="varchar" MaxLength="10" />
-          <Property Name="Fec_usu_regi" Type="datetime" />
-          <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
-          <Property Name="Fec_usu_modi" Type="datetime" />
-          <Property Name="Cod_criterio" Type="int" />
-        </EntityType>
         <EntityType Name="RRH_AlternativaEvaluacionTecnica">
           <Key>
             <PropertyRef Name="Cod_alternativa_evaluaciontec" />
@@ -986,6 +972,9 @@
           <Property Name="Telefono" Type="varchar" MaxLength="50" />
           <Property Name="Direccion" Type="varchar" MaxLength="100" />
           <Property Name="Foto" Type="varchar(max)" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Cod_distrito" Type="int" />
+          <Property Name="Fec_Nacimiento" Type="date" />
           <Property Name="Fec_postulacion" Type="date" />
           <Property Name="Cod_usu_regi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_regi" Type="datetime" />
@@ -1004,14 +993,16 @@
           <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_modi" Type="datetime" />
         </EntityType>
-        <EntityType Name="RRH_Criterio_PruebaAutoevaluacion">
+        <EntityType Name="RRH_Distrito">
           <Key>
-            <PropertyRef Name="Cod_autoevaluacion" />
-            <PropertyRef Name="Cod_criterio" />
+            <PropertyRef Name="Cod_distrito" />
           </Key>
-          <Property Name="Cod_autoevaluacion" Type="int" Nullable="false" />
-          <Property Name="Cod_criterio" Type="int" Nullable="false" />
-          <Property Name="Cod_alternatica_autoevaluacion" Type="int" />
+          <Property Name="Cod_distrito" Type="int" Nullable="false" />
+          <Property Name="Nom_distrito" Type="varchar" MaxLength="50" />
+          <Property Name="Cod_usu_regi" Type="varchar" MaxLength="10" />
+          <Property Name="Fec_usu_regi" Type="datetime" />
+          <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
+          <Property Name="Fec_usu_modi" Type="datetime" />
         </EntityType>
         <EntityType Name="RRH_Empleado">
           <Key>
@@ -1030,7 +1021,23 @@
           <Property Name="Fec_usu_regi" Type="datetime" />
           <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_modi" Type="datetime" />
-          <Property Name="Cod_puesto" Type="int" />
+          <Property Name="Evaluado" Type="bit" />
+          <Property Name="Cod_Puesto" Type="int" />
+          <Property Name="Cod_Jefe" Type="int" />
+          <Property Name="Cod_Sucursal" Type="int" />
+        </EntityType>
+        <EntityType Name="RRH_EvaluacionTecnica">
+          <Key>
+            <PropertyRef Name="Cod_evaluaciontecnica" />
+          </Key>
+          <Property Name="Cod_evaluaciontecnica" Type="int" Nullable="false" />
+          <Property Name="Cod_alternativa_evaluaciontec" Type="int" />
+          <Property Name="Cod_preg_eva_tec" Type="int" />
+          <Property Name="Version" Type="varchar" MaxLength="2" />
+          <Property Name="Cod_usu_regi" Type="varchar" MaxLength="10" />
+          <Property Name="Fec_usu_regi" Type="datetime" />
+          <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
+          <Property Name="Fec_usu_modi" Type="datetime" />
         </EntityType>
         <EntityType Name="RRH_ExperienciaLaboral">
           <Key>
@@ -1042,6 +1049,12 @@
           <Property Name="Desc_Reponsabilidades" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="Fec_Inicio_elaboral" Type="date" Nullable="false" />
           <Property Name="Fec_Fin_elaboral" Type="date" Nullable="false" />
+          <Property Name="Nom_puesto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nom_area" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cod_usu_regi" Type="varchar" MaxLength="10" />
+          <Property Name="Fec_usu_regi" Type="datetime" />
+          <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
+          <Property Name="Fec_usu_modi" Type="datetime" />
         </EntityType>
         <EntityType Name="RRH_GradoAcademico">
           <Key>
@@ -1049,9 +1062,14 @@
           </Key>
           <Property Name="Cod_GradoAcademico" Type="int" Nullable="false" />
           <Property Name="Cod_candidato" Type="int" Nullable="false" />
-          <Property Name="Especialidad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CentroEstudios" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Fec_Graduacion" Type="date" Nullable="false" />
+          <Property Name="Anio_graduacion" Type="int" Nullable="false" />
+          <Property Name="ruta_certificado" Type="varchar" MaxLength="500" />
+          <Property Name="Cod_usu_regi" Type="varchar" MaxLength="10" />
+          <Property Name="Fec_usu_regi" Type="datetime" />
+          <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
+          <Property Name="Fec_usu_modi" Type="datetime" />
         </EntityType>
         <EntityType Name="RRH_OfertaLaboral">
           <Key>
@@ -1081,6 +1099,16 @@
           <Property Name="Fec_usu_regi" Type="datetime" />
           <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_modi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RRH_Option">
+          <Key>
+            <PropertyRef Name="OptionId" />
+          </Key>
+          <Property Name="OptionId" Type="int" Nullable="false" />
+          <Property Name="OptionDes" Type="varchar" MaxLength="250" />
+          <Property Name="Action" Type="varchar" MaxLength="50" />
+          <Property Name="Controller" Type="varchar" MaxLength="50" />
+          <Property Name="OptionMainId" Type="int" />
         </EntityType>
         <EntityType Name="RRH_Perfil">
           <Key>
@@ -1117,38 +1145,34 @@
         </EntityType>
         <EntityType Name="RRH_PruebaAutoevaluacion">
           <Key>
-            <PropertyRef Name="Cod_autoevaluacion" />
+            <PropertyRef Name="Cod_prueba_autoevaluacion" />
           </Key>
-          <Property Name="Cod_autoevaluacion" Type="int" Nullable="false" />
+          <Property Name="Cod_prueba_autoevaluacion" Type="int" Nullable="false" />
           <Property Name="Fec_evaluacion" Type="date" />
-          <Property Name="VersionEvaluacion" Type="varchar" MaxLength="2" />
           <Property Name="Cod_usu_regi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_regi" Type="datetime" />
           <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_modi" Type="datetime" />
           <Property Name="Cod_empleado" Type="int" />
-          <Property Name="PuntajeTotal" Type="int" />
+          <Property Name="Cod_resp_autoevaluacion" Type="int" />
         </EntityType>
         <EntityType Name="RRH_PruebaEvaluacionTecnica">
           <Key>
-            <PropertyRef Name="Cod_evaluaciontecnica" />
+            <PropertyRef Name="Cod_pruebaevaluaciontecnica" />
           </Key>
-          <Property Name="Cod_evaluaciontecnica" Type="int" Nullable="false" />
+          <Property Name="Cod_pruebaevaluaciontecnica" Type="int" Nullable="false" />
           <Property Name="Fec_evaluacion" Type="date" />
-          <Property Name="VersionEvaluacion" Type="varchar" MaxLength="2" />
           <Property Name="Evaluador" Type="varchar" MaxLength="25" />
           <Property Name="Observacion" Type="varchar" MaxLength="150" />
-          <Property Name="ResultadoPreg1" Type="int" />
-          <Property Name="ResultadoPreg2" Type="int" />
-          <Property Name="ResultadoPreg3" Type="int" />
-          <Property Name="ResultadoPreg4" Type="int" />
-          <Property Name="ResultadoPreg5" Type="int" />
+          <Property Name="RespuestaPreg" Type="varchar" MaxLength="150" />
+          <Property Name="ResultadoPreg" Type="int" />
           <Property Name="Cod_usu_regi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_regi" Type="datetime" />
           <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_modi" Type="datetime" />
           <Property Name="Cod_empleado" Type="int" />
           <Property Name="Cod_preg_eva_tec" Type="int" />
+          <Property Name="Cod_evaluaciontecnica" Type="int" />
         </EntityType>
         <EntityType Name="RRH_Puesto">
           <Key>
@@ -1163,18 +1187,45 @@
           <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_modi" Type="datetime" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="RRH_Puesto_Option">
+          <Key>
+            <PropertyRef Name="Cod_Puesto" />
+            <PropertyRef Name="OptionId" />
+          </Key>
+          <Property Name="Cod_Puesto_Option" Type="int" />
+          <Property Name="Cod_Puesto" Type="int" Nullable="false" />
+          <Property Name="OptionId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="RRH_ReferenciaLaboral">
           <Key>
             <PropertyRef Name="Cod_ReferenciaLaboral" />
           </Key>
           <Property Name="Cod_ReferenciaLaboral" Type="int" Nullable="false" />
           <Property Name="Cod_candidato" Type="int" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" />
-          <Property Name="Apellido" Type="varchar" MaxLength="50" />
+          <Property Name="Nom_Persona" Type="varchar" MaxLength="50" />
+          <Property Name="Nom_empresa" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="100" />
-          <Property Name="Telefono" Type="varchar" MaxLength="50" />
-          <Property Name="TipoReferencia" Type="int" />
+          <Property Name="Telefono" Type="varchar" MaxLength="20" />
           <Property Name="Puesto" Type="varchar" MaxLength="50" />
+          <Property Name="Cod_usu_regi" Type="varchar" MaxLength="10" />
+          <Property Name="Fec_usu_regi" Type="datetime" />
+          <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
+          <Property Name="Fec_usu_modi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RRH_RespuestaAutoevaluacion">
+          <Key>
+            <PropertyRef Name="Cod_resp_autoevaluacion" />
+          </Key>
+          <Property Name="Cod_resp_autoevaluacion" Type="int" Nullable="false" />
+          <Property Name="Cod_criterio" Type="int" Nullable="false" />
+          <Property Name="Respuesta" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Puntaje" Type="int" Nullable="false" />
+          <Property Name="Cod_usu_reg" Type="varchar" MaxLength="10" />
+          <Property Name="Fec_usu_reg" Type="datetime" />
+          <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
+          <Property Name="Fec_usu_modi" Type="datetime" />
         </EntityType>
         <EntityType Name="RRH_Sucursal">
           <Key>
@@ -1188,6 +1239,15 @@
           <Property Name="Fec_usu_regi" Type="datetime" />
           <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_modi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RRH_Usuario">
+          <Key>
+            <PropertyRef Name="Cod_usuario" />
+          </Key>
+          <Property Name="Cod_usuario" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Cod_Empleado" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Contrasena" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="RYA_ACTARECEP_CAB">
           <Key>
@@ -1379,7 +1439,7 @@
           <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_modi" Type="datetime" />
         </EntityType>
-        <Association Name="FK__ALP_CONST__num_o__11158940">
+        <Association Name="FK__ALP_CONST__num_o__4E53A1AA">
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="1" />
           <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1391,7 +1451,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_HOJA___num_c__2057CCD0">
+        <Association Name="FK__ALP_HOJA___num_c__4F47C5E3">
           <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
           <End Role="ALP_HOJA_MERMA" Type="Self.ALP_HOJA_MERMA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1403,7 +1463,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_LIBRO__cod_q__1E6F845E">
+        <Association Name="FK__ALP_LIBRO__cod_q__46B27FE2">
           <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="1" />
           <End Role="ALP_LIBRO_RECETA" Type="Self.ALP_LIBRO_RECETA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1415,7 +1475,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_LIBRO__num_c__1F63A897">
+        <Association Name="FK__ALP_LIBRO__num_c__51300E55">
           <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
           <End Role="ALP_LIBRO_RECETA" Type="Self.ALP_LIBRO_RECETA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1427,7 +1487,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_e__7B264821">
+        <Association Name="FK__ALP_ORDEN__cod_e__489AC854">
           <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="1" />
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1439,7 +1499,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_i__0F2D40CE">
+        <Association Name="FK__ALP_ORDEN__cod_i__55009F39">
           <End Role="ALP_INSUMO" Type="Self.ALP_INSUMO" Multiplicity="1" />
           <End Role="ALP_ORDEN_PREPARADO_INSUMO" Type="Self.ALP_ORDEN_PREPARADO_INSUMO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1451,7 +1511,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_r__7C1A6C5A">
+        <Association Name="FK__ALP_ORDEN__cod_r__531856C7">
           <End Role="ALP_RECETA" Type="Self.ALP_RECETA" Multiplicity="1" />
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1463,7 +1523,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_s__7D0E9093">
+        <Association Name="FK__ALP_ORDEN__cod_s__540C7B00">
           <End Role="RRH_Sucursal" Type="Self.RRH_Sucursal" Multiplicity="1" />
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1475,7 +1535,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__num_o__10216507">
+        <Association Name="FK__ALP_ORDEN__num_o__55F4C372">
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="1" />
           <End Role="ALP_ORDEN_PREPARADO_INSUMO" Type="Self.ALP_ORDEN_PREPARADO_INSUMO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1487,7 +1547,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DIS_Pedid__Cod_s__5224328E">
+        <Association Name="FK__DIS_Pedid__Cod_s__5BAD9CC8">
           <End Role="RRH_Sucursal" Type="Self.RRH_Sucursal" Multiplicity="0..1" />
           <End Role="DIS_Pedido" Type="Self.DIS_Pedido" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2335,43 +2395,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RRH_Criterio_PruebaAutoevaluacion_RRH_AlternativaAutoevaluacion">
-          <End Role="RRH_AlternativaAutoevaluacion" Type="Self.RRH_AlternativaAutoevaluacion" Multiplicity="0..1" />
-          <End Role="RRH_Criterio_PruebaAutoevaluacion" Type="Self.RRH_Criterio_PruebaAutoevaluacion" Multiplicity="*" />
+        <Association Name="FK_RRH_Candidato_RRH_Distrito">
+          <End Role="RRH_Distrito" Type="Self.RRH_Distrito" Multiplicity="0..1" />
+          <End Role="RRH_Candidato" Type="Self.RRH_Candidato" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="RRH_AlternativaAutoevaluacion">
-              <PropertyRef Name="Cod_alternativa_autoevaluacion" />
+            <Principal Role="RRH_Distrito">
+              <PropertyRef Name="Cod_distrito" />
             </Principal>
-            <Dependent Role="RRH_Criterio_PruebaAutoevaluacion">
-              <PropertyRef Name="Cod_alternatica_autoevaluacion" />
+            <Dependent Role="RRH_Candidato">
+              <PropertyRef Name="Cod_distrito" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RRH_Criterio_PruebaAutoevaluacion_RRH_Criterio">
-          <End Role="RRH_Criterio" Type="Self.RRH_Criterio" Multiplicity="1" />
-          <End Role="RRH_Criterio_PruebaAutoevaluacion" Type="Self.RRH_Criterio_PruebaAutoevaluacion" Multiplicity="*" />
+        <Association Name="FK_RRH_Empleado_RRH_Empleado">
+          <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="0..1" />
+          <End Role="RRH_Empleado1" Type="Self.RRH_Empleado" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="RRH_Criterio">
-              <PropertyRef Name="Cod_criterio" />
+            <Principal Role="RRH_Empleado">
+              <PropertyRef Name="Cod_empleado" />
             </Principal>
-            <Dependent Role="RRH_Criterio_PruebaAutoevaluacion">
-              <PropertyRef Name="Cod_criterio" />
+            <Dependent Role="RRH_Empleado1">
+              <PropertyRef Name="Cod_Jefe" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RRH_Criterio_PruebaAutoevaluacion_RRH_PruebaAuotoevaluacion">
-          <End Role="RRH_PruebaAutoevaluacion" Type="Self.RRH_PruebaAutoevaluacion" Multiplicity="1" />
-          <End Role="RRH_Criterio_PruebaAutoevaluacion" Type="Self.RRH_Criterio_PruebaAutoevaluacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RRH_PruebaAutoevaluacion">
-              <PropertyRef Name="Cod_autoevaluacion" />
-            </Principal>
-            <Dependent Role="RRH_Criterio_PruebaAutoevaluacion">
-              <PropertyRef Name="Cod_autoevaluacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RRH_Empleado_RRH_Puesto">
+        <Association Name="FK_RRH_Empleado_RRH_Perfil">
           <End Role="RRH_Puesto" Type="Self.RRH_Puesto" Multiplicity="0..1" />
           <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2379,7 +2427,43 @@
               <PropertyRef Name="Cod_puesto" />
             </Principal>
             <Dependent Role="RRH_Empleado">
-              <PropertyRef Name="Cod_puesto" />
+              <PropertyRef Name="Cod_Puesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_Empleado_RRH_Sucursal">
+          <End Role="RRH_Sucursal" Type="Self.RRH_Sucursal" Multiplicity="0..1" />
+          <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Sucursal">
+              <PropertyRef Name="Cod_sucursal" />
+            </Principal>
+            <Dependent Role="RRH_Empleado">
+              <PropertyRef Name="Cod_Sucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_EvaluacionTecnica_RRH_AlternativaEvaluacionTecnica">
+          <End Role="RRH_AlternativaEvaluacionTecnica" Type="Self.RRH_AlternativaEvaluacionTecnica" Multiplicity="0..1" />
+          <End Role="RRH_EvaluacionTecnica" Type="Self.RRH_EvaluacionTecnica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_AlternativaEvaluacionTecnica">
+              <PropertyRef Name="Cod_alternativa_evaluaciontec" />
+            </Principal>
+            <Dependent Role="RRH_EvaluacionTecnica">
+              <PropertyRef Name="Cod_alternativa_evaluaciontec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_EvaluacionTecnica_RRH_PreguntaEvaluacionTecnica">
+          <End Role="RRH_PreguntaEvaluacionTecnica" Type="Self.RRH_PreguntaEvaluacionTecnica" Multiplicity="0..1" />
+          <End Role="RRH_EvaluacionTecnica" Type="Self.RRH_EvaluacionTecnica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_PreguntaEvaluacionTecnica">
+              <PropertyRef Name="Cod_preg_eva_tec" />
+            </Principal>
+            <Dependent Role="RRH_EvaluacionTecnica">
+              <PropertyRef Name="Cod_preg_eva_tec" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2407,18 +2491,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RRH_PreguntaEvaluacionTecnica_RRH_AlternativaEvaluacionTecnica">
-          <End Role="RRH_AlternativaEvaluacionTecnica" Type="Self.RRH_AlternativaEvaluacionTecnica" Multiplicity="0..1" />
-          <End Role="RRH_PreguntaEvaluacionTecnica" Type="Self.RRH_PreguntaEvaluacionTecnica" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RRH_AlternativaEvaluacionTecnica">
-              <PropertyRef Name="Cod_alternativa_evaluaciontec" />
-            </Principal>
-            <Dependent Role="RRH_PreguntaEvaluacionTecnica">
-              <PropertyRef Name="Cod_alternativa_evaluaciontec" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_RRH_PreguntaEvaluacionTecnica_RRH_Criterio">
           <End Role="RRH_Criterio" Type="Self.RRH_Criterio" Multiplicity="0..1" />
           <End Role="RRH_PreguntaEvaluacionTecnica" Type="Self.RRH_PreguntaEvaluacionTecnica" Multiplicity="*" />
@@ -2443,6 +2515,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RRH_PruebaAutoevaluacion_RRH_RespuestaAutoevaluacion">
+          <End Role="RRH_RespuestaAutoevaluacion" Type="Self.RRH_RespuestaAutoevaluacion" Multiplicity="0..1" />
+          <End Role="RRH_PruebaAutoevaluacion" Type="Self.RRH_PruebaAutoevaluacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_RespuestaAutoevaluacion">
+              <PropertyRef Name="Cod_resp_autoevaluacion" />
+            </Principal>
+            <Dependent Role="RRH_PruebaAutoevaluacion">
+              <PropertyRef Name="Cod_resp_autoevaluacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado">
           <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="0..1" />
           <End Role="RRH_PruebaEvaluacionTecnica" Type="Self.RRH_PruebaEvaluacionTecnica" Multiplicity="*" />
@@ -2455,15 +2539,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RRH_PruebaEvaluacionTecnica_RRH_PreguntaEvaluacionTecnica">
-          <End Role="RRH_PreguntaEvaluacionTecnica" Type="Self.RRH_PreguntaEvaluacionTecnica" Multiplicity="0..1" />
+        <Association Name="FK_RRH_PruebaEvaluacionTecnica_RRH_EvaluacionTecnica">
+          <End Role="RRH_EvaluacionTecnica" Type="Self.RRH_EvaluacionTecnica" Multiplicity="0..1" />
           <End Role="RRH_PruebaEvaluacionTecnica" Type="Self.RRH_PruebaEvaluacionTecnica" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="RRH_PreguntaEvaluacionTecnica">
-              <PropertyRef Name="Cod_preg_eva_tec" />
+            <Principal Role="RRH_EvaluacionTecnica">
+              <PropertyRef Name="Cod_evaluaciontecnica" />
             </Principal>
             <Dependent Role="RRH_PruebaEvaluacionTecnica">
-              <PropertyRef Name="Cod_preg_eva_tec" />
+              <PropertyRef Name="Cod_evaluaciontecnica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_Puesto_Option_RRH_Option">
+          <End Role="RRH_Option" Type="Self.RRH_Option" Multiplicity="1" />
+          <End Role="RRH_Puesto_Option" Type="Self.RRH_Puesto_Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Option">
+              <PropertyRef Name="OptionId" />
+            </Principal>
+            <Dependent Role="RRH_Puesto_Option">
+              <PropertyRef Name="OptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_Puesto_Option_RRH_Puesto">
+          <End Role="RRH_Puesto" Type="Self.RRH_Puesto" Multiplicity="1" />
+          <End Role="RRH_Puesto_Option" Type="Self.RRH_Puesto_Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Puesto">
+              <PropertyRef Name="Cod_puesto" />
+            </Principal>
+            <Dependent Role="RRH_Puesto_Option">
+              <PropertyRef Name="Cod_Puesto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2476,6 +2584,30 @@
             </Principal>
             <Dependent Role="RRH_ReferenciaLaboral">
               <PropertyRef Name="Cod_candidato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_RespuestaAutoevaluacion_RRH_Criterio">
+          <End Role="RRH_Criterio" Type="Self.RRH_Criterio" Multiplicity="1" />
+          <End Role="RRH_RespuestaAutoevaluacion" Type="Self.RRH_RespuestaAutoevaluacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Criterio">
+              <PropertyRef Name="Cod_criterio" />
+            </Principal>
+            <Dependent Role="RRH_RespuestaAutoevaluacion">
+              <PropertyRef Name="Cod_criterio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_Usuario_RRH_Empleado">
+          <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="1" />
+          <End Role="RRH_Usuario" Type="Self.RRH_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Empleado">
+              <PropertyRef Name="Cod_empleado" />
+            </Principal>
+            <Dependent Role="RRH_Usuario">
+              <PropertyRef Name="Cod_Empleado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2701,24 +2833,27 @@
           <EntitySet Name="IMP_TIPO_EVENTO" EntityType="Self.IMP_TIPO_EVENTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMP_TIPO_MONEDA" EntityType="Self.IMP_TIPO_MONEDA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMP_TIPO_PAGO" EntityType="Self.IMP_TIPO_PAGO" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RRH_AlternativaAutoevaluacion" EntityType="Self.RRH_AlternativaAutoevaluacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_AlternativaEvaluacionTecnica" EntityType="Self.RRH_AlternativaEvaluacionTecnica" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_Area" EntityType="Self.RRH_Area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_Candidato" EntityType="Self.RRH_Candidato" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_Criterio" EntityType="Self.RRH_Criterio" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RRH_Criterio_PruebaAutoevaluacion" EntityType="Self.RRH_Criterio_PruebaAutoevaluacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RRH_Distrito" EntityType="Self.RRH_Distrito" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_Empleado" EntityType="Self.RRH_Empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RRH_EvaluacionTecnica" EntityType="Self.RRH_EvaluacionTecnica" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_ExperienciaLaboral" EntityType="Self.RRH_ExperienciaLaboral" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_GradoAcademico" EntityType="Self.RRH_GradoAcademico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_OfertaLaboral" EntityType="Self.RRH_OfertaLaboral" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_OfertaLaboral_Candidato" EntityType="Self.RRH_OfertaLaboral_Candidato" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RRH_Option" EntityType="Self.RRH_Option" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_Perfil" EntityType="Self.RRH_Perfil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_PreguntaEvaluacionTecnica" EntityType="Self.RRH_PreguntaEvaluacionTecnica" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_PruebaAutoevaluacion" EntityType="Self.RRH_PruebaAutoevaluacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_PruebaEvaluacionTecnica" EntityType="Self.RRH_PruebaEvaluacionTecnica" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_Puesto" EntityType="Self.RRH_Puesto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_ReferenciaLaboral" EntityType="Self.RRH_ReferenciaLaboral" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RRH_RespuestaAutoevaluacion" EntityType="Self.RRH_RespuestaAutoevaluacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_Sucursal" EntityType="Self.RRH_Sucursal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RRH_Usuario" EntityType="Self.RRH_Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RYA_ACTARECEP_CAB" EntityType="Self.RYA_ACTARECEP_CAB" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RYA_ACTARECEP_DET" EntityType="Self.RYA_ACTARECEP_DET" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RYA_ALMACENES" EntityType="Self.RYA_ALMACENES" Schema="dbo" store:Type="Tables" />
@@ -2732,43 +2867,50 @@
           <EntitySet Name="RYA_SUCURSALES" EntityType="Self.RYA_SUCURSALES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RYA_TRANSA_ALMA" EntityType="Self.RYA_TRANSA_ALMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RYA_UBICACIONES" EntityType="Self.RYA_UBICACIONES" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__ALP_CONST__num_o__11158940" Association="Self.FK__ALP_CONST__num_o__11158940">
+          <EntitySet Name="RRH_Puesto_Option" EntityType="Self.RRH_Puesto_Option" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RRH_Puesto_Option].[Cod_Puesto_Option] AS [Cod_Puesto_Option], 
+    [RRH_Puesto_Option].[Cod_Puesto] AS [Cod_Puesto], 
+    [RRH_Puesto_Option].[OptionId] AS [OptionId]
+    FROM [dbo].[RRH_Puesto_Option] AS [RRH_Puesto_Option]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__ALP_CONST__num_o__4E53A1AA" Association="Self.FK__ALP_CONST__num_o__4E53A1AA">
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_HOJA___num_c__2057CCD0" Association="Self.FK__ALP_HOJA___num_c__2057CCD0">
+          <AssociationSet Name="FK__ALP_HOJA___num_c__4F47C5E3" Association="Self.FK__ALP_HOJA___num_c__4F47C5E3">
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
             <End Role="ALP_HOJA_MERMA" EntitySet="ALP_HOJA_MERMA" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_LIBRO__cod_q__1E6F845E" Association="Self.FK__ALP_LIBRO__cod_q__1E6F845E">
+          <AssociationSet Name="FK__ALP_LIBRO__cod_q__46B27FE2" Association="Self.FK__ALP_LIBRO__cod_q__46B27FE2">
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="ALP_LIBRO_RECETA" EntitySet="ALP_LIBRO_RECETA" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_LIBRO__num_c__1F63A897" Association="Self.FK__ALP_LIBRO__num_c__1F63A897">
+          <AssociationSet Name="FK__ALP_LIBRO__num_c__51300E55" Association="Self.FK__ALP_LIBRO__num_c__51300E55">
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
             <End Role="ALP_LIBRO_RECETA" EntitySet="ALP_LIBRO_RECETA" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_e__7B264821" Association="Self.FK__ALP_ORDEN__cod_e__7B264821">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_e__489AC854" Association="Self.FK__ALP_ORDEN__cod_e__489AC854">
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_i__0F2D40CE" Association="Self.FK__ALP_ORDEN__cod_i__0F2D40CE">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_i__55009F39" Association="Self.FK__ALP_ORDEN__cod_i__55009F39">
             <End Role="ALP_INSUMO" EntitySet="ALP_INSUMO" />
             <End Role="ALP_ORDEN_PREPARADO_INSUMO" EntitySet="ALP_ORDEN_PREPARADO_INSUMO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_r__7C1A6C5A" Association="Self.FK__ALP_ORDEN__cod_r__7C1A6C5A">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_r__531856C7" Association="Self.FK__ALP_ORDEN__cod_r__531856C7">
             <End Role="ALP_RECETA" EntitySet="ALP_RECETA" />
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_s__7D0E9093" Association="Self.FK__ALP_ORDEN__cod_s__7D0E9093">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_s__540C7B00" Association="Self.FK__ALP_ORDEN__cod_s__540C7B00">
             <End Role="RRH_Sucursal" EntitySet="RRH_Sucursal" />
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__num_o__10216507" Association="Self.FK__ALP_ORDEN__num_o__10216507">
+          <AssociationSet Name="FK__ALP_ORDEN__num_o__55F4C372" Association="Self.FK__ALP_ORDEN__num_o__55F4C372">
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
             <End Role="ALP_ORDEN_PREPARADO_INSUMO" EntitySet="ALP_ORDEN_PREPARADO_INSUMO" />
           </AssociationSet>
-          <AssociationSet Name="FK__DIS_Pedid__Cod_s__5224328E" Association="Self.FK__DIS_Pedid__Cod_s__5224328E">
+          <AssociationSet Name="FK__DIS_Pedid__Cod_s__5BAD9CC8" Association="Self.FK__DIS_Pedid__Cod_s__5BAD9CC8">
             <End Role="RRH_Sucursal" EntitySet="RRH_Sucursal" />
             <End Role="DIS_Pedido" EntitySet="DIS_Pedido" />
           </AssociationSet>
@@ -3048,21 +3190,29 @@
             <End Role="RRH_Area" EntitySet="RRH_Area" />
             <End Role="RRH_Puesto" EntitySet="RRH_Puesto" />
           </AssociationSet>
-          <AssociationSet Name="FK_RRH_Criterio_PruebaAutoevaluacion_RRH_AlternativaAutoevaluacion" Association="Self.FK_RRH_Criterio_PruebaAutoevaluacion_RRH_AlternativaAutoevaluacion">
-            <End Role="RRH_AlternativaAutoevaluacion" EntitySet="RRH_AlternativaAutoevaluacion" />
-            <End Role="RRH_Criterio_PruebaAutoevaluacion" EntitySet="RRH_Criterio_PruebaAutoevaluacion" />
+          <AssociationSet Name="FK_RRH_Candidato_RRH_Distrito" Association="Self.FK_RRH_Candidato_RRH_Distrito">
+            <End Role="RRH_Distrito" EntitySet="RRH_Distrito" />
+            <End Role="RRH_Candidato" EntitySet="RRH_Candidato" />
           </AssociationSet>
-          <AssociationSet Name="FK_RRH_Criterio_PruebaAutoevaluacion_RRH_Criterio" Association="Self.FK_RRH_Criterio_PruebaAutoevaluacion_RRH_Criterio">
-            <End Role="RRH_Criterio" EntitySet="RRH_Criterio" />
-            <End Role="RRH_Criterio_PruebaAutoevaluacion" EntitySet="RRH_Criterio_PruebaAutoevaluacion" />
+          <AssociationSet Name="FK_RRH_Empleado_RRH_Empleado" Association="Self.FK_RRH_Empleado_RRH_Empleado">
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+            <End Role="RRH_Empleado1" EntitySet="RRH_Empleado" />
           </AssociationSet>
-          <AssociationSet Name="FK_RRH_Criterio_PruebaAutoevaluacion_RRH_PruebaAuotoevaluacion" Association="Self.FK_RRH_Criterio_PruebaAutoevaluacion_RRH_PruebaAuotoevaluacion">
-            <End Role="RRH_PruebaAutoevaluacion" EntitySet="RRH_PruebaAutoevaluacion" />
-            <End Role="RRH_Criterio_PruebaAutoevaluacion" EntitySet="RRH_Criterio_PruebaAutoevaluacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RRH_Empleado_RRH_Puesto" Association="Self.FK_RRH_Empleado_RRH_Puesto">
+          <AssociationSet Name="FK_RRH_Empleado_RRH_Perfil" Association="Self.FK_RRH_Empleado_RRH_Perfil">
             <End Role="RRH_Puesto" EntitySet="RRH_Puesto" />
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_Empleado_RRH_Sucursal" Association="Self.FK_RRH_Empleado_RRH_Sucursal">
+            <End Role="RRH_Sucursal" EntitySet="RRH_Sucursal" />
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_EvaluacionTecnica_RRH_AlternativaEvaluacionTecnica" Association="Self.FK_RRH_EvaluacionTecnica_RRH_AlternativaEvaluacionTecnica">
+            <End Role="RRH_AlternativaEvaluacionTecnica" EntitySet="RRH_AlternativaEvaluacionTecnica" />
+            <End Role="RRH_EvaluacionTecnica" EntitySet="RRH_EvaluacionTecnica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_EvaluacionTecnica_RRH_PreguntaEvaluacionTecnica" Association="Self.FK_RRH_EvaluacionTecnica_RRH_PreguntaEvaluacionTecnica">
+            <End Role="RRH_PreguntaEvaluacionTecnica" EntitySet="RRH_PreguntaEvaluacionTecnica" />
+            <End Role="RRH_EvaluacionTecnica" EntitySet="RRH_EvaluacionTecnica" />
           </AssociationSet>
           <AssociationSet Name="FK_RRH_ExperienciaLaboral_RRH_ExperienciaLaboral" Association="Self.FK_RRH_ExperienciaLaboral_RRH_ExperienciaLaboral">
             <End Role="RRH_Candidato" EntitySet="RRH_Candidato" />
@@ -3072,10 +3222,6 @@
             <End Role="RRH_Candidato" EntitySet="RRH_Candidato" />
             <End Role="RRH_GradoAcademico" EntitySet="RRH_GradoAcademico" />
           </AssociationSet>
-          <AssociationSet Name="FK_RRH_PreguntaEvaluacionTecnica_RRH_AlternativaEvaluacionTecnica" Association="Self.FK_RRH_PreguntaEvaluacionTecnica_RRH_AlternativaEvaluacionTecnica">
-            <End Role="RRH_AlternativaEvaluacionTecnica" EntitySet="RRH_AlternativaEvaluacionTecnica" />
-            <End Role="RRH_PreguntaEvaluacionTecnica" EntitySet="RRH_PreguntaEvaluacionTecnica" />
-          </AssociationSet>
           <AssociationSet Name="FK_RRH_PreguntaEvaluacionTecnica_RRH_Criterio" Association="Self.FK_RRH_PreguntaEvaluacionTecnica_RRH_Criterio">
             <End Role="RRH_Criterio" EntitySet="RRH_Criterio" />
             <End Role="RRH_PreguntaEvaluacionTecnica" EntitySet="RRH_PreguntaEvaluacionTecnica" />
@@ -3084,17 +3230,37 @@
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="RRH_PruebaAutoevaluacion" EntitySet="RRH_PruebaAutoevaluacion" />
           </AssociationSet>
+          <AssociationSet Name="FK_RRH_PruebaAutoevaluacion_RRH_RespuestaAutoevaluacion" Association="Self.FK_RRH_PruebaAutoevaluacion_RRH_RespuestaAutoevaluacion">
+            <End Role="RRH_RespuestaAutoevaluacion" EntitySet="RRH_RespuestaAutoevaluacion" />
+            <End Role="RRH_PruebaAutoevaluacion" EntitySet="RRH_PruebaAutoevaluacion" />
+          </AssociationSet>
           <AssociationSet Name="FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado" Association="Self.FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado">
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="RRH_PruebaEvaluacionTecnica" EntitySet="RRH_PruebaEvaluacionTecnica" />
           </AssociationSet>
-          <AssociationSet Name="FK_RRH_PruebaEvaluacionTecnica_RRH_PreguntaEvaluacionTecnica" Association="Self.FK_RRH_PruebaEvaluacionTecnica_RRH_PreguntaEvaluacionTecnica">
-            <End Role="RRH_PreguntaEvaluacionTecnica" EntitySet="RRH_PreguntaEvaluacionTecnica" />
+          <AssociationSet Name="FK_RRH_PruebaEvaluacionTecnica_RRH_EvaluacionTecnica" Association="Self.FK_RRH_PruebaEvaluacionTecnica_RRH_EvaluacionTecnica">
+            <End Role="RRH_EvaluacionTecnica" EntitySet="RRH_EvaluacionTecnica" />
             <End Role="RRH_PruebaEvaluacionTecnica" EntitySet="RRH_PruebaEvaluacionTecnica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_Puesto_Option_RRH_Option" Association="Self.FK_RRH_Puesto_Option_RRH_Option">
+            <End Role="RRH_Option" EntitySet="RRH_Option" />
+            <End Role="RRH_Puesto_Option" EntitySet="RRH_Puesto_Option" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_Puesto_Option_RRH_Puesto" Association="Self.FK_RRH_Puesto_Option_RRH_Puesto">
+            <End Role="RRH_Puesto" EntitySet="RRH_Puesto" />
+            <End Role="RRH_Puesto_Option" EntitySet="RRH_Puesto_Option" />
           </AssociationSet>
           <AssociationSet Name="FK_RRH_ReferenciaLaboral_RRH_Candidato" Association="Self.FK_RRH_ReferenciaLaboral_RRH_Candidato">
             <End Role="RRH_Candidato" EntitySet="RRH_Candidato" />
             <End Role="RRH_ReferenciaLaboral" EntitySet="RRH_ReferenciaLaboral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_RespuestaAutoevaluacion_RRH_Criterio" Association="Self.FK_RRH_RespuestaAutoevaluacion_RRH_Criterio">
+            <End Role="RRH_Criterio" EntitySet="RRH_Criterio" />
+            <End Role="RRH_RespuestaAutoevaluacion" EntitySet="RRH_RespuestaAutoevaluacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_Usuario_RRH_Empleado" Association="Self.FK_RRH_Usuario_RRH_Empleado">
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+            <End Role="RRH_Usuario" EntitySet="RRH_Usuario" />
           </AssociationSet>
           <AssociationSet Name="FK_RYA_ACTARECEP_CAB_RYA_PEDIDO_CAB" Association="Self.FK_RYA_ACTARECEP_CAB_RYA_PEDIDO_CAB">
             <End Role="RYA_PEDIDO_CAB" EntitySet="RYA_PEDIDO_CAB" />
@@ -3265,24 +3431,25 @@
           <EntitySet Name="IMP_TIPO_EVENTO" EntityType="BDBoticasModel.IMP_TIPO_EVENTO" />
           <EntitySet Name="IMP_TIPO_MONEDA" EntityType="BDBoticasModel.IMP_TIPO_MONEDA" />
           <EntitySet Name="IMP_TIPO_PAGO" EntityType="BDBoticasModel.IMP_TIPO_PAGO" />
-          <EntitySet Name="RRH_AlternativaAutoevaluacion" EntityType="BDBoticasModel.RRH_AlternativaAutoevaluacion" />
           <EntitySet Name="RRH_AlternativaEvaluacionTecnica" EntityType="BDBoticasModel.RRH_AlternativaEvaluacionTecnica" />
           <EntitySet Name="RRH_Area" EntityType="BDBoticasModel.RRH_Area" />
           <EntitySet Name="RRH_Candidato" EntityType="BDBoticasModel.RRH_Candidato" />
           <EntitySet Name="RRH_Criterio" EntityType="BDBoticasModel.RRH_Criterio" />
-          <EntitySet Name="RRH_Criterio_PruebaAutoevaluacion" EntityType="BDBoticasModel.RRH_Criterio_PruebaAutoevaluacion" />
+          <EntitySet Name="RRH_Distrito" EntityType="BDBoticasModel.RRH_Distrito" />
           <EntitySet Name="RRH_Empleado" EntityType="BDBoticasModel.RRH_Empleado" />
+          <EntitySet Name="RRH_EvaluacionTecnica" EntityType="BDBoticasModel.RRH_EvaluacionTecnica" />
           <EntitySet Name="RRH_ExperienciaLaboral" EntityType="BDBoticasModel.RRH_ExperienciaLaboral" />
           <EntitySet Name="RRH_GradoAcademico" EntityType="BDBoticasModel.RRH_GradoAcademico" />
           <EntitySet Name="RRH_OfertaLaboral" EntityType="BDBoticasModel.RRH_OfertaLaboral" />
           <EntitySet Name="RRH_OfertaLaboral_Candidato" EntityType="BDBoticasModel.RRH_OfertaLaboral_Candidato" />
+          <EntitySet Name="RRH_Option" EntityType="BDBoticasModel.RRH_Option" />
           <EntitySet Name="RRH_Perfil" EntityType="BDBoticasModel.RRH_Perfil" />
           <EntitySet Name="RRH_PreguntaEvaluacionTecnica" EntityType="BDBoticasModel.RRH_PreguntaEvaluacionTecnica" />
-          <EntitySet Name="RRH_PruebaAutoevaluacion" EntityType="BDBoticasModel.RRH_PruebaAutoevaluacion" />
-          <EntitySet Name="RRH_PruebaEvaluacionTecnica" EntityType="BDBoticasModel.RRH_PruebaEvaluacionTecnica" />
           <EntitySet Name="RRH_Puesto" EntityType="BDBoticasModel.RRH_Puesto" />
           <EntitySet Name="RRH_ReferenciaLaboral" EntityType="BDBoticasModel.RRH_ReferenciaLaboral" />
+          <EntitySet Name="RRH_RespuestaAutoevaluacion" EntityType="BDBoticasModel.RRH_RespuestaAutoevaluacion" />
           <EntitySet Name="RRH_Sucursal" EntityType="BDBoticasModel.RRH_Sucursal" />
+          <EntitySet Name="RRH_Usuario" EntityType="BDBoticasModel.RRH_Usuario" />
           <EntitySet Name="RYA_ACTARECEP_CAB" EntityType="BDBoticasModel.RYA_ACTARECEP_CAB" />
           <EntitySet Name="RYA_ACTARECEP_DET" EntityType="BDBoticasModel.RYA_ACTARECEP_DET" />
           <EntitySet Name="RYA_ALMACENES" EntityType="BDBoticasModel.RYA_ALMACENES" />
@@ -3296,39 +3463,40 @@
           <EntitySet Name="RYA_SUCURSALES" EntityType="BDBoticasModel.RYA_SUCURSALES" />
           <EntitySet Name="RYA_TRANSA_ALMA" EntityType="BDBoticasModel.RYA_TRANSA_ALMA" />
           <EntitySet Name="RYA_UBICACIONES" EntityType="BDBoticasModel.RYA_UBICACIONES" />
-          <AssociationSet Name="FK__ALP_CONST__num_o__11158940" Association="BDBoticasModel.FK__ALP_CONST__num_o__11158940">
+          <EntitySet Name="RRH_Puesto_Option" EntityType="BDBoticasModel.RRH_Puesto_Option" />
+          <AssociationSet Name="FK__ALP_CONST__num_o__4E53A1AA" Association="BDBoticasModel.FK__ALP_CONST__num_o__4E53A1AA">
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_HOJA___num_c__2057CCD0" Association="BDBoticasModel.FK__ALP_HOJA___num_c__2057CCD0">
+          <AssociationSet Name="FK__ALP_HOJA___num_c__4F47C5E3" Association="BDBoticasModel.FK__ALP_HOJA___num_c__4F47C5E3">
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
             <End Role="ALP_HOJA_MERMA" EntitySet="ALP_HOJA_MERMA" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_LIBRO__num_c__1F63A897" Association="BDBoticasModel.FK__ALP_LIBRO__num_c__1F63A897">
+          <AssociationSet Name="FK__ALP_LIBRO__num_c__51300E55" Association="BDBoticasModel.FK__ALP_LIBRO__num_c__51300E55">
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
             <End Role="ALP_LIBRO_RECETA" EntitySet="ALP_LIBRO_RECETA" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_i__0F2D40CE" Association="BDBoticasModel.FK__ALP_ORDEN__cod_i__0F2D40CE">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_i__55009F39" Association="BDBoticasModel.FK__ALP_ORDEN__cod_i__55009F39">
             <End Role="ALP_INSUMO" EntitySet="ALP_INSUMO" />
             <End Role="ALP_ORDEN_PREPARADO_INSUMO" EntitySet="ALP_ORDEN_PREPARADO_INSUMO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_LIBRO__cod_q__1E6F845E" Association="BDBoticasModel.FK__ALP_LIBRO__cod_q__1E6F845E">
+          <AssociationSet Name="FK__ALP_LIBRO__cod_q__46B27FE2" Association="BDBoticasModel.FK__ALP_LIBRO__cod_q__46B27FE2">
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="ALP_LIBRO_RECETA" EntitySet="ALP_LIBRO_RECETA" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_e__7B264821" Association="BDBoticasModel.FK__ALP_ORDEN__cod_e__7B264821">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_e__489AC854" Association="BDBoticasModel.FK__ALP_ORDEN__cod_e__489AC854">
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_r__7C1A6C5A" Association="BDBoticasModel.FK__ALP_ORDEN__cod_r__7C1A6C5A">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_r__531856C7" Association="BDBoticasModel.FK__ALP_ORDEN__cod_r__531856C7">
             <End Role="ALP_RECETA" EntitySet="ALP_RECETA" />
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_s__7D0E9093" Association="BDBoticasModel.FK__ALP_ORDEN__cod_s__7D0E9093">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_s__540C7B00" Association="BDBoticasModel.FK__ALP_ORDEN__cod_s__540C7B00">
             <End Role="RRH_Sucursal" EntitySet="RRH_Sucursal" />
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__num_o__10216507" Association="BDBoticasModel.FK__ALP_ORDEN__num_o__10216507">
+          <AssociationSet Name="FK__ALP_ORDEN__num_o__55F4C372" Association="BDBoticasModel.FK__ALP_ORDEN__num_o__55F4C372">
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
             <End Role="ALP_ORDEN_PREPARADO_INSUMO" EntitySet="ALP_ORDEN_PREPARADO_INSUMO" />
           </AssociationSet>
@@ -3352,7 +3520,7 @@
             <End Role="DIS_Pedido" EntitySet="DIS_Pedido" />
             <End Role="DIS_HojaRutaDetalle" EntitySet="DIS_HojaRutaDetalle" />
           </AssociationSet>
-          <AssociationSet Name="FK__DIS_Pedid__Cod_s__5224328E" Association="BDBoticasModel.FK__DIS_Pedid__Cod_s__5224328E">
+          <AssociationSet Name="FK__DIS_Pedid__Cod_s__5BAD9CC8" Association="BDBoticasModel.FK__DIS_Pedid__Cod_s__5BAD9CC8">
             <End Role="RRH_Sucursal" EntitySet="RRH_Sucursal" />
             <End Role="DIS_Pedido" EntitySet="DIS_Pedido" />
           </AssociationSet>
@@ -3588,13 +3756,9 @@
             <End Role="IMP_TIPO_MONEDA" EntitySet="IMP_TIPO_MONEDA" />
             <End Role="IMP_TIPO_CAMBIO" EntitySet="IMP_TIPO_CAMBIO" />
           </AssociationSet>
-          <AssociationSet Name="FK_RRH_Criterio_PruebaAutoevaluacion_RRH_AlternativaAutoevaluacion" Association="BDBoticasModel.FK_RRH_Criterio_PruebaAutoevaluacion_RRH_AlternativaAutoevaluacion">
-            <End Role="RRH_AlternativaAutoevaluacion" EntitySet="RRH_AlternativaAutoevaluacion" />
-            <End Role="RRH_Criterio_PruebaAutoevaluacion" EntitySet="RRH_Criterio_PruebaAutoevaluacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RRH_PreguntaEvaluacionTecnica_RRH_AlternativaEvaluacionTecnica" Association="BDBoticasModel.FK_RRH_PreguntaEvaluacionTecnica_RRH_AlternativaEvaluacionTecnica">
+          <AssociationSet Name="FK_RRH_EvaluacionTecnica_RRH_AlternativaEvaluacionTecnica" Association="BDBoticasModel.FK_RRH_EvaluacionTecnica_RRH_AlternativaEvaluacionTecnica">
             <End Role="RRH_AlternativaEvaluacionTecnica" EntitySet="RRH_AlternativaEvaluacionTecnica" />
-            <End Role="RRH_PreguntaEvaluacionTecnica" EntitySet="RRH_PreguntaEvaluacionTecnica" />
+            <End Role="RRH_EvaluacionTecnica" EntitySet="RRH_EvaluacionTecnica" />
           </AssociationSet>
           <AssociationSet Name="FK_Puesto_Area" Association="BDBoticasModel.FK_Puesto_Area">
             <End Role="RRH_Area" EntitySet="RRH_Area" />
@@ -3603,6 +3767,10 @@
           <AssociationSet Name="FK_OfertaLaboral_Candidato_Candidato" Association="BDBoticasModel.FK_OfertaLaboral_Candidato_Candidato">
             <End Role="RRH_Candidato" EntitySet="RRH_Candidato" />
             <End Role="RRH_OfertaLaboral_Candidato" EntitySet="RRH_OfertaLaboral_Candidato" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_Candidato_RRH_Distrito" Association="BDBoticasModel.FK_RRH_Candidato_RRH_Distrito">
+            <End Role="RRH_Distrito" EntitySet="RRH_Distrito" />
+            <End Role="RRH_Candidato" EntitySet="RRH_Candidato" />
           </AssociationSet>
           <AssociationSet Name="FK_RRH_ExperienciaLaboral_RRH_ExperienciaLaboral" Association="BDBoticasModel.FK_RRH_ExperienciaLaboral_RRH_ExperienciaLaboral">
             <End Role="RRH_Candidato" EntitySet="RRH_Candidato" />
@@ -3616,29 +3784,33 @@
             <End Role="RRH_Candidato" EntitySet="RRH_Candidato" />
             <End Role="RRH_ReferenciaLaboral" EntitySet="RRH_ReferenciaLaboral" />
           </AssociationSet>
-          <AssociationSet Name="FK_RRH_Criterio_PruebaAutoevaluacion_RRH_Criterio" Association="BDBoticasModel.FK_RRH_Criterio_PruebaAutoevaluacion_RRH_Criterio">
-            <End Role="RRH_Criterio" EntitySet="RRH_Criterio" />
-            <End Role="RRH_Criterio_PruebaAutoevaluacion" EntitySet="RRH_Criterio_PruebaAutoevaluacion" />
-          </AssociationSet>
           <AssociationSet Name="FK_RRH_PreguntaEvaluacionTecnica_RRH_Criterio" Association="BDBoticasModel.FK_RRH_PreguntaEvaluacionTecnica_RRH_Criterio">
             <End Role="RRH_Criterio" EntitySet="RRH_Criterio" />
             <End Role="RRH_PreguntaEvaluacionTecnica" EntitySet="RRH_PreguntaEvaluacionTecnica" />
           </AssociationSet>
-          <AssociationSet Name="FK_RRH_Criterio_PruebaAutoevaluacion_RRH_PruebaAuotoevaluacion" Association="BDBoticasModel.FK_RRH_Criterio_PruebaAutoevaluacion_RRH_PruebaAuotoevaluacion">
-            <End Role="RRH_PruebaAutoevaluacion" EntitySet="RRH_PruebaAutoevaluacion" />
-            <End Role="RRH_Criterio_PruebaAutoevaluacion" EntitySet="RRH_Criterio_PruebaAutoevaluacion" />
+          <AssociationSet Name="FK_RRH_RespuestaAutoevaluacion_RRH_Criterio" Association="BDBoticasModel.FK_RRH_RespuestaAutoevaluacion_RRH_Criterio">
+            <End Role="RRH_Criterio" EntitySet="RRH_Criterio" />
+            <End Role="RRH_RespuestaAutoevaluacion" EntitySet="RRH_RespuestaAutoevaluacion" />
           </AssociationSet>
-          <AssociationSet Name="FK_RRH_Empleado_RRH_Puesto" Association="BDBoticasModel.FK_RRH_Empleado_RRH_Puesto">
+          <AssociationSet Name="FK_RRH_Empleado_RRH_Empleado" Association="BDBoticasModel.FK_RRH_Empleado_RRH_Empleado">
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+            <End Role="RRH_Empleado1" EntitySet="RRH_Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_Empleado_RRH_Perfil" Association="BDBoticasModel.FK_RRH_Empleado_RRH_Perfil">
             <End Role="RRH_Puesto" EntitySet="RRH_Puesto" />
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
           </AssociationSet>
-          <AssociationSet Name="FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" Association="BDBoticasModel.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado">
+          <AssociationSet Name="FK_RRH_Empleado_RRH_Sucursal" Association="BDBoticasModel.FK_RRH_Empleado_RRH_Sucursal">
+            <End Role="RRH_Sucursal" EntitySet="RRH_Sucursal" />
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
-            <End Role="RRH_PruebaAutoevaluacion" EntitySet="RRH_PruebaAutoevaluacion" />
           </AssociationSet>
-          <AssociationSet Name="FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado" Association="BDBoticasModel.FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado">
+          <AssociationSet Name="FK_RRH_Usuario_RRH_Empleado" Association="BDBoticasModel.FK_RRH_Usuario_RRH_Empleado">
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
-            <End Role="RRH_PruebaEvaluacionTecnica" EntitySet="RRH_PruebaEvaluacionTecnica" />
+            <End Role="RRH_Usuario" EntitySet="RRH_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_EvaluacionTecnica_RRH_PreguntaEvaluacionTecnica" Association="BDBoticasModel.FK_RRH_EvaluacionTecnica_RRH_PreguntaEvaluacionTecnica">
+            <End Role="RRH_PreguntaEvaluacionTecnica" EntitySet="RRH_PreguntaEvaluacionTecnica" />
+            <End Role="RRH_EvaluacionTecnica" EntitySet="RRH_EvaluacionTecnica" />
           </AssociationSet>
           <AssociationSet Name="FK_OfertaLaboral_Candidato_OfertaLaboral" Association="BDBoticasModel.FK_OfertaLaboral_Candidato_OfertaLaboral">
             <End Role="RRH_OfertaLaboral" EntitySet="RRH_OfertaLaboral" />
@@ -3652,13 +3824,17 @@
             <End Role="RRH_Sucursal" EntitySet="RRH_Sucursal" />
             <End Role="RRH_OfertaLaboral" EntitySet="RRH_OfertaLaboral" />
           </AssociationSet>
+          <AssociationSet Name="FK_RRH_Puesto_Option_RRH_Option" Association="BDBoticasModel.FK_RRH_Puesto_Option_RRH_Option">
+            <End Role="RRH_Option" EntitySet="RRH_Option" />
+            <End Role="RRH_Puesto_Option" EntitySet="RRH_Puesto_Option" />
+          </AssociationSet>
           <AssociationSet Name="FK_Perfil_Puesto" Association="BDBoticasModel.FK_Perfil_Puesto">
             <End Role="RRH_Puesto" EntitySet="RRH_Puesto" />
             <End Role="RRH_Perfil" EntitySet="RRH_Perfil" />
           </AssociationSet>
-          <AssociationSet Name="FK_RRH_PruebaEvaluacionTecnica_RRH_PreguntaEvaluacionTecnica" Association="BDBoticasModel.FK_RRH_PruebaEvaluacionTecnica_RRH_PreguntaEvaluacionTecnica">
-            <End Role="RRH_PreguntaEvaluacionTecnica" EntitySet="RRH_PreguntaEvaluacionTecnica" />
-            <End Role="RRH_PruebaEvaluacionTecnica" EntitySet="RRH_PruebaEvaluacionTecnica" />
+          <AssociationSet Name="FK_RRH_Puesto_Option_RRH_Puesto" Association="BDBoticasModel.FK_RRH_Puesto_Option_RRH_Puesto">
+            <End Role="RRH_Puesto" EntitySet="RRH_Puesto" />
+            <End Role="RRH_Puesto_Option" EntitySet="RRH_Puesto_Option" />
           </AssociationSet>
           <AssociationSet Name="FK_RYA_ACTARECEP_CAB_RYA_PEDIDO_CAB" Association="BDBoticasModel.FK_RYA_ACTARECEP_CAB_RYA_PEDIDO_CAB">
             <End Role="RYA_PEDIDO_CAB" EntitySet="RYA_PEDIDO_CAB" />
@@ -3712,6 +3888,24 @@
             <End Role="RYA_PRODUCTO" EntitySet="RYA_PRODUCTO" />
             <End Role="RYA_STOCK" EntitySet="RYA_STOCK" />
           </AssociationSet>
+          <EntitySet Name="RRH_PruebaAutoevaluacion" EntityType="BDBoticasModel.RRH_PruebaAutoevaluacion" />
+          <EntitySet Name="RRH_PruebaEvaluacionTecnica" EntityType="BDBoticasModel.RRH_PruebaEvaluacionTecnica" />
+          <AssociationSet Name="FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" Association="BDBoticasModel.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado">
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+            <End Role="RRH_PruebaAutoevaluacion" EntitySet="RRH_PruebaAutoevaluacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado" Association="BDBoticasModel.FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado">
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+            <End Role="RRH_PruebaEvaluacionTecnica" EntitySet="RRH_PruebaEvaluacionTecnica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_PruebaEvaluacionTecnica_RRH_EvaluacionTecnica" Association="BDBoticasModel.FK_RRH_PruebaEvaluacionTecnica_RRH_EvaluacionTecnica">
+            <End Role="RRH_EvaluacionTecnica" EntitySet="RRH_EvaluacionTecnica" />
+            <End Role="RRH_PruebaEvaluacionTecnica" EntitySet="RRH_PruebaEvaluacionTecnica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_PruebaAutoevaluacion_RRH_RespuestaAutoevaluacion" Association="BDBoticasModel.FK_RRH_PruebaAutoevaluacion_RRH_RespuestaAutoevaluacion">
+            <End Role="RRH_RespuestaAutoevaluacion" EntitySet="RRH_RespuestaAutoevaluacion" />
+            <End Role="RRH_PruebaAutoevaluacion" EntitySet="RRH_PruebaAutoevaluacion" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="usp_Chofer_GetAll_Result">
           <Property Type="Int32" Name="IdChofer" Nullable="false" />
@@ -3735,9 +3929,9 @@
           <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="BDBoticasModel.FK__ALP_CONST__num_o__11158940" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_ORDEN_PREPARADO" />
-          <NavigationProperty Name="ALP_HOJA_MERMA" Relationship="BDBoticasModel.FK__ALP_HOJA___num_c__2057CCD0" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_HOJA_MERMA" />
-          <NavigationProperty Name="ALP_LIBRO_RECETA" Relationship="BDBoticasModel.FK__ALP_LIBRO__num_c__1F63A897" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_LIBRO_RECETA" />
+          <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="BDBoticasModel.FK__ALP_CONST__num_o__4E53A1AA" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_ORDEN_PREPARADO" />
+          <NavigationProperty Name="ALP_HOJA_MERMA" Relationship="BDBoticasModel.FK__ALP_HOJA___num_c__4F47C5E3" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_HOJA_MERMA" />
+          <NavigationProperty Name="ALP_LIBRO_RECETA" Relationship="BDBoticasModel.FK__ALP_LIBRO__num_c__51300E55" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_LIBRO_RECETA" />
         </EntityType>
         <EntityType Name="ALP_HOJA_MERMA">
           <Key>
@@ -3751,7 +3945,7 @@
           <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="BDBoticasModel.FK__ALP_HOJA___num_c__2057CCD0" FromRole="ALP_HOJA_MERMA" ToRole="ALP_CONSTANCIA_PREPARADO" />
+          <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="BDBoticasModel.FK__ALP_HOJA___num_c__4F47C5E3" FromRole="ALP_HOJA_MERMA" ToRole="ALP_CONSTANCIA_PREPARADO" />
         </EntityType>
         <EntityType Name="ALP_INSUMO">
           <Key>
@@ -3766,7 +3960,7 @@
           <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="ALP_ORDEN_PREPARADO_INSUMO" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_i__0F2D40CE" FromRole="ALP_INSUMO" ToRole="ALP_ORDEN_PREPARADO_INSUMO" />
+          <NavigationProperty Name="ALP_ORDEN_PREPARADO_INSUMO" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_i__55009F39" FromRole="ALP_INSUMO" ToRole="ALP_ORDEN_PREPARADO_INSUMO" />
         </EntityType>
         <EntityType Name="ALP_LIBRO_RECETA">
           <Key>
@@ -3780,8 +3974,8 @@
           <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="BDBoticasModel.FK__ALP_LIBRO__num_c__1F63A897" FromRole="ALP_LIBRO_RECETA" ToRole="ALP_CONSTANCIA_PREPARADO" />
-          <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK__ALP_LIBRO__cod_q__1E6F845E" FromRole="ALP_LIBRO_RECETA" ToRole="RRH_Empleado" />
+          <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="BDBoticasModel.FK__ALP_LIBRO__num_c__51300E55" FromRole="ALP_LIBRO_RECETA" ToRole="ALP_CONSTANCIA_PREPARADO" />
+          <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK__ALP_LIBRO__cod_q__46B27FE2" FromRole="ALP_LIBRO_RECETA" ToRole="RRH_Empleado" />
         </EntityType>
         <EntityType Name="ALP_ORDEN_PREPARADO">
           <Key>
@@ -3798,11 +3992,11 @@
           <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="BDBoticasModel.FK__ALP_CONST__num_o__11158940" FromRole="ALP_ORDEN_PREPARADO" ToRole="ALP_CONSTANCIA_PREPARADO" />
-          <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_e__7B264821" FromRole="ALP_ORDEN_PREPARADO" ToRole="RRH_Empleado" />
-          <NavigationProperty Name="ALP_RECETA" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_r__7C1A6C5A" FromRole="ALP_ORDEN_PREPARADO" ToRole="ALP_RECETA" />
-          <NavigationProperty Name="RRH_Sucursal" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_s__7D0E9093" FromRole="ALP_ORDEN_PREPARADO" ToRole="RRH_Sucursal" />
-          <NavigationProperty Name="ALP_ORDEN_PREPARADO_INSUMO" Relationship="BDBoticasModel.FK__ALP_ORDEN__num_o__10216507" FromRole="ALP_ORDEN_PREPARADO" ToRole="ALP_ORDEN_PREPARADO_INSUMO" />
+          <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="BDBoticasModel.FK__ALP_CONST__num_o__4E53A1AA" FromRole="ALP_ORDEN_PREPARADO" ToRole="ALP_CONSTANCIA_PREPARADO" />
+          <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_e__489AC854" FromRole="ALP_ORDEN_PREPARADO" ToRole="RRH_Empleado" />
+          <NavigationProperty Name="ALP_RECETA" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_r__531856C7" FromRole="ALP_ORDEN_PREPARADO" ToRole="ALP_RECETA" />
+          <NavigationProperty Name="RRH_Sucursal" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_s__540C7B00" FromRole="ALP_ORDEN_PREPARADO" ToRole="RRH_Sucursal" />
+          <NavigationProperty Name="ALP_ORDEN_PREPARADO_INSUMO" Relationship="BDBoticasModel.FK__ALP_ORDEN__num_o__55F4C372" FromRole="ALP_ORDEN_PREPARADO" ToRole="ALP_ORDEN_PREPARADO_INSUMO" />
         </EntityType>
         <EntityType Name="ALP_ORDEN_PREPARADO_INSUMO">
           <Key>
@@ -3816,8 +4010,8 @@
           <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="ALP_INSUMO" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_i__0F2D40CE" FromRole="ALP_ORDEN_PREPARADO_INSUMO" ToRole="ALP_INSUMO" />
-          <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="BDBoticasModel.FK__ALP_ORDEN__num_o__10216507" FromRole="ALP_ORDEN_PREPARADO_INSUMO" ToRole="ALP_ORDEN_PREPARADO" />
+          <NavigationProperty Name="ALP_INSUMO" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_i__55009F39" FromRole="ALP_ORDEN_PREPARADO_INSUMO" ToRole="ALP_INSUMO" />
+          <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="BDBoticasModel.FK__ALP_ORDEN__num_o__55F4C372" FromRole="ALP_ORDEN_PREPARADO_INSUMO" ToRole="ALP_ORDEN_PREPARADO" />
         </EntityType>
         <EntityType Name="ALP_RECETA">
           <Key>
@@ -3835,7 +4029,7 @@
           <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_r__7C1A6C5A" FromRole="ALP_RECETA" ToRole="ALP_ORDEN_PREPARADO" />
+          <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_r__531856C7" FromRole="ALP_RECETA" ToRole="ALP_ORDEN_PREPARADO" />
         </EntityType>
         <EntityType Name="DIS_Control_Asignacion">
           <Key>
@@ -3902,7 +4096,7 @@
           <Property Name="fec_usu_regi" Type="DateTime" Precision="3" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="3" />
           <NavigationProperty Name="DIS_HojaRutaDetalle" Relationship="BDBoticasModel.FK_HojaRutaDetalle_Pedido" FromRole="DIS_Pedido" ToRole="DIS_HojaRutaDetalle" />
-          <NavigationProperty Name="RRH_Sucursal" Relationship="BDBoticasModel.FK__DIS_Pedid__Cod_s__5224328E" FromRole="DIS_Pedido" ToRole="RRH_Sucursal" />
+          <NavigationProperty Name="RRH_Sucursal" Relationship="BDBoticasModel.FK__DIS_Pedid__Cod_s__5BAD9CC8" FromRole="DIS_Pedido" ToRole="RRH_Sucursal" />
           <NavigationProperty Name="DIS_Pedido_Detalle" Relationship="BDBoticasModel.FK_Pedido_Detalle_Pedido" FromRole="DIS_Pedido" ToRole="DIS_Pedido_Detalle" />
         </EntityType>
         <EntityType Name="DIS_Pedido_Detalle">
@@ -4792,21 +4986,6 @@
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
           <NavigationProperty Name="IMP_PAGO_IMPORTACION" Relationship="BDBoticasModel.FK_IMP_PAGO_IMPORTACION_IMP_TIPO_PAGO" FromRole="IMP_TIPO_PAGO" ToRole="IMP_PAGO_IMPORTACION" />
         </EntityType>
-        <EntityType Name="RRH_AlternativaAutoevaluacion">
-          <Key>
-            <PropertyRef Name="Cod_alternativa_autoevaluacion" />
-          </Key>
-          <Property Name="Cod_alternativa_autoevaluacion" Type="Int32" Nullable="false" />
-          <Property Name="Respuesta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Valor" Type="Int32" />
-          <Property Name="Fec_creacion" Type="DateTime" Precision="0" />
-          <Property Name="Cod_usu_regi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
-          <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
-          <Property Name="Cod_criterio" Type="Int32" />
-          <NavigationProperty Name="RRH_Criterio_PruebaAutoevaluacion" Relationship="BDBoticasModel.FK_RRH_Criterio_PruebaAutoevaluacion_RRH_AlternativaAutoevaluacion" FromRole="RRH_AlternativaAutoevaluacion" ToRole="RRH_Criterio_PruebaAutoevaluacion" />
-        </EntityType>
         <EntityType Name="RRH_AlternativaEvaluacionTecnica">
           <Key>
             <PropertyRef Name="Cod_alternativa_evaluaciontec" />
@@ -4818,7 +4997,7 @@
           <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
           <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="RRH_PreguntaEvaluacionTecnica" Relationship="BDBoticasModel.FK_RRH_PreguntaEvaluacionTecnica_RRH_AlternativaEvaluacionTecnica" FromRole="RRH_AlternativaEvaluacionTecnica" ToRole="RRH_PreguntaEvaluacionTecnica" />
+          <NavigationProperty Name="RRH_EvaluacionTecnica" Relationship="BDBoticasModel.FK_RRH_EvaluacionTecnica_RRH_AlternativaEvaluacionTecnica" FromRole="RRH_AlternativaEvaluacionTecnica" ToRole="RRH_EvaluacionTecnica" />
         </EntityType>
         <EntityType Name="RRH_Area">
           <Key>
@@ -4845,12 +5024,16 @@
           <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_distrito" Type="Int32" />
+          <Property Name="Fec_Nacimiento" Type="DateTime" Precision="0" />
           <Property Name="Fec_postulacion" Type="DateTime" Precision="0" />
           <Property Name="Cod_usu_regi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
           <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
           <NavigationProperty Name="RRH_OfertaLaboral_Candidato" Relationship="BDBoticasModel.FK_OfertaLaboral_Candidato_Candidato" FromRole="RRH_Candidato" ToRole="RRH_OfertaLaboral_Candidato" />
+          <NavigationProperty Name="RRH_Distrito" Relationship="BDBoticasModel.FK_RRH_Candidato_RRH_Distrito" FromRole="RRH_Candidato" ToRole="RRH_Distrito" />
           <NavigationProperty Name="RRH_ExperienciaLaboral" Relationship="BDBoticasModel.FK_RRH_ExperienciaLaboral_RRH_ExperienciaLaboral" FromRole="RRH_Candidato" ToRole="RRH_ExperienciaLaboral" />
           <NavigationProperty Name="RRH_GradoAcademico" Relationship="BDBoticasModel.FK_RRH_GradoAcademico_RRH_Candidato" FromRole="RRH_Candidato" ToRole="RRH_GradoAcademico" />
           <NavigationProperty Name="RRH_ReferenciaLaboral" Relationship="BDBoticasModel.FK_RRH_ReferenciaLaboral_RRH_Candidato" FromRole="RRH_Candidato" ToRole="RRH_ReferenciaLaboral" />
@@ -4866,20 +5049,20 @@
           <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
           <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="RRH_Criterio_PruebaAutoevaluacion" Relationship="BDBoticasModel.FK_RRH_Criterio_PruebaAutoevaluacion_RRH_Criterio" FromRole="RRH_Criterio" ToRole="RRH_Criterio_PruebaAutoevaluacion" />
           <NavigationProperty Name="RRH_PreguntaEvaluacionTecnica" Relationship="BDBoticasModel.FK_RRH_PreguntaEvaluacionTecnica_RRH_Criterio" FromRole="RRH_Criterio" ToRole="RRH_PreguntaEvaluacionTecnica" />
+          <NavigationProperty Name="RRH_RespuestaAutoevaluacion" Relationship="BDBoticasModel.FK_RRH_RespuestaAutoevaluacion_RRH_Criterio" FromRole="RRH_Criterio" ToRole="RRH_RespuestaAutoevaluacion" />
         </EntityType>
-        <EntityType Name="RRH_Criterio_PruebaAutoevaluacion">
+        <EntityType Name="RRH_Distrito">
           <Key>
-            <PropertyRef Name="Cod_autoevaluacion" />
-            <PropertyRef Name="Cod_criterio" />
+            <PropertyRef Name="Cod_distrito" />
           </Key>
-          <Property Name="Cod_autoevaluacion" Type="Int32" Nullable="false" />
-          <Property Name="Cod_criterio" Type="Int32" Nullable="false" />
-          <Property Name="Cod_alternatica_autoevaluacion" Type="Int32" />
-          <NavigationProperty Name="RRH_AlternativaAutoevaluacion" Relationship="BDBoticasModel.FK_RRH_Criterio_PruebaAutoevaluacion_RRH_AlternativaAutoevaluacion" FromRole="RRH_Criterio_PruebaAutoevaluacion" ToRole="RRH_AlternativaAutoevaluacion" />
-          <NavigationProperty Name="RRH_Criterio" Relationship="BDBoticasModel.FK_RRH_Criterio_PruebaAutoevaluacion_RRH_Criterio" FromRole="RRH_Criterio_PruebaAutoevaluacion" ToRole="RRH_Criterio" />
-          <NavigationProperty Name="RRH_PruebaAutoevaluacion" Relationship="BDBoticasModel.FK_RRH_Criterio_PruebaAutoevaluacion_RRH_PruebaAuotoevaluacion" FromRole="RRH_Criterio_PruebaAutoevaluacion" ToRole="RRH_PruebaAutoevaluacion" />
+          <Property Name="Cod_distrito" Type="Int32" Nullable="false" />
+          <Property Name="Nom_distrito" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_usu_regi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
+          <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="RRH_Candidato" Relationship="BDBoticasModel.FK_RRH_Candidato_RRH_Distrito" FromRole="RRH_Distrito" ToRole="RRH_Candidato" />
         </EntityType>
         <EntityType Name="RRH_Empleado">
           <Key>
@@ -4898,15 +5081,38 @@
           <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
           <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
-          <Property Name="Cod_puesto" Type="Int32" />
-          <NavigationProperty Name="ALP_LIBRO_RECETA" Relationship="BDBoticasModel.FK__ALP_LIBRO__cod_q__1E6F845E" FromRole="RRH_Empleado" ToRole="ALP_LIBRO_RECETA" />
-          <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_e__7B264821" FromRole="RRH_Empleado" ToRole="ALP_ORDEN_PREPARADO" />
+          <Property Name="Evaluado" Type="Boolean" />
+          <Property Name="Cod_Puesto" Type="Int32" />
+          <Property Name="Cod_Jefe" Type="Int32" />
+          <Property Name="Cod_Sucursal" Type="Int32" />
+          <NavigationProperty Name="ALP_LIBRO_RECETA" Relationship="BDBoticasModel.FK__ALP_LIBRO__cod_q__46B27FE2" FromRole="RRH_Empleado" ToRole="ALP_LIBRO_RECETA" />
+          <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_e__489AC854" FromRole="RRH_Empleado" ToRole="ALP_ORDEN_PREPARADO" />
           <NavigationProperty Name="GCC_EMPLEADO_INF_CREDITICIO" Relationship="BDBoticasModel.FK_GCC_EMPLEADO_INF_CREDITICIO_RRH_EMPLEADO" FromRole="RRH_Empleado" ToRole="GCC_EMPLEADO_INF_CREDITICIO" />
           <NavigationProperty Name="GCC_EMPLEADO_SOL_CREDITO" Relationship="BDBoticasModel.FK_GCC_EMPLEADO_SOL_CREDITO_RRH_EMPLEADO" FromRole="RRH_Empleado" ToRole="GCC_EMPLEADO_SOL_CREDITO" />
           <NavigationProperty Name="IMP_ACTIVIDAD_PLANIFICADA" Relationship="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_RRH_Empleado" FromRole="RRH_Empleado" ToRole="IMP_ACTIVIDAD_PLANIFICADA" />
-          <NavigationProperty Name="RRH_Puesto" Relationship="BDBoticasModel.FK_RRH_Empleado_RRH_Puesto" FromRole="RRH_Empleado" ToRole="RRH_Puesto" />
+          <NavigationProperty Name="RRH_Empleado1" Relationship="BDBoticasModel.FK_RRH_Empleado_RRH_Empleado" FromRole="RRH_Empleado" ToRole="RRH_Empleado1" />
+          <NavigationProperty Name="RRH_Empleado2" Relationship="BDBoticasModel.FK_RRH_Empleado_RRH_Empleado" FromRole="RRH_Empleado1" ToRole="RRH_Empleado" />
+          <NavigationProperty Name="RRH_Puesto" Relationship="BDBoticasModel.FK_RRH_Empleado_RRH_Perfil" FromRole="RRH_Empleado" ToRole="RRH_Puesto" />
+          <NavigationProperty Name="RRH_Sucursal" Relationship="BDBoticasModel.FK_RRH_Empleado_RRH_Sucursal" FromRole="RRH_Empleado" ToRole="RRH_Sucursal" />
+          <NavigationProperty Name="RRH_Usuario" Relationship="BDBoticasModel.FK_RRH_Usuario_RRH_Empleado" FromRole="RRH_Empleado" ToRole="RRH_Usuario" />
           <NavigationProperty Name="RRH_PruebaAutoevaluacion" Relationship="BDBoticasModel.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" FromRole="RRH_Empleado" ToRole="RRH_PruebaAutoevaluacion" />
           <NavigationProperty Name="RRH_PruebaEvaluacionTecnica" Relationship="BDBoticasModel.FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado" FromRole="RRH_Empleado" ToRole="RRH_PruebaEvaluacionTecnica" />
+        </EntityType>
+        <EntityType Name="RRH_EvaluacionTecnica">
+          <Key>
+            <PropertyRef Name="Cod_evaluaciontecnica" />
+          </Key>
+          <Property Name="Cod_evaluaciontecnica" Type="Int32" Nullable="false" />
+          <Property Name="Cod_alternativa_evaluaciontec" Type="Int32" />
+          <Property Name="Cod_preg_eva_tec" Type="Int32" />
+          <Property Name="Version" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_usu_regi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
+          <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="RRH_AlternativaEvaluacionTecnica" Relationship="BDBoticasModel.FK_RRH_EvaluacionTecnica_RRH_AlternativaEvaluacionTecnica" FromRole="RRH_EvaluacionTecnica" ToRole="RRH_AlternativaEvaluacionTecnica" />
+          <NavigationProperty Name="RRH_PreguntaEvaluacionTecnica" Relationship="BDBoticasModel.FK_RRH_EvaluacionTecnica_RRH_PreguntaEvaluacionTecnica" FromRole="RRH_EvaluacionTecnica" ToRole="RRH_PreguntaEvaluacionTecnica" />
+          <NavigationProperty Name="RRH_PruebaEvaluacionTecnica" Relationship="BDBoticasModel.FK_RRH_PruebaEvaluacionTecnica_RRH_EvaluacionTecnica" FromRole="RRH_EvaluacionTecnica" ToRole="RRH_PruebaEvaluacionTecnica" />
         </EntityType>
         <EntityType Name="RRH_ExperienciaLaboral">
           <Key>
@@ -4918,6 +5124,12 @@
           <Property Name="Desc_Reponsabilidades" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="Fec_Inicio_elaboral" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Fec_Fin_elaboral" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Nom_puesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nom_area" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_usu_regi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
+          <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
           <NavigationProperty Name="RRH_Candidato" Relationship="BDBoticasModel.FK_RRH_ExperienciaLaboral_RRH_ExperienciaLaboral" FromRole="RRH_ExperienciaLaboral" ToRole="RRH_Candidato" />
         </EntityType>
         <EntityType Name="RRH_GradoAcademico">
@@ -4926,9 +5138,14 @@
           </Key>
           <Property Name="Cod_GradoAcademico" Type="Int32" Nullable="false" />
           <Property Name="Cod_candidato" Type="Int32" Nullable="false" />
-          <Property Name="Especialidad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CentroEstudios" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Fec_Graduacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Anio_graduacion" Type="Int32" Nullable="false" />
+          <Property Name="ruta_certificado" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_usu_regi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
+          <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
           <NavigationProperty Name="RRH_Candidato" Relationship="BDBoticasModel.FK_RRH_GradoAcademico_RRH_Candidato" FromRole="RRH_GradoAcademico" ToRole="RRH_Candidato" />
         </EntityType>
         <EntityType Name="RRH_OfertaLaboral">
@@ -4965,6 +5182,17 @@
           <NavigationProperty Name="RRH_Candidato" Relationship="BDBoticasModel.FK_OfertaLaboral_Candidato_Candidato" FromRole="RRH_OfertaLaboral_Candidato" ToRole="RRH_Candidato" />
           <NavigationProperty Name="RRH_OfertaLaboral" Relationship="BDBoticasModel.FK_OfertaLaboral_Candidato_OfertaLaboral" FromRole="RRH_OfertaLaboral_Candidato" ToRole="RRH_OfertaLaboral" />
         </EntityType>
+        <EntityType Name="RRH_Option">
+          <Key>
+            <PropertyRef Name="OptionId" />
+          </Key>
+          <Property Name="OptionId" Type="Int32" Nullable="false" />
+          <Property Name="OptionDes" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Controller" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OptionMainId" Type="Int32" />
+          <NavigationProperty Name="RRH_Puesto_Option" Relationship="BDBoticasModel.FK_RRH_Puesto_Option_RRH_Option" FromRole="RRH_Option" ToRole="RRH_Puesto_Option" />
+        </EntityType>
         <EntityType Name="RRH_Perfil">
           <Key>
             <PropertyRef Name="Cod_perfil" />
@@ -4999,48 +5227,8 @@
           <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
           <Property Name="Cod_alternativa_evaluaciontec" Type="Int32" />
-          <NavigationProperty Name="RRH_AlternativaEvaluacionTecnica" Relationship="BDBoticasModel.FK_RRH_PreguntaEvaluacionTecnica_RRH_AlternativaEvaluacionTecnica" FromRole="RRH_PreguntaEvaluacionTecnica" ToRole="RRH_AlternativaEvaluacionTecnica" />
           <NavigationProperty Name="RRH_Criterio" Relationship="BDBoticasModel.FK_RRH_PreguntaEvaluacionTecnica_RRH_Criterio" FromRole="RRH_PreguntaEvaluacionTecnica" ToRole="RRH_Criterio" />
-          <NavigationProperty Name="RRH_PruebaEvaluacionTecnica" Relationship="BDBoticasModel.FK_RRH_PruebaEvaluacionTecnica_RRH_PreguntaEvaluacionTecnica" FromRole="RRH_PreguntaEvaluacionTecnica" ToRole="RRH_PruebaEvaluacionTecnica" />
-        </EntityType>
-        <EntityType Name="RRH_PruebaAutoevaluacion">
-          <Key>
-            <PropertyRef Name="Cod_autoevaluacion" />
-          </Key>
-          <Property Name="Cod_autoevaluacion" Type="Int32" Nullable="false" />
-          <Property Name="Fec_evaluacion" Type="DateTime" Precision="0" />
-          <Property Name="VersionEvaluacion" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="Cod_usu_regi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
-          <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
-          <Property Name="Cod_empleado" Type="Int32" />
-          <Property Name="PuntajeTotal" Type="Int32" />
-          <NavigationProperty Name="RRH_Criterio_PruebaAutoevaluacion" Relationship="BDBoticasModel.FK_RRH_Criterio_PruebaAutoevaluacion_RRH_PruebaAuotoevaluacion" FromRole="RRH_PruebaAutoevaluacion" ToRole="RRH_Criterio_PruebaAutoevaluacion" />
-          <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" FromRole="RRH_PruebaAutoevaluacion" ToRole="RRH_Empleado" />
-        </EntityType>
-        <EntityType Name="RRH_PruebaEvaluacionTecnica">
-          <Key>
-            <PropertyRef Name="Cod_evaluaciontecnica" />
-          </Key>
-          <Property Name="Cod_evaluaciontecnica" Type="Int32" Nullable="false" />
-          <Property Name="Fec_evaluacion" Type="DateTime" Precision="0" />
-          <Property Name="VersionEvaluacion" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="Evaluador" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Observacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="ResultadoPreg1" Type="Int32" />
-          <Property Name="ResultadoPreg2" Type="Int32" />
-          <Property Name="ResultadoPreg3" Type="Int32" />
-          <Property Name="ResultadoPreg4" Type="Int32" />
-          <Property Name="ResultadoPreg5" Type="Int32" />
-          <Property Name="Cod_usu_regi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
-          <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
-          <Property Name="Cod_empleado" Type="Int32" />
-          <Property Name="Cod_preg_eva_tec" Type="Int32" />
-          <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado" FromRole="RRH_PruebaEvaluacionTecnica" ToRole="RRH_Empleado" />
-          <NavigationProperty Name="RRH_PreguntaEvaluacionTecnica" Relationship="BDBoticasModel.FK_RRH_PruebaEvaluacionTecnica_RRH_PreguntaEvaluacionTecnica" FromRole="RRH_PruebaEvaluacionTecnica" ToRole="RRH_PreguntaEvaluacionTecnica" />
+          <NavigationProperty Name="RRH_EvaluacionTecnica" Relationship="BDBoticasModel.FK_RRH_EvaluacionTecnica_RRH_PreguntaEvaluacionTecnica" FromRole="RRH_PreguntaEvaluacionTecnica" ToRole="RRH_EvaluacionTecnica" />
         </EntityType>
         <EntityType Name="RRH_Puesto">
           <Key>
@@ -5055,8 +5243,9 @@
           <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
           <NavigationProperty Name="RRH_Area" Relationship="BDBoticasModel.FK_Puesto_Area" FromRole="RRH_Puesto" ToRole="RRH_Area" />
-          <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_RRH_Empleado_RRH_Puesto" FromRole="RRH_Puesto" ToRole="RRH_Empleado" />
+          <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_RRH_Empleado_RRH_Perfil" FromRole="RRH_Puesto" ToRole="RRH_Empleado" />
           <NavigationProperty Name="RRH_Perfil" Relationship="BDBoticasModel.FK_Perfil_Puesto" FromRole="RRH_Puesto" ToRole="RRH_Perfil" />
+          <NavigationProperty Name="RRH_Puesto_Option" Relationship="BDBoticasModel.FK_RRH_Puesto_Option_RRH_Puesto" FromRole="RRH_Puesto" ToRole="RRH_Puesto_Option" />
         </EntityType>
         <EntityType Name="RRH_ReferenciaLaboral">
           <Key>
@@ -5064,13 +5253,31 @@
           </Key>
           <Property Name="Cod_ReferenciaLaboral" Type="Int32" Nullable="false" />
           <Property Name="Cod_candidato" Type="Int32" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nom_Persona" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nom_empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TipoReferencia" Type="Int32" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Puesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_usu_regi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
+          <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
           <NavigationProperty Name="RRH_Candidato" Relationship="BDBoticasModel.FK_RRH_ReferenciaLaboral_RRH_Candidato" FromRole="RRH_ReferenciaLaboral" ToRole="RRH_Candidato" />
+        </EntityType>
+        <EntityType Name="RRH_RespuestaAutoevaluacion">
+          <Key>
+            <PropertyRef Name="Cod_resp_autoevaluacion" />
+          </Key>
+          <Property Name="Cod_resp_autoevaluacion" Type="Int32" Nullable="false" />
+          <Property Name="Cod_criterio" Type="Int32" Nullable="false" />
+          <Property Name="Respuesta" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Puntaje" Type="Int32" Nullable="false" />
+          <Property Name="Cod_usu_reg" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_usu_reg" Type="DateTime" Precision="3" />
+          <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="RRH_Criterio" Relationship="BDBoticasModel.FK_RRH_RespuestaAutoevaluacion_RRH_Criterio" FromRole="RRH_RespuestaAutoevaluacion" ToRole="RRH_Criterio" />
+          <NavigationProperty Name="RRH_PruebaAutoevaluacion" Relationship="BDBoticasModel.FK_RRH_PruebaAutoevaluacion_RRH_RespuestaAutoevaluacion" FromRole="RRH_RespuestaAutoevaluacion" ToRole="RRH_PruebaAutoevaluacion" />
         </EntityType>
         <EntityType Name="RRH_Sucursal">
           <Key>
@@ -5084,9 +5291,20 @@
           <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
           <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_s__7D0E9093" FromRole="RRH_Sucursal" ToRole="ALP_ORDEN_PREPARADO" />
-          <NavigationProperty Name="DIS_Pedido" Relationship="BDBoticasModel.FK__DIS_Pedid__Cod_s__5224328E" FromRole="RRH_Sucursal" ToRole="DIS_Pedido" />
+          <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_s__540C7B00" FromRole="RRH_Sucursal" ToRole="ALP_ORDEN_PREPARADO" />
+          <NavigationProperty Name="DIS_Pedido" Relationship="BDBoticasModel.FK__DIS_Pedid__Cod_s__5BAD9CC8" FromRole="RRH_Sucursal" ToRole="DIS_Pedido" />
+          <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_RRH_Empleado_RRH_Sucursal" FromRole="RRH_Sucursal" ToRole="RRH_Empleado" />
           <NavigationProperty Name="RRH_OfertaLaboral" Relationship="BDBoticasModel.FK_OfertaLaboral_Sucursal" FromRole="RRH_Sucursal" ToRole="RRH_OfertaLaboral" />
+        </EntityType>
+        <EntityType Name="RRH_Usuario">
+          <Key>
+            <PropertyRef Name="Cod_usuario" />
+          </Key>
+          <Property Name="Cod_usuario" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_Empleado" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Contrasena" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_RRH_Usuario_RRH_Empleado" FromRole="RRH_Usuario" ToRole="RRH_Empleado" />
         </EntityType>
         <EntityType Name="RYA_ACTARECEP_CAB">
           <Key>
@@ -5304,7 +5522,18 @@
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
           <NavigationProperty Name="RYA_LOTES" Relationship="BDBoticasModel.FK_RYA_UBICACIONES_RYA_LOTES" FromRole="RYA_UBICACIONES" ToRole="RYA_LOTES" />
         </EntityType>
-        <Association Name="FK__ALP_CONST__num_o__11158940">
+        <EntityType Name="RRH_Puesto_Option">
+          <Key>
+            <PropertyRef Name="Cod_Puesto" />
+            <PropertyRef Name="OptionId" />
+          </Key>
+          <Property Name="Cod_Puesto_Option" Type="Int32" />
+          <Property Name="Cod_Puesto" Type="Int32" Nullable="false" />
+          <Property Name="OptionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RRH_Option" Relationship="BDBoticasModel.FK_RRH_Puesto_Option_RRH_Option" FromRole="RRH_Puesto_Option" ToRole="RRH_Option" />
+          <NavigationProperty Name="RRH_Puesto" Relationship="BDBoticasModel.FK_RRH_Puesto_Option_RRH_Puesto" FromRole="RRH_Puesto_Option" ToRole="RRH_Puesto" />
+        </EntityType>
+        <Association Name="FK__ALP_CONST__num_o__4E53A1AA">
           <End Type="BDBoticasModel.ALP_ORDEN_PREPARADO" Role="ALP_ORDEN_PREPARADO" Multiplicity="1" />
           <End Type="BDBoticasModel.ALP_CONSTANCIA_PREPARADO" Role="ALP_CONSTANCIA_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -5316,7 +5545,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_HOJA___num_c__2057CCD0">
+        <Association Name="FK__ALP_HOJA___num_c__4F47C5E3">
           <End Type="BDBoticasModel.ALP_CONSTANCIA_PREPARADO" Role="ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
           <End Type="BDBoticasModel.ALP_HOJA_MERMA" Role="ALP_HOJA_MERMA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -5328,7 +5557,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_LIBRO__num_c__1F63A897">
+        <Association Name="FK__ALP_LIBRO__num_c__51300E55">
           <End Type="BDBoticasModel.ALP_CONSTANCIA_PREPARADO" Role="ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
           <End Type="BDBoticasModel.ALP_LIBRO_RECETA" Role="ALP_LIBRO_RECETA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -5340,7 +5569,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_i__0F2D40CE">
+        <Association Name="FK__ALP_ORDEN__cod_i__55009F39">
           <End Type="BDBoticasModel.ALP_INSUMO" Role="ALP_INSUMO" Multiplicity="1" />
           <End Type="BDBoticasModel.ALP_ORDEN_PREPARADO_INSUMO" Role="ALP_ORDEN_PREPARADO_INSUMO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -5352,7 +5581,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_LIBRO__cod_q__1E6F845E">
+        <Association Name="FK__ALP_LIBRO__cod_q__46B27FE2">
           <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="1" />
           <End Type="BDBoticasModel.ALP_LIBRO_RECETA" Role="ALP_LIBRO_RECETA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -5364,7 +5593,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_e__7B264821">
+        <Association Name="FK__ALP_ORDEN__cod_e__489AC854">
           <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="1" />
           <End Type="BDBoticasModel.ALP_ORDEN_PREPARADO" Role="ALP_ORDEN_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -5376,7 +5605,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_r__7C1A6C5A">
+        <Association Name="FK__ALP_ORDEN__cod_r__531856C7">
           <End Type="BDBoticasModel.ALP_RECETA" Role="ALP_RECETA" Multiplicity="1" />
           <End Type="BDBoticasModel.ALP_ORDEN_PREPARADO" Role="ALP_ORDEN_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -5388,7 +5617,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_s__7D0E9093">
+        <Association Name="FK__ALP_ORDEN__cod_s__540C7B00">
           <End Type="BDBoticasModel.RRH_Sucursal" Role="RRH_Sucursal" Multiplicity="1" />
           <End Type="BDBoticasModel.ALP_ORDEN_PREPARADO" Role="ALP_ORDEN_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -5400,7 +5629,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__num_o__10216507">
+        <Association Name="FK__ALP_ORDEN__num_o__55F4C372">
           <End Type="BDBoticasModel.ALP_ORDEN_PREPARADO" Role="ALP_ORDEN_PREPARADO" Multiplicity="1" />
           <End Type="BDBoticasModel.ALP_ORDEN_PREPARADO_INSUMO" Role="ALP_ORDEN_PREPARADO_INSUMO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -5472,7 +5701,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DIS_Pedid__Cod_s__5224328E">
+        <Association Name="FK__DIS_Pedid__Cod_s__5BAD9CC8">
           <End Type="BDBoticasModel.RRH_Sucursal" Role="RRH_Sucursal" Multiplicity="0..1" />
           <End Type="BDBoticasModel.DIS_Pedido" Role="DIS_Pedido" Multiplicity="*" />
           <ReferentialConstraint>
@@ -6188,26 +6417,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RRH_Criterio_PruebaAutoevaluacion_RRH_AlternativaAutoevaluacion">
-          <End Type="BDBoticasModel.RRH_AlternativaAutoevaluacion" Role="RRH_AlternativaAutoevaluacion" Multiplicity="0..1" />
-          <End Type="BDBoticasModel.RRH_Criterio_PruebaAutoevaluacion" Role="RRH_Criterio_PruebaAutoevaluacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RRH_AlternativaAutoevaluacion">
-              <PropertyRef Name="Cod_alternativa_autoevaluacion" />
-            </Principal>
-            <Dependent Role="RRH_Criterio_PruebaAutoevaluacion">
-              <PropertyRef Name="Cod_alternatica_autoevaluacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RRH_PreguntaEvaluacionTecnica_RRH_AlternativaEvaluacionTecnica">
+        <Association Name="FK_RRH_EvaluacionTecnica_RRH_AlternativaEvaluacionTecnica">
           <End Type="BDBoticasModel.RRH_AlternativaEvaluacionTecnica" Role="RRH_AlternativaEvaluacionTecnica" Multiplicity="0..1" />
-          <End Type="BDBoticasModel.RRH_PreguntaEvaluacionTecnica" Role="RRH_PreguntaEvaluacionTecnica" Multiplicity="*" />
+          <End Type="BDBoticasModel.RRH_EvaluacionTecnica" Role="RRH_EvaluacionTecnica" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RRH_AlternativaEvaluacionTecnica">
               <PropertyRef Name="Cod_alternativa_evaluaciontec" />
             </Principal>
-            <Dependent Role="RRH_PreguntaEvaluacionTecnica">
+            <Dependent Role="RRH_EvaluacionTecnica">
               <PropertyRef Name="Cod_alternativa_evaluaciontec" />
             </Dependent>
           </ReferentialConstraint>
@@ -6233,6 +6450,18 @@
             </Principal>
             <Dependent Role="RRH_OfertaLaboral_Candidato">
               <PropertyRef Name="Cod_candidato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_Candidato_RRH_Distrito">
+          <End Type="BDBoticasModel.RRH_Distrito" Role="RRH_Distrito" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.RRH_Candidato" Role="RRH_Candidato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Distrito">
+              <PropertyRef Name="Cod_distrito" />
+            </Principal>
+            <Dependent Role="RRH_Candidato">
+              <PropertyRef Name="Cod_distrito" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6272,18 +6501,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RRH_Criterio_PruebaAutoevaluacion_RRH_Criterio">
-          <End Type="BDBoticasModel.RRH_Criterio" Role="RRH_Criterio" Multiplicity="1" />
-          <End Type="BDBoticasModel.RRH_Criterio_PruebaAutoevaluacion" Role="RRH_Criterio_PruebaAutoevaluacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RRH_Criterio">
-              <PropertyRef Name="Cod_criterio" />
-            </Principal>
-            <Dependent Role="RRH_Criterio_PruebaAutoevaluacion">
-              <PropertyRef Name="Cod_criterio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_RRH_PreguntaEvaluacionTecnica_RRH_Criterio">
           <End Type="BDBoticasModel.RRH_Criterio" Role="RRH_Criterio" Multiplicity="0..1" />
           <End Type="BDBoticasModel.RRH_PreguntaEvaluacionTecnica" Role="RRH_PreguntaEvaluacionTecnica" Multiplicity="*" />
@@ -6296,19 +6513,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RRH_Criterio_PruebaAutoevaluacion_RRH_PruebaAuotoevaluacion">
-          <End Type="BDBoticasModel.RRH_PruebaAutoevaluacion" Role="RRH_PruebaAutoevaluacion" Multiplicity="1" />
-          <End Type="BDBoticasModel.RRH_Criterio_PruebaAutoevaluacion" Role="RRH_Criterio_PruebaAutoevaluacion" Multiplicity="*" />
+        <Association Name="FK_RRH_RespuestaAutoevaluacion_RRH_Criterio">
+          <End Type="BDBoticasModel.RRH_Criterio" Role="RRH_Criterio" Multiplicity="1" />
+          <End Type="BDBoticasModel.RRH_RespuestaAutoevaluacion" Role="RRH_RespuestaAutoevaluacion" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="RRH_PruebaAutoevaluacion">
-              <PropertyRef Name="Cod_autoevaluacion" />
+            <Principal Role="RRH_Criterio">
+              <PropertyRef Name="Cod_criterio" />
             </Principal>
-            <Dependent Role="RRH_Criterio_PruebaAutoevaluacion">
-              <PropertyRef Name="Cod_autoevaluacion" />
+            <Dependent Role="RRH_RespuestaAutoevaluacion">
+              <PropertyRef Name="Cod_criterio" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RRH_Empleado_RRH_Puesto">
+        <Association Name="FK_RRH_Empleado_RRH_Empleado">
+          <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Empleado">
+              <PropertyRef Name="Cod_empleado" />
+            </Principal>
+            <Dependent Role="RRH_Empleado1">
+              <PropertyRef Name="Cod_Jefe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_Empleado_RRH_Perfil">
           <End Type="BDBoticasModel.RRH_Puesto" Role="RRH_Puesto" Multiplicity="0..1" />
           <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -6316,31 +6545,43 @@
               <PropertyRef Name="Cod_puesto" />
             </Principal>
             <Dependent Role="RRH_Empleado">
-              <PropertyRef Name="Cod_puesto" />
+              <PropertyRef Name="Cod_Puesto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RRH_PruebaAuotoevaluacion_RRH_Empleado">
-          <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="0..1" />
-          <End Type="BDBoticasModel.RRH_PruebaAutoevaluacion" Role="RRH_PruebaAutoevaluacion" Multiplicity="*" />
+        <Association Name="FK_RRH_Empleado_RRH_Sucursal">
+          <End Type="BDBoticasModel.RRH_Sucursal" Role="RRH_Sucursal" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Sucursal">
+              <PropertyRef Name="Cod_sucursal" />
+            </Principal>
+            <Dependent Role="RRH_Empleado">
+              <PropertyRef Name="Cod_Sucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_Usuario_RRH_Empleado">
+          <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="1" />
+          <End Type="BDBoticasModel.RRH_Usuario" Role="RRH_Usuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RRH_Empleado">
               <PropertyRef Name="Cod_empleado" />
             </Principal>
-            <Dependent Role="RRH_PruebaAutoevaluacion">
-              <PropertyRef Name="Cod_empleado" />
+            <Dependent Role="RRH_Usuario">
+              <PropertyRef Name="Cod_Empleado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado">
-          <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="0..1" />
-          <End Type="BDBoticasModel.RRH_PruebaEvaluacionTecnica" Role="RRH_PruebaEvaluacionTecnica" Multiplicity="*" />
+        <Association Name="FK_RRH_EvaluacionTecnica_RRH_PreguntaEvaluacionTecnica">
+          <End Type="BDBoticasModel.RRH_PreguntaEvaluacionTecnica" Role="RRH_PreguntaEvaluacionTecnica" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.RRH_EvaluacionTecnica" Role="RRH_EvaluacionTecnica" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="RRH_Empleado">
-              <PropertyRef Name="Cod_empleado" />
+            <Principal Role="RRH_PreguntaEvaluacionTecnica">
+              <PropertyRef Name="Cod_preg_eva_tec" />
             </Principal>
-            <Dependent Role="RRH_PruebaEvaluacionTecnica">
-              <PropertyRef Name="Cod_empleado" />
+            <Dependent Role="RRH_EvaluacionTecnica">
+              <PropertyRef Name="Cod_preg_eva_tec" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6380,6 +6621,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RRH_Puesto_Option_RRH_Option">
+          <End Type="BDBoticasModel.RRH_Option" Role="RRH_Option" Multiplicity="1" />
+          <End Type="BDBoticasModel.RRH_Puesto_Option" Role="RRH_Puesto_Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Option">
+              <PropertyRef Name="OptionId" />
+            </Principal>
+            <Dependent Role="RRH_Puesto_Option">
+              <PropertyRef Name="OptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Perfil_Puesto">
           <End Type="BDBoticasModel.RRH_Puesto" Role="RRH_Puesto" Multiplicity="1" />
           <End Type="BDBoticasModel.RRH_Perfil" Role="RRH_Perfil" Multiplicity="*" />
@@ -6392,15 +6645,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RRH_PruebaEvaluacionTecnica_RRH_PreguntaEvaluacionTecnica">
-          <End Type="BDBoticasModel.RRH_PreguntaEvaluacionTecnica" Role="RRH_PreguntaEvaluacionTecnica" Multiplicity="0..1" />
-          <End Type="BDBoticasModel.RRH_PruebaEvaluacionTecnica" Role="RRH_PruebaEvaluacionTecnica" Multiplicity="*" />
+        <Association Name="FK_RRH_Puesto_Option_RRH_Puesto">
+          <End Type="BDBoticasModel.RRH_Puesto" Role="RRH_Puesto" Multiplicity="1" />
+          <End Type="BDBoticasModel.RRH_Puesto_Option" Role="RRH_Puesto_Option" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="RRH_PreguntaEvaluacionTecnica">
-              <PropertyRef Name="Cod_preg_eva_tec" />
+            <Principal Role="RRH_Puesto">
+              <PropertyRef Name="Cod_puesto" />
             </Principal>
-            <Dependent Role="RRH_PruebaEvaluacionTecnica">
-              <PropertyRef Name="Cod_preg_eva_tec" />
+            <Dependent Role="RRH_Puesto_Option">
+              <PropertyRef Name="Cod_Puesto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6557,6 +6810,89 @@
             </Principal>
             <Dependent Role="RYA_STOCK">
               <PropertyRef Name="COD_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RRH_PruebaAutoevaluacion">
+          <Key>
+            <PropertyRef Name="Cod_prueba_autoevaluacion" />
+          </Key>
+          <Property Name="Cod_prueba_autoevaluacion" Type="Int32" Nullable="false" />
+          <Property Name="Fec_evaluacion" Type="DateTime" Precision="0" />
+          <Property Name="Cod_usu_regi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
+          <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
+          <Property Name="Cod_empleado" Type="Int32" />
+          <Property Name="Cod_resp_autoevaluacion" Type="Int32" />
+          <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" FromRole="RRH_PruebaAutoevaluacion" ToRole="RRH_Empleado" />
+          <NavigationProperty Name="RRH_RespuestaAutoevaluacion" Relationship="BDBoticasModel.FK_RRH_PruebaAutoevaluacion_RRH_RespuestaAutoevaluacion" FromRole="RRH_PruebaAutoevaluacion" ToRole="RRH_RespuestaAutoevaluacion" />
+        </EntityType>
+        <EntityType Name="RRH_PruebaEvaluacionTecnica">
+          <Key>
+            <PropertyRef Name="Cod_pruebaevaluaciontecnica" />
+          </Key>
+          <Property Name="Cod_pruebaevaluaciontecnica" Type="Int32" Nullable="false" />
+          <Property Name="Fec_evaluacion" Type="DateTime" Precision="0" />
+          <Property Name="Evaluador" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Observacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="RespuestaPreg" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ResultadoPreg" Type="Int32" />
+          <Property Name="Cod_usu_regi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
+          <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
+          <Property Name="Cod_empleado" Type="Int32" />
+          <Property Name="Cod_preg_eva_tec" Type="Int32" />
+          <Property Name="Cod_evaluaciontecnica" Type="Int32" />
+          <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado" FromRole="RRH_PruebaEvaluacionTecnica" ToRole="RRH_Empleado" />
+          <NavigationProperty Name="RRH_EvaluacionTecnica" Relationship="BDBoticasModel.FK_RRH_PruebaEvaluacionTecnica_RRH_EvaluacionTecnica" FromRole="RRH_PruebaEvaluacionTecnica" ToRole="RRH_EvaluacionTecnica" />
+        </EntityType>
+        <Association Name="FK_RRH_PruebaAuotoevaluacion_RRH_Empleado">
+          <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.RRH_PruebaAutoevaluacion" Role="RRH_PruebaAutoevaluacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Empleado">
+              <PropertyRef Name="Cod_empleado" />
+            </Principal>
+            <Dependent Role="RRH_PruebaAutoevaluacion">
+              <PropertyRef Name="Cod_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado">
+          <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.RRH_PruebaEvaluacionTecnica" Role="RRH_PruebaEvaluacionTecnica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Empleado">
+              <PropertyRef Name="Cod_empleado" />
+            </Principal>
+            <Dependent Role="RRH_PruebaEvaluacionTecnica">
+              <PropertyRef Name="Cod_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_PruebaEvaluacionTecnica_RRH_EvaluacionTecnica">
+          <End Type="BDBoticasModel.RRH_EvaluacionTecnica" Role="RRH_EvaluacionTecnica" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.RRH_PruebaEvaluacionTecnica" Role="RRH_PruebaEvaluacionTecnica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_EvaluacionTecnica">
+              <PropertyRef Name="Cod_evaluaciontecnica" />
+            </Principal>
+            <Dependent Role="RRH_PruebaEvaluacionTecnica">
+              <PropertyRef Name="Cod_evaluaciontecnica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_PruebaAutoevaluacion_RRH_RespuestaAutoevaluacion">
+          <End Type="BDBoticasModel.RRH_RespuestaAutoevaluacion" Role="RRH_RespuestaAutoevaluacion" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.RRH_PruebaAutoevaluacion" Role="RRH_PruebaAutoevaluacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_RespuestaAutoevaluacion">
+              <PropertyRef Name="Cod_resp_autoevaluacion" />
+            </Principal>
+            <Dependent Role="RRH_PruebaAutoevaluacion">
+              <PropertyRef Name="Cod_resp_autoevaluacion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7557,21 +7893,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RRH_AlternativaAutoevaluacion">
-            <EntityTypeMapping TypeName="BDBoticasModel.RRH_AlternativaAutoevaluacion">
-              <MappingFragment StoreEntitySet="RRH_AlternativaAutoevaluacion">
-                <ScalarProperty Name="Cod_criterio" ColumnName="Cod_criterio" />
-                <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
-                <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
-                <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
-                <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
-                <ScalarProperty Name="Fec_creacion" ColumnName="Fec_creacion" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-                <ScalarProperty Name="Respuesta" ColumnName="Respuesta" />
-                <ScalarProperty Name="Cod_alternativa_autoevaluacion" ColumnName="Cod_alternativa_autoevaluacion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="RRH_AlternativaEvaluacionTecnica">
             <EntityTypeMapping TypeName="BDBoticasModel.RRH_AlternativaEvaluacionTecnica">
               <MappingFragment StoreEntitySet="RRH_AlternativaEvaluacionTecnica">
@@ -7606,6 +7927,9 @@
                 <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
                 <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
                 <ScalarProperty Name="Fec_postulacion" ColumnName="Fec_postulacion" />
+                <ScalarProperty Name="Fec_Nacimiento" ColumnName="Fec_Nacimiento" />
+                <ScalarProperty Name="Cod_distrito" ColumnName="Cod_distrito" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Foto" ColumnName="Foto" />
                 <ScalarProperty Name="Direccion" ColumnName="Direccion" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
@@ -7630,19 +7954,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RRH_Criterio_PruebaAutoevaluacion">
-            <EntityTypeMapping TypeName="BDBoticasModel.RRH_Criterio_PruebaAutoevaluacion">
-              <MappingFragment StoreEntitySet="RRH_Criterio_PruebaAutoevaluacion">
-                <ScalarProperty Name="Cod_alternatica_autoevaluacion" ColumnName="Cod_alternatica_autoevaluacion" />
-                <ScalarProperty Name="Cod_criterio" ColumnName="Cod_criterio" />
-                <ScalarProperty Name="Cod_autoevaluacion" ColumnName="Cod_autoevaluacion" />
+          <EntitySetMapping Name="RRH_Distrito">
+            <EntityTypeMapping TypeName="BDBoticasModel.RRH_Distrito">
+              <MappingFragment StoreEntitySet="RRH_Distrito">
+                <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
+                <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
+                <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
+                <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
+                <ScalarProperty Name="Nom_distrito" ColumnName="Nom_distrito" />
+                <ScalarProperty Name="Cod_distrito" ColumnName="Cod_distrito" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RRH_Empleado">
             <EntityTypeMapping TypeName="BDBoticasModel.RRH_Empleado">
               <MappingFragment StoreEntitySet="RRH_Empleado">
-                <ScalarProperty Name="Cod_puesto" ColumnName="Cod_puesto" />
+                <ScalarProperty Name="Cod_Sucursal" ColumnName="Cod_Sucursal" />
+                <ScalarProperty Name="Cod_Jefe" ColumnName="Cod_Jefe" />
+                <ScalarProperty Name="Cod_Puesto" ColumnName="Cod_Puesto" />
+                <ScalarProperty Name="Evaluado" ColumnName="Evaluado" />
                 <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
                 <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
                 <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
@@ -7659,9 +7989,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="RRH_EvaluacionTecnica">
+            <EntityTypeMapping TypeName="BDBoticasModel.RRH_EvaluacionTecnica">
+              <MappingFragment StoreEntitySet="RRH_EvaluacionTecnica">
+                <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
+                <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
+                <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
+                <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="Cod_preg_eva_tec" ColumnName="Cod_preg_eva_tec" />
+                <ScalarProperty Name="Cod_alternativa_evaluaciontec" ColumnName="Cod_alternativa_evaluaciontec" />
+                <ScalarProperty Name="Cod_evaluaciontecnica" ColumnName="Cod_evaluaciontecnica" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="RRH_ExperienciaLaboral">
             <EntityTypeMapping TypeName="BDBoticasModel.RRH_ExperienciaLaboral">
               <MappingFragment StoreEntitySet="RRH_ExperienciaLaboral">
+                <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
+                <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
+                <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
+                <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
+                <ScalarProperty Name="Nom_area" ColumnName="Nom_area" />
+                <ScalarProperty Name="Nom_puesto" ColumnName="Nom_puesto" />
                 <ScalarProperty Name="Fec_Fin_elaboral" ColumnName="Fec_Fin_elaboral" />
                 <ScalarProperty Name="Fec_Inicio_elaboral" ColumnName="Fec_Inicio_elaboral" />
                 <ScalarProperty Name="Desc_Reponsabilidades" ColumnName="Desc_Reponsabilidades" />
@@ -7674,9 +8024,14 @@
           <EntitySetMapping Name="RRH_GradoAcademico">
             <EntityTypeMapping TypeName="BDBoticasModel.RRH_GradoAcademico">
               <MappingFragment StoreEntitySet="RRH_GradoAcademico">
-                <ScalarProperty Name="Fec_Graduacion" ColumnName="Fec_Graduacion" />
+                <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
+                <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
+                <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
+                <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
+                <ScalarProperty Name="ruta_certificado" ColumnName="ruta_certificado" />
+                <ScalarProperty Name="Anio_graduacion" ColumnName="Anio_graduacion" />
                 <ScalarProperty Name="CentroEstudios" ColumnName="CentroEstudios" />
-                <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
                 <ScalarProperty Name="Cod_candidato" ColumnName="Cod_candidato" />
                 <ScalarProperty Name="Cod_GradoAcademico" ColumnName="Cod_GradoAcademico" />
               </MappingFragment>
@@ -7710,6 +8065,17 @@
                 <ScalarProperty Name="Cod_candidato" ColumnName="Cod_candidato" />
                 <ScalarProperty Name="Cod_ofertalaboral" ColumnName="Cod_ofertalaboral" />
                 <ScalarProperty Name="Cod_ofertalaboral_candidato" ColumnName="Cod_ofertalaboral_candidato" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RRH_Option">
+            <EntityTypeMapping TypeName="BDBoticasModel.RRH_Option">
+              <MappingFragment StoreEntitySet="RRH_Option">
+                <ScalarProperty Name="OptionMainId" ColumnName="OptionMainId" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="OptionDes" ColumnName="OptionDes" />
+                <ScalarProperty Name="OptionId" ColumnName="OptionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -7748,43 +8114,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RRH_PruebaAutoevaluacion">
-            <EntityTypeMapping TypeName="BDBoticasModel.RRH_PruebaAutoevaluacion">
-              <MappingFragment StoreEntitySet="RRH_PruebaAutoevaluacion">
-                <ScalarProperty Name="PuntajeTotal" ColumnName="PuntajeTotal" />
-                <ScalarProperty Name="Cod_empleado" ColumnName="Cod_empleado" />
-                <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
-                <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
-                <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
-                <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
-                <ScalarProperty Name="VersionEvaluacion" ColumnName="VersionEvaluacion" />
-                <ScalarProperty Name="Fec_evaluacion" ColumnName="Fec_evaluacion" />
-                <ScalarProperty Name="Cod_autoevaluacion" ColumnName="Cod_autoevaluacion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RRH_PruebaEvaluacionTecnica">
-            <EntityTypeMapping TypeName="BDBoticasModel.RRH_PruebaEvaluacionTecnica">
-              <MappingFragment StoreEntitySet="RRH_PruebaEvaluacionTecnica">
-                <ScalarProperty Name="Cod_preg_eva_tec" ColumnName="Cod_preg_eva_tec" />
-                <ScalarProperty Name="Cod_empleado" ColumnName="Cod_empleado" />
-                <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
-                <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
-                <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
-                <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
-                <ScalarProperty Name="ResultadoPreg5" ColumnName="ResultadoPreg5" />
-                <ScalarProperty Name="ResultadoPreg4" ColumnName="ResultadoPreg4" />
-                <ScalarProperty Name="ResultadoPreg3" ColumnName="ResultadoPreg3" />
-                <ScalarProperty Name="ResultadoPreg2" ColumnName="ResultadoPreg2" />
-                <ScalarProperty Name="ResultadoPreg1" ColumnName="ResultadoPreg1" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="Evaluador" ColumnName="Evaluador" />
-                <ScalarProperty Name="VersionEvaluacion" ColumnName="VersionEvaluacion" />
-                <ScalarProperty Name="Fec_evaluacion" ColumnName="Fec_evaluacion" />
-                <ScalarProperty Name="Cod_evaluaciontecnica" ColumnName="Cod_evaluaciontecnica" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="RRH_Puesto">
             <EntityTypeMapping TypeName="BDBoticasModel.RRH_Puesto">
               <MappingFragment StoreEntitySet="RRH_Puesto">
@@ -7802,14 +8131,31 @@
           <EntitySetMapping Name="RRH_ReferenciaLaboral">
             <EntityTypeMapping TypeName="BDBoticasModel.RRH_ReferenciaLaboral">
               <MappingFragment StoreEntitySet="RRH_ReferenciaLaboral">
+                <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
+                <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
+                <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
+                <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
                 <ScalarProperty Name="Puesto" ColumnName="Puesto" />
-                <ScalarProperty Name="TipoReferencia" ColumnName="TipoReferencia" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Nom_empresa" ColumnName="Nom_empresa" />
+                <ScalarProperty Name="Nom_Persona" ColumnName="Nom_Persona" />
                 <ScalarProperty Name="Cod_candidato" ColumnName="Cod_candidato" />
                 <ScalarProperty Name="Cod_ReferenciaLaboral" ColumnName="Cod_ReferenciaLaboral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RRH_RespuestaAutoevaluacion">
+            <EntityTypeMapping TypeName="BDBoticasModel.RRH_RespuestaAutoevaluacion">
+              <MappingFragment StoreEntitySet="RRH_RespuestaAutoevaluacion">
+                <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
+                <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
+                <ScalarProperty Name="Fec_usu_reg" ColumnName="Fec_usu_reg" />
+                <ScalarProperty Name="Cod_usu_reg" ColumnName="Cod_usu_reg" />
+                <ScalarProperty Name="Puntaje" ColumnName="Puntaje" />
+                <ScalarProperty Name="Respuesta" ColumnName="Respuesta" />
+                <ScalarProperty Name="Cod_criterio" ColumnName="Cod_criterio" />
+                <ScalarProperty Name="Cod_resp_autoevaluacion" ColumnName="Cod_resp_autoevaluacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -7824,6 +8170,16 @@
                 <ScalarProperty Name="Direccion" ColumnName="Direccion" />
                 <ScalarProperty Name="Nom_sucursal" ColumnName="Nom_sucursal" />
                 <ScalarProperty Name="Cod_sucursal" ColumnName="Cod_sucursal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RRH_Usuario">
+            <EntityTypeMapping TypeName="BDBoticasModel.RRH_Usuario">
+              <MappingFragment StoreEntitySet="RRH_Usuario">
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Cod_Empleado" ColumnName="Cod_Empleado" />
+                <ScalarProperty Name="Cod_usuario" ColumnName="Cod_usuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8027,6 +8383,48 @@
                 <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
                 <ScalarProperty Name="Cod_Lote" ColumnName="Cod_Lote" />
                 <ScalarProperty Name="Cod_Almacen" ColumnName="Cod_Almacen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RRH_Puesto_Option">
+            <EntityTypeMapping TypeName="BDBoticasModel.RRH_Puesto_Option">
+              <MappingFragment StoreEntitySet="RRH_Puesto_Option">
+                <ScalarProperty Name="OptionId" ColumnName="OptionId" />
+                <ScalarProperty Name="Cod_Puesto" ColumnName="Cod_Puesto" />
+                <ScalarProperty Name="Cod_Puesto_Option" ColumnName="Cod_Puesto_Option" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RRH_PruebaAutoevaluacion">
+            <EntityTypeMapping TypeName="BDBoticasModel.RRH_PruebaAutoevaluacion">
+              <MappingFragment StoreEntitySet="RRH_PruebaAutoevaluacion">
+                <ScalarProperty Name="Cod_resp_autoevaluacion" ColumnName="Cod_resp_autoevaluacion" />
+                <ScalarProperty Name="Cod_empleado" ColumnName="Cod_empleado" />
+                <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
+                <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
+                <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
+                <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
+                <ScalarProperty Name="Fec_evaluacion" ColumnName="Fec_evaluacion" />
+                <ScalarProperty Name="Cod_prueba_autoevaluacion" ColumnName="Cod_prueba_autoevaluacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RRH_PruebaEvaluacionTecnica">
+            <EntityTypeMapping TypeName="BDBoticasModel.RRH_PruebaEvaluacionTecnica">
+              <MappingFragment StoreEntitySet="RRH_PruebaEvaluacionTecnica">
+                <ScalarProperty Name="Cod_evaluaciontecnica" ColumnName="Cod_evaluaciontecnica" />
+                <ScalarProperty Name="Cod_preg_eva_tec" ColumnName="Cod_preg_eva_tec" />
+                <ScalarProperty Name="Cod_empleado" ColumnName="Cod_empleado" />
+                <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
+                <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
+                <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
+                <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
+                <ScalarProperty Name="ResultadoPreg" ColumnName="ResultadoPreg" />
+                <ScalarProperty Name="RespuestaPreg" ColumnName="RespuestaPreg" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Evaluador" ColumnName="Evaluador" />
+                <ScalarProperty Name="Fec_evaluacion" ColumnName="Fec_evaluacion" />
+                <ScalarProperty Name="Cod_pruebaevaluaciontecnica" ColumnName="Cod_pruebaevaluaciontecnica" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

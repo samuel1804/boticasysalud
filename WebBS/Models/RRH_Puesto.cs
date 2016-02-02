@@ -18,6 +18,7 @@ namespace WebBS.Models
         {
             this.RRH_Empleado = new HashSet<RRH_Empleado>();
             this.RRH_Perfil = new HashSet<RRH_Perfil>();
+            this.RRH_Puesto_Option = new HashSet<RRH_Puesto_Option>();
         }
     
         public int Cod_puesto { get; set; }
@@ -32,5 +33,6 @@ namespace WebBS.Models
         public virtual RRH_Area RRH_Area { get; set; }
         public virtual ICollection<RRH_Empleado> RRH_Empleado { get; set; }
         public virtual ICollection<RRH_Perfil> RRH_Perfil { get; set; }
+        public virtual ICollection<RRH_Puesto_Option> RRH_Puesto_Option { get; set; }
     }
 }

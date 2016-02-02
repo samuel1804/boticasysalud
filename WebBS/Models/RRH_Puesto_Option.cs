@@ -12,14 +12,13 @@ namespace WebBS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class RRH_Criterio_PruebaAutoevaluacion
+    public partial class RRH_Puesto_Option
     {
-        public int Cod_autoevaluacion { get; set; }
-        public int Cod_criterio { get; set; }
-        public Nullable<int> Cod_alternatica_autoevaluacion { get; set; }
+        public Nullable<int> Cod_Puesto_Option { get; set; }
+        public int Cod_Puesto { get; set; }
+        public int OptionId { get; set; }
     
-        public virtual RRH_AlternativaAutoevaluacion RRH_AlternativaAutoevaluacion { get; set; }
-        public virtual RRH_Criterio RRH_Criterio { get; set; }
-        public virtual RRH_PruebaAutoevaluacion RRH_PruebaAutoevaluacion { get; set; }
+        public virtual RRH_Option RRH_Option { get; set; }
+        public virtual RRH_Puesto RRH_Puesto { get; set; }
     }
 }

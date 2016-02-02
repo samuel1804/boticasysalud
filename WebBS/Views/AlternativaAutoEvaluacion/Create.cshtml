@@ -1,4 +1,4 @@
-﻿@model WebBS.Models.RRH_AlternativaAutoevaluacion
+﻿@model WebBS.Models.RRH_RespuestaAutoevaluacion
 
 @{
     ViewBag.Title = "Elaborar AutoEvaluación";
@@ -35,10 +35,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Valor, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Puntaje, new { @class = "control-label col-md-2" })
             <div class="col-md-2">
-                @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Valor)
+                @Html.EditorFor(model => model.Puntaje, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Puntaje)
 
                 
             </div>
@@ -55,18 +55,18 @@
                             <tr>
                                 <th width="0%" hidden="hidden"></th>
                                 <th>Criterio</th>
-                                <th>Respuesta</th>
-                                <th>Valor</th>
+                                <th>Alternativa</th>
+                                <th>Puntaje</th>
                                 <th>Eliminar</th>
                             </tr>
                         </thead>
                        @foreach (var i in ViewBag.Alternativas) { 
                             <tr>
-                                <td class="cod_alternativa" width="0px" hidden="hidden">@i.Cod_alternativa_autoevaluacion</td>
+                                <td class="cod_alternativa" width="0px" hidden="hidden">@i.Cod_resp_autoevaluacion</td>
                                 <td>@i.Desc_criterio</td>
                                 <td>@i.Respuesta</td>
-                                <td>@i.Valor</td>
-                                <td width="5%"><a href="#" class="delete" data-id="@i.Cod_alternativa_autoevaluacion" title="">
+                                <td>@i.Puntaje</td>
+                                <td width="5%"><a href="#" class="delete"  title="">
     <i class="glyphicon glyphicon-remove"></i>
 </a></td>
                                 
@@ -133,7 +133,7 @@ clickeliminar=function() {
         cod_operacion: 2,
         Desc_criterio: "",
         Respuesta: "",
-        Valor: 0
+        Puntaje: 0
     });
 
     orderItems.splice(tr,1);
@@ -158,13 +158,13 @@ $('.delete').click(clickeliminar);
                         cod_operacion: 1,
                         Desc_criterio: $('#Cod_criterio option:selected').text(),
                         Respuesta: $('#Respuesta').val(),
-                        Valor: parseInt($('#Valor').val())
+                        Puntaje: parseInt($('#Puntaje').val())
                     });
                     
 
                     //Clear fields
                     $('#Respuesta').val('').focus();
-                    $('#Cod_criterio,#Valor').val('');
+                    $('#Cod_criterio,#Puntaje').val('');
 
                 }
                 //populate order items
@@ -217,7 +217,7 @@ $('.delete').click(clickeliminar);
                                 //orderItems = [];
                                 $('#Cod_criterio').val('');
                                 $('#Respuesta').val('');
-                                $('#Valor').val('');
+                                $('#Puntaje').val('');
                             }
                             else {
                                 alert('Error');
@@ -244,7 +244,7 @@ $('.delete').click(clickeliminar);
                         $row.append($('<td class="cod_alternativa" width="0px" hidden="hidden">'+val.Cod_alternativa_autoevaluacion+'</td>'));
                         $row.append($('<td/>').html(val.Desc_criterio));
                         $row.append($('<td/>').html(val.Respuesta));
-                        $row.append($('<td/>').html(val.Valor));
+                        $row.append($('<td/>').html(val.Puntaje));
                         $row.append($('<td width="5%"><a href="#" onclick="clickeliminar();" class="delete" data-id="'+val.Cod_alternativa_autoevaluacion+'" title=""><i class="glyphicon glyphicon-remove"></i></a></td>'));
 
 

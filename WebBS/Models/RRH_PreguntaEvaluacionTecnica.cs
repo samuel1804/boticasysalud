@@ -16,7 +16,7 @@ namespace WebBS.Models
     {
         public RRH_PreguntaEvaluacionTecnica()
         {
-            this.RRH_PruebaEvaluacionTecnica = new HashSet<RRH_PruebaEvaluacionTecnica>();
+            this.RRH_EvaluacionTecnica = new HashSet<RRH_EvaluacionTecnica>();
         }
     
         public int Cod_preg_eva_tec { get; set; }
@@ -30,8 +30,7 @@ namespace WebBS.Models
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
         public Nullable<int> Cod_alternativa_evaluaciontec { get; set; }
     
-        public virtual RRH_AlternativaEvaluacionTecnica RRH_AlternativaEvaluacionTecnica { get; set; }
         public virtual RRH_Criterio RRH_Criterio { get; set; }
-        public virtual ICollection<RRH_PruebaEvaluacionTecnica> RRH_PruebaEvaluacionTecnica { get; set; }
+        public virtual ICollection<RRH_EvaluacionTecnica> RRH_EvaluacionTecnica { get; set; }
     }
 }

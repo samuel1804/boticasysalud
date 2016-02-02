@@ -14,22 +14,18 @@ namespace WebBS.Models
     
     public partial class RRH_PruebaAutoevaluacion
     {
-        public RRH_PruebaAutoevaluacion()
-        {
-            this.RRH_Criterio_PruebaAutoevaluacion = new HashSet<RRH_Criterio_PruebaAutoevaluacion>();
-        }
-    
-        public int Cod_autoevaluacion { get; set; }
+        public int Cod_prueba_autoevaluacion { get; set; }
         public Nullable<System.DateTime> Fec_evaluacion { get; set; }
-        public string VersionEvaluacion { get; set; }
         public string Cod_usu_regi { get; set; }
         public Nullable<System.DateTime> Fec_usu_regi { get; set; }
         public string Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
         public Nullable<int> Cod_empleado { get; set; }
-        public Nullable<int> PuntajeTotal { get; set; }
+        public Nullable<int> Cod_resp_autoevaluacion { get; set; }
     
-        public virtual ICollection<RRH_Criterio_PruebaAutoevaluacion> RRH_Criterio_PruebaAutoevaluacion { get; set; }
         public virtual RRH_Empleado RRH_Empleado { get; set; }
+        public virtual RRH_RespuestaAutoevaluacion RRH_RespuestaAutoevaluacion { get; set; }
+
+        public int PuntajeTotal { get; set; }
     }
 }

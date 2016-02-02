@@ -16,9 +16,14 @@ namespace WebBS.Models
     {
         public int Cod_GradoAcademico { get; set; }
         public int Cod_candidato { get; set; }
-        public string Especialidad { get; set; }
+        public string Titulo { get; set; }
         public string CentroEstudios { get; set; }
-        public System.DateTime Fec_Graduacion { get; set; }
+        public int Anio_graduacion { get; set; }
+        public string ruta_certificado { get; set; }
+        public string Cod_usu_regi { get; set; }
+        public Nullable<System.DateTime> Fec_usu_regi { get; set; }
+        public string Cod_usu_modi { get; set; }
+        public Nullable<System.DateTime> Fec_usu_modi { get; set; }
     
         public virtual RRH_Candidato RRH_Candidato { get; set; }
     }
