@@ -10,9 +10,10 @@
 <div>
     <div id="divMensajeInformativo">
         <span class="fa fa-info-circle"></span>
-        <span id="lblMensajeInformativo">Usted puede consultar las solicitudes de adquisición.</span>
+        <span id="lblMensajeInformativo">Usted puede consultar las solicitudes de desaduanaje.</span>
     </div>
     <hr />
+
     <div class="row">
         @using (Html.BeginForm("Index", "SolicitudDesaduanaje", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
@@ -48,10 +49,8 @@
                     </div>
                 </div>
             </div>
-            <input type="hidden" name="ReturnUrl" value="@TempData["ReturnController"].ToString()" />
         }
     </div>
-
 
     <h4>Resultado de la consulta</h4>
     <hr />
@@ -81,37 +80,37 @@
             </th>
         </tr>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Numero)
-                </td>
-                <td>
-                    @item.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Fec_emision.Value.ToString("dd/MM/yyyy")
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IMP_SOLICITUD_IMPORTACION.IMP_ORDEN_COMPRA.Num_orden_compra)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IMP_SOLICITUD_IMPORTACION.IMP_ORDEN_COMPRA.IMP_PROVEEDOR.Razon_social)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IMP_SOLICITUD_IMPORTACION.IMP_ORDEN_COMPRA.IMP_PROVEEDOR.Origen)
-                </td>
-                <td>
-                    @Html.Raw(TablaDefinicion.ObtenerValor(item.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado, TablaDefinicion.EstadoSolicitud))
-                </td>
-                <td>
-                    <a class="control-table text-center" href="@Url.Action( TempData["ReturnAction"].ToString(),TempData["ReturnController"].ToString(), new  { Id=item.Cod_desaduanaje })">
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Numero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Fec_emision)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IMP_SOLICITUD_IMPORTACION.IMP_ORDEN_COMPRA.Num_orden_compra)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IMP_SOLICITUD_IMPORTACION.IMP_ORDEN_COMPRA.IMP_PROVEEDOR.Razon_social)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IMP_SOLICITUD_IMPORTACION.IMP_ORDEN_COMPRA.IMP_PROVEEDOR.Origen)
+            </td>
+            <td>
+                @Html.Raw(TablaDefinicion.ObtenerValor(item.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado, TablaDefinicion.EstadoSolicitud))
+            </td>
+            <td>
+                <a class="control-table text-center" href="@Url.Action("Details", new  { Id=item.Cod_desaduanaje })">
 
-                        <i class="fa fa-caret-square-o-right"></i>
-                    </a>
-                </td>
-            </tr>
-        }
+                    <i class="fa fa-caret-square-o-right"></i>
+                </a>
+            </td>
+        </tr>
+    }
 
     </table>
+
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
