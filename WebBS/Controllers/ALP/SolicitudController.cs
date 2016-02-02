@@ -164,6 +164,7 @@ namespace WebBS.Controllers.ALP
                     fec_usu_regi = DateTime.Now.Date,
                     cod_usu_modi = 3,
                     fec_usu_modi = DateTime.Now.Date,
+                    cod_sucursal_destino = int.Parse(codSucursal),
                     estado = "01"
                 };
 

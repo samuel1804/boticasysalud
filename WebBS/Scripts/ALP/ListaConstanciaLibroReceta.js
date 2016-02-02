@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    
+
     var now = new Date();
 
     var day = ("0" + now.getDate()).slice(-2);
@@ -26,7 +26,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/Constancia/BuscarConstanciaSinMerma",
+            url: "/Constancia/BuscarConstanciaAprobada",
             data: data,
             contentType: "application/json; charset=utf-8",
             DataType: "json",
@@ -48,11 +48,9 @@
                         html += "<td>" + value.fechaConstancia + "</td>";
                         html += "<td>" + value.sucursal + "</td>";
                         html += "<td>" + value.nomPreparado + "</td>";
-                        html += "<td><a href='../Constancia/Modificar?num_constancia=" + value.nroConstancia + "'>Modifcar Constancia</a></td>";
+                        html += "<td><a href='../Libro/Nuevo?num_constancia=" + value.nroConstancia + "'>Registrar Libro</a></td>";
                         html += "<tr>";
                     });
-
-                    //<a href='../ControlMerma/Registrar?num_constancia=" + value.nroConstancia + "'>Control Merma</a>
 
                     $("#tbConstanciaContent").html(html);
 

@@ -44,6 +44,12 @@ namespace WebBS.App_Start
 
             bundles.Add(new ScriptBundle("~/bundles/ModificarSolicitud").Include(
                         "~/Scripts/ALP/ModificarSolicitud.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ListaConstanciaLibroReceta").Include(
+                        "~/Scripts/ALP/ListaConstanciaLibroReceta.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/NuevoLibroReceta").Include(
+                        "~/Scripts/ALP/NuevoLibroReceta.js"));
         }
     }
 }

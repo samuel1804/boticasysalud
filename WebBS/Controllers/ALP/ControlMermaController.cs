@@ -113,14 +113,14 @@ namespace WebBS.Controllers.ALP
 
                 }
 
-                var constancia = db.ALP_CONSTANCIA_PREPARADO.Where(o => o.num_constancia_preparado.Contains(nroConstancia)).FirstOrDefault();
+                /*var constancia = db.ALP_CONSTANCIA_PREPARADO.Where(o => o.num_constancia_preparado.Contains(nroConstancia)).FirstOrDefault();
                 constancia.estado = "02";
 
                 db.ALP_CONSTANCIA_PREPARADO.Attach(constancia);
 
                 var manager = ((IObjectContextAdapter)db).ObjectContext.ObjectStateManager;
 
-                manager.ChangeObjectState(constancia, EntityState.Modified);
+                manager.ChangeObjectState(constancia, EntityState.Modified);*/
                 db.SaveChanges();
 
             }

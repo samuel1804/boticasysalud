@@ -15,13 +15,13 @@ $(document).ready(function () {
 
     function GuardarMerma() {
 
-        var cantMerma = $("#txtCantMerma").val();
+        /*var cantMerma = $("#txtCantMerma").val();
 
         if (cantMerma == 0)
         {
             bootbox.alert("No Existen mermas para registrar");
             return;
-        }
+        }*/
 
         var arrInsumos = new Array();
 

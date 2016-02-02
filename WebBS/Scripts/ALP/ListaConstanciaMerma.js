@@ -26,7 +26,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/Constancia/BuscarConstancia",
+            url: "/Constancia/BuscarConstanciaSinMerma",
             data: data,
             contentType: "application/json; charset=utf-8",
             DataType: "json",
