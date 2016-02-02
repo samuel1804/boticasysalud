@@ -42,13 +42,6 @@ namespace WebBS.Models
         public string Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
         public Nullable<int> Cod_puesto { get; set; }
-
-        public string GetEmpleado()
-        {
-            string temp = Nom_empleado + " " + Ap_paterno + " " + Ap_materno;
-
-            return String.IsNullOrEmpty(temp) ? "" : temp;
-        }
     
         public virtual ICollection<ALP_LIBRO_RECETA> ALP_LIBRO_RECETA { get; set; }
         public virtual ICollection<ALP_ORDEN_PREPARADO> ALP_ORDEN_PREPARADO { get; set; }
@@ -61,5 +54,13 @@ namespace WebBS.Models
         public virtual ICollection<RRH_PruebaEvaluacionTecnica> RRH_PruebaEvaluacionTecnica { get; set; }
         public virtual ICollection<ALP_CONSTANCIA_PREPARADO> ALP_CONSTANCIA_PREPARADO { get; set; }
         public virtual ICollection<ALP_HOJA_MERMA> ALP_HOJA_MERMA { get; set; }
+
+        internal dynamic GetEmpleado()
+        {
+            string temp = Nom_empleado + " " + Ap_paterno + " " + Ap_materno;
+
+            return String.IsNullOrEmpty(temp) ? "" : temp;
+
+        }
     }
 }

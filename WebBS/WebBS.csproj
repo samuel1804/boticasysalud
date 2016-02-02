@@ -179,6 +179,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ALP\IndexConstancia.js" />
     <Content Include="Scripts\ALP\ListaConstancia.js" />
+    <Content Include="Scripts\ALP\ListaConstanciaLibroReceta.js" />
     <Content Include="Scripts\ALP\ListaConstanciaMerma.js" />
     <Content Include="Scripts\ALP\ListaConstanciaSolicitud.js" />
     <Content Include="Scripts\ALP\ListaSolicitud.js" />
@@ -187,6 +188,7 @@
     <Content Include="Scripts\ALP\NuevaConstancia.js" />
     <Content Include="Scripts\ALP\NuevaSolicitud.js" />
     <Content Include="Scripts\ALP\NuevoControlMerma.js" />
+    <Content Include="Scripts\ALP\NuevoLibroReceta.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -215,6 +217,7 @@
     <Compile Include="Controllers\ActividadPlanificadaController.cs" />
     <Compile Include="Controllers\ALP\ConstanciaController.cs" />
     <Compile Include="Controllers\ALP\ControlMermaController.cs" />
+    <Compile Include="Controllers\ALP\LibroController.cs" />
     <Compile Include="Controllers\ALP\OrdenPreparadoController.cs" />
     <Compile Include="Controllers\ALP\SolicitudController.cs" />
     <Compile Include="Controllers\ChoferController.cs" />
@@ -573,6 +576,8 @@
     <Content Include="Views\ALP\Solicitud\Nuevo.cshtml" />
     <Content Include="Views\ALP\Solicitud\ListaConstancia.cshtml" />
     <Content Include="Views\ALP\Solicitud\Modificar.cshtml" />
+    <Content Include="Views\ALP\Libro\Lista.cshtml" />
+    <Content Include="Views\ALP\Libro\Nuevo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

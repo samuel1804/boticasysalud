@@ -75,7 +75,7 @@
           <Key>
             <PropertyRef Name="cod_libro_receta" />
           </Key>
-          <Property Name="cod_libro_receta" Type="int" Nullable="false" />
+          <Property Name="cod_libro_receta" Type="char" MaxLength="20" Nullable="false" />
           <Property Name="num_constancia_preparado" Type="char" MaxLength="20" Nullable="false" />
           <Property Name="cod_quimico_laboratorista" Type="int" Nullable="false" />
           <Property Name="fec_preparado" Type="date" Nullable="false" />
@@ -3359,7 +3359,7 @@
           <Key>
             <PropertyRef Name="cod_libro_receta" />
           </Key>
-          <Property Name="cod_libro_receta" Type="Int32" Nullable="false" />
+          <Property Name="cod_libro_receta" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="true" />
           <Property Name="num_constancia_preparado" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="cod_quimico_laboratorista" Type="Int32" Nullable="false" />
           <Property Name="fec_preparado" Type="DateTime" Nullable="false" Precision="0" />
