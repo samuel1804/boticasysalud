@@ -228,6 +228,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ActividadPlanificadaController.cs" />
     <Compile Include="Controllers\BitacoraActividadPlanificadaController.cs" />
+    <Compile Include="Controllers\BitacoraEventoDesaduanajeController.cs" />
     <Compile Include="Controllers\ChoferController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="Controllers\OfertaLaboralController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\SolicitudAdquisicionController.cs" />
+    <Compile Include="Controllers\SolicitudDesaduanajeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -581,6 +583,16 @@
     <Content Include="Views\SolicitudAdquisicion\Details.cshtml" />
     <Content Include="Views\SolicitudAdquisicion\Edit.cshtml" />
     <Content Include="Views\SolicitudAdquisicion\Index.cshtml" />
+    <Content Include="Views\SolicitudDesaduanaje\Create.cshtml" />
+    <Content Include="Views\SolicitudDesaduanaje\Delete.cshtml" />
+    <Content Include="Views\SolicitudDesaduanaje\Details.cshtml" />
+    <Content Include="Views\SolicitudDesaduanaje\Edit.cshtml" />
+    <Content Include="Views\SolicitudDesaduanaje\Index.cshtml" />
+    <Content Include="Views\BitacoraEventoDesaduanaje\Create.cshtml" />
+    <Content Include="Views\BitacoraEventoDesaduanaje\Delete.cshtml" />
+    <Content Include="Views\BitacoraEventoDesaduanaje\Details.cshtml" />
+    <Content Include="Views\BitacoraEventoDesaduanaje\Edit.cshtml" />
+    <Content Include="Views\BitacoraEventoDesaduanaje\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

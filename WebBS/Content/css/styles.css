@@ -369,3 +369,23 @@ small.text-muted {
 .file-caption {
     z-index: 1 !important;
 }
+
+
+.panel-heading a:after{
+    font-family:'Glyphicons Halflings';
+    content:"\e114";
+    float: right;
+    color: #ffffff;
+}
+.panel-heading a.collapsed:after {
+    content:"\e080";
+}
+
+ h4.hasCollapse a:after {
+    font-family:'Glyphicons Halflings';
+    content:"\e106";
+    float: right;
+}
+ h4.hasCollapse a.collapsed:after{
+    content:"\e105";
+} 

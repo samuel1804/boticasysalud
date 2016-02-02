@@ -1,0 +1,98 @@
+﻿@model WebBS.Models.IMP_BITACORA_EVENTO
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>IMP_BITACORA_EVENTO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_evento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_evento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cod_usu_regi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cod_usu_regi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_usu_regi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_usu_regi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cod_usu_modi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cod_usu_modi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_usu_modi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_usu_modi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IMP_DESADUANAJE.Cod_desaduanaje)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IMP_DESADUANAJE.Cod_desaduanaje)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IMP_EVENTO.Cod_evento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IMP_EVENTO.Cod_evento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IMP_PAGO_IMPORTACION.Cod_pago_importacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IMP_PAGO_IMPORTACION.Cod_pago_importacion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Cod_bitacora_evento }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

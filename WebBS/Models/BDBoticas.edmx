@@ -731,8 +731,9 @@
             <PropertyRef Name="Cod_evento" />
           </Key>
           <Property Name="Cod_evento" Type="int" Nullable="false" />
-          <Property Name="Evento" Type="varbinary" MaxLength="50" />
-          <Property Name="Cod_tipo_evento" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RutaAdjunto" Type="varbinary(max)" />
+          <Property Name="Cod_tipo_evento" Type="int" Nullable="false" />
           <Property Name="Cod_usu_regi" Type="int" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="datetime" Nullable="false" />
           <Property Name="Cod_usu_modi" Type="int" />
@@ -2027,7 +2028,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IMP_EVENTO_IMP_TIPO_EVENTO">
-          <End Role="IMP_TIPO_EVENTO" Type="Self.IMP_TIPO_EVENTO" Multiplicity="0..1" />
+          <End Role="IMP_TIPO_EVENTO" Type="Self.IMP_TIPO_EVENTO" Multiplicity="1" />
           <End Role="IMP_EVENTO" Type="Self.IMP_EVENTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IMP_TIPO_EVENTO">
@@ -4531,8 +4532,9 @@
             <PropertyRef Name="Cod_evento" />
           </Key>
           <Property Name="Cod_evento" Type="Int32" Nullable="false" />
-          <Property Name="Evento" Type="Binary" MaxLength="50" FixedLength="false" />
-          <Property Name="Cod_tipo_evento" Type="Int32" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RutaAdjunto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Cod_tipo_evento" Type="Int32" Nullable="false" />
           <Property Name="Cod_usu_regi" Type="Int32" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Cod_usu_modi" Type="Int32" />
@@ -6045,7 +6047,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IMP_EVENTO_IMP_TIPO_EVENTO">
-          <End Type="BDBoticasModel.IMP_TIPO_EVENTO" Role="IMP_TIPO_EVENTO" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.IMP_TIPO_EVENTO" Role="IMP_TIPO_EVENTO" Multiplicity="1" />
           <End Type="BDBoticasModel.IMP_EVENTO" Role="IMP_EVENTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IMP_TIPO_EVENTO">
@@ -7316,7 +7318,8 @@
                 <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
                 <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
                 <ScalarProperty Name="Cod_tipo_evento" ColumnName="Cod_tipo_evento" />
-                <ScalarProperty Name="Evento" ColumnName="Evento" />
+                <ScalarProperty Name="RutaAdjunto" ColumnName="RutaAdjunto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Cod_evento" ColumnName="Cod_evento" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -1,0 +1,74 @@
+﻿@model WebBS.Models.IMP_DESADUANAJE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>IMP_DESADUANAJE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_inicio_desaduanaje)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_inicio_desaduanaje)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_retiro_mercaderia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_retiro_mercaderia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cod_usu_regi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cod_usu_regi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_usu_regi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_usu_regi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cod_usu_modi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cod_usu_modi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_usu_modi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_usu_modi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IMP_SOLICITUD_IMPORTACION.Cod_solicitudimportacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IMP_SOLICITUD_IMPORTACION.Cod_solicitudimportacion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Cod_desaduanaje }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

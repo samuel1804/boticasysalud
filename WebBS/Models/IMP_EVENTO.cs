@@ -20,8 +20,9 @@ namespace WebBS.Models
         }
     
         public int Cod_evento { get; set; }
-        public byte[] Evento { get; set; }
-        public Nullable<int> Cod_tipo_evento { get; set; }
+        public string Nombre { get; set; }
+        public byte[] RutaAdjunto { get; set; }
+        public int Cod_tipo_evento { get; set; }
         public int Cod_usu_regi { get; set; }
         public System.DateTime Fec_usu_regi { get; set; }
         public Nullable<int> Cod_usu_modi { get; set; }
