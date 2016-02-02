@@ -50,5 +50,15 @@ namespace WebBS.Models
         public string Estado_cliente { get; set; }
         [Display(Name = "Situación de cliente")]
         public string Estado_cliente_str { get; set; }
+        [Display(Name = "Capacidad Creditícia")]
+        public string Capacidad_crediticia_str { get; set; }
+        [Display(Name = "Nivel Riesgo")]
+        public string Nivel_riesgo_str { get; set; }
+        [Display(Name = "Rango de Línea de Crédito")]
+        public string Rango_credito { get; set; }
+        public string Estado_informe { get; set; }
+        [Display(Name = "Cantidad de Línea de Crédito")]
+        public int Cantidad_credito { get; set; }
+        public int Codigo_politica { get; set; }
     }
 }

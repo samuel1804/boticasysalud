@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using WebBS.Models;
 using PagedList;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 
 namespace WebBS.Controllers
 {
@@ -47,59 +49,8 @@ namespace WebBS.Controllers
 
                 var data = query.ToList();
 
-                foreach (var item in data)
-                {
-
-                    ICollection<GCC_EMPLEADO_INF_CREDITICIO> estados = item.GCC_EMPLEADO_INF_CREDITICIO;
-                    string estado_actual = estados.Last().Estado;
-
-                    if (estado_actual == "A")
-                    {
-                        estado_actual = "Aprobado";
-                    }
-                    else if (estado_actual == "R")
-                    {
-                        estado_actual = "Registrado";
-                    }
-                    else if (estado_actual == "M")
-                    {
-                        estado_actual = "Modificado";
-                    }
-                    else if (estado_actual == "O")
-                    {
-                        estado_actual = "Anulado";
-                    }
-                    else if (estado_actual == "Z")
-                    {
-                        estado_actual = "Rechazado";
-                    }
-
-                    item.Estado_actual = estado_actual;
-
-                }
-
                 if (!string.IsNullOrEmpty(estado))
                 {
-                    if (estado == "Aprobado")
-                    {
-                        estado = "A";
-                    }
-                    else if (estado == "Registrado")
-                    {
-                        estado = "R";
-                    }
-                    else if (estado == "Modificado")
-                    {
-                        estado = "M";
-                    }
-                    else if (estado == "Anulado")
-                    {
-                        estado = "O";
-                    }
-                    else if (estado == "Rechazado")
-                    {
-                        estado = "Z";
-                    }
 
                     List<GCC_INFORME_CREDITICIO> listFiltered = new List<GCC_INFORME_CREDITICIO>();
 
@@ -119,45 +70,11 @@ namespace WebBS.Controllers
                     data = listFiltered;
                 }
 
-
-
                 return View(data.ToPagedList(pageNumber, pageSize));
             }
             else
             {
                 var solicitudesEncontradas = db.GCC_INFORME_CREDITICIO.ToList();
-
-                foreach (var item in solicitudesEncontradas)
-                {
-
-                    ICollection<GCC_EMPLEADO_INF_CREDITICIO> estados = item.GCC_EMPLEADO_INF_CREDITICIO;
-                    string estado_actual = estados.Last().Estado;
-
-                    if (estado_actual == "A")
-                    {
-                        estado_actual = "Aprobado";
-                    }
-                    else if (estado_actual == "R")
-                    {
-                        estado_actual = "Registrado";
-                    }
-                    else if (estado_actual == "M")
-                    {
-                        estado_actual = "Modificado";
-                    }
-                    else if (estado_actual == "O")
-                    {
-                        estado_actual = "Anulado";
-                    }
-                    else if (estado_actual == "Z")
-                    {
-                        estado_actual = "Rechazado";
-                    }
-
-                    item.Estado_actual = estado_actual;
-
-                }
-
                 return View(solicitudesEncontradas.ToPagedList(pageNumber, pageSize));
             }
 
@@ -194,41 +111,6 @@ namespace WebBS.Controllers
             }
 
             var data = query.ToList();
-
-            foreach (var item in data)
-            {
-
-                ICollection<GCC_EMPLEADO_INF_CREDITICIO> estados = item.GCC_EMPLEADO_INF_CREDITICIO;
-                string estado_actual = estados.Last().Estado;
-
-                if (estado_actual == "A")
-                {
-                    estado_actual = "Aprobado";
-                }
-                else if (estado_actual == "R")
-                {
-                    estado_actual = "Registrado";
-                }
-                else if (estado_actual == "M")
-                {
-                    estado_actual = "Modificado";
-                }
-                else if (estado_actual == "O")
-                {
-                    estado_actual = "Anulado";
-                }
-                else if (estado_actual == "Z")
-                {
-                    estado_actual = "Rechazado";
-                }
-                else if (estado_actual == "G")
-                {
-                    estado_actual = "Generado";
-                }
-
-                item.Estado_actual = estado_actual;
-
-            }
 
             List<GCC_INFORME_CREDITICIO> listFiltered = new List<GCC_INFORME_CREDITICIO>();
 
@@ -288,24 +170,103 @@ namespace WebBS.Controllers
                     solicitudEncontrada.Cod_solicitud_credito = -1;
                     informeCrediticio.GCC_SOLICITUD_CREDITO = solicitudEncontrada;
                 }
-
                 return RedirectToAction("Create", solicitudEncontrada);
             } else {
             return View();
             }
-        } 
+        }
 
+        public ActionResult EvaluarCliente(GCC_INFORME_CREDITICIO informe)
+        {
+
+            GCC_CLIENTE_JURIDICO cliente = db.GCC_CLIENTE_JURIDICO.Where(b => b.Razon_social == informe.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.Razon_social).Single();
+
+            if (cliente.Categoria == "P")
+            {
+                informe.Capacidad_crediticia = "Alto";
+            } else if (cliente.Categoria == "C")
+            {
+                List < GCC_COMPROBANTE> comprobantes = cliente.GCC_CLIENTE.GCC_COMPROBANTE.ToList();
+
+                if(comprobantes.Count == 0){
+                    informe.Capacidad_crediticia = "Alto";
+                } else if (comprobantes.Count>=1 && comprobantes.Count<=9){
+                    informe.Capacidad_crediticia = "Bajo";
+                    informe.Capacidad_crediticia = obtenerCapacidadCrediticia(comprobantes, "Medio", "Bajo", 40);
+                }
+                else if (comprobantes.Count >= 10 && comprobantes.Count <= 50)
+                {
+                    informe.Capacidad_crediticia = obtenerCapacidadCrediticia(comprobantes, "Medio", "Bajo", 80);
+                }
+                else if (comprobantes.Count >= 51)
+                {
+                    informe.Capacidad_crediticia = obtenerCapacidadCrediticia(comprobantes, "Alto", "Medio", 80);
+                }
+            }
+            informe.GCC_SOLICITUD_CREDITO.Capacidad_crediticia_str = informe.Capacidad_crediticia;
+            return RedirectToAction("Create", informe.GCC_SOLICITUD_CREDITO);
+        }
+        public ActionResult DeterminarLineaCredito(GCC_INFORME_CREDITICIO informe)
+        {
+            string capacidadCrediticia = informe.GCC_SOLICITUD_CREDITO.Capacidad_crediticia_str.Substring(0,1);
+            string nivelRiesto = informe.GCC_SOLICITUD_CREDITO.Nivel_riesgo_str;
+            bool clienteNuevo = false;
+
+            if(informe.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.Categoria == "P"){
+                clienteNuevo = true;
+            }
+            GCC_POLITICA_CREDITO politica = db.GCC_POLITICA_CREDITO.Where(b => b.Capacidad_crediticia == capacidadCrediticia
+                && b.Nivel_riesgo == nivelRiesto && b.Cliente_nuevo==clienteNuevo).Single();
+            GCC_PLAN_CREDITO plan = politica.GCC_PLAN_CREDITO;
+
+            informe.GCC_SOLICITUD_CREDITO.Rango_credito = "[" + Convert.ToInt32(plan.Rango_inicio) + ", " + Convert.ToInt32(plan.Rango_fin) + "]";
+            informe.GCC_SOLICITUD_CREDITO.Estado_informe = politica.Estado_resultante;
+            informe.GCC_SOLICITUD_CREDITO.Cantidad_credito = Convert.ToInt32((plan.Rango_inicio + plan.Rango_fin) / 2);
+            informe.GCC_SOLICITUD_CREDITO.Codigo_politica = politica.Cod_politica_credito; 
+            return RedirectToAction("Create", informe.GCC_SOLICITUD_CREDITO);
+        }
+        
+        public string obtenerCapacidadCrediticia(List<GCC_COMPROBANTE> comprobantes, string superior, string inferior, int porcentajeAprobacion)
+        {
+            int totalComprobantes = comprobantes.Count;
+            int totalComprobantesATiempo = 0;
+            int totalPorcentajeAprobacion = (totalComprobantes * porcentajeAprobacion) / 100;
+
+            foreach (GCC_COMPROBANTE item in comprobantes)
+            {
+
+                if (item.Fec_pago <= item.Fec_vencimiento)
+                {
+                    totalComprobantesATiempo = totalComprobantesATiempo + 1;
+                }
+
+            }
+
+            if (totalComprobantesATiempo >= totalPorcentajeAprobacion)
+            {
+                return superior;
+            }
+            else
+            {
+                return inferior;
+            }
+        }
         // GET: InformeCrediticio/Create
-        public ActionResult Create(GCC_SOLICITUD_CREDITO solicitud)
+        [HttpGet, ActionName("Create")]
+        public ActionResult CreateGet(GCC_SOLICITUD_CREDITO solicitud)
         {
             GCC_INFORME_CREDITICIO informe = new GCC_INFORME_CREDITICIO();
-            
-            if(solicitud.Cod_solicitud_credito==-1){
-            
-                ModelState.AddModelError("GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad", "El cliente selecionado no presenta solicitud");
-            } else if(solicitud.Cod_solicitud_credito!=0){
-                solicitud.GCC_CLIENTE_JURIDICO = db.GCC_CLIENTE_JURIDICO.Where(b => b.Cod_cliente == solicitud.Cod_cliente).Single();
-                informe.GCC_SOLICITUD_CREDITO = solicitud;
+            if (solicitud != null)
+            {
+                if (solicitud.Cod_solicitud_credito == -1)
+                {
+
+                    ModelState.AddModelError("GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad", "El cliente selecionado no presenta solicitud");
+                }
+                else if (solicitud.Cod_cliente != 0)
+                {
+                    solicitud.GCC_CLIENTE_JURIDICO = db.GCC_CLIENTE_JURIDICO.Where(b => b.Cod_cliente == solicitud.Cod_cliente).Single();
+                }
             }
 
             List<SelectListItem> items = new List<SelectListItem>();
@@ -313,72 +274,96 @@ namespace WebBS.Controllers
             items.Add(new SelectListItem { Text = "Alto", Value = "A", Selected = true });
             items.Add(new SelectListItem { Text = "Media", Value = "M" });
             items.Add(new SelectListItem { Text = "Baja", Value = "B"});
-            //items.Add(new SelectListItem { Text = "Baja", Value = "b", Selected = true });
             ViewBag.RiesgoSelection = items;
+            informe.GCC_SOLICITUD_CREDITO = solicitud;
             return View(informe);
             
         }
 
         // POST: InformeCrediticio/Create
         [HttpPost, ActionName("Create")]
-        public ActionResult Create2(GCC_INFORME_CREDITICIO informeCrediticio)
+        public ActionResult CreatPost(GCC_INFORME_CREDITICIO informeCrediticio)
         {
-            try
-            {
-                
+           
+            informeCrediticio.Monto_linea_credito_eval = informeCrediticio.GCC_SOLICITUD_CREDITO.Cantidad_credito;
+            informeCrediticio.Monto_linea_credito_aprob = informeCrediticio.GCC_SOLICITUD_CREDITO.Cantidad_credito;
+            informeCrediticio.Capacidad_crediticia = informeCrediticio.GCC_SOLICITUD_CREDITO.Capacidad_crediticia_str.Substring(0,1);
+            informeCrediticio.Nivel_riesgo = informeCrediticio.GCC_SOLICITUD_CREDITO.Nivel_riesgo_str;                 
+            informeCrediticio.GCC_POLITICA_CREDITO = db.GCC_POLITICA_CREDITO.Where(b => b.Cod_plan_credito == informeCrediticio.GCC_SOLICITUD_CREDITO.Codigo_politica).Single();
+            informeCrediticio.Cod_politica_credito = informeCrediticio.GCC_POLITICA_CREDITO.Cod_politica_credito;
+            informeCrediticio.GCC_SOLICITUD_CREDITO = db.GCC_SOLICITUD_CREDITO.Where(b => b.Cod_solicitud_credito == informeCrediticio.GCC_SOLICITUD_CREDITO.Cod_solicitud_credito).Single();
+            informeCrediticio.Cod_solicitud_credito = informeCrediticio.GCC_SOLICITUD_CREDITO.Cod_solicitud_credito;
+            informeCrediticio.Cod_usu_regi = 1;
+            informeCrediticio.Fec_usu_regi = DateTime.Now;
+            informeCrediticio.Fecha_informe = DateTime.Now;
+            informeCrediticio.Fec_ultima_evaluacion = DateTime.Now;
 
-                return View();
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            var sevenItems = new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 };
+            informeCrediticio.Reporte_infocorp = sevenItems;
 
-        // GET: InformeCrediticio/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+            GCC_EMPLEADO_INF_CREDITICIO estado = new GCC_EMPLEADO_INF_CREDITICIO();
+            estado.Cod_empleado = informeCrediticio.GCC_SOLICITUD_CREDITO.Cod_cliente;
+            estado.Cod_informe_crediticio = informeCrediticio.Cod_informe_crediticio;
+            estado.Cod_usu_regi = 1;
+            estado.Estado = "R";
+            estado.Fec_usu_regi = DateTime.Now;
+            estado.Fec_registro = DateTime.Now;
+            estado.RRH_Empleado = db.RRH_Empleado.Where(b => b.Cod_empleado == 1).Single();
+            informeCrediticio.GCC_EMPLEADO_INF_CREDITICIO.Add(estado);
 
-        // POST: InformeCrediticio/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+            db.GCC_INFORME_CREDITICIO.Add(informeCrediticio);
+            db.SaveChanges();                
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            GCC_EMPLEADO_SOL_CREDITO esc = new GCC_EMPLEADO_SOL_CREDITO();
+            esc.Cod_empleado = informeCrediticio.GCC_SOLICITUD_CREDITO.Cod_cliente;
+            esc.Cod_solicitud_credito = informeCrediticio.GCC_SOLICITUD_CREDITO.Cod_solicitud_credito;
+            esc.Cod_usu_regi = 1;
+            esc.Estado = "C";
+            esc.Fec_usu_regi = DateTime.Now;
+            esc.Fec_registro = DateTime.Now;
+            esc.RRH_Empleado = db.RRH_Empleado.Where(b => b.Cod_empleado == 1).Single();
+            db.GCC_EMPLEADO_SOL_CREDITO.Add(esc);
+            db.SaveChanges();
 
-        
+            return RedirectToAction("Index");
+
+        }        
 
         // GET: InformeCrediticio/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            GCC_INFORME_CREDITICIO informe = db.GCC_INFORME_CREDITICIO.Where(b => b.Cod_informe_crediticio == id).Single();
+            return View(informe);
         }
 
         // POST: InformeCrediticio/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirm(int id)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                GCC_EMPLEADO_INF_CREDITICIO esc = new GCC_EMPLEADO_INF_CREDITICIO();
+                esc.Cod_empleado = 1;
+                esc.Cod_informe_crediticio = id;
+                esc.Cod_usu_regi = 1;
+                esc.Estado = "O";
+                esc.Fec_usu_regi = DateTime.Now;
+                esc.Fec_registro = DateTime.Now;
+                esc.RRH_Empleado = db.RRH_Empleado.Where(b => b.Cod_empleado == 1).Single();
+                db.GCC_EMPLEADO_INF_CREDITICIO.Add(esc);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
             {
                 return View();
             }
+        }
+
+        public ActionResult Details(int id)
+        {
+            GCC_INFORME_CREDITICIO informe = db.GCC_INFORME_CREDITICIO.Where(b=> b.Cod_informe_crediticio == id).Single();
+            return View(informe);
         }
 
         // GET: InformeCrediticio/Delete/5

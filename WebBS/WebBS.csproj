@@ -578,6 +578,8 @@
     <Content Include="Views\SolicitudDeCredito\_Dialog.cshtml" />
     <Content Include="Views\InformeCrediticio\Create.cshtml" />
     <Content Include="Views\InformeCrediticio\Index2.cshtml" />
+    <Content Include="Views\InformeCrediticio\Details.cshtml" />
+    <Content Include="Views\InformeCrediticio\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

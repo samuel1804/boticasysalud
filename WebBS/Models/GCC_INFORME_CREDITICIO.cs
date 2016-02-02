@@ -11,6 +11,7 @@ namespace WebBS.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class GCC_INFORME_CREDITICIO
     {
@@ -27,7 +28,7 @@ namespace WebBS.Models
         public string Nivel_riesgo { get; set; }
         public string Capacidad_crediticia { get; set; }
         public System.DateTime Fec_ultima_evaluacion { get; set; }
-        public byte[] Reporte_infocorp { get; set; }
+        public Byte[] Reporte_infocorp { get; set; }
         public decimal Monto_linea_credito_eval { get; set; }
         public decimal Monto_linea_credito_aprob { get; set; }
         public int Cod_usu_regi { get; set; }
@@ -39,7 +40,42 @@ namespace WebBS.Models
         public virtual ICollection<GCC_EMPLEADO_INF_CREDITICIO> GCC_EMPLEADO_INF_CREDITICIO { get; set; }
         public virtual GCC_POLITICA_CREDITO GCC_POLITICA_CREDITO { get; set; }
         public virtual GCC_SOLICITUD_CREDITO GCC_SOLICITUD_CREDITO { get; set; }
+        [Display(Name = "Estado")]
+        public string Estado_actual
+        {
+            get
+            {
+                
+                var estados = new List<Models.GCC_EMPLEADO_INF_CREDITICIO>(GCC_EMPLEADO_INF_CREDITICIO);
+                String estado_actual = estados[estados.Count - 1].Estado;
 
-        public string Estado_actual { get; set; }
+                if (estado_actual == "A")
+                {
+                    estado_actual = "Aprobado";
+                }
+                else if (estado_actual == "R")
+                {
+                    estado_actual = "Registrado";
+                }
+                else if (estado_actual == "M")
+                {
+                    estado_actual = "Modificado";
+                }
+                else if (estado_actual == "O")
+                {
+                    estado_actual = "Anulado";
+                }
+                else if (estado_actual == "Z")
+                {
+                    estado_actual = "Rechazado";
+                }
+                else if (estado_actual == "G")
+                {
+                    estado_actual = "Generado";
+                }
+
+                return estado_actual;
+            }
+        }
     }
 }

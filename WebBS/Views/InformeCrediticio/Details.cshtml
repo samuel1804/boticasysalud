@@ -1,0 +1,72 @@
+﻿@model WebBS.Models.GCC_INFORME_CREDITICIO
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GCC_INFORME_CREDITICIO</h4>
+	<hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_informe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_informe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nivel_riesgo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nivel_riesgo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Capacidad_crediticia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Capacidad_crediticia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_ultima_evaluacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_ultima_evaluacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Monto_linea_credito_eval)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Monto_linea_credito_eval)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Monto_linea_credito_aprob)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Monto_linea_credito_aprob)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado_actual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado_actual)
+        </dd>
+
+    </dl>
+</div>
+<p>

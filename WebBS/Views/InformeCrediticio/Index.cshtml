@@ -22,7 +22,7 @@
                     <td>RUC</td>
                     <td><input type="number" name="ruc"></td>
                     <td>Estado</td>
-                    <td><select name="estado"><option></option><option>Registrado</option><option>Modificado</option><option>Aprobado</option><option>Anulado</option><option>Rechazado</option></select></td>
+                    <td><select name="estado"><option></option><option value="R">Registrado</option><option value ="M">Modificado</option><option value="A">Aprobado</option><option value="O">Anulado</option><option value="Z">Rechazado</option></select></td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -91,7 +91,9 @@
                     @Html.DisplayFor(modelItem => item.Estado_actual)
                 </td>
                 <td>
-                    @Html.ActionLink("Generar Contrato", "GenerarContrato", new { id = item.Cod_informe_crediticio })
+                    @Html.ActionLink("Generar Contrato", "GenerarContrato", new { id = item.Cod_informe_crediticio }) |
+                    @Html.ActionLink("Detalle", "Details", new { id = item.Cod_informe_crediticio }) |
+                    @Html.ActionLink("Anular", "Delete", new { id = item.Cod_informe_crediticio })
                 </td>
             </tr>
         }
