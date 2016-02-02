@@ -108,6 +108,7 @@ namespace WebBS.Models
         public virtual DbSet<RRH_PruebaAutoevaluacion> RRH_PruebaAutoevaluacion { get; set; }
         public virtual DbSet<RRH_PruebaEvaluacionTecnica> RRH_PruebaEvaluacionTecnica { get; set; }
         public virtual DbSet<RRH_Puesto> RRH_Puesto { get; set; }
+        public virtual DbSet<RRH_ReferenciaLaboral> RRH_ReferenciaLaboral { get; set; }
         public virtual DbSet<RRH_Sucursal> RRH_Sucursal { get; set; }
         public virtual DbSet<RYA_ACTARECEP_CAB> RYA_ACTARECEP_CAB { get; set; }
         public virtual DbSet<RYA_ACTARECEP_DET> RYA_ACTARECEP_DET { get; set; }

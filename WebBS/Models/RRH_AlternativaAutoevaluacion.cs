@@ -28,8 +28,7 @@ namespace WebBS.Models
         public string Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
         public Nullable<int> Cod_criterio { get; set; }
-        public string Desc_criterio { get; set; }
-
+    
         public virtual ICollection<RRH_Criterio_PruebaAutoevaluacion> RRH_Criterio_PruebaAutoevaluacion { get; set; }
     }
 }

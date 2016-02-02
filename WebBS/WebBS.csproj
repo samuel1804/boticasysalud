@@ -477,6 +477,9 @@
     <Compile Include="Models\RRH_Puesto.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RRH_ReferenciaLaboral.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RRH_Sucursal.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>

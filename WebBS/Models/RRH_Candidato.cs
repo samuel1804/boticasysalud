@@ -11,8 +11,7 @@ namespace WebBS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class RRH_Candidato
     {
         public RRH_Candidato()
@@ -20,36 +19,27 @@ namespace WebBS.Models
             this.RRH_OfertaLaboral_Candidato = new HashSet<RRH_OfertaLaboral_Candidato>();
             this.RRH_ExperienciaLaboral = new HashSet<RRH_ExperienciaLaboral>();
             this.RRH_GradoAcademico = new HashSet<RRH_GradoAcademico>();
+            this.RRH_ReferenciaLaboral = new HashSet<RRH_ReferenciaLaboral>();
         }
 
-        [Required(ErrorMessage = "Seleccione la Oferta")]
         public int Cod_ofertalaboral { get; set; }
-
-
         public int Cod_candidato { get; set; }
-        [Required(ErrorMessage = "Ingrese Nombre")]
         public string Nombre { get; set; }
-        [Required(ErrorMessage = "Ingrese Apellido Paterno")]
         public string ApellidoPaterno { get; set; }
-        [Required(ErrorMessage = "Ingrese Apellido Materno")]
         public string ApellidoMaterno { get; set; }
-        [Required(ErrorMessage = "Ingrese DNI")]
-        [StringLength(8, MinimumLength = 8, ErrorMessage = "DNI debe tener 8 Dígitos")]
         public string DNI { get; set; }
-
         public string Telefono { get; set; }
         public string Direccion { get; set; }
         public string Foto { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> Fec_postulacion { get; set; }
         public string Cod_usu_regi { get; set; }
         public Nullable<System.DateTime> Fec_usu_regi { get; set; }
         public string Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
-
+    
         public virtual ICollection<RRH_OfertaLaboral_Candidato> RRH_OfertaLaboral_Candidato { get; set; }
         public virtual ICollection<RRH_ExperienciaLaboral> RRH_ExperienciaLaboral { get; set; }
         public virtual ICollection<RRH_GradoAcademico> RRH_GradoAcademico { get; set; }
+        public virtual ICollection<RRH_ReferenciaLaboral> RRH_ReferenciaLaboral { get; set; }
     }
 }
