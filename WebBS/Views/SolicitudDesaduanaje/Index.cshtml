@@ -49,6 +49,7 @@
                     </div>
                 </div>
             </div>
+            <input type="hidden" name="ReturnUrl" value="@TempData["ReturnController"] "/>
         }
     </div>
 
@@ -101,7 +102,7 @@
                 @Html.Raw(TablaDefinicion.ObtenerValor(item.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado, TablaDefinicion.EstadoSolicitud))
             </td>
             <td>
-                <a class="control-table text-center" href="@Url.Action("Details", new  { Id=item.Cod_desaduanaje })">
+                <a class="control-table text-center" href="@Url.Action(  TempData["ReturnAction"].ToString() , TempData["ReturnController"].ToString() , new  { Id=item.Cod_desaduanaje })">
 
                     <i class="fa fa-caret-square-o-right"></i>
                 </a>
