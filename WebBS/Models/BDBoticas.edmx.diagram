@@ -209,12 +209,14 @@
         <AssociationConnector Association="BDBoticasModel.FK_RYA_PEDIDO_CAB_RYA_SUCURSALES" />
         <AssociationConnector Association="BDBoticasModel.FK_RYA_PEDIDO_DET_RYA_PEDIDO_CAB" />
         <AssociationConnector Association="BDBoticasModel.FK_RYA_STOCK_RYA_PRODUCTO" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_PruebaAutoevaluacion" Width="1.5" PointX="12.25" PointY="33.625" />
         <EntityTypeShape EntityType="BDBoticasModel.RRH_PruebaEvaluacionTecnica" Width="1.5" PointX="11.25" PointY="38.125" />
-        <AssociationConnector Association="BDBoticasModel.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" />
         <AssociationConnector Association="BDBoticasModel.FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado" />
         <AssociationConnector Association="BDBoticasModel.FK_RRH_PruebaEvaluacionTecnica_RRH_EvaluacionTecnica" />
-        <AssociationConnector Association="BDBoticasModel.FK_RRH_PruebaAutoevaluacion_RRH_RespuestaAutoevaluacion" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_PruebaAutoevaluacion" Width="1.5" PointX="5.25" PointY="28.875" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_PruebaAutoevaluacion_Respuesta" Width="1.5" PointX="12.25" PointY="34.75" />
+        <AssociationConnector Association="BDBoticasModel.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" />
+        <AssociationConnector Association="BDBoticasModel.FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_PruebaAutoevaluacion" />
+        <AssociationConnector Association="BDBoticasModel.FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_RespuestaAutoevaluacion" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

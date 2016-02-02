@@ -475,6 +475,9 @@
     <Compile Include="Models\RRH_PruebaAutoevaluacion.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RRH_PruebaAutoevaluacion_Respuesta.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RRH_PruebaEvaluacionTecnica.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>

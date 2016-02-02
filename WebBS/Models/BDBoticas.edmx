@@ -1154,7 +1154,14 @@
           <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_modi" Type="datetime" />
           <Property Name="Cod_empleado" Type="int" />
-          <Property Name="Cod_resp_autoevaluacion" Type="int" />
+        </EntityType>
+        <EntityType Name="RRH_PruebaAutoevaluacion_Respuesta">
+          <Key>
+            <PropertyRef Name="Cod_PruebaAutoevaluacion_Respuesta" />
+          </Key>
+          <Property Name="Cod_PruebaAutoevaluacion_Respuesta" Type="int" Nullable="false" />
+          <Property Name="Cod_prueba_autoevaluacion" Type="int" Nullable="false" />
+          <Property Name="Cod_resp_autoevaluacion" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RRH_PruebaEvaluacionTecnica">
           <Key>
@@ -2515,14 +2522,26 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RRH_PruebaAutoevaluacion_RRH_RespuestaAutoevaluacion">
-          <End Role="RRH_RespuestaAutoevaluacion" Type="Self.RRH_RespuestaAutoevaluacion" Multiplicity="0..1" />
-          <End Role="RRH_PruebaAutoevaluacion" Type="Self.RRH_PruebaAutoevaluacion" Multiplicity="*" />
+        <Association Name="FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_PruebaAutoevaluacion">
+          <End Role="RRH_PruebaAutoevaluacion" Type="Self.RRH_PruebaAutoevaluacion" Multiplicity="1" />
+          <End Role="RRH_PruebaAutoevaluacion_Respuesta" Type="Self.RRH_PruebaAutoevaluacion_Respuesta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_PruebaAutoevaluacion">
+              <PropertyRef Name="Cod_prueba_autoevaluacion" />
+            </Principal>
+            <Dependent Role="RRH_PruebaAutoevaluacion_Respuesta">
+              <PropertyRef Name="Cod_prueba_autoevaluacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_RespuestaAutoevaluacion">
+          <End Role="RRH_RespuestaAutoevaluacion" Type="Self.RRH_RespuestaAutoevaluacion" Multiplicity="1" />
+          <End Role="RRH_PruebaAutoevaluacion_Respuesta" Type="Self.RRH_PruebaAutoevaluacion_Respuesta" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RRH_RespuestaAutoevaluacion">
               <PropertyRef Name="Cod_resp_autoevaluacion" />
             </Principal>
-            <Dependent Role="RRH_PruebaAutoevaluacion">
+            <Dependent Role="RRH_PruebaAutoevaluacion_Respuesta">
               <PropertyRef Name="Cod_resp_autoevaluacion" />
             </Dependent>
           </ReferentialConstraint>
@@ -2848,6 +2867,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <EntitySet Name="RRH_Perfil" EntityType="Self.RRH_Perfil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_PreguntaEvaluacionTecnica" EntityType="Self.RRH_PreguntaEvaluacionTecnica" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_PruebaAutoevaluacion" EntityType="Self.RRH_PruebaAutoevaluacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RRH_PruebaAutoevaluacion_Respuesta" EntityType="Self.RRH_PruebaAutoevaluacion_Respuesta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_PruebaEvaluacionTecnica" EntityType="Self.RRH_PruebaEvaluacionTecnica" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_Puesto" EntityType="Self.RRH_Puesto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RRH_ReferenciaLaboral" EntityType="Self.RRH_ReferenciaLaboral" Schema="dbo" store:Type="Tables" />
@@ -3230,9 +3250,13 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="RRH_PruebaAutoevaluacion" EntitySet="RRH_PruebaAutoevaluacion" />
           </AssociationSet>
-          <AssociationSet Name="FK_RRH_PruebaAutoevaluacion_RRH_RespuestaAutoevaluacion" Association="Self.FK_RRH_PruebaAutoevaluacion_RRH_RespuestaAutoevaluacion">
-            <End Role="RRH_RespuestaAutoevaluacion" EntitySet="RRH_RespuestaAutoevaluacion" />
+          <AssociationSet Name="FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_PruebaAutoevaluacion" Association="Self.FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_PruebaAutoevaluacion">
             <End Role="RRH_PruebaAutoevaluacion" EntitySet="RRH_PruebaAutoevaluacion" />
+            <End Role="RRH_PruebaAutoevaluacion_Respuesta" EntitySet="RRH_PruebaAutoevaluacion_Respuesta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_RespuestaAutoevaluacion" Association="Self.FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_RespuestaAutoevaluacion">
+            <End Role="RRH_RespuestaAutoevaluacion" EntitySet="RRH_RespuestaAutoevaluacion" />
+            <End Role="RRH_PruebaAutoevaluacion_Respuesta" EntitySet="RRH_PruebaAutoevaluacion_Respuesta" />
           </AssociationSet>
           <AssociationSet Name="FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado" Association="Self.FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado">
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
@@ -3888,12 +3912,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             <End Role="RYA_PRODUCTO" EntitySet="RYA_PRODUCTO" />
             <End Role="RYA_STOCK" EntitySet="RYA_STOCK" />
           </AssociationSet>
-          <EntitySet Name="RRH_PruebaAutoevaluacion" EntityType="BDBoticasModel.RRH_PruebaAutoevaluacion" />
           <EntitySet Name="RRH_PruebaEvaluacionTecnica" EntityType="BDBoticasModel.RRH_PruebaEvaluacionTecnica" />
-          <AssociationSet Name="FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" Association="BDBoticasModel.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado">
-            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
-            <End Role="RRH_PruebaAutoevaluacion" EntitySet="RRH_PruebaAutoevaluacion" />
-          </AssociationSet>
           <AssociationSet Name="FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado" Association="BDBoticasModel.FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado">
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="RRH_PruebaEvaluacionTecnica" EntitySet="RRH_PruebaEvaluacionTecnica" />
@@ -3902,9 +3921,19 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             <End Role="RRH_EvaluacionTecnica" EntitySet="RRH_EvaluacionTecnica" />
             <End Role="RRH_PruebaEvaluacionTecnica" EntitySet="RRH_PruebaEvaluacionTecnica" />
           </AssociationSet>
-          <AssociationSet Name="FK_RRH_PruebaAutoevaluacion_RRH_RespuestaAutoevaluacion" Association="BDBoticasModel.FK_RRH_PruebaAutoevaluacion_RRH_RespuestaAutoevaluacion">
-            <End Role="RRH_RespuestaAutoevaluacion" EntitySet="RRH_RespuestaAutoevaluacion" />
+          <EntitySet Name="RRH_PruebaAutoevaluacion" EntityType="BDBoticasModel.RRH_PruebaAutoevaluacion" />
+          <EntitySet Name="RRH_PruebaAutoevaluacion_Respuesta" EntityType="BDBoticasModel.RRH_PruebaAutoevaluacion_Respuesta" />
+          <AssociationSet Name="FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" Association="BDBoticasModel.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado">
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="RRH_PruebaAutoevaluacion" EntitySet="RRH_PruebaAutoevaluacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_PruebaAutoevaluacion" Association="BDBoticasModel.FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_PruebaAutoevaluacion">
+            <End Role="RRH_PruebaAutoevaluacion" EntitySet="RRH_PruebaAutoevaluacion" />
+            <End Role="RRH_PruebaAutoevaluacion_Respuesta" EntitySet="RRH_PruebaAutoevaluacion_Respuesta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_RespuestaAutoevaluacion" Association="BDBoticasModel.FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_RespuestaAutoevaluacion">
+            <End Role="RRH_RespuestaAutoevaluacion" EntitySet="RRH_RespuestaAutoevaluacion" />
+            <End Role="RRH_PruebaAutoevaluacion_Respuesta" EntitySet="RRH_PruebaAutoevaluacion_Respuesta" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="usp_Chofer_GetAll_Result">
@@ -5095,8 +5124,8 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <NavigationProperty Name="RRH_Puesto" Relationship="BDBoticasModel.FK_RRH_Empleado_RRH_Perfil" FromRole="RRH_Empleado" ToRole="RRH_Puesto" />
           <NavigationProperty Name="RRH_Sucursal" Relationship="BDBoticasModel.FK_RRH_Empleado_RRH_Sucursal" FromRole="RRH_Empleado" ToRole="RRH_Sucursal" />
           <NavigationProperty Name="RRH_Usuario" Relationship="BDBoticasModel.FK_RRH_Usuario_RRH_Empleado" FromRole="RRH_Empleado" ToRole="RRH_Usuario" />
-          <NavigationProperty Name="RRH_PruebaAutoevaluacion" Relationship="BDBoticasModel.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" FromRole="RRH_Empleado" ToRole="RRH_PruebaAutoevaluacion" />
           <NavigationProperty Name="RRH_PruebaEvaluacionTecnica" Relationship="BDBoticasModel.FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado" FromRole="RRH_Empleado" ToRole="RRH_PruebaEvaluacionTecnica" />
+          <NavigationProperty Name="RRH_PruebaAutoevaluacion" Relationship="BDBoticasModel.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" FromRole="RRH_Empleado" ToRole="RRH_PruebaAutoevaluacion" />
         </EntityType>
         <EntityType Name="RRH_EvaluacionTecnica">
           <Key>
@@ -5277,7 +5306,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
           <NavigationProperty Name="RRH_Criterio" Relationship="BDBoticasModel.FK_RRH_RespuestaAutoevaluacion_RRH_Criterio" FromRole="RRH_RespuestaAutoevaluacion" ToRole="RRH_Criterio" />
-          <NavigationProperty Name="RRH_PruebaAutoevaluacion" Relationship="BDBoticasModel.FK_RRH_PruebaAutoevaluacion_RRH_RespuestaAutoevaluacion" FromRole="RRH_RespuestaAutoevaluacion" ToRole="RRH_PruebaAutoevaluacion" />
+          <NavigationProperty Name="RRH_PruebaAutoevaluacion_Respuesta" Relationship="BDBoticasModel.FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_RespuestaAutoevaluacion" FromRole="RRH_RespuestaAutoevaluacion" ToRole="RRH_PruebaAutoevaluacion_Respuesta" />
         </EntityType>
         <EntityType Name="RRH_Sucursal">
           <Key>
@@ -6813,21 +6842,6 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="RRH_PruebaAutoevaluacion">
-          <Key>
-            <PropertyRef Name="Cod_prueba_autoevaluacion" />
-          </Key>
-          <Property Name="Cod_prueba_autoevaluacion" Type="Int32" Nullable="false" />
-          <Property Name="Fec_evaluacion" Type="DateTime" Precision="0" />
-          <Property Name="Cod_usu_regi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
-          <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
-          <Property Name="Cod_empleado" Type="Int32" />
-          <Property Name="Cod_resp_autoevaluacion" Type="Int32" />
-          <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" FromRole="RRH_PruebaAutoevaluacion" ToRole="RRH_Empleado" />
-          <NavigationProperty Name="RRH_RespuestaAutoevaluacion" Relationship="BDBoticasModel.FK_RRH_PruebaAutoevaluacion_RRH_RespuestaAutoevaluacion" FromRole="RRH_PruebaAutoevaluacion" ToRole="RRH_RespuestaAutoevaluacion" />
-        </EntityType>
         <EntityType Name="RRH_PruebaEvaluacionTecnica">
           <Key>
             <PropertyRef Name="Cod_pruebaevaluaciontecnica" />
@@ -6848,18 +6862,6 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado" FromRole="RRH_PruebaEvaluacionTecnica" ToRole="RRH_Empleado" />
           <NavigationProperty Name="RRH_EvaluacionTecnica" Relationship="BDBoticasModel.FK_RRH_PruebaEvaluacionTecnica_RRH_EvaluacionTecnica" FromRole="RRH_PruebaEvaluacionTecnica" ToRole="RRH_EvaluacionTecnica" />
         </EntityType>
-        <Association Name="FK_RRH_PruebaAuotoevaluacion_RRH_Empleado">
-          <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="0..1" />
-          <End Type="BDBoticasModel.RRH_PruebaAutoevaluacion" Role="RRH_PruebaAutoevaluacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RRH_Empleado">
-              <PropertyRef Name="Cod_empleado" />
-            </Principal>
-            <Dependent Role="RRH_PruebaAutoevaluacion">
-              <PropertyRef Name="Cod_empleado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado">
           <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="0..1" />
           <End Type="BDBoticasModel.RRH_PruebaEvaluacionTecnica" Role="RRH_PruebaEvaluacionTecnica" Multiplicity="*" />
@@ -6884,14 +6886,62 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RRH_PruebaAutoevaluacion_RRH_RespuestaAutoevaluacion">
-          <End Type="BDBoticasModel.RRH_RespuestaAutoevaluacion" Role="RRH_RespuestaAutoevaluacion" Multiplicity="0..1" />
+        <EntityType Name="RRH_PruebaAutoevaluacion">
+          <Key>
+            <PropertyRef Name="Cod_prueba_autoevaluacion" />
+          </Key>
+          <Property Name="Cod_prueba_autoevaluacion" Type="Int32" Nullable="false" />
+          <Property Name="Fec_evaluacion" Type="DateTime" Precision="0" />
+          <Property Name="Cod_usu_regi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
+          <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
+          <Property Name="Cod_empleado" Type="Int32" />
+          <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" FromRole="RRH_PruebaAutoevaluacion" ToRole="RRH_Empleado" />
+          <NavigationProperty Name="RRH_PruebaAutoevaluacion_Respuesta" Relationship="BDBoticasModel.FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_PruebaAutoevaluacion" FromRole="RRH_PruebaAutoevaluacion" ToRole="RRH_PruebaAutoevaluacion_Respuesta" />
+        </EntityType>
+        <EntityType Name="RRH_PruebaAutoevaluacion_Respuesta">
+          <Key>
+            <PropertyRef Name="Cod_PruebaAutoevaluacion_Respuesta" />
+          </Key>
+          <Property Name="Cod_PruebaAutoevaluacion_Respuesta" Type="Int32" Nullable="false" />
+          <Property Name="Cod_prueba_autoevaluacion" Type="Int32" Nullable="false" />
+          <Property Name="Cod_resp_autoevaluacion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RRH_PruebaAutoevaluacion" Relationship="BDBoticasModel.FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_PruebaAutoevaluacion" FromRole="RRH_PruebaAutoevaluacion_Respuesta" ToRole="RRH_PruebaAutoevaluacion" />
+          <NavigationProperty Name="RRH_RespuestaAutoevaluacion" Relationship="BDBoticasModel.FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_RespuestaAutoevaluacion" FromRole="RRH_PruebaAutoevaluacion_Respuesta" ToRole="RRH_RespuestaAutoevaluacion" />
+        </EntityType>
+        <Association Name="FK_RRH_PruebaAuotoevaluacion_RRH_Empleado">
+          <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="0..1" />
           <End Type="BDBoticasModel.RRH_PruebaAutoevaluacion" Role="RRH_PruebaAutoevaluacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Empleado">
+              <PropertyRef Name="Cod_empleado" />
+            </Principal>
+            <Dependent Role="RRH_PruebaAutoevaluacion">
+              <PropertyRef Name="Cod_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_PruebaAutoevaluacion">
+          <End Type="BDBoticasModel.RRH_PruebaAutoevaluacion" Role="RRH_PruebaAutoevaluacion" Multiplicity="1" />
+          <End Type="BDBoticasModel.RRH_PruebaAutoevaluacion_Respuesta" Role="RRH_PruebaAutoevaluacion_Respuesta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_PruebaAutoevaluacion">
+              <PropertyRef Name="Cod_prueba_autoevaluacion" />
+            </Principal>
+            <Dependent Role="RRH_PruebaAutoevaluacion_Respuesta">
+              <PropertyRef Name="Cod_prueba_autoevaluacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_RespuestaAutoevaluacion">
+          <End Type="BDBoticasModel.RRH_RespuestaAutoevaluacion" Role="RRH_RespuestaAutoevaluacion" Multiplicity="1" />
+          <End Type="BDBoticasModel.RRH_PruebaAutoevaluacion_Respuesta" Role="RRH_PruebaAutoevaluacion_Respuesta" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RRH_RespuestaAutoevaluacion">
               <PropertyRef Name="Cod_resp_autoevaluacion" />
             </Principal>
-            <Dependent Role="RRH_PruebaAutoevaluacion">
+            <Dependent Role="RRH_PruebaAutoevaluacion_Respuesta">
               <PropertyRef Name="Cod_resp_autoevaluacion" />
             </Dependent>
           </ReferentialConstraint>
@@ -8395,20 +8445,6 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RRH_PruebaAutoevaluacion">
-            <EntityTypeMapping TypeName="BDBoticasModel.RRH_PruebaAutoevaluacion">
-              <MappingFragment StoreEntitySet="RRH_PruebaAutoevaluacion">
-                <ScalarProperty Name="Cod_resp_autoevaluacion" ColumnName="Cod_resp_autoevaluacion" />
-                <ScalarProperty Name="Cod_empleado" ColumnName="Cod_empleado" />
-                <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
-                <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
-                <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
-                <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
-                <ScalarProperty Name="Fec_evaluacion" ColumnName="Fec_evaluacion" />
-                <ScalarProperty Name="Cod_prueba_autoevaluacion" ColumnName="Cod_prueba_autoevaluacion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="RRH_PruebaEvaluacionTecnica">
             <EntityTypeMapping TypeName="BDBoticasModel.RRH_PruebaEvaluacionTecnica">
               <MappingFragment StoreEntitySet="RRH_PruebaEvaluacionTecnica">
@@ -8425,6 +8461,28 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
                 <ScalarProperty Name="Evaluador" ColumnName="Evaluador" />
                 <ScalarProperty Name="Fec_evaluacion" ColumnName="Fec_evaluacion" />
                 <ScalarProperty Name="Cod_pruebaevaluaciontecnica" ColumnName="Cod_pruebaevaluaciontecnica" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RRH_PruebaAutoevaluacion">
+            <EntityTypeMapping TypeName="BDBoticasModel.RRH_PruebaAutoevaluacion">
+              <MappingFragment StoreEntitySet="RRH_PruebaAutoevaluacion">
+                <ScalarProperty Name="Cod_empleado" ColumnName="Cod_empleado" />
+                <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
+                <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
+                <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
+                <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
+                <ScalarProperty Name="Fec_evaluacion" ColumnName="Fec_evaluacion" />
+                <ScalarProperty Name="Cod_prueba_autoevaluacion" ColumnName="Cod_prueba_autoevaluacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RRH_PruebaAutoevaluacion_Respuesta">
+            <EntityTypeMapping TypeName="BDBoticasModel.RRH_PruebaAutoevaluacion_Respuesta">
+              <MappingFragment StoreEntitySet="RRH_PruebaAutoevaluacion_Respuesta">
+                <ScalarProperty Name="Cod_resp_autoevaluacion" ColumnName="Cod_resp_autoevaluacion" />
+                <ScalarProperty Name="Cod_prueba_autoevaluacion" ColumnName="Cod_prueba_autoevaluacion" />
+                <ScalarProperty Name="Cod_PruebaAutoevaluacion_Respuesta" ColumnName="Cod_PruebaAutoevaluacion_Respuesta" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

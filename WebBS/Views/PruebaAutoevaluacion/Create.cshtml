@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Completar Autoevaluación";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var cod_empleado=((RRH_Usuario)Session["Usuario"]).RRH_Empleado.Cod_empleado;
 }
 
 <h2>Completar Autoevaluación</h2>
@@ -209,8 +210,9 @@
                     //$('#Respuesta').val('');
                     //$('#Valor').val('');
                     $("#resultados").prop('disabled', false);
+
                     $('#resultados').click(function(){
-                        location.href='@Url.Action("Details/1", "PruebaAutoevaluacion")'
+                        location.href='@Url.Action("Details/" + cod_empleado , "PruebaAutoevaluacion")'
 
                     });
 

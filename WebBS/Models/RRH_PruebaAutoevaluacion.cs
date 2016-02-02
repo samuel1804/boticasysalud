@@ -14,6 +14,11 @@ namespace WebBS.Models
     
     public partial class RRH_PruebaAutoevaluacion
     {
+        public RRH_PruebaAutoevaluacion()
+        {
+            this.RRH_PruebaAutoevaluacion_Respuesta = new HashSet<RRH_PruebaAutoevaluacion_Respuesta>();
+        }
+    
         public int Cod_prueba_autoevaluacion { get; set; }
         public Nullable<System.DateTime> Fec_evaluacion { get; set; }
         public string Cod_usu_regi { get; set; }
@@ -21,10 +26,10 @@ namespace WebBS.Models
         public string Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
         public Nullable<int> Cod_empleado { get; set; }
-        public Nullable<int> Cod_resp_autoevaluacion { get; set; }
     
         public virtual RRH_Empleado RRH_Empleado { get; set; }
-        public virtual RRH_RespuestaAutoevaluacion RRH_RespuestaAutoevaluacion { get; set; }
+        public virtual ICollection<RRH_PruebaAutoevaluacion_Respuesta> RRH_PruebaAutoevaluacion_Respuesta { get; set; }
+
 
         public int PuntajeTotal { get; set; }
     }
