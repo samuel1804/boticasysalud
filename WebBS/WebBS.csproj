@@ -183,6 +183,17 @@
       <DependentUpon>BDBoticas.edmx</DependentUpon>
       <LastGenOutput>BDBoticas.cs</LastGenOutput>
     </Content>
+    <Content Include="BDBoticasDataSet.xsc">
+      <DependentUpon>BDBoticasDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="BDBoticasDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BDBoticasDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="BDBoticasDataSet.xss">
+      <DependentUpon>BDBoticasDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -208,6 +219,11 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BDBoticasDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDBoticasDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\ActividadPlanificadaController.cs" />
     <Compile Include="Controllers\ChoferController.cs" />
     <Compile Include="Controllers\ClienteJuridicoController.cs" />
@@ -561,6 +577,7 @@
     <Content Include="Views\InformeCrediticio\GenerarContrato.cshtml" />
     <Content Include="Views\SolicitudDeCredito\_Dialog.cshtml" />
     <Content Include="Views\InformeCrediticio\Create.cshtml" />
+    <Content Include="Views\InformeCrediticio\Index2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

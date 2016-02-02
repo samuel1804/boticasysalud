@@ -163,6 +163,93 @@ namespace WebBS.Controllers
 
         }
 
+        // GET: InformeCrediticio para Contrato
+        public ActionResult Index2(int? page, string nroSolCredito, string ruc, DateTime? fechaInformeInicio, DateTime? fechaInformeFin)
+        {
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            var query = from s in db.GCC_INFORME_CREDITICIO
+                        select s;
+
+            if (fechaInformeInicio != null)
+            {
+                query = query.Where(s => s.GCC_SOLICITUD_CREDITO.Fec_solicitud >= fechaInformeInicio);
+            }
+
+            if (fechaInformeFin != null)
+            {
+                query = query.Where(s => s.GCC_SOLICITUD_CREDITO.Fec_solicitud <= fechaInformeFin);
+            }
+
+            if (!string.IsNullOrEmpty(nroSolCredito))
+            {
+                query = query.Where(s => s.GCC_SOLICITUD_CREDITO.Num_solicitud == nroSolCredito);
+            }
+
+            if (!string.IsNullOrEmpty(ruc))
+            {
+                query = query.Where(s => s.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad.Contains(ruc));
+            }
+
+            var data = query.ToList();
+
+            foreach (var item in data)
+            {
+
+                ICollection<GCC_EMPLEADO_INF_CREDITICIO> estados = item.GCC_EMPLEADO_INF_CREDITICIO;
+                string estado_actual = estados.Last().Estado;
+
+                if (estado_actual == "A")
+                {
+                    estado_actual = "Aprobado";
+                }
+                else if (estado_actual == "R")
+                {
+                    estado_actual = "Registrado";
+                }
+                else if (estado_actual == "M")
+                {
+                    estado_actual = "Modificado";
+                }
+                else if (estado_actual == "O")
+                {
+                    estado_actual = "Anulado";
+                }
+                else if (estado_actual == "Z")
+                {
+                    estado_actual = "Rechazado";
+                }
+                else if (estado_actual == "G")
+                {
+                    estado_actual = "Generado";
+                }
+
+                item.Estado_actual = estado_actual;
+
+            }
+
+            List<GCC_INFORME_CREDITICIO> listFiltered = new List<GCC_INFORME_CREDITICIO>();
+
+            foreach (var item in data)
+            {
+
+                String ultimoEstado = item.GCC_EMPLEADO_INF_CREDITICIO.Last().Estado;
+
+                if (ultimoEstado == "A"  || ultimoEstado == "G")
+                {
+                    listFiltered.Add(item);
+                }
+
+            }
+
+            data = listFiltered;
+
+            return View(data.ToPagedList(pageNumber, pageSize));
+
+        }
+
         // GET: InformeCrediticio/Details/5
         public ActionResult Details(int id)
         {
@@ -307,13 +394,8 @@ namespace WebBS.Controllers
             try
             {
 
-                /*gccInf.Cod_usu_modi = 1;
-                gccInf.Fec_usu_modi = DateTime.Now;
-                db.Entry(gccInf).State = EntityState.Modified;
-                db.SaveChanges();*/
-
                 GCC_EMPLEADO_SOL_CREDITO gccEstSol = new GCC_EMPLEADO_SOL_CREDITO();
-                gccEstSol.Cod_solicitud_credito = gccInf.GCC_SOLICITUD_CREDITO.Cod_solicitud_credito;
+                gccEstSol.Cod_solicitud_credito = gccInf.Cod_solicitud_credito;
                 gccEstSol.Cod_empleado = 1;
                 gccEstSol.Fec_registro = DateTime.Now;
                 gccEstSol.Estado = "G";
@@ -333,7 +415,7 @@ namespace WebBS.Controllers
                 db.SaveChanges();
 
                 GCC_CONTRATO_CREDITO gccCont = new GCC_CONTRATO_CREDITO();
-                gccCont.Cod_solicitud_credito = gccInf.GCC_SOLICITUD_CREDITO.Cod_solicitud_credito;
+                gccCont.Cod_solicitud_credito = gccInf.Cod_solicitud_credito;
                 gccCont.Fec_inicio = DateTime.Now;
                 gccCont.Fec_renovacion = DateTime.Today.Date.AddYears(1);
                 gccCont.Cod_usu_regi = 1;
@@ -352,7 +434,7 @@ namespace WebBS.Controllers
                 db.GCC_CUENTA_CLIENTE.Add(gccCta);
                 db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index2");
             }
             catch (System.ArgumentOutOfRangeException ex)
             {
