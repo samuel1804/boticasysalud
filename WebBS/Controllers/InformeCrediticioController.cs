@@ -132,12 +132,6 @@ namespace WebBS.Controllers
 
         }
 
-        // GET: InformeCrediticio/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         public ActionResult BuscarCliente(GCC_INFORME_CREDITICIO informeCrediticio)
         {
             if (informeCrediticio.GCC_SOLICITUD_CREDITO != null)
