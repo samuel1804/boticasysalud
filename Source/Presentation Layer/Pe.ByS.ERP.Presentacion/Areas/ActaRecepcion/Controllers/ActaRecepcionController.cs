@@ -7,17 +7,14 @@ using Pe.ByS.ERP.Application.Converter;
 using Pe.ByS.ERP.Application.DTO;
 using Pe.ByS.ERP.CrossCutting.Common;
 using Pe.ByS.ERP.CrossCutting.Common.JQGrid;
-using Pe.ByS.ERP.Presentacion.Controllers;
+using Pe.ByS.ERP.Presentacion.Core;
 using Pe.ByS.ERP.Services.BusinessLogic.Core;
 using Pe.ByS.ERP.Services.BusinessLogic.Inter;
-using Stimulsoft.Base.Json;
-using Stimulsoft.Report;
-using Stimulsoft.Report.Mvc;
 using Acta = Pe.ByS.ERP.Domain.ActaRecepcion;
 
 namespace Pe.ByS.ERP.Presentacion.Areas.ActaRecepcion.Controllers
 {
-    public class ActaRecepcionController : BaseControlReportController
+    public class ActaRecepcionController : BaseController
     {
         #region Variables Privadas
 
@@ -81,6 +78,11 @@ namespace Pe.ByS.ERP.Presentacion.Areas.ActaRecepcion.Controllers
             return View("ListarGuia");
         }
 
+        public ActionResult Almacenamiento()
+        {
+            return View("ReubicarProducto");
+        }
+
         [HttpPost]
         public virtual JsonResult ObtenerAlmacenes(int id)
         {
@@ -116,19 +118,6 @@ namespace Pe.ByS.ERP.Presentacion.Areas.ActaRecepcion.Controllers
                 jsonResponse.Message = "Ocurrió un error";
             }
             return Json(jsonResponse, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public ActionResult GetReportSnapshot()
-        {
-            //var filters = CommonUtils.ToObject<List<WhereFilter>>(ParametrosReport);
-            //var data = _anteproyectoAppService.FindPagination(LambdaManager.GetWhereFilter<AnteproyectoPaginationDto>(filters));
-
-            var report = new StiReport();
-            report.Load(Server.MapPath("~/Reports/ActaRecepcion.mrt"));
-            report.RegBusinessObject("Proyecto", "Proyecto", null);
-
-            return StiMvcViewer.GetReportSnapshotResult(report);
         }
 
         [HttpGet]

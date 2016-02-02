@@ -1986,6 +1986,7 @@
     <Content Include="BoticasBDDS.xsc">
       <DependentUpon>BoticasBDDS.xsd</DependentUpon>
     </Content>
+    <Content Include="Areas\ActaRecepcion\Views\ActaRecepcion\ReubicarProducto.cshtml" />
     <None Include="BoticasBDDS.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
