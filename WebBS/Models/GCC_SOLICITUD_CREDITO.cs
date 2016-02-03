@@ -46,9 +46,47 @@ namespace WebBS.Models
         public virtual ICollection<GCC_EMPLEADO_SOL_CREDITO> GCC_EMPLEADO_SOL_CREDITO { get; set; }
         public virtual ICollection<GCC_INFORME_CREDITICIO> GCC_INFORME_CREDITICIO { get; set; }
         [Display(Name = "Estado")]
-        public string Estado_actual { get; set; }
+        public string Estado_actual {
+            get
+            {
+
+                var estados = new List<Models.GCC_EMPLEADO_SOL_CREDITO>(GCC_EMPLEADO_SOL_CREDITO);
+                String estado_actual = estados[estados.Count - 1].Estado;
+
+                if (estado_actual == "A")
+                {
+                    estado_actual = "Aprobado";
+                }
+                else if (estado_actual == "R")
+                {
+                    estado_actual = "Registrado";
+                }
+                else if (estado_actual == "M")
+                {
+                    estado_actual = "Modificado";
+                }
+                else if (estado_actual == "O")
+                {
+                    estado_actual = "Anulado";
+                }
+                else if (estado_actual == "Z")
+                {
+                    estado_actual = "Rechazado";
+                }
+                else if (estado_actual == "G")
+                {
+                    estado_actual = "Generado";
+                }
+                else if (estado_actual == "C")
+                {
+                    estado_actual = "Confirmado";
+                }
+
+                return estado_actual;
+            }
+        }
         public string Estado_cliente { get; set; }
-        [Display(Name = "Situación de cliente")]
+        [Display(Name = "Situación de Cliente")]
         public string Estado_cliente_str { get; set; }
         [Display(Name = "Capacidad Creditícia")]
         public string Capacidad_crediticia_str { get; set; }

@@ -4,8 +4,9 @@
     ViewBag.Title = "Anular";
 }
 
+<h2>Confirmar Anulación</h2>
 
-<h3>Esta seguro que desea anular?</h3>
+<h3>Seguro que desea anular la Solicitud de Crédito?</h3>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -16,7 +17,21 @@
         <dd style="display: none;">
             @Html.DisplayFor(model => model.Cod_solicitud_credito)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Num_solicitud)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.Num_solicitud)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fec_solicitud)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fec_solicitud)
+        </dd>
         <dt>
             RUC
         </dt>
@@ -33,21 +48,7 @@
             @Html.DisplayFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Fec_solicitud)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Fec_solicitud)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Num_solicitud)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Num_solicitud)
-        </dd>
+       
 
         <dt>
             @Html.DisplayNameFor(model => model.Observacion)

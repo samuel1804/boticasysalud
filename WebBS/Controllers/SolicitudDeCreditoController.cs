@@ -48,59 +48,10 @@ namespace WebBS.Controllers
                 }
 
                 var data = query.ToList();
-
-                foreach (var item in data)
-                {
-
-                    ICollection<GCC_EMPLEADO_SOL_CREDITO> estados = item.GCC_EMPLEADO_SOL_CREDITO;
-                    string estado_actual = estados.Last().Estado;
-
-                    if(estado_actual == "A"){
-                        estado_actual = "Aprobado";
-                    }
-                    else if (estado_actual == "R")
-                    {
-                        estado_actual = "Registrado";
-                    }
-                    else if (estado_actual == "M")
-                    {
-                        estado_actual = "Modificado";
-                    }
-                    else if (estado_actual == "O")
-                    {
-                        estado_actual = "Anulado";
-                    }
-                    else if (estado_actual == "Z")
-                    {
-                        estado_actual = "Rechazado";
-                    }
-
-                    item.Estado_actual = estado_actual;
-
-                }
                
                 if (!string.IsNullOrEmpty(estado))
                 {
-                    if (estado == "Aprobado")
-                    {
-                        estado = "A";
-                    } else if (estado == "Registrado")
-                    {
-                        estado = "R";
-                    }
-                    else if (estado == "Modificado")
-                    {
-                        estado = "M";
-                    }
-                    else if (estado == "Anulado")
-                    {
-                        estado = "O";
-                    }
-                    else if (estado == "Rechazado")
-                    {
-                        estado = "Z";
-                    }
-
+                    
                     List<GCC_SOLICITUD_CREDITO> listFiltered = new List<GCC_SOLICITUD_CREDITO>();
 
                      foreach (var item in data)
@@ -117,8 +68,6 @@ namespace WebBS.Controllers
                     }
 
                      data = listFiltered;
-                    //query = query.Where(s => s.GCC_EMPLEADO_SOL_CREDITO.Any(e =>                          
-                    //  e.Estado == estado));
                 }
                 
                 
@@ -128,38 +77,6 @@ namespace WebBS.Controllers
             else
             {
                 var solicitudesEncontradas = db.GCC_SOLICITUD_CREDITO.ToList();
-
-                foreach (var item in solicitudesEncontradas)
-                {
-
-                    ICollection<GCC_EMPLEADO_SOL_CREDITO> estados = item.GCC_EMPLEADO_SOL_CREDITO;
-                    string estado_actual = estados.Last().Estado;
-
-                    if (estado_actual == "A")
-                    {
-                        estado_actual = "Aprobado";
-                    }
-                    else if (estado_actual == "R")
-                    {
-                        estado_actual = "Registrado";
-                    }
-                    else if (estado_actual == "M")
-                    {
-                        estado_actual = "Modificado";
-                    }
-                    else if (estado_actual == "O")
-                    {
-                        estado_actual = "Anulado";
-                    }
-                    else if (estado_actual == "Z")
-                    {
-                        estado_actual = "Rechazado";
-                    }
-
-                    item.Estado_actual = estado_actual;                 
-
-                }
-
                 return View(solicitudesEncontradas.ToPagedList(pageNumber, pageSize));
             }
         }
@@ -290,22 +207,6 @@ namespace WebBS.Controllers
                 return HttpNotFound();
             }
 
-            ICollection<GCC_EMPLEADO_SOL_CREDITO> estados = solicitud.GCC_EMPLEADO_SOL_CREDITO;
-            string estado_actual = estados.Last().Estado;
-
-            if (estado_actual == "A")
-            {
-                estado_actual = "Aprobado";
-            }
-            else if (estado_actual == "R")
-            {
-                estado_actual = "Registrado";
-            }
-            else if (estado_actual == "O")
-            {
-                estado_actual = "Anulado";
-            }
-
             // cliente estado
             if (solicitud.Estado_cliente == "N")
             {
@@ -320,7 +221,6 @@ namespace WebBS.Controllers
                 solicitud.Estado_cliente_str = "Cliente Con Historial";
             }
 
-            solicitud.Estado_actual = estado_actual;
             return View(solicitud);
         }
 
@@ -377,23 +277,6 @@ namespace WebBS.Controllers
             {                
                 return HttpNotFound();
             }
-            ICollection<GCC_EMPLEADO_SOL_CREDITO> estados = solicitud.GCC_EMPLEADO_SOL_CREDITO;
-            string estado_actual = estados.Last().Estado;
-
-            if (estado_actual == "A")
-            {
-                estado_actual = "Aprobado";
-            }
-            else if (estado_actual == "R")
-            {
-                estado_actual = "Registrado";
-            }
-            else if (estado_actual == "O")
-            {
-                estado_actual = "Anulado";
-            }
-
-            solicitud.Estado_actual = estado_actual;
             return View(solicitud);
         }
 

@@ -9,7 +9,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Nueva Solicitud de Crédito</h4>
+        <h4>Registrar de Solicitud de Crédito</h4>
         <hr />
         @Html.ValidationSummary(true)
 
@@ -38,7 +38,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="GCC_CLIENTE_JURIDICO_Razon_social">Razón social</label>
+            <label class="control-label col-md-2" for="GCC_CLIENTE_JURIDICO_Razon_social">Razón Social</label>
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social, new { @readonly = "readonly", Style = "background:#D3D3D3;" })*
                 @Html.ValidationMessageFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social, null, new { @class = "text-danger" })

@@ -43,5 +43,23 @@ namespace WebBS.Models
         public virtual GCC_CLIENTE_JURIDICO GCC_CLIENTE_JURIDICO { get; set; }
         public virtual GCC_CLIENTE_NATURAL GCC_CLIENTE_NATURAL { get; set; }
         public virtual ICollection<GCC_COMPROBANTE> GCC_COMPROBANTE { get; set; }
+        public string Estado_str
+        {
+            get
+            {
+
+                if (Estado == "A")
+                {
+                    return "Activo";
+                }
+                else if (Estado == "D")
+                {
+                    return "Inactivo";
+                }
+
+                return "";
+            }
+        }
+
     }
 }

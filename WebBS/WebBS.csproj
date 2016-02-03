@@ -213,6 +213,7 @@
     <Compile Include="Controllers\ActividadPlanificadaController.cs" />
     <Compile Include="Controllers\ChoferController.cs" />
     <Compile Include="Controllers\ClienteJuridicoController.cs" />
+    <Compile Include="Controllers\EmpleadoInfCrediticioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InformeCrediticioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -563,9 +564,14 @@
     <Content Include="Views\InformeCrediticio\GenerarContrato.cshtml" />
     <Content Include="Views\SolicitudDeCredito\_Dialog.cshtml" />
     <Content Include="Views\InformeCrediticio\Create.cshtml" />
-    <Content Include="Views\InformeCrediticio\Index2.cshtml" />
     <Content Include="Views\InformeCrediticio\Details.cshtml" />
     <Content Include="Views\InformeCrediticio\Delete.cshtml" />
+    <Content Include="Views\InformeCrediticio\GenerarContratoIndex.cshtml" />
+    <Content Include="Views\EmpleadoInfCrediticio\Create.cshtml" />
+    <Content Include="Views\EmpleadoInfCrediticio\Delete.cshtml" />
+    <Content Include="Views\EmpleadoInfCrediticio\Details.cshtml" />
+    <Content Include="Views\EmpleadoInfCrediticio\Edit.cshtml" />
+    <Content Include="Views\EmpleadoInfCrediticio\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

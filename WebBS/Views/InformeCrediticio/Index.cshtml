@@ -8,7 +8,7 @@
         ViewBag.Title = "Mantenimiento de Informe Crediticio";
     }
 
-    <h2>Mantenimiento de Informe Crediticio</h2>
+    <h2>Consulta de Informe Crediticio</h2>
 
     @using (Html.BeginForm("Index", "InformeCrediticio", FormMethod.Get))
     {
@@ -29,7 +29,7 @@
                 <tr>
                     <td>Fecha Inicio Informe Crediticio</td>
                     <td><input type="date" name="fechaInformeInicio" /></td>
-                    <td>Fecha Inicio Informe Crediticio</td>
+                    <td>Hasta</td>
                     <td><input type="date" name="fechaInformeFin" /></td>
                     <td></td>
                     <td></td>
@@ -91,16 +91,20 @@
                     @Html.DisplayFor(modelItem => item.Estado_actual)
                 </td>
                 <td>
-                    @Html.ActionLink("Generar Contrato", "GenerarContrato", new { id = item.Cod_informe_crediticio }) |
-                    @Html.ActionLink("Detalle", "Details", new { id = item.Cod_informe_crediticio }) |
-                    @Html.ActionLink("Anular", "Delete", new { id = item.Cod_informe_crediticio })
+                    @Html.ActionLink("Detalle", "Details", new { id = item.Cod_informe_crediticio }) 
+                    
+
+                    @if (item.Estado_actual == "Registrado" || item.Estado_actual == "Modificado")
+                    {
+                       @Html.ActionLink("  Anular", "Delete", new { id = item.Cod_informe_crediticio })
+                    }
                 </td>
             </tr>
         }
 
     </table>
 <br />
-Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
 @Html.PagedListPager(Model, page => Url.Action("Index",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

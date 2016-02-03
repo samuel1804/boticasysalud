@@ -8,7 +8,7 @@
     ViewBag.Title = "Consulta Cliente Jurídico";
 }
 
-<h2>Mantenimineto Cliente Jurídico</h2>
+<h2>Consulta Cliente Jurídico</h2>
 
 @using (Html.BeginForm("Index", "ClienteJuridico", FormMethod.Get))
 {
@@ -86,18 +86,27 @@
             @Html.DisplayFor(modelItem => item.Correo)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Estado)
+            @Html.DisplayFor(modelItem => item.Estado_str)
         </td>
         <td>
-            @Html.ActionLink("Modificar", "Edit", new { id = item.Cod_cliente }) |
-            @Html.ActionLink("Anular", "Delete", new { id = item.Cod_cliente })
+            
+
+            @if (item.Estado_str == "Activo")
+            {
+                @Html.ActionLink("Modificar", "Edit", new { id = item.Cod_cliente }) 
+                
+                @Html.ActionLink(" Anular", "Delete", new { id = item.Cod_cliente })
+            }
+            
+
+            
         </td>
     </tr>
 }
 
 </table>
 <br />
-Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
 @Html.PagedListPager(Model, page => Url.Action("Index",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

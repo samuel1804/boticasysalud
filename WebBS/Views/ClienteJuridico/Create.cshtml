@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Nuevo Cliente Jurídico</h2>
+<h2>Registrar de Cliente Jurídico</h2>
 
 
 @using (Html.BeginForm()) 
@@ -19,7 +19,7 @@
             <label class="control-label col-md-2" for="Num_doc_identidad">RUC</label>
 
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Num_doc_identidad)
+                @Html.EditorFor(model => model.Num_doc_identidad)*
                 @Html.ValidationMessageFor(model => model.Num_doc_identidad, null, new { @class = "text-danger" })
             </div>
         </div>
@@ -27,7 +27,7 @@
         <div class="form-group">
             <label class="control-label col-md-2" for="GCC_CLIENTE_JURIDICO_Razon_social">Razón social</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social)
+                @Html.EditorFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social)*
                 @Html.ValidationMessageFor(model => model.GCC_CLIENTE_JURIDICO.Razon_social, null, new { @class = "text-danger" })
             </div>
         </div>
@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-md-2">Privincia</label>
+            <label class="control-label col-md-2">Provincia</label>
                 <div class="col-md-10">
                     <select id="prov" name="prov">
                         <option value=""></option>
@@ -64,7 +64,7 @@
         <div class="form-group">
             <label class="control-label col-md-2" for="Direccion">Dirección</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Direccion)
+                @Html.EditorFor(model => model.Direccion)*
                 @Html.ValidationMessageFor(model => model.Direccion, null, new { @class = "text-danger" })
             </div>
         </div>
@@ -72,7 +72,7 @@
         <div class="form-group">
             <label class="control-label col-md-2" for="Telefono">Teléfono</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Telefono)
+                @Html.EditorFor(model => model.Telefono)*
                 @Html.ValidationMessageFor(model => model.Telefono, null, new { @class = "text-danger" })
             </div>
         </div>
@@ -80,7 +80,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Correo, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Correo)
+                @Html.EditorFor(model => model.Correo)*
                 @Html.ValidationMessageFor(model => model.Correo, null, new { @class = "text-danger" })
             </div>
         </div>

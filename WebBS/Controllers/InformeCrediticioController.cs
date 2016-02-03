@@ -81,7 +81,7 @@ namespace WebBS.Controllers
         }
 
         // GET: InformeCrediticio para Contrato
-        public ActionResult Index2(int? page, string nroSolCredito, string ruc, DateTime? fechaInformeInicio, DateTime? fechaInformeFin)
+        public ActionResult GenerarContratoIndex(int? page, string nroSolCredito, string ruc, DateTime? fechaInformeInicio, DateTime? fechaInformeFin)
         {
 
             int pageSize = 10;

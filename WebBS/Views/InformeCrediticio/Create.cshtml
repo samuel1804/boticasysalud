@@ -1,17 +1,16 @@
 ﻿@model WebBS.Models.GCC_INFORME_CREDITICIO
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Registrar Informe Créditicio";
 }
 
-<h2>Create</h2>
+<h2>Registrar Informe Créditicio</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>GCC_INFORME_CREDITICIO</h4>
         <hr />
         @Html.ValidationSummary(true)
 
@@ -99,7 +98,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.GCC_SOLICITUD_CREDITO.Nivel_riesgo_str, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.GCC_SOLICITUD_CREDITO.Nivel_riesgo_str, new SelectList(ViewBag.RiesgoSelection, "Value", "Text"), "  -----Select List-----  ")
+                @Html.DropDownListFor(model => model.GCC_SOLICITUD_CREDITO.Nivel_riesgo_str, new SelectList(ViewBag.RiesgoSelection, "Value", "Text"), "  -----Selecionar-----  ")
                 @Html.ValidationMessageFor(model => model.GCC_SOLICITUD_CREDITO.Nivel_riesgo_str)
             </div>
         </div>

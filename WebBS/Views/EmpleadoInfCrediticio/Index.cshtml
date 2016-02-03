@@ -1,0 +1,114 @@
+﻿@model IEnumerable<WebBS.Models.GCC_EMPLEADO_INF_CREDITICIO>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Determinar Plan de Crédito</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm("Index", "EmpleadoInfCrediticio", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+
+<div style="border:1px solid black;">
+    <table style="width:100%">
+        <tr>
+            <td>Nro. Solicitud:</td>
+            <td><input type="number" name="codSolicitudCredito"></td>
+            <td>RUC:</td>
+            <td><input type="number" name="ruc"></td>
+            
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Fecha Sol. Ini:</td>
+            <td><input type="date" name="fechaSolicitudInicio" /></td>
+            <td>Fecha Sol. Fin:</td>
+            <td><input type="date" name="fechaSolicitudFin" /></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><input type="submit" value="Buscar" /></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cod_registro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GCC_INFORME_CREDITICIO.Cod_solicitud_credito)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GCC_INFORME_CREDITICIO.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GCC_INFORME_CREDITICIO.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.Razon_social)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GCC_INFORME_CREDITICIO.GCC_SOLICITUD_CREDITO.Fec_solicitud)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cod_registro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GCC_INFORME_CREDITICIO.Cod_solicitud_credito)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GCC_INFORME_CREDITICIO.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GCC_INFORME_CREDITICIO.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.Razon_social)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GCC_INFORME_CREDITICIO.GCC_SOLICITUD_CREDITO.Fec_solicitud)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+       
+        <td>
+            @Html.ActionLink("Seleccionar", "Edit", new { id=item.Cod_registro }) |           
+           
+        </td>
+    </tr>
+}
+
+</table>
+<script type="text/javascript">
+@if (TempData["message"] != null)
+{
+
+    <Text>
+    alert('@TempData["message"]');
+    </text>
+
+}
+</script>
