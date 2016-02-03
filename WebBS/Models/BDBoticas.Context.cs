@@ -106,6 +106,9 @@ namespace WebBS.Models
         public virtual DbSet<RRH_Option> RRH_Option { get; set; }
         public virtual DbSet<RRH_Perfil> RRH_Perfil { get; set; }
         public virtual DbSet<RRH_PreguntaEvaluacionTecnica> RRH_PreguntaEvaluacionTecnica { get; set; }
+        public virtual DbSet<RRH_PruebaAutoevaluacion> RRH_PruebaAutoevaluacion { get; set; }
+        public virtual DbSet<RRH_PruebaAutoevaluacion_Respuesta> RRH_PruebaAutoevaluacion_Respuesta { get; set; }
+        public virtual DbSet<RRH_PruebaEvaluacionTecnica> RRH_PruebaEvaluacionTecnica { get; set; }
         public virtual DbSet<RRH_Puesto> RRH_Puesto { get; set; }
         public virtual DbSet<RRH_ReferenciaLaboral> RRH_ReferenciaLaboral { get; set; }
         public virtual DbSet<RRH_RespuestaAutoevaluacion> RRH_RespuestaAutoevaluacion { get; set; }
@@ -125,9 +128,6 @@ namespace WebBS.Models
         public virtual DbSet<RYA_TRANSA_ALMA> RYA_TRANSA_ALMA { get; set; }
         public virtual DbSet<RYA_UBICACIONES> RYA_UBICACIONES { get; set; }
         public virtual DbSet<RRH_Puesto_Option> RRH_Puesto_Option { get; set; }
-        public virtual DbSet<RRH_PruebaEvaluacionTecnica> RRH_PruebaEvaluacionTecnica { get; set; }
-        public virtual DbSet<RRH_PruebaAutoevaluacion> RRH_PruebaAutoevaluacion { get; set; }
-        public virtual DbSet<RRH_PruebaAutoevaluacion_Respuesta> RRH_PruebaAutoevaluacion_Respuesta { get; set; }
     
         public virtual int sp_DetalleReceta_Buscar(string wHERE)
         {

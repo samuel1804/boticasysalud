@@ -21,7 +21,6 @@ namespace WebBS.Models
             this.RRH_GradoAcademico = new HashSet<RRH_GradoAcademico>();
             this.RRH_ReferenciaLaboral = new HashSet<RRH_ReferenciaLaboral>();
         }
-
         public int Cod_ofertalaboral { get; set; }
         public int Cod_candidato { get; set; }
         public string Nombre { get; set; }

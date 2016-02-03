@@ -30,7 +30,6 @@ namespace WebBS.Models
         public virtual RRH_Empleado RRH_Empleado { get; set; }
         public virtual ICollection<RRH_PruebaAutoevaluacion_Respuesta> RRH_PruebaAutoevaluacion_Respuesta { get; set; }
 
-
         public int PuntajeTotal { get; set; }
     }
 }

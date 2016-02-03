@@ -35,6 +35,26 @@ namespace WebBS.Controllers
                                                      select b).Sum(t => t.Puntaje);
             
             //rrh_pruebaautoevaluacion.PuntajeTotal =  db.RRH_AlternativaEvaluacionTecnica.Where(t=>t.d)
+            ViewBag.Fortalezas = (from a in db.RRH_PruebaAutoevaluacion_Respuesta
+                                  join b in db.RRH_RespuestaAutoevaluacion on a.Cod_resp_autoevaluacion equals b.Cod_resp_autoevaluacion
+                                  join c in db.RRH_Criterio on b.Cod_criterio equals c.Cod_criterio
+                                  where a.Cod_prueba_autoevaluacion == rrh_pruebaautoevaluacion.Cod_prueba_autoevaluacion && b.Puntaje>=3
+                                  select new AlternativaAutoevaluacionDTO
+                                  {
+                                      Desc_criterio=c.Desc_criterio,
+                                      Respuesta=b.Respuesta
+                                  });
+
+
+            ViewBag.Debilidades = (from a in db.RRH_PruebaAutoevaluacion_Respuesta
+                                  join b in db.RRH_RespuestaAutoevaluacion on a.Cod_resp_autoevaluacion equals b.Cod_resp_autoevaluacion
+                                  join c in db.RRH_Criterio on b.Cod_criterio equals c.Cod_criterio
+                                  where a.Cod_prueba_autoevaluacion == rrh_pruebaautoevaluacion.Cod_prueba_autoevaluacion && b.Puntaje <3
+                                  select new AlternativaAutoevaluacionDTO
+                                  {
+                                      Desc_criterio = c.Desc_criterio,
+                                      Respuesta = b.Respuesta
+                                  });
 
 
             if (rrh_pruebaautoevaluacion == null)
@@ -108,7 +128,7 @@ namespace WebBS.Controllers
                  }
 
 
-
+                ViewBag.Cod_Prueba = pa.Cod_prueba_autoevaluacion;
 
                 status = true;
 

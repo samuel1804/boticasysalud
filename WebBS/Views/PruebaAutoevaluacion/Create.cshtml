@@ -126,8 +126,9 @@
 
 
     <script>
-
+        var Prueba = 0;
         $(document).ready(function () {
+            
             var orderItems = [];
             $('#submit').click(function () {
                 
@@ -205,16 +206,18 @@
                     alert('Autoevaluación Registrada.');
                     //clear form
                     //orderItems = [];
-
+                    Prueba = d.status;
+                    alert(Prueba);
                     //$('#Cod_criterio').val('');
                     //$('#Respuesta').val('');
                     //$('#Valor').val('');
                     $("#resultados").prop('disabled', false);
 
-                    $('#resultados').click(function(){
-                        location.href='@Url.Action("Details/" + cod_empleado , "PruebaAutoevaluacion")'
+                    $('#resultados').click(function(a){
+                        location.href='@Url.Action("Details"  , "PruebaAutoevaluacion")'
 
                     });
+
 
                 }
                 else {

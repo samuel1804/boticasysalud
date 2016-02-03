@@ -22,15 +22,18 @@ namespace WebBS.Models
             this.GCC_EMPLEADO_SOL_CREDITO = new HashSet<GCC_EMPLEADO_SOL_CREDITO>();
             this.IMP_ACTIVIDAD_PLANIFICADA = new HashSet<IMP_ACTIVIDAD_PLANIFICADA>();
             this.RRH_Empleado1 = new HashSet<RRH_Empleado>();
-            this.RRH_Usuario = new HashSet<RRH_Usuario>();
-            this.RRH_PruebaEvaluacionTecnica = new HashSet<RRH_PruebaEvaluacionTecnica>();
             this.RRH_PruebaAutoevaluacion = new HashSet<RRH_PruebaAutoevaluacion>();
+            this.RRH_PruebaEvaluacionTecnica = new HashSet<RRH_PruebaEvaluacionTecnica>();
+            this.RRH_Usuario = new HashSet<RRH_Usuario>();
         }
     
         public int Cod_empleado { get; set; }
         public string Nom_empleado { get; set; }
         public string Ap_paterno { get; set; }
+        
         public string Ap_materno { get; set; }
+
+        public string Nom_Completo { get { return Nom_empleado + " " + Ap_paterno + " " + Ap_materno; } }
         public string Dni { get; set; }
         public string Telefono { get; set; }
         public string Direccion { get; set; }
@@ -54,8 +57,8 @@ namespace WebBS.Models
         public virtual RRH_Empleado RRH_Empleado2 { get; set; }
         public virtual RRH_Puesto RRH_Puesto { get; set; }
         public virtual RRH_Sucursal RRH_Sucursal { get; set; }
-        public virtual ICollection<RRH_Usuario> RRH_Usuario { get; set; }
-        public virtual ICollection<RRH_PruebaEvaluacionTecnica> RRH_PruebaEvaluacionTecnica { get; set; }
         public virtual ICollection<RRH_PruebaAutoevaluacion> RRH_PruebaAutoevaluacion { get; set; }
+        public virtual ICollection<RRH_PruebaEvaluacionTecnica> RRH_PruebaEvaluacionTecnica { get; set; }
+        public virtual ICollection<RRH_Usuario> RRH_Usuario { get; set; }
     }
 }
