@@ -20,15 +20,17 @@ namespace Pe.ByS.ERP.Presentacion.Areas.ActaRecepcion.Controllers
 
         private readonly IActaRecepcionBL _actaBL;
         private readonly ISucursalBL _sucursalBL;
+        private readonly IEmpleadoBL _empleadoBL;
 
         #endregion
 
         #region Constructor
 
-        public ActaRecepcionController(IActaRecepcionBL actaBL, ISucursalBL sucursalBL)
+        public ActaRecepcionController(IActaRecepcionBL actaBL, ISucursalBL sucursalBL, IEmpleadoBL empleadoBL)
         {
             _actaBL = actaBL;
             _sucursalBL = sucursalBL;
+            _empleadoBL = empleadoBL;
         }
 
         #endregion
@@ -70,7 +72,8 @@ namespace Pe.ByS.ERP.Presentacion.Areas.ActaRecepcion.Controllers
         public ActionResult Edit()
         {
             var sucursalList = _sucursalBL.FindAll(p => true).ToList();
-            return View("Edit", ActaRecepcionConverter.DataInicial(sucursalList));
+            var empleadoList = _empleadoBL.FindAll(p => true).ToList();
+            return View("Edit", ActaRecepcionConverter.DataInicial(sucursalList, empleadoList));
         }
 
         public ActionResult ListadoGuia()

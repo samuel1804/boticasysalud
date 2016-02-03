@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IActaRecepcionRepository.cs" />
+    <Compile Include="IEmpleadoRepository.cs" />
     <Compile Include="IGuiaRemisionRepository.cs" />
     <Compile Include="IOrdenPedidoRepository.cs" />
     <Compile Include="IProductoRepository.cs" />

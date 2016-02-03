@@ -54,9 +54,11 @@
   <ItemGroup>
     <Compile Include="ActaRecepcionBL.cs" />
     <Compile Include="Core\ListJQGridParameter.cs" />
+    <Compile Include="EmpleadoBL.cs" />
     <Compile Include="Exceptions\BusinessException.cs" />
     <Compile Include="GuiaRemisionBL.cs" />
     <Compile Include="Inter\IActaRecepcionBL.cs" />
+    <Compile Include="Inter\IEmpleadoBL.cs" />
     <Compile Include="Inter\IGuiaRemisionBL.cs" />
     <Compile Include="Inter\IJQGridPaging.cs" />
     <Compile Include="Inter\IOrdenPedidoBL.cs" />

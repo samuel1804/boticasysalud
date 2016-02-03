@@ -7,6 +7,13 @@
 <div class="grupocontenido2 scrollTotal">
     <div class="form-horizontal">
         <div class="row">
+            <div class="col-md-12">
+                <div class="text-center" style="padding-bottom: 20px;">
+                    <h2>Generar Acta de Recepción</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-5">
                 <div class="form-group form-group-sm">
                     <label class="control-label col-md-4 col-sm-4 col-xs-12">Sucursal:</label>
@@ -19,7 +26,7 @@
                 <div class="form-group form-group-sm">
                     <label class="control-label col-md-4 col-sm-4 col-xs-12">Almacén:</label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
-                        @Html.DropDownListFor(model => model.AlmacenId, new SelectList(new List<KeyValuePair<int, string>>(), "Key", "Value", Model.AlmacenId), new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.AlmacenId, new SelectList(new List<KeyValuePair<int, string>>(), "Key", "Value", Model.AlmacenId), new {@class = "form-control"})
                     </div>
                 </div>
             </div>
@@ -29,7 +36,7 @@
                 <div class="form-group form-group-sm">
                     <label class="control-label col-md-4 col-sm-4 col-xs-12">Verificador:</label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
-                        @Html.DropDownListFor(model => model.VerificadorId, new SelectList(Model.VerificadorList, "Key", "Value", Model.VerificadorId), new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.VerificadorId, new SelectList(Model.VerificadorList, "Key", "Value", Model.VerificadorId), new {@class = "form-control"})
                     </div>
                 </div>
             </div>
@@ -38,7 +45,7 @@
                     <label class="control-label col-md-4 col-sm-4 col-xs-12">Fecha de Recepción:</label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
                         <div class="input-group">
-                            @Html.TextBoxFor(model => model.Fecha, new { @class = "form-control", @disabled = "disabled" })
+                            @Html.TextBoxFor(model => model.Fecha, new {@class = "form-control", @disabled = "disabled"})
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
@@ -56,31 +63,31 @@
                             @Html.TextBoxFor(model => model.NumeroPedido, new {@class = "form-control"})
                             @Html.HiddenFor(p => p.OrdenPedidoId)
                             <span class="input-group-btn">
-                                <button type="button" id="btnPedidos" class="btn btn-info btn-flat">...</button>
-                            </span>
+                                    <button type="button" id="btnPedidos" class="btn btn-info btn-flat">...</button>
+                                </span>
                         </div>
                     </div>
                 </div>
             </div>
             @*<div class="col-md-5">
-                <div class="form-group">
-                    <label class="control-label col-md-4 col-sm-4 col-xs-12">Número de Guia:</label>
-                    <div class="col-sm-8">
-                        <div class="input-group">
-                            @Html.TextBoxFor(model => model.NumeroGuia, new {@class = "form-control"})
-                            @Html.HiddenFor(p => p.GuiaRemisionId)
-                            <span class="input-group-btn">
-                                <button type="button" id="btnGuias" class="btn btn-info btn-flat">...</button>
-                            </span>
+                    <div class="form-group">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12">Número de Guia:</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.NumeroGuia, new {@class = "form-control"})
+                                @Html.HiddenFor(p => p.GuiaRemisionId)
+                                <span class="input-group-btn">
+                                    <button type="button" id="btnGuias" class="btn btn-info btn-flat">...</button>
+                                </span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>*@
+                </div>*@
             <div class="col-md-5">
                 <div class="form-group form-group-sm">
                     <label class="control-label col-md-4 col-sm-4 col-xs-12">Número de Guia de Remisión:</label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
-                        @Html.TextBoxFor(model => model.NumeroGuia, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.NumeroGuia, new {@class = "form-control"})
                     </div>
                 </div>
             </div>
@@ -99,7 +106,7 @@
                     <label class="control-label col-md-4 col-sm-4 col-xs-12">Fecha de Guia de Remisión:</label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
                         <div class="input-group">
-                            @Html.TextBoxFor(model => model.FechaGuia, new { @class = "form-control", @id = "txtFechaGuia" })
+                            @Html.TextBoxFor(model => model.FechaGuia, new {@class = "form-control", @id = "txtFechaGuia"})
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
@@ -115,10 +122,10 @@
                     Generar Acta Recepción
                 </button>
                 @*&nbsp; &nbsp; &nbsp;
-                <button type="button" class="btn btn-info" id="btnExportar">
-                    <i class="fa fa-floppy-o"></i>
-                    Exportar
-                </button>*@
+                    <button type="button" class="btn btn-info" id="btnExportar">
+                        <i class="fa fa-floppy-o"></i>
+                        Exportar
+                    </button>*@
                 &nbsp; &nbsp; &nbsp;
                 <button type="button" class="btn btn-danger" id="btnCancelar">
                     <i class="fa fa-remove"></i>
@@ -309,7 +316,7 @@
             grilla: grdDetalleActa,
             pager: 'barraDetalle',
             identificador: 'hfIdentificadorDetalle',
-            height: 210,
+            height: 185,
             width: 'auto',
             id: 'id',
             colsNames: colNames,

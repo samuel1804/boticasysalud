@@ -46,8 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActaRecepcionConverter.cs" />
+    <Compile Include="EmpleadoConverter.cs" />
     <Compile Include="OrdenPedidoConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SucursalConverter.cs" />
     <Compile Include="UsuarioConverter.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -9,19 +9,12 @@ namespace Pe.ByS.ERP.Application.Converter
 {
     public class ActaRecepcionConverter
     {
-        public static ActaRecepcionDto DataInicial(List<Sucursal> sucursalList)
+        public static ActaRecepcionDto DataInicial(List<Sucursal> sucursalList, List<Empleado> empleadoList)
         {
-            var list = sucursalList.ConvertAll(p => new KeyValuePair<string, string>(p.Id.ToString(), p.Nombre));
-            list.Insert(0, new KeyValuePair<string, string>("", "-- Seleccionar --"));
-
             return new ActaRecepcionDto
             {
-                SucursalList = list,
-                VerificadorList = new List<KeyValuePair<string, string>>
-                {
-                    new KeyValuePair<string, string>("", "-- Seleccionar --"),
-                    new KeyValuePair<string, string>("1", "Verificador 1")
-                },
+                SucursalList = SucursalConverter.ListToKeyValueList(sucursalList),
+                VerificadorList = EmpleadoConverter.ListToKeyValueList(empleadoList),
                 Fecha = DateTime.Now.ConvertToDdmmaaaa(),
                 FechaGuia = DateTime.Now.ConvertToDdmmaaaa()
             };
