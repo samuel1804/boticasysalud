@@ -1,0 +1,60 @@
+﻿
+@using WebBS.Models
+
+
+
+<fieldset>
+    <div class="panel panel-default">
+        <!-- Table -->
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Empresa</th>
+                        <th>Puesto</th>
+                        <th>Area</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+@if ((List<RRH_ExperienciaLaboral>)Session["Experiencia"] != null)
+{
+
+    foreach (var item in (List<RRH_ExperienciaLaboral>)Session["Experiencia"])
+    {
+
+                <tr>
+                    <td>@item.LugarTrabajo</td>
+                    <td>@item.Nom_puesto</td>
+                    <td>@item.Nom_area</td>
+                    <td>@item.Fec_Inicio_elaboral</td>
+                    <td>@item.Fec_Fin_elaboral</td>
+                    <td class="text-right">
+                        <a href="" title="">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </a>
+
+                    </td>
+
+
+                </tr>
+    }
+}
+
+            </table>
+        </div>
+    </div>
+</fieldset>
+
+
+
+
+
+
+
+
+
+
+

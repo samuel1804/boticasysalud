@@ -30,6 +30,39 @@
             }
         });
 
+
+        $("#CreateExperiencia").on("click", function (e) {
+            // e.preventDefault(); use this or return false
+            var url = $(this).attr('href');
+            $("#dialog-edit").dialog({
+                title: 'Experiencia Laboral',
+                autoOpen: false,
+                resizable: false,
+                height: 500,
+                width: 600,
+                show: { effect: 'drop', direction: "up" },
+                modal: true,
+                draggable: true,
+                open: function (event, ui) {
+                    $(this).load(url);
+
+                },
+                close: function (event, ui) {
+                    $(this).dialog('close');
+                }
+            });
+
+            $("#dialog-edit").dialog('open');
+            return false;
+
+
+            function onSucess() {
+                $("#dialog-edit").dialog('close');
+            }
+
+        });
+
+
         
         $("#CreateCustomer").on("click", function (e) {
             // e.preventDefault(); use this or return false
@@ -269,53 +302,20 @@
 
 
                 </div>
+ 
 
-            <a id="CreateCustomer" href="..\Candidato\AdicionarGrado" title="">Agregar Grado</a>
+                <a id="CreateCustomer" href="..\Candidato\AdicionarGrado" title="">Agregar Grado Academico</a>
+        
             <div id="GradoDiv">
                 @Html.Partial("_GridGrado")
             </div>
-            <fieldset>
-                <div class="panel panel-default">
-                    <!-- Table -->
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Empresa</th>
-                                    <th>Fecha Inicio</th>
-                                    <th>Fecha Fin</th>
-                                    <th>Agregar</th>
-
-                                </tr>
-                            </thead>
-
-                         
-                                <tr>
-                                    <td>
-                                     
-                                    </td>
-                                    <td>
-                                   
-                                    </td>
-                                    <td>
-                                     
-                                    </td>
-                                    <td class="text-right">
-                                        <a href="" title="">
-                                            <i class="glyphicon glyphicon-plus"></i>
-                                         </a>
-
-                                    </td>
 
 
-                                </tr>
-                          
-
-                        </table>
-                    </div>
-                </div>
-            </fieldset>
-
+            <a id="CreateExperiencia" href="..\Candidato\AdicionarExperiencia" title="">Agregar Experiencia Laboral</a>
+            
+            <div id="ExperienciaDiv">
+                @Html.Partial("_GridExperiencia")
+            </div>
 
             <!--<div class="form-group">
                  @Html.LabelFor(model => model.Cod_usu_regi, new { @class = "control-label col-md-2" })

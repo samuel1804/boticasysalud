@@ -44,6 +44,7 @@ namespace WebBS.Controllers
         {
             ViewBag.Cod_ofertalaboral = new SelectList(db.RRH_OfertaLaboral, "Cod_ofertalaboral", "Titulo");
             Session["Grados"] = null;
+            Session["Experiencia"] = null;
             //ViewBag.Grados = db.RRH_GradoAcademico.ToList();
             //ViewBag.IdPuesto = new SelectList(db.Puesto, "IdPuesto", "Nombre");
             return View();
@@ -59,6 +60,19 @@ namespace WebBS.Controllers
                 RRH_GradoAcademico cust = new RRH_GradoAcademico();
                 ViewBag.IsUpdate = false;
                 return View("_Grado", cust);
+            }
+            else
+                return View();
+        }
+
+        public ActionResult AdicionarExperiencia()
+        {
+
+            if (Request.IsAjaxRequest())
+            {
+                RRH_ExperienciaLaboral cust = new RRH_ExperienciaLaboral();
+                ViewBag.IsUpdate = false;
+                return View("_Experiencia", cust);
             }
             else
                 return View();
@@ -82,8 +96,7 @@ namespace WebBS.Controllers
         }
 
 
-       [HttpPost]
-       [ValidateAntiForgeryToken]
+      
         public ActionResult CreateEditCandidato(RRH_GradoAcademico mCust, string Command)
         {
             // Validate the model being submitted
@@ -145,6 +158,75 @@ namespace WebBS.Controllers
           //return  RedirectToAction("Create");
             return PartialView("_GridGrado");
         }
+
+
+
+        public ActionResult CreateEditExperiencia(RRH_ExperienciaLaboral mCust, string Command)
+        {
+            // Validate the model being submitted
+            if (Request.IsAjaxRequest())
+            {
+                if (!ModelState.IsValid)
+                {
+
+                    return PartialView("_Grado", mCust);
+
+                }
+
+                else if (Command == "Save")
+                {
+                    if (Session["Grados"] == null)
+                    {
+                        Session["Grados"] = new List<RRH_GradoAcademico>();
+                    }
+                    List<RRH_ExperienciaLaboral> Grados = (List<RRH_ExperienciaLaboral>)Session["Experiencia"];
+                    RRH_ExperienciaLaboral mobjcust = new RRH_ExperienciaLaboral();
+                    mobjcust.LugarTrabajo = mCust.LugarTrabajo;
+                    mobjcust.Nom_puesto = mCust.Nom_puesto;
+                    mobjcust.Nom_area = mCust.Nom_area;
+                    mobjcust.Desc_Reponsabilidades = mCust.Desc_Reponsabilidades;
+                    mobjcust.Fec_Inicio_elaboral = mCust.Fec_Inicio_elaboral;
+                    mobjcust.Fec_Fin_elaboral = mCust.Fec_Fin_elaboral;
+
+
+                    Grados.Add(mobjcust);
+                    Session["Experiencia"] = Grados;
+
+                    TempData["Msg"] = "Los Datos han sido registrados satisfactoriamente";
+                    // ModelState.Clear();
+
+
+                    /*
+                    bool check = mo bjModel.CreateCustomer(mobjcust);
+                    if (check)
+                    {
+                        TempData["Msg"] = "El Cliente ha sido registrado satisfactoriamente";
+                        ModelState.Clear();
+                        return RedirectToAction("WebGrid", "Home");
+                    }*/
+                }
+
+                else if (Command == "Update")
+                {
+                    /*Customer mobjcust = new Customer();
+                    mobjcust.Id = mCust.Id;
+                    mobjcust.Name = mCust.Name;
+                    mobjcust.Mobile = mCust.Mobile;
+
+                    bool check = mobjModel.UpdateCustomer(mobjcust);
+                    if (check)
+                    {
+                        TempData["Msg"] = "El Cliente ha sido actualizado satisfactoriamente";
+                        ModelState.Clear();
+                        return RedirectToAction("WebGrid", "Home");
+                    }*/
+
+                }
+            }
+            //return  RedirectToAction("Create");
+            return PartialView("_GridExperiencia");
+        }
+
 
         public ActionResult _GridGrado() {
 
