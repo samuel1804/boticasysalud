@@ -13,7 +13,7 @@ namespace WebBS.Controllers
     public class PruebaAutoevaluacionController : Controller
     {
         private BDBoticasEntities db = new BDBoticasEntities();
-
+        
         // GET: /PruebaAutoevaluacion/
         public ActionResult Index()
         {
@@ -67,12 +67,22 @@ namespace WebBS.Controllers
         // GET: /PruebaAutoevaluacion/Create
         public ActionResult Create()
         {
-            ViewBag.Cod_empleado = new SelectList(db.RRH_Empleado, "Cod_empleado", "Nom_empleado");
-            List<RRH_RespuestaAutoevaluacion> resp = db.RRH_RespuestaAutoevaluacion.ToList();
+            if(Session["Criterios"]==null){
+            Session["Criterios"]=db.RRH_Criterio.ToList();
+            }
+            List<RRH_Criterio> Criterios=(List<RRH_Criterio>)Session["Criterios"];
+            RRH_Criterio Criterio=Criterios.Where(t=>t.completado==false).FirstOrDefault();
 
-            ViewBag.Alternativas = resp;
-            ViewBag.Criterios = db.RRH_Criterio.ToList();
-            return View();
+            if (Session["Respuestas"] != null)
+            {
+                Session["Respuestas"] = new List<RRH_PruebaAutoevaluacion_Respuesta>();
+            }
+
+            //ViewBag.Cod_empleado = new SelectList(db.RRH_Empleado, "Cod_empleado", "Nom_empleado");
+            //List<RRH_RespuestaAutoevaluacion> resp = db.RRH_RespuestaAutoevaluacion.Where(t=>t.Cod_criterio==Criterio.Cod_criterio).ToList();
+
+            //ViewBag.Alternativas = resp;
+            return View(Criterio);
         }
 
         // POST: /PruebaAutoevaluacion/Create
@@ -103,32 +113,39 @@ namespace WebBS.Controllers
             if (ModelState.IsValid)
             {
 
-                RRH_Usuario usuario = (RRH_Usuario)Session["Usuario"];
-                RRH_PruebaAutoevaluacion pa=new RRH_PruebaAutoevaluacion();
-                pa.Cod_prueba_autoevaluacion = db.RRH_PruebaAutoevaluacion.OrderByDescending(t => t.Cod_prueba_autoevaluacion).FirstOrDefault() == null ? 1 : db.RRH_PruebaAutoevaluacion.OrderByDescending(t => t.Cod_prueba_autoevaluacion).FirstOrDefault().Cod_prueba_autoevaluacion + 1;
-                pa.Cod_empleado = usuario.Cod_Empleado;
-              db.RRH_PruebaAutoevaluacion.Add(pa);
+                //RRH_Usuario usuario = (RRH_Usuario)Session["Usuario"];
+                //RRH_PruebaAutoevaluacion pa=new RRH_PruebaAutoevaluacion();
+                //pa.Cod_prueba_autoevaluacion = db.RRH_PruebaAutoevaluacion.OrderByDescending(t => t.Cod_prueba_autoevaluacion).FirstOrDefault() == null ? 1 : db.RRH_PruebaAutoevaluacion.OrderByDescending(t => t.Cod_prueba_autoevaluacion).FirstOrDefault().Cod_prueba_autoevaluacion + 1;
+                //pa.Cod_empleado = usuario.Cod_Empleado;
+            
 
-                        db.SaveChanges();
-                foreach (var i in OrderDetails)
-                {
-
+                     
+               
                     var Prueba = new RRH_PruebaAutoevaluacion_Respuesta()
                         {
-                            Cod_PruebaAutoevaluacion_Respuesta=db.RRH_PruebaAutoevaluacion_Respuesta.OrderByDescending(t => t.Cod_PruebaAutoevaluacion_Respuesta).FirstOrDefault() == null ? 1 : db.RRH_PruebaAutoevaluacion_Respuesta.OrderByDescending(t => t.Cod_PruebaAutoevaluacion_Respuesta).FirstOrDefault().Cod_PruebaAutoevaluacion_Respuesta + 1,
-                             Cod_prueba_autoevaluacion = pa.Cod_prueba_autoevaluacion, 
-                            Cod_resp_autoevaluacion = i.Cod_resp_autoevaluacion,
+                            //Cod_PruebaAutoevaluacion_Respuesta=db.RRH_PruebaAutoevaluacion_Respuesta.OrderByDescending(t => t.Cod_PruebaAutoevaluacion_Respuesta).FirstOrDefault() == null ? 1 : db.RRH_PruebaAutoevaluacion_Respuesta.OrderByDescending(t => t.Cod_PruebaAutoevaluacion_Respuesta).FirstOrDefault().Cod_PruebaAutoevaluacion_Respuesta + 1,
+                             //Cod_prueba_autoevaluacion = pa.Cod_prueba_autoevaluacion, 
+                            Cod_resp_autoevaluacion = OrderDetails[0].Cod_resp_autoevaluacion,
 
                         };
 
 
-                    db.RRH_PruebaAutoevaluacion_Respuesta.Add(Prueba);
+                   // pa.RRH_PruebaAutoevaluacion_Respuesta.Add(Prueba);
+                 
 
-                        db.SaveChanges();
-                 }
+                if (Session["Criterios"] != null)
+                {
+                    List<RRH_Criterio> Criterios = (List<RRH_Criterio>)Session["Criterios"];
+                    Criterios.Where(t => t.completado == false).FirstOrDefault().completado=true;
+                    Session["Criterios"] = Criterios;
+                }
+                if (Session["Respuestas"] != null)
+                {
+                    List<RRH_PruebaAutoevaluacion_Respuesta> respuestas = (List<RRH_PruebaAutoevaluacion_Respuesta>)Session["Respuestas"];
+                    respuestas.Add(Prueba);
+                }
 
 
-                ViewBag.Cod_Prueba = pa.Cod_prueba_autoevaluacion;
 
                 status = true;
 

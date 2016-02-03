@@ -30,5 +30,7 @@ namespace WebBS.Models
     
         public virtual ICollection<RRH_PreguntaEvaluacionTecnica> RRH_PreguntaEvaluacionTecnica { get; set; }
         public virtual ICollection<RRH_RespuestaAutoevaluacion> RRH_RespuestaAutoevaluacion { get; set; }
+
+        public bool completado { get; set; }
     }
 }

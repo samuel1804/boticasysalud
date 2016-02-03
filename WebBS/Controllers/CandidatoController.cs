@@ -14,8 +14,7 @@ namespace WebBS.Controllers
     public class CandidatoController : Controller
     {
         private BDBoticasEntities db = new BDBoticasEntities();
-       public List<RRH_GradoAcademico> Grados = new List<RRH_GradoAcademico>();
-      
+       
         // GET: /Candidato/
         public ActionResult Index()
         {
@@ -52,9 +51,6 @@ namespace WebBS.Controllers
         public ActionResult AdicionarGrado()
         {
 
-         
-            
-
             if (Request.IsAjaxRequest())
             {
                 RRH_GradoAcademico cust = new RRH_GradoAcademico();
@@ -81,13 +77,20 @@ namespace WebBS.Controllers
 
                 else if (Command == "Save")
                 {
-                     
+                    if (TempData["Grados"] == null)
+                    {
+                        TempData["Grados"] = new List<RRH_GradoAcademico>();
+                    }
+                        List<RRH_GradoAcademico> Grados = (List<RRH_GradoAcademico>)TempData["Grados"];
+                        RRH_GradoAcademico mobjcust = new RRH_GradoAcademico();
+                        mobjcust.CentroEstudios = mCust.CentroEstudios;
+                        mobjcust.Titulo = mCust.Titulo;
 
-                    RRH_GradoAcademico mobjcust = new RRH_GradoAcademico();
-                    mobjcust.CentroEstudios = mCust.CentroEstudios;
-                    mobjcust.Titulo = mCust.Titulo;
+                        Grados.Add(mobjcust);
+                        TempData["Grados"] = Grados;
+                    
+
                    
-                    Grados.Add(mobjcust);
                     /*
                     bool check = mo bjModel.CreateCustomer(mobjcust);
                     if (check)
@@ -116,8 +119,63 @@ namespace WebBS.Controllers
                 }
             }
 
-           return RedirectToAction("Create");
+            return PartialView("_GridGrado");
         }
+
+        public ActionResult _GridGrado() {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateEditCustomer(RRH_GradoAcademico mCust, string Command)
+        {
+            // Validate the model being submitted
+
+            if (!ModelState.IsValid)
+            {
+
+                return PartialView("_Grado", mCust);
+
+            }
+
+            else if (Command == "Save")
+            {
+                /*Customer mobjcust = new Customer();
+                mobjcust.Id = mCust.Id;
+                mobjcust.Name = mCust.Name;
+                mobjcust.Mobile = mCust.Mobile;
+
+
+                bool check = mobjModel.CreateCustomer(mobjcust);
+                if (check)
+                {*/
+                    TempData["Msg"] = "El Cliente ha sido registrado satisfactoriamente";
+                    ModelState.Clear();
+                    return RedirectToAction("Create", "Candidato");
+                //}
+            }
+
+            else if (Command == "Update")
+            {
+                /*Customer mobjcust = new Customer();
+                mobjcust.Id = mCust.Id;
+                mobjcust.Name = mCust.Name;
+                mobjcust.Mobile = mCust.Mobile;
+
+                bool check = mobjModel.UpdateCustomer(mobjcust);
+                if (check)
+                {*/
+                    TempData["Msg"] = "El Cliente ha sido actualizado satisfactoriamente";
+                    ModelState.Clear();
+                    return RedirectToAction("Create", "Candidato");
+               // }
+
+            }
+
+            return RedirectToAction("GridGrado");
+        }
+
 
         // POST: /Candidato/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 

@@ -588,6 +588,7 @@
     <Content Include="Views\PruebaAutoevaluacion\Edit.cshtml" />
     <Content Include="Views\PruebaAutoevaluacion\Index.cshtml" />
     <Content Include="Views\Option\Index.cshtml" />
+    <Content Include="Views\Candidato\_GridGrado.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

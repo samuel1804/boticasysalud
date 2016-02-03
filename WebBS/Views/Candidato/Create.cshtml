@@ -1,19 +1,163 @@
 ﻿@model WebBS.Models.RRH_Candidato
-
+@using WebBS.Models
     @{
         ViewBag.Title = "Create";
         Layout = "~/Views/Shared/_Layout.cshtml";
 
         
     }
+
+
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('.glyphicon-calendar').on('click', function () {
+            $('.week-picker').focus()
+        });
+
+        $("#DNI").keypress(function (e) {
+            //if the letter is not digit then display error and don't type anything
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                //display error message
+                $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                return false;
+            }
+        });
+
+        
+        $("#CreateCustomer").on("click", function (e) {
+            // e.preventDefault(); use this or return false
+            var url = $(this).attr('href');
+            $("#dialog-edit").dialog({
+                title: 'Grado Académico',
+                autoOpen: false,
+                resizable: false,
+                height: 300,
+                width: 600,
+                show: { effect: 'drop', direction: "up" },
+                modal: true,
+                draggable: true,
+                open: function (event, ui) {
+                    $(this).load(url);
+
+                },
+                close: function (event, ui) {
+                    $(this).dialog('close');
+                }
+            });
+
+            $("#dialog-edit").dialog('open');
+            return false;
+        });
+
+
+
+        $(".editDialog").on("click", function (e) {
+            // e.preventDefault(); use this or return false
+            var url = $(this).attr('href');
+            $("#dialog-edit").dialog({
+                title: 'Edit Customer',
+                autoOpen: false,
+                resizable: false,
+                height: 200,
+                width: 400,
+                show: { effect: 'drop', direction: "up" },
+                modal: true,
+                draggable: true,
+                open: function (event, ui) {
+                    $(this).load(url);
+
+                },
+                close: function (event, ui) {
+                    $(this).dialog('close');
+                }
+            });
+
+            $("#dialog-edit").dialog('open');
+            return false;
+        });
+
+        $(".confirmDialog").on("click", function (e) {
+
+            // e.preventDefault(); use this or return false
+            var url = $(this).attr('href');
+
+            $("#dialog-confirm").dialog({
+                autoOpen: false,
+                resizable: false,
+                height: 170,
+                width: 350,
+                show: { effect: 'drop', direction: "up" },
+                modal: true,
+                draggable: true,
+                buttons: {
+                    "OK": function () {
+                        $(this).dialog("close");
+                        window.location = url;
+
+                    },
+                    "Cancel": function () {
+                        $(this).dialog("close");
+
+                    }
+                }
+            });
+            $("#dialog-confirm").dialog('open');
+            return false;
+        });
+
+        $(".viewDialog").on("click", function (e) {
+            // e.preventDefault(); use this or return false
+            var url = $(this).attr('href');
+            $("#dialog-view").dialog({
+                title: 'View Customer',
+                autoOpen: false,
+                resizable: false,
+                height: 250,
+                width: 400,
+                show: { effect: 'drop', direction: "up" },
+                modal: true,
+                draggable: true,
+                open: function (event, ui) {
+                    $(this).load(url);
+
+                },
+                buttons: {
+                    "Close": function () {
+                        $(this).dialog("close");
+
+                    }
+                },
+                close: function (event, ui) {
+                    $(this).dialog('close');
+                }
+            });
+
+            $("#dialog-view").dialog('open');
+            return false;
+        });
+
+        
+
+
+
+
+
+    });
+</script>
+
+
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
     <h2>Registrar Candidato</h2>
 
 
-  @using (Html.BeginForm("Create", "Candidato", FormMethod.Post,
-                                 new { enctype = "multipart/form-data" }))
-{
-        @Html.AntiForgeryToken()
+  
 
         <div class="form-horizontal">
 
@@ -117,69 +261,7 @@
 
 
 
-            <fieldset>
-                <div class="panel panel-default">
-                    <!-- Table -->
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Titulo</th>
-                                    <th>Centro de Estudios</th>
-                                    <th>Fecha</th>
-                                    <th>Agregar</th>
-
-                                </tr>
-                            </thead>
-                            @if ((List<WebBS.Models.RRH_GradoAcademico>)ViewData["Grados"] == null)
-                            {
-                                <tr>
-                                    <td>
-                                   
-                                    </td>
-                                    <td>
-                                 
-                                    </td>
-                                    <td>
-                                       
-                                    </td>
-                                    <td class="text-right">
-                                        <a id="CreateCustomer" href="..\Candidato\AdicionarGrado" title="">
-                                            <i class="glyphicon glyphicon-plus"></i>
-                                        </a>
-
-                                    </td>
-
-                                </tr>
- }
-                            else
-                            {
-                                foreach (var item in (List<WebBS.Models.RRH_GradoAcademico>)ViewData["Grados"])
-                                {                         
-                                <tr>
-                                    <td>
-                                     @item.Titulo
-                                    </td>
-                                    <td>
-                                  @item.CentroEstudios
-                                    </td>
-                                    <td>
-                                       
-                                    </td>
-                                    <td class="text-right">
-                                        <a id="CreateCustomer" href="..\Candidato\AdicionarGrado" title="">
-                                            <i class="glyphicon glyphicon-plus"></i>
-                                        </a>
-
-                                    </td>
-
-                                </tr>
- }}
-
-                        </table>
-                    </div>
-                </div>
-            </fieldset>
+     @Html.Partial("_GridGrado")
 
             <fieldset>
                 <div class="panel panel-default">
@@ -285,17 +367,13 @@
 
       
       
-    }
+    
 
     <div>
         @Html.ActionLink("Ir a la Lista", "Index")
     </div>
 
-    <script type="text/javascript">
-        $('.glyphicon-calendar').on('click', function () {
-            $('.week-picker').focus()
-        });
-    </script>
+   
 
 
 
@@ -304,143 +382,6 @@
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
 
-        <script type="text/javascript">
-        $(document).ready(function () {
-
-  $("#DNI").keypress(function (e) {
-     //if the letter is not digit then display error and don't type anything
-     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-        //display error message
-        $("#errmsg").html("Digits Only").show().fadeOut("slow");
-               return false;
-    }
-  });
-
-
-  $("#CreateCustomer").on("click", function (e) {
-      // e.preventDefault(); use this or return false
-      var url = $(this).attr('href');
-      $("#dialog-edit").dialog({
-          title: 'Grado Académico',
-          autoOpen: false,
-          resizable: false,
-          height: 300,
-          width: 600,
-          show: { effect: 'drop', direction: "up" },
-          modal: true,
-          draggable: true,
-          open: function (event, ui) {
-              $(this).load(url);
-
-          },
-          close: function (event, ui) {
-              $(this).dialog('close');
-          }
-      });
-
-      $("#dialog-edit").dialog('open');
-      return false;
-  });
-
-
-
-  $(".editDialog").on("click", function (e) {
-      // e.preventDefault(); use this or return false
-      var url = $(this).attr('href');
-      $("#dialog-edit").dialog({
-          title: 'Edit Customer',
-          autoOpen: false,
-          resizable: false,
-          height: 200,
-          width: 400,
-          show: { effect: 'drop', direction: "up" },
-          modal: true,
-          draggable: true,
-          open: function (event, ui) {
-              $(this).load(url);
-
-          },
-          close: function (event, ui) {
-              $(this).dialog('close');
-          }
-      });
-
-      $("#dialog-edit").dialog('open');
-      return false;
-  });
-
-  $(".confirmDialog").on("click", function (e) {
-
-      // e.preventDefault(); use this or return false
-      var url = $(this).attr('href');
-
-      $("#dialog-confirm").dialog({
-          autoOpen: false,
-          resizable: false,
-          height: 170,
-          width: 350,
-          show: { effect: 'drop', direction: "up" },
-          modal: true,
-          draggable: true,
-          buttons: {
-              "OK": function () {
-                  $(this).dialog("close");
-                  window.location = url;
-
-              },
-              "Cancel": function () {
-                  $(this).dialog("close");
-
-              }
-          }
-      });
-      $("#dialog-confirm").dialog('open');
-      return false;
-  });
-
-  $(".viewDialog").on("click", function (e) {
-      // e.preventDefault(); use this or return false
-      var url = $(this).attr('href');
-      $("#dialog-view").dialog({
-          title: 'View Customer',
-          autoOpen: false,
-          resizable: false,
-          height: 250,
-          width: 400,
-          show: { effect: 'drop', direction: "up" },
-          modal: true,
-          draggable: true,
-          open: function (event, ui) {
-              $(this).load(url);
-
-          },
-          buttons: {
-              "Close": function () {
-                  $(this).dialog("close");
-
-              }
-          },
-          close: function (event, ui) {
-              $(this).dialog('close');
-          }
-      });
-
-      $("#dialog-view").dialog('open');
-      return false;
-  });
-
-  $("#btncancel").on("click", function (e) {
-      // location.reload(true);
-      $("#dialog-edit").dialog('close');
-
-  });
-
-
-
-
-
-});
-        </script>
 
 
 

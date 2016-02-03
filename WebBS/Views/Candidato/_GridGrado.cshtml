@@ -1,0 +1,62 @@
+﻿
+@using WebBS.Models
+
+
+<fieldset>
+    <div class="panel panel-default">
+        <!-- Table -->
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Titulo</th>
+                        <th>Centro de Estudios</th>
+                        <th>Fecha</th>
+                        <th>Agregar</th>
+
+                    </tr>
+                </thead>
+                @if ((List<RRH_GradoAcademico>)TempData["Grados"] == null)
+                {
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right">
+                            <a id="CreateCustomer" href="..\Candidato\AdicionarGrado" title="">
+                                <i class="glyphicon glyphicon-plus"></i>
+                            </a>
+
+
+                        </td>
+
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in (List<RRH_GradoAcademico>)TempData["Grados"])
+                    {
+                        <tr>
+                            <td>
+                                @item.Titulo
+                            </td>
+                            <td>
+                                @item.CentroEstudios
+                            </td>
+                            <td></td>
+                            <td class="text-right">
+                                <a id="CreateCustomer2" href="..\Candidato\AdicionarGrado" title="">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                </a>
+
+                            </td>
+
+                        </tr>
+                    }
+                }
+
+            </table>
+        </div>
+    </div>
+</fieldset>
+
