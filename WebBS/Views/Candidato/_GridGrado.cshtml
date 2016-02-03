@@ -11,19 +11,19 @@
                     <tr>
                         <th>Titulo</th>
                         <th>Centro de Estudios</th>
-                        <th>Fecha</th>
+                        <th>Año Graduación</th>
                         <th>Agregar</th>
 
                     </tr>
                 </thead>
-                @if ((List<RRH_GradoAcademico>)TempData["Grados"] == null)
+                @if ((List<RRH_GradoAcademico>)Session["Grados"] == null)
                 {
                     <tr>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td class="text-right">
-                            <a id="CreateCustomer" href="..\Candidato\AdicionarGrado" title="">
+                            <a id="CreateCustomer3" href="..\Candidato\AdicionarGrado" title="">
                                 <i class="glyphicon glyphicon-plus"></i>
                             </a>
 
@@ -34,7 +34,7 @@
                 }
                 else
                 {
-                    foreach (var item in (List<RRH_GradoAcademico>)TempData["Grados"])
+                    foreach (var item in (List<RRH_GradoAcademico>)Session["Grados"])
                     {
                         <tr>
                             <td>
@@ -43,6 +43,10 @@
                             <td>
                                 @item.CentroEstudios
                             </td>
+                            <td>
+                                @item.Anio_graduacion
+                            </td>
+                            
                             <td></td>
                             <td class="text-right">
                                 <a id="CreateCustomer2" href="..\Candidato\AdicionarGrado" title="">

@@ -18,6 +18,9 @@ namespace WebBS.Controllers
         // GET: /Candidato/
         public ActionResult Index()
         {
+           
+                Session["Grados"] = new List<RRH_GradoAcademico>();
+           
             return View(db.RRH_Candidato.ToList());
         }
 
@@ -40,7 +43,7 @@ namespace WebBS.Controllers
         public ActionResult Create()
         {
             ViewBag.Cod_ofertalaboral = new SelectList(db.RRH_OfertaLaboral, "Cod_ofertalaboral", "Titulo");
-           
+            Session["Grados"] = null;
             //ViewBag.Grados = db.RRH_GradoAcademico.ToList();
             //ViewBag.IdPuesto = new SelectList(db.Puesto, "IdPuesto", "Nombre");
             return View();
@@ -62,7 +65,25 @@ namespace WebBS.Controllers
         }
 
 
-        
+        [HttpPost]
+        public ActionResult Upload(HttpPostedFileBase file)
+        {
+            string path = null;
+            if (file != null && file.ContentLength > 0)
+            {
+                // extract only the filename
+                var fileName = Path.GetFileName(file.FileName);
+                // store the file inside ~/App_Data/uploads folder
+                path = Path.Combine(Server.MapPath("~/Uploads"), fileName);
+                file.SaveAs(path);
+            }
+
+            return View();
+        }
+
+
+       [HttpPost]
+       [ValidateAntiForgeryToken]
         public ActionResult CreateEditCandidato(RRH_GradoAcademico mCust, string Command)
         {
             // Validate the model being submitted
@@ -77,18 +98,21 @@ namespace WebBS.Controllers
 
                 else if (Command == "Save")
                 {
-                    if (TempData["Grados"] == null)
+                    if (Session["Grados"] == null)
                     {
-                        TempData["Grados"] = new List<RRH_GradoAcademico>();
+                        Session["Grados"] = new List<RRH_GradoAcademico>();
                     }
-                        List<RRH_GradoAcademico> Grados = (List<RRH_GradoAcademico>)TempData["Grados"];
+                    List<RRH_GradoAcademico> Grados = (List<RRH_GradoAcademico>)Session["Grados"];
                         RRH_GradoAcademico mobjcust = new RRH_GradoAcademico();
                         mobjcust.CentroEstudios = mCust.CentroEstudios;
                         mobjcust.Titulo = mCust.Titulo;
-
+                        mobjcust.Anio_graduacion = mCust.Anio_graduacion;
+                     
                         Grados.Add(mobjcust);
-                        TempData["Grados"] = Grados;
-                    
+                        Session["Grados"] = Grados;
+
+                        TempData["Msg"] = "Los Datos han sido registrados satisfactoriamente";
+                       // ModelState.Clear();
 
                    
                     /*
@@ -118,7 +142,7 @@ namespace WebBS.Controllers
 
                 }
             }
-
+          //return  RedirectToAction("Create");
             return PartialView("_GridGrado");
         }
 
@@ -128,6 +152,7 @@ namespace WebBS.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateEditCustomer(RRH_GradoAcademico mCust, string Command)
         {
             // Validate the model being submitted
@@ -205,8 +230,8 @@ namespace WebBS.Controllers
                     path = Path.Combine(Server.MapPath("~/Uploads"), fileName);
                     file.SaveAs(path);
                 }
-              
-                rrh_candidato.Cod_candidato = db.RRH_Candidato.OrderByDescending(t => t.Cod_candidato).FirstOrDefault().Cod_candidato + 1;
+
+                rrh_candidato.Cod_candidato = db.RRH_Candidato.OrderByDescending(t => t.Cod_candidato).FirstOrDefault() == null ? 1 : db.RRH_Candidato.OrderByDescending(t => t.Cod_candidato).FirstOrDefault().Cod_candidato + 1;
                 rrh_candidato.Foto = path;
                 db.RRH_Candidato.Add(rrh_candidato);
                 db.SaveChanges();
