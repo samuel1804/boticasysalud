@@ -211,9 +211,7 @@
             rules: true,
             GetRulesMethod: function() {
                 var estado = $("#selEstado").val();
-                if (estado !== "")
-                    return [{ field: "Estado", op: "eq", data: estado }];
-                return null;
+                return [{ field: "Estado", op: "eq", data: estado }];
             }
         };
 
