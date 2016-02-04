@@ -23,7 +23,14 @@
                 console.log(data.Success);
 
                 if (data.Success) {
-                    bootbox.alert("Se registró satisfactoriamente en el Libro de Receta : " + data.Object, function () {
+                    
+                    var arrCodigos = data.Object.split("|");
+
+                    var msg = arrCodigos[1].length == 0 ? 
+                        "<p> Se registró satisfactoriamente en el Libro de Receta : " + arrCodigos[0] + "</p>" : 
+                        "<p> Se registró satisfactoriamente en el Libro de Receta : " + arrCodigos[0] + "</p><p> Se registró satisfactoriamente en el Libro de Receta Psicotrópico : " + arrCodigos[1] + "</p>";
+
+                    bootbox.alert(msg, function () {
                         window.location.replace("/Libro/Lista");
                     });
                 }

@@ -176,6 +176,7 @@
       <DependentUpon>BDBoticas.edmx</DependentUpon>
       <LastGenOutput>BDBoticas.cs</LastGenOutput>
     </Content>
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ALP\IndexConstancia.js" />
     <Content Include="Scripts\ALP\ListaConstancia.js" />
@@ -246,6 +247,15 @@
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ALP_LIBRO_RECETA.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ALP_LIBRO_RECETA_INSUMO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ALP_LIBRO_RECETA_PSICOTROPICO.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ALP_ORDEN_PREPARADO.cs">
