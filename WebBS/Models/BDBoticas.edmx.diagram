@@ -5,122 +5,122 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f06427c5c68941a795ec541a3be0727b" Name="Diagram1" ZoomLevel="55">
-        <EntityTypeShape EntityType="BDBoticasModel.ALP_CONSTANCIA_PREPARADO" Width="1.5" PointX="7.5" PointY="29" />
-        <EntityTypeShape EntityType="BDBoticasModel.ALP_HOJA_MERMA" Width="1.5" PointX="9.75" PointY="29.25" />
-        <EntityTypeShape EntityType="BDBoticasModel.ALP_INSUMO" Width="1.5" PointX="8.25" PointY="16" />
-        <EntityTypeShape EntityType="BDBoticasModel.ALP_LIBRO_RECETA" Width="1.5" PointX="12.75" PointY="26.375" />
-        <EntityTypeShape EntityType="BDBoticasModel.ALP_ORDEN_PREPARADO" Width="1.5" PointX="5.25" PointY="24.5" />
-        <EntityTypeShape EntityType="BDBoticasModel.ALP_ORDEN_PREPARADO_INSUMO" Width="1.5" PointX="10.5" PointY="25.125" />
-        <EntityTypeShape EntityType="BDBoticasModel.ALP_RECETA" Width="1.5" PointX="3" PointY="19" />
-        <EntityTypeShape EntityType="BDBoticasModel.DIS_Control_Asignacion" Width="1.5" PointX="0.75" PointY="58.625" />
-        <EntityTypeShape EntityType="BDBoticasModel.DIS_HojaRuta" Width="1.5" PointX="3" PointY="58.75" />
-        <EntityTypeShape EntityType="BDBoticasModel.DIS_HojaRutaDetalle" Width="1.5" PointX="5.25" PointY="40" />
-        <EntityTypeShape EntityType="BDBoticasModel.DIS_Pedido" Width="1.5" PointX="3" PointY="39.75" />
-        <EntityTypeShape EntityType="BDBoticasModel.DIS_Pedido_Detalle" Width="1.5" PointX="8.25" PointY="39.625" />
-        <EntityTypeShape EntityType="BDBoticasModel.DIS_PresentacionProducto" Width="1.5" PointX="3.75" PointY="51.75" />
-        <EntityTypeShape EntityType="BDBoticasModel.DIS_Producto" Width="1.5" PointX="6" PointY="52.5" />
-        <EntityTypeShape EntityType="BDBoticasModel.DIS_TipoProducto" Width="1.5" PointX="3.75" PointY="54.625" />
-        <EntityTypeShape EntityType="BDBoticasModel.DIS_Transportista" Width="1.5" PointX="1.5" PointY="63.125" />
-        <EntityTypeShape EntityType="BDBoticasModel.DIS_Vehiculo" Width="1.5" PointX="1.5" PointY="66.5" />
-        <EntityTypeShape EntityType="BDBoticasModel.GCC_CLIENTE" Width="1.5" PointX="1.5" PointY="48.5" />
-        <EntityTypeShape EntityType="BDBoticasModel.GCC_CLIENTE_JURIDICO" Width="1.5" PointX="1.5" PointY="44.875" />
-        <EntityTypeShape EntityType="BDBoticasModel.GCC_CLIENTE_NATURAL" Width="1.5" PointX="3.75" PointY="48" />
-        <EntityTypeShape EntityType="BDBoticasModel.GCC_COMPROBANTE" Width="1.5" PointX="3.75" PointY="63.375" />
-        <EntityTypeShape EntityType="BDBoticasModel.GCC_CONTRATO_CREDITO" Width="1.5" PointX="3" PointY="1.75" />
-        <EntityTypeShape EntityType="BDBoticasModel.GCC_CUENTA_CLIENTE" Width="1.5" PointX="5.25" PointY="1.625" />
-        <EntityTypeShape EntityType="BDBoticasModel.GCC_DOCUMENTO_RECHAZO" Width="1.5" PointX="5.25" PointY="58.125" />
-        <EntityTypeShape EntityType="BDBoticasModel.GCC_EMPLEADO_INF_CREDITICIO" Width="1.5" PointX="5.25" PointY="21" />
-        <EntityTypeShape EntityType="BDBoticasModel.GCC_EMPLEADO_SOL_CREDITO" Width="1.5" PointX="11.25" PointY="21" />
-        <EntityTypeShape EntityType="BDBoticasModel.GCC_INFORME_CREDITICIO" Width="1.5" PointX="3" PointY="32.375" />
-        <EntityTypeShape EntityType="BDBoticasModel.GCC_NOTIFICACION" Width="1.5" PointX="6" PointY="63.5" />
-        <EntityTypeShape EntityType="BDBoticasModel.GCC_PLAN_CREDITO" Width="1.5" PointX="1.5" PointY="52.875" />
-        <EntityTypeShape EntityType="BDBoticasModel.GCC_POLITICA_CREDITO" Width="1.5" PointX="0.75" PointY="34.5" />
-        <EntityTypeShape EntityType="BDBoticasModel.GCC_POLITICAS_NOTIFICACION" Width="1.5" PointX="3.75" PointY="67.625" />
-        <EntityTypeShape EntityType="BDBoticasModel.GCC_SOLICITUD_CREDITO" Width="1.5" PointX="0.75" PointY="30.5" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_ACCION" Width="1.5" PointX="14.5" PointY="30.125" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_ACTIVIDAD" Width="1.5" PointX="10" PointY="35.75" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_ACTIVIDAD_PLANIFICADA" Width="1.5" PointX="12.25" PointY="30.25" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_ADQUISICION" Width="1.5" PointX="23.5" PointY="26.875" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_ALERTA" Width="1.5" PointX="14.5" PointY="33.5" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_ARTICULO" Width="1.5" PointX="7.75" PointY="48" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_BITACORA_EVENTO" Width="1.5" PointX="25.75" PointY="33.875" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_BL" Width="1.5" PointX="25.75" PointY="28.625" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_CERTIFICADO_ISO" Width="1.5" PointX="12.25" PointY="50" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_CERTIFICADO_MANUFACTURA" Width="1.5" PointX="12.25" PointY="42.75" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_CONCEPTO" Width="1.5" PointX="21.25" PointY="37.125" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_DAM" Width="1.5" PointX="25.75" PointY="41.25" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_DEPARTAMENTO" Width="1.5" PointX="12.25" PointY="38" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_DESADUANAJE" Width="1.5" PointX="23.5" PointY="37.125" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_DETALLE_FACTURA_COMERCIAL" Width="1.5" PointX="28" PointY="36.5" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_DETALLE_ORDEN_COMPRA" Width="1.5" PointX="21.25" PointY="33.625" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_DISTRITO" Width="1.5" PointX="16.75" PointY="37.875" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_EVENTO" Width="1.5" PointX="23.5" PointY="45.25" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_FACTURA_COMERCIAL" Width="1.5" PointX="25.75" PointY="24.875" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_ORDEN_COMPRA" Width="1.5" PointX="19" PointY="12.875" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_PAGO_IMPORTACION" Width="1.5" PointX="23.5" PointY="31.125" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_PROVEEDOR" Width="1.5" PointX="16.75" PointY="13" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_PROVINCIA" Width="1.5" PointX="14.5" PointY="37.875" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_PUERTO" Width="1.5" PointX="19" PointY="37.625" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_RESOLUCION_DIGEMID" Width="1.5" PointX="12.25" PointY="46.25" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_SOLICITUD" Width="1.5" PointX="7.75" PointY="44.5" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_SOLICITUD_GESTION_PERMISO" Width="1.5" PointX="10" PointY="46.125" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_SOLICITUD_IMPORTACION" Width="1.5" PointX="21.25" PointY="28.125" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_TIPO_ACTIVIDAD" Width="1.5" PointX="7.75" PointY="36" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_TIPO_CAMBIO" Width="1.5" PointX="21.25" PointY="41.625" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_TIPO_EVENTO" Width="1.5" PointX="21.25" PointY="45.375" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_TIPO_MONEDA" Width="1.5" PointX="19" PointY="41.875" />
-        <EntityTypeShape EntityType="BDBoticasModel.IMP_TIPO_PAGO" Width="1.5" PointX="21.25" PointY="24.75" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_AlternativaEvaluacionTecnica" Width="1.5" PointX="3.75" PointY="8.375" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_Area" Width="1.5" PointX="1.5" PointY="15.25" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_Candidato" Width="1.5" PointX="12" PointY="10.125" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_Criterio" Width="1.5" PointX="1.5" PointY="11.625" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_Distrito" Width="1.5" PointX="9.75" PointY="11.25" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_Empleado" Width="1.5" PointX="3" PointY="23.5" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_EvaluacionTecnica" Width="1.5" PointX="6" PointY="10" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_ExperienciaLaboral" Width="1.5" PointX="14.25" PointY="10.875" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_GradoAcademico" Width="1.5" PointX="14.25" PointY="14.75" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_OfertaLaboral" Width="1.5" PointX="8" PointY="24.625" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_OfertaLaboral_Candidato" Width="1.5" PointX="14.25" PointY="23.125" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_Option" Width="1.5" PointX="3.75" PointY="5.375" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_Perfil" Width="1.5" PointX="5.75" PointY="16.625" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_PreguntaEvaluacionTecnica" Width="1.5" PointX="3.75" PointY="11.375" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_PruebaAutoevaluacion" Width="1.5" PointX="5.25" PointY="31.5" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_PruebaAutoevaluacion_Respuesta" Width="1.5" PointX="7.5" PointY="32.875" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_PruebaEvaluacionTecnica" Width="1.5" PointX="8.25" PointY="19.625" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_Puesto" Width="1.5" PointX="0.75" PointY="20.875" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_ReferenciaLaboral" Width="1.5" PointX="14.25" PointY="7.25" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_RespuestaAutoevaluacion" Width="1.5" PointX="5.25" PointY="35.375" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_Sucursal" Width="1.5" PointX="0.75" PointY="24.875" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_Usuario" Width="1.5" PointX="5.25" PointY="45.375" />
-        <EntityTypeShape EntityType="BDBoticasModel.RYA_ACTARECEP_CAB" Width="1.5" PointX="26.25" PointY="9.75" />
-        <EntityTypeShape EntityType="BDBoticasModel.RYA_ACTARECEP_DET" Width="1.5" PointX="28.5" PointY="10" />
-        <EntityTypeShape EntityType="BDBoticasModel.RYA_ALMACENES" Width="1.5" PointX="21.75" PointY="10.25" />
-        <EntityTypeShape EntityType="BDBoticasModel.RYA_LOTES" Width="1.5" PointX="26.25" PointY="0.75" />
-        <EntityTypeShape EntityType="BDBoticasModel.RYA_MOVALM_CAB" Width="1.5" PointX="24" PointY="5.875" />
-        <EntityTypeShape EntityType="BDBoticasModel.RYA_MOVALM_DET" Width="1.5" PointX="26.25" PointY="5.5" />
-        <EntityTypeShape EntityType="BDBoticasModel.RYA_PEDIDO_CAB" Width="1.5" PointX="24" PointY="11.25" />
-        <EntityTypeShape EntityType="BDBoticasModel.RYA_PEDIDO_DET" Width="1.5" PointX="26.25" PointY="13.625" />
-        <EntityTypeShape EntityType="BDBoticasModel.RYA_PRODUCTO" Width="1.5" PointX="24" PointY="1.375" />
-        <EntityTypeShape EntityType="BDBoticasModel.RYA_STOCK" Width="1.5" PointX="28.5" PointY="1.25" />
-        <EntityTypeShape EntityType="BDBoticasModel.RYA_SUCURSALES" Width="1.5" PointX="21.75" PointY="6.5" />
-        <EntityTypeShape EntityType="BDBoticasModel.RYA_TRANSA_ALMA" Width="1.5" PointX="21.75" PointY="3.25" />
-        <EntityTypeShape EntityType="BDBoticasModel.RYA_UBICACIONES" Width="1.5" PointX="28.5" PointY="5.25" />
-        <EntityTypeShape EntityType="BDBoticasModel.RRH_Puesto_Option" Width="1.5" PointX="6" PointY="13.5" />
-        <AssociationConnector Association="BDBoticasModel.FK__ALP_CONST__num_o__531856C7" />
-        <AssociationConnector Association="BDBoticasModel.FK__ALP_HOJA___num_c__540C7B00" />
-        <AssociationConnector Association="BDBoticasModel.FK__ALP_LIBRO__num_c__55F4C372" />
-        <AssociationConnector Association="BDBoticasModel.FK__ALP_ORDEN__cod_i__59C55456" />
+        <EntityTypeShape EntityType="BDBoticasModel.ALP_CONSTANCIA_PREPARADO" Width="1.5" PointX="7.5" PointY="30" />
+        <EntityTypeShape EntityType="BDBoticasModel.ALP_HOJA_MERMA" Width="1.5" PointX="9.75" PointY="33.5" />
+        <EntityTypeShape EntityType="BDBoticasModel.ALP_INSUMO" Width="1.5" PointX="8.25" PointY="16.125" />
+        <EntityTypeShape EntityType="BDBoticasModel.ALP_LIBRO_RECETA" Width="1.5" PointX="10.75" PointY="27.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.ALP_ORDEN_PREPARADO" Width="1.5" PointX="5.25" PointY="25.625" />
+        <EntityTypeShape EntityType="BDBoticasModel.ALP_ORDEN_PREPARADO_INSUMO" Width="1.5" PointX="10.5" PointY="23.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.ALP_RECETA" Width="1.5" PointX="3" PointY="20.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.DIS_Control_Asignacion" Width="1.5" PointX="3.75" PointY="61.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.DIS_HojaRuta" Width="1.5" PointX="6" PointY="61.375" />
+        <EntityTypeShape EntityType="BDBoticasModel.DIS_HojaRutaDetalle" Width="1.5" PointX="8.25" PointY="37.625" />
+        <EntityTypeShape EntityType="BDBoticasModel.DIS_Pedido" Width="1.5" PointX="3" PointY="37.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.DIS_Pedido_Detalle" Width="1.5" PointX="5.25" PointY="37.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.DIS_PresentacionProducto" Width="1.5" PointX="0.75" PointY="67.375" />
+        <EntityTypeShape EntityType="BDBoticasModel.DIS_Producto" Width="1.5" PointX="3" PointY="68.125" />
+        <EntityTypeShape EntityType="BDBoticasModel.DIS_TipoProducto" Width="1.5" PointX="0.75" PointY="70.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.DIS_Transportista" Width="1.5" PointX="1.5" PointY="63.375" />
+        <EntityTypeShape EntityType="BDBoticasModel.DIS_Vehiculo" Width="1.5" PointX="1.5" PointY="59.75" />
+        <EntityTypeShape EntityType="BDBoticasModel.GCC_CLIENTE" Width="1.5" PointX="4.5" PointY="5.75" />
+        <EntityTypeShape EntityType="BDBoticasModel.GCC_CLIENTE_JURIDICO" Width="1.5" PointX="6.75" PointY="6.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.GCC_CLIENTE_NATURAL" Width="1.5" PointX="6.75" PointY="2.625" />
+        <EntityTypeShape EntityType="BDBoticasModel.GCC_COMPROBANTE" Width="1.5" PointX="6.75" PointY="65.875" />
+        <EntityTypeShape EntityType="BDBoticasModel.GCC_CONTRATO_CREDITO" Width="1.5" PointX="11.25" PointY="6.125" />
+        <EntityTypeShape EntityType="BDBoticasModel.GCC_CUENTA_CLIENTE" Width="1.5" PointX="13.5" PointY="6" />
+        <EntityTypeShape EntityType="BDBoticasModel.GCC_DOCUMENTO_RECHAZO" Width="1.5" PointX="5.25" PointY="12.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.GCC_EMPLEADO_INF_CREDITICIO" Width="1.5" PointX="5.25" PointY="22" />
+        <EntityTypeShape EntityType="BDBoticasModel.GCC_EMPLEADO_SOL_CREDITO" Width="1.5" PointX="11.25" PointY="19" />
+        <EntityTypeShape EntityType="BDBoticasModel.GCC_INFORME_CREDITICIO" Width="1.5" PointX="3" PointY="11.5" />
+        <EntityTypeShape EntityType="BDBoticasModel.GCC_NOTIFICACION" Width="1.5" PointX="9" PointY="66" />
+        <EntityTypeShape EntityType="BDBoticasModel.GCC_PLAN_CREDITO" Width="1.5" PointX="1.5" PointY="7" />
+        <EntityTypeShape EntityType="BDBoticasModel.GCC_POLITICA_CREDITO" Width="1.5" PointX="0.75" PointY="11.5" />
+        <EntityTypeShape EntityType="BDBoticasModel.GCC_POLITICAS_NOTIFICACION" Width="1.5" PointX="6.75" PointY="70.125" />
+        <EntityTypeShape EntityType="BDBoticasModel.GCC_SOLICITUD_CREDITO" Width="1.5" PointX="9" PointY="5.875" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_ACCION" Width="1.5" PointX="10.5" PointY="15.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_ACTIVIDAD" Width="1.5" PointX="6" PointY="16.5" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_ACTIVIDAD_PLANIFICADA" Width="1.5" PointX="8.25" PointY="20.375" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_ADQUISICION" Width="1.5" PointX="25.5" PointY="39.125" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_ALERTA" Width="1.5" PointX="10.5" PointY="10.5" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_ARTICULO" Width="1.5" PointX="3.75" PointY="45.75" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_BITACORA_EVENTO" Width="1.5" PointX="30.75" PointY="28.625" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_BL" Width="1.5" PointX="27.75" PointY="37" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_CERTIFICADO_ISO" Width="1.5" PointX="8.25" PointY="46" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_CERTIFICADO_MANUFACTURA" Width="1.5" PointX="8.25" PointY="59.5" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_CONCEPTO" Width="1.5" PointX="26.25" PointY="20.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_DAM" Width="1.5" PointX="27.75" PointY="33.625" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_DEPARTAMENTO" Width="1.5" PointX="14.25" PointY="23" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_DESADUANAJE" Width="1.5" PointX="25.5" PointY="29.5" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_DETALLE_FACTURA_COMERCIAL" Width="1.5" PointX="30" PointY="43.5" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_DETALLE_ORDEN_COMPRA" Width="1.5" PointX="20.25" PointY="30" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_DISTRITO" Width="1.5" PointX="18.75" PointY="22.875" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_EVENTO" Width="1.5" PointX="28.5" PointY="17" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_FACTURA_COMERCIAL" Width="1.5" PointX="27.75" PointY="40.875" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_ORDEN_COMPRA" Width="1.5" PointX="18" PointY="13.875" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_PAGO_IMPORTACION" Width="1.5" PointX="28.5" PointY="28.125" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_PROVEEDOR" Width="1.5" PointX="15.75" PointY="14" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_PROVINCIA" Width="1.5" PointX="16.5" PointY="22.875" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_PUERTO" Width="1.5" PointX="21" PointY="22.75" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_RESOLUCION_DIGEMID" Width="1.5" PointX="8.25" PointY="74" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_SOLICITUD" Width="1.5" PointX="3.75" PointY="49.5" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_SOLICITUD_GESTION_PERMISO" Width="1.5" PointX="6" PointY="47.375" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_SOLICITUD_IMPORTACION" Width="1.5" PointX="23.25" PointY="28.125" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_TIPO_ACTIVIDAD" Width="1.5" PointX="3.75" PointY="16.75" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_TIPO_CAMBIO" Width="1.5" PointX="26.25" PointY="23.75" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_TIPO_EVENTO" Width="1.5" PointX="26.25" PointY="17.125" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_TIPO_MONEDA" Width="1.5" PointX="24" PointY="24" />
+        <EntityTypeShape EntityType="BDBoticasModel.IMP_TIPO_PAGO" Width="1.5" PointX="26.25" PointY="45.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_AlternativaEvaluacionTecnica" Width="1.5" PointX="7.75" PointY="52.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_Area" Width="1.5" PointX="0.75" PointY="29.625" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_Candidato" Width="1.5" PointX="11" PointY="41.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_Criterio" Width="1.5" PointX="3" PointY="53.5" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_Distrito" Width="1.5" PointX="8.75" PointY="42.375" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_Empleado" Width="1.5" PointX="3" PointY="24.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_EvaluacionTecnica" Width="1.5" PointX="10" PointY="54" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_ExperienciaLaboral" Width="1.5" PointX="13.25" PointY="38.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_GradoAcademico" Width="1.5" PointX="13.25" PointY="42.125" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_OfertaLaboral" Width="1.5" PointX="8" PointY="25.75" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_OfertaLaboral_Candidato" Width="1.5" PointX="13.25" PointY="26.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_Option" Width="1.5" PointX="0.75" PointY="41.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_Perfil" Width="1.5" PointX="0.75" PointY="21.125" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_PreguntaEvaluacionTecnica" Width="1.5" PointX="7.75" PointY="55.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_PruebaAutoevaluacion" Width="1.5" PointX="5.25" PointY="30.375" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_PruebaAutoevaluacion_Respuesta" Width="1.5" PointX="7.5" PointY="33.75" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_PruebaEvaluacionTecnica" Width="1.5" PointX="12.25" PointY="30.75" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_Puesto" Width="1.5" PointX="0.75" PointY="32.75" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_ReferenciaLaboral" Width="1.5" PointX="13.25" PointY="45.625" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_RespuestaAutoevaluacion" Width="1.5" PointX="5.25" PointY="53.375" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_Sucursal" Width="1.5" PointX="0.75" PointY="26" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_Usuario" Width="1.5" PointX="5.25" PointY="43" />
+        <EntityTypeShape EntityType="BDBoticasModel.RYA_ACTARECEP_CAB" Width="1.5" PointX="25.25" PointY="9.75" />
+        <EntityTypeShape EntityType="BDBoticasModel.RYA_ACTARECEP_DET" Width="1.5" PointX="27.5" PointY="10" />
+        <EntityTypeShape EntityType="BDBoticasModel.RYA_ALMACENES" Width="1.5" PointX="20.75" PointY="4.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.RYA_LOTES" Width="1.5" PointX="25.25" PointY="0.75" />
+        <EntityTypeShape EntityType="BDBoticasModel.RYA_MOVALM_CAB" Width="1.5" PointX="23" PointY="5.875" />
+        <EntityTypeShape EntityType="BDBoticasModel.RYA_MOVALM_DET" Width="1.5" PointX="25.25" PointY="5.5" />
+        <EntityTypeShape EntityType="BDBoticasModel.RYA_PEDIDO_CAB" Width="1.5" PointX="23" PointY="11.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.RYA_PEDIDO_DET" Width="1.5" PointX="25.25" PointY="13.625" />
+        <EntityTypeShape EntityType="BDBoticasModel.RYA_PRODUCTO" Width="1.5" PointX="23" PointY="1.375" />
+        <EntityTypeShape EntityType="BDBoticasModel.RYA_STOCK" Width="1.5" PointX="27.5" PointY="1.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.RYA_SUCURSALES" Width="1.5" PointX="20.75" PointY="7.5" />
+        <EntityTypeShape EntityType="BDBoticasModel.RYA_TRANSA_ALMA" Width="1.5" PointX="20.75" PointY="11.375" />
+        <EntityTypeShape EntityType="BDBoticasModel.RYA_UBICACIONES" Width="1.5" PointX="27.5" PointY="5.25" />
+        <EntityTypeShape EntityType="BDBoticasModel.RRH_Puesto_Option" Width="1.5" PointX="3" PointY="33.375" />
+        <AssociationConnector Association="BDBoticasModel.FK__ALP_CONST__num_o__4E53A1AA" />
+        <AssociationConnector Association="BDBoticasModel.FK__ALP_HOJA___num_c__4F47C5E3" />
+        <AssociationConnector Association="BDBoticasModel.FK__ALP_LIBRO__num_c__51300E55" />
+        <AssociationConnector Association="BDBoticasModel.FK__ALP_ORDEN__cod_i__55009F39" />
         <AssociationConnector Association="BDBoticasModel.FK__ALP_LIBRO__cod_q__46B27FE2" />
         <AssociationConnector Association="BDBoticasModel.FK__ALP_ORDEN__cod_e__489AC854" />
-        <AssociationConnector Association="BDBoticasModel.FK__ALP_ORDEN__cod_r__57DD0BE4" />
-        <AssociationConnector Association="BDBoticasModel.FK__ALP_ORDEN__cod_s__58D1301D" />
-        <AssociationConnector Association="BDBoticasModel.FK__ALP_ORDEN__num_o__5AB9788F" />
+        <AssociationConnector Association="BDBoticasModel.FK__ALP_ORDEN__cod_r__531856C7" />
+        <AssociationConnector Association="BDBoticasModel.FK__ALP_ORDEN__cod_s__540C7B00" />
+        <AssociationConnector Association="BDBoticasModel.FK__ALP_ORDEN__num_o__55F4C372" />
         <AssociationConnector Association="BDBoticasModel.FK_Control_Asignacion_Chofer" />
         <AssociationConnector Association="BDBoticasModel.FK_Control_Asignacion_Vehiculo" />
         <AssociationConnector Association="BDBoticasModel.FK_HojaRuta_Control_Asignacion" />
         <AssociationConnector Association="BDBoticasModel.FK_HojaRutaDetalle_HojaRuta" />
         <AssociationConnector Association="BDBoticasModel.FK_HojaRutaDetalle_Pedido" />
-        <AssociationConnector Association="BDBoticasModel.FK__DIS_Pedid__Cod_s__607251E5" />
+        <AssociationConnector Association="BDBoticasModel.FK__DIS_Pedid__Cod_s__5BAD9CC8" />
         <AssociationConnector Association="BDBoticasModel.FK_Pedido_Detalle_Pedido" />
         <AssociationConnector Association="BDBoticasModel.FK_Pedido_Detalle_Producto" />
         <AssociationConnector Association="BDBoticasModel.FK_Producto_PresentacionProducto" />
@@ -181,6 +181,7 @@
         <AssociationConnector Association="BDBoticasModel.FK_IMP_TIPO_CAMBIO_IMP_TIPO_MONEDA" />
         <AssociationConnector Association="BDBoticasModel.FK_RRH_EvaluacionTecnica_RRH_AlternativaEvaluacionTecnica" />
         <AssociationConnector Association="BDBoticasModel.FK_Puesto_Area" />
+        <AssociationConnector Association="BDBoticasModel.FK_RRH_Empleado_RRH_Area" />
         <AssociationConnector Association="BDBoticasModel.FK_OfertaLaboral_Candidato_Candidato" />
         <AssociationConnector Association="BDBoticasModel.FK_RRH_Candidato_RRH_Distrito" />
         <AssociationConnector Association="BDBoticasModel.FK_RRH_ExperienciaLaboral_RRH_ExperienciaLaboral" />
@@ -190,6 +191,7 @@
         <AssociationConnector Association="BDBoticasModel.FK_RRH_RespuestaAutoevaluacion_RRH_Criterio" />
         <AssociationConnector Association="BDBoticasModel.FK_RRH_Empleado_RRH_Empleado" />
         <AssociationConnector Association="BDBoticasModel.FK_RRH_Empleado_RRH_Perfil" />
+        <AssociationConnector Association="BDBoticasModel.FK_RRH_Empleado_RRH_Perfil1" />
         <AssociationConnector Association="BDBoticasModel.FK_RRH_Empleado_RRH_Sucursal" />
         <AssociationConnector Association="BDBoticasModel.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" />
         <AssociationConnector Association="BDBoticasModel.FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado" />
@@ -201,6 +203,7 @@
         <AssociationConnector Association="BDBoticasModel.FK_OfertaLaboral_Sucursal" />
         <AssociationConnector Association="BDBoticasModel.FK_RRH_Puesto_Option_RRH_Option" />
         <AssociationConnector Association="BDBoticasModel.FK_Perfil_Puesto" />
+        <AssociationConnector Association="BDBoticasModel.FK_RRH_PreguntaEvaluacionTecnica_RRH_Perfil" />
         <AssociationConnector Association="BDBoticasModel.FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_PruebaAutoevaluacion" />
         <AssociationConnector Association="BDBoticasModel.FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_RespuestaAutoevaluacion" />
         <AssociationConnector Association="BDBoticasModel.FK_RRH_Puesto_Option_RRH_Puesto" />

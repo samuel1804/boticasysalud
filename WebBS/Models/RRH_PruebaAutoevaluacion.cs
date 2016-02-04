@@ -26,6 +26,7 @@ namespace WebBS.Models
         public string Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
         public Nullable<int> Cod_empleado { get; set; }
+        public Nullable<int> Cod_resp_autoevaluacion { get; set; }
     
         public virtual RRH_Empleado RRH_Empleado { get; set; }
         public virtual ICollection<RRH_PruebaAutoevaluacion_Respuesta> RRH_PruebaAutoevaluacion_Respuesta { get; set; }

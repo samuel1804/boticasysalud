@@ -114,11 +114,40 @@
   <ItemGroup>
     <Content Include="BD\BDBoticas.sql" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\MenuButton.css" />
     <Content Include="Content\css\Site.css" />
     <Content Include="Content\css\styles.css" />
+    <Content Include="Content\images\add.png" />
+    <Content Include="Content\images\ajax-loader2.gif" />
+    <Content Include="Content\images\App\add.png" />
+    <Content Include="Content\images\App\ajax-loader2.gif" />
+    <Content Include="Content\images\App\back.png" />
+    <Content Include="Content\images\App\Buscar.png" />
+    <Content Include="Content\images\App\Cancelar.png" />
+    <Content Include="Content\images\App\Editar.png" />
+    <Content Include="Content\images\App\Eliminar.gif" />
+    <Content Include="Content\images\App\Eliminar.png" />
+    <Content Include="Content\images\App\Email.png" />
+    <Content Include="Content\images\App\Grabar.png" />
+    <Content Include="Content\images\App\Limpiar.png" />
+    <Content Include="Content\images\App\Nuevo.png" />
+    <Content Include="Content\images\App\pass-icon.png" />
+    <Content Include="Content\images\App\question.png" />
+    <Content Include="Content\images\App\Search.png" />
+    <Content Include="Content\images\App\user-icon.png" />
+    <Content Include="Content\images\App\User.png" />
+    <Content Include="Content\images\App\user_default.png" />
     <Content Include="Content\images\bg.png" />
+    <Content Include="Content\images\Buscar.png" />
+    <Content Include="Content\images\Cancelar.png" />
+    <Content Include="Content\images\chart.png" />
     <Content Include="Content\images\crossword.png" />
+    <Content Include="Content\images\Editar.png" />
+    <Content Include="Content\images\Eliminar.gif" />
+    <Content Include="Content\images\Grabar.png" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\printer.png" />
+    <Content Include="Content\images\User.png" />
     <Content Include="Content\jqGrid\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\jqGrid\images\ui-bg_flat_55_fbec88_40x100.png" />
     <Content Include="Content\jqGrid\images\ui-bg_glass_75_d0e5f5_1x400.png" />
@@ -183,6 +212,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BDBoticas.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="jsonService.asmx" />
     <Content Include="Models\BDBoticas.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BDBoticas.edmx</DependentUpon>
@@ -218,6 +248,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-3.4.0.debug.js" />
     <Content Include="Scripts\knockout-3.4.0.js" />
+    <Content Include="Scripts\Source\jsRecursosHumanos.js" />
     <Content Include="Scripts\toastr\toastr.min.css" />
     <Content Include="Scripts\toastr\toastr.min.js" />
     <Content Include="Views\PruebaAutoevaluacion\Create.cshtml" />
@@ -480,6 +511,15 @@
     <Compile Include="Models\RRH_Empleado.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RRH_Empleado_GetJefe_Result.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_Empleado_Get_Result.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_Empleado_Select_Result.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RRH_EvaluacionTecnica.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
@@ -502,6 +542,12 @@
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RRH_PreguntaEvaluacionTecnica.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_PreguntaEvaluacionTecnica_get_Result.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_PreguntaEvaluacionTecnica_Select_Result.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RRH_PruebaAutoevaluacion.cs">

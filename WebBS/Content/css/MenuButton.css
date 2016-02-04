@@ -1,0 +1,192 @@
+﻿#cssmenuButton,
+#cssmenuButton ul,
+#cssmenuButton ul li,
+#cssmenuButton ul li button,
+#cssmenuButton #menu-button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+  line-height: 1;
+  display: block;
+  position: relative;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#cssmenuButton:after,
+#cssmenuButton > ul:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+#cssmenuButton #menu-button {
+  display: none;
+}
+#cssmenuButton {
+  width: 375px;
+  border-radius: 4px;
+  border: 1px solid rgba(100, 100, 100, 0.1);
+  line-height: 1;
+  margin-bottom: 15px;
+}
+#cssmenuButton > ul > li {
+  float: left;
+}
+#cssmenuButton.align-center > ul {
+  font-size: 0;
+  text-align: center;
+}
+#cssmenuButton.align-center > ul > li {
+  display: inline-block;
+  float: none;
+}
+#cssmenuButton.align-right > ul > li {
+  float: right;
+}
+#cssmenuButton > ul > li > button {
+  padding: 5px 10px 6px 10px;
+  font-size: 10pt;
+  text-decoration: none;
+  /*color: #fcfefb;*/
+  color: black;
+  -webkit-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -ms-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease;
+}
+#cssmenuButton > ul > li:first-child > button {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+#cssmenuButton.align-center > ul > li:first-child > button {
+  border-radius: 0;
+}
+#cssmen.align-right > ul > li:first-child > button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+#cssmenuButton > ul > li:hover > button,
+#cssmenuButton > ul > li.active > button {
+  background: rgba(100, 100, 100, 0.1);
+}
+#cssmenuButton > ul > li:hover > button,
+#cssmenuButton > ul > li > button:hover {
+  background: rgba(125, 125, 125, 0.04);
+  /*background: rgba(100, 100, 100, 0.1);*/
+  cursor: pointer;
+}
+#cssmenuButton > ul > li:after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  right: 0;
+  display: block;
+  height: 20px;
+  width: 1px;
+  opacity: .15;
+  background: rgba(0, 0, 0, 0.7);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0), #000000, rgba(0, 0, 0, 0));
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), #000000, rgba(0, 0, 0, 0));
+  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0), #000000, rgba(0, 0, 0, 0));
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0), #000000, rgba(0, 0, 0, 0));
+  background: -o-linear-gradient(top, rgba(0, 0, 0, 0), #000000, rgba(0, 0, 0, 0));
+}
+#cssmenuButton.align-right > ul > li:after {
+  right: auto;
+  left: -1px;
+}
+#cssmenuButton > ul > li:before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: -1px;
+  display: block;
+  height: 20px;
+  width: 1px;
+  opacity: .35;
+  background: rgba(255, 255, 255, 0.8);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0), #ffffff, rgba(0, 0, 0, 0));
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), #ffffff, rgba(0, 0, 0, 0));
+  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0), #ffffff, rgba(0, 0, 0, 0));
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.01), #ffffff, rgba(255, 255, 255, 0.01));
+  background: -o-linear-gradient(top, rgba(0, 0, 0, 0), #ffffff, rgba(0, 0, 0, 0));
+}
+
+#cssmenuButton.align-right > ul > li:before {
+  right: auto;
+  left: 0px;
+}
+#cssmenuButton > ul > li:last-child:after,
+#cssmenuButton > ul > li:last-child:before {
+  display: none;
+}
+#cssmenuButton.small-screen {
+  width: 100%;
+}
+#cssmenuButton.small-screen > ul,
+#cssmenuButton.small-screen.align-center > ul {
+  width: 100%;
+  text-align: left;
+}
+#cssmenuButton.small-screen > ul > li,
+#cssmenuButton.small-screen.align-center {
+  float: none;
+  display: block;
+  border-top: 1px solid rgba(100, 100, 100, 0.1);
+}
+#cssmenuButton.small-screen > ul > li > button {
+  padding: 18px 25px;
+}
+#cssmenuButton.small-screen > ul > li:after,
+#cssmenuButton.small-screen > ul > li:before {
+  display: none;
+}
+#cssmenuButton.small-screen #menu-button {
+  display: block;
+  padding: 18px 25px 19px 25px;
+  cursor: pointer;
+  font-size: 15px;
+  text-decoration: none;
+  color: #fcfefb;
+}
+#cssmenuButton.small-screen #menu-button.menu-opened {
+  color: #444444;
+}
+#cssmenuButton.small-screen #menu-button:after {
+  content: "";
+  position: absolute;
+  right: 25px;
+  top: 20px;
+  display: block;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  border-top: 2px solid #fcfefb;
+  border-bottom: 2px solid #fcfefb;
+  width: 18px;
+  height: 3px;
+}
+#cssmenuButton.small-screen #menu-button.menu-opened:after {
+  border-top: 2px solid #444444;
+  border-bottom: 2px solid #444444;
+}
+#cssmenuButton.small-screen #menu-button:before {
+  content: "";
+  position: absolute;
+  right: 25px;
+  top: 30px;
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: #fcfefb;
+}
+#cssmenuButton.small-screen #menu-button.menu-opened:before {
+  background: #444444;
+}

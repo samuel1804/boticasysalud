@@ -1025,6 +1025,8 @@
           <Property Name="Cod_Puesto" Type="int" />
           <Property Name="Cod_Jefe" Type="int" />
           <Property Name="Cod_Sucursal" Type="int" />
+          <Property Name="Cod_Perfil" Type="int" />
+          <Property Name="Cod_Area" Type="int" />
         </EntityType>
         <EntityType Name="RRH_EvaluacionTecnica">
           <Key>
@@ -1142,6 +1144,7 @@
           <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_modi" Type="datetime" />
           <Property Name="Cod_alternativa_evaluaciontec" Type="int" />
+          <Property Name="Cod_perfil" Type="int" />
         </EntityType>
         <EntityType Name="RRH_PruebaAutoevaluacion">
           <Key>
@@ -1154,6 +1157,7 @@
           <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_modi" Type="datetime" />
           <Property Name="Cod_empleado" Type="int" />
+          <Property Name="Cod_resp_autoevaluacion" Type="int" />
         </EntityType>
         <EntityType Name="RRH_PruebaAutoevaluacion_Respuesta">
           <Key>
@@ -1446,7 +1450,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <Property Name="Cod_usu_modi" Type="varchar" MaxLength="10" />
           <Property Name="Fec_usu_modi" Type="datetime" />
         </EntityType>
-        <Association Name="FK__ALP_CONST__num_o__531856C7">
+        <Association Name="FK__ALP_CONST__num_o__4E53A1AA">
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="1" />
           <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1458,7 +1462,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_HOJA___num_c__540C7B00">
+        <Association Name="FK__ALP_HOJA___num_c__4F47C5E3">
           <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
           <End Role="ALP_HOJA_MERMA" Type="Self.ALP_HOJA_MERMA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1482,7 +1486,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_LIBRO__num_c__55F4C372">
+        <Association Name="FK__ALP_LIBRO__num_c__51300E55">
           <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
           <End Role="ALP_LIBRO_RECETA" Type="Self.ALP_LIBRO_RECETA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1506,7 +1510,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_i__59C55456">
+        <Association Name="FK__ALP_ORDEN__cod_i__55009F39">
           <End Role="ALP_INSUMO" Type="Self.ALP_INSUMO" Multiplicity="1" />
           <End Role="ALP_ORDEN_PREPARADO_INSUMO" Type="Self.ALP_ORDEN_PREPARADO_INSUMO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1518,7 +1522,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_r__57DD0BE4">
+        <Association Name="FK__ALP_ORDEN__cod_r__531856C7">
           <End Role="ALP_RECETA" Type="Self.ALP_RECETA" Multiplicity="1" />
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1530,7 +1534,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_s__58D1301D">
+        <Association Name="FK__ALP_ORDEN__cod_s__540C7B00">
           <End Role="RRH_Sucursal" Type="Self.RRH_Sucursal" Multiplicity="1" />
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1542,7 +1546,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__num_o__5AB9788F">
+        <Association Name="FK__ALP_ORDEN__num_o__55F4C372">
           <End Role="ALP_ORDEN_PREPARADO" Type="Self.ALP_ORDEN_PREPARADO" Multiplicity="1" />
           <End Role="ALP_ORDEN_PREPARADO_INSUMO" Type="Self.ALP_ORDEN_PREPARADO_INSUMO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1554,7 +1558,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DIS_Pedid__Cod_s__607251E5">
+        <Association Name="FK__DIS_Pedid__Cod_s__5BAD9CC8">
           <End Role="RRH_Sucursal" Type="Self.RRH_Sucursal" Multiplicity="0..1" />
           <End Role="DIS_Pedido" Type="Self.DIS_Pedido" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2414,6 +2418,18 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RRH_Empleado_RRH_Area">
+          <End Role="RRH_Area" Type="Self.RRH_Area" Multiplicity="0..1" />
+          <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Area">
+              <PropertyRef Name="Cod_area" />
+            </Principal>
+            <Dependent Role="RRH_Empleado">
+              <PropertyRef Name="Cod_Area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RRH_Empleado_RRH_Empleado">
           <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="0..1" />
           <End Role="RRH_Empleado1" Type="Self.RRH_Empleado" Multiplicity="*" />
@@ -2435,6 +2451,18 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Principal>
             <Dependent Role="RRH_Empleado">
               <PropertyRef Name="Cod_Puesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_Empleado_RRH_Perfil1">
+          <End Role="RRH_Perfil" Type="Self.RRH_Perfil" Multiplicity="0..1" />
+          <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Perfil">
+              <PropertyRef Name="Cod_perfil" />
+            </Principal>
+            <Dependent Role="RRH_Empleado">
+              <PropertyRef Name="Cod_Perfil" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2507,6 +2535,18 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Principal>
             <Dependent Role="RRH_PreguntaEvaluacionTecnica">
               <PropertyRef Name="Cod_criterio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_PreguntaEvaluacionTecnica_RRH_Perfil">
+          <End Role="RRH_Perfil" Type="Self.RRH_Perfil" Multiplicity="0..1" />
+          <End Role="RRH_PreguntaEvaluacionTecnica" Type="Self.RRH_PreguntaEvaluacionTecnica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Perfil">
+              <PropertyRef Name="Cod_perfil" />
+            </Principal>
+            <Dependent Role="RRH_PreguntaEvaluacionTecnica">
+              <PropertyRef Name="Cod_perfil" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2786,6 +2826,47 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="RRH_Criterio_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Desc_criterio" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="RRH_Empleado_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cod_Empleado" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RRH_Empleado_GetJefe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="RRH_Empleado_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cod_Jefe" Type="int" Mode="In" />
+          <Parameter Name="NomCompleto" Type="varchar" Mode="In" />
+          <Parameter Name="Nom_puesto" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="RRH_PreguntaEvaluacionTecnica_get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cod_perfil" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RRH_PreguntaEvaluacionTecnica_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cod_preg_eva_tec" Type="int" Mode="In" />
+          <Parameter Name="Titulo" Type="varchar" Mode="In" />
+          <Parameter Name="Pregunta" Type="varchar" Mode="In" />
+          <Parameter Name="Fec_creacion" Type="date" Mode="In" />
+          <Parameter Name="Cod_criterio" Type="int" Mode="In" />
+          <Parameter Name="Cod_usu_regi" Type="varchar" Mode="In" />
+          <Parameter Name="Fec_usu_regi" Type="datetime" Mode="In" />
+          <Parameter Name="Cod_alternativa_evaluaciontec" Type="int" Mode="In" />
+          <Parameter Name="Cod_perfil" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RRH_PreguntaEvaluacionTecnica_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="startRowIndex" Type="int" Mode="In" />
+          <Parameter Name="maximumRows" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RRH_PreguntaEvaluacionTecnica_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cod_preg_eva_tec" Type="int" Mode="In" />
+          <Parameter Name="Titulo" Type="varchar" Mode="In" />
+          <Parameter Name="Pregunta" Type="varchar" Mode="In" />
+          <Parameter Name="Fec_creacion" Type="date" Mode="In" />
+          <Parameter Name="Cod_criterio" Type="int" Mode="In" />
+          <Parameter Name="Cod_usu_regi" Type="varchar" Mode="In" />
+          <Parameter Name="Fec_usu_regi" Type="datetime" Mode="In" />
+          <Parameter Name="Cod_alternativa_evaluaciontec" Type="int" Mode="In" />
+          <Parameter Name="Cod_perfil" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="BDBoticasModelStoreContainer">
           <EntitySet Name="ALP_CONSTANCIA_PREPARADO" EntityType="Self.ALP_CONSTANCIA_PREPARADO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALP_HOJA_MERMA" EntityType="Self.ALP_HOJA_MERMA" Schema="dbo" store:Type="Tables" />
@@ -2894,11 +2975,11 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
     [RRH_Puesto_Option].[OptionId] AS [OptionId]
     FROM [dbo].[RRH_Puesto_Option] AS [RRH_Puesto_Option]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__ALP_CONST__num_o__531856C7" Association="Self.FK__ALP_CONST__num_o__531856C7">
+          <AssociationSet Name="FK__ALP_CONST__num_o__4E53A1AA" Association="Self.FK__ALP_CONST__num_o__4E53A1AA">
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_HOJA___num_c__540C7B00" Association="Self.FK__ALP_HOJA___num_c__540C7B00">
+          <AssociationSet Name="FK__ALP_HOJA___num_c__4F47C5E3" Association="Self.FK__ALP_HOJA___num_c__4F47C5E3">
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
             <End Role="ALP_HOJA_MERMA" EntitySet="ALP_HOJA_MERMA" />
           </AssociationSet>
@@ -2906,7 +2987,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="ALP_LIBRO_RECETA" EntitySet="ALP_LIBRO_RECETA" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_LIBRO__num_c__55F4C372" Association="Self.FK__ALP_LIBRO__num_c__55F4C372">
+          <AssociationSet Name="FK__ALP_LIBRO__num_c__51300E55" Association="Self.FK__ALP_LIBRO__num_c__51300E55">
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
             <End Role="ALP_LIBRO_RECETA" EntitySet="ALP_LIBRO_RECETA" />
           </AssociationSet>
@@ -2914,23 +2995,23 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_i__59C55456" Association="Self.FK__ALP_ORDEN__cod_i__59C55456">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_i__55009F39" Association="Self.FK__ALP_ORDEN__cod_i__55009F39">
             <End Role="ALP_INSUMO" EntitySet="ALP_INSUMO" />
             <End Role="ALP_ORDEN_PREPARADO_INSUMO" EntitySet="ALP_ORDEN_PREPARADO_INSUMO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_r__57DD0BE4" Association="Self.FK__ALP_ORDEN__cod_r__57DD0BE4">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_r__531856C7" Association="Self.FK__ALP_ORDEN__cod_r__531856C7">
             <End Role="ALP_RECETA" EntitySet="ALP_RECETA" />
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_s__58D1301D" Association="Self.FK__ALP_ORDEN__cod_s__58D1301D">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_s__540C7B00" Association="Self.FK__ALP_ORDEN__cod_s__540C7B00">
             <End Role="RRH_Sucursal" EntitySet="RRH_Sucursal" />
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__num_o__5AB9788F" Association="Self.FK__ALP_ORDEN__num_o__5AB9788F">
+          <AssociationSet Name="FK__ALP_ORDEN__num_o__55F4C372" Association="Self.FK__ALP_ORDEN__num_o__55F4C372">
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
             <End Role="ALP_ORDEN_PREPARADO_INSUMO" EntitySet="ALP_ORDEN_PREPARADO_INSUMO" />
           </AssociationSet>
-          <AssociationSet Name="FK__DIS_Pedid__Cod_s__607251E5" Association="Self.FK__DIS_Pedid__Cod_s__607251E5">
+          <AssociationSet Name="FK__DIS_Pedid__Cod_s__5BAD9CC8" Association="Self.FK__DIS_Pedid__Cod_s__5BAD9CC8">
             <End Role="RRH_Sucursal" EntitySet="RRH_Sucursal" />
             <End Role="DIS_Pedido" EntitySet="DIS_Pedido" />
           </AssociationSet>
@@ -3214,12 +3295,20 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             <End Role="RRH_Distrito" EntitySet="RRH_Distrito" />
             <End Role="RRH_Candidato" EntitySet="RRH_Candidato" />
           </AssociationSet>
+          <AssociationSet Name="FK_RRH_Empleado_RRH_Area" Association="Self.FK_RRH_Empleado_RRH_Area">
+            <End Role="RRH_Area" EntitySet="RRH_Area" />
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+          </AssociationSet>
           <AssociationSet Name="FK_RRH_Empleado_RRH_Empleado" Association="Self.FK_RRH_Empleado_RRH_Empleado">
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="RRH_Empleado1" EntitySet="RRH_Empleado" />
           </AssociationSet>
           <AssociationSet Name="FK_RRH_Empleado_RRH_Perfil" Association="Self.FK_RRH_Empleado_RRH_Perfil">
             <End Role="RRH_Puesto" EntitySet="RRH_Puesto" />
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_Empleado_RRH_Perfil1" Association="Self.FK_RRH_Empleado_RRH_Perfil1">
+            <End Role="RRH_Perfil" EntitySet="RRH_Perfil" />
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
           </AssociationSet>
           <AssociationSet Name="FK_RRH_Empleado_RRH_Sucursal" Association="Self.FK_RRH_Empleado_RRH_Sucursal">
@@ -3244,6 +3333,10 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           </AssociationSet>
           <AssociationSet Name="FK_RRH_PreguntaEvaluacionTecnica_RRH_Criterio" Association="Self.FK_RRH_PreguntaEvaluacionTecnica_RRH_Criterio">
             <End Role="RRH_Criterio" EntitySet="RRH_Criterio" />
+            <End Role="RRH_PreguntaEvaluacionTecnica" EntitySet="RRH_PreguntaEvaluacionTecnica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_PreguntaEvaluacionTecnica_RRH_Perfil" Association="Self.FK_RRH_PreguntaEvaluacionTecnica_RRH_Perfil">
+            <End Role="RRH_Perfil" EntitySet="RRH_Perfil" />
             <End Role="RRH_PreguntaEvaluacionTecnica" EntitySet="RRH_PreguntaEvaluacionTecnica" />
           </AssociationSet>
           <AssociationSet Name="FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" Association="Self.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado">
@@ -3491,19 +3584,19 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <EntitySet Name="RYA_TRANSA_ALMA" EntityType="BDBoticasModel.RYA_TRANSA_ALMA" />
           <EntitySet Name="RYA_UBICACIONES" EntityType="BDBoticasModel.RYA_UBICACIONES" />
           <EntitySet Name="RRH_Puesto_Option" EntityType="BDBoticasModel.RRH_Puesto_Option" />
-          <AssociationSet Name="FK__ALP_CONST__num_o__531856C7" Association="BDBoticasModel.FK__ALP_CONST__num_o__531856C7">
+          <AssociationSet Name="FK__ALP_CONST__num_o__4E53A1AA" Association="BDBoticasModel.FK__ALP_CONST__num_o__4E53A1AA">
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_HOJA___num_c__540C7B00" Association="BDBoticasModel.FK__ALP_HOJA___num_c__540C7B00">
+          <AssociationSet Name="FK__ALP_HOJA___num_c__4F47C5E3" Association="BDBoticasModel.FK__ALP_HOJA___num_c__4F47C5E3">
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
             <End Role="ALP_HOJA_MERMA" EntitySet="ALP_HOJA_MERMA" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_LIBRO__num_c__55F4C372" Association="BDBoticasModel.FK__ALP_LIBRO__num_c__55F4C372">
+          <AssociationSet Name="FK__ALP_LIBRO__num_c__51300E55" Association="BDBoticasModel.FK__ALP_LIBRO__num_c__51300E55">
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
             <End Role="ALP_LIBRO_RECETA" EntitySet="ALP_LIBRO_RECETA" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_i__59C55456" Association="BDBoticasModel.FK__ALP_ORDEN__cod_i__59C55456">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_i__55009F39" Association="BDBoticasModel.FK__ALP_ORDEN__cod_i__55009F39">
             <End Role="ALP_INSUMO" EntitySet="ALP_INSUMO" />
             <End Role="ALP_ORDEN_PREPARADO_INSUMO" EntitySet="ALP_ORDEN_PREPARADO_INSUMO" />
           </AssociationSet>
@@ -3515,15 +3608,15 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_r__57DD0BE4" Association="BDBoticasModel.FK__ALP_ORDEN__cod_r__57DD0BE4">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_r__531856C7" Association="BDBoticasModel.FK__ALP_ORDEN__cod_r__531856C7">
             <End Role="ALP_RECETA" EntitySet="ALP_RECETA" />
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__cod_s__58D1301D" Association="BDBoticasModel.FK__ALP_ORDEN__cod_s__58D1301D">
+          <AssociationSet Name="FK__ALP_ORDEN__cod_s__540C7B00" Association="BDBoticasModel.FK__ALP_ORDEN__cod_s__540C7B00">
             <End Role="RRH_Sucursal" EntitySet="RRH_Sucursal" />
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALP_ORDEN__num_o__5AB9788F" Association="BDBoticasModel.FK__ALP_ORDEN__num_o__5AB9788F">
+          <AssociationSet Name="FK__ALP_ORDEN__num_o__55F4C372" Association="BDBoticasModel.FK__ALP_ORDEN__num_o__55F4C372">
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
             <End Role="ALP_ORDEN_PREPARADO_INSUMO" EntitySet="ALP_ORDEN_PREPARADO_INSUMO" />
           </AssociationSet>
@@ -3547,7 +3640,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             <End Role="DIS_Pedido" EntitySet="DIS_Pedido" />
             <End Role="DIS_HojaRutaDetalle" EntitySet="DIS_HojaRutaDetalle" />
           </AssociationSet>
-          <AssociationSet Name="FK__DIS_Pedid__Cod_s__607251E5" Association="BDBoticasModel.FK__DIS_Pedid__Cod_s__607251E5">
+          <AssociationSet Name="FK__DIS_Pedid__Cod_s__5BAD9CC8" Association="BDBoticasModel.FK__DIS_Pedid__Cod_s__5BAD9CC8">
             <End Role="RRH_Sucursal" EntitySet="RRH_Sucursal" />
             <End Role="DIS_Pedido" EntitySet="DIS_Pedido" />
           </AssociationSet>
@@ -3791,6 +3884,10 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             <End Role="RRH_Area" EntitySet="RRH_Area" />
             <End Role="RRH_Puesto" EntitySet="RRH_Puesto" />
           </AssociationSet>
+          <AssociationSet Name="FK_RRH_Empleado_RRH_Area" Association="BDBoticasModel.FK_RRH_Empleado_RRH_Area">
+            <End Role="RRH_Area" EntitySet="RRH_Area" />
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+          </AssociationSet>
           <AssociationSet Name="FK_OfertaLaboral_Candidato_Candidato" Association="BDBoticasModel.FK_OfertaLaboral_Candidato_Candidato">
             <End Role="RRH_Candidato" EntitySet="RRH_Candidato" />
             <End Role="RRH_OfertaLaboral_Candidato" EntitySet="RRH_OfertaLaboral_Candidato" />
@@ -3825,6 +3922,10 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           </AssociationSet>
           <AssociationSet Name="FK_RRH_Empleado_RRH_Perfil" Association="BDBoticasModel.FK_RRH_Empleado_RRH_Perfil">
             <End Role="RRH_Puesto" EntitySet="RRH_Puesto" />
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_Empleado_RRH_Perfil1" Association="BDBoticasModel.FK_RRH_Empleado_RRH_Perfil1">
+            <End Role="RRH_Perfil" EntitySet="RRH_Perfil" />
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
           </AssociationSet>
           <AssociationSet Name="FK_RRH_Empleado_RRH_Sucursal" Association="BDBoticasModel.FK_RRH_Empleado_RRH_Sucursal">
@@ -3870,6 +3971,10 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <AssociationSet Name="FK_Perfil_Puesto" Association="BDBoticasModel.FK_Perfil_Puesto">
             <End Role="RRH_Puesto" EntitySet="RRH_Puesto" />
             <End Role="RRH_Perfil" EntitySet="RRH_Perfil" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RRH_PreguntaEvaluacionTecnica_RRH_Perfil" Association="BDBoticasModel.FK_RRH_PreguntaEvaluacionTecnica_RRH_Perfil">
+            <End Role="RRH_Perfil" EntitySet="RRH_Perfil" />
+            <End Role="RRH_PreguntaEvaluacionTecnica" EntitySet="RRH_PreguntaEvaluacionTecnica" />
           </AssociationSet>
           <AssociationSet Name="FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_PruebaAutoevaluacion" Association="BDBoticasModel.FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_PruebaAutoevaluacion">
             <End Role="RRH_PruebaAutoevaluacion" EntitySet="RRH_PruebaAutoevaluacion" />
@@ -3935,6 +4040,47 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             <End Role="RYA_PRODUCTO" EntitySet="RYA_PRODUCTO" />
             <End Role="RYA_STOCK" EntitySet="RYA_STOCK" />
           </AssociationSet>
+          <FunctionImport Name="RRH_Criterio_Insert" ReturnType="Collection(Int32)">
+            <Parameter Name="Desc_criterio" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RRH_Empleado_Get" ReturnType="Collection(BDBoticasModel.RRH_Empleado_Get_Result)">
+            <Parameter Name="Cod_Empleado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RRH_Empleado_GetJefe" ReturnType="Collection(BDBoticasModel.RRH_Empleado_GetJefe_Result)" />
+          <FunctionImport Name="RRH_Empleado_Select" ReturnType="Collection(BDBoticasModel.RRH_Empleado_Select_Result)">
+            <Parameter Name="Cod_Jefe" Mode="In" Type="Int32" />
+            <Parameter Name="NomCompleto" Mode="In" Type="String" />
+            <Parameter Name="Nom_puesto" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RRH_PreguntaEvaluacionTecnica_get" ReturnType="Collection(BDBoticasModel.RRH_PreguntaEvaluacionTecnica_get_Result)">
+            <Parameter Name="Cod_perfil" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RRH_PreguntaEvaluacionTecnica_Insert" ReturnType="Collection(Int32)">
+            <Parameter Name="Cod_preg_eva_tec" Mode="In" Type="Int32" />
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="Pregunta" Mode="In" Type="String" />
+            <Parameter Name="Fec_creacion" Mode="In" Type="DateTime" />
+            <Parameter Name="Cod_criterio" Mode="In" Type="Int32" />
+            <Parameter Name="Cod_usu_regi" Mode="In" Type="String" />
+            <Parameter Name="Fec_usu_regi" Mode="In" Type="DateTime" />
+            <Parameter Name="Cod_alternativa_evaluaciontec" Mode="In" Type="Int32" />
+            <Parameter Name="Cod_perfil" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RRH_PreguntaEvaluacionTecnica_Select" ReturnType="Collection(BDBoticasModel.RRH_PreguntaEvaluacionTecnica_Select_Result)">
+            <Parameter Name="startRowIndex" Mode="In" Type="Int32" />
+            <Parameter Name="maximumRows" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RRH_PreguntaEvaluacionTecnica_Update" ReturnType="Collection(Int32)">
+            <Parameter Name="Cod_preg_eva_tec" Mode="In" Type="Int32" />
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="Pregunta" Mode="In" Type="String" />
+            <Parameter Name="Fec_creacion" Mode="In" Type="DateTime" />
+            <Parameter Name="Cod_criterio" Mode="In" Type="Int32" />
+            <Parameter Name="Cod_usu_regi" Mode="In" Type="String" />
+            <Parameter Name="Fec_usu_regi" Mode="In" Type="DateTime" />
+            <Parameter Name="Cod_alternativa_evaluaciontec" Mode="In" Type="Int32" />
+            <Parameter Name="Cod_perfil" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="usp_Chofer_GetAll_Result">
           <Property Type="Int32" Name="IdChofer" Nullable="false" />
@@ -3958,9 +4104,9 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="BDBoticasModel.FK__ALP_CONST__num_o__531856C7" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_ORDEN_PREPARADO" />
-          <NavigationProperty Name="ALP_HOJA_MERMA" Relationship="BDBoticasModel.FK__ALP_HOJA___num_c__540C7B00" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_HOJA_MERMA" />
-          <NavigationProperty Name="ALP_LIBRO_RECETA" Relationship="BDBoticasModel.FK__ALP_LIBRO__num_c__55F4C372" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_LIBRO_RECETA" />
+          <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="BDBoticasModel.FK__ALP_CONST__num_o__4E53A1AA" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_ORDEN_PREPARADO" />
+          <NavigationProperty Name="ALP_HOJA_MERMA" Relationship="BDBoticasModel.FK__ALP_HOJA___num_c__4F47C5E3" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_HOJA_MERMA" />
+          <NavigationProperty Name="ALP_LIBRO_RECETA" Relationship="BDBoticasModel.FK__ALP_LIBRO__num_c__51300E55" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_LIBRO_RECETA" />
         </EntityType>
         <EntityType Name="ALP_HOJA_MERMA">
           <Key>
@@ -3974,7 +4120,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="BDBoticasModel.FK__ALP_HOJA___num_c__540C7B00" FromRole="ALP_HOJA_MERMA" ToRole="ALP_CONSTANCIA_PREPARADO" />
+          <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="BDBoticasModel.FK__ALP_HOJA___num_c__4F47C5E3" FromRole="ALP_HOJA_MERMA" ToRole="ALP_CONSTANCIA_PREPARADO" />
         </EntityType>
         <EntityType Name="ALP_INSUMO">
           <Key>
@@ -3989,7 +4135,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="ALP_ORDEN_PREPARADO_INSUMO" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_i__59C55456" FromRole="ALP_INSUMO" ToRole="ALP_ORDEN_PREPARADO_INSUMO" />
+          <NavigationProperty Name="ALP_ORDEN_PREPARADO_INSUMO" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_i__55009F39" FromRole="ALP_INSUMO" ToRole="ALP_ORDEN_PREPARADO_INSUMO" />
         </EntityType>
         <EntityType Name="ALP_LIBRO_RECETA">
           <Key>
@@ -4003,7 +4149,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="BDBoticasModel.FK__ALP_LIBRO__num_c__55F4C372" FromRole="ALP_LIBRO_RECETA" ToRole="ALP_CONSTANCIA_PREPARADO" />
+          <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="BDBoticasModel.FK__ALP_LIBRO__num_c__51300E55" FromRole="ALP_LIBRO_RECETA" ToRole="ALP_CONSTANCIA_PREPARADO" />
           <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK__ALP_LIBRO__cod_q__46B27FE2" FromRole="ALP_LIBRO_RECETA" ToRole="RRH_Empleado" />
         </EntityType>
         <EntityType Name="ALP_ORDEN_PREPARADO">
@@ -4021,11 +4167,11 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="BDBoticasModel.FK__ALP_CONST__num_o__531856C7" FromRole="ALP_ORDEN_PREPARADO" ToRole="ALP_CONSTANCIA_PREPARADO" />
+          <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="BDBoticasModel.FK__ALP_CONST__num_o__4E53A1AA" FromRole="ALP_ORDEN_PREPARADO" ToRole="ALP_CONSTANCIA_PREPARADO" />
           <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_e__489AC854" FromRole="ALP_ORDEN_PREPARADO" ToRole="RRH_Empleado" />
-          <NavigationProperty Name="ALP_RECETA" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_r__57DD0BE4" FromRole="ALP_ORDEN_PREPARADO" ToRole="ALP_RECETA" />
-          <NavigationProperty Name="RRH_Sucursal" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_s__58D1301D" FromRole="ALP_ORDEN_PREPARADO" ToRole="RRH_Sucursal" />
-          <NavigationProperty Name="ALP_ORDEN_PREPARADO_INSUMO" Relationship="BDBoticasModel.FK__ALP_ORDEN__num_o__5AB9788F" FromRole="ALP_ORDEN_PREPARADO" ToRole="ALP_ORDEN_PREPARADO_INSUMO" />
+          <NavigationProperty Name="ALP_RECETA" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_r__531856C7" FromRole="ALP_ORDEN_PREPARADO" ToRole="ALP_RECETA" />
+          <NavigationProperty Name="RRH_Sucursal" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_s__540C7B00" FromRole="ALP_ORDEN_PREPARADO" ToRole="RRH_Sucursal" />
+          <NavigationProperty Name="ALP_ORDEN_PREPARADO_INSUMO" Relationship="BDBoticasModel.FK__ALP_ORDEN__num_o__55F4C372" FromRole="ALP_ORDEN_PREPARADO" ToRole="ALP_ORDEN_PREPARADO_INSUMO" />
         </EntityType>
         <EntityType Name="ALP_ORDEN_PREPARADO_INSUMO">
           <Key>
@@ -4039,8 +4185,8 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="ALP_INSUMO" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_i__59C55456" FromRole="ALP_ORDEN_PREPARADO_INSUMO" ToRole="ALP_INSUMO" />
-          <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="BDBoticasModel.FK__ALP_ORDEN__num_o__5AB9788F" FromRole="ALP_ORDEN_PREPARADO_INSUMO" ToRole="ALP_ORDEN_PREPARADO" />
+          <NavigationProperty Name="ALP_INSUMO" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_i__55009F39" FromRole="ALP_ORDEN_PREPARADO_INSUMO" ToRole="ALP_INSUMO" />
+          <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="BDBoticasModel.FK__ALP_ORDEN__num_o__55F4C372" FromRole="ALP_ORDEN_PREPARADO_INSUMO" ToRole="ALP_ORDEN_PREPARADO" />
         </EntityType>
         <EntityType Name="ALP_RECETA">
           <Key>
@@ -4058,7 +4204,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_r__57DD0BE4" FromRole="ALP_RECETA" ToRole="ALP_ORDEN_PREPARADO" />
+          <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_r__531856C7" FromRole="ALP_RECETA" ToRole="ALP_ORDEN_PREPARADO" />
         </EntityType>
         <EntityType Name="DIS_Control_Asignacion">
           <Key>
@@ -4125,7 +4271,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <Property Name="fec_usu_regi" Type="DateTime" Precision="3" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="3" />
           <NavigationProperty Name="DIS_HojaRutaDetalle" Relationship="BDBoticasModel.FK_HojaRutaDetalle_Pedido" FromRole="DIS_Pedido" ToRole="DIS_HojaRutaDetalle" />
-          <NavigationProperty Name="RRH_Sucursal" Relationship="BDBoticasModel.FK__DIS_Pedid__Cod_s__607251E5" FromRole="DIS_Pedido" ToRole="RRH_Sucursal" />
+          <NavigationProperty Name="RRH_Sucursal" Relationship="BDBoticasModel.FK__DIS_Pedid__Cod_s__5BAD9CC8" FromRole="DIS_Pedido" ToRole="RRH_Sucursal" />
           <NavigationProperty Name="DIS_Pedido_Detalle" Relationship="BDBoticasModel.FK_Pedido_Detalle_Pedido" FromRole="DIS_Pedido" ToRole="DIS_Pedido_Detalle" />
         </EntityType>
         <EntityType Name="DIS_Pedido_Detalle">
@@ -5040,6 +5186,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
           <NavigationProperty Name="RRH_Puesto" Relationship="BDBoticasModel.FK_Puesto_Area" FromRole="RRH_Area" ToRole="RRH_Puesto" />
+          <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_RRH_Empleado_RRH_Area" FromRole="RRH_Area" ToRole="RRH_Empleado" />
         </EntityType>
         <EntityType Name="RRH_Candidato">
           <Key>
@@ -5114,14 +5261,18 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <Property Name="Cod_Puesto" Type="Int32" />
           <Property Name="Cod_Jefe" Type="Int32" />
           <Property Name="Cod_Sucursal" Type="Int32" />
+          <Property Name="Cod_Perfil" Type="Int32" />
+          <Property Name="Cod_Area" Type="Int32" />
           <NavigationProperty Name="ALP_LIBRO_RECETA" Relationship="BDBoticasModel.FK__ALP_LIBRO__cod_q__46B27FE2" FromRole="RRH_Empleado" ToRole="ALP_LIBRO_RECETA" />
           <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_e__489AC854" FromRole="RRH_Empleado" ToRole="ALP_ORDEN_PREPARADO" />
           <NavigationProperty Name="GCC_EMPLEADO_INF_CREDITICIO" Relationship="BDBoticasModel.FK_GCC_EMPLEADO_INF_CREDITICIO_RRH_EMPLEADO" FromRole="RRH_Empleado" ToRole="GCC_EMPLEADO_INF_CREDITICIO" />
           <NavigationProperty Name="GCC_EMPLEADO_SOL_CREDITO" Relationship="BDBoticasModel.FK_GCC_EMPLEADO_SOL_CREDITO_RRH_EMPLEADO" FromRole="RRH_Empleado" ToRole="GCC_EMPLEADO_SOL_CREDITO" />
           <NavigationProperty Name="IMP_ACTIVIDAD_PLANIFICADA" Relationship="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_RRH_Empleado" FromRole="RRH_Empleado" ToRole="IMP_ACTIVIDAD_PLANIFICADA" />
+          <NavigationProperty Name="RRH_Area" Relationship="BDBoticasModel.FK_RRH_Empleado_RRH_Area" FromRole="RRH_Empleado" ToRole="RRH_Area" />
           <NavigationProperty Name="RRH_Empleado1" Relationship="BDBoticasModel.FK_RRH_Empleado_RRH_Empleado" FromRole="RRH_Empleado" ToRole="RRH_Empleado1" />
           <NavigationProperty Name="RRH_Empleado2" Relationship="BDBoticasModel.FK_RRH_Empleado_RRH_Empleado" FromRole="RRH_Empleado1" ToRole="RRH_Empleado" />
           <NavigationProperty Name="RRH_Puesto" Relationship="BDBoticasModel.FK_RRH_Empleado_RRH_Perfil" FromRole="RRH_Empleado" ToRole="RRH_Puesto" />
+          <NavigationProperty Name="RRH_Perfil" Relationship="BDBoticasModel.FK_RRH_Empleado_RRH_Perfil1" FromRole="RRH_Empleado" ToRole="RRH_Perfil" />
           <NavigationProperty Name="RRH_Sucursal" Relationship="BDBoticasModel.FK_RRH_Empleado_RRH_Sucursal" FromRole="RRH_Empleado" ToRole="RRH_Sucursal" />
           <NavigationProperty Name="RRH_PruebaAutoevaluacion" Relationship="BDBoticasModel.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" FromRole="RRH_Empleado" ToRole="RRH_PruebaAutoevaluacion" />
           <NavigationProperty Name="RRH_PruebaEvaluacionTecnica" Relationship="BDBoticasModel.FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado" FromRole="RRH_Empleado" ToRole="RRH_PruebaEvaluacionTecnica" />
@@ -5239,8 +5390,10 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
           <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_RRH_Empleado_RRH_Perfil1" FromRole="RRH_Perfil" ToRole="RRH_Empleado" />
           <NavigationProperty Name="RRH_OfertaLaboral" Relationship="BDBoticasModel.FK_OfertaLaboral_Perfil" FromRole="RRH_Perfil" ToRole="RRH_OfertaLaboral" />
           <NavigationProperty Name="RRH_Puesto" Relationship="BDBoticasModel.FK_Perfil_Puesto" FromRole="RRH_Perfil" ToRole="RRH_Puesto" />
+          <NavigationProperty Name="RRH_PreguntaEvaluacionTecnica" Relationship="BDBoticasModel.FK_RRH_PreguntaEvaluacionTecnica_RRH_Perfil" FromRole="RRH_Perfil" ToRole="RRH_PreguntaEvaluacionTecnica" />
         </EntityType>
         <EntityType Name="RRH_PreguntaEvaluacionTecnica">
           <Key>
@@ -5256,8 +5409,10 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
           <Property Name="Cod_alternativa_evaluaciontec" Type="Int32" />
+          <Property Name="Cod_perfil" Type="Int32" />
           <NavigationProperty Name="RRH_Criterio" Relationship="BDBoticasModel.FK_RRH_PreguntaEvaluacionTecnica_RRH_Criterio" FromRole="RRH_PreguntaEvaluacionTecnica" ToRole="RRH_Criterio" />
           <NavigationProperty Name="RRH_EvaluacionTecnica" Relationship="BDBoticasModel.FK_RRH_EvaluacionTecnica_RRH_PreguntaEvaluacionTecnica" FromRole="RRH_PreguntaEvaluacionTecnica" ToRole="RRH_EvaluacionTecnica" />
+          <NavigationProperty Name="RRH_Perfil" Relationship="BDBoticasModel.FK_RRH_PreguntaEvaluacionTecnica_RRH_Perfil" FromRole="RRH_PreguntaEvaluacionTecnica" ToRole="RRH_Perfil" />
         </EntityType>
         <EntityType Name="RRH_PruebaAutoevaluacion">
           <Key>
@@ -5270,6 +5425,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
           <Property Name="Cod_empleado" Type="Int32" />
+          <Property Name="Cod_resp_autoevaluacion" Type="Int32" />
           <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_RRH_PruebaAuotoevaluacion_RRH_Empleado" FromRole="RRH_PruebaAutoevaluacion" ToRole="RRH_Empleado" />
           <NavigationProperty Name="RRH_PruebaAutoevaluacion_Respuesta" Relationship="BDBoticasModel.FK_RRH_PruebaAutoevaluacion_Respuesta_RRH_PruebaAutoevaluacion" FromRole="RRH_PruebaAutoevaluacion" ToRole="RRH_PruebaAutoevaluacion_Respuesta" />
         </EntityType>
@@ -5364,8 +5520,8 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <Property Name="Fec_usu_regi" Type="DateTime" Precision="3" />
           <Property Name="Cod_usu_modi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_s__58D1301D" FromRole="RRH_Sucursal" ToRole="ALP_ORDEN_PREPARADO" />
-          <NavigationProperty Name="DIS_Pedido" Relationship="BDBoticasModel.FK__DIS_Pedid__Cod_s__607251E5" FromRole="RRH_Sucursal" ToRole="DIS_Pedido" />
+          <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="BDBoticasModel.FK__ALP_ORDEN__cod_s__540C7B00" FromRole="RRH_Sucursal" ToRole="ALP_ORDEN_PREPARADO" />
+          <NavigationProperty Name="DIS_Pedido" Relationship="BDBoticasModel.FK__DIS_Pedid__Cod_s__5BAD9CC8" FromRole="RRH_Sucursal" ToRole="DIS_Pedido" />
           <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_RRH_Empleado_RRH_Sucursal" FromRole="RRH_Sucursal" ToRole="RRH_Empleado" />
           <NavigationProperty Name="RRH_OfertaLaboral" Relationship="BDBoticasModel.FK_OfertaLaboral_Sucursal" FromRole="RRH_Sucursal" ToRole="RRH_OfertaLaboral" />
         </EntityType>
@@ -5606,7 +5762,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <NavigationProperty Name="RRH_Option" Relationship="BDBoticasModel.FK_RRH_Puesto_Option_RRH_Option" FromRole="RRH_Puesto_Option" ToRole="RRH_Option" />
           <NavigationProperty Name="RRH_Puesto" Relationship="BDBoticasModel.FK_RRH_Puesto_Option_RRH_Puesto" FromRole="RRH_Puesto_Option" ToRole="RRH_Puesto" />
         </EntityType>
-        <Association Name="FK__ALP_CONST__num_o__531856C7">
+        <Association Name="FK__ALP_CONST__num_o__4E53A1AA">
           <End Type="BDBoticasModel.ALP_ORDEN_PREPARADO" Role="ALP_ORDEN_PREPARADO" Multiplicity="1" />
           <End Type="BDBoticasModel.ALP_CONSTANCIA_PREPARADO" Role="ALP_CONSTANCIA_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -5618,7 +5774,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_HOJA___num_c__540C7B00">
+        <Association Name="FK__ALP_HOJA___num_c__4F47C5E3">
           <End Type="BDBoticasModel.ALP_CONSTANCIA_PREPARADO" Role="ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
           <End Type="BDBoticasModel.ALP_HOJA_MERMA" Role="ALP_HOJA_MERMA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -5630,7 +5786,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_LIBRO__num_c__55F4C372">
+        <Association Name="FK__ALP_LIBRO__num_c__51300E55">
           <End Type="BDBoticasModel.ALP_CONSTANCIA_PREPARADO" Role="ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
           <End Type="BDBoticasModel.ALP_LIBRO_RECETA" Role="ALP_LIBRO_RECETA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -5642,7 +5798,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_i__59C55456">
+        <Association Name="FK__ALP_ORDEN__cod_i__55009F39">
           <End Type="BDBoticasModel.ALP_INSUMO" Role="ALP_INSUMO" Multiplicity="1" />
           <End Type="BDBoticasModel.ALP_ORDEN_PREPARADO_INSUMO" Role="ALP_ORDEN_PREPARADO_INSUMO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -5678,7 +5834,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_r__57DD0BE4">
+        <Association Name="FK__ALP_ORDEN__cod_r__531856C7">
           <End Type="BDBoticasModel.ALP_RECETA" Role="ALP_RECETA" Multiplicity="1" />
           <End Type="BDBoticasModel.ALP_ORDEN_PREPARADO" Role="ALP_ORDEN_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -5690,7 +5846,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__cod_s__58D1301D">
+        <Association Name="FK__ALP_ORDEN__cod_s__540C7B00">
           <End Type="BDBoticasModel.RRH_Sucursal" Role="RRH_Sucursal" Multiplicity="1" />
           <End Type="BDBoticasModel.ALP_ORDEN_PREPARADO" Role="ALP_ORDEN_PREPARADO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -5702,7 +5858,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALP_ORDEN__num_o__5AB9788F">
+        <Association Name="FK__ALP_ORDEN__num_o__55F4C372">
           <End Type="BDBoticasModel.ALP_ORDEN_PREPARADO" Role="ALP_ORDEN_PREPARADO" Multiplicity="1" />
           <End Type="BDBoticasModel.ALP_ORDEN_PREPARADO_INSUMO" Role="ALP_ORDEN_PREPARADO_INSUMO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -5774,7 +5930,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DIS_Pedid__Cod_s__607251E5">
+        <Association Name="FK__DIS_Pedid__Cod_s__5BAD9CC8">
           <End Type="BDBoticasModel.RRH_Sucursal" Role="RRH_Sucursal" Multiplicity="0..1" />
           <End Type="BDBoticasModel.DIS_Pedido" Role="DIS_Pedido" Multiplicity="*" />
           <ReferentialConstraint>
@@ -6514,6 +6670,18 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RRH_Empleado_RRH_Area">
+          <End Type="BDBoticasModel.RRH_Area" Role="RRH_Area" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Area">
+              <PropertyRef Name="Cod_area" />
+            </Principal>
+            <Dependent Role="RRH_Empleado">
+              <PropertyRef Name="Cod_Area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OfertaLaboral_Candidato_Candidato">
           <End Type="BDBoticasModel.RRH_Candidato" Role="RRH_Candidato" Multiplicity="0..1" />
           <End Type="BDBoticasModel.RRH_OfertaLaboral_Candidato" Role="RRH_OfertaLaboral_Candidato" Multiplicity="*" />
@@ -6619,6 +6787,18 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Principal>
             <Dependent Role="RRH_Empleado">
               <PropertyRef Name="Cod_Puesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_Empleado_RRH_Perfil1">
+          <End Type="BDBoticasModel.RRH_Perfil" Role="RRH_Perfil" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Perfil">
+              <PropertyRef Name="Cod_perfil" />
+            </Principal>
+            <Dependent Role="RRH_Empleado">
+              <PropertyRef Name="Cod_Perfil" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6751,6 +6931,18 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Principal>
             <Dependent Role="RRH_Perfil">
               <PropertyRef Name="Cod_puesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RRH_PreguntaEvaluacionTecnica_RRH_Perfil">
+          <End Type="BDBoticasModel.RRH_Perfil" Role="RRH_Perfil" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.RRH_PreguntaEvaluacionTecnica" Role="RRH_PreguntaEvaluacionTecnica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Perfil">
+              <PropertyRef Name="Cod_perfil" />
+            </Principal>
+            <Dependent Role="RRH_PreguntaEvaluacionTecnica">
+              <PropertyRef Name="Cod_perfil" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6946,6 +7138,50 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="RRH_Empleado_Get_Result">
+          <Property Type="Int32" Name="Cod_empleado" Nullable="false" />
+          <Property Type="String" Name="Nom_empleado" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Ap_paterno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Ap_materno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Nom_puesto" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Cod_perfil" Nullable="true" />
+          <Property Type="String" Name="Desc_perfil" Nullable="false" />
+          <Property Type="String" Name="Desc_Area" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="RRH_Empleado_GetJefe_Result">
+          <Property Type="Int32" Name="Cod_empleado" Nullable="false" />
+          <Property Type="String" Name="Nom_empleado" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Ap_paterno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Ap_materno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Desc_Area" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="RRH_Empleado_Select_Result">
+          <Property Type="Int32" Name="Cod_empleado" Nullable="false" />
+          <Property Type="String" Name="Nom_empleado" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Ap_paterno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Ap_materno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Nom_puesto" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Evaluado" Nullable="false" MaxLength="11" />
+          <Property Type="Int32" Name="Puntaje" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="RRH_PreguntaEvaluacionTecnica_get_Result">
+          <Property Type="Int32" Name="Cod_criterio" Nullable="true" />
+          <Property Type="String" Name="Desc_criterio" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Pregunta" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="Cod_alternativa_evaluaciontec" Nullable="true" />
+          <Property Type="String" Name="Desc_Alternatica" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="RRH_PreguntaEvaluacionTecnica_Select_Result">
+          <Property Type="Int64" Name="rn1" Nullable="true" />
+          <Property Type="Int32" Name="Cod_preg_eva_tec" Nullable="false" />
+          <Property Type="String" Name="Desc_perfil" Nullable="false" />
+          <Property Type="Int32" Name="Cod_perfil" Nullable="true" />
+          <Property Type="String" Name="Desc_criterio" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="Cod_criterio" Nullable="true" />
+          <Property Type="String" Name="Pregunta" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Desc_Alternatica" Nullable="true" MaxLength="163" />
+          <Property Type="Int32" Name="Cod_alternativa_evaluaciontec" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8019,6 +8255,8 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <EntitySetMapping Name="RRH_Empleado">
             <EntityTypeMapping TypeName="BDBoticasModel.RRH_Empleado">
               <MappingFragment StoreEntitySet="RRH_Empleado">
+                <ScalarProperty Name="Cod_Area" ColumnName="Cod_Area" />
+                <ScalarProperty Name="Cod_Perfil" ColumnName="Cod_Perfil" />
                 <ScalarProperty Name="Cod_Sucursal" ColumnName="Cod_Sucursal" />
                 <ScalarProperty Name="Cod_Jefe" ColumnName="Cod_Jefe" />
                 <ScalarProperty Name="Cod_Puesto" ColumnName="Cod_Puesto" />
@@ -8151,6 +8389,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <EntitySetMapping Name="RRH_PreguntaEvaluacionTecnica">
             <EntityTypeMapping TypeName="BDBoticasModel.RRH_PreguntaEvaluacionTecnica">
               <MappingFragment StoreEntitySet="RRH_PreguntaEvaluacionTecnica">
+                <ScalarProperty Name="Cod_perfil" ColumnName="Cod_perfil" />
                 <ScalarProperty Name="Cod_alternativa_evaluaciontec" ColumnName="Cod_alternativa_evaluaciontec" />
                 <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
                 <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
@@ -8167,6 +8406,7 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
           <EntitySetMapping Name="RRH_PruebaAutoevaluacion">
             <EntityTypeMapping TypeName="BDBoticasModel.RRH_PruebaAutoevaluacion">
               <MappingFragment StoreEntitySet="RRH_PruebaAutoevaluacion">
+                <ScalarProperty Name="Cod_resp_autoevaluacion" ColumnName="Cod_resp_autoevaluacion" />
                 <ScalarProperty Name="Cod_empleado" ColumnName="Cod_empleado" />
                 <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
                 <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
@@ -8486,6 +8726,73 @@ advertencia 6002: La tabla o vista 'BDBoticas_Final.dbo.RRH_Puesto_Option' no ti
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="RRH_Criterio_Insert" FunctionName="BDBoticasModel.Store.RRH_Criterio_Insert" />
+          <FunctionImportMapping FunctionImportName="RRH_Empleado_Get" FunctionName="BDBoticasModel.Store.RRH_Empleado_Get">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDBoticasModel.RRH_Empleado_Get_Result">
+                <ScalarProperty Name="Cod_empleado" ColumnName="Cod_empleado" />
+                <ScalarProperty Name="Nom_empleado" ColumnName="Nom_empleado" />
+                <ScalarProperty Name="Ap_paterno" ColumnName="Ap_paterno" />
+                <ScalarProperty Name="Ap_materno" ColumnName="Ap_materno" />
+                <ScalarProperty Name="Nom_puesto" ColumnName="Nom_puesto" />
+                <ScalarProperty Name="Cod_perfil" ColumnName="Cod_perfil" />
+                <ScalarProperty Name="Desc_perfil" ColumnName="Desc_perfil" />
+                <ScalarProperty Name="Desc_Area" ColumnName="Desc_Area" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RRH_Empleado_GetJefe" FunctionName="BDBoticasModel.Store.RRH_Empleado_GetJefe">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDBoticasModel.RRH_Empleado_GetJefe_Result">
+                <ScalarProperty Name="Cod_empleado" ColumnName="Cod_empleado" />
+                <ScalarProperty Name="Nom_empleado" ColumnName="Nom_empleado" />
+                <ScalarProperty Name="Ap_paterno" ColumnName="Ap_paterno" />
+                <ScalarProperty Name="Ap_materno" ColumnName="Ap_materno" />
+                <ScalarProperty Name="Desc_Area" ColumnName="Desc_Area" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RRH_Empleado_Select" FunctionName="BDBoticasModel.Store.RRH_Empleado_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDBoticasModel.RRH_Empleado_Select_Result">
+                <ScalarProperty Name="Cod_empleado" ColumnName="Cod_empleado" />
+                <ScalarProperty Name="Nom_empleado" ColumnName="Nom_empleado" />
+                <ScalarProperty Name="Ap_paterno" ColumnName="Ap_paterno" />
+                <ScalarProperty Name="Ap_materno" ColumnName="Ap_materno" />
+                <ScalarProperty Name="Nom_puesto" ColumnName="Nom_puesto" />
+                <ScalarProperty Name="Evaluado" ColumnName="Evaluado" />
+                <ScalarProperty Name="Puntaje" ColumnName="Puntaje" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RRH_PreguntaEvaluacionTecnica_get" FunctionName="BDBoticasModel.Store.RRH_PreguntaEvaluacionTecnica_get">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDBoticasModel.RRH_PreguntaEvaluacionTecnica_get_Result">
+                <ScalarProperty Name="Cod_criterio" ColumnName="Cod_criterio" />
+                <ScalarProperty Name="Desc_criterio" ColumnName="Desc_criterio" />
+                <ScalarProperty Name="Pregunta" ColumnName="Pregunta" />
+                <ScalarProperty Name="Cod_alternativa_evaluaciontec" ColumnName="Cod_alternativa_evaluaciontec" />
+                <ScalarProperty Name="Desc_Alternatica" ColumnName="Desc_Alternatica" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RRH_PreguntaEvaluacionTecnica_Insert" FunctionName="BDBoticasModel.Store.RRH_PreguntaEvaluacionTecnica_Insert" />
+          <FunctionImportMapping FunctionImportName="RRH_PreguntaEvaluacionTecnica_Select" FunctionName="BDBoticasModel.Store.RRH_PreguntaEvaluacionTecnica_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDBoticasModel.RRH_PreguntaEvaluacionTecnica_Select_Result">
+                <ScalarProperty Name="rn1" ColumnName="rn1" />
+                <ScalarProperty Name="Cod_preg_eva_tec" ColumnName="Cod_preg_eva_tec" />
+                <ScalarProperty Name="Desc_perfil" ColumnName="Desc_perfil" />
+                <ScalarProperty Name="Cod_perfil" ColumnName="Cod_perfil" />
+                <ScalarProperty Name="Desc_criterio" ColumnName="Desc_criterio" />
+                <ScalarProperty Name="Cod_criterio" ColumnName="Cod_criterio" />
+                <ScalarProperty Name="Pregunta" ColumnName="Pregunta" />
+                <ScalarProperty Name="Desc_Alternatica" ColumnName="Desc_Alternatica" />
+                <ScalarProperty Name="Cod_alternativa_evaluaciontec" ColumnName="Cod_alternativa_evaluaciontec" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RRH_PreguntaEvaluacionTecnica_Update" FunctionName="BDBoticasModel.Store.RRH_PreguntaEvaluacionTecnica_Update" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

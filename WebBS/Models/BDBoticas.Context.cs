@@ -280,5 +280,149 @@ namespace WebBS.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_Chofer_GetAll_Result>("usp_Chofer_GetAll");
         }
+    
+        public virtual ObjectResult<Nullable<int>> RRH_Criterio_Insert(string desc_criterio)
+        {
+            var desc_criterioParameter = desc_criterio != null ?
+                new ObjectParameter("Desc_criterio", desc_criterio) :
+                new ObjectParameter("Desc_criterio", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("RRH_Criterio_Insert", desc_criterioParameter);
+        }
+    
+        public virtual ObjectResult<RRH_Empleado_Get_Result> RRH_Empleado_Get(Nullable<int> cod_Empleado)
+        {
+            var cod_EmpleadoParameter = cod_Empleado.HasValue ?
+                new ObjectParameter("Cod_Empleado", cod_Empleado) :
+                new ObjectParameter("Cod_Empleado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RRH_Empleado_Get_Result>("RRH_Empleado_Get", cod_EmpleadoParameter);
+        }
+    
+        public virtual ObjectResult<RRH_Empleado_GetJefe_Result> RRH_Empleado_GetJefe()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RRH_Empleado_GetJefe_Result>("RRH_Empleado_GetJefe");
+        }
+    
+        public virtual ObjectResult<RRH_Empleado_Select_Result> RRH_Empleado_Select(Nullable<int> cod_Jefe, string nomCompleto, string nom_puesto)
+        {
+            var cod_JefeParameter = cod_Jefe.HasValue ?
+                new ObjectParameter("Cod_Jefe", cod_Jefe) :
+                new ObjectParameter("Cod_Jefe", typeof(int));
+    
+            var nomCompletoParameter = nomCompleto != null ?
+                new ObjectParameter("NomCompleto", nomCompleto) :
+                new ObjectParameter("NomCompleto", typeof(string));
+    
+            var nom_puestoParameter = nom_puesto != null ?
+                new ObjectParameter("Nom_puesto", nom_puesto) :
+                new ObjectParameter("Nom_puesto", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RRH_Empleado_Select_Result>("RRH_Empleado_Select", cod_JefeParameter, nomCompletoParameter, nom_puestoParameter);
+        }
+    
+        public virtual ObjectResult<RRH_PreguntaEvaluacionTecnica_get_Result> RRH_PreguntaEvaluacionTecnica_get(Nullable<int> cod_perfil)
+        {
+            var cod_perfilParameter = cod_perfil.HasValue ?
+                new ObjectParameter("Cod_perfil", cod_perfil) :
+                new ObjectParameter("Cod_perfil", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RRH_PreguntaEvaluacionTecnica_get_Result>("RRH_PreguntaEvaluacionTecnica_get", cod_perfilParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> RRH_PreguntaEvaluacionTecnica_Insert(Nullable<int> cod_preg_eva_tec, string titulo, string pregunta, Nullable<System.DateTime> fec_creacion, Nullable<int> cod_criterio, string cod_usu_regi, Nullable<System.DateTime> fec_usu_regi, Nullable<int> cod_alternativa_evaluaciontec, Nullable<int> cod_perfil)
+        {
+            var cod_preg_eva_tecParameter = cod_preg_eva_tec.HasValue ?
+                new ObjectParameter("Cod_preg_eva_tec", cod_preg_eva_tec) :
+                new ObjectParameter("Cod_preg_eva_tec", typeof(int));
+    
+            var tituloParameter = titulo != null ?
+                new ObjectParameter("Titulo", titulo) :
+                new ObjectParameter("Titulo", typeof(string));
+    
+            var preguntaParameter = pregunta != null ?
+                new ObjectParameter("Pregunta", pregunta) :
+                new ObjectParameter("Pregunta", typeof(string));
+    
+            var fec_creacionParameter = fec_creacion.HasValue ?
+                new ObjectParameter("Fec_creacion", fec_creacion) :
+                new ObjectParameter("Fec_creacion", typeof(System.DateTime));
+    
+            var cod_criterioParameter = cod_criterio.HasValue ?
+                new ObjectParameter("Cod_criterio", cod_criterio) :
+                new ObjectParameter("Cod_criterio", typeof(int));
+    
+            var cod_usu_regiParameter = cod_usu_regi != null ?
+                new ObjectParameter("Cod_usu_regi", cod_usu_regi) :
+                new ObjectParameter("Cod_usu_regi", typeof(string));
+    
+            var fec_usu_regiParameter = fec_usu_regi.HasValue ?
+                new ObjectParameter("Fec_usu_regi", fec_usu_regi) :
+                new ObjectParameter("Fec_usu_regi", typeof(System.DateTime));
+    
+            var cod_alternativa_evaluaciontecParameter = cod_alternativa_evaluaciontec.HasValue ?
+                new ObjectParameter("Cod_alternativa_evaluaciontec", cod_alternativa_evaluaciontec) :
+                new ObjectParameter("Cod_alternativa_evaluaciontec", typeof(int));
+    
+            var cod_perfilParameter = cod_perfil.HasValue ?
+                new ObjectParameter("Cod_perfil", cod_perfil) :
+                new ObjectParameter("Cod_perfil", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("RRH_PreguntaEvaluacionTecnica_Insert", cod_preg_eva_tecParameter, tituloParameter, preguntaParameter, fec_creacionParameter, cod_criterioParameter, cod_usu_regiParameter, fec_usu_regiParameter, cod_alternativa_evaluaciontecParameter, cod_perfilParameter);
+        }
+    
+        public virtual ObjectResult<RRH_PreguntaEvaluacionTecnica_Select_Result> RRH_PreguntaEvaluacionTecnica_Select(Nullable<int> startRowIndex, Nullable<int> maximumRows)
+        {
+            var startRowIndexParameter = startRowIndex.HasValue ?
+                new ObjectParameter("startRowIndex", startRowIndex) :
+                new ObjectParameter("startRowIndex", typeof(int));
+    
+            var maximumRowsParameter = maximumRows.HasValue ?
+                new ObjectParameter("maximumRows", maximumRows) :
+                new ObjectParameter("maximumRows", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RRH_PreguntaEvaluacionTecnica_Select_Result>("RRH_PreguntaEvaluacionTecnica_Select", startRowIndexParameter, maximumRowsParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> RRH_PreguntaEvaluacionTecnica_Update(Nullable<int> cod_preg_eva_tec, string titulo, string pregunta, Nullable<System.DateTime> fec_creacion, Nullable<int> cod_criterio, string cod_usu_regi, Nullable<System.DateTime> fec_usu_regi, Nullable<int> cod_alternativa_evaluaciontec, Nullable<int> cod_perfil)
+        {
+            var cod_preg_eva_tecParameter = cod_preg_eva_tec.HasValue ?
+                new ObjectParameter("Cod_preg_eva_tec", cod_preg_eva_tec) :
+                new ObjectParameter("Cod_preg_eva_tec", typeof(int));
+    
+            var tituloParameter = titulo != null ?
+                new ObjectParameter("Titulo", titulo) :
+                new ObjectParameter("Titulo", typeof(string));
+    
+            var preguntaParameter = pregunta != null ?
+                new ObjectParameter("Pregunta", pregunta) :
+                new ObjectParameter("Pregunta", typeof(string));
+    
+            var fec_creacionParameter = fec_creacion.HasValue ?
+                new ObjectParameter("Fec_creacion", fec_creacion) :
+                new ObjectParameter("Fec_creacion", typeof(System.DateTime));
+    
+            var cod_criterioParameter = cod_criterio.HasValue ?
+                new ObjectParameter("Cod_criterio", cod_criterio) :
+                new ObjectParameter("Cod_criterio", typeof(int));
+    
+            var cod_usu_regiParameter = cod_usu_regi != null ?
+                new ObjectParameter("Cod_usu_regi", cod_usu_regi) :
+                new ObjectParameter("Cod_usu_regi", typeof(string));
+    
+            var fec_usu_regiParameter = fec_usu_regi.HasValue ?
+                new ObjectParameter("Fec_usu_regi", fec_usu_regi) :
+                new ObjectParameter("Fec_usu_regi", typeof(System.DateTime));
+    
+            var cod_alternativa_evaluaciontecParameter = cod_alternativa_evaluaciontec.HasValue ?
+                new ObjectParameter("Cod_alternativa_evaluaciontec", cod_alternativa_evaluaciontec) :
+                new ObjectParameter("Cod_alternativa_evaluaciontec", typeof(int));
+    
+            var cod_perfilParameter = cod_perfil.HasValue ?
+                new ObjectParameter("Cod_perfil", cod_perfil) :
+                new ObjectParameter("Cod_perfil", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("RRH_PreguntaEvaluacionTecnica_Update", cod_preg_eva_tecParameter, tituloParameter, preguntaParameter, fec_creacionParameter, cod_criterioParameter, cod_usu_regiParameter, fec_usu_regiParameter, cod_alternativa_evaluaciontecParameter, cod_perfilParameter);
+        }
     }
 }

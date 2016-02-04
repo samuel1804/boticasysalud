@@ -29,8 +29,10 @@ namespace WebBS.Models
         public string Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
         public Nullable<int> Cod_alternativa_evaluaciontec { get; set; }
+        public Nullable<int> Cod_perfil { get; set; }
     
         public virtual RRH_Criterio RRH_Criterio { get; set; }
         public virtual ICollection<RRH_EvaluacionTecnica> RRH_EvaluacionTecnica { get; set; }
+        public virtual RRH_Perfil RRH_Perfil { get; set; }
     }
 }

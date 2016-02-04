@@ -12,26 +12,26 @@ namespace WebBS.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+
     public partial class RRH_ExperienciaLaboral
     {
         public int Cod_ExperienciaLaboral { get; set; }
         public int Cod_candidato { get; set; }
-         [Required(ErrorMessage = "Ingrese el Nombre de la Empresa")]
+        [Required(ErrorMessage = "Ingrese el Nombre de la Empresa")]
         public string LugarTrabajo { get; set; }
-         [Required(ErrorMessage = "Ingrese sus Responsabilidades")]
+        [Required(ErrorMessage = "Ingrese sus Responsabilidades")]
         public string Desc_Reponsabilidades { get; set; }
         public System.DateTime Fec_Inicio_elaboral { get; set; }
         public System.DateTime Fec_Fin_elaboral { get; set; }
-         [Required(ErrorMessage = "Ingrese el Nombre de puesto que ocupo")]
+        [Required(ErrorMessage = "Ingrese el Nombre de puesto que ocupo")]
         public string Nom_puesto { get; set; }
-         [Required(ErrorMessage = "Ingrese el Área en la que se desempeño")]
+        [Required(ErrorMessage = "Ingrese el Área en la que se desempeño")]
         public string Nom_area { get; set; }
         public string Cod_usu_regi { get; set; }
         public Nullable<System.DateTime> Fec_usu_regi { get; set; }
         public string Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
-    
+
         public virtual RRH_Candidato RRH_Candidato { get; set; }
     }
 }

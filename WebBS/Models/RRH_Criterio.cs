@@ -27,10 +27,8 @@ namespace WebBS.Models
         public Nullable<System.DateTime> Fec_usu_regi { get; set; }
         public string Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
-    
+        public bool completado { get; set; }
         public virtual ICollection<RRH_PreguntaEvaluacionTecnica> RRH_PreguntaEvaluacionTecnica { get; set; }
         public virtual ICollection<RRH_RespuestaAutoevaluacion> RRH_RespuestaAutoevaluacion { get; set; }
-
-        public bool completado { get; set; }
     }
 }

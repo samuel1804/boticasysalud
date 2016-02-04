@@ -17,6 +17,7 @@ namespace WebBS.Models
         public RRH_Area()
         {
             this.RRH_Puesto = new HashSet<RRH_Puesto>();
+            this.RRH_Empleado = new HashSet<RRH_Empleado>();
         }
     
         public int Cod_area { get; set; }
@@ -28,5 +29,6 @@ namespace WebBS.Models
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
     
         public virtual ICollection<RRH_Puesto> RRH_Puesto { get; set; }
+        public virtual ICollection<RRH_Empleado> RRH_Empleado { get; set; }
     }
 }
