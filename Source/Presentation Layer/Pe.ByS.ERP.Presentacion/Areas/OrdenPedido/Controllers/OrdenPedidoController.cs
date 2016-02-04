@@ -83,7 +83,8 @@ namespace Pe.ByS.ERP.Presentacion.Areas.OrdenPedido.Controllers
                             item.FechaEntrega.ConvertToDdmmaaaa(),
                             string.Format("{0} {1}, {2}", item.Solicitante.ApellidoPaterno,
                                 item.Solicitante.ApellidoMaterno, item.Solicitante.Nombre),
-                            estados.First(p => p.Key == item.Estado).Value
+                            estados.First(p => p.Key == item.Estado).Value,
+                            item.Estado
                         }
                     }
                 });

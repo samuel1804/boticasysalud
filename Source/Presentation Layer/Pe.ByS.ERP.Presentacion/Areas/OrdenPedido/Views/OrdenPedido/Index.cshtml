@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutI.cshtml";
 }
+@using Pe.ByS.ERP.CrossCutting.Common.Enums
 @model List<KeyValuePair<string, string>>
 
 <div class="form-horizontal">
@@ -114,6 +115,13 @@
         var rowKey = $grilla.getGridParam('selrow');
 
         if (rowKey != null) {
+            var rowData = $grilla.getRowData(rowKey);
+            debugger;
+            if (rowData.EstadoId != '@Convert.ToInt32(EstadoPedido.Pendiente)') {
+                SIG.Alert('Alerta', "No se puede eliminar el registro su estado es diferente de \"Pendiente\"");
+                return;
+            }
+
             var parametrosConfirm = {
                 dialogText: "Está seguro que desea eliminar el registro?",
                 OkHandlerFunction: function(key) {
@@ -142,14 +150,15 @@
     });
 
     function ListarActa() {
-        var colNames = ['ID', 'Número de Orden de Pedido', 'Fecha de Solicitud', 'Fecha de Entrega de Pedido', 'Solicitante', 'Estado'];
+        var colNames = ['ID', 'Número de Orden de Pedido', 'Fecha de Solicitud', 'Fecha de Entrega de Pedido', 'Solicitante', 'Estado', 'EstadoId'];
         var colModels = [
             { name: 'Id', index: 'Id', align: 'center', hidden: true },
             { name: 'NumeroPedido', index: 'NumeroPedido', align: 'center', width: 100, searchoptions: { sopt: ['cn', 'bw'] } },
             { name: 'FechaPedido', index: 'FechaPedido', align: 'center', width: 120 },
             { name: 'FechaEntrega', index: 'FechaEntrega', align: 'center', width: 120, searchoptions: { sopt: ['cn', 'bw'] } },
             { name: 'SolicitanteNombre', index: 'SolicitanteNombre', align: 'center', width: 120 },
-            { name: 'Estado', index: 'Estado', align: 'center', width: 120, searchoptions: { sopt: ['cn', 'bw'] } }
+            { name: 'Estado', index: 'Estado', align: 'center', width: 120, searchoptions: { sopt: ['cn', 'bw'] } },
+            { name: 'EstadoId', index: 'EstadoId', align: 'center', hidden: true }
         ];
 
         var opciones = {
