@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Caching;
 using Pe.ByS.ERP.Application.DTO;
 using Pe.ByS.ERP.CrossCutting.Common;
 using Pe.ByS.ERP.CrossCutting.Common.Enums;
@@ -60,6 +59,7 @@ namespace Pe.ByS.ERP.Application.Converter
             pedidoDomain.SucursalId = pedidoDto.SucursalId;
             pedidoDomain.SolicitanteId = pedidoDto.SolicitanteId;
             pedidoDomain.Glosa = pedidoDto.Glosa;
+            pedidoDomain.Estado = ((int) EstadoPedido.Actualizado).ToString();
 
             var detalleEliminar = new List<int>();
             foreach (var item in pedidoDomain.DetalleOrdenPedidoList)
