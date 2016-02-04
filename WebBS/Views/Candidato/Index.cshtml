@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<WebBS.Models.RRH_Candidato>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Relación de Candidatos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Relación de Candidatos</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Nuevo Candidato", "Create")
 </p>
 <table class="table">
     <tr>
@@ -16,10 +16,10 @@
             @Html.DisplayNameFor(model => model.Nombre)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ApellidoPaterno)
+            Apellido Paterno
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ApellidoMaterno)
+           Apellido Materno
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DNI)
@@ -30,24 +30,11 @@
         <th>
             @Html.DisplayNameFor(model => model.Direccion)
         </th>
+      
         <th>
-            @Html.DisplayNameFor(model => model.Foto)
+            Fecha Post.
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fec_postulacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cod_usu_regi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fec_usu_regi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cod_usu_modi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fec_usu_modi)
-        </th>
+     
         <th></th>
     </tr>
 
@@ -71,28 +58,15 @@
         <td>
             @Html.DisplayFor(modelItem => item.Direccion)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Foto)
-        </td>
+        
         <td>
             @Html.DisplayFor(modelItem => item.Fec_postulacion)
         </td>
+    
         <td>
-            @Html.DisplayFor(modelItem => item.Cod_usu_regi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fec_usu_regi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cod_usu_modi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fec_usu_modi)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Cod_candidato }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Cod_candidato }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Cod_candidato })
+            @Html.ActionLink("Modificar", "Edit", new { id=item.Cod_candidato }) |
+            @Html.ActionLink("Ver", "Details", new { id=item.Cod_candidato }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.Cod_candidato })
         </td>
     </tr>
 }

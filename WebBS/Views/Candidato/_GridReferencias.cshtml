@@ -1,0 +1,64 @@
+﻿@model WebBS.Models.RRH_ReferenciaLaboral
+@using WebBS.Models
+
+
+<fieldset>
+    <div class="panel panel-default">
+        <!-- Table -->
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Empresa</th>
+                        <th>Puesto</th>
+                        <th>Celular</th>
+                        <th>Email</th>
+                        
+                        <th></th>
+
+                    </tr>
+                </thead>
+@if ((List<RRH_ReferenciaLaboral>)Session["Referencias"] != null)
+{
+
+    foreach (var item in (List<RRH_ReferenciaLaboral>)Session["Referencias"])
+    {
+
+                <tr>
+                    <td>@item.Nom_Persona</td>
+                    <td>@item.Nom_empresa</td>
+                    <td>@item.Puesto</td>
+                    <td>@item.Telefono</td>
+                    <td>@item.Email</td>
+                    <td class="text-right">
+                        <a href="" class="delete" title="">
+                            <i class="glyphicon glyphicon-remove"></i>   
+                        </a>
+                    </td>
+
+
+                </tr>
+    }
+}
+
+            </table>
+        </div>
+    </div>
+</fieldset>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+
+    });
+</script>
+
+
+
+
+
+
+

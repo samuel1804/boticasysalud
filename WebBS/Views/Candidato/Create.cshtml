@@ -12,6 +12,51 @@
 <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
 
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+<script src="~/Scripts/jquery.uploadPreview.js"></script>
+
+<style type="text/css">
+    #image-preview {
+        width: 250px;
+        height: 250px;
+        position: relative;
+        float: right;
+        overflow: hidden;
+        background-color: #ffffff;
+        color: #ecf0f1;
+        input
+
+    {
+        line-height: 200px;
+        font-size: 200px;
+        position: absolute;
+        opacity: 0;
+        z-index: 10;
+    }
+
+    label {
+        position: absolute;
+        z-index: 5;
+        opacity: 0.8;
+        cursor: pointer;
+        background-color: #bdc3c7;
+        width: 200px;
+        height: 50px;
+        font-size: 20px;
+        line-height: 50px;
+        text-transform: uppercase;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        text-align: center;
+    }
+
+    }
+</style>
 
 
 <script type="text/javascript">
@@ -20,6 +65,71 @@
         $('.glyphicon-calendar').on('click', function () {
             $('.week-picker').focus()
         });
+
+
+        $.uploadPreview({
+            input_field: "#image-upload",
+            preview_box: "#image-preview",
+            label_field: "#image-label"
+        });
+      
+            $("#Cod_ofertalaboral").change(function() {
+                $("#State").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetFechas")', // we are calling json method
+
+                    dataType: 'json',
+
+                    data: { id: $("#Cod_ofertalaboral").val() },
+                    success: function (states) {
+                        var date = new Date(parseInt(states.substr(6)));
+                        var day = date.getDate();
+                        var month = date.getMonth() + 1;
+                        var year = date.getFullYear();
+                        if (day < 10) {
+                            day = "0" + day;
+                        }
+                        if (month < 10) {
+                            month = "0" + month;
+                        }
+
+                        var fecha = year + "-" + month + "-" + day;
+                        date.setMonth(date.getMonth() + 1);
+
+                        var day = date.getDate();
+                        var month = date.getMonth() + 1;
+                        var year = date.getFullYear();
+                        if (day < 10) {
+                            day = "0" + day;
+                        }
+                        if (month < 10) {
+                            month = "0" + month;
+                        }
+                        var fecha2 = year + "-" + month + "-" + day;
+
+                        $("#Fec_postulacion").attr({
+                            //"max": date,        // substitute your own
+                            "min": fecha,
+                            "max":fecha2
+                        });
+                        /*$.each(states, function(i, state) {
+                            
+                        });*/
+                    },
+                    error: function(ex) {
+                        //alert('Failed to retrieve states.' + ex);
+                        $("#Fec_postulacion").attr({
+                            //"max": date,        // substitute your own
+                            "min": "",
+                            "max": ""
+                        });
+                    }
+                });
+                return false;
+            });
+
+
 
         $("#DNI").keypress(function (e) {
             //if the letter is not digit then display error and don't type anything
@@ -31,6 +141,32 @@
         });
 
 
+        $('.delete').click(function (e) {
+            e.preventDefault(); // <------------------ stop default behaviour of button
+            var element = this;
+            $.ajax({
+                url: "/Candidato/EliminarReferencia",
+                type: "POST",
+                data: JSON.stringify({ 'Options': someData }),
+                dataType: "json",
+                traditional: true,
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data.status == "Success") {
+                        alert("Done");
+                        $(element).closest("form").submit(); //<------------ submit form
+                    } else {
+                        alert("Error occurs on the Database level!");
+                    }
+                },
+                error: function () {
+                    alert("An error has occured!!!");
+                }
+            });
+        });
+
+
+
         $("#CreateExperiencia").on("click", function (e) {
             // e.preventDefault(); use this or return false
             var url = $(this).attr('href');
@@ -39,12 +175,16 @@
                 autoOpen: false,
                 resizable: false,
                 height: 500,
-                width: 600,
+                width: 800,
                 show: { effect: 'drop', direction: "up" },
                 modal: true,
                 draggable: true,
                 open: function (event, ui) {
-                    $(this).load(url);
+                    $(this).load(url, function (html) {
+                        var form = $('form');
+                        form.data('validator', null);
+                        $.validator.unobtrusive.parse(form);
+                    });
 
                 },
                 close: function (event, ui) {
@@ -62,7 +202,40 @@
 
         });
 
+        $("#CreateReferencias").on("click", function (e) {
+            // e.preventDefault(); use this or return false
+            var url = $(this).attr('href');
+            $("#dialog-edit").dialog({
+                title: 'Referencias Laborales',
+                autoOpen: false,
+                resizable: false,
+                height: 500,
+                width: 600,
+                show: { effect: 'drop', direction: "up" },
+                modal: true,
+                draggable: true,
+                open: function (event, ui) {
+                    $(this).load(url, function (html) {
+                        var form = $('form');
+                        form.data('validator', null);
+                        $.validator.unobtrusive.parse(form);
+                    });
 
+                },
+                close: function (event, ui) {
+                    $(this).dialog('close');
+                }
+            });
+
+            $("#dialog-edit").dialog('open');
+            return false;
+
+
+            function onSucess() {
+                $("#dialog-edit").dialog('close');
+            }
+
+        });
         
         $("#CreateCustomer").on("click", function (e) {
             // e.preventDefault(); use this or return false
@@ -77,7 +250,11 @@
                 modal: true,
                 draggable: true,
                 open: function (event, ui) {
-                    $(this).load(url);
+                    $(this).load(url, function (html) {
+                        var form = $('form');
+                        form.data('validator', null);
+                        $.validator.unobtrusive.parse(form);
+                    });
 
                 },
                 close: function (event, ui) {
@@ -200,7 +377,7 @@
 
 
   
-@using (Ajax.BeginForm("Create", "Candidato", new AjaxOptions() { HttpMethod = "POST" }, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "Candidato", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
      @Html.AntiForgeryToken()
         <div class="form-horizontal">
@@ -211,8 +388,8 @@
 
 
 
-            <div class="form-group">
-                @Html.Label("Oferta Laboral", "Oferta", new { @class = "control-label col-md-2" })
+            <div class="form-group col-md-8">
+                @Html.Label("Oferta Laboral", "Oferta", new { @class = "control-label col-md-3" })
                 <div class="col-md-6">
 
                     @Html.DropDownListFor(model => model.Cod_ofertalaboral, @ViewBag.Cod_ofertalaboral as SelectList, "Seleccione", new { @class = "form-control" })
@@ -221,50 +398,57 @@
                 </div>
             </div>
 
+            
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Nombre, new { @class = "control-label col-md-2" })
-                <div class="col-md-4">
+            <div id="image-preview">
+                <label for="image-upload" id="image-label">Choose File</label>
+                <input type="file" name="image" id="image-upload"/>
+            </div>
+            
+
+            <div class="form-group col-md-8">
+                @Html.LabelFor(model => model.Nombre, new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
                     @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.ApellidoPaterno, new { @class = "control-label col-md-2" })
-                <div class="col-md-4">
+            <div class="form-group col-md-8">
+                @Html.LabelFor(model => model.ApellidoPaterno, new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
                     @Html.EditorFor(model => model.ApellidoPaterno, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.ApellidoPaterno, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.ApellidoMaterno, new { @class = "control-label col-md-2" })
-                <div class="col-md-4">
+            <div class="form-group col-md-8">
+                @Html.LabelFor(model => model.ApellidoMaterno, new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
                     @Html.EditorFor(model => model.ApellidoMaterno, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.ApellidoMaterno, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.DNI, new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
+            <div class="form-group col-md-8">
+                @Html.LabelFor(model => model.DNI, new { @class = "control-label col-md-3" })
+                <div class="col-md-4">
                     @Html.EditorFor(model => model.DNI, new { htmlAttributes = new { @class = "form-control", maxlength = "8" } })
                     @Html.ValidationMessageFor(model => model.DNI, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Telefono, new { @class = "control-label col-md-2" })
-                <div class="col-md-4">
+            <div class="form-group col-md-8">
+                @Html.LabelFor(model => model.Telefono, new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
                     @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Telefono)
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Direccion, new { @class = "control-label col-md-2" })
-                <div class="col-md-6">
+            <div class="form-group col-md-8">
+                @Html.LabelFor(model => model.Direccion, new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
                     @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Direccion)
                 </div>
@@ -278,45 +462,46 @@
 
 
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Foto, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <!-- @Html.EditorFor(model => model.Foto)-->
-                    <input type="file" name="file" id="file" style="width: 100%;" />
-
-                    @Html.ValidationMessageFor(model => model.Foto)
-                </div>
-            </div>
+          
 
 
+         
 
-            <div class="form-group">
-                @Html.Label("Fecha Postulación", new { @class = "control-label col-md-2" })
+            <div class="form-group col-md-8">
+                @Html.Label("Fecha Postulación", new { @class = "control-label col-md-3" })
 
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.Fec_postulacion, new { @class = "form-control" })
-
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.Fec_postulacion, new { @type = "date", @class = "form-control"})
+                   
                     @Html.ValidationMessageFor(model => model.Fec_postulacion)
 
                     </div>
 
 
                 </div>
- 
+            <div class="form-group col-md-10">
 
                 <a id="CreateCustomer" href="..\Candidato\AdicionarGrado" title="">Agregar Grado Academico</a>
-        
-            <div id="GradoDiv">
-                @Html.Partial("_GridGrado")
+
+                <div id="GradoDiv">
+                    @Html.Partial("_GridGrado")
+                </div>
+
+
+                <a id="CreateExperiencia" href="..\Candidato\AdicionarExperiencia" title="">Agregar Experiencia Laboral</a>
+
+                <div id="ExperienciaDiv">
+                    @Html.Partial("_GridExperiencia")
+                </div>
+
+
+                <a id="CreateReferencias" href="..\Candidato\AdicionarReferencias" title="">Agregar Referencias Laborales</a>
+
+                <div id="ReferenciasDiv">
+                    @Html.Partial("_GridReferencias")
+                </div>
+
             </div>
-
-
-            <a id="CreateExperiencia" href="..\Candidato\AdicionarExperiencia" title="">Agregar Experiencia Laboral</a>
-            
-            <div id="ExperienciaDiv">
-                @Html.Partial("_GridExperiencia")
-            </div>
-
             <!--<div class="form-group">
                  @Html.LabelFor(model => model.Cod_usu_regi, new { @class = "control-label col-md-2" })
                  <div class="col-md-10">

@@ -11,13 +11,18 @@ namespace WebBS.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class RRH_GradoAcademico
     {
         public int Cod_GradoAcademico { get; set; }
         public int Cod_candidato { get; set; }
+        [Required(ErrorMessage = "Ingrese el Titulo Obtenido")]
         public string Titulo { get; set; }
+
+        [Required(ErrorMessage="Ingrese el Centro de Estudios")]
         public string CentroEstudios { get; set; }
+         [Required(ErrorMessage = "Ingrese el Año de Graduación")]
         public int Anio_graduacion { get; set; }
         public string ruta_certificado { get; set; }
         public string Cod_usu_regi { get; set; }

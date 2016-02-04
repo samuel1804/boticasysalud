@@ -11,6 +11,7 @@ namespace WebBS.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class RRH_Candidato
     {
@@ -21,11 +22,21 @@ namespace WebBS.Models
             this.RRH_GradoAcademico = new HashSet<RRH_GradoAcademico>();
             this.RRH_ReferenciaLaboral = new HashSet<RRH_ReferenciaLaboral>();
         }
+
+         [Required(ErrorMessage = "Seleccione una Oferta Laboral")]
         public int Cod_ofertalaboral { get; set; }
         public int Cod_candidato { get; set; }
+        [Required(ErrorMessage = "Ingrese Nombre")]
+     
         public string Nombre { get; set; }
+        [Required(ErrorMessage = "Ingrese Apellido Paterno")]
+     
         public string ApellidoPaterno { get; set; }
+        [Required(ErrorMessage = "Ingrese Apellido Materno")]
+     
         public string ApellidoMaterno { get; set; }
+        [Required(ErrorMessage = "Ingrese DNI")]
+     
         public string DNI { get; set; }
         public string Telefono { get; set; }
         public string Direccion { get; set; }

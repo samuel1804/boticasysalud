@@ -1,4 +1,4 @@
-﻿@model WebBS.Models.RRH_GradoAcademico
+﻿@model WebBS.Models.RRH_ReferenciaLaboral
 @{
     Layout = null;
 }
@@ -6,25 +6,25 @@
 
 
 
-@using (Ajax.BeginForm("CreateEditCandidato", "Candidato",
+@using (Ajax.BeginForm("CreateEditReferencias", "Candidato",
             new AjaxOptions()
             {
                 HttpMethod = "POST",
                 InsertionMode = InsertionMode.Replace,
-                UpdateTargetId = "GradoDiv",
+                UpdateTargetId = "ReferenciasDiv",
                 OnSuccess="onSucess"
             }, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
       <div class="form-horizontal">
     <fieldset>
-        <legend>Agregar Grado Académico</legend>
+        <legend>Agregar Referencias</legend>
         @* <div style="color: Green; font-weight: bold">
                 @ViewBag.Msg
             </div>*@
         @if (ViewBag.IsUpdate == true)
         {
-            @Html.HiddenFor(model => model.Cod_GradoAcademico)
+            @Html.HiddenFor(model => model.Cod_ReferenciaLaboral)
         }
         
 
@@ -32,46 +32,50 @@
       
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Titulo, new { @class = "control-label col-md-4" })
+            @Html.LabelFor(model => model.Nom_Persona,"Nombre", new { @class = "control-label col-md-4" })
             <div class="col-md-6">
-                @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Nom_Persona, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nom_Persona, "", new { @class = "text-danger" })
             </div>
         </div>
 
 
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CentroEstudios,"Centro de Estudios", new { @class = "control-label col-md-4" })
+            @Html.LabelFor(model => model.Nom_empresa,"Empresa", new { @class = "control-label col-md-4" })
             <div class="col-md-6">
-                @Html.EditorFor(model => model.CentroEstudios, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CentroEstudios, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Nom_empresa, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nom_empresa, "", new { @class = "text-danger" })
             </div>
         </div>
 
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Anio_graduacion,"Año de Graduación", new { @class = "control-label col-md-4" })
+            @Html.LabelFor(model => model.Puesto, new { @class = "control-label col-md-4" })
             <div class="col-md-6">
-                @Html.TextBoxFor(model => model.Anio_graduacion, new { @class = "form-control", @type = "number", @min = "1940",@max="2016", @Value = "1940" })
-                @Html.ValidationMessageFor(model => model.Anio_graduacion, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Puesto, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Puesto, "", new { @class = "text-danger" })
             </div>
         </div>
 
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.Telefono,"Celular", new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Telefono, "", new {@type="tel", @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ruta_certificado,"Certificado", new { @class = "control-label col-md-4" })
+            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-4" })
             <div class="col-md-6">
-                <!-- @Html.EditorFor(model => model.ruta_certificado, new { htmlAttributes = new { @class = "form-control" } })-->
-                <input type="file" name="file" id="file" style="width: 100%;" />
-
-                @Html.ValidationMessageFor(model => model.ruta_certificado)
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new {@type="email", @class = "text-danger" })
             </div>
         </div>
     
-    
-
+        <br />
 
         <div style="float: right">
             @if (ViewBag.IsUpdate == true)

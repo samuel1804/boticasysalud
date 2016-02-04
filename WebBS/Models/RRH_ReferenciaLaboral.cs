@@ -11,15 +11,20 @@ namespace WebBS.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class RRH_ReferenciaLaboral
     {
         public int Cod_ReferenciaLaboral { get; set; }
         public Nullable<int> Cod_candidato { get; set; }
+         [Required(ErrorMessage = "Ingrese el Nombre de la Persona")]
         public string Nom_Persona { get; set; }
+         [Required(ErrorMessage = "Ingrese el Nombre de la Empresa")]
         public string Nom_empresa { get; set; }
+         [Required(ErrorMessage = "Ingrese el Email")]
         public string Email { get; set; }
         public string Telefono { get; set; }
+         [Required(ErrorMessage = "Ingrese el Puesto de la Persona")]
         public string Puesto { get; set; }
         public string Cod_usu_regi { get; set; }
         public Nullable<System.DateTime> Fec_usu_regi { get; set; }
