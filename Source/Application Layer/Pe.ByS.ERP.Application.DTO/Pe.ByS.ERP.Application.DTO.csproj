@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="ActaRecepcionDto.cs" />
     <Compile Include="DetalleActaRecepcionDto.cs" />
+    <Compile Include="DetalleActaRecepcionReubicarDto.cs" />
     <Compile Include="DetalleOrdenPedidoDto.cs" />
     <Compile Include="OrdenPedidoDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

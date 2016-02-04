@@ -52,5 +52,19 @@ namespace Pe.ByS.ERP.Application.Converter
                 FechaCreacion = DateTime.Now
             };
         }
+
+        public static List<DetalleActaRecepcionReubicarDto> DomainToDtoDetalleActa(ActaRecepcion acta)
+        {
+            return acta.DetalleActaRecepcion.Select(p => new DetalleActaRecepcionReubicarDto
+            {
+                Id = p.Id,
+                ProductoId = p.ProductoId,
+                Lote = p.Lote,
+                ProductoNombre = p.Producto.Nombre,
+                UnidadMedida = p.Producto.UnidadMedida,
+                CantidadRecepcionada = p.Cantidad,
+                AlmacenNombre = acta.Almacen.Descripcion
+            }).ToList();
+        }
     }
 }

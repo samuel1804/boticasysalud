@@ -120,6 +120,25 @@ namespace Pe.ByS.ERP.Presentacion.Areas.ActaRecepcion.Controllers
             return Json(jsonResponse, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public ActionResult GetDetalleActa(int numActa)
+        {
+            var jsonResponse = new JsonResponse { Success = false };
+            try
+            {
+                var acta = _actaBL.Get(p => p.Id == numActa);
+
+                jsonResponse.Data = ActaRecepcionConverter.DomainToDtoDetalleActa(acta);
+                jsonResponse.Success = true;
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                jsonResponse.Message = "Ocurrió un error";
+            }
+            return Json(jsonResponse, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpGet]
         public void GetReporte()
         {

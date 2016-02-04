@@ -9,14 +9,18 @@
             <div class="form-group form-group-sm">
                 <label class="control-label col-md-4 col-sm-4 col-xs-12">Número de Acta de Recepción:</label>
                 <div class="col-sm-8 col-sm-8 col-xs-12">
-                    @Html.TextBox("txtNumeroPedido", "", new {@class = "form-control"})
+                    @Html.TextBox("txtNumeroActa", "", new {@class = "form-control"})
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-5">
             <button type="button" class="btn btn-success" id="btnBuscar">
                 <i class="fa fa-search"></i>
                 Buscar
+            </button>
+            <button type="button" class="btn btn-info" id="btnReubicar">
+                <i class="fa fa-search"></i>
+                Reubicar Stock
             </button>
         </div>
     </div>
@@ -29,22 +33,39 @@
     <div style="width: 100%" id="barraDetalle"></div>
 </div>
 
+<div class="form-horizontal">
+    <div class="row" style="padding-bottom: 20px;"></div>
+    <div class="box-footer">
+        <div class="col-md-offset-3 col-md-9">
+            <button type="button" class="btn btn-info" id="btnRegistrar">
+                <i class="fa fa-plus"></i>
+                Registrar
+            </button>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
     var grdDetalle = 'tablaDetalle';
 
+    $(document).ready(function () {
+        ListarActaDetalle();
+    });
+
     function ListarActaDetalle() {
         var colNames = [
-            'Almacén', 'Código', 'Articulo', 'Unidad', 'Lote', 'Modulo', 'Columna', 'Fila'
+            'Almacén', 'Código', 'Articulo', 'Unidad', 'Lote', 'Cant. Rec.', 'Modulo', 'Columna', 'Fila'
         ];
         var colModels = [
-            { name: 'AlamcenNombre', index: 'AlamcenNombre', align: 'center', width: 60 },
+            { name: 'AlmacenNombre', index: 'AlmacenNombre', align: 'center', width: 60 },
             { name: 'ProductoId', index: 'ProductoId', align: 'center', width: 60 },
             { name: 'ProductoNombre', index: 'ProductoNombre', align: 'left', width: 150 },
             { name: 'UnidadMedida', index: 'UnidadMedida', align: 'center', width: 60 },
             { name: 'Lote', index: 'Lote', align: 'center', width: 65 },
-            { name: 'Modulo', index: 'Modulo', align: 'center', width: 60 },
-            { name: 'Columna', index: 'Columna', align: 'center', width: 60 },
-            { name: 'Fila', index: 'Fila', align: 'center', width: 60 }
+            { name: 'CantidadRecepcionada', index: 'CantidadRecepcionada', align: 'right', width: 65 },
+            { name: 'Modulo', index: 'Modulo', align: 'center', width: 60, editable: true },
+            { name: 'Columna', index: 'Columna', align: 'center', width: 60, editable: true },
+            { name: 'Fila', index: 'Fila', align: 'center', width: 60, editable: true }
         ];
 
         var opciones = {
@@ -61,7 +82,7 @@
             mensaje: 'Seleccione un registro',
             sinRegistro: 'Sin registro',
             alertTitle: 'Alerta',
-            caption: 'Detalle',
+            caption: 'Productos a ubicar',
             grilla: grdDetalle,
             pager: 'barraDetalle',
             height: 180,
@@ -73,9 +94,40 @@
             pgbuttons: false,
             rowNumbers: [],
             viewrecords: false,
-            pginput: false
+            pginput: false,
+            EditingOptions: {
+                canEditRowInline: true,
+                editUrl: 'clientArray'
+                //AfterSaveFunc: afterSaveDetalle
+            }
         };
 
         SIG.GrillaUpgrade(opciones);
+    }
+
+    $("#btnBuscar").click(function () {
+        var numActa = $("#txtNumeroActa").val();
+        if (numActa !== "")
+            cargarDetalleActa(numActa);
+    });
+
+    function cargarDetalleActa(numActa) {
+        var opciones = {
+            url: '@Url.Action("GetDetalleActa", "ActaRecepcion", new { area = "ActaRecepcion" })',
+            parametros: { numActa: numActa }
+        };
+
+        SIG.Ajax(opciones, function (response) {
+            if (response.Success) {
+                var $grilla = $("#" + grdDetalle);
+                var item;
+                $grilla.jqGrid('clearGridData');
+
+                for (var i = 0; i < response.Data.length; i++) {
+                    item = response.Data[i];
+                    $grilla.addRowData(item.Id, item);
+                }
+            }
+        });
     }
 </script>
