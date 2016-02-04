@@ -59,6 +59,37 @@ namespace Pe.ByS.ERP.Application.Converter
             };
         }
 
+        public static OrdenPedidoDto DomainToDto(OrdenPedido pedido, List<Sucursal> sucursalList)
+        {
+            var list = sucursalList.ConvertAll(p => new KeyValuePair<string, string>(p.Id.ToString(), p.Nombre));
+            list.Insert(0, new KeyValuePair<string, string>("", "-- Seleccionar --"));
+
+            return new OrdenPedidoDto
+            {
+                SucursalList = list,
+                NumeroPedido = pedido.NumeroPedido,
+                FechaEntrega = pedido.FechaEntrega.ConvertToDdmmaaaa(),
+                FechaPedido = pedido.FechaPedido.ConvertToDdmmaaaa(),
+                SucursalId = pedido.SucursalId,
+                SolicitanteId = pedido.SolicitanteId,
+                Glosa = pedido.Glosa,
+                SolicitanteList = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("", "-- Seleccionar --"),
+                    new KeyValuePair<string, string>("1", "Verificador 1")
+                },
+                DetalleList = pedido.DetalleOrdenPedidoList.Select(p => new DetalleOrdenPedidoDto
+                {
+                    Cantidad = p.Cantidad,
+                    ProductoId = p.ProductoId,
+                    ProductoNombre = p.Producto.Nombre,
+                    UnidadMedida = p.UnidadMedida,
+                    Observacion = p.Observacion
+                }).ToList(),
+                Estado = EstadoOrdenPedidoList().First(p => p.Key == pedido.Estado).Value
+            };
+        }
+
         public static List<KeyValuePair<string, string>> EstadoOrdenPedidoList()
         {
             return new List<KeyValuePair<string, string>>

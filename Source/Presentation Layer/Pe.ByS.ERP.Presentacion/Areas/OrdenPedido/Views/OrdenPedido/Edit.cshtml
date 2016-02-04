@@ -165,32 +165,6 @@
         SIG.CreateDialogPopUpForm(opciones);
     });
 
-    function cargarDetallePedidos(numPedido) {
-        var opciones = {
-            url: '@Url.Action("GetDetallePedido", "OrdenPedido", new {area = "OrdenPedido"})',
-            parametros: { numPedido: numPedido }
-        };
-
-        SIG.Ajax(opciones, function (response) {
-            if (response.Success) {
-                var $grilla = $("#" + grdDetalle);
-                var item;
-                $grilla.jqGrid('clearGridData');
-
-                for (var i = 0; i < response.Data.length; i++) {
-                    item = response.Data[i];
-                    $grilla.addRowData(item.Id, {
-                        Id: item.Id,
-                        ProductoId: item.ProductoId,
-                        ProductoNombre: item.ProductoNombre,
-                        UnidadMedida: item.UnidadMedida,
-                        CantidadPedida: item.Cantidad
-                    });
-                }
-            }
-        });
-    }
-
     function ListarActaDetalle() {
         var colNames = [
             'Código', 'Articulo', 'Unidad', 'Cant. Pedida', 'Observacion', ''
@@ -251,6 +225,22 @@
         });
 
         SIG.GrillaUpgrade(opciones);
+        CargarData();
+    }
+
+    function CargarData() {
+        debugger;
+        var datos = '@Html.Raw(Json.Encode(@Model.DetalleList))';
+        if (datos !== 'null') {
+            var datosJson = JSON.parse(datos);
+            var $grilla = $("#" + grdDetalle);
+            var item;
+
+            for (var i = 0; i < datosJson.length; i++) {
+                item = datosJson[i];
+                $grilla.addRowData(item.ProductoId, item);
+            }
+        }
     }
 
     function GuardarCerrar() {
