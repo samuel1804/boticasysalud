@@ -3,4 +3,79 @@
     Layout = "~/Views/Shared/_LayoutI.cshtml";
 }
 
-<h2>ReubicarProducto</h2>
+<div class="form-horizontal">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group form-group-sm">
+                <label class="control-label col-md-4 col-sm-4 col-xs-12">Número de Acta de Recepción:</label>
+                <div class="col-sm-8 col-sm-8 col-xs-12">
+                    @Html.TextBox("txtNumeroPedido", "", new {@class = "form-control"})
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-success" id="btnBuscar">
+                <i class="fa fa-search"></i>
+                Buscar
+            </button>
+        </div>
+    </div>
+    <div class="row" style="padding-bottom: 20px;"></div>
+</div>
+
+<div>
+    <input id="hfIdentDetalle" type="hidden"/>
+    <table style="width: 100%" id="tablaDetalle"></table>
+    <div style="width: 100%" id="barraDetalle"></div>
+</div>
+
+<script type="text/javascript">
+    var grdDetalle = 'tablaDetalle';
+
+    function ListarActaDetalle() {
+        var colNames = [
+            'Almacén', 'Código', 'Articulo', 'Unidad', 'Lote', 'Modulo', 'Columna', 'Fila'
+        ];
+        var colModels = [
+            { name: 'AlamcenNombre', index: 'AlamcenNombre', align: 'center', width: 60 },
+            { name: 'ProductoId', index: 'ProductoId', align: 'center', width: 60 },
+            { name: 'ProductoNombre', index: 'ProductoNombre', align: 'left', width: 150 },
+            { name: 'UnidadMedida', index: 'UnidadMedida', align: 'center', width: 60 },
+            { name: 'Lote', index: 'Lote', align: 'center', width: 65 },
+            { name: 'Modulo', index: 'Modulo', align: 'center', width: 60 },
+            { name: 'Columna', index: 'Columna', align: 'center', width: 60 },
+            { name: 'Fila', index: 'Fila', align: 'center', width: 60 }
+        ];
+
+        var opciones = {
+            gridLocal: true,
+            nuevo: false,
+            editar: false,
+            eliminar: false,
+            search: false,
+            refresh: false,
+            nuevoCaption: 'Agregar',
+            editarCaption: 'Editar',
+            eliminarCaption: 'Eliminar',
+            dialogDelete: 'dialog-DetalleEliminar',
+            mensaje: 'Seleccione un registro',
+            sinRegistro: 'Sin registro',
+            alertTitle: 'Alerta',
+            caption: 'Detalle',
+            grilla: grdDetalle,
+            pager: 'barraDetalle',
+            height: 180,
+            width: 'auto',
+            id: 'id',
+            colsNames: colNames,
+            colsModel: colModels,
+            sortName: 'Id',
+            pgbuttons: false,
+            rowNumbers: [],
+            viewrecords: false,
+            pginput: false
+        };
+
+        SIG.GrillaUpgrade(opciones);
+    }
+</script>

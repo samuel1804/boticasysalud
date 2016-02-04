@@ -75,7 +75,8 @@
                 <div class="form-group form-group-sm">
                     <label class="control-label col-md-4 col-sm-4 col-xs-12">Estado:</label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
-                        @Html.DropDownListFor(model => model.Estado, new SelectList(Model.EstadoList, "Key", "Value", Model.Estado), new {@class = "form-control"})
+                        @Html.TextBoxFor(model => model.Estado, new { @class = "form-control", @disabled = "disabled" })
+                        @*@Html.DropDownListFor(model => model.Estado, new SelectList(Model.EstadoList, "Key", "Value", Model.Estado), new {@class = "form-control"})*@
                     </div>
                 </div>
             </div>
@@ -93,7 +94,7 @@
         <div class="row" style="padding-bottom: 5px;"></div>
     </div>
 </div>
-<div>
+<div id="divContentGrid">
     <table style="width: 100%" id="tablaDetalle"></table>
     <div style="width: 100%" id="barraDetalle"></div>
 </div>
@@ -114,17 +115,24 @@
 
 <script type='text/javascript'>
     var grdDetalle = 'tablaDetalle';
-    var dialogDelete = 'dialog-DetalleEliminar';
 
     $(document).ready(function () {
         ListarActaDetalle();
     });
 
-    $("#FechaEntrega, #FechaPedido").datepicker({
+    $("#FechaPedido").datepicker({
         changeYear: true,
         changeMonth: true,
         showButtonPanel: true
     });
+
+    $("#FechaEntrega").datepicker({
+        changeYear: true,
+        changeMonth: true,
+        showButtonPanel: true,
+        minDate: $("#FechaPedido").val()
+    });
+
 
     $("#btnGuardarCerrar").click(function (e) {
         e.preventDefault();
@@ -135,7 +143,7 @@
         window.location.href = '@Url.Action("Index", "OrdenPedido", new { Area = "OrdenPedido" })';
     });
 
-    $("#btnAgregar").click(function() {
+    $("#btnAgregar").click(function () {
         var opciones = {
             title: 'Articulo',
             url: '@Url.Action("ViewProducto", "OrdenPedido", new { Area = "OrdenPedido" })',
@@ -147,9 +155,10 @@
                 GuardarHandlerFunction: 'AgregarProducto',
                 cancelarText: 'Cancelar',
                 parametroHandlers: {
-                    functionOk: function(rowData) {
+                    functionOk: function (rowData) {
                         $("#" + grdDetalle).addRowData(rowData.ProductoId, rowData);
-                    }
+                    },
+                    grillaId: grdDetalle
                 }
             }
         };
@@ -162,7 +171,7 @@
             parametros: { numPedido: numPedido }
         };
 
-        SIG.Ajax(opciones, function(response) {
+        SIG.Ajax(opciones, function (response) {
             if (response.Success) {
                 var $grilla = $("#" + grdDetalle);
                 var item;
@@ -184,27 +193,38 @@
 
     function ListarActaDetalle() {
         var colNames = [
-            'Código', 'Articulo', 'Unidad', 'Cant. Pedida', 'Observacion'
+            'Código', 'Articulo', 'Unidad', 'Cant. Pedida', 'Observacion', ''
         ];
         var colModels = [
             { name: 'ProductoId', index: 'ProductoId', align: 'center', width: 60 },
             { name: 'ProductoNombre', index: 'ProductoNombre', align: 'left', width: 150 },
             { name: 'UnidadMedida', index: 'UnidadMedida', align: 'center', width: 60 },
-            { name: 'CantidadPedida', index: 'CantidadPedida', align: 'right', width: 65 },
-            { name: 'Observacion', index: 'Observacion', align: 'left', width: 200 }
+            { name: 'Cantidad', index: 'Cantidad', align: 'right', width: 65 },
+            { name: 'Observacion', index: 'Observacion', align: 'left', width: 200 },
+            {
+                name: 'Eliminar',
+                index: 'Eliminar',
+                width: 18,
+                align: "center",
+                sortable: false,
+                search: false,
+                formatter: function () {
+                    return "<img src='@Url.Content("~/Content/Images/delete.png")' class='btnEliminar' title='Eliminar'/>";
+                }
+            }
         ];
 
         var opciones = {
             gridLocal: true,
             nuevo: false,
             editar: false,
-            eliminar: true,
+            eliminar: false,
             search: false,
             refresh: false,
             nuevoCaption: 'Agregar',
             editarCaption: 'Editar',
             eliminarCaption: 'Eliminar',
-            dialogDelete: dialogDelete,
+            dialogDelete: 'dialog-DetalleEliminar',
             mensaje: 'Seleccione un registro',
             sinRegistro: 'Sin registro',
             alertTitle: 'Alerta',
@@ -223,44 +243,38 @@
             pginput: false
         };
 
+        var $grilla = $("#" + grdDetalle);
+
+        $('#divContentGrid').on("click", ".btnEliminar", function () {
+            var rowKey = $grilla.getGridParam('selrow');
+            $grilla.jqGrid('delRowData', rowKey);
+        });
+
         SIG.GrillaUpgrade(opciones);
     }
 
     function GuardarCerrar() {
         var model = {
+            FechaPedido: $('#FechaPedido').val(),
+            FechaEntrega: $('#FechaEntrega').val(),
             SucursalId: $('#SucursalId').val(),
-            AlmacenId: $('#AlmacenId').val(),
-            VerificadorId: $('#VerificadorId').val(),
-            Fecha: $('#Fecha').val(),
-            OrdenPedidoId: $('#OrdenPedidoId').val(),
-            NumeroGuia: $('#NumeroGuia').val(),
-            Glosa: $('#NumeroGuia').val(),
-            FechaGuia: $('#txtFechaGuia').val(),
+            SolicitanteId: $('#SolicitanteId').val(),
+            Glosa: $('#Glosa').val(),
             DetalleList: $("#" + grdDetalle).jqGrid('getGridParam', 'data')
         };
 
         var msj = "";
         if (model.SucursalId === "")
-            msj += "- Seleccione una sucursal<br />";
-        if (model.AlmacenId == null || model.AlmacenId === "")
-            msj += "- Seleccione un almacén<br />";
-        if (model.VerificadorId === "")
-            msj += "- Seleccione un verificador<br />";
-        if ($("#NumeroPedido").val() === "")
-            msj += "- Seleccione o ingrese el número de pedido<br />";
-        if (model.NumeroGuia === "")
-            msj += "- Ingrese un número de guia<br />";
-        if (model.FechaGuia === "")
-            msj += "- Ingrese una fecha de guia<br />";
+            msj += "- Seleccione una sucursal.<br />";
+        if (model.SolicitanteId === "")
+            msj += "- Seleccione un solicitante.<br />";
+        if (model.FechaPedido === "")
+            msj += "- Ingrese fecha de orden de pedido.<br />";
+        if (model.FechaEntrega === "")
+            msj += "- Ingrese fecha de entrega de pedido.<br />";
 
-        var item;
-        for (var i = 0; i < model.DetalleList.length; i++) {
-            item = model.DetalleList[i];
-            if (!item.CantidadRecepcionada || item.Saldo !== 0) {
-                msj += "- Ingrese los lotes y cant. rec del detalle";
-                break;
-            }
-        }
+        if (model.DetalleList.length === 0)
+            msj += "- Agrege articulos al detalle.<br />";
 
         if (msj !== "") {
             SIG.Alert('Alerta', msj, null);
@@ -268,17 +282,20 @@
         }
 
         var opciones = {
-            url: '@Url.Action("GenerarActa", "ActaRecepcion", new {area = "ActaRecepcion"})',
+            url: '@Url.Action("ArgregarPedido", "OrdenPedido", new { area = "OrdenPedido" })',
             parametros: model
         };
 
-        SIG.Ajax(opciones, function(response) {
+        SIG.Ajax(opciones, function (response) {
             if (response.Success) {
-                SIG.Alert('Alerta', 'Acta registrada correctamente', null);
-                @*window.location.href = '@Url.Action("Edit", "ActaRecepcion", new { Area = "ActaRecepcion" })';*@
+                SIG.Alert('Alerta', 'Pedido registrado correctamente.<br/>El Número Pedido generado es: ' + response.Data, redirectIndex, redirectIndex);
             } else {
                 SIG.Alert('Alerta', response.Message, null);
             }
         });
+    }
+
+    function redirectIndex() {
+        window.location.href = '@Url.Action("Index", "OrdenPedido", new { Area = "OrdenPedido" })';
     }
 </script>

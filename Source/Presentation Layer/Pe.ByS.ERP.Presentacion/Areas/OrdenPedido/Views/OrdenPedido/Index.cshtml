@@ -109,6 +109,38 @@
         window.location.href = '@Url.Action("Edit", "OrdenPedido", new { Area = "OrdenPedido" })';
     });
 
+    $("#btnEliminar").click(function() {
+        var $grilla = $("#" + grdPedido);
+        var rowKey = $grilla.getGridParam('selrow');
+
+        if (rowKey != null) {
+            var parametrosConfirm = {
+                dialogText: "Está seguro que desea eliminar el registro?",
+                OkHandlerFunction: function(key) {
+                    var opciones = {
+                        url: '@Url.Action("EliminarPedido", "OrdenPedido", new { area = "OrdenPedido" })',
+                        parametros: { id: key }
+                    };
+
+                    SIG.Ajax(opciones, function (response) {
+                        if (response.Success) {
+                            SIG.Alert('Alerta', 'Registro eliminado correctamente.');
+                            $grilla.trigger("reloadGrid");
+                        } else {
+                            SIG.Alert('Alerta', response.Message, null);
+                        }
+                    });
+                },
+                dialogTitle: "Alerta",
+                dialogOkText: "Aceptar",
+                dialogCancelText: "Cancelar",
+                parametroHandlers: rowKey
+            };
+            SIG.confirmUpgrade(parametrosConfirm);
+        } else
+            SIG.Alert("Alerta", "Seleccione un registro", null);
+    });
+
     function ListarActa() {
         var colNames = ['ID', 'Número de Orden de Pedido', 'Fecha de Solicitud', 'Fecha de Entrega de Pedido', 'Solicitante', 'Estado'];
         var colModels = [
@@ -144,7 +176,7 @@
             colsModel: colModels,
             sortName: 'Id',
             rules: true,
-            GetRulesMethod: function() {
+            GetRulesMethod: function () {
                 var estado = $("#selEstado").val();
                 if (estado !== "")
                     return [{ field: "Estado", op: "eq", data: estado }];

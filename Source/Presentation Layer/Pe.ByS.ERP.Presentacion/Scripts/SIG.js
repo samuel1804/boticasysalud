@@ -1840,7 +1840,73 @@
         });
     },
 
-    Alert: function (dialogTitle, dialogText, okFunc) {
+    confirmUpgrade: function (opciones) {
+        var buttons = [
+            {
+                text: opciones.dialogOkText,
+                click: function () {
+                    if (typeof (opciones.OkHandlerFunction) == 'function') {
+                        var dialogConfirm = $(this);
+
+                        var respuestaHandler;
+                        $.when(opciones.OkHandlerFunction(opciones.parametroHandlers)).then(function () {
+                            dialogConfirm.dialog("destroy").remove();
+                            respuestaHandler = esperaRespuesta.resolve();
+                        }, function () {
+                            respuestaHandler = esperaRespuesta.reject();
+                        });
+
+                        return respuestaHandler;
+                    } else {
+                        alert("Debe definir un handler para la accion OK");
+                    }
+
+                    return esperaRespuesta.reject();
+                }
+            }, {
+                text: opciones.dialogCancelText,
+                click: function () {
+                    if (typeof (opciones.CancelHandlerFunction) == 'function') {
+                        $(this).dialog("destroy").remove();
+                        opciones.CancelHandlerFunction(opciones.parametroHandlers);
+                    } else {
+                        $(this).dialog("destroy").remove();
+                    }
+
+                    return esperaRespuesta.reject();
+                }
+            }
+        ];
+
+        var esperaRespuesta = new $.Deferred();
+        var dialog = $('<div style="padding: 10px; min-width: 300px; word-wrap: break-word;">' + opciones.dialogText + '</div>').dialog({
+            draggable: true,
+            modal: true,
+            resizable: opciones.resizable == null ? false : opciones.resizable,
+            width: opciones.width == null ? 'auto' : opciones.width,
+            height: opciones.height == null ? 'auto' : opciones.height,
+            position: 'center',
+            dialogClass: opciones.dialogClass,
+            appendTo: opciones.container,
+            title: opciones.dialogTitle || 'Confirmación',
+            minHeight: 75,
+            buttons: opciones.isAlert == null ? buttons : []
+        });
+
+        dialog.parent().draggable({
+            containment: opciones.dragContainer == null ? 'body' : opciones.dragContainer
+        });
+
+        dialog.parent().position({
+            my: opciones.positionMy != null ? opciones.positionMy : 'center',
+            at: opciones.positionAt != null ? opciones.positionAt : 'center',
+            of: opciones.dragContainer == null ? 'body' : opciones.dragContainer
+        });
+
+        return esperaRespuesta.promise();
+    },
+
+    Alert: function (dialogTitle, dialogText, okFunc, closeFunc) {
         $('<div style="padding: 10px; min-width: 250px; word-wrap: break-word;">' + dialogText + '</div>').dialog({
             //draggable: false,
             modal: true,
@@ -1848,7 +1914,6 @@
             width: '400px',
             title: dialogTitle || 'Alert',
             minHeight: 75,
-            modal: true,
             buttons: {
                 OK: function () {
                     if (okFunc != null) {
@@ -1856,6 +1921,13 @@
                     }
                     $(this).dialog('destroy');
                 }
+            },
+            close: function () {
+                if (closeFunc != null && typeof (closeFunc) == 'function') {
+                    closeFunc();
+                }
+
+                $(this).dialog("destroy").remove();
             }
         });
     },

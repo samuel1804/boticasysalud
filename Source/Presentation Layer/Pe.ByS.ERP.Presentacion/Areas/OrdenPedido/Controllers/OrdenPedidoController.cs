@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using Pe.ByS.ERP.Application.Converter;
+using Pe.ByS.ERP.Application.DTO;
 using Pe.ByS.ERP.CrossCutting.Common;
 using Pe.ByS.ERP.CrossCutting.Common.Enums;
 using Pe.ByS.ERP.CrossCutting.Common.JQGrid;
@@ -103,6 +104,46 @@ namespace Pe.ByS.ERP.Presentacion.Areas.OrdenPedido.Controllers
         {
             var sucursalList = _sucursalBL.FindAll(p => true).ToList();
             return View("Edit", OrdenPedidoConverter.DataInicial(sucursalList));
+        }
+
+        [HttpPost]
+        public virtual JsonResult ArgregarPedido(OrdenPedidoDto pedido)
+        {
+            var jsonResponse = new JsonResponse { Success = false };
+            try
+            {
+                var ultimoPedido = _ordenBL.FindAll(p => true).OrderByDescending(p => p.Id).FirstOrDefault();
+                if (ultimoPedido != null)
+                    pedido.NumeroPedido = ultimoPedido.NumeroPedido;
+                
+                _ordenBL.Add(OrdenPedidoConverter.DtoToDomain(pedido));
+                jsonResponse.Data = pedido.NumeroPedido;
+                jsonResponse.Success = true;
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                jsonResponse.Message = "Ocurrió un error";
+            }
+            return Json(jsonResponse, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public virtual JsonResult EliminarPedido(int id)
+        {
+            var jsonResponse = new JsonResponse {Success = false};
+            try
+            {
+                var pedido = _ordenBL.Get(p => p.Id == id);
+                _ordenBL.Delete(pedido);
+                jsonResponse.Success = true;
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                jsonResponse.Message = "Ocurrió un error";
+            }
+            return Json(jsonResponse, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ViewProducto()

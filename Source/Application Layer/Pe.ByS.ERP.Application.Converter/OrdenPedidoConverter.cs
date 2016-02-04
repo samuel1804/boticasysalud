@@ -23,8 +23,39 @@ namespace Pe.ByS.ERP.Application.Converter
                     new KeyValuePair<string, string>("", "-- Seleccionar --"),
                     new KeyValuePair<string, string>("1", "Verificador 1")
                 },
-                EstadoList = EstadoOrdenPedidoList(),
+                Estado = EstadoOrdenPedidoList().First(p => p.Key == ((int) EstadoPedido.Pendiente).ToString()).Value,
                 FechaPedido = DateTime.Now.ConvertToDdmmaaaa()
+            };
+        }
+
+        public static OrdenPedido DtoToDomain(OrdenPedidoDto pedido)
+        {
+            if (!string.IsNullOrEmpty(pedido.NumeroPedido))
+            {
+                var num = pedido.NumeroPedido.Substring(2);
+                pedido.NumeroPedido = string.Format("OP{0:000000}", Convert.ToInt32(num) + 1);
+            }
+
+            return new OrdenPedido
+            {
+                NumeroPedido = pedido.NumeroPedido,
+                FechaEntrega = Convert.ToDateTime(pedido.FechaEntrega),
+                FechaPedido = Convert.ToDateTime(pedido.FechaPedido),
+                SucursalId = pedido.SucursalId,
+                SolicitanteId = pedido.SolicitanteId,
+                Glosa = pedido.Glosa,
+                DetalleOrdenPedidoList = pedido.DetalleList.Select(p => new DetalleOrdenPedido
+                {
+                    Cantidad = p.Cantidad,
+                    ProductoId = p.ProductoId,
+                    UnidadMedida = p.UnidadMedida,
+                    Observacion = p.Observacion,
+                    UsuarioCreacion = "Aministrador",
+                    FechaCreacion = DateTime.Now
+                }).ToList(),
+                UsuarioCreacion = "Aministrador",
+                FechaCreacion = DateTime.Now,
+                Estado = ((int) EstadoPedido.Pendiente).ToString()
             };
         }
 
