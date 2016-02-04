@@ -21,6 +21,7 @@ namespace WebBS.Models
         }
 
         public int Cod_cliente { get; set; }
+        [Display(Name = "Razón Social")]
         [Required(ErrorMessage = "Razon social es requerido.")]
         public string Razon_social { get; set; }
         public string Categoria { get; set; }

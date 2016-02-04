@@ -16,7 +16,7 @@ namespace WebBS.Controllers
 
         //
         // GET: /ClienteJuridico/
-        public ActionResult Index(string razonSocial, string ruc, string sortOrder, string currentFilter, int? page)
+        public ActionResult Index(string estado, string razonSocial, string ruc, string sortOrder, string currentFilter, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.RUCSortParm = String.IsNullOrEmpty(sortOrder) ? "Num_doc_identidad" : "";
@@ -26,26 +26,24 @@ namespace WebBS.Controllers
                            select s;            
 
             int pageSize = 10;
-            int pageNumber = (page ?? 1);
-
-            if (razonSocial != null || ruc != null)
-            {
-
-                if (razonSocial != null && ruc != null){
-                    clientes = clientes.Where(b =>
-                        (b.GCC_CLIENTE_JURIDICO.Razon_social.Contains(razonSocial))
-                       && b.Num_doc_identidad.Contains(ruc));
-                }
-                else if (razonSocial == null && ruc != null)
-                {
-                    clientes = clientes.Where(b => b.Num_doc_identidad.Contains(ruc));
-                }
-                else if (razonSocial != null && ruc == null)
-                {
-                    clientes = clientes.Where(b => b.GCC_CLIENTE_JURIDICO.Razon_social.Contains(razonSocial));
-                }
+            int pageNumber = (page ?? 1);                
                 
+            if (!string.IsNullOrEmpty(ruc))
+            {
+                clientes = clientes.Where(b => b.Num_doc_identidad.Contains(ruc));
             }
+
+            if (!string.IsNullOrEmpty(razonSocial))
+            {
+                clientes = clientes.Where(b => b.GCC_CLIENTE_JURIDICO.Razon_social.Contains(razonSocial));
+            }
+                
+            if (!string.IsNullOrEmpty(estado))
+            {
+                clientes = clientes.Where(b => b.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Estado==estado);
+            }
+                
+            
 
             switch (sortOrder)
             {

@@ -572,6 +572,7 @@
     <Content Include="Views\EmpleadoInfCrediticio\Details.cshtml" />
     <Content Include="Views\EmpleadoInfCrediticio\Edit.cshtml" />
     <Content Include="Views\EmpleadoInfCrediticio\Index.cshtml" />
+    <Content Include="Views\SolicitudDeCredito\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

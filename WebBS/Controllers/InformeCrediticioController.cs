@@ -213,7 +213,7 @@ namespace WebBS.Controllers
                 && b.Nivel_riesgo == nivelRiesto && b.Cliente_nuevo==clienteNuevo).Single();
             GCC_PLAN_CREDITO plan = politica.GCC_PLAN_CREDITO;
 
-            informe.GCC_SOLICITUD_CREDITO.Rango_credito = "[" + Convert.ToInt32(plan.Rango_inicio) + ", " + Convert.ToInt32(plan.Rango_fin) + "]";
+            informe.GCC_SOLICITUD_CREDITO.Rango_credito = "<<" + plan.Rango_inicio + " a " + plan.Rango_fin + ">>";
             informe.GCC_SOLICITUD_CREDITO.Estado_informe = politica.Estado_resultante;
             informe.GCC_SOLICITUD_CREDITO.Cantidad_credito = Convert.ToInt32((plan.Rango_inicio + plan.Rango_fin) / 2);
             informe.GCC_SOLICITUD_CREDITO.Codigo_politica = politica.Cod_politica_credito; 
@@ -283,7 +283,7 @@ namespace WebBS.Controllers
             informeCrediticio.Monto_linea_credito_aprob = informeCrediticio.GCC_SOLICITUD_CREDITO.Cantidad_credito;
             informeCrediticio.Capacidad_crediticia = informeCrediticio.GCC_SOLICITUD_CREDITO.Capacidad_crediticia_str.Substring(0,1);
             informeCrediticio.Nivel_riesgo = informeCrediticio.GCC_SOLICITUD_CREDITO.Nivel_riesgo_str;                 
-            informeCrediticio.GCC_POLITICA_CREDITO = db.GCC_POLITICA_CREDITO.Where(b => b.Cod_plan_credito == informeCrediticio.GCC_SOLICITUD_CREDITO.Codigo_politica).Single();
+            informeCrediticio.GCC_POLITICA_CREDITO = db.GCC_POLITICA_CREDITO.Where(b => b.Cod_politica_credito == informeCrediticio.GCC_SOLICITUD_CREDITO.Codigo_politica).Single();
             informeCrediticio.Cod_politica_credito = informeCrediticio.GCC_POLITICA_CREDITO.Cod_politica_credito;
             informeCrediticio.GCC_SOLICITUD_CREDITO = db.GCC_SOLICITUD_CREDITO.Where(b => b.Cod_solicitud_credito == informeCrediticio.GCC_SOLICITUD_CREDITO.Cod_solicitud_credito).Single();
             informeCrediticio.Cod_solicitud_credito = informeCrediticio.GCC_SOLICITUD_CREDITO.Cod_solicitud_credito;
@@ -327,6 +327,7 @@ namespace WebBS.Controllers
         public ActionResult Delete(int id)
         {
             GCC_INFORME_CREDITICIO informe = db.GCC_INFORME_CREDITICIO.Where(b => b.Cod_informe_crediticio == id).Single();
+            informe.GCC_SOLICITUD_CREDITO.Rango_credito = "<<" + informe.GCC_POLITICA_CREDITO.GCC_PLAN_CREDITO.Rango_inicio + " a " + informe.GCC_POLITICA_CREDITO.GCC_PLAN_CREDITO.Rango_fin + ">>";
             return View(informe);
         }
 
@@ -357,6 +358,7 @@ namespace WebBS.Controllers
         public ActionResult Details(int id)
         {
             GCC_INFORME_CREDITICIO informe = db.GCC_INFORME_CREDITICIO.Where(b=> b.Cod_informe_crediticio == id).Single();
+            informe.GCC_SOLICITUD_CREDITO.Rango_credito = "<<" + informe.GCC_POLITICA_CREDITO.GCC_PLAN_CREDITO.Rango_inicio + " a " + informe.GCC_POLITICA_CREDITO.GCC_PLAN_CREDITO.Rango_fin + ">>";
             return View(informe);
         }
 

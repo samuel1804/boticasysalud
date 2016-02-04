@@ -1,22 +1,16 @@
 ﻿@model WebBS.Models.GCC_SOLICITUD_CREDITO
 
 @{
-    ViewBag.Title = "Anular";
+    ViewBag.Title = "Details";
 }
 
-<h2>Confirmar Anulación</h2>
+<h2>Details</h2>
 
-<h3>Seguro que desea anular la Solicitud de Crédito?</h3>
 <div>
-    <hr />
+    <h4>GCC_SOLICITUD_CREDITO</h4>
+	<hr />
     <dl class="dl-horizontal">
-        <dt style="display: none;">
-            @Html.DisplayNameFor(model => model.Cod_solicitud_credito)
-        </dt>
 
-        <dd style="display: none;">
-            @Html.DisplayFor(model => model.Cod_solicitud_credito)
-        </dd>
         <dt>
             RUC
         </dt>
@@ -71,15 +65,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.Estado_cliente_str)
-        </dd>        
+        </dd>  
 
     </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Anular" class="btn btn-default" />
-        </div>
-    }
 </div>

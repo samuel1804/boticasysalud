@@ -85,7 +85,25 @@ namespace WebBS.Controllers
         // GET: /SolicitudDeCredito/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            GCC_SOLICITUD_CREDITO solicitud = db.GCC_SOLICITUD_CREDITO.Find(id);
+            if (solicitud.GCC_CLIENTE_JURIDICO.Categoria == "P")
+            {
+                solicitud.Estado_cliente_str = "Cliente Nuevo";
+            }
+            else
+            {
+                List<GCC_COMPROBANTE> comprobantes = solicitud.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.GCC_COMPROBANTE.ToList();
+
+                if (comprobantes == null || comprobantes.Count == 0)
+                {
+                    solicitud.Estado_cliente_str = "Cliente Sin Historial";
+                }
+                else
+                {
+                    solicitud.Estado_cliente_str = "Cliente Con Historial";
+                }
+            }
+            return View(solicitud);
         }
 
         //
@@ -277,6 +295,25 @@ namespace WebBS.Controllers
             {                
                 return HttpNotFound();
             }
+
+            if (solicitud.GCC_CLIENTE_JURIDICO.Categoria == "P")
+            {
+                solicitud.Estado_cliente_str = "Cliente Nuevo";
+            }
+            else
+            {
+                List<GCC_COMPROBANTE> comprobantes = solicitud.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.GCC_COMPROBANTE.ToList();
+
+                if (comprobantes == null || comprobantes.Count == 0)
+                {
+                    solicitud.Estado_cliente_str = "Cliente Sin Historial";
+                }
+                else
+                {
+                    solicitud.Estado_cliente_str = "Cliente Con Historial";
+                }
+            }
+
             return View(solicitud);
         }
 

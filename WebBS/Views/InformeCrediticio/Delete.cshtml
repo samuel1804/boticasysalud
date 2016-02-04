@@ -20,19 +20,35 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Nivel_riesgo)
+            RUC
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Nivel_riesgo)
+            @Html.DisplayFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Capacidad_crediticia)
+            @Html.DisplayNameFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.Razon_social)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Capacidad_crediticia)
+            @Html.DisplayFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.Razon_social)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nivel_riesgo_str)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nivel_riesgo_str)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Capacidad_crediticia_str)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Capacidad_crediticia_str)
         </dd>
 
         <dt>
@@ -41,6 +57,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.Fec_ultima_evaluacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GCC_SOLICITUD_CREDITO.Rango_credito)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GCC_SOLICITUD_CREDITO.Rango_credito)
         </dd>
 
         <dt>

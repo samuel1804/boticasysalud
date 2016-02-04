@@ -24,12 +24,16 @@ namespace WebBS.Models
         public int Cod_informe_crediticio { get; set; }
         public int Cod_solicitud_credito { get; set; }
         public int Cod_politica_credito { get; set; }
+        [Display(Name = "Fecha Informe")]
         public System.DateTime Fecha_informe { get; set; }
         public string Nivel_riesgo { get; set; }
         public string Capacidad_crediticia { get; set; }
+        [Display(Name = "Fecha Ultima Evaluación")]
         public System.DateTime Fec_ultima_evaluacion { get; set; }
         public Byte[] Reporte_infocorp { get; set; }
+        [Display(Name = "Linea de Crédito Evaluado")]
         public decimal Monto_linea_credito_eval { get; set; }
+        [Display(Name = "Linea de Crédito Aprobado")]
         public decimal Monto_linea_credito_aprob { get; set; }
         public int Cod_usu_regi { get; set; }
         public System.DateTime Fec_usu_regi { get; set; }
@@ -40,6 +44,44 @@ namespace WebBS.Models
         public virtual ICollection<GCC_EMPLEADO_INF_CREDITICIO> GCC_EMPLEADO_INF_CREDITICIO { get; set; }
         public virtual GCC_POLITICA_CREDITO GCC_POLITICA_CREDITO { get; set; }
         public virtual GCC_SOLICITUD_CREDITO GCC_SOLICITUD_CREDITO { get; set; }
+        [Display(Name = "Nivel Riesgo")]
+        public string Nivel_riesgo_str { get{
+            if (Nivel_riesgo == "A") {
+                return "Alto";
+            }
+            else if (Nivel_riesgo == "M")
+            {
+                return "Medio";
+            }
+            else if (Nivel_riesgo == "B")
+            {
+                return "Bajo";
+            }
+
+            return "";
+            } 
+        }
+        [Display(Name = "Capacidad Crediticia")]
+        public string Capacidad_crediticia_str
+        {
+            get
+            {
+                if (Capacidad_crediticia == "A")
+                {
+                    return "Alto";
+                }
+                else if (Capacidad_crediticia == "M")
+                {
+                    return "Medio";
+                }
+                else if (Capacidad_crediticia == "B")
+                {
+                    return "Bajo";
+                }
+
+                return "";
+            }
+        }
         [Display(Name = "Estado")]
         public string Estado_actual
         {

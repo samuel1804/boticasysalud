@@ -51,6 +51,10 @@ namespace WebBS.Models
             {
 
                 var estados = new List<Models.GCC_EMPLEADO_SOL_CREDITO>(GCC_EMPLEADO_SOL_CREDITO);
+
+                if (estados.Count == 0)
+                    return "";
+
                 String estado_actual = estados[estados.Count - 1].Estado;
 
                 if (estado_actual == "A")
