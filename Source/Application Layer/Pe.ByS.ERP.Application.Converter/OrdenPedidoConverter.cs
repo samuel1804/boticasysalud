@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Pe.ByS.ERP.Application.DTO;
 using Pe.ByS.ERP.CrossCutting.Common;
+using Pe.ByS.ERP.CrossCutting.Common.Enums;
 using Pe.ByS.ERP.Domain;
 
 namespace Pe.ByS.ERP.Application.Converter
@@ -22,11 +23,7 @@ namespace Pe.ByS.ERP.Application.Converter
                     new KeyValuePair<string, string>("", "-- Seleccionar --"),
                     new KeyValuePair<string, string>("1", "Verificador 1")
                 },
-                EstadoList = new List<KeyValuePair<string, string>>
-                {
-                    new KeyValuePair<string, string>("", "-- Seleccionar --"),
-                    new KeyValuePair<string, string>("1", "Pendiente")
-                },
+                EstadoList = EstadoOrdenPedidoList(),
                 FechaPedido = DateTime.Now.ConvertToDdmmaaaa()
             };
         }
@@ -36,7 +33,8 @@ namespace Pe.ByS.ERP.Application.Converter
             return new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("", "-- Seleccionar --"),
-                new KeyValuePair<string, string>("1", "Pendiente")
+                new KeyValuePair<string, string>(((int) EstadoPedido.Pendiente).ToString(), "Pendiente"),
+                new KeyValuePair<string, string>(((int) EstadoPedido.Actualizado).ToString(), "Actualizado")
             };
         }
 

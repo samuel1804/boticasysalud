@@ -4,32 +4,32 @@
     <div class="col-sm-11">
         <div class="row">
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Articulo:</label>
-                <div class="col-md-9 col-sm-9 col-xs-12">
+                <label class="control-label col-md-4 col-sm-4 col-xs-12">Articulo:</label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
                     @Html.DropDownList("selArticulo", new SelectList(Model, "Key", "Value", 0), new { @class = "form-control" })
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Unidad:</label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
+                <label class="control-label col-md-4 col-sm-4 col-xs-12">Unidad:</label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
                     <input id="txtUnidad" class="form-control" />
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Cantidad:</label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
+                <label class="control-label col-md-4 col-sm-4 col-xs-12">Cantidad:</label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
                     <input id="txtCantidad" class="form-control" />
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Articulo:</label>
-                <div class="col-md-9 col-sm-9 col-xs-12">
+                <label class="control-label col-md-4 col-sm-4 col-xs-12">Observación:</label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
                     <textarea id="txtObservacion" class="form-control"></textarea>
                 </div>
             </div>
@@ -42,13 +42,28 @@
     function AgregarProducto(popupObj, parametroHandlers) {
         var model = {
             ProductoId: $('#selArticulo').val(),
-            ProductoNombre: $('#SolicitanteId option:selected').text(),
+            ProductoNombre: $('#selArticulo option:selected').text(),
             UnidadMedida: $('#txtUnidad').val(),
             CantidadPedida: $('#txtCantidad').val(),
             Observacion: $('#txtObservacion').val()
         };
 
+        var msj = "";
+        if (model.ProductoId === "")
+            msj += "- Seleccione un articulo.<br />";
+        if (model.UnidadMedida === "")
+            msj += "- Ingrese una unidad.<br />";
+        if (model.CantidadPedida === "")
+            msj += "- Ingrese una cantidad.<br />";
+        else if (isNaN(model.CantidadPedida))
+            msj += "- Cantidad no válida.<br />";
+        if (msj !== "") {
+            SIG.Alert('Alerta', msj, null);
+            return;
+        }
+
         parametroHandlers.functionOk(model);
+        $(popupObj).dialog("close");
     }
 
 </script>

@@ -9,7 +9,7 @@
             <div class="form-group form-group-sm">
                 <label class="control-label col-md-4 col-sm-4 col-xs-12">Estado:</label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
-                    @Html.DropDownList("selEstado", new SelectList(Model, "Key", "Value", 0), new {@class = "form-control"})
+                    @Html.DropDownList("selEstado", new SelectList(Model, "Key", "Value", 1), new {@class = "form-control"})
                 </div>
             </div>
         </div>
@@ -87,12 +87,8 @@
         showButtonPanel: true
     });
 
-    $("#btnBuscar").click(function() {
+    $("#btnBuscar").click(function () {
         var rules = [];
-        var estado = $("#selEstado").val();
-        if (estado !== "")
-            rules.push({ field: "Estado", op: "eq", data: estado });
-
         var pedido = $("#txtNumeroPedido").val();
         if (pedido !== "")
             rules.push({ field: "NumeroPedido", op: "cn", data: pedido });
@@ -109,12 +105,12 @@
         $grid.trigger("reloadGrid");
     });
 
-    $("#btnAgregar").click(function() {
+    $("#btnAgregar").click(function () {
         window.location.href = '@Url.Action("Edit", "OrdenPedido", new { Area = "OrdenPedido" })';
     });
 
     function ListarActa() {
-        var colNames = ['ID', 'Número Pedido', 'Fecha Solicitud', 'Fecha Entrega', 'Solicitante', 'Estado'];
+        var colNames = ['ID', 'Número de Orden de Pedido', 'Fecha de Solicitud', 'Fecha de Entrega de Pedido', 'Solicitante', 'Estado'];
         var colModels = [
             { name: 'Id', index: 'Id', align: 'center', hidden: true },
             { name: 'NumeroPedido', index: 'NumeroPedido', align: 'center', width: 100, searchoptions: { sopt: ['cn', 'bw'] } },
@@ -146,11 +142,17 @@
             id: 'id',
             colsNames: colNames,
             colsModel: colModels,
-            sortName: 'Id'
+            sortName: 'Id',
+            rules: true,
+            GetRulesMethod: function() {
+                var estado = $("#selEstado").val();
+                if (estado !== "")
+                    return [{ field: "Estado", op: "eq", data: estado }];
+                return null;
+            }
         };
 
         SIG.GrillaUpgrade(opciones);
-        $("#" + grdPedido).filterToolbar({ searchOnEnter: true, stringResult: true, defaultSearch: "cn" });
     }
 
 </script>

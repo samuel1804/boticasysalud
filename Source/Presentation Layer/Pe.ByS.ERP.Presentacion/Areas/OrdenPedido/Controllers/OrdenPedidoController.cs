@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Pe.ByS.ERP.Application.Converter;
 using Pe.ByS.ERP.CrossCutting.Common;
+using Pe.ByS.ERP.CrossCutting.Common.Enums;
 using Pe.ByS.ERP.CrossCutting.Common.JQGrid;
 using Pe.ByS.ERP.Presentacion.Core;
 using Pe.ByS.ERP.Services.BusinessLogic.Core;
@@ -49,7 +50,8 @@ namespace Pe.ByS.ERP.Presentacion.Areas.OrdenPedido.Controllers
                             item.FechaPedido.ConvertToDdmmaaaa(),
                             item.NumeroPedido
                         }
-                    }
+                    },
+                    FiltrosAdicionales = p => p.Estado == ((int)EstadoPedido.Actualizado).ToString()
                 });
             }
             catch (Exception ex)
@@ -78,7 +80,8 @@ namespace Pe.ByS.ERP.Presentacion.Areas.OrdenPedido.Controllers
                             item.NumeroPedido,
                             item.FechaPedido.ConvertToDdmmaaaa(),
                             item.FechaEntrega.ConvertToDdmmaaaa(),
-                            item.Solicitante.Nombre,
+                            string.Format("{0} {1}, {2}", item.Solicitante.ApellidoPaterno,
+                                item.Solicitante.ApellidoMaterno, item.Solicitante.Nombre),
                             estados.First(p => p.Key == item.Estado).Value
                         }
                     }

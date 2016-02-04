@@ -73,6 +73,7 @@
     <Compile Include="Constantes.cs" />
     <Compile Include="DataResponse.cs" />
     <Compile Include="Encriptador.cs" />
+    <Compile Include="Enums\EstadoPedido.cs" />
     <Compile Include="Enums\TipoActa.cs" />
     <Compile Include="Enums\TipoEstado.cs" />
     <Compile Include="Enums\TipoOrden.cs" />
