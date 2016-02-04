@@ -7,7 +7,11 @@ namespace Pe.ByS.ERP.Application.Converter
     {
         public static List<KeyValuePair<string, string>> ListToKeyValueList(List<Empleado> empeladoList)
         {
-            var list = empeladoList.ConvertAll(p => new KeyValuePair<string, string>(p.Id.ToString(), p.Nombre));
+            var list =
+                empeladoList.ConvertAll(
+                    p =>
+                        new KeyValuePair<string, string>(p.Id.ToString(),
+                            string.Format("{0} {1}, {2}", p.ApellidoPaterno, p.ApellidoMaterno, p.Nombre)));
             list.Insert(0, new KeyValuePair<string, string>("", "-- Seleccionar --"));
 
             return list;

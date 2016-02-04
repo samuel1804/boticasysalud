@@ -19,16 +19,18 @@ namespace Pe.ByS.ERP.Presentacion.Areas.OrdenPedido.Controllers
         private readonly IOrdenPedidoBL _ordenBL;
         private readonly ISucursalBL _sucursalBL;
         private readonly IProductoBL _productoBL;
+        private readonly IEmpleadoBL _empleadoBL;
 
         #endregion
 
         #region Constructor
 
-        public OrdenPedidoController(IOrdenPedidoBL ordenBL, ISucursalBL sucursalBL, IProductoBL productoBL)
+        public OrdenPedidoController(IOrdenPedidoBL ordenBL, ISucursalBL sucursalBL, IProductoBL productoBL, IEmpleadoBL empleadoBL)
         {
             _ordenBL = ordenBL;
             _sucursalBL = sucursalBL;
             _productoBL = productoBL;
+            _empleadoBL = empleadoBL;
         }
 
         #endregion
@@ -104,7 +106,9 @@ namespace Pe.ByS.ERP.Presentacion.Areas.OrdenPedido.Controllers
         public ActionResult Edit()
         {
             var sucursalList = _sucursalBL.FindAll(p => true).ToList();
-            return View("Edit", OrdenPedidoConverter.DataInicial(sucursalList));
+            var empleadoList = _empleadoBL.FindAll(p => true).ToList();
+
+            return View("Edit", OrdenPedidoConverter.DataInicial(sucursalList, empleadoList));
         }
 
         [HttpPost]
@@ -133,8 +137,9 @@ namespace Pe.ByS.ERP.Presentacion.Areas.OrdenPedido.Controllers
         {
             var pedido = _ordenBL.Get(p => p.Id == id);
             var sucursalList = _sucursalBL.FindAll(p => true).ToList();
+            var empleadoList = _empleadoBL.FindAll(p => true).ToList();
 
-            return View("Edit", OrdenPedidoConverter.DomainToDto(pedido, sucursalList));
+            return View("Edit", OrdenPedidoConverter.DomainToDto(pedido, sucursalList, empleadoList));
         }
 
         [HttpPost]

@@ -10,19 +10,12 @@ namespace Pe.ByS.ERP.Application.Converter
 {
     public class OrdenPedidoConverter
     {
-        public static OrdenPedidoDto DataInicial(List<Sucursal> sucursalList)
+        public static OrdenPedidoDto DataInicial(List<Sucursal> sucursalList, List<Empleado> empleadoList)
         {
-            var list = sucursalList.ConvertAll(p => new KeyValuePair<string, string>(p.Id.ToString(), p.Nombre));
-            list.Insert(0, new KeyValuePair<string, string>("", "-- Seleccionar --"));
-
             return new OrdenPedidoDto
             {
-                SucursalList = list,
-                SolicitanteList = new List<KeyValuePair<string, string>>
-                {
-                    new KeyValuePair<string, string>("", "-- Seleccionar --"),
-                    new KeyValuePair<string, string>("1", "Verificador 1")
-                },
+                SucursalList = SucursalConverter.ListToKeyValueList(sucursalList),
+                SolicitanteList = EmpleadoConverter.ListToKeyValueList(empleadoList),
                 Estado = EstadoOrdenPedidoList().First(p => p.Key == ((int) EstadoPedido.Pendiente).ToString()).Value,
                 FechaPedido = DateTime.Now.ConvertToDdmmaaaa()
             };
@@ -59,25 +52,18 @@ namespace Pe.ByS.ERP.Application.Converter
             };
         }
 
-        public static OrdenPedidoDto DomainToDto(OrdenPedido pedido, List<Sucursal> sucursalList)
+        public static OrdenPedidoDto DomainToDto(OrdenPedido pedido, List<Sucursal> sucursalList, List<Empleado> empleadoList)
         {
-            var list = sucursalList.ConvertAll(p => new KeyValuePair<string, string>(p.Id.ToString(), p.Nombre));
-            list.Insert(0, new KeyValuePair<string, string>("", "-- Seleccionar --"));
-
             return new OrdenPedidoDto
             {
-                SucursalList = list,
+                SucursalList = SucursalConverter.ListToKeyValueList(sucursalList),
+                SolicitanteList = EmpleadoConverter.ListToKeyValueList(empleadoList),
                 NumeroPedido = pedido.NumeroPedido,
                 FechaEntrega = pedido.FechaEntrega.ConvertToDdmmaaaa(),
                 FechaPedido = pedido.FechaPedido.ConvertToDdmmaaaa(),
                 SucursalId = pedido.SucursalId,
                 SolicitanteId = pedido.SolicitanteId,
                 Glosa = pedido.Glosa,
-                SolicitanteList = new List<KeyValuePair<string, string>>
-                {
-                    new KeyValuePair<string, string>("", "-- Seleccionar --"),
-                    new KeyValuePair<string, string>("1", "Verificador 1")
-                },
                 DetalleList = pedido.DetalleOrdenPedidoList.Select(p => new DetalleOrdenPedidoDto
                 {
                     Cantidad = p.Cantidad,
