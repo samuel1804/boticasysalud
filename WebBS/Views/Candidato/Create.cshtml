@@ -4,7 +4,6 @@
         ViewBag.Title = "Create";
         Layout = "~/Views/Shared/_Layout.cshtml";
 
-        
     }
 
 
@@ -399,12 +398,15 @@
             </div>
 
             
+            @if (Model == null) {
 
             <div id="image-preview">
                 <label for="image-upload" id="image-label">Choose File</label>
-                <input type="file" name="image" id="image-upload"/>
+                <input type="file" name="image" id="image-upload"  />
             </div>
-            
+            }else{
+            <img id="image-preview" src="@Url.Content(@Model.Foto)" width="250px" height="250px" /> 
+           }
 
             <div class="form-group col-md-8">
                 @Html.LabelFor(model => model.Nombre, new { @class = "control-label col-md-3" })
@@ -539,7 +541,7 @@
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" name="btnRegistrar"  value="Grabar" class="btn btn-default" />
                     <input type="submit" name="btnRegistrarMas"  value="Grabar y Registrar Nuevo" class="btn btn-default" />
-                    <input type="submit" name="btnCancelar" value="Cancelar" class="btn btn-default" />
+                    <a type="submit" name="btnCancelar" href="~/Candidato/Index" class="btn btn-default">Cancelar</a> 
                 </div>
 
             </div>

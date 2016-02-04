@@ -1,0 +1,129 @@
+﻿
+<div id="divCriterios">
+    <div style="margin-left: 20px;">
+    </div>
+    <div>
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function getPreguntaEvalTecnica(Cod_perfil) {
+        $.get(
+            '/RecursosHumanos/RegistrarEvalTecnica/getPreguntaEvalTecnica',
+            {
+                intCod_perfil: Cod_perfil
+            },
+            function (jsonResult) {
+                var arr = eval(jsonResult);
+                var cadena = '';
+                var CriterioAnterior = '';
+                var PreguntaAnterior = '';
+                var Alternativas = '';
+
+                for (var i = 0; i < arr.length; i++) {
+                    if (i != 0) {
+                        CriterioAnterior = arr[i - 1].obeCriterio.strDesc_criterio;
+                        PreguntaAnterior = arr[i - 1].strPregunta;
+                    }
+                    Alternativas += arr[i].obeAlternativa.strDesc_Alternatica + '|';
+
+                    if (CriterioAnterior != arr[i].obeCriterio.strDesc_criterio) {
+                        cadena += '<div><span>' + arr[i].obeCriterio.strDesc_criterio + '</span></div>';
+                        if (PreguntaAnterior != arr[i].strPregunta) {
+                            cadena += '<div style="margin-left: 50px;"><span>' + arr[i].strPregunta + '</span></div>';
+
+                            if (i != arr.length - 1) {
+                                if (arr[i].strPregunta != arr[i + 1].strPregunta) {
+                                    cadena += setAlternativa(arr[i].obeCriterio.intCod_criterio, arr[i].strPregunta, Alternativas);
+                                    Alternativas = '';
+                                }
+                            }
+                            else {
+                                cadena += setAlternativa(arr[i].obeCriterio.intCod_criterio, arr[i].strPregunta, Alternativas);
+                                Alternativas = '';
+                            }
+
+
+
+                        }
+                        else {
+
+                            if (i != arr.length - 1) {
+                                if (arr[i].strPregunta != arr[i + 1].strPregunta) {
+                                    cadena += setAlternativa(arr[i].obeCriterio.intCod_criterio, arr[i].strPregunta, Alternativas);
+                                    Alternativas = '';
+                                }
+                            }
+                            else {
+                                cadena += setAlternativa(arr[i].obeCriterio.intCod_criterio, arr[i].strPregunta, Alternativas);
+                                Alternativas = '';
+                            }
+
+
+                        }
+                    }
+                    else {
+                        if (PreguntaAnterior != arr[i].strPregunta) {
+                            cadena += '<div style="margin-left: 50px;"><span>' + arr[i].strPregunta + '</span></div>';
+
+                            if (i != arr.length - 1) {
+                                if (arr[i].strPregunta != arr[i + 1].strPregunta) {
+                                    cadena += setAlternativa(arr[i].obeCriterio.intCod_criterio, arr[i].strPregunta, Alternativas);
+                                    Alternativas = '';
+                                }
+                            }
+                            else {
+                                cadena += setAlternativa(arr[i].obeCriterio.intCod_criterio, arr[i].strPregunta, Alternativas);
+                                Alternativas = '';
+                            }
+
+
+                        }
+                        else {
+
+                            if (i != arr.length - 1) {
+                                if (arr[i].strPregunta != arr[i + 1].strPregunta) {
+                                    cadena += setAlternativa(arr[i].obeCriterio.intCod_criterio, arr[i].strPregunta, Alternativas);
+                                    Alternativas = '';
+                                }
+                            }
+                            else {
+                                cadena += setAlternativa(arr[i].obeCriterio.intCod_criterio, arr[i].strPregunta, Alternativas);
+                                Alternativas = '';
+                            }
+
+
+                        }
+                    }
+                }
+                $(divCriterios).html(cadena);
+            }
+            );
+
+    }
+
+    function setAlternativa(intCod_criterio, strPregunta, Alternativas)
+    {
+        var cadena = '<div style="margin-left: 100px; margin-bottom: 10px; height: 30px;">';
+        var arrAlternativas = Alternativas.split('|');
+        for (var j = 0; j < arrAlternativas.length - 1; j++)
+        {
+            cadena += '<div class="squaredFour">' +
+            '<input type="radio" value="' + intCod_criterio + '|' + strPregunta + '|' + arrAlternativas[j] +
+            '" id="' + intCod_criterio + '|' + strPregunta + '|' + arrAlternativas[j] +
+            '" name="' + intCod_criterio + '|' + strPregunta + '" />' +
+            '<label for="' + intCod_criterio + '|' + strPregunta + '|' + arrAlternativas[j] + '"></label>' +
+            '</div>' +
+            '<div style="float: left;">' +
+            '<span style="font-size: 13px !important; padding-right: 15px;">' + arrAlternativas[j] + '</span>' +
+            '</div>';
+        }
+        cadena += '</div>';
+        return cadena;
+    }
+
+
+</script>
+  

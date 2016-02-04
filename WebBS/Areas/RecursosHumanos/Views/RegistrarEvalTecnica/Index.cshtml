@@ -1,0 +1,303 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/css/MenuButton.css" rel="stylesheet" />
+
+<fieldset class="panel">
+    <legend>Completar Evaluación de Desempeño Técnico</legend>
+    <div id='cssmenuButton' style="width: 423px !important;">
+        <ul id="ul_Botones">
+            <li id="li_Grabar" aria-disabled="true" style="cursor: not-allowed !important;">
+                <button onclick="fnGrabar();" class="buttonMenu">
+                    <img class="imgMenuButton" src="~/Content/images/Grabar.png" /><span>Grabar</span>
+                </button>
+            </li>
+            <li id="li_Previsualizar">
+                <button class="buttonMenu">
+                    <img class="imgMenuButton" src="~/Content/images/Buscar.png" /><span>Ver Resultados</span>
+                </button>
+            </li>
+            <li id="li_Imprimir">
+                <button class="buttonMenu">
+                    <img class="imgMenuButton" src="~/Content/images/chart.png" /><span>Ver Estadistica</span>
+                </button>
+            </li>
+            <li id="li_Salir" style="cursor: not-allowed !important;">
+                <button onclick="fnSalir();" class="buttonMenu">
+                    <img class="imgMenuButton" src="~/Content/images/Cancelar.png" /><span>Salir</span>
+                </button>
+            </li>
+        </ul>
+    </div>
+
+@using (Html.BeginForm("Grabar", "RegistrarEvalTecnica", FormMethod.Post, null))
+{
+    @Html.ValidationSummary(true)
+    <div id="divMantenimiento">
+        <input id="hd_Cod_empleadoJefe" type="hidden" />
+
+        <div style="width: 100%; padding-bottom: 10px; float: left;">
+            <div style="float: left; width: 100px;">
+                <span style="font-size: 16px;">Nombre:</span>
+            </div>
+            <div style="float: left;">
+                <input type="text" id="txtNombre" class="input form-control search" style="width: 300px;" disabled="disabled" />
+            </div>
+        </div>
+        <div style="width: 100%; padding-bottom: 10px; float: left;">
+            <div style="float: left; width: 100px;">
+                <span style="font-size: 16px;">Área:</span>
+            </div>
+            <div style="float: left;">
+                <input type="text" id="txtArea" class="input form-control search" style="width: 300px;" disabled="disabled" />
+            </div>
+        </div>
+
+        <div id="divlistaEmpleado" style="width: 60%; float: left;">
+            <table id="listaEmpleado"></table>
+            <div id="pagerlistaEmpleado"></div>
+        </div>
+
+    </div>
+
+    <div id="divNoEvaluado" style="display: none;">    
+
+        @{ Html.RenderPartial("../UserControls/_ucDatosEmpleado"); }
+
+        <fieldset class="panel">
+            <legend style="font-size: 16px !important;">Evaluación</legend>
+            @{ Html.RenderPartial("../UserControls/_ucCriterios"); }
+        </fieldset>
+        <div style="width: 100%; padding-bottom: 10px;">
+            <div style="float: left; width: 120px;">
+                <span style="font-size: 16px;">Observacion:</span>
+            </div>
+            <div style="float: left;">
+                <input type="text" id="txtObservacion" class="input form-control search" multiple style="width: 600px; height: 100px;" maxlength="150" />
+            </div>
+        </div>
+
+    </div>
+
+    <div id="dialogAutoEval" title="Autoevaluación" style="display: none">
+        <div style="width: 100%; padding-bottom: 10px; float: left;">
+            <div style="float: left; width: 70px;">
+                <span style="font-size: 16px;">Puntaje:</span>
+            </div>
+            <div style="float: left;">
+                <input type="number" id="txtPuntaje" class="input form-control search" style="width: 200px;" maxlength="150" />
+            </div>
+        </div>
+    </div>
+    
+    <input type="submit" id="btnGrabar" name="btnGrabar" value="Grabar" style="display: none;" />
+
+    }
+
+
+</fieldset>
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery-ui-1.9.2.custom.js"></script>
+    <script src="~/Content/bootstrap/js/bootstrap.js"></script>
+    <link href="~/Content/jqGrid/jquery-ui-1.9.2.custom.css" rel="stylesheet" />
+    <link href="~/Content/jqGrid/ui.jqgrid.css" rel="stylesheet" />
+    <script src="~/Scripts/jqGrid/grid.locale-en.js"></script>
+    <script src="~/Scripts/jqGrid/jquery.jqGrid.min.js"></script>
+    <script src="~/Scripts/Source/jsRecursosHumanos.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            onDatosEmpleado();
+
+            MantElaborarEvalTecnica.sel();
+
+            $("#dialogAutoEval").dialog({
+                autoOpen: false,
+                modal: true,
+                title: "Agregar Criterio",
+                show: { effect: "blind", duration: 500 },
+                hide: { effect: "blind", duration: 500 },
+                resizable: false,
+                CloseOnEscape: true,
+                width: 350,
+                close: function () {
+                    //document.getElementById("dialogMantElemento").setAttribute("style", "display: none;");
+                    //ocultarDivsElemento();
+                    //if (indAceptar == true) {
+                    //    var btn_RefrescarOperaciones = document.getElementById('<%= btn_RefrescarOperaciones.ClientID %>');
+                    //    btn_RefrescarOperaciones.click();
+                    //}
+                },
+                buttons: {
+                    "Aceptar": function () {
+
+                        if ($('#txtCriterio').val().trim() == "") {
+                            alert('Ingrese Criterio');
+                            return;
+                        }
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/jsonService.asmx/insertCriterio",
+                            data: "{ 'strDesc_criterio': '" + $('#txtCriterio').val().trim() + "' }",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
+                                var dato = response.d;
+                                var recepcion = dato.split('|');
+                                var mensaje = recepcion[0];
+                                if (mensaje == "") {
+                                    cargarCombo('cargaComboCriterio', 'cboCriterio');
+                                }
+                                else {
+                                    alert(recepcion[1]);
+                                    return;
+                                }
+                            }
+                        });
+
+                        $(this).dialog('close');
+                    },
+                    "Cancelar": function () {
+                        $(this).dialog('close');
+                    }
+                }
+            });
+
+        });
+
+
+        function onDatosEmpleado() {
+            $.get(
+                '/RecursosHumanos/RegistrarEvalTecnica/getDatosJefe',
+                {
+                },
+                function (jsonResult) {
+                    $("#hd_Cod_empleadoJefe").val(jsonResult.intCod_empleado);
+                    $("#txtNombre").val(jsonResult.strNomCompleto);
+                    $("#txtArea").val(jsonResult.strDesc_Area);
+
+                    $("#listaEmpleado").jqGrid({
+                        url: "/RecursosHumanos/RegistrarEvalTecnica/selectEmpleados?intCod_Jefe=" + $("#hd_Cod_empleadoJefe").val().toString(),
+                        datatype: 'json',
+                        mtype: 'Get',
+                        colNames: ['ID', 'Nombre Empleado', 'Puesto', 'Situación', ''],
+                        colModel: [
+                            { key: true, hidden: true, name: 'intCod_empleado', index: 'intCod_empleado' },
+                            { key: false, name: 'strNomCompleto', index: 'strNomCompleto', width: '35%', sorttype: 'string', searchoptions: { sopt: ['eq', 'bw', 'bn', 'cn', 'nc', 'ew', 'en'] } },
+                            { key: false, name: 'strNom_puesto', index: 'strNom_puesto', width: '35%', sorttype: 'string', searchoptions: { sopt: ['eq', 'bw', 'bn', 'cn', 'nc', 'ew', 'en'] } },
+                            { key: false, name: 'strEvaluado', index: 'strEvaluado', width: '20%', search: false },
+                            { key: false, hidden: true, name: 'intPuntaje', index: 'intPuntaje' }],
+                        pager: jQuery('#pagerlistaEmpleado'),
+                        scrollOffset: 0,
+                        rownumbers: true,
+                        viewrecords: false,
+                        emptyrecords: 'No existen registros',
+                        jsonReader: {
+                            root: "rows",
+                            page: "page",
+                            total: "total",
+                            records: "records",
+                            repeatitems: false,
+                            Id: "1"
+                        },
+                        autowidth: true,
+                        multiselect: false,
+                        //onSelectRow: function (id) {
+                        //    if (id && id !== lastcell) {
+                        //        jQuery('#grid').jqGrid('restoreRow', lastcell);
+                        //        jQuery('#grid').jqGrid('editRow', id, true);
+                        //        lastcell = id;
+                        //    }
+                        //},
+                        gridComplete: function () {
+                            var grid = jQuery("#listaEmpleado");
+                            var gridData = grid.jqGrid('getRowData');
+                            for (var i = 0; i < gridData.length; i++) {
+                                var rowId = gridData[i]["intCod_empleado"];
+                                var Evaluado = gridData[i]["strEvaluado"];
+                                var Puntaje = gridData[i]["intPuntaje"];
+                                var tagEvaluado;
+                                tagEvaluado = "<a href='#' id='" + rowId + "' style='color:darkblue'" +
+                                                "onclick=\"fnOpcionEval('" + rowId + "', '" + Evaluado + "', '" + Puntaje + "');\" ><u><em><strong>" + Evaluado + "</strong></em></u></a>";
+                                grid.jqGrid('setRowData', rowId, { strEvaluado: tagEvaluado });
+                            }
+                    },
+                    }).navGrid('#pagerlistaEmpleado', { edit: false, add: false, del: false, search: false, refresh: false });
+
+                    $("#listaEmpleado").jqGrid('filterToolbar', { searchOnEnter: true, enableClear: true });
+                    $("#listaEmpleado").setGridHeight('auto');
+                }
+                );
+        }
+
+
+
+
+
+
+        function fnOpcionEval(Cod_Empleado, Situacion, Puntaje) {
+            if (Puntaje == '0')
+            {
+                alert('Empleado no tiene Autoevaluación, no se puede continuar.');
+                $("#dialogAutoEval").dialog('open');
+                return;
+            }
+            if (Situacion == 'No Evaluado')
+            {
+                $.get(
+                '/RecursosHumanos/RegistrarEvalTecnica/getDatosEmpleado',
+                {
+                    intCod_Empleado: Cod_Empleado
+                },
+                function (jsonResult) {
+                    $("#hd_Cod_empleado").val(jsonResult.intCod_empleado);
+                    $("#txtNombreEmpleado").val(jsonResult.strNomCompleto);
+                    $("#txtPuestoEmpleado").val(jsonResult.strNom_puesto);
+                    $("#txtPerfilEmpleado").val(jsonResult.strDesc_perfil);
+                    $("#txtAreaEmpleado").val(jsonResult.strDesc_Area);
+
+                    getPreguntaEvalTecnica(jsonResult.intCod_perfil);
+                }
+                );
+
+                $("#divNoEvaluado").css("display", "block");
+                $("#divMantenimiento").css("display", "none");
+            }
+        }
+
+
+        function fnSalir() {
+            $("#divMantenimiento").css("display", "block");
+            $("#divNoEvaluado").css("display", "none");
+        }
+
+        function fnGrabar() {
+            $("#btnGrabar").click();
+            //MantRegistrarEvalTecnica.add();
+        }
+
+        function Open() {
+
+            $("#dialogBusqueda").dialog('open');
+        }
+
+        function fnImprimir() {
+            $("#dialogImprimir").dialog('open');
+            setTimeout(function () {
+                $("#dialogImprimir").dialog('close');
+                alert('Se imprimió con éxito.');
+            }, 3000);
+        }
+
+    </script>
+}
+
+
+
+

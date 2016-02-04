@@ -49,7 +49,7 @@
                     <ul class="nav">
                         <li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
                     </ul>
-                 
+              @*   @Html.Action("Index", "Option")*@
                     <ul class="list-unstyled hidden-xs" id="sidebar-footer">
                         <li>
                             <a href="#"><h3>Boticas y Salud</h3></a>
@@ -75,6 +75,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
+
                             @*<a href="/" class="navbar-brand logo">b</a>*@
                             <a href="~/Home" class="navbar-brand logo">
                                 <img src="~/Content/images/logo.png" class="img-responsive" />
@@ -89,6 +90,7 @@
                                     </div>
                                 </div>
                             </form>-->
+
                             <ul class="nav navbar-nav">
                                 <li>
                                     <a href="~/Home"><i class="glyphicon glyphicon-home"></i> Inicio</a>
@@ -114,6 +116,18 @@
                                     </ul>
                                 </li>
                             </ul>
+
+
+                            <ul class="nav navbar-nav navbar-right" style="padding-right:10px">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+                                        <i class="glyphicon glyphicon-user"></i> @(((RRH_Usuario)Session["Usuario"]).RRH_Empleado.Nom_empleado) @(((RRH_Usuario)Session["Usuario"]).RRH_Empleado.Ap_paterno) @(((RRH_Usuario)Session["Usuario"]).RRH_Empleado.Ap_materno) | Cargo: @(((RRH_Usuario)Session["Usuario"]).RRH_Empleado.RRH_Puesto.Nom_puesto)
+                                    </a>
+                                    
+                                </li>
+                            </ul>
+
 
                             <ul class="nav navbar-nav navbar-right" style="padding-right:10px">
                                 <li class="dropdown">

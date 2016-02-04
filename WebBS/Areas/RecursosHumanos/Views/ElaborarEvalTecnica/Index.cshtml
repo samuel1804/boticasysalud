@@ -1,0 +1,341 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/css/MenuButton.css" rel="stylesheet" />
+
+<fieldset class="panel">
+    <legend>Elaborar Evaluación de Desempeño Técnico</legend>
+    <div id='cssmenuButton'>
+        <ul id="ul_Botones">
+            <li id="li_Grabar" aria-disabled="true" style="cursor: not-allowed !important;">
+                <button onclick="fnGrabar();" class="buttonMenu">
+                    <img class="imgMenuButton" src="~/Content/images/Grabar.png" /><span>Grabar</span>
+                </button>
+            </li>
+            <li id="li_Previsualizar">
+                <button onclick="fnPrevisualizar();" class="buttonMenu">
+                    <img class="imgMenuButton" src="~/Content/images/Buscar.png" /><span>Previsualizar</span>
+                </button>
+            </li>
+            <li id="li_Imprimir">
+                <button onclick="fnImprimir();" class="buttonMenu">
+                    <img class="imgMenuButton" src="~/Content/images/printer.png" /><span>Imprimir</span>
+                </button>
+            </li>
+            <li id="li_Salir" style="cursor: not-allowed !important;">
+                <button onclick="fnSalir();" class="buttonMenu">
+                    <img class="imgMenuButton" src="~/Content/images/Cancelar.png" /><span>Salir</span>
+                </button>
+            </li>
+        </ul>
+    </div>
+
+
+    <div id="divMantenimiento">
+
+        <input id="hd_Cod_preg_eva_tec" type="hidden" value="0" />
+
+        <div style="width: 100%; padding-bottom: 10px; float: left;">
+            <div style="float: left; width: 100px;">
+                <span style="font-size: 16px;">Perfil:</span>
+            </div>
+            <div style="float: left;">
+                <select id="cboPerfil" name="cboPerfil" class="form-control input-sm" tabindex="3"
+                        required="required" style="width: 300px;"></select>
+            </div>
+        </div>
+        <div style="width: 100%; padding-bottom: 10px; float: left;">
+            <div style="float: left; width: 100px;">
+                <span style="font-size: 16px;">Criterio:</span>
+            </div>
+            <div style="float: left;">
+                <select id="cboCriterio" name="cboCriterio" class="form-control input-sm" tabindex="3"
+                        required="required" style="width: 300px;"></select>
+            </div>
+            <div style="float: left;">
+                <button class="imgAddButton" style="float: left; vertical-align: top;"
+                        id="btnAddCriterio" onclick="Open();" title="Agregar Criterio"></button>
+            </div>
+        </div>
+        <div style="width: 100%; padding-bottom: 10px; float: left;">
+            <div style="float: left; width: 100px;">
+                <span style="font-size: 16px;">Pregunta:</span>
+            </div>
+            <div style="float: left;">
+                <input type="text" id="txtPregunta" class="input form-control search" style="width: 300px;" maxlength="150" />
+            </div>
+        </div>
+        <div style="width: 100%; padding-bottom: 10px; float: left;">
+            <div style="float: left; width: 100px;">
+                <span style="font-size: 16px;">Alternativa:</span>
+            </div>
+            <div style="float: left;">
+                <select id="cboAlternativa" name="cboAlternativa" class="form-control input-sm" tabindex="3"
+                        required="required" style="width: 300px;"></select>
+            </div>
+        </div>
+  
+        <div id="divlistaElabDesemTecnico" style="padding: 3px 5px; width: 90%; float: left;">
+            <table id="listaElabDesemTecnico"></table>
+            <div id="pagerlistaElabDesemTecnico"></div>
+        </div>
+
+    </div>
+
+    <div id="divVista" style="display: none;">
+        <div style="width: 100%; padding-bottom: 10px; height: 50px;">
+            <div style="float: left; width: 120px;">
+                <span style="font-size: 16px;">Perfil:</span>
+            </div>
+            <div style="float: left;">
+                <select id="cboPerfilVista" name="cboPerfil" class="form-control input-sm" tabindex="3"
+                        required="required" style="width: 300px;" onchange="getPreguntaEvalTecnica(document.getElementById('cboPerfilVista').value);"></select>
+            </div>
+        </div>
+        <fieldset class="panel">
+            <legend style="font-size: 16px !important;">Preguntas</legend>
+            @{ Html.RenderPartial("../UserControls/_ucCriterios"); }
+        </fieldset>
+
+        <div style="width: 100%; padding-bottom: 10px; height: 50px;">
+            <div style="float: left; width: 120px;">
+                <span style="font-size: 16px;">Puntaje Total:</span>
+            </div>
+            <div style="float: left;">
+                <input type="number" id="txtPuntajeTotal" class="input form-control search" style="width: 70px;" />
+            </div>
+        </div>
+        <div style="width: 100%; padding-bottom: 10px;">
+            <div style="float: left; width: 120px;">
+                <span style="font-size: 16px;">Observacion:</span>
+            </div>
+            <div style="float: left;">
+                <input type="text" id="txtObservacion" class="input form-control search" multiple style="width: 600px; height: 100px;" maxlength="150" />
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div id="dialogBusqueda" title="Agregar Criterio" style="display: none">
+        <div style="width: 100%; padding-bottom: 10px; float: left;">
+            <div style="float: left; width: 70px;">
+                <span style="font-size: 16px;">Criterio:</span>
+            </div>
+            <div style="float: left;">
+                <input type="text" id="txtCriterio" class="input form-control search" style="width: 200px;" maxlength="150" />
+            </div>
+        </div>
+    </div>
+
+    <div id="dialogImprimir" title="Imprimiendo" style="display: none">
+        <div style="width: 100%; float: left;">
+            <div style="width: 100%; text-align: center;">
+                <span style="font-size: 14px;">Espere un momento por favor...</span>
+            </div>
+            <div style="width: 100%; text-align: center;">
+                <img src="~/Content/images/ajax-loader2.gif" />
+            </div>
+        </div>
+    </div>
+    
+
+
+
+</fieldset>
+
+
+@section Scripts {
+<script src="~/Scripts/jquery-ui-1.9.2.custom.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+    <link href="~/Content/jqGrid/jquery-ui-1.9.2.custom.css" rel="stylesheet" />
+    <link href="~/Content/jqGrid/ui.jqgrid.css" rel="stylesheet" />
+    <script src="~/Scripts/jqGrid/grid.locale-en.js"></script>
+    <script src="~/Scripts/jqGrid/jquery.jqGrid.min.js"></script>
+<script src="~/Scripts/Source/jsRecursosHumanos.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            cargarCombo('cargaComboPerfil', 'cboPerfil');
+            cargarCombo('cargaComboCriterio', 'cboCriterio');
+            cargarCombo('cargaComboAlternativa', 'cboAlternativa');
+
+            MantElaborarEvalTecnica.sel();
+
+            $("#dialogBusqueda").dialog({
+                autoOpen: false,
+                modal: true,
+                title: "Agregar Criterio",
+                show: { effect: "blind", duration: 500 },
+                hide: { effect: "blind", duration: 500 },
+                resizable: false,
+                CloseOnEscape: true,
+                width: 350,
+                close: function () {
+                    //document.getElementById("dialogMantElemento").setAttribute("style", "display: none;");
+                    //ocultarDivsElemento();
+                    //if (indAceptar == true) {
+                    //    var btn_RefrescarOperaciones = document.getElementById('<%= btn_RefrescarOperaciones.ClientID %>');
+                    //    btn_RefrescarOperaciones.click();
+                    //}
+                },
+                buttons: {
+                    "Aceptar": function () {
+
+                        if ($('#txtCriterio').val().trim() == "") {
+                            alert('Ingrese Criterio');
+                            return;
+                        }
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/jsonService.asmx/insertCriterio",
+                            data: "{ 'strDesc_criterio': '" + $('#txtCriterio').val().trim() + "' }",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
+                                var dato = response.d;
+                                var recepcion = dato.split('|');
+                                var mensaje = recepcion[0];
+                                if (mensaje == "") {
+                                    cargarCombo('cargaComboCriterio', 'cboCriterio');
+                                }
+                                else {
+                                    alert(recepcion[1]);
+                                    return;
+                                }
+                            }
+                        });
+
+                        $(this).dialog('close');
+                    },
+                    "Cancelar": function () {
+                        $(this).dialog('close');
+                    }
+                }
+            });
+
+            $("#dialogImprimir").dialog({
+                autoOpen: false,
+                modal: true,
+                title: "Imprimiendo",
+                show: { effect: "blind", duration: 500 },
+                hide: { effect: "blind", duration: 500 },
+                resizable: false,
+                CloseOnEscape: true,
+                width: 300,
+                height: 90
+            });
+
+        });
+
+        function cargarCombo(metodo, combo)
+        {
+            $.get(
+            '/RecursosHumanos/ElaborarEvalTecnica/' + metodo,
+            {
+            },
+            function (jsonResult) {
+                var arr = eval(jsonResult);
+                var cadena;
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i].Selected == true)
+                        cadena += '<option value="' + arr[i].Value + '" selected>' + arr[i].Text + '</option> '
+                    else
+                        cadena += '<option value="' + arr[i].Value + '">' + arr[i].Text + '</option> '
+                }
+                $("#" + combo).html(cadena);
+            }
+            );
+        }
+        
+
+        function fnPrevisualizar() {
+            cargarCombo('cargaComboPerfil', 'cboPerfilVista');
+            $(divCriterios).html("");
+            $("#divMantenimiento").css("display", "none");
+            $("#divVista").css("display", "block");
+        }
+
+        function fnSalir() {
+            if ($('#divVista').is(":visible")) {
+                $("#divMantenimiento").css("display", "block");
+                $("#divVista").css("display", "none");
+            } else {
+                location.href = "/Home";
+            }
+        }
+
+        function fnGrabar() {
+            MantElaborarEvalTecnica.add();
+        }
+
+        function Open () {
+            
+            $("#dialogBusqueda").dialog('open');
+        }
+
+        function fnImprimir() {
+            $("#dialogImprimir").dialog('open');
+            setTimeout(function () {
+                $("#dialogImprimir").dialog('close');
+                alert('Se imprimió con éxito.');
+            }, 3000);
+        }
+
+        //function insertClienteGarantia() {
+        //    if (document.getElementById("txtClienteId").value.trim() == '') {
+        //        var agree = confirm("Debe ingresar un cliente. Solo se actualizará el campo, ¿Desea continuar?");
+        //        if (agree) {
+        //            $.get(
+        //                appNombre + "/Configuracion/ClienteGarantia/updateCampo",
+        //                {
+        //                    intUsuarioId: 1,
+        //                    strNombreCampo: document.getElementById("cboCampos").value
+        //                },
+        //                function (response) {
+        //                    alert(response);
+        //                }
+        //                );
+        //            return true;
+        //        }
+        //        else {
+        //            document.getElementById("txtClienteId").value = '';
+        //            document.getElementById("txtClienteDes").value = '';
+        //            document.getElementById("txtClienteId").focus();
+        //            return false;
+        //        }
+        //    }
+
+
+        //    var strGrupo = document.getElementById("GARANTIA").value;
+        //    if (document.getElementById("GOODWILL").checked)
+        //        strGrupo = document.getElementById("GOODWILL").value
+
+        //    $(function () {
+        //        $.get(
+        //        appNombre + '/Configuracion/ClienteGarantia/insertClienteGarantia',
+        //        {
+        //            strClienteId: document.getElementById("txtClienteId").value,
+        //            strNombreCampo: document.getElementById("cboCampos").value,
+        //            strGrupo: strGrupo,
+        //            intUsuarioId: 1
+        //        },
+        //        function (jsonResult) {
+        //            var url = appNombre + '/Configuracion/ClienteGarantia/getClientesGarantia?intUsuarioId=1';
+        //            $("#listaClientesGarantia").jqGrid('setGridParam', { url: url }).trigger("reloadGrid");
+        //            alert(jsonResult);
+        //            document.getElementById("txtClienteId").value = '';
+        //            document.getElementById("txtClienteDes").value = '';
+        //            document.getElementById("txtClienteId").focus();
+        //        }
+        //        );
+        //    });
+        //}
+
+    </script>
+}

@@ -10,7 +10,8 @@
 
 
 
-    
+    @using (Html.BeginForm("Create", "Candidato", FormMethod.Post))
+{
     <div class="form-horizontal">
       
         <hr />
@@ -72,8 +73,9 @@
                                 <th hidden="hidden">Puntaje</th>
                             </tr>
                         </thead>
-
-                        @foreach (var i in Model.RRH_RespuestaAutoevaluacion)
+@if (ViewBag.respuestas != null)
+{
+    foreach (var i in ViewBag.respuestas)
                         {
                             
 
@@ -88,7 +90,7 @@
 
                         }
 
-
+}
 
 
                     </table>
@@ -103,17 +105,21 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
+                @if (ViewBag.ultimo != true) { 
                 <input id="submit" type="button" value="Continuar" class="btn btn-default" width="200px" />
-                <input id="submit" type="button" value="Guardar Respuestas" class="btn btn-default" hidden="hidden" style="visibility:hidden" />
+                }
+                else { 
+                 <input id="submit" type="button" value="Guardar Respuestas" class="btn btn-default"  />
              
-                <input id="resultados" type="submit" value="Mostrar Resultados" class="btn btn-default" hidden="hidden" style="visibility:hidden" />
-   
+
+                <input id="resultados" type="submit" value="Mostrar Resultados" class="btn btn-default"  />
+                }
             </div>
 
             
         </div>
     </div>
-
+    }
 
 <div>
 
@@ -200,33 +206,24 @@
             contentType: "application/json",
             success: function (d) {
                 //check is successfully save to database
-                if (d.status == true) {
+                if (d.status == 1) {
+                    window.location.href = "/PruebaAutoevaluacion/Create";
+                }
+                else if(d.status==3) {
+                    alert('Error');
+                }
+                else{
                     //will send status from server side
                     alert('Autoevaluación Registrada.');
                     //clear form
                     //orderItems = [];
-                    Prueba = d.status;
-                    alert(Prueba);
+                    window.location.href = "/PruebaAutoevaluacion/Details/"+d.status;
                     //$('#Cod_criterio').val('');
                     //$('#Respuesta').val('');
                     //$('#Valor').val('');
-
-                    window.location.href = "/PruebaAutoevaluacion/Create";
-                    //$("#resultados").prop('disabled', false);
-
-
-
-
-                    $('#resultados').click(function(a){
-                        location.href='@Url.Action("Details"  , "PruebaAutoevaluacion")'
-
-                    });
-
-
                 }
-                else {
-                    alert('Error');
-                }
+
+
                 $('#submit').val('Grabar Respuestas');
             },
             error: function () {

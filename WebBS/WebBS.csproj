@@ -119,6 +119,23 @@
     <Content Include="Content\images\bg.png" />
     <Content Include="Content\images\crossword.png" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\jqGrid\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\jqGrid\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Content\jqGrid\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Content\jqGrid\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Content\jqGrid\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\jqGrid\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Content\jqGrid\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Content\jqGrid\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\jqGrid\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Content\jqGrid\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\jqGrid\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Content\jqGrid\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Content\jqGrid\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\jqGrid\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\jqGrid\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Content\jqGrid\jquery-ui-1.9.2.custom.css" />
+    <Content Include="Content\jqGrid\ui.jqgrid.css" />
     <Content Include="Content\js\app.js" />
     <Content Include="Content\js\util.js" />
     <Content Include="Content\js\ViewModel\NotaIngreso.js" />
@@ -179,9 +196,16 @@
       <DependentUpon>BDBoticas.edmx</DependentUpon>
       <LastGenOutput>BDBoticas.cs</LastGenOutput>
     </Content>
+    <Content Include="Areas\RecursosHumanos\Views\ElaborarEvalTecnica\Index.cshtml" />
+    <Content Include="Areas\RecursosHumanos\Views\RegistrarEvalTecnica\Index.cshtml" />
+    <Content Include="Areas\RecursosHumanos\Views\web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jqGrid\grid.locale-en.js" />
+    <Content Include="Scripts\jqGrid\jqGrid.js" />
+    <Content Include="Scripts\jqGrid\jquery.jqGrid.js" />
+    <Content Include="Scripts\jqGrid\jquery.jqGrid.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -209,6 +233,9 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\RecursosHumanos\Controllers\ElaborarEvalTecnicaController.cs" />
+    <Compile Include="Areas\RecursosHumanos\Controllers\RegistrarEvalTecnicaController.cs" />
+    <Compile Include="Areas\RecursosHumanos\RecursosHumanosAreaRegistration.cs" />
     <Compile Include="Controllers\ActividadPlanificadaController.cs" />
     <Compile Include="Controllers\AlternativaAutoEvaluacionController.cs" />
     <Compile Include="Controllers\CandidatoController.cs" />
@@ -221,6 +248,7 @@
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\PruebaAutoevaluacionController.cs" />
     <Compile Include="DTO\AlternativaAutoevaluacionDTO.cs" />
+    <Compile Include="DTO\HttpParamAction.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -603,6 +631,8 @@
     <Content Include="Views\Candidato\_Experiencia.cshtml" />
     <Content Include="Views\Candidato\_Referencias.cshtml" />
     <Content Include="Views\Candidato\_GridReferencias.cshtml" />
+    <Content Include="Views\UserControls\_ucCriterios.cshtml" />
+    <Content Include="Views\UserControls\_ucDatosEmpleado.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -612,6 +642,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\RecursosHumanos\Models\" />
+    <Folder Include="Areas\RecursosHumanos\Views\Shared\" />
     <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
@@ -623,6 +655,20 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Report_Autoevaluacion.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AccesoDatosBS\AccesoDatosBS.csproj">
+      <Project>{250e92a2-fd3d-4050-9cb9-a1c549d2eabc}</Project>
+      <Name>AccesoDatosBS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EntidadesBS\EntidadesBS.csproj">
+      <Project>{72c85461-f9f1-4e8b-b75e-876aaa7e1972}</Project>
+      <Name>EntidadesBS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LogicaBS\LogicaBS.csproj">
+      <Project>{bd2b24a2-555e-4e02-9921-9888b20d10b6}</Project>
+      <Name>LogicaBS</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

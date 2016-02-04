@@ -30,6 +30,7 @@ namespace WebBS.Controllers
                 var model = db.RRH_Usuario.Where(p=>p.UserName == username && p.Contrasena == Contrasena).FirstOrDefault();
                 if (model != null)
                 {
+                    Session.Clear();
                     Session["Usuario"] = model;
                     return RedirectToAction("Index", "Home");
                 }

@@ -44,6 +44,7 @@ namespace WebBS.Models
         public string Email { get; set; }
         public Nullable<int> Cod_distrito { get; set; }
         public Nullable<System.DateTime> Fec_Nacimiento { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public Nullable<System.DateTime> Fec_postulacion { get; set; }
         public string Cod_usu_regi { get; set; }
         public Nullable<System.DateTime> Fec_usu_regi { get; set; }

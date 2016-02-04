@@ -1,5 +1,5 @@
-﻿@model IEnumerable<WebBS.Models.RRH_Candidato>
-
+﻿@model IEnumerable<RRH_Candidato>
+@using WebBS.Models
 @{
     ViewBag.Title = "Relación de Candidatos";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,10 +7,49 @@
 
 <h2>Relación de Candidatos</h2>
 
-<p>
-    @Html.ActionLink("Nuevo Candidato", "Create")
-</p>
-<table class="table">
+
+<form class="form-inline" role="form">
+
+    <div class="form-group">
+        <label class="control-label col-lg-4">Oferta Laboral</label>
+        <div class="col-lg-8">
+
+            @Html.DropDownList("Ofertas", new SelectList(ViewBag.Ofertas, "Value", "Text"), new { @id = "selOfertas", @class = "form-control" })
+
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-lg-2">DNI</label>
+        <div class="col-lg-8">
+            <input id="txtDNI" name="DNI" type="number"  maxlength="8" placeholder="DNI" class="form-control" />
+        </div>
+    </div>
+    
+ 
+    <div class="form-group">
+        <div class="col-lg-10">
+            <input type="submit" id="btnBuscar" value="Buscar" class="btn btn-primary"></input>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div id="btnNuevo" class="pull-right">
+            <a href="../Candidato/Create" class="btn btn-success">Nuevo Candidato</a>
+        </div>
+    </div>
+
+</form>
+
+
+
+
+
+<br />
+
+
+<table id="results" class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Nombre)
@@ -64,7 +103,7 @@
         </td>
     
         <td>
-            @Html.ActionLink("Modificar", "Edit", new { id=item.Cod_candidato }) |
+           @* @Html.ActionLink("Modificar", "Edit", new { id=item.Cod_candidato }) |*@
             @Html.ActionLink("Ver", "Details", new { id=item.Cod_candidato }) |
             @Html.ActionLink("Eliminar", "Delete", new { id=item.Cod_candidato })
         </td>

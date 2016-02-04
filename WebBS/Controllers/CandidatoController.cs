@@ -16,16 +16,71 @@ namespace WebBS.Controllers
         private BDBoticasEntities db = new BDBoticasEntities();
        
         // GET: /Candidato/
-        public ActionResult Index()
+        [HttpPost]
+        public ActionResult Buscar(string Ofertas, string DNI)
         {
-           
-               
-           
-            return View(db.RRH_Candidato.ToList());
+            var candidatos = db.RRH_Candidato.Where(s => s.DNI.Contains(DNI)).ToList();
+            return View(candidatos);
+        }
+
+        public ActionResult Index(string Ofertas,string DNI)
+        {
+            List<RRH_Candidato> candidatos;
+            var candidato = new RRH_Candidato();
+            if (!String.IsNullOrEmpty(Ofertas))
+            {
+                int ofert =  int.Parse(Ofertas);
+                if (ofert != 0)
+                {
+
+                    candidatos = (from a in db.RRH_Candidato
+                                 join b in db.RRH_OfertaLaboral_Candidato on a.Cod_candidato equals b.Cod_candidato
+                                 where b.Cod_ofertalaboral==ofert && a.DNI.Contains(DNI)
+                                  select a).ToList();
+                    
+                    //db.RRH_Candidato.Where(s => s.Cod_ofertalaboral == ofert).ToList();
+
+                }
+                else {
+                    candidatos = db.RRH_Candidato.Where(s => s.DNI.Contains(DNI)).ToList();
+
+                }
+                
+                candidato.DNI = DNI;
+                //candidato.Cod_ofertalaboral = int.Parse(Ofertas);
+                
+            }
+            else {
+
+                candidatos = db.RRH_Candidato.ToList();
+            }
+
+
+            List<SelectListItem> selectList = new List<SelectListItem>();
+
+            SelectListItem t = new SelectListItem();
+            t.Text = "Todos";
+            t.Value = "0";
+            selectList.Add(t);
+
+            foreach (RRH_OfertaLaboral c in db.RRH_OfertaLaboral.ToList())
+            {
+                SelectListItem i = new SelectListItem();
+                i.Text = c.Titulo.ToString();
+                i.Value = c.Cod_ofertalaboral.ToString();
+                selectList.Add(i);
+            }
+
+            ViewBag.Ofertas = selectList;
+        
+
+
+
+            return View(candidatos);
         }
 
         // GET: /Candidato/Details/5
-        public ActionResult Details(int? id)
+      /*  public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -37,7 +92,7 @@ namespace WebBS.Controllers
                 return HttpNotFound();
             }
             return View(rrh_candidato);
-        }
+        }*/
 
         // GET: /Candidato/Create
 
@@ -53,6 +108,16 @@ namespace WebBS.Controllers
                 return null;
             }
         }
+
+
+        public ActionResult Buscar(string txtDNI)
+        {
+
+
+
+            return View("~/Views/Candidato/Index.cshtml");
+        }
+
         public ActionResult Create()
         {
             ViewBag.Cod_ofertalaboral = new SelectList(db.RRH_OfertaLaboral, "Cod_ofertalaboral", "Titulo");
@@ -411,6 +476,7 @@ namespace WebBS.Controllers
             
             {
                 string path=null;
+                string ruta=null;
                 if (image != null && image.ContentLength > 0)
                 {
                     // extract only the filename
@@ -418,10 +484,12 @@ namespace WebBS.Controllers
                     // store the file inside ~/App_Data/uploads folder
                     path = Path.Combine(Server.MapPath("~/Uploads"), fileName);
                     image.SaveAs(path);
+                    ruta = "~/Uploads/" + fileName;
                 }
+               
 
                 rrh_candidato.Cod_candidato = db.RRH_Candidato.OrderByDescending(t => t.Cod_candidato).FirstOrDefault() == null ? 1 : db.RRH_Candidato.OrderByDescending(t => t.Cod_candidato).FirstOrDefault().Cod_candidato + 1;
-                rrh_candidato.Foto = path;
+                rrh_candidato.Foto = ruta;
                 db.RRH_Candidato.Add(rrh_candidato);
                 db.SaveChanges();
 
@@ -502,18 +570,32 @@ namespace WebBS.Controllers
         }
 
         // GET: /Candidato/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             RRH_Candidato rrh_candidato = db.RRH_Candidato.Find(id);
+
+            ViewBag.Cod_ofertalaboral = new SelectList(db.RRH_OfertaLaboral, "Cod_ofertalaboral", "Titulo");
+            Session["Grados"] = rrh_candidato.RRH_GradoAcademico.ToList();
+            Session["Experiencia"] = rrh_candidato.RRH_ExperienciaLaboral.ToList();
+            Session["Referencias"] =rrh_candidato.RRH_ReferenciaLaboral.ToList();
+
+            //ViewBag.Grados = db.RRH_GradoAcademico.ToList();
+            //ViewBag.IdPuesto = new SelectList(db.Puesto, "IdPuesto", "Nombre");
+       
+
+
+
             if (rrh_candidato == null)
             {
                 return HttpNotFound();
             }
-            return View(rrh_candidato);
+
+
+            return View("../Candidato/Create",rrh_candidato);
         }
 
         // POST: /Candidato/Edit/5
