@@ -4,32 +4,32 @@
     <div class="col-sm-11">
         <div class="row">
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Articulo:</label>
-                <div class="col-md-9 col-sm-9 col-xs-12">
+                <label class="control-label col-md-4 col-sm-4 col-xs-12">Articulo:</label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
                     @Html.DropDownList("selArticulo", new SelectList(Model, "Key", "Value", 0), new { @class = "form-control" })
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Unidad:</label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input id="txtUnidad" class="form-control" />
+                <label class="control-label col-md-4 col-sm-4 col-xs-12">Unidad:</label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <input id="txtUnidad" class="form-control" maxlength="3" />
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Cantidad:</label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
+                <label class="control-label col-md-4 col-sm-4 col-xs-12">Cantidad:</label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
                     <input id="txtCantidad" class="form-control" />
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Articulo:</label>
-                <div class="col-md-9 col-sm-9 col-xs-12">
+                <label class="control-label col-md-4 col-sm-4 col-xs-12">Observación:</label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
                     <textarea id="txtObservacion" class="form-control"></textarea>
                 </div>
             </div>
@@ -42,13 +42,41 @@
     function AgregarProducto(popupObj, parametroHandlers) {
         var model = {
             ProductoId: $('#selArticulo').val(),
-            ProductoNombre: $('#SolicitanteId option:selected').text(),
+            ProductoNombre: $('#selArticulo option:selected').text(),
             UnidadMedida: $('#txtUnidad').val(),
-            CantidadPedida: $('#txtCantidad').val(),
+            Cantidad: $('#txtCantidad').val(),
             Observacion: $('#txtObservacion').val()
         };
 
+        var msj = "";
+        if (model.ProductoId === "")
+            msj += "- Seleccione un articulo.<br />";
+        else {
+            var data = $("#" + parametroHandlers.grillaId).jqGrid('getGridParam', 'data');
+            var item;
+            for (var i = 0; i < data.length; i++) {
+                item = data[i];
+                if (item.ProductoId == model.ProductoId) {
+                    msj += "- Seleccione otro articulo, este articulo ya se encuentra en el detalle.<br />";
+                    break;
+                }
+            }
+        }
+        if (model.UnidadMedida === "")
+            msj += "- Ingrese una unidad.<br />";
+        if (model.Cantidad === "")
+            msj += "- Ingrese una cantidad.<br />";
+        else if (isNaN(model.Cantidad))
+            msj += "- Cantidad no válida.<br />";
+        else if (model.Cantidad <= 0)
+            msj += "- Cantidad debe ser mayor que cero.<br />";
+        if (msj !== "") {
+            SIG.Alert('Alerta', msj, null);
+            return;
+        }
+
         parametroHandlers.functionOk(model);
+        $(popupObj).dialog("close");
     }
 
 </script>

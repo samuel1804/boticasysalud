@@ -63,6 +63,7 @@
     <Compile Include="Sucursal.cs" />
     <Compile Include="Tienda.cs" />
     <Compile Include="TipoProducto.cs" />
+    <Compile Include="UbicacionProducto.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

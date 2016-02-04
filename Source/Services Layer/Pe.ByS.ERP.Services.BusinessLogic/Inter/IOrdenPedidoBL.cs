@@ -9,6 +9,7 @@ namespace Pe.ByS.ERP.Services.BusinessLogic.Inter
     {
         void Add(OrdenPedido entity);
         void Update(OrdenPedido entity);
+        void Delete(OrdenPedido entity);
         OrdenPedido Get(Expression<Func<OrdenPedido, bool>> where);
         IQueryable<OrdenPedido> FindAll(Expression<Func<OrdenPedido, bool>> where);
     }

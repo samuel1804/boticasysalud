@@ -1212,6 +1212,7 @@
     <Content Include="Content\images\bg.png" />
     <Content Include="Content\images\crossword.png" />
     <Content Include="Content\images\D1E6FC_40x100_textures_10_dots_medium_90.png" />
+    <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\dp\btn-arrow-light.gif" />
     <Content Include="Content\images\dp\btn-arrow.gif" />
     <Content Include="Content\images\dp\cal.gif" />

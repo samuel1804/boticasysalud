@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Pe.ByS.ERP.Application.DTO;
 using Pe.ByS.ERP.CrossCutting.Common;
+using Pe.ByS.ERP.CrossCutting.Common.Enums;
 using Pe.ByS.ERP.Domain;
 
 namespace Pe.ByS.ERP.Application.Converter
@@ -22,12 +23,70 @@ namespace Pe.ByS.ERP.Application.Converter
                     new KeyValuePair<string, string>("", "-- Seleccionar --"),
                     new KeyValuePair<string, string>("1", "Verificador 1")
                 },
-                EstadoList = new List<KeyValuePair<string, string>>
+                Estado = EstadoOrdenPedidoList().First(p => p.Key == ((int) EstadoPedido.Pendiente).ToString()).Value,
+                FechaPedido = DateTime.Now.ConvertToDdmmaaaa()
+            };
+        }
+
+        public static OrdenPedido DtoToDomain(OrdenPedidoDto pedido)
+        {
+            if (!string.IsNullOrEmpty(pedido.NumeroPedido))
+            {
+                var num = pedido.NumeroPedido.Substring(2);
+                pedido.NumeroPedido = string.Format("OP{0:000000}", Convert.ToInt32(num) + 1);
+            }
+
+            return new OrdenPedido
+            {
+                NumeroPedido = pedido.NumeroPedido,
+                FechaEntrega = Convert.ToDateTime(pedido.FechaEntrega),
+                FechaPedido = Convert.ToDateTime(pedido.FechaPedido),
+                SucursalId = pedido.SucursalId,
+                SolicitanteId = pedido.SolicitanteId,
+                Glosa = pedido.Glosa,
+                DetalleOrdenPedidoList = pedido.DetalleList.Select(p => new DetalleOrdenPedido
+                {
+                    Cantidad = p.Cantidad,
+                    ProductoId = p.ProductoId,
+                    UnidadMedida = p.UnidadMedida,
+                    Observacion = p.Observacion,
+                    UsuarioCreacion = "Aministrador",
+                    FechaCreacion = DateTime.Now
+                }).ToList(),
+                UsuarioCreacion = "Aministrador",
+                FechaCreacion = DateTime.Now,
+                Estado = ((int) EstadoPedido.Pendiente).ToString()
+            };
+        }
+
+        public static OrdenPedidoDto DomainToDto(OrdenPedido pedido, List<Sucursal> sucursalList)
+        {
+            var list = sucursalList.ConvertAll(p => new KeyValuePair<string, string>(p.Id.ToString(), p.Nombre));
+            list.Insert(0, new KeyValuePair<string, string>("", "-- Seleccionar --"));
+
+            return new OrdenPedidoDto
+            {
+                SucursalList = list,
+                NumeroPedido = pedido.NumeroPedido,
+                FechaEntrega = pedido.FechaEntrega.ConvertToDdmmaaaa(),
+                FechaPedido = pedido.FechaPedido.ConvertToDdmmaaaa(),
+                SucursalId = pedido.SucursalId,
+                SolicitanteId = pedido.SolicitanteId,
+                Glosa = pedido.Glosa,
+                SolicitanteList = new List<KeyValuePair<string, string>>
                 {
                     new KeyValuePair<string, string>("", "-- Seleccionar --"),
-                    new KeyValuePair<string, string>("1", "Pendiente")
+                    new KeyValuePair<string, string>("1", "Verificador 1")
                 },
-                FechaPedido = DateTime.Now.ConvertToDdmmaaaa()
+                DetalleList = pedido.DetalleOrdenPedidoList.Select(p => new DetalleOrdenPedidoDto
+                {
+                    Cantidad = p.Cantidad,
+                    ProductoId = p.ProductoId,
+                    ProductoNombre = p.Producto.Nombre,
+                    UnidadMedida = p.UnidadMedida,
+                    Observacion = p.Observacion
+                }).ToList(),
+                Estado = EstadoOrdenPedidoList().First(p => p.Key == pedido.Estado).Value
             };
         }
 
@@ -36,7 +95,8 @@ namespace Pe.ByS.ERP.Application.Converter
             return new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("", "-- Seleccionar --"),
-                new KeyValuePair<string, string>("1", "Pendiente")
+                new KeyValuePair<string, string>(((int) EstadoPedido.Pendiente).ToString(), "Pendiente"),
+                new KeyValuePair<string, string>(((int) EstadoPedido.Actualizado).ToString(), "Actualizado")
             };
         }
 

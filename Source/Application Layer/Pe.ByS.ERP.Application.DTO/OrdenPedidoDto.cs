@@ -16,6 +16,6 @@ namespace Pe.ByS.ERP.Application.DTO
 
         public List<KeyValuePair<string, string>> SolicitanteList { get; set; }
         public List<KeyValuePair<string, string>> SucursalList { get; set; }
-        public List<KeyValuePair<string, string>> EstadoList { get; set; }
+        public List<DetalleOrdenPedidoDto> DetalleList { get; set; }
     }
 }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using Pe.ByS.ERP.CrossCutting.Aspects;
 using Pe.ByS.ERP.CrossCutting.Common;
-using Pe.ByS.ERP.CrossCutting.Common.Enums;
 using Pe.ByS.ERP.Domain;
 using Pe.ByS.ERP.Infrastructure.Persistence.Aspects;
 using Pe.ByS.ERP.Infrastructure.Repository;
@@ -45,6 +44,13 @@ namespace Pe.ByS.ERP.Services.BusinessLogic
         public void Update(OrdenPedido entity)
         {
             _ordenRepository.Update(entity);
+        }
+
+        [CommitsOperation]
+        [TryCatch(ExceptionTypeExpected = typeof(Exception), RethrowException = true)]
+        public void Delete(OrdenPedido entity)
+        {
+            _ordenRepository.Delete(entity);
         }
 
         [TryCatch(ExceptionTypeExpected = typeof(Exception), RethrowException = true)]

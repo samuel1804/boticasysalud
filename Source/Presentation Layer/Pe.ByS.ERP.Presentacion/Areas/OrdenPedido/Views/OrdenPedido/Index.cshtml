@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutI.cshtml";
 }
+@using Pe.ByS.ERP.CrossCutting.Common.Enums
 @model List<KeyValuePair<string, string>>
 
 <div class="form-horizontal">
@@ -9,7 +10,7 @@
             <div class="form-group form-group-sm">
                 <label class="control-label col-md-4 col-sm-4 col-xs-12">Estado:</label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
-                    @Html.DropDownList("selEstado", new SelectList(Model, "Key", "Value", 0), new {@class = "form-control"})
+                    @Html.DropDownList("selEstado", new SelectList(Model, "Key", "Value", 1), new {@class = "form-control"})
                 </div>
             </div>
         </div>
@@ -77,7 +78,7 @@
 <script type='text/javascript' id="ListarProducto">
     var grdPedido = 'tablaPedido';
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         ListarActa();
     });
 
@@ -89,10 +90,6 @@
 
     $("#btnBuscar").click(function() {
         var rules = [];
-        var estado = $("#selEstado").val();
-        if (estado !== "")
-            rules.push({ field: "Estado", op: "eq", data: estado });
-
         var pedido = $("#txtNumeroPedido").val();
         if (pedido !== "")
             rules.push({ field: "NumeroPedido", op: "cn", data: pedido });
@@ -110,18 +107,75 @@
     });
 
     $("#btnAgregar").click(function() {
-        window.location.href = '@Url.Action("Edit", "OrdenPedido", new { Area = "OrdenPedido" })';
+        window.location.href = '@Url.Action("Edit", "OrdenPedido", new {Area = "OrdenPedido"})';
+    });
+
+    $("#btnActualizar").click(function() {
+        var $grilla = $("#" + grdPedido);
+        var rowKey = $grilla.getGridParam('selrow');
+
+        if (rowKey != null) {
+            var rowData = $grilla.getRowData(rowKey);
+
+            if (rowData.EstadoId != '@Convert.ToInt32(EstadoPedido.Pendiente)') {
+                SIG.Alert('Alerta', "No se puede eliminar el registro su estado es diferente de \"Pendiente\"");
+                return;
+            }
+
+            window.location.href = '@Url.Action("ActualizarPedido", "OrdenPedido", new {Area = "OrdenPedido"})/' + rowKey;
+        } else
+            SIG.Alert("Alerta", "Seleccione un registro", null);
+    });
+
+    $("#btnEliminar").click(function() {
+        var $grilla = $("#" + grdPedido);
+        var rowKey = $grilla.getGridParam('selrow');
+
+        if (rowKey != null) {
+            var rowData = $grilla.getRowData(rowKey);
+
+            if (rowData.EstadoId != '@Convert.ToInt32(EstadoPedido.Pendiente)') {
+                SIG.Alert('Alerta', "No se puede eliminar el registro su estado es diferente de \"Pendiente\"");
+                return;
+            }
+
+            var parametrosConfirm = {
+                dialogText: "Está seguro que desea eliminar el registro?",
+                OkHandlerFunction: function(key) {
+                    var opciones = {
+                        url: '@Url.Action("EliminarPedido", "OrdenPedido", new {area = "OrdenPedido"})',
+                        parametros: { id: key }
+                    };
+
+                    SIG.Ajax(opciones, function(response) {
+                        if (response.Success) {
+                            SIG.Alert('Alerta', 'Registro eliminado correctamente.');
+                            $grilla.trigger("reloadGrid");
+                        } else {
+                            SIG.Alert('Alerta', response.Message, null);
+                        }
+                    });
+                },
+                dialogTitle: "Alerta",
+                dialogOkText: "Aceptar",
+                dialogCancelText: "Cancelar",
+                parametroHandlers: rowKey
+            };
+            SIG.confirmUpgrade(parametrosConfirm);
+        } else
+            SIG.Alert("Alerta", "Seleccione un registro", null);
     });
 
     function ListarActa() {
-        var colNames = ['ID', 'Número Pedido', 'Fecha Solicitud', 'Fecha Entrega', 'Solicitante', 'Estado'];
+        var colNames = ['ID', 'Número de Orden de Pedido', 'Fecha de Solicitud', 'Fecha de Entrega de Pedido', 'Solicitante', 'Estado', 'EstadoId'];
         var colModels = [
             { name: 'Id', index: 'Id', align: 'center', hidden: true },
             { name: 'NumeroPedido', index: 'NumeroPedido', align: 'center', width: 100, searchoptions: { sopt: ['cn', 'bw'] } },
             { name: 'FechaPedido', index: 'FechaPedido', align: 'center', width: 120 },
             { name: 'FechaEntrega', index: 'FechaEntrega', align: 'center', width: 120, searchoptions: { sopt: ['cn', 'bw'] } },
             { name: 'SolicitanteNombre', index: 'SolicitanteNombre', align: 'center', width: 120 },
-            { name: 'Estado', index: 'Estado', align: 'center', width: 120, searchoptions: { sopt: ['cn', 'bw'] } }
+            { name: 'Estado', index: 'Estado', align: 'center', width: 120, searchoptions: { sopt: ['cn', 'bw'] } },
+            { name: 'EstadoId', index: 'EstadoId', align: 'center', hidden: true }
         ];
 
         var opciones = {
@@ -137,7 +191,7 @@
             sinRegistro: 'Sin registro',
             alertTitle: 'Alerta',
             caption: 'Listado de Ordenes de Pedido',
-            urlListar: '@Url.Action("ListarPedidos", "OrdenPedido", new { area = "OrdenPedido" })',
+            urlListar: '@Url.Action("ListarPedidos", "OrdenPedido", new {area = "OrdenPedido"})',
             grilla: grdPedido,
             pager: 'barraPedido',
             identificador: 'hfIdentPedido',
@@ -146,11 +200,17 @@
             id: 'id',
             colsNames: colNames,
             colsModel: colModels,
-            sortName: 'Id'
+            sortName: 'Id',
+            rules: true,
+            GetRulesMethod: function() {
+                var estado = $("#selEstado").val();
+                if (estado !== "")
+                    return [{ field: "Estado", op: "eq", data: estado }];
+                return null;
+            }
         };
 
         SIG.GrillaUpgrade(opciones);
-        $("#" + grdPedido).filterToolbar({ searchOnEnter: true, stringResult: true, defaultSearch: "cn" });
     }
 
 </script>

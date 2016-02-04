@@ -89,6 +89,7 @@
     <Compile Include="DatabaseMappings\SucursalConfiguration.cs" />
     <Compile Include="DatabaseMappings\TiendaConfiguration.cs" />
     <Compile Include="DatabaseMappings\TipoProductoConfiguration.cs" />
+    <Compile Include="DatabaseMappings\UbicacionProductoConfiguration.cs" />
     <Compile Include="DatabaseMappings\UsuarioConfiguration.cs" />
     <Compile Include="EntityFramework\AutoMapper.cs" />
     <Compile Include="EntityFramework\ContextInitializer.cs" />
