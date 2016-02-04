@@ -19,34 +19,53 @@
         @Html.HiddenFor(model => model.Cod_registro)
 
         <div class="form-group">
-            @Html.Label("Rango de Línea de Crédito", htmlAttributes: new { @class = "control-label col-md-2" })
-          
-            <div class="col-md-10">
-               @Html.DisplayTextFor(model=>model.GCC_INFORME_CREDITICIO.GCC_POLITICA_CREDITO.GCC_PLAN_CREDITO.Rango_inicio) 
-                <label> --- </label>           
-               @Html.DisplayTextFor(model => model.GCC_INFORME_CREDITICIO.GCC_POLITICA_CREDITO.GCC_PLAN_CREDITO.Rango_fin)
-                 </div>
-        </div>       
+            <label class="control-label col-md-3">Nro. Solicitud</label>
+            <div class="col-md-2">
+                @Html.TextBox("nro", Model.GCC_INFORME_CREDITICIO.GCC_SOLICITUD_CREDITO.Num_solicitud , new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.GCC_INFORME_CREDITICIO.Monto_linea_credito_eval, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.GCC_INFORME_CREDITICIO.Monto_linea_credito_eval, new { htmlAttributes = new { @class = "form-control" } })
+            <label class="control-label col-md-3">Fecha Solicitud</label>
+            <div class="col-md-2">
+                @Html.TextBox("nro", Model.GCC_INFORME_CREDITICIO.GCC_SOLICITUD_CREDITO.Num_solicitud, new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-md-3">RUC / Razón Social</label>
+            <div class="col-md-2">
+                @Html.TextBox("ruc", Model.GCC_INFORME_CREDITICIO.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad, new { @class = "form-control", @readonly = "true" })
+            </div>
+            <div class="col-md-5">
+                @Html.TextBox("ruc", Model.GCC_INFORME_CREDITICIO.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.Razon_social, new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3" >Rango de Línea de Crédito</label>
+            <div class="col-md-3">
+                @Html.TextBox("rango", "<<" + Model.GCC_INFORME_CREDITICIO.GCC_POLITICA_CREDITO.GCC_PLAN_CREDITO.Rango_inicio.ToString("#,##0.00") + " a " + Model.GCC_INFORME_CREDITICIO.GCC_POLITICA_CREDITO.GCC_PLAN_CREDITO.Rango_fin.ToString("#,##0.00") + ">>", new { @class = "form-control", @readonly = "true", @style = "text-align:center" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3">Monto Línea de Crédito</label>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.GCC_INFORME_CREDITICIO.Monto_linea_credito_eval, new { htmlAttributes = new { @class = "form-control" }, @style = "text-align:right" })
                 @Html.ValidationMessageFor(model => model.GCC_INFORME_CREDITICIO.Monto_linea_credito_eval, "", new { @class = "text-danger" })
             </div>
         </div>      
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <a href="@Url.Content("~/EmpleadoInfCrediticio/Index")"><input type="button" value="<< Regresar" class="btn btn-default" /></a>
+                <input type="submit" value="Aprobar" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

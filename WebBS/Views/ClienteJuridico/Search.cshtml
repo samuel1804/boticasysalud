@@ -12,18 +12,22 @@
 
     <div style="border:1px solid black;">
         <table style="width:100%">
+            <tr><td>&nbsp;&nbsp;&nbsp;</td></tr>
             <tr>
+                <td>&nbsp;&nbsp;&nbsp;</td>
                 <td>Razón Social</td>
                 <td><input type="text" name="razonSocial"><br></td>
             </tr>
             <tr>
+                <td>&nbsp;&nbsp;&nbsp;</td>
                 <td>Ruc</td>
                 <td><input type="number" name="ruc"><br></td>
             </tr>
             <tr>
                 <td></td>
-                <td><input type="submit" value="Buscar" /></td>
+                <td><input type="submit" value="Buscar" class="btn btn-default" /></td>
             </tr>
+            <tr><td>&nbsp;&nbsp;&nbsp;</td></tr>
         </table>
 
     </div>
@@ -44,16 +48,17 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>        
+@foreach (var item in Model)
+{
+    <tr style="background-color:white;">
         <td>
             @Html.DisplayFor(modelItem => item.Num_doc_identidad)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.GCC_CLIENTE_JURIDICO.Razon_social)
-        </td>        
+        </td>
         <td>
-            @Html.ActionLink("Selecionar", "Select", "SolicitudDeCredito", new { id = item.Cod_cliente }, null)
+            @Html.ActionLink("Selecionar", "Select", "SolicitudDeCredito", new { id = item.Cod_cliente }, new { @class = "btn-link" })
         </td>
     </tr>
 }

@@ -5,10 +5,10 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Generación de Contrato";
+    ViewBag.Title = "Generar Contrato de Crédito";
 }
 
-<h2>Generación de Contrato</h2>
+<h2>Generar Contrato de Crédito</h2>
 
 @using (Html.BeginForm("GenerarContratoIndex", "InformeCrediticio", FormMethod.Get))
 {
@@ -46,7 +46,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><input type="submit" value="Buscar" /></td>
+                <td><input type="submit" value="Buscar" class="btn btn-default" /></td>
                 <td></td>
             </tr>
             <tr><td>&nbsp;&nbsp;&nbsp;</td></tr>
@@ -101,8 +101,8 @@
                 }
                 else
                 {
-                    @*@Html.DisplayFor(modelItem => item.GCC_SOLICITUD_CREDITO.GCC_EMPLEADO_SOL_CREDITO.Last().Fec_registro)*@
-                    @Html.ValueFor(modelItem => item.GCC_SOLICITUD_CREDITO.GCC_EMPLEADO_SOL_CREDITO.Last().Fec_registro, "{0:dd/MM/yyyy}")
+                @Html.ActionLink("Imprimir Contrato", "ImprimirContrato", new { id = item.Cod_informe_crediticio }, new { @class = "btn-link" })
+                @*@Html.ValueFor(modelItem => item.GCC_SOLICITUD_CREDITO.GCC_EMPLEADO_SOL_CREDITO.Last().Fec_registro, "{0:dd/MM/yyyy}")*@
                 }
             </td>
         </tr>

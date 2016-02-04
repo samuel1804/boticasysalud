@@ -16,7 +16,9 @@
 
     <div style="border:1px solid black;">
         <table style="width:100%">
+            <tr><td>&nbsp;&nbsp;&nbsp;</td></tr>
             <tr>
+                <td>&nbsp;&nbsp;&nbsp;</td>
                 <td>Nro Solicitud Crédito</td>
                 <td><input type="text" name="nroSolicitudCredito"></td>
                 <td>RUC</td>
@@ -27,6 +29,7 @@
                 <td></td>
             </tr>
             <tr>
+                <td>&nbsp;&nbsp;&nbsp;</td>
                 <td>Fecha Solicitud Desde</td>
                 <td><input type="date" name="fechaSolicitudInicio" /></td>
                 <td>Hasta</td>
@@ -37,15 +40,17 @@
                 <td></td>
             </tr>
             <tr>
+                <td>&nbsp;&nbsp;&nbsp;</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><input type="submit" value="Buscar" /></td>
-                <td><button type="submit" value="Registrar" formaction="/SolicitudDeCredito/Create">Nuevo</button></td>
+                <td><input type="submit" value="Buscar" class="btn btn-default" /></td>
+                <td><button type="submit" value="Registrar" class="btn btn-default" formaction="/SolicitudDeCredito/Create">Nuevo</button></td>
                 <td></td>
             </tr>
+            <tr><td>&nbsp;&nbsp;&nbsp;</td></tr>
         </table>
 
     </div>
@@ -72,8 +77,9 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
+@foreach (var item in Model)
+{
+    <tr style="background-color:white;">
         <td>
             @Html.DisplayFor(modelItem => item.Num_solicitud)
         </td>
@@ -90,13 +96,13 @@
             @Html.DisplayFor(modelItem => item.Estado_actual)
         </td>
         <td>
-            @Html.ActionLink("Detalle", "Details", new { id = item.Cod_solicitud_credito })
+            @Html.ActionLink("Detalle", "Details", new { id = item.Cod_solicitud_credito }, new { @class = "btn-link" })
 
             @if (item.Estado_actual == "Registrado" || item.Estado_actual == "Modificado")
             {
-                @Html.ActionLink("  Anular", "Delete", new { id = item.Cod_solicitud_credito })
+                @Html.ActionLink(" | Anular", "Delete", new { id = item.Cod_solicitud_credito }, new { @class = "btn-link" })
             }
-            
+
         </td>
     </tr>
 }

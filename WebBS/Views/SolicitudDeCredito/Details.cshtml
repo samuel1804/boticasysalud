@@ -1,13 +1,12 @@
 ﻿@model WebBS.Models.GCC_SOLICITUD_CREDITO
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalle de Solicitud de Crédito";
 }
 
-<h2>Details</h2>
+<h2>Detalle de Solicitud de Crédito</h2>
 
 <div>
-    <h4>GCC_SOLICITUD_CREDITO</h4>
 	<hr />
     <dl class="dl-horizontal">
 
@@ -68,4 +67,13 @@
         </dd>  
 
     </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <a href="@Url.Content("~/SolicitudDeCredito/Index")"><input type="button" value="<< Regresar" class="btn btn-default" /></a>
+        </div>
+    }
 </div>

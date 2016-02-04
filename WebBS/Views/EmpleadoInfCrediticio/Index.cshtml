@@ -7,28 +7,28 @@
 
 <h2>Determinar Plan de Crédito</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 @using (Html.BeginForm("Index", "EmpleadoInfCrediticio", FormMethod.Get))
 {
     @Html.AntiForgeryToken()
 
 <div style="border:1px solid black;">
     <table style="width:100%">
+        <tr><td>&nbsp;&nbsp;&nbsp;</td></tr>
         <tr>
-            <td>Nro. Solicitud:</td>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td>Nro. Solicitud</td>
             <td><input type="number" name="codSolicitudCredito"></td>
-            <td>RUC:</td>
+            <td>RUC</td>
             <td><input type="number" name="ruc"></td>
             
             <td></td>
             <td></td>
         </tr>
         <tr>
-            <td>Fecha Sol. Ini:</td>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td>Fecha Solicitud Desde</td>
             <td><input type="date" name="fechaSolicitudInicio" /></td>
-            <td>Fecha Sol. Fin:</td>
+            <td>Hasta</td>
             <td><input type="date" name="fechaSolicitudFin" /></td>
             <td></td>
             <td></td>
@@ -36,15 +36,17 @@
             <td></td>
         </tr>
         <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
-            <td><input type="submit" value="Buscar" /></td>
+            <td><input type="submit" value="Buscar" class="btn btn-default" /></td>
             <td></td>
             <td></td>
         </tr>
+        <tr><td>&nbsp;&nbsp;&nbsp;</td></tr>
     </table>
 </div>
 }
@@ -52,34 +54,29 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Cod_registro)
+            Nro. Solicitud
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.GCC_INFORME_CREDITICIO.Cod_solicitud_credito)
+            RUC
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.GCC_INFORME_CREDITICIO.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad)
+            Razón Social
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.GCC_INFORME_CREDITICIO.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.Razon_social)
+            Fecha Solicitud
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.GCC_INFORME_CREDITICIO.GCC_SOLICITUD_CREDITO.Fec_solicitud)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Estado)
+            Estado
         </th>
        
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
+@foreach (var item in Model)
+{
+    <tr style="background-color:white;">
         <td>
-            @Html.DisplayFor(modelItem => item.Cod_registro)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GCC_INFORME_CREDITICIO.Cod_solicitud_credito)
+            @Html.DisplayFor(modelItem => item.GCC_INFORME_CREDITICIO.GCC_SOLICITUD_CREDITO.Num_solicitud)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.GCC_INFORME_CREDITICIO.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad)
@@ -93,10 +90,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Estado)
         </td>
-       
+
         <td>
-            @Html.ActionLink("Seleccionar", "Edit", new { id=item.Cod_registro }) |           
-           
+            @Html.ActionLink("Seleccionar", "Edit", new { id = item.Cod_registro }, new { @class = "btn-link" })
         </td>
     </tr>
 }

@@ -1,7 +1,7 @@
 ﻿@model WebBS.Models.GCC_INFORME_CREDITICIO
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalle de Informe Crediticio";
 }
 
 <h2>Detalle de Informe Crediticio</h2>
@@ -10,7 +10,7 @@
 	<hr />
     <dl class="dl-horizontal">
 
-        <dt>
+        <dt >
             @Html.DisplayNameFor(model => model.Fecha_informe)
         </dt>
 
@@ -91,5 +91,14 @@
         </dd>
 
     </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <a href="@Url.Content("~/InformeCrediticio/Index")"><input type="button" value="<< Regresar" class="btn btn-default" /></a>
+        </div>
+    }
 </div>
 <p>

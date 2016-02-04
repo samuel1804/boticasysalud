@@ -16,8 +16,9 @@
 
     <div style="border:1px solid black;">
         <table style="width:100%" >
-            
+            <tr><td>&nbsp;&nbsp;&nbsp;</td></tr>
             <tr>
+                <td>&nbsp;&nbsp;&nbsp;</td>
                 <td>Ruc</td>
                 <td><input type="number" name="ruc"><br></td>
                 <td>Estado</td>
@@ -27,6 +28,7 @@
                 <td></td>
             </tr>
             <tr>
+                <td>&nbsp;&nbsp;&nbsp;</td>
                 <td>Razón Social</td>
                 <td><input type="text" name="razonSocial"><br></td>
                 <td></td>
@@ -34,14 +36,17 @@
                 <td></td>
                 <td></td>
             </tr>
+            <tr><td>&nbsp;&nbsp;&nbsp;</td></tr>
             <tr>
+                <td>&nbsp;&nbsp;&nbsp;</td>
                 <td></td>
-                <td><input type="submit" value="Buscar" /></td>
+                <td><input type="submit" class="btn btn-default" value="Buscar" /></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><button type="submit" value="Registrar" formmethod="delete" formaction="/ClienteJuridico/Create">Nuevo</button></td>
+                <td><button type="submit" class="btn btn-default" value="Registrar" formmethod="delete" formaction="/ClienteJuridico/Create">Nuevo</button></td>
             </tr>
+            <tr><td>&nbsp;&nbsp;&nbsp;</td></tr>
         </table>
 
     </div>
@@ -74,7 +79,7 @@
 
 @foreach (var item in Model)
 {
-    <tr>
+    <tr style="background-color:white;">
         <td>
             @Html.DisplayFor(modelItem => item.Num_doc_identidad)
         </td>
@@ -94,17 +99,17 @@
             @Html.DisplayFor(modelItem => item.Estado_str)
         </td>
         <td>
-            
+
 
             @if (item.Estado_str == "Activo")
             {
-                @Html.ActionLink("Modificar", "Edit", new { id = item.Cod_cliente }) 
+                @Html.ActionLink("Modificar |", "Edit", new { id = item.Cod_cliente }, new { @class = "btn-link" })
                 
-                @Html.ActionLink(" Anular", "Delete", new { id = item.Cod_cliente })
+                @Html.ActionLink(" Anular", "Delete", new { id = item.Cod_cliente }, new { @class = "btn-link" })
             }
-            
 
-            
+
+
         </td>
     </tr>
 }

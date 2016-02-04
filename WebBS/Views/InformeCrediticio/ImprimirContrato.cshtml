@@ -1,0 +1,145 @@
+﻿@model WebBS.Models.GCC_INFORME_CREDITICIO
+
+@{
+    ViewBag.Title = "ImprimirContrato";
+}
+<div class="col-md-5">
+    <a href="@Url.Content("~/InformeCrediticio/GenerarContratoIndex")"><input type="button" value="<< Regresar" class="btn btn-default" /></a>
+    <input type="submit" value="Imprimir Contrato" class="btn btn-default" onclick="window.print();return false;" />
+    @*<input type="button" value="Print" onclick="window.print();return false;" />*@
+</div>
+    <table style="background-color:white; width:100%">
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="5" align="right">
+                <img src="~/Content/images/logo.png" />
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="5" align="center" style="font-size:x-large">CONTRATO DE CRÉDITO</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td style="font-weight:bold;">Número de Contrato</td>
+            <td>
+                @Html.DisplayFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CONTRATO_CREDITO.Last().Cod_contrato_credito)
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td style="font-weight:bold;">Fecha de Contrato</td>
+            <td>
+                @Html.ValueFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CONTRATO_CREDITO.Last().Fec_inicio, "{0:dd/MM/yyyy}")
+            </td>
+            <td style="font-weight:bold;">Fecha de Renovación</td>
+            <td>
+                @Html.ValueFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CONTRATO_CREDITO.Last().Fec_renovacion, "{0:dd/MM/yyyy}")
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td style="font-weight:bold;">RUC</td>
+            <td>
+                @Html.ValueFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad)
+            </td>
+            <td style="font-weight:bold;">Razón Social</td>
+            <td>
+                @Html.ValueFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.Razon_social)
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td style="font-weight:bold;">Número de Cuenta</td>
+            <td>
+                @Html.ValueFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CONTRATO_CREDITO.Last().GCC_CUENTA_CLIENTE.Last().Num_cuenta)
+            </td>
+            <td style="font-weight:bold;">Estado de la Cuenta</td>
+            <td>
+                @Html.ValueFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CONTRATO_CREDITO.Last().GCC_CUENTA_CLIENTE.Last().Estado_cuenta)
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td style="font-weight:bold;">Línea de Crédito</td>
+            <td>
+                @Html.ValueFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CONTRATO_CREDITO.Last().GCC_CUENTA_CLIENTE.Last().Linea_credito,"{0:#,##0.00}")
+            </td>
+            <td style="font-weight:bold;">Línea Disponible</td>
+            <td>
+                @Html.ValueFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CONTRATO_CREDITO.Last().GCC_CUENTA_CLIENTE.Last().Linea_disponible, "{0:#,##0.00}")
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td colspan="5" align="left" style="font-size:larger">SOLICITUD DE CRÉDITO</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td style="font-weight:bold;">Número de Solicitud</td>
+            <td>
+                @Html.DisplayFor(model => model.GCC_SOLICITUD_CREDITO.Num_solicitud)
+            </td>
+            <td style="font-weight:bold;">Fecha de Solicitud</td>
+            <td>
+                @Html.ValueFor(model => model.GCC_SOLICITUD_CREDITO.Fec_solicitud, "{0:dd/MM/yyyy}")
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td colspan="5" align="left" style="font-size:larger">INFORME CREDITICIO</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td style="font-weight:bold;">Número de Informe</td>
+            <td>
+                @Html.DisplayFor(model => model.Cod_informe_crediticio)
+            </td>
+            <td style="font-weight:bold;">Fecha de Informe</td>
+            <td>
+                @Html.ValueFor(model => model.Fecha_informe, "{0:dd/MM/yyyy}")
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+    </table>
+
+
+

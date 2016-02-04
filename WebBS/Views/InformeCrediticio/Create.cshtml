@@ -1,7 +1,7 @@
 ﻿@model WebBS.Models.GCC_INFORME_CREDITICIO
 
 @{
-    ViewBag.Title = "Registrar Informe Créditicio";
+    ViewBag.Title = "Registrar Informe Crediticio";
 }
 
 <h2>Registrar Informe Crediticio</h2>
@@ -113,7 +113,7 @@
 
         <div class="form-group">
 
-            <label class="control-label col-md-2">Determinar Linea de Crédito</label>
+            <label class="control-label col-md-2">Calcular Línea de Crédito</label>
 
             <div class="col-md-10">
                 <button type="submit" formaction="/InformeCrediticio/DeterminarLineaCredito">LC</button>
@@ -138,6 +138,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
+                <a href="@Url.Content("~/InformeCrediticio/Index")"><input type="button" value="<< Regresar" class="btn btn-default" /></a>
                 <input type="submit" value="Guardar" class="btn btn-default" />
             </div>
         </div>

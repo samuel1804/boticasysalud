@@ -1,7 +1,7 @@
 ﻿@model WebBS.Models.GCC_SOLICITUD_CREDITO
 
 @{
-    ViewBag.Title = "Nueva Solicitud de Crédito";
+    ViewBag.Title = "Registrar Solicitud de Crédito";
 }
 
 @using (Html.BeginForm()) 
@@ -9,7 +9,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Registrar de Solicitud de Crédito</h4>
+        <h4>Registrar Solicitud de Crédito</h4>
         <hr />
         @Html.ValidationSummary(true)
 
@@ -72,6 +72,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
+                <a href="@Url.Content("~/SolicitudDeCredito/Index")"><input type="button" value="<< Regresar" class="btn btn-default" /></a>
                 <input type="submit" value="Guardar" class="btn btn-default" />
             </div>
         </div>
