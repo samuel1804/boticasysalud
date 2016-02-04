@@ -192,6 +192,8 @@
     <Content Include="Scripts\File\js\fileinput_locale_es.js" />
     <Content Include="Scripts\File\js\plugins\canvas-to-blob.js" />
     <Content Include="Scripts\File\js\plugins\canvas-to-blob.min.js" />
+    <Content Include="Scripts\Gitgraph\gitgraph.css" />
+    <Content Include="Scripts\Gitgraph\gitgraph.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -232,6 +234,7 @@
     <Compile Include="Controllers\ChoferController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MonitorearDesaduanajeController.cs" />
     <Compile Include="Controllers\NotaIngresoController.cs" />
     <Compile Include="Controllers\OfertaLaboralController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
@@ -366,7 +369,10 @@
     <Compile Include="Models\IMP_ADQUISICION.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\IMP_ALERTA.cs">
+    <Compile Include="Models\IMP_ALERTA_ACTIVIDAD.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMP_ALERTA_EVENTO.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IMP_ARTICULO.cs">
@@ -593,6 +599,7 @@
     <Content Include="Views\BitacoraEventoDesaduanaje\Details.cshtml" />
     <Content Include="Views\BitacoraEventoDesaduanaje\Edit.cshtml" />
     <Content Include="Views\BitacoraEventoDesaduanaje\Index.cshtml" />
+    <Content Include="Views\MonitorearDesaduanaje\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

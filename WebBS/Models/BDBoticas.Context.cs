@@ -63,7 +63,8 @@ namespace WebBS.Models
         public virtual DbSet<IMP_ACTIVIDAD> IMP_ACTIVIDAD { get; set; }
         public virtual DbSet<IMP_ACTIVIDAD_PLANIFICADA> IMP_ACTIVIDAD_PLANIFICADA { get; set; }
         public virtual DbSet<IMP_ADQUISICION> IMP_ADQUISICION { get; set; }
-        public virtual DbSet<IMP_ALERTA> IMP_ALERTA { get; set; }
+        public virtual DbSet<IMP_ALERTA_ACTIVIDAD> IMP_ALERTA_ACTIVIDAD { get; set; }
+        public virtual DbSet<IMP_ALERTA_EVENTO> IMP_ALERTA_EVENTO { get; set; }
         public virtual DbSet<IMP_ARTICULO> IMP_ARTICULO { get; set; }
         public virtual DbSet<IMP_BITACORA_EVENTO> IMP_BITACORA_EVENTO { get; set; }
         public virtual DbSet<IMP_BL> IMP_BL { get; set; }

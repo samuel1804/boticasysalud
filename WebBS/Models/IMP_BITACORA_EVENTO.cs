@@ -15,11 +15,11 @@ namespace WebBS.Models
     public partial class IMP_BITACORA_EVENTO
     {
         public int Cod_bitacora_evento { get; set; }
-        public Nullable<int> Cod_desaduanaje { get; set; }
+        public int Cod_desaduanaje { get; set; }
         public string Descripcion { get; set; }
-        public Nullable<System.DateTime> Fec_evento { get; set; }
+        public System.DateTime Fec_evento { get; set; }
         public string Observaciones { get; set; }
-        public Nullable<int> Cod_evento { get; set; }
+        public int Cod_evento { get; set; }
         public Nullable<int> Cod_pago_importacion { get; set; }
         public int Cod_usu_regi { get; set; }
         public System.DateTime Fec_usu_regi { get; set; }

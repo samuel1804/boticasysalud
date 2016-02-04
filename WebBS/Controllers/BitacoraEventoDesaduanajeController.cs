@@ -42,16 +42,35 @@ namespace WebBS.Controllers
             {
                 return HttpNotFound();
             }
+            TempData["Desaduanaje"] = db.IMP_DESADUANAJE.Find(iMP_BITACORA_EVENTO.Cod_desaduanaje);
+            ViewBag.Id_desaduanaje = id;
+
             return View(iMP_BITACORA_EVENTO);
         }
 
         // GET: BitacoraEventoDesaduanaje/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            ViewBag.Cod_desaduanaje = new SelectList(db.IMP_DESADUANAJE, "Cod_desaduanaje", "Cod_desaduanaje");
-            ViewBag.Cod_evento = new SelectList(db.IMP_EVENTO, "Cod_evento", "Cod_evento");
-            ViewBag.Cod_pago_importacion = new SelectList(db.IMP_PAGO_IMPORTACION, "Cod_pago_importacion", "Cod_pago_importacion");
+
+            TempData["Desaduanaje"] = db.IMP_DESADUANAJE.Find(id);
+            ViewBag.Id_desaduanaje = id;
+
+            var lista = db.IMP_TIPO_EVENTO.Where(t => !t.EsAutomatico.Value).ToList();
+            lista.Insert(0, new IMP_TIPO_EVENTO() { Nombre = "Seleccione" });
+            ViewBag.Cod_Tipo_Evento = new SelectList(lista, "Cod_tipo_evento", "Nombre");
+            //ViewBag.Cod_pago_importacion = new SelectList(db.IMP_PAGO_IMPORTACION, "Cod_pago_importacion", "Cod_pago_importacion");
             return View();
+        }
+
+        public ActionResult ListarEvento(int id)
+        {
+            var lista = db.IMP_EVENTO.Where(e => e.Cod_tipo_evento == id).ToList();
+            lista = lista.Select(i => new IMP_EVENTO
+            {
+                Cod_evento = i.Cod_evento,
+                Nombre = i.Nombre
+            }).ToList();
+            return Json(new { Result = lista, IsSuccess = true });
         }
 
         // POST: BitacoraEventoDesaduanaje/Create
@@ -68,9 +87,12 @@ namespace WebBS.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Cod_desaduanaje = new SelectList(db.IMP_DESADUANAJE, "Cod_desaduanaje", "Cod_desaduanaje", iMP_BITACORA_EVENTO.Cod_desaduanaje);
-            ViewBag.Cod_evento = new SelectList(db.IMP_EVENTO, "Cod_evento", "Cod_evento", iMP_BITACORA_EVENTO.Cod_evento);
-            ViewBag.Cod_pago_importacion = new SelectList(db.IMP_PAGO_IMPORTACION, "Cod_pago_importacion", "Cod_pago_importacion", iMP_BITACORA_EVENTO.Cod_pago_importacion);
+            TempData["Desaduanaje"] = db.IMP_DESADUANAJE.Find(iMP_BITACORA_EVENTO.Cod_desaduanaje);
+            ViewBag.Id_desaduanaje = iMP_BITACORA_EVENTO.Cod_desaduanaje;
+
+            var lista = db.IMP_TIPO_EVENTO.Where(t => !t.EsAutomatico.Value).ToList();
+            lista.Insert(0, new IMP_TIPO_EVENTO() { Nombre = "Seleccione" });
+            ViewBag.Cod_Tipo_Evento = new SelectList(lista, "Cod_tipo_evento", "Nombre");
             return View(iMP_BITACORA_EVENTO);
         }
 
@@ -86,9 +108,18 @@ namespace WebBS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Cod_desaduanaje = new SelectList(db.IMP_DESADUANAJE, "Cod_desaduanaje", "Cod_desaduanaje", iMP_BITACORA_EVENTO.Cod_desaduanaje);
-            ViewBag.Cod_evento = new SelectList(db.IMP_EVENTO, "Cod_evento", "Cod_evento", iMP_BITACORA_EVENTO.Cod_evento);
-            ViewBag.Cod_pago_importacion = new SelectList(db.IMP_PAGO_IMPORTACION, "Cod_pago_importacion", "Cod_pago_importacion", iMP_BITACORA_EVENTO.Cod_pago_importacion);
+
+
+            TempData["Desaduanaje"] = db.IMP_DESADUANAJE.Find(iMP_BITACORA_EVENTO.Cod_desaduanaje);
+            ViewBag.Id_desaduanaje = id;
+
+            var lista = db.IMP_TIPO_EVENTO.Where(t => !t.EsAutomatico.Value).ToList();
+            lista.Insert(0, new IMP_TIPO_EVENTO() { Nombre = "Seleccione" });
+            ViewBag.Cod_Tipo_Evento = new SelectList(lista, "Cod_tipo_evento", "Nombre");
+            var lista2 = db.IMP_EVENTO.Where(e => e.Cod_tipo_evento == iMP_BITACORA_EVENTO.IMP_EVENTO.Cod_tipo_evento).ToList();
+            lista2.Insert(0, new IMP_EVENTO() { Nombre = "Seleccione" });
+            ViewBag.Cod_evento = new SelectList(lista2, "Cod_evento", "Nombre", iMP_BITACORA_EVENTO.Cod_evento);
+
             return View(iMP_BITACORA_EVENTO);
         }
 
@@ -105,9 +136,16 @@ namespace WebBS.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.Cod_desaduanaje = new SelectList(db.IMP_DESADUANAJE, "Cod_desaduanaje", "Cod_desaduanaje", iMP_BITACORA_EVENTO.Cod_desaduanaje);
-            ViewBag.Cod_evento = new SelectList(db.IMP_EVENTO, "Cod_evento", "Cod_evento", iMP_BITACORA_EVENTO.Cod_evento);
-            ViewBag.Cod_pago_importacion = new SelectList(db.IMP_PAGO_IMPORTACION, "Cod_pago_importacion", "Cod_pago_importacion", iMP_BITACORA_EVENTO.Cod_pago_importacion);
+
+            TempData["Desaduanaje"] = db.IMP_DESADUANAJE.Find(iMP_BITACORA_EVENTO.Cod_desaduanaje);
+            ViewBag.Id_desaduanaje = iMP_BITACORA_EVENTO.Cod_desaduanaje;
+
+            var lista = db.IMP_TIPO_EVENTO.Where(t => !t.EsAutomatico.Value).ToList();
+            lista.Insert(0, new IMP_TIPO_EVENTO() { Nombre = "Seleccione" });
+            ViewBag.Cod_Tipo_Evento = new SelectList(lista, "Cod_tipo_evento", "Nombre");
+            var lista2 = db.IMP_EVENTO.Where(e => e.Cod_tipo_evento == iMP_BITACORA_EVENTO.IMP_EVENTO.Cod_tipo_evento).ToList();
+            lista2.Insert(0, new IMP_EVENTO() { Nombre = "Seleccione" });
+            ViewBag.Cod_evento = new SelectList(lista2, "Cod_evento", "Nombre", iMP_BITACORA_EVENTO.Cod_evento);
             return View(iMP_BITACORA_EVENTO);
         }
 
@@ -123,6 +161,9 @@ namespace WebBS.Controllers
             {
                 return HttpNotFound();
             }
+            TempData["Desaduanaje"] = db.IMP_DESADUANAJE.Find(iMP_BITACORA_EVENTO.Cod_desaduanaje);
+            ViewBag.Id_desaduanaje = id;
+
             return View(iMP_BITACORA_EVENTO);
         }
 

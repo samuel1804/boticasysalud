@@ -16,18 +16,21 @@ namespace WebBS.Models
     {
         public IMP_EVENTO()
         {
+            this.IMP_ALERTA_EVENTO = new HashSet<IMP_ALERTA_EVENTO>();
             this.IMP_BITACORA_EVENTO = new HashSet<IMP_BITACORA_EVENTO>();
         }
     
         public int Cod_evento { get; set; }
         public string Nombre { get; set; }
-        public byte[] RutaAdjunto { get; set; }
+        public byte[] Descripcion { get; set; }
         public int Cod_tipo_evento { get; set; }
         public int Cod_usu_regi { get; set; }
         public System.DateTime Fec_usu_regi { get; set; }
         public Nullable<int> Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
+        public string Clase { get; set; }
     
+        public virtual ICollection<IMP_ALERTA_EVENTO> IMP_ALERTA_EVENTO { get; set; }
         public virtual ICollection<IMP_BITACORA_EVENTO> IMP_BITACORA_EVENTO { get; set; }
         public virtual IMP_TIPO_EVENTO IMP_TIPO_EVENTO { get; set; }
     }

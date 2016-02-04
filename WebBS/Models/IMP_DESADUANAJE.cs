@@ -16,6 +16,7 @@ namespace WebBS.Models
     {
         public IMP_DESADUANAJE()
         {
+            this.IMP_ALERTA_EVENTO = new HashSet<IMP_ALERTA_EVENTO>();
             this.IMP_BITACORA_EVENTO = new HashSet<IMP_BITACORA_EVENTO>();
             this.IMP_DAM = new HashSet<IMP_DAM>();
         }
@@ -29,6 +30,7 @@ namespace WebBS.Models
         public Nullable<int> Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
     
+        public virtual ICollection<IMP_ALERTA_EVENTO> IMP_ALERTA_EVENTO { get; set; }
         public virtual ICollection<IMP_BITACORA_EVENTO> IMP_BITACORA_EVENTO { get; set; }
         public virtual ICollection<IMP_DAM> IMP_DAM { get; set; }
         public virtual IMP_SOLICITUD_IMPORTACION IMP_SOLICITUD_IMPORTACION { get; set; }

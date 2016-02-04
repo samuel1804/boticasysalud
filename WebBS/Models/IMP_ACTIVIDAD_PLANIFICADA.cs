@@ -18,7 +18,7 @@ namespace WebBS.Models
         {
             this.IMP_ACCION = new HashSet<IMP_ACCION>();
             this.IMP_ACTIVIDAD_PLANIFICADA1 = new HashSet<IMP_ACTIVIDAD_PLANIFICADA>();
-            this.IMP_ALERTA = new HashSet<IMP_ALERTA>();
+            this.IMP_ALERTA_ACTIVIDAD = new HashSet<IMP_ALERTA_ACTIVIDAD>();
         }
     
         public int Cod_actividad_planificada { get; set; }
@@ -44,6 +44,6 @@ namespace WebBS.Models
         public virtual IMP_ACTIVIDAD_PLANIFICADA IMP_ACTIVIDAD_PLANIFICADA2 { get; set; }
         public virtual IMP_SOLICITUD_GESTION_PERMISO IMP_SOLICITUD_GESTION_PERMISO { get; set; }
         public virtual RRH_Empleado RRH_Empleado { get; set; }
-        public virtual ICollection<IMP_ALERTA> IMP_ALERTA { get; set; }
+        public virtual ICollection<IMP_ALERTA_ACTIVIDAD> IMP_ALERTA_ACTIVIDAD { get; set; }
     }
 }

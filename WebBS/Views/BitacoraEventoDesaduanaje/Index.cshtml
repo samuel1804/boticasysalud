@@ -30,42 +30,9 @@
             </td>
         </tr>
     </table>
-    <div id="divCerrarSolicitud" hidden>
-        <div class="form-horizontal">
-            <div class="form-group">
-                <label class="control-label col-md-2" for="Fec_accion">Fecha de Embarque :</label>
-                <div class="col-md-2">
-                    @imp_adquisicion.Fec_Embarque.Value.ToString("dd/MM/yyyy")
-                </div>
-                <label class="control-label col-md-2" for="Fec_accion">Fecha de llegada :</label>
-                <div class="col-md-2">
-                    @imp_adquisicion.Fec_programada_llegada.Value.ToString("dd/MM/yyyy")
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-2" for="Fec_accion">Puerto de llegada :</label>
-                <div class="col-md-3">
-                    @imp_adquisicion.IMP_PUERTO.Nombre
-                </div>
-            </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2" for="Fec_accion">Factura Comercial :</label>
-                <div class="col-md-3">
-                    <a href="@Url.Content(imp_adquisicion.IMP_FACTURA_COMERCIAL.FirstOrDefault().Archivo)" class="control-table text-center" target="_blank"><i class="fa fa-file-archive-o"></i></a>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-2" for="Fec_accion">Bill of lading :</label>
-                <div class="col-md-3">
-                    <a href="@Url.Content(imp_adquisicion.IMP_BL.FirstOrDefault().Archivo)" class="control-table text-center" target="_blank"><i class="fa fa-file-archive-o"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
     <hr />
-    <h4 class="hasCollapse" > <a data-toggle="collapse" href="#accordion">Detalle de Solicitud</a></h4>
+    <h4 class="hasCollapse"> <a data-toggle="collapse" href="#accordion">Detalle de Solicitud</a></h4>
 
     <div class="panel-group collapse" id="accordion">
         <br />
@@ -78,7 +45,7 @@
                 </h4>
             </div>
             <div id="collapse1" class="panel-collapse collapse">
-                <div class="panel-body">                  
+                <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-1"></div>
                         <div class="col-sm-2">
@@ -181,9 +148,9 @@
                                 <div class="panel-heading">
                                     Agentes Carga
                                 </div>
-                                <div class="panel-body" >
+                                <div class="panel-body">
                                     <div class="row">
-                                        <label class="col-md-3" >Agente  :</label>
+                                        <label class="col-md-3">Agente  :</label>
                                         <div class="col-md-5">
                                             @imp_adquisicion.IMP_SOLICITUD_IMPORTACION.IMP_PROVEEDOR.Razon_social
                                         </div>
@@ -238,6 +205,54 @@
                 </div>
             </div>
         </div>
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                        Datos de la Adquisición
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="Fec_accion">Fecha de Embarque :</label>
+                                <div class="col-md-2">
+                                    @imp_adquisicion.Fec_Embarque.Value.ToString("dd/MM/yyyy")
+                                </div>
+                                <label class="control-label col-md-2" for="Fec_accion">Fecha de llegada :</label>
+                                <div class="col-md-2">
+                                    @imp_adquisicion.Fec_programada_llegada.Value.ToString("dd/MM/yyyy")
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="Fec_accion">Puerto de llegada :</label>
+                                <div class="col-md-3">
+                                    @imp_adquisicion.IMP_PUERTO.Nombre
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="Fec_accion">Factura Comercial :</label>
+                                <div class="col-md-3">
+                                    <a href="@Url.Content(imp_adquisicion.IMP_FACTURA_COMERCIAL.FirstOrDefault().Archivo)" class="control-table text-center" target="_blank"><i class="fa fa-file-archive-o"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="Fec_accion">Bill of lading :</label>
+                                <div class="col-md-3">
+                                    <a href="@Url.Content(imp_adquisicion.IMP_BL.FirstOrDefault().Archivo)" class="control-table text-center" target="_blank"><i class="fa fa-file-archive-o"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -248,87 +263,86 @@
         </div>
         <div class="col-sm-6 text-right">
             <div class="form-group">
-                @Html.ActionLink("Añadir", "Create", new { id = Model.Cod_desaduanaje }, new { @class = "btn btn-primary" })
+                @if (Model.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado == WebBS.Implement.DatosConstantes.EstadoSolicitud.Proceso)
+            {
+                    @Html.ActionLink("Añadir", "Create", new { id = Model.Cod_desaduanaje }, new { @class = "btn btn-primary" })
+                }
             </div>
         </div>
     </div>
-   
-        @{
-            int itemNumber = 1;
-        }
-        <table class="table-bordered">
-            <tr>
-                <th>
-                    Item
-                </th>
-                <th>
-                    Evento
-                </th>
-                <th>
-                    Fecha del evento
-                </th>
-                <th>
-                    Resumen
-                </th>
-                <th>
-                    Observaciones
-                </th>
 
-                <th>
-                    @Html.DisplayNameFor(model => model.Fec_usu_regi)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Cod_usu_modi)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Fec_usu_modi)
-                </th>
-                <th></th>
-            </tr>
-
-            @foreach (var item in Model.IMP_BITACORA_EVENTO)
+    @{
+        int itemNumber = 1;
+    }
+    <table class="table-bordered">
+        <tr>
+            <th>
+                Item
+            </th>
+            <th>
+                Evento
+            </th>
+            <th>
+                Fecha del evento
+            </th>
+            <th>
+                Título
+            </th>
+            <th>
+                Observaciones
+            </th>
+            @if (Model.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado == WebBS.Implement.DatosConstantes.EstadoSolicitud.Proceso)
             {
-                <tr>
-                    <td>
-                        @itemNumber++
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IMP_EVENTO.Nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Fec_evento)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Descripcion)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Observaciones)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Fec_usu_regi)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Cod_usu_modi)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Fec_usu_modi)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Cod_bitacora_evento }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Cod_bitacora_evento }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Cod_bitacora_evento })
-                    </td>
-                </tr>
+                <th></th>
             }
+        </tr>
 
-        </table>
+        @foreach (var item in Model.IMP_BITACORA_EVENTO.Where(a => !a.IMP_EVENTO.IMP_TIPO_EVENTO.EsAutomatico.Value))
+        {
+            <tr>
+                <td>
+                    @(itemNumber++)
+                </td>
+                <td>
+                    @Html.Raw(item.IMP_EVENTO.IMP_TIPO_EVENTO.Nombre + " - " + item.IMP_EVENTO.Nombre)
+                </td>
+                <td>
+                    @Html.Raw(item.Fec_evento.ToString("dd/MM/yyyy"))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
 
-        <div class="row">
-            <div class="col-sm-12 text-right">
-                <a id="btnCancelar" class="btn btn-default" href="@Url.Action("Index", "SolicitudAdquisicion")">Salir</a>
-            </div>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Observaciones)
+                </td>
+                @if (Model.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado == WebBS.Implement.DatosConstantes.EstadoSolicitud.Proceso)
+                {
+                    <td>
+                        <a class="control-table text-center" href="@Url.Action("Edit", "BitacoraEventoDesaduanaje",new  { Id=item.Cod_bitacora_evento })">
+
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a class="control-table text-center" href="@Url.Action("Details", "BitacoraEventoDesaduanaje",new  { Id=item.Cod_bitacora_evento })">
+
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <a class="control-table text-center" href="@Url.Action("Delete", "BitacoraEventoDesaduanaje",new  { Id=item.Cod_bitacora_evento })">
+
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                    </td>
+                }
+
+            </tr>
+        }
+
+    </table>
+
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <a id="btnCancelar" class="btn btn-default" href="@Url.Action("Index", "SolicitudAdquisicion")">Salir</a>
         </div>
+    </div>
 
 </div>

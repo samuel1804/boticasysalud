@@ -540,7 +540,7 @@
           <Property Name="Fec_Embarque" Type="datetime" />
           <Property Name="Cod_Puerto" Type="int" />
         </EntityType>
-        <EntityType Name="IMP_ALERTA">
+        <EntityType Name="IMP_ALERTA_ACTIVIDAD">
           <Key>
             <PropertyRef Name="Cod_alerta" />
           </Key>
@@ -552,6 +552,18 @@
           <Property Name="Fec_inicio" Type="datetime" />
           <Property Name="Fec_fin" Type="datetime" />
           <Property Name="Cod_actividad_planificada" Type="int" />
+          <Property Name="Cod_usu_regi" Type="int" Nullable="false" />
+          <Property Name="Fec_usu_regi" Type="datetime" Nullable="false" />
+          <Property Name="Cod_usu_modi" Type="int" />
+          <Property Name="Fec_usu_modi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="IMP_ALERTA_EVENTO">
+          <Key>
+            <PropertyRef Name="Cod_alerta_evento" />
+          </Key>
+          <Property Name="Cod_alerta_evento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cod_desaduanaje" Type="int" Nullable="false" />
+          <Property Name="Cod_evento" Type="int" Nullable="false" />
           <Property Name="Cod_usu_regi" Type="int" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="datetime" Nullable="false" />
           <Property Name="Cod_usu_modi" Type="int" />
@@ -576,12 +588,12 @@
           <Key>
             <PropertyRef Name="Cod_bitacora_evento" />
           </Key>
-          <Property Name="Cod_bitacora_evento" Type="int" Nullable="false" />
-          <Property Name="Cod_desaduanaje" Type="int" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="150" />
-          <Property Name="Fec_evento" Type="datetime" />
-          <Property Name="Observaciones" Type="varchar" MaxLength="150" />
-          <Property Name="Cod_evento" Type="int" />
+          <Property Name="Cod_bitacora_evento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cod_desaduanaje" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Fec_evento" Type="datetime" Nullable="false" />
+          <Property Name="Observaciones" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Cod_evento" Type="int" Nullable="false" />
           <Property Name="Cod_pago_importacion" Type="int" />
           <Property Name="Cod_usu_regi" Type="int" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="datetime" Nullable="false" />
@@ -732,12 +744,13 @@
           </Key>
           <Property Name="Cod_evento" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="RutaAdjunto" Type="varbinary(max)" />
+          <Property Name="Descripcion" Type="varbinary" MaxLength="200" />
           <Property Name="Cod_tipo_evento" Type="int" Nullable="false" />
           <Property Name="Cod_usu_regi" Type="int" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="datetime" Nullable="false" />
           <Property Name="Cod_usu_modi" Type="int" />
           <Property Name="Fec_usu_modi" Type="datetime" />
+          <Property Name="Clase" Type="varchar" MaxLength="15" />
         </EntityType>
         <EntityType Name="IMP_FACTURA_COMERCIAL">
           <Key>
@@ -923,6 +936,8 @@
           <Property Name="Fec_usu_regi" Type="datetime" Nullable="false" />
           <Property Name="Cod_usu_modi" Type="int" />
           <Property Name="Fec_usu_modi" Type="datetime" />
+          <Property Name="Orden" Type="int" />
+          <Property Name="EsAutomatico" Type="bit" />
         </EntityType>
         <EntityType Name="IMP_TIPO_MONEDA">
           <Key>
@@ -1857,20 +1872,44 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IMP_ALERTA_EVENTO_IMP_DESADUANAJE">
+          <End Role="IMP_DESADUANAJE" Type="Self.IMP_DESADUANAJE" Multiplicity="1" />
+          <End Role="IMP_ALERTA_EVENTO" Type="Self.IMP_ALERTA_EVENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMP_DESADUANAJE">
+              <PropertyRef Name="Cod_desaduanaje" />
+            </Principal>
+            <Dependent Role="IMP_ALERTA_EVENTO">
+              <PropertyRef Name="Cod_desaduanaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMP_ALERTA_EVENTO_IMP_EVENTO">
+          <End Role="IMP_EVENTO" Type="Self.IMP_EVENTO" Multiplicity="1" />
+          <End Role="IMP_ALERTA_EVENTO" Type="Self.IMP_ALERTA_EVENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMP_EVENTO">
+              <PropertyRef Name="Cod_evento" />
+            </Principal>
+            <Dependent Role="IMP_ALERTA_EVENTO">
+              <PropertyRef Name="Cod_evento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IMP_ALERTA_IMP_ACTIVIDAD_PLANIFICADA">
           <End Role="IMP_ACTIVIDAD_PLANIFICADA" Type="Self.IMP_ACTIVIDAD_PLANIFICADA" Multiplicity="0..1" />
-          <End Role="IMP_ALERTA" Type="Self.IMP_ALERTA" Multiplicity="*" />
+          <End Role="IMP_ALERTA_ACTIVIDAD" Type="Self.IMP_ALERTA_ACTIVIDAD" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IMP_ACTIVIDAD_PLANIFICADA">
               <PropertyRef Name="Cod_actividad_planificada" />
             </Principal>
-            <Dependent Role="IMP_ALERTA">
+            <Dependent Role="IMP_ALERTA_ACTIVIDAD">
               <PropertyRef Name="Cod_actividad_planificada" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IMP_BITACORA_EVENTO_IMP_DESADUANAJE">
-          <End Role="IMP_DESADUANAJE" Type="Self.IMP_DESADUANAJE" Multiplicity="0..1" />
+          <End Role="IMP_DESADUANAJE" Type="Self.IMP_DESADUANAJE" Multiplicity="1" />
           <End Role="IMP_BITACORA_EVENTO" Type="Self.IMP_BITACORA_EVENTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IMP_DESADUANAJE">
@@ -1882,7 +1921,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IMP_BITACORA_EVENTO_IMP_EVENTO">
-          <End Role="IMP_EVENTO" Type="Self.IMP_EVENTO" Multiplicity="0..1" />
+          <End Role="IMP_EVENTO" Type="Self.IMP_EVENTO" Multiplicity="1" />
           <End Role="IMP_BITACORA_EVENTO" Type="Self.IMP_BITACORA_EVENTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IMP_EVENTO">
@@ -2668,7 +2707,8 @@
           <EntitySet Name="IMP_ACTIVIDAD" EntityType="Self.IMP_ACTIVIDAD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMP_ACTIVIDAD_PLANIFICADA" EntityType="Self.IMP_ACTIVIDAD_PLANIFICADA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMP_ADQUISICION" EntityType="Self.IMP_ADQUISICION" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="IMP_ALERTA" EntityType="Self.IMP_ALERTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IMP_ALERTA_ACTIVIDAD" EntityType="Self.IMP_ALERTA_ACTIVIDAD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IMP_ALERTA_EVENTO" EntityType="Self.IMP_ALERTA_EVENTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMP_ARTICULO" EntityType="Self.IMP_ARTICULO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMP_BITACORA_EVENTO" EntityType="Self.IMP_BITACORA_EVENTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMP_BL" EntityType="Self.IMP_BL" Schema="dbo" store:Type="Tables" />
@@ -2882,9 +2922,17 @@
             <End Role="IMP_SOLICITUD_IMPORTACION" EntitySet="IMP_SOLICITUD_IMPORTACION" />
             <End Role="IMP_ADQUISICION" EntitySet="IMP_ADQUISICION" />
           </AssociationSet>
+          <AssociationSet Name="FK_IMP_ALERTA_EVENTO_IMP_DESADUANAJE" Association="Self.FK_IMP_ALERTA_EVENTO_IMP_DESADUANAJE">
+            <End Role="IMP_DESADUANAJE" EntitySet="IMP_DESADUANAJE" />
+            <End Role="IMP_ALERTA_EVENTO" EntitySet="IMP_ALERTA_EVENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMP_ALERTA_EVENTO_IMP_EVENTO" Association="Self.FK_IMP_ALERTA_EVENTO_IMP_EVENTO">
+            <End Role="IMP_EVENTO" EntitySet="IMP_EVENTO" />
+            <End Role="IMP_ALERTA_EVENTO" EntitySet="IMP_ALERTA_EVENTO" />
+          </AssociationSet>
           <AssociationSet Name="FK_IMP_ALERTA_IMP_ACTIVIDAD_PLANIFICADA" Association="Self.FK_IMP_ALERTA_IMP_ACTIVIDAD_PLANIFICADA">
             <End Role="IMP_ACTIVIDAD_PLANIFICADA" EntitySet="IMP_ACTIVIDAD_PLANIFICADA" />
-            <End Role="IMP_ALERTA" EntitySet="IMP_ALERTA" />
+            <End Role="IMP_ALERTA_ACTIVIDAD" EntitySet="IMP_ALERTA_ACTIVIDAD" />
           </AssociationSet>
           <AssociationSet Name="FK_IMP_BITACORA_EVENTO_IMP_DESADUANAJE" Association="Self.FK_IMP_BITACORA_EVENTO_IMP_DESADUANAJE">
             <End Role="IMP_DESADUANAJE" EntitySet="IMP_DESADUANAJE" />
@@ -3226,7 +3274,8 @@
           <EntitySet Name="IMP_ACTIVIDAD" EntityType="BDBoticasModel.IMP_ACTIVIDAD" />
           <EntitySet Name="IMP_ACTIVIDAD_PLANIFICADA" EntityType="BDBoticasModel.IMP_ACTIVIDAD_PLANIFICADA" />
           <EntitySet Name="IMP_ADQUISICION" EntityType="BDBoticasModel.IMP_ADQUISICION" />
-          <EntitySet Name="IMP_ALERTA" EntityType="BDBoticasModel.IMP_ALERTA" />
+          <EntitySet Name="IMP_ALERTA_ACTIVIDAD" EntityType="BDBoticasModel.IMP_ALERTA_ACTIVIDAD" />
+          <EntitySet Name="IMP_ALERTA_EVENTO" EntityType="BDBoticasModel.IMP_ALERTA_EVENTO" />
           <EntitySet Name="IMP_ARTICULO" EntityType="BDBoticasModel.IMP_ARTICULO" />
           <EntitySet Name="IMP_BITACORA_EVENTO" EntityType="BDBoticasModel.IMP_BITACORA_EVENTO" />
           <EntitySet Name="IMP_BL" EntityType="BDBoticasModel.IMP_BL" />
@@ -3454,7 +3503,7 @@
           </AssociationSet>
           <AssociationSet Name="FK_IMP_ALERTA_IMP_ACTIVIDAD_PLANIFICADA" Association="BDBoticasModel.FK_IMP_ALERTA_IMP_ACTIVIDAD_PLANIFICADA">
             <End Role="IMP_ACTIVIDAD_PLANIFICADA" EntitySet="IMP_ACTIVIDAD_PLANIFICADA" />
-            <End Role="IMP_ALERTA" EntitySet="IMP_ALERTA" />
+            <End Role="IMP_ALERTA_ACTIVIDAD" EntitySet="IMP_ALERTA_ACTIVIDAD" />
           </AssociationSet>
           <AssociationSet Name="FK_IMP_ADQUISICION_IMP_PUERTO" Association="BDBoticasModel.FK_IMP_ADQUISICION_IMP_PUERTO">
             <End Role="IMP_PUERTO" EntitySet="IMP_PUERTO" />
@@ -3471,6 +3520,14 @@
           <AssociationSet Name="FK_IMP_FACTURA_COMERCIAL_IMP_ADQUISICION" Association="BDBoticasModel.FK_IMP_FACTURA_COMERCIAL_IMP_ADQUISICION">
             <End Role="IMP_ADQUISICION" EntitySet="IMP_ADQUISICION" />
             <End Role="IMP_FACTURA_COMERCIAL" EntitySet="IMP_FACTURA_COMERCIAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMP_ALERTA_EVENTO_IMP_DESADUANAJE" Association="BDBoticasModel.FK_IMP_ALERTA_EVENTO_IMP_DESADUANAJE">
+            <End Role="IMP_DESADUANAJE" EntitySet="IMP_DESADUANAJE" />
+            <End Role="IMP_ALERTA_EVENTO" EntitySet="IMP_ALERTA_EVENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMP_ALERTA_EVENTO_IMP_EVENTO" Association="BDBoticasModel.FK_IMP_ALERTA_EVENTO_IMP_EVENTO">
+            <End Role="IMP_EVENTO" EntitySet="IMP_EVENTO" />
+            <End Role="IMP_ALERTA_EVENTO" EntitySet="IMP_ALERTA_EVENTO" />
           </AssociationSet>
           <AssociationSet Name="FK_IMP_DETALLE_FACTURA_COMERCIAL_IMP_ARTICULO" Association="BDBoticasModel.FK_IMP_DETALLE_FACTURA_COMERCIAL_IMP_ARTICULO">
             <End Role="IMP_ARTICULO" EntitySet="IMP_ARTICULO" />
@@ -4299,7 +4356,7 @@
           <NavigationProperty Name="IMP_ACTIVIDAD_PLANIFICADA2" Relationship="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_ACTIVIDAD_PLANIFICADA" FromRole="IMP_ACTIVIDAD_PLANIFICADA1" ToRole="IMP_ACTIVIDAD_PLANIFICADA" />
           <NavigationProperty Name="IMP_SOLICITUD_GESTION_PERMISO" Relationship="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_IMP_SOLICITUD_GESTION_PERMISO" FromRole="IMP_ACTIVIDAD_PLANIFICADA" ToRole="IMP_SOLICITUD_GESTION_PERMISO" />
           <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_IMP_ACTIVIDAD_PLANIFICADA_RRH_Empleado" FromRole="IMP_ACTIVIDAD_PLANIFICADA" ToRole="RRH_Empleado" />
-          <NavigationProperty Name="IMP_ALERTA" Relationship="BDBoticasModel.FK_IMP_ALERTA_IMP_ACTIVIDAD_PLANIFICADA" FromRole="IMP_ACTIVIDAD_PLANIFICADA" ToRole="IMP_ALERTA" />
+          <NavigationProperty Name="IMP_ALERTA_ACTIVIDAD" Relationship="BDBoticasModel.FK_IMP_ALERTA_IMP_ACTIVIDAD_PLANIFICADA" FromRole="IMP_ACTIVIDAD_PLANIFICADA" ToRole="IMP_ALERTA_ACTIVIDAD" />
         </EntityType>
         <EntityType Name="IMP_ADQUISICION">
           <Key>
@@ -4320,7 +4377,7 @@
           <NavigationProperty Name="IMP_BL" Relationship="BDBoticasModel.FK_IMP_BL_IMP_ADQUISICION" FromRole="IMP_ADQUISICION" ToRole="IMP_BL" />
           <NavigationProperty Name="IMP_FACTURA_COMERCIAL" Relationship="BDBoticasModel.FK_IMP_FACTURA_COMERCIAL_IMP_ADQUISICION" FromRole="IMP_ADQUISICION" ToRole="IMP_FACTURA_COMERCIAL" />
         </EntityType>
-        <EntityType Name="IMP_ALERTA">
+        <EntityType Name="IMP_ALERTA_ACTIVIDAD">
           <Key>
             <PropertyRef Name="Cod_alerta" />
           </Key>
@@ -4336,7 +4393,21 @@
           <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Cod_usu_modi" Type="Int32" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="IMP_ACTIVIDAD_PLANIFICADA" Relationship="BDBoticasModel.FK_IMP_ALERTA_IMP_ACTIVIDAD_PLANIFICADA" FromRole="IMP_ALERTA" ToRole="IMP_ACTIVIDAD_PLANIFICADA" />
+          <NavigationProperty Name="IMP_ACTIVIDAD_PLANIFICADA" Relationship="BDBoticasModel.FK_IMP_ALERTA_IMP_ACTIVIDAD_PLANIFICADA" FromRole="IMP_ALERTA_ACTIVIDAD" ToRole="IMP_ACTIVIDAD_PLANIFICADA" />
+        </EntityType>
+        <EntityType Name="IMP_ALERTA_EVENTO">
+          <Key>
+            <PropertyRef Name="Cod_alerta_evento" />
+          </Key>
+          <Property Name="Cod_alerta_evento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cod_desaduanaje" Type="Int32" Nullable="false" />
+          <Property Name="Cod_evento" Type="Int32" Nullable="false" />
+          <Property Name="Cod_usu_regi" Type="Int32" Nullable="false" />
+          <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Cod_usu_modi" Type="Int32" />
+          <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="IMP_DESADUANAJE" Relationship="BDBoticasModel.FK_IMP_ALERTA_EVENTO_IMP_DESADUANAJE" FromRole="IMP_ALERTA_EVENTO" ToRole="IMP_DESADUANAJE" />
+          <NavigationProperty Name="IMP_EVENTO" Relationship="BDBoticasModel.FK_IMP_ALERTA_EVENTO_IMP_EVENTO" FromRole="IMP_ALERTA_EVENTO" ToRole="IMP_EVENTO" />
         </EntityType>
         <EntityType Name="IMP_ARTICULO">
           <Key>
@@ -4359,12 +4430,12 @@
           <Key>
             <PropertyRef Name="Cod_bitacora_evento" />
           </Key>
-          <Property Name="Cod_bitacora_evento" Type="Int32" Nullable="false" />
-          <Property Name="Cod_desaduanaje" Type="Int32" />
-          <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Fec_evento" Type="DateTime" Precision="3" />
-          <Property Name="Observaciones" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Cod_evento" Type="Int32" />
+          <Property Name="Cod_bitacora_evento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cod_desaduanaje" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Fec_evento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Observaciones" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_evento" Type="Int32" Nullable="false" />
           <Property Name="Cod_pago_importacion" Type="Int32" />
           <Property Name="Cod_usu_regi" Type="Int32" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
@@ -4476,6 +4547,7 @@
           <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Cod_usu_modi" Type="Int32" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="IMP_ALERTA_EVENTO" Relationship="BDBoticasModel.FK_IMP_ALERTA_EVENTO_IMP_DESADUANAJE" FromRole="IMP_DESADUANAJE" ToRole="IMP_ALERTA_EVENTO" />
           <NavigationProperty Name="IMP_BITACORA_EVENTO" Relationship="BDBoticasModel.FK_IMP_BITACORA_EVENTO_IMP_DESADUANAJE" FromRole="IMP_DESADUANAJE" ToRole="IMP_BITACORA_EVENTO" />
           <NavigationProperty Name="IMP_DAM" Relationship="BDBoticasModel.FK_IMP_DAM_IMP_DESADUANAJE" FromRole="IMP_DESADUANAJE" ToRole="IMP_DAM" />
           <NavigationProperty Name="IMP_SOLICITUD_IMPORTACION" Relationship="BDBoticasModel.FK_IMP_DESADUANAJE_IMP_SOLICITUD_IMPORTACION" FromRole="IMP_DESADUANAJE" ToRole="IMP_SOLICITUD_IMPORTACION" />
@@ -4533,12 +4605,14 @@
           </Key>
           <Property Name="Cod_evento" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RutaAdjunto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Descripcion" Type="Binary" MaxLength="200" FixedLength="false" />
           <Property Name="Cod_tipo_evento" Type="Int32" Nullable="false" />
           <Property Name="Cod_usu_regi" Type="Int32" Nullable="false" />
           <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Cod_usu_modi" Type="Int32" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
+          <Property Name="Clase" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="IMP_ALERTA_EVENTO" Relationship="BDBoticasModel.FK_IMP_ALERTA_EVENTO_IMP_EVENTO" FromRole="IMP_EVENTO" ToRole="IMP_ALERTA_EVENTO" />
           <NavigationProperty Name="IMP_BITACORA_EVENTO" Relationship="BDBoticasModel.FK_IMP_BITACORA_EVENTO_IMP_EVENTO" FromRole="IMP_EVENTO" ToRole="IMP_BITACORA_EVENTO" />
           <NavigationProperty Name="IMP_TIPO_EVENTO" Relationship="BDBoticasModel.FK_IMP_EVENTO_IMP_TIPO_EVENTO" FromRole="IMP_EVENTO" ToRole="IMP_TIPO_EVENTO" />
         </EntityType>
@@ -4762,6 +4836,8 @@
           <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Cod_usu_modi" Type="Int32" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
+          <Property Name="Orden" Type="Int32" />
+          <Property Name="EsAutomatico" Type="Boolean" />
           <NavigationProperty Name="IMP_EVENTO" Relationship="BDBoticasModel.FK_IMP_EVENTO_IMP_TIPO_EVENTO" FromRole="IMP_TIPO_EVENTO" ToRole="IMP_EVENTO" />
         </EntityType>
         <EntityType Name="IMP_TIPO_MONEDA">
@@ -5802,12 +5878,12 @@
         </Association>
         <Association Name="FK_IMP_ALERTA_IMP_ACTIVIDAD_PLANIFICADA">
           <End Type="BDBoticasModel.IMP_ACTIVIDAD_PLANIFICADA" Role="IMP_ACTIVIDAD_PLANIFICADA" Multiplicity="0..1" />
-          <End Type="BDBoticasModel.IMP_ALERTA" Role="IMP_ALERTA" Multiplicity="*" />
+          <End Type="BDBoticasModel.IMP_ALERTA_ACTIVIDAD" Role="IMP_ALERTA_ACTIVIDAD" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IMP_ACTIVIDAD_PLANIFICADA">
               <PropertyRef Name="Cod_actividad_planificada" />
             </Principal>
-            <Dependent Role="IMP_ALERTA">
+            <Dependent Role="IMP_ALERTA_ACTIVIDAD">
               <PropertyRef Name="Cod_actividad_planificada" />
             </Dependent>
           </ReferentialConstraint>
@@ -5860,6 +5936,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IMP_ALERTA_EVENTO_IMP_DESADUANAJE">
+          <End Type="BDBoticasModel.IMP_DESADUANAJE" Role="IMP_DESADUANAJE" Multiplicity="1" />
+          <End Type="BDBoticasModel.IMP_ALERTA_EVENTO" Role="IMP_ALERTA_EVENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMP_DESADUANAJE">
+              <PropertyRef Name="Cod_desaduanaje" />
+            </Principal>
+            <Dependent Role="IMP_ALERTA_EVENTO">
+              <PropertyRef Name="Cod_desaduanaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMP_ALERTA_EVENTO_IMP_EVENTO">
+          <End Type="BDBoticasModel.IMP_EVENTO" Role="IMP_EVENTO" Multiplicity="1" />
+          <End Type="BDBoticasModel.IMP_ALERTA_EVENTO" Role="IMP_ALERTA_EVENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMP_EVENTO">
+              <PropertyRef Name="Cod_evento" />
+            </Principal>
+            <Dependent Role="IMP_ALERTA_EVENTO">
+              <PropertyRef Name="Cod_evento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IMP_DETALLE_FACTURA_COMERCIAL_IMP_ARTICULO">
           <End Type="BDBoticasModel.IMP_ARTICULO" Role="IMP_ARTICULO" Multiplicity="0..1" />
           <End Type="BDBoticasModel.IMP_DETALLE_FACTURA_COMERCIAL" Role="IMP_DETALLE_FACTURA_COMERCIAL" Multiplicity="*" />
@@ -5885,7 +5985,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IMP_BITACORA_EVENTO_IMP_DESADUANAJE">
-          <End Type="BDBoticasModel.IMP_DESADUANAJE" Role="IMP_DESADUANAJE" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.IMP_DESADUANAJE" Role="IMP_DESADUANAJE" Multiplicity="1" />
           <End Type="BDBoticasModel.IMP_BITACORA_EVENTO" Role="IMP_BITACORA_EVENTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IMP_DESADUANAJE">
@@ -5897,7 +5997,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IMP_BITACORA_EVENTO_IMP_EVENTO">
-          <End Type="BDBoticasModel.IMP_EVENTO" Role="IMP_EVENTO" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.IMP_EVENTO" Role="IMP_EVENTO" Multiplicity="1" />
           <End Type="BDBoticasModel.IMP_BITACORA_EVENTO" Role="IMP_BITACORA_EVENTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IMP_EVENTO">
@@ -7113,9 +7213,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="IMP_ALERTA">
-            <EntityTypeMapping TypeName="BDBoticasModel.IMP_ALERTA">
-              <MappingFragment StoreEntitySet="IMP_ALERTA">
+          <EntitySetMapping Name="IMP_ALERTA_ACTIVIDAD">
+            <EntityTypeMapping TypeName="BDBoticasModel.IMP_ALERTA_ACTIVIDAD">
+              <MappingFragment StoreEntitySet="IMP_ALERTA_ACTIVIDAD">
                 <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
                 <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
                 <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
@@ -7128,6 +7228,19 @@
                 <ScalarProperty Name="Disparador_estado_actividad" ColumnName="Disparador_estado_actividad" />
                 <ScalarProperty Name="Nombre_alerta" ColumnName="Nombre_alerta" />
                 <ScalarProperty Name="Cod_alerta" ColumnName="Cod_alerta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IMP_ALERTA_EVENTO">
+            <EntityTypeMapping TypeName="BDBoticasModel.IMP_ALERTA_EVENTO">
+              <MappingFragment StoreEntitySet="IMP_ALERTA_EVENTO">
+                <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
+                <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
+                <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
+                <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
+                <ScalarProperty Name="Cod_evento" ColumnName="Cod_evento" />
+                <ScalarProperty Name="Cod_desaduanaje" ColumnName="Cod_desaduanaje" />
+                <ScalarProperty Name="Cod_alerta_evento" ColumnName="Cod_alerta_evento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -7313,12 +7426,13 @@
           <EntitySetMapping Name="IMP_EVENTO">
             <EntityTypeMapping TypeName="BDBoticasModel.IMP_EVENTO">
               <MappingFragment StoreEntitySet="IMP_EVENTO">
+                <ScalarProperty Name="Clase" ColumnName="Clase" />
                 <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
                 <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
                 <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
                 <ScalarProperty Name="Cod_usu_regi" ColumnName="Cod_usu_regi" />
                 <ScalarProperty Name="Cod_tipo_evento" ColumnName="Cod_tipo_evento" />
-                <ScalarProperty Name="RutaAdjunto" ColumnName="RutaAdjunto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Cod_evento" ColumnName="Cod_evento" />
               </MappingFragment>
@@ -7512,6 +7626,8 @@
           <EntitySetMapping Name="IMP_TIPO_EVENTO">
             <EntityTypeMapping TypeName="BDBoticasModel.IMP_TIPO_EVENTO">
               <MappingFragment StoreEntitySet="IMP_TIPO_EVENTO">
+                <ScalarProperty Name="EsAutomatico" ColumnName="EsAutomatico" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
                 <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
                 <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
                 <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />

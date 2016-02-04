@@ -1,18 +1,40 @@
-﻿@model WebBS.Models.IMP_BITACORA_EVENTO
+﻿@using WebBS.Implement
+@model WebBS.Models.IMP_BITACORA_EVENTO
 
 @{
     ViewBag.Title = "Delete";
+    WebBS.Models.IMP_DESADUANAJE iMP_DESADUANAJE = (WebBS.Models.IMP_DESADUANAJE)TempData["Desaduanaje"];
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+<h2>Eliminar Evento</h2>
+<div id="divMensajeInformativo">
+    <span class="fa fa-info-circle"></span>
+    <span id="lblMensajeInformativo">Usted esta a punto de eliminar el evento registrado.</span>
+</div>
+<h3>¿Está seguro que desea eliminar el evento?</h3>
 <div>
-    <h4>IMP_BITACORA_EVENTO</h4>
+    <h4>Solicitud</h4>
+    <table class="table-bordered">
+        <tr class="rowGroup" data-toggle="collapse" data-target="#Panel_@iMP_DESADUANAJE.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Numero">
+            <td colspan="8">
+                <h4>Solicitud #: @iMP_DESADUANAJE.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Numero</h4>
+                <h5>Fecha : @Html.Raw(iMP_DESADUANAJE.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Fec_emision.Value.ToString("dd/MM/yyyy"))</h5>
+                <h5>Estado: @Html.Raw(TablaDefinicion.ObtenerValor(iMP_DESADUANAJE.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado, TablaDefinicion.EstadoSolicitud))</h5>
+                <p>@iMP_DESADUANAJE.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Descripcion</p>
+                @if (iMP_DESADUANAJE.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado == WebBS.Implement.DatosConstantes.EstadoSolicitud.Rechazado)
+                {
+                    <h4>Motivo del rechazo:</h4>
+                    <p>@iMP_DESADUANAJE.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Observaciones</p>
+                }
+            </td>
+        </tr>
+    </table>
+
     <hr />
     <dl class="dl-horizontal">
+
         <dt>
-            @Html.DisplayNameFor(model => model.Descripcion)
+            Título
         </dt>
 
         <dd>
@@ -20,85 +42,54 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Fec_evento)
+            Fecha del evento
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Fec_evento)
+            @Html.Raw(Model.Fec_evento.ToString("dd/MM/yyyy"))
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Observaciones)
+            Tipo de evento
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Observaciones)
+            @Html.DisplayFor(model => model.IMP_EVENTO.IMP_TIPO_EVENTO.Nombre)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Cod_usu_regi)
+            Evento
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Cod_usu_regi)
+            @Html.DisplayFor(model => model.IMP_EVENTO.Nombre)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Fec_usu_regi)
+            Observaciones
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Fec_usu_regi)
+            <p>@Html.DisplayFor(model => model.Observaciones)</p>
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Cod_usu_modi)
-        </dt>
+        @*<dt>
+                @Html.DisplayNameFor(model => model.IMP_PAGO_IMPORTACION.Cod_pago_importacion)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Cod_usu_modi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Fec_usu_modi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Fec_usu_modi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IMP_DESADUANAJE.Cod_desaduanaje)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IMP_DESADUANAJE.Cod_desaduanaje)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IMP_EVENTO.Cod_evento)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IMP_EVENTO.Cod_evento)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IMP_PAGO_IMPORTACION.Cod_pago_importacion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IMP_PAGO_IMPORTACION.Cod_pago_importacion)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.IMP_PAGO_IMPORTACION.Cod_pago_importacion)
+            </dd>*@
 
     </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
 </div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-primary" /> |
+        <a class="btn btn-default" href="@Url.Action("Index", "BitacoraEventoDesaduanaje",new  { Id=Model.Cod_desaduanaje })">Cancelar</a>
+    </div>
+}

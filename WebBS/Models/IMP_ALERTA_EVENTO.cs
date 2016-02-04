@@ -12,21 +12,17 @@ namespace WebBS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class IMP_ALERTA
+    public partial class IMP_ALERTA_EVENTO
     {
-        public int Cod_alerta { get; set; }
-        public string Nombre_alerta { get; set; }
-        public string Disparador_estado_actividad { get; set; }
-        public string Disparador_fecha_cierre_planificado { get; set; }
-        public string Repetir_dia { get; set; }
-        public Nullable<System.DateTime> Fec_inicio { get; set; }
-        public Nullable<System.DateTime> Fec_fin { get; set; }
-        public Nullable<int> Cod_actividad_planificada { get; set; }
+        public int Cod_alerta_evento { get; set; }
+        public int Cod_desaduanaje { get; set; }
+        public int Cod_evento { get; set; }
         public int Cod_usu_regi { get; set; }
         public System.DateTime Fec_usu_regi { get; set; }
         public Nullable<int> Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
     
-        public virtual IMP_ACTIVIDAD_PLANIFICADA IMP_ACTIVIDAD_PLANIFICADA { get; set; }
+        public virtual IMP_DESADUANAJE IMP_DESADUANAJE { get; set; }
+        public virtual IMP_EVENTO IMP_EVENTO { get; set; }
     }
 }
