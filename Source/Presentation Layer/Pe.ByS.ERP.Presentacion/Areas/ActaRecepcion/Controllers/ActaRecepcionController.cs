@@ -20,15 +20,17 @@ namespace Pe.ByS.ERP.Presentacion.Areas.ActaRecepcion.Controllers
 
         private readonly IActaRecepcionBL _actaBL;
         private readonly ISucursalBL _sucursalBL;
+        private readonly IUbicacionProductoBL _ubicacionBL;
 
         #endregion
 
         #region Constructor
 
-        public ActaRecepcionController(IActaRecepcionBL actaBL, ISucursalBL sucursalBL)
+        public ActaRecepcionController(IActaRecepcionBL actaBL, ISucursalBL sucursalBL, IUbicacionProductoBL ubicacionBL)
         {
             _actaBL = actaBL;
             _sucursalBL = sucursalBL;
+            _ubicacionBL = ubicacionBL;
         }
 
         #endregion
@@ -128,7 +130,25 @@ namespace Pe.ByS.ERP.Presentacion.Areas.ActaRecepcion.Controllers
             {
                 var acta = _actaBL.Get(p => p.Id == numActa);
 
-                jsonResponse.Data = ActaRecepcionConverter.DomainToDtoDetalleActa(acta);
+                jsonResponse.Data = UbicacionProductoConverter.DomainToDtoList(acta);
+                jsonResponse.Success = true;
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                jsonResponse.Message = "Ocurrió un error";
+            }
+            return Json(jsonResponse, JsonRequestBehavior.AllowGet);
+        }
+        
+        [HttpPost]
+        public virtual JsonResult GuardarUbicacion(List<DetalleActaRecepcionReubicarDto> detalleUbicacion)
+        {
+            var jsonResponse = new JsonResponse { Success = false };
+            try
+            {
+                _ubicacionBL.AddRange(UbicacionProductoConverter.DtoToDomainList(detalleUbicacion));
+                
                 jsonResponse.Success = true;
             }
             catch (Exception ex)

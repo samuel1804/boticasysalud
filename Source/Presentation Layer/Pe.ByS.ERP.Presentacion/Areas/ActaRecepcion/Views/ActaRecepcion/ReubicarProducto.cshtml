@@ -38,7 +38,7 @@
     <div class="box-footer">
         <div class="col-md-offset-3 col-md-9">
             <button type="button" class="btn btn-info" id="btnRegistrar">
-                <i class="fa fa-plus"></i>
+                <i class="fa fa-floppy-o"></i>
                 Registrar
             </button>
         </div>
@@ -54,18 +54,19 @@
 
     function ListarActaDetalle() {
         var colNames = [
-            'Almacén', 'Código', 'Articulo', 'Unidad', 'Lote', 'Cant. Rec.', 'Modulo', 'Columna', 'Fila'
+            'AlmacenId', 'Almacén', 'Código', 'Articulo', 'Unidad', 'Lote', 'Cant. Rec.', 'Módulo', 'Columna', 'Fila'
         ];
         var colModels = [
-            { name: 'AlmacenNombre', index: 'AlmacenNombre', align: 'center', width: 60 },
+            { name: 'AlmacenId', index: 'AlmacenId', hidden: true },
+            { name: 'AlmacenNombre', index: 'AlmacenNombre', align: 'center', width: 150 },
             { name: 'ProductoId', index: 'ProductoId', align: 'center', width: 60 },
             { name: 'ProductoNombre', index: 'ProductoNombre', align: 'left', width: 150 },
             { name: 'UnidadMedida', index: 'UnidadMedida', align: 'center', width: 60 },
-            { name: 'Lote', index: 'Lote', align: 'center', width: 65 },
-            { name: 'CantidadRecepcionada', index: 'CantidadRecepcionada', align: 'right', width: 65 },
+            { name: 'Lote', index: 'Lote', align: 'center', width: 60 },
+            { name: 'CantidadRecepcionada', index: 'CantidadRecepcionada', align: 'right', width: 60 },
             { name: 'Modulo', index: 'Modulo', align: 'center', width: 60, editable: true },
-            { name: 'Columna', index: 'Columna', align: 'center', width: 60, editable: true },
-            { name: 'Fila', index: 'Fila', align: 'center', width: 60, editable: true }
+            { name: 'Columna', index: 'Columna', align: 'center', width: 60, editable: true, editrules: { custom: true, custom_func: validarNumero } },
+            { name: 'Fila', index: 'Fila', align: 'center', width: 60, editable: true, editrules: { custom: true, custom_func: validarNumero } }
         ];
 
         var opciones = {
@@ -111,6 +112,59 @@
             cargarDetalleActa(numActa);
     });
 
+    $("#btnReubicar").click(function () {
+        alert('No se detalla la funcion de este boton en el documento');
+    });
+
+    $("#btnRegistrar").click(function() {
+        var model = {
+            detalleUbicacion: $("#" + grdDetalle).jqGrid('getGridParam', 'data')
+        };
+
+        var item, msj = "";
+
+        if (model.detalleUbicacion.length === 0)
+            msj += "- Busque un número de acta de recepción.";
+        else {
+            for (var i = 0; i < model.detalleUbicacion.length; i++) {
+                item = model.detalleUbicacion[i];
+                if (!item.Modulo || !item.Columna || !item.Columna) {
+                    msj += "- Ingrese el módulo, columna y fila de los productos a ubicar.";
+                    break;
+                }
+            }
+        }
+
+        if (msj !== "") {
+            SIG.Alert('Alerta', msj, null);
+            return;
+        }
+
+        var opciones = {
+            url: '@Url.Action("GuardarUbicacion", "ActaRecepcion", new { area = "ActaRecepcion" })',
+            parametros: model
+        };
+
+        SIG.Ajax(opciones, function(response) {
+            if (response.Success) {
+                SIG.Alert('Alerta', 'Los datos se registraron correctamente.', redirectIndex, redirectIndex);
+            } else {
+                SIG.Alert('Alerta', response.Message, null);
+            }
+        });
+    });
+
+    function redirectIndex() {
+        window.location.href = '@Url.Action("Almacenamiento", "ActaRecepcion", new { Area = "ActaRecepcion" })';
+    }
+
+    function validarNumero(value, colname) {
+        if (!isNaN(value))
+            return [true, "", ""];
+
+        return [false, "El valor de \"" + colname + "\" debe ser un número", ""];
+    }
+
     function cargarDetalleActa(numActa) {
         var opciones = {
             url: '@Url.Action("GetDetalleActa", "ActaRecepcion", new { area = "ActaRecepcion" })',
@@ -125,6 +179,8 @@
 
                 for (var i = 0; i < response.Data.length; i++) {
                     item = response.Data[i];
+                    item.Columna = "";
+                    item.Fila = "";
                     $grilla.addRowData(item.Id, item);
                 }
             }

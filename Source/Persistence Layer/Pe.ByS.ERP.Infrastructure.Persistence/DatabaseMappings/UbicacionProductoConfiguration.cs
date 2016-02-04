@@ -9,6 +9,7 @@ namespace Pe.ByS.ERP.Infrastructure.Persistence.DatabaseMappings
         {
             ToTable("RYA_UBICACIONES");
 
+            Property(p => p.AlmacenId).HasColumnName("Cod_Almacen");
             Property(p => p.ProductoId).HasColumnName("Cod_Producto");
             Property(p => p.Lote).IsRequired().HasMaxLength(15);
             Property(p => p.Cantidad).HasColumnName("Cant");

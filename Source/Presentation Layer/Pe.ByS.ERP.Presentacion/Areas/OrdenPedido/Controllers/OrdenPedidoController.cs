@@ -129,6 +129,28 @@ namespace Pe.ByS.ERP.Presentacion.Areas.OrdenPedido.Controllers
         }
 
         [HttpPost]
+        public virtual JsonResult ActualizarPedido(OrdenPedidoDto pedido)
+        {
+            var jsonResponse = new JsonResponse { Success = false };
+            try
+            {
+                var ultimoPedido = _ordenBL.FindAll(p => true).OrderByDescending(p => p.Id).FirstOrDefault();
+                if (ultimoPedido != null)
+                    pedido.NumeroPedido = ultimoPedido.NumeroPedido;
+
+                _ordenBL.Add(OrdenPedidoConverter.DtoToDomain(pedido));
+                jsonResponse.Data = pedido.NumeroPedido;
+                jsonResponse.Success = true;
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                jsonResponse.Message = "Ocurrió un error";
+            }
+            return Json(jsonResponse, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
         public virtual JsonResult EliminarPedido(int id)
         {
             var jsonResponse = new JsonResponse {Success = false};
