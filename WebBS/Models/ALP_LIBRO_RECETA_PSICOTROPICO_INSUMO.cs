@@ -12,28 +12,17 @@ namespace WebBS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ALP_RECETA
+    public partial class ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO
     {
-        public ALP_RECETA()
-        {
-            this.ALP_ORDEN_PREPARADO = new HashSet<ALP_ORDEN_PREPARADO>();
-        }
-    
-        public string cod_receta { get; set; }
-        public string nom_preparado { get; set; }
-        public string desc_receta { get; set; }
-        public string nom_medico { get; set; }
-        public int num_colegiatura { get; set; }
-        public string motivo { get; set; }
-        public System.DateTime fec_emision { get; set; }
-        public string estado { get; set; }
+        public string cod_libro_receta_psicotropico { get; set; }
+        public string cod_insumo { get; set; }
+        public int cant_insumo_constancia { get; set; }
         public int cod_usu_regi { get; set; }
         public System.DateTime fec_usu_regi { get; set; }
         public Nullable<int> cod_usu_modi { get; set; }
         public Nullable<System.DateTime> fec_usu_modi { get; set; }
-        public string nom_paciente { get; set; }
-        public string num_docu_paciente { get; set; }
     
-        public virtual ICollection<ALP_ORDEN_PREPARADO> ALP_ORDEN_PREPARADO { get; set; }
+        public virtual ALP_INSUMO ALP_INSUMO { get; set; }
+        public virtual ALP_LIBRO_RECETA_PSICOTROPICO ALP_LIBRO_RECETA_PSICOTROPICO { get; set; }
     }
 }

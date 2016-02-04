@@ -26,6 +26,7 @@ namespace WebBS.Models
             this.RRH_PruebaEvaluacionTecnica = new HashSet<RRH_PruebaEvaluacionTecnica>();
             this.ALP_CONSTANCIA_PREPARADO = new HashSet<ALP_CONSTANCIA_PREPARADO>();
             this.ALP_HOJA_MERMA = new HashSet<ALP_HOJA_MERMA>();
+            this.ALP_LIBRO_RECETA_PSICOTROPICO = new HashSet<ALP_LIBRO_RECETA_PSICOTROPICO>();
         }
     
         public int Cod_empleado { get; set; }
@@ -54,13 +55,13 @@ namespace WebBS.Models
         public virtual ICollection<RRH_PruebaEvaluacionTecnica> RRH_PruebaEvaluacionTecnica { get; set; }
         public virtual ICollection<ALP_CONSTANCIA_PREPARADO> ALP_CONSTANCIA_PREPARADO { get; set; }
         public virtual ICollection<ALP_HOJA_MERMA> ALP_HOJA_MERMA { get; set; }
+        public virtual ICollection<ALP_LIBRO_RECETA_PSICOTROPICO> ALP_LIBRO_RECETA_PSICOTROPICO { get; set; }
 
         internal dynamic GetEmpleado()
         {
             string temp = Nom_empleado + " " + Ap_paterno + " " + Ap_materno;
 
             return String.IsNullOrEmpty(temp) ? "" : temp;
-
         }
     }
 }

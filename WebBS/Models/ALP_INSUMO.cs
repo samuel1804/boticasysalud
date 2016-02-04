@@ -19,6 +19,8 @@ namespace WebBS.Models
             this.ALP_CONSTANCIA_PREPARADO_INSUMO = new HashSet<ALP_CONSTANCIA_PREPARADO_INSUMO>();
             this.ALP_HOJA_MERMA_INSUMO = new HashSet<ALP_HOJA_MERMA_INSUMO>();
             this.ALP_ORDEN_PREPARADO_INSUMO = new HashSet<ALP_ORDEN_PREPARADO_INSUMO>();
+            this.ALP_LIBRO_RECETA_INSUMO = new HashSet<ALP_LIBRO_RECETA_INSUMO>();
+            this.ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO = new HashSet<ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO>();
         }
     
         public string cod_insumo { get; set; }
@@ -30,9 +32,12 @@ namespace WebBS.Models
         public System.DateTime fec_usu_regi { get; set; }
         public Nullable<int> cod_usu_modi { get; set; }
         public Nullable<System.DateTime> fec_usu_modi { get; set; }
+        public Nullable<bool> psicotropico { get; set; }
     
         public virtual ICollection<ALP_CONSTANCIA_PREPARADO_INSUMO> ALP_CONSTANCIA_PREPARADO_INSUMO { get; set; }
         public virtual ICollection<ALP_HOJA_MERMA_INSUMO> ALP_HOJA_MERMA_INSUMO { get; set; }
         public virtual ICollection<ALP_ORDEN_PREPARADO_INSUMO> ALP_ORDEN_PREPARADO_INSUMO { get; set; }
+        public virtual ICollection<ALP_LIBRO_RECETA_INSUMO> ALP_LIBRO_RECETA_INSUMO { get; set; }
+        public virtual ICollection<ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO> ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO { get; set; }
     }
 }

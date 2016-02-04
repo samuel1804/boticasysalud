@@ -20,6 +20,7 @@ namespace WebBS.Models
             this.ALP_LIBRO_RECETA = new HashSet<ALP_LIBRO_RECETA>();
             this.ALP_HOJA_MERMA = new HashSet<ALP_HOJA_MERMA>();
             this.ALP_SOLICITUD_TRANSPORTE = new HashSet<ALP_SOLICITUD_TRANSPORTE>();
+            this.ALP_LIBRO_RECETA_PSICOTROPICO = new HashSet<ALP_LIBRO_RECETA_PSICOTROPICO>();
         }
     
         public string num_constancia_preparado { get; set; }
@@ -39,5 +40,6 @@ namespace WebBS.Models
         public virtual ICollection<ALP_HOJA_MERMA> ALP_HOJA_MERMA { get; set; }
         public virtual ICollection<ALP_SOLICITUD_TRANSPORTE> ALP_SOLICITUD_TRANSPORTE { get; set; }
         public virtual RRH_Empleado RRH_Empleado { get; set; }
+        public virtual ICollection<ALP_LIBRO_RECETA_PSICOTROPICO> ALP_LIBRO_RECETA_PSICOTROPICO { get; set; }
     }
 }

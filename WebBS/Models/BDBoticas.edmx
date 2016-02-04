@@ -70,6 +70,7 @@
           <Property Name="fec_usu_regi" Type="date" Nullable="false" />
           <Property Name="cod_usu_modi" Type="int" />
           <Property Name="fec_usu_modi" Type="date" />
+          <Property Name="psicotropico" Type="bit" />
         </EntityType>
         <EntityType Name="ALP_LIBRO_RECETA">
           <Key>
@@ -79,6 +80,53 @@
           <Property Name="num_constancia_preparado" Type="char" MaxLength="20" Nullable="false" />
           <Property Name="cod_quimico_laboratorista" Type="int" Nullable="false" />
           <Property Name="fec_preparado" Type="date" Nullable="false" />
+          <Property Name="cod_usu_regi" Type="int" Nullable="false" />
+          <Property Name="fec_usu_regi" Type="date" Nullable="false" />
+          <Property Name="cod_usu_modi" Type="int" />
+          <Property Name="fec_usu_modi" Type="date" />
+          <Property Name="fec_vencimiento" Type="date" />
+          <Property Name="nom_medico" Type="varchar" MaxLength="250" />
+          <Property Name="num_colegiatura_medico" Type="int" />
+        </EntityType>
+        <EntityType Name="ALP_LIBRO_RECETA_INSUMO">
+          <Key>
+            <PropertyRef Name="cod_libro_receta" />
+            <PropertyRef Name="cod_insumo" />
+          </Key>
+          <Property Name="cod_libro_receta" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="cod_insumo" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="cant_insumo_real" Type="int" Nullable="false" />
+          <Property Name="cod_usu_regi" Type="int" Nullable="false" />
+          <Property Name="fec_usu_regi" Type="date" Nullable="false" />
+          <Property Name="cod_usu_modi" Type="int" />
+          <Property Name="fec_usu_modi" Type="date" />
+        </EntityType>
+        <EntityType Name="ALP_LIBRO_RECETA_PSICOTROPICO">
+          <Key>
+            <PropertyRef Name="cod_libro_receta_psicotropico" />
+          </Key>
+          <Property Name="cod_libro_receta_psicotropico" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="num_constancia_preparado" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="cod_quimico_laboratorista" Type="int" Nullable="false" />
+          <Property Name="nom_medico" Type="nvarchar" MaxLength="250" />
+          <Property Name="num_colegiatura_medico" Type="int" />
+          <Property Name="nom_paciente" Type="nvarchar" MaxLength="250" />
+          <Property Name="num_docu_paciente" Type="varchar" MaxLength="20" />
+          <Property Name="fec_preparado" Type="date" Nullable="false" />
+          <Property Name="fec_vencimiento" Type="date" Nullable="false" />
+          <Property Name="cod_usu_regi" Type="int" Nullable="false" />
+          <Property Name="fec_usu_regi" Type="date" Nullable="false" />
+          <Property Name="cod_usu_modi" Type="int" />
+          <Property Name="fec_usu_modi" Type="date" />
+        </EntityType>
+        <EntityType Name="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO">
+          <Key>
+            <PropertyRef Name="cod_libro_receta_psicotropico" />
+            <PropertyRef Name="cod_insumo" />
+          </Key>
+          <Property Name="cod_libro_receta_psicotropico" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="cod_insumo" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="cant_insumo_constancia" Type="int" Nullable="false" />
           <Property Name="cod_usu_regi" Type="int" Nullable="false" />
           <Property Name="fec_usu_regi" Type="date" Nullable="false" />
           <Property Name="cod_usu_modi" Type="int" />
@@ -129,6 +177,8 @@
           <Property Name="fec_usu_regi" Type="date" Nullable="false" />
           <Property Name="cod_usu_modi" Type="int" />
           <Property Name="fec_usu_modi" Type="date" />
+          <Property Name="nom_paciente" Type="varchar" MaxLength="250" />
+          <Property Name="num_docu_paciente" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="ALP_SOLICITUD_TRANSPORTE">
           <Key>
@@ -1454,6 +1504,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ALP_LIBRO__cod_i__0662F0A3">
+          <End Role="ALP_INSUMO" Type="Self.ALP_INSUMO" Multiplicity="1" />
+          <End Role="ALP_LIBRO_RECETA_INSUMO" Type="Self.ALP_LIBRO_RECETA_INSUMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_INSUMO">
+              <PropertyRef Name="cod_insumo" />
+            </Principal>
+            <Dependent Role="ALP_LIBRO_RECETA_INSUMO">
+              <PropertyRef Name="cod_insumo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALP_LIBRO__cod_i__10E07F16">
+          <End Role="ALP_INSUMO" Type="Self.ALP_INSUMO" Multiplicity="1" />
+          <End Role="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" Type="Self.ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_INSUMO">
+              <PropertyRef Name="cod_insumo" />
+            </Principal>
+            <Dependent Role="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO">
+              <PropertyRef Name="cod_insumo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALP_LIBRO__cod_l__047AA831">
+          <End Role="ALP_LIBRO_RECETA" Type="Self.ALP_LIBRO_RECETA" Multiplicity="1" />
+          <End Role="ALP_LIBRO_RECETA_INSUMO" Type="Self.ALP_LIBRO_RECETA_INSUMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_LIBRO_RECETA">
+              <PropertyRef Name="cod_libro_receta" />
+            </Principal>
+            <Dependent Role="ALP_LIBRO_RECETA_INSUMO">
+              <PropertyRef Name="cod_libro_receta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALP_LIBRO__cod_l__0EF836A4">
+          <End Role="ALP_LIBRO_RECETA_PSICOTROPICO" Type="Self.ALP_LIBRO_RECETA_PSICOTROPICO" Multiplicity="1" />
+          <End Role="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" Type="Self.ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_LIBRO_RECETA_PSICOTROPICO">
+              <PropertyRef Name="cod_libro_receta_psicotropico" />
+            </Principal>
+            <Dependent Role="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO">
+              <PropertyRef Name="cod_libro_receta_psicotropico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALP_LIBRO__cod_q__0C1BC9F9">
+          <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="1" />
+          <End Role="ALP_LIBRO_RECETA_PSICOTROPICO" Type="Self.ALP_LIBRO_RECETA_PSICOTROPICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Empleado">
+              <PropertyRef Name="Cod_empleado" />
+            </Principal>
+            <Dependent Role="ALP_LIBRO_RECETA_PSICOTROPICO">
+              <PropertyRef Name="cod_quimico_laboratorista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__ALP_LIBRO__cod_q__40F9A68C">
           <End Role="RRH_Empleado" Type="Self.RRH_Empleado" Multiplicity="1" />
           <End Role="ALP_LIBRO_RECETA" Type="Self.ALP_LIBRO_RECETA" Multiplicity="*" />
@@ -1463,6 +1573,18 @@
             </Principal>
             <Dependent Role="ALP_LIBRO_RECETA">
               <PropertyRef Name="cod_quimico_laboratorista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALP_LIBRO__num_c__0B27A5C0">
+          <End Role="ALP_CONSTANCIA_PREPARADO" Type="Self.ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
+          <End Role="ALP_LIBRO_RECETA_PSICOTROPICO" Type="Self.ALP_LIBRO_RECETA_PSICOTROPICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_CONSTANCIA_PREPARADO">
+              <PropertyRef Name="num_constancia_preparado" />
+            </Principal>
+            <Dependent Role="ALP_LIBRO_RECETA_PSICOTROPICO">
+              <PropertyRef Name="num_constancia_preparado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2741,6 +2863,9 @@
           <EntitySet Name="ALP_HOJA_MERMA_INSUMO" EntityType="Self.ALP_HOJA_MERMA_INSUMO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALP_INSUMO" EntityType="Self.ALP_INSUMO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALP_LIBRO_RECETA" EntityType="Self.ALP_LIBRO_RECETA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ALP_LIBRO_RECETA_INSUMO" EntityType="Self.ALP_LIBRO_RECETA_INSUMO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ALP_LIBRO_RECETA_PSICOTROPICO" EntityType="Self.ALP_LIBRO_RECETA_PSICOTROPICO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" EntityType="Self.ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALP_ORDEN_PREPARADO" EntityType="Self.ALP_ORDEN_PREPARADO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALP_ORDEN_PREPARADO_INSUMO" EntityType="Self.ALP_ORDEN_PREPARADO_INSUMO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALP_RECETA" EntityType="Self.ALP_RECETA" Schema="dbo" store:Type="Tables" />
@@ -2844,9 +2969,33 @@
             <End Role="ALP_ORDEN_PREPARADO" EntitySet="ALP_ORDEN_PREPARADO" />
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
           </AssociationSet>
+          <AssociationSet Name="FK__ALP_LIBRO__cod_i__0662F0A3" Association="Self.FK__ALP_LIBRO__cod_i__0662F0A3">
+            <End Role="ALP_INSUMO" EntitySet="ALP_INSUMO" />
+            <End Role="ALP_LIBRO_RECETA_INSUMO" EntitySet="ALP_LIBRO_RECETA_INSUMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALP_LIBRO__cod_i__10E07F16" Association="Self.FK__ALP_LIBRO__cod_i__10E07F16">
+            <End Role="ALP_INSUMO" EntitySet="ALP_INSUMO" />
+            <End Role="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" EntitySet="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALP_LIBRO__cod_l__047AA831" Association="Self.FK__ALP_LIBRO__cod_l__047AA831">
+            <End Role="ALP_LIBRO_RECETA" EntitySet="ALP_LIBRO_RECETA" />
+            <End Role="ALP_LIBRO_RECETA_INSUMO" EntitySet="ALP_LIBRO_RECETA_INSUMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALP_LIBRO__cod_l__0EF836A4" Association="Self.FK__ALP_LIBRO__cod_l__0EF836A4">
+            <End Role="ALP_LIBRO_RECETA_PSICOTROPICO" EntitySet="ALP_LIBRO_RECETA_PSICOTROPICO" />
+            <End Role="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" EntitySet="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALP_LIBRO__cod_q__0C1BC9F9" Association="Self.FK__ALP_LIBRO__cod_q__0C1BC9F9">
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+            <End Role="ALP_LIBRO_RECETA_PSICOTROPICO" EntitySet="ALP_LIBRO_RECETA_PSICOTROPICO" />
+          </AssociationSet>
           <AssociationSet Name="FK__ALP_LIBRO__cod_q__40F9A68C" Association="Self.FK__ALP_LIBRO__cod_q__40F9A68C">
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="ALP_LIBRO_RECETA" EntitySet="ALP_LIBRO_RECETA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALP_LIBRO__num_c__0B27A5C0" Association="Self.FK__ALP_LIBRO__num_c__0B27A5C0">
+            <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
+            <End Role="ALP_LIBRO_RECETA_PSICOTROPICO" EntitySet="ALP_LIBRO_RECETA_PSICOTROPICO" />
           </AssociationSet>
           <AssociationSet Name="FK__ALP_LIBRO__num_c__41EDCAC5" Association="Self.FK__ALP_LIBRO__num_c__41EDCAC5">
             <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
@@ -3293,6 +3442,7 @@
           <NavigationProperty Name="ALP_SOLICITUD_TRANSPORTE" Relationship="Self.FK_ALP_SOLICITUD_TRANSPORTE_ALP_CONSTANCIA_PREPARADO" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_SOLICITUD_TRANSPORTE" />
           <Property Name="cod_empleado" Type="Int32" />
           <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK_ALP_CONSTANCIA_PREPARADO_RRHH_EMPLEADO" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="RRH_Empleado" />
+          <NavigationProperty Name="ALP_LIBRO_RECETA_PSICOTROPICO" Relationship="BDBoticasModel.FK__ALP_LIBRO__num_c__0B27A5C0" FromRole="ALP_CONSTANCIA_PREPARADO" ToRole="ALP_LIBRO_RECETA_PSICOTROPICO" />
         </EntityType>
         <EntityType Name="ALP_CONSTANCIA_PREPARADO_INSUMO">
           <Key>
@@ -3354,6 +3504,9 @@
           <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO_INSUMO" Relationship="Self.FK__ALP_CONST__cod_i__2DB1C7EE" FromRole="ALP_INSUMO" ToRole="ALP_CONSTANCIA_PREPARADO_INSUMO" />
           <NavigationProperty Name="ALP_HOJA_MERMA_INSUMO" Relationship="Self.FK_ALP_HOJA_MERMA_INSUMO_ALP_INSUMO" FromRole="ALP_INSUMO" ToRole="ALP_HOJA_MERMA_INSUMO" />
           <NavigationProperty Name="ALP_ORDEN_PREPARADO_INSUMO" Relationship="Self.FK__ALP_ORDEN__cod_i__45BE5BA9" FromRole="ALP_INSUMO" ToRole="ALP_ORDEN_PREPARADO_INSUMO" />
+          <Property Name="psicotropico" Type="Boolean" />
+          <NavigationProperty Name="ALP_LIBRO_RECETA_INSUMO" Relationship="BDBoticasModel.FK__ALP_LIBRO__cod_i__0662F0A3" FromRole="ALP_INSUMO" ToRole="ALP_LIBRO_RECETA_INSUMO" />
+          <NavigationProperty Name="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" Relationship="BDBoticasModel.FK__ALP_LIBRO__cod_i__10E07F16" FromRole="ALP_INSUMO" ToRole="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" />
         </EntityType>
         <EntityType Name="ALP_LIBRO_RECETA">
           <Key>
@@ -3369,6 +3522,10 @@
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
           <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="Self.FK__ALP_LIBRO__num_c__41EDCAC5" FromRole="ALP_LIBRO_RECETA" ToRole="ALP_CONSTANCIA_PREPARADO" />
           <NavigationProperty Name="RRH_Empleado" Relationship="Self.FK__ALP_LIBRO__cod_q__40F9A68C" FromRole="ALP_LIBRO_RECETA" ToRole="RRH_Empleado" />
+          <Property Name="fec_vencimiento" Type="DateTime" Precision="0" />
+          <Property Name="nom_medico" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="num_colegiatura_medico" Type="Int32" />
+          <NavigationProperty Name="ALP_LIBRO_RECETA_INSUMO" Relationship="BDBoticasModel.FK__ALP_LIBRO__cod_l__047AA831" FromRole="ALP_LIBRO_RECETA" ToRole="ALP_LIBRO_RECETA_INSUMO" />
         </EntityType>
         <EntityType Name="ALP_ORDEN_PREPARADO">
           <Key>
@@ -3423,6 +3580,8 @@
           <Property Name="cod_usu_modi" Type="Int32" />
           <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
           <NavigationProperty Name="ALP_ORDEN_PREPARADO" Relationship="Self.FK__ALP_ORDEN__cod_r__43D61337" FromRole="ALP_RECETA" ToRole="ALP_ORDEN_PREPARADO" />
+          <Property Name="nom_paciente" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="num_docu_paciente" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ALP_SOLICITUD_TRANSPORTE">
           <Key>
@@ -4529,6 +4688,7 @@
           <NavigationProperty Name="RRH_PruebaEvaluacionTecnica" Relationship="Self.FK_RRH_PruebaEvaluacionTecnica_RRH_Empleado" FromRole="RRH_Empleado" ToRole="RRH_PruebaEvaluacionTecnica" />
           <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="BDBoticasModel.FK_ALP_CONSTANCIA_PREPARADO_RRHH_EMPLEADO" FromRole="RRH_Empleado" ToRole="ALP_CONSTANCIA_PREPARADO" />
           <NavigationProperty Name="ALP_HOJA_MERMA" Relationship="BDBoticasModel.FK_ALP_HOJA_MERMA_RRHH_EMPLEADO" FromRole="RRH_Empleado" ToRole="ALP_HOJA_MERMA" />
+          <NavigationProperty Name="ALP_LIBRO_RECETA_PSICOTROPICO" Relationship="BDBoticasModel.FK__ALP_LIBRO__cod_q__0C1BC9F9" FromRole="RRH_Empleado" ToRole="ALP_LIBRO_RECETA_PSICOTROPICO" />
         </EntityType>
         <EntityType Name="RRH_OfertaLaboral">
           <Key>
@@ -6730,6 +6890,33 @@
             <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
             <End Role="ALP_HOJA_MERMA" EntitySet="ALP_HOJA_MERMA" />
           </AssociationSet>
+          <EntitySet Name="ALP_LIBRO_RECETA_INSUMO" EntityType="BDBoticasModel.ALP_LIBRO_RECETA_INSUMO" />
+          <EntitySet Name="ALP_LIBRO_RECETA_PSICOTROPICO" EntityType="BDBoticasModel.ALP_LIBRO_RECETA_PSICOTROPICO" />
+          <EntitySet Name="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" EntityType="BDBoticasModel.ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" />
+          <AssociationSet Name="FK__ALP_LIBRO__num_c__0B27A5C0" Association="BDBoticasModel.FK__ALP_LIBRO__num_c__0B27A5C0">
+            <End Role="ALP_CONSTANCIA_PREPARADO" EntitySet="ALP_CONSTANCIA_PREPARADO" />
+            <End Role="ALP_LIBRO_RECETA_PSICOTROPICO" EntitySet="ALP_LIBRO_RECETA_PSICOTROPICO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALP_LIBRO__cod_i__0662F0A3" Association="BDBoticasModel.FK__ALP_LIBRO__cod_i__0662F0A3">
+            <End Role="ALP_INSUMO" EntitySet="ALP_INSUMO" />
+            <End Role="ALP_LIBRO_RECETA_INSUMO" EntitySet="ALP_LIBRO_RECETA_INSUMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALP_LIBRO__cod_i__10E07F16" Association="BDBoticasModel.FK__ALP_LIBRO__cod_i__10E07F16">
+            <End Role="ALP_INSUMO" EntitySet="ALP_INSUMO" />
+            <End Role="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" EntitySet="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALP_LIBRO__cod_l__047AA831" Association="BDBoticasModel.FK__ALP_LIBRO__cod_l__047AA831">
+            <End Role="ALP_LIBRO_RECETA" EntitySet="ALP_LIBRO_RECETA" />
+            <End Role="ALP_LIBRO_RECETA_INSUMO" EntitySet="ALP_LIBRO_RECETA_INSUMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALP_LIBRO__cod_l__0EF836A4" Association="BDBoticasModel.FK__ALP_LIBRO__cod_l__0EF836A4">
+            <End Role="ALP_LIBRO_RECETA_PSICOTROPICO" EntitySet="ALP_LIBRO_RECETA_PSICOTROPICO" />
+            <End Role="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" EntitySet="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALP_LIBRO__cod_q__0C1BC9F9" Association="BDBoticasModel.FK__ALP_LIBRO__cod_q__0C1BC9F9">
+            <End Role="RRH_Empleado" EntitySet="RRH_Empleado" />
+            <End Role="ALP_LIBRO_RECETA_PSICOTROPICO" EntitySet="ALP_LIBRO_RECETA_PSICOTROPICO" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_ALP_CONSTANCIA_PREPARADO_RRHH_EMPLEADO">
           <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="0..1" />
@@ -6752,6 +6939,129 @@
             </Principal>
             <Dependent Role="ALP_HOJA_MERMA">
               <PropertyRef Name="cod_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ALP_LIBRO_RECETA_INSUMO">
+          <Key>
+            <PropertyRef Name="cod_libro_receta" />
+            <PropertyRef Name="cod_insumo" />
+          </Key>
+          <Property Name="cod_libro_receta" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="cod_insumo" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="cant_insumo_real" Type="Int32" Nullable="false" />
+          <Property Name="cod_usu_regi" Type="Int32" Nullable="false" />
+          <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cod_usu_modi" Type="Int32" />
+          <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="ALP_INSUMO" Relationship="BDBoticasModel.FK__ALP_LIBRO__cod_i__0662F0A3" FromRole="ALP_LIBRO_RECETA_INSUMO" ToRole="ALP_INSUMO" />
+          <NavigationProperty Name="ALP_LIBRO_RECETA" Relationship="BDBoticasModel.FK__ALP_LIBRO__cod_l__047AA831" FromRole="ALP_LIBRO_RECETA_INSUMO" ToRole="ALP_LIBRO_RECETA" />
+        </EntityType>
+        <EntityType Name="ALP_LIBRO_RECETA_PSICOTROPICO">
+          <Key>
+            <PropertyRef Name="cod_libro_receta_psicotropico" />
+          </Key>
+          <Property Name="cod_libro_receta_psicotropico" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="num_constancia_preparado" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="cod_quimico_laboratorista" Type="Int32" Nullable="false" />
+          <Property Name="nom_medico" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="num_colegiatura_medico" Type="Int32" />
+          <Property Name="nom_paciente" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="num_docu_paciente" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fec_preparado" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fec_vencimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cod_usu_regi" Type="Int32" Nullable="false" />
+          <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cod_usu_modi" Type="Int32" />
+          <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="ALP_CONSTANCIA_PREPARADO" Relationship="BDBoticasModel.FK__ALP_LIBRO__num_c__0B27A5C0" FromRole="ALP_LIBRO_RECETA_PSICOTROPICO" ToRole="ALP_CONSTANCIA_PREPARADO" />
+          <NavigationProperty Name="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" Relationship="BDBoticasModel.FK__ALP_LIBRO__cod_l__0EF836A4" FromRole="ALP_LIBRO_RECETA_PSICOTROPICO" ToRole="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" />
+          <NavigationProperty Name="RRH_Empleado" Relationship="BDBoticasModel.FK__ALP_LIBRO__cod_q__0C1BC9F9" FromRole="ALP_LIBRO_RECETA_PSICOTROPICO" ToRole="RRH_Empleado" />
+        </EntityType>
+        <EntityType Name="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO">
+          <Key>
+            <PropertyRef Name="cod_libro_receta_psicotropico" />
+            <PropertyRef Name="cod_insumo" />
+          </Key>
+          <Property Name="cod_libro_receta_psicotropico" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="cod_insumo" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="cant_insumo_constancia" Type="Int32" Nullable="false" />
+          <Property Name="cod_usu_regi" Type="Int32" Nullable="false" />
+          <Property Name="fec_usu_regi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cod_usu_modi" Type="Int32" />
+          <Property Name="fec_usu_modi" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="ALP_INSUMO" Relationship="BDBoticasModel.FK__ALP_LIBRO__cod_i__10E07F16" FromRole="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" ToRole="ALP_INSUMO" />
+          <NavigationProperty Name="ALP_LIBRO_RECETA_PSICOTROPICO" Relationship="BDBoticasModel.FK__ALP_LIBRO__cod_l__0EF836A4" FromRole="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" ToRole="ALP_LIBRO_RECETA_PSICOTROPICO" />
+        </EntityType>
+        <Association Name="FK__ALP_LIBRO__num_c__0B27A5C0">
+          <End Type="BDBoticasModel.ALP_CONSTANCIA_PREPARADO" Role="ALP_CONSTANCIA_PREPARADO" Multiplicity="1" />
+          <End Type="BDBoticasModel.ALP_LIBRO_RECETA_PSICOTROPICO" Role="ALP_LIBRO_RECETA_PSICOTROPICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_CONSTANCIA_PREPARADO">
+              <PropertyRef Name="num_constancia_preparado" />
+            </Principal>
+            <Dependent Role="ALP_LIBRO_RECETA_PSICOTROPICO">
+              <PropertyRef Name="num_constancia_preparado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALP_LIBRO__cod_i__0662F0A3">
+          <End Type="BDBoticasModel.ALP_INSUMO" Role="ALP_INSUMO" Multiplicity="1" />
+          <End Type="BDBoticasModel.ALP_LIBRO_RECETA_INSUMO" Role="ALP_LIBRO_RECETA_INSUMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_INSUMO">
+              <PropertyRef Name="cod_insumo" />
+            </Principal>
+            <Dependent Role="ALP_LIBRO_RECETA_INSUMO">
+              <PropertyRef Name="cod_insumo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALP_LIBRO__cod_i__10E07F16">
+          <End Type="BDBoticasModel.ALP_INSUMO" Role="ALP_INSUMO" Multiplicity="1" />
+          <End Type="BDBoticasModel.ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" Role="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_INSUMO">
+              <PropertyRef Name="cod_insumo" />
+            </Principal>
+            <Dependent Role="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO">
+              <PropertyRef Name="cod_insumo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALP_LIBRO__cod_l__047AA831">
+          <End Type="BDBoticasModel.ALP_LIBRO_RECETA" Role="ALP_LIBRO_RECETA" Multiplicity="1" />
+          <End Type="BDBoticasModel.ALP_LIBRO_RECETA_INSUMO" Role="ALP_LIBRO_RECETA_INSUMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_LIBRO_RECETA">
+              <PropertyRef Name="cod_libro_receta" />
+            </Principal>
+            <Dependent Role="ALP_LIBRO_RECETA_INSUMO">
+              <PropertyRef Name="cod_libro_receta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALP_LIBRO__cod_l__0EF836A4">
+          <End Type="BDBoticasModel.ALP_LIBRO_RECETA_PSICOTROPICO" Role="ALP_LIBRO_RECETA_PSICOTROPICO" Multiplicity="1" />
+          <End Type="BDBoticasModel.ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" Role="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALP_LIBRO_RECETA_PSICOTROPICO">
+              <PropertyRef Name="cod_libro_receta_psicotropico" />
+            </Principal>
+            <Dependent Role="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO">
+              <PropertyRef Name="cod_libro_receta_psicotropico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALP_LIBRO__cod_q__0C1BC9F9">
+          <End Type="BDBoticasModel.RRH_Empleado" Role="RRH_Empleado" Multiplicity="1" />
+          <End Type="BDBoticasModel.ALP_LIBRO_RECETA_PSICOTROPICO" Role="ALP_LIBRO_RECETA_PSICOTROPICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RRH_Empleado">
+              <PropertyRef Name="Cod_empleado" />
+            </Principal>
+            <Dependent Role="ALP_LIBRO_RECETA_PSICOTROPICO">
+              <PropertyRef Name="cod_quimico_laboratorista" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6818,6 +7128,7 @@
           <EntitySetMapping Name="ALP_INSUMO">
             <EntityTypeMapping TypeName="BDBoticasModel.ALP_INSUMO">
               <MappingFragment StoreEntitySet="ALP_INSUMO">
+                <ScalarProperty Name="psicotropico" ColumnName="psicotropico" />
                 <ScalarProperty Name="cod_insumo" ColumnName="cod_insumo" />
                 <ScalarProperty Name="nom_insumo" ColumnName="nom_insumo" />
                 <ScalarProperty Name="unidad_medida" ColumnName="unidad_medida" />
@@ -6833,6 +7144,9 @@
           <EntitySetMapping Name="ALP_LIBRO_RECETA">
             <EntityTypeMapping TypeName="BDBoticasModel.ALP_LIBRO_RECETA">
               <MappingFragment StoreEntitySet="ALP_LIBRO_RECETA">
+                <ScalarProperty Name="num_colegiatura_medico" ColumnName="num_colegiatura_medico" />
+                <ScalarProperty Name="nom_medico" ColumnName="nom_medico" />
+                <ScalarProperty Name="fec_vencimiento" ColumnName="fec_vencimiento" />
                 <ScalarProperty Name="cod_libro_receta" ColumnName="cod_libro_receta" />
                 <ScalarProperty Name="num_constancia_preparado" ColumnName="num_constancia_preparado" />
                 <ScalarProperty Name="cod_quimico_laboratorista" ColumnName="cod_quimico_laboratorista" />
@@ -6877,6 +7191,8 @@
           <EntitySetMapping Name="ALP_RECETA">
             <EntityTypeMapping TypeName="BDBoticasModel.ALP_RECETA">
               <MappingFragment StoreEntitySet="ALP_RECETA">
+                <ScalarProperty Name="num_docu_paciente" ColumnName="num_docu_paciente" />
+                <ScalarProperty Name="nom_paciente" ColumnName="nom_paciente" />
                 <ScalarProperty Name="cod_receta" ColumnName="cod_receta" />
                 <ScalarProperty Name="nom_preparado" ColumnName="nom_preparado" />
                 <ScalarProperty Name="desc_receta" ColumnName="desc_receta" />
@@ -8261,6 +8577,51 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ALP_LIBRO_RECETA_INSUMO">
+            <EntityTypeMapping TypeName="BDBoticasModel.ALP_LIBRO_RECETA_INSUMO">
+              <MappingFragment StoreEntitySet="ALP_LIBRO_RECETA_INSUMO">
+                <ScalarProperty Name="fec_usu_modi" ColumnName="fec_usu_modi" />
+                <ScalarProperty Name="cod_usu_modi" ColumnName="cod_usu_modi" />
+                <ScalarProperty Name="fec_usu_regi" ColumnName="fec_usu_regi" />
+                <ScalarProperty Name="cod_usu_regi" ColumnName="cod_usu_regi" />
+                <ScalarProperty Name="cant_insumo_real" ColumnName="cant_insumo_real" />
+                <ScalarProperty Name="cod_insumo" ColumnName="cod_insumo" />
+                <ScalarProperty Name="cod_libro_receta" ColumnName="cod_libro_receta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ALP_LIBRO_RECETA_PSICOTROPICO">
+            <EntityTypeMapping TypeName="BDBoticasModel.ALP_LIBRO_RECETA_PSICOTROPICO">
+              <MappingFragment StoreEntitySet="ALP_LIBRO_RECETA_PSICOTROPICO">
+                <ScalarProperty Name="fec_usu_modi" ColumnName="fec_usu_modi" />
+                <ScalarProperty Name="cod_usu_modi" ColumnName="cod_usu_modi" />
+                <ScalarProperty Name="fec_usu_regi" ColumnName="fec_usu_regi" />
+                <ScalarProperty Name="cod_usu_regi" ColumnName="cod_usu_regi" />
+                <ScalarProperty Name="fec_vencimiento" ColumnName="fec_vencimiento" />
+                <ScalarProperty Name="fec_preparado" ColumnName="fec_preparado" />
+                <ScalarProperty Name="num_docu_paciente" ColumnName="num_docu_paciente" />
+                <ScalarProperty Name="nom_paciente" ColumnName="nom_paciente" />
+                <ScalarProperty Name="num_colegiatura_medico" ColumnName="num_colegiatura_medico" />
+                <ScalarProperty Name="nom_medico" ColumnName="nom_medico" />
+                <ScalarProperty Name="cod_quimico_laboratorista" ColumnName="cod_quimico_laboratorista" />
+                <ScalarProperty Name="num_constancia_preparado" ColumnName="num_constancia_preparado" />
+                <ScalarProperty Name="cod_libro_receta_psicotropico" ColumnName="cod_libro_receta_psicotropico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO">
+            <EntityTypeMapping TypeName="BDBoticasModel.ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO">
+              <MappingFragment StoreEntitySet="ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO">
+                <ScalarProperty Name="fec_usu_modi" ColumnName="fec_usu_modi" />
+                <ScalarProperty Name="cod_usu_modi" ColumnName="cod_usu_modi" />
+                <ScalarProperty Name="fec_usu_regi" ColumnName="fec_usu_regi" />
+                <ScalarProperty Name="cod_usu_regi" ColumnName="cod_usu_regi" />
+                <ScalarProperty Name="cant_insumo_constancia" ColumnName="cant_insumo_constancia" />
+                <ScalarProperty Name="cod_insumo" ColumnName="cod_insumo" />
+                <ScalarProperty Name="cod_libro_receta_psicotropico" ColumnName="cod_libro_receta_psicotropico" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

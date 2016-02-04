@@ -122,5 +122,8 @@ namespace WebBS.Models
         public virtual DbSet<RYA_TRANSA_ALMA> RYA_TRANSA_ALMA { get; set; }
         public virtual DbSet<RYA_UBICACIONES> RYA_UBICACIONES { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<ALP_LIBRO_RECETA_INSUMO> ALP_LIBRO_RECETA_INSUMO { get; set; }
+        public virtual DbSet<ALP_LIBRO_RECETA_PSICOTROPICO> ALP_LIBRO_RECETA_PSICOTROPICO { get; set; }
+        public virtual DbSet<ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO> ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO { get; set; }
     }
 }

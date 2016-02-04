@@ -211,6 +211,15 @@
         <AssociationConnector Association="BDBoticasModel.FK_RYA_STOCK_RYA_PRODUCTO" ManuallyRouted="false" />
         <AssociationConnector Association="BDBoticasModel.FK_ALP_CONSTANCIA_PREPARADO_RRHH_EMPLEADO" />
         <AssociationConnector Association="BDBoticasModel.FK_ALP_HOJA_MERMA_RRHH_EMPLEADO" />
+        <EntityTypeShape EntityType="BDBoticasModel.ALP_LIBRO_RECETA_INSUMO" Width="1.5" PointX="15.75" PointY="17.375" />
+        <EntityTypeShape EntityType="BDBoticasModel.ALP_LIBRO_RECETA_PSICOTROPICO" Width="1.5" PointX="23" PointY="24.75" />
+        <EntityTypeShape EntityType="BDBoticasModel.ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO" Width="1.5" PointX="28.25" PointY="19.5" />
+        <AssociationConnector Association="BDBoticasModel.FK__ALP_LIBRO__num_c__0B27A5C0" />
+        <AssociationConnector Association="BDBoticasModel.FK__ALP_LIBRO__cod_i__0662F0A3" />
+        <AssociationConnector Association="BDBoticasModel.FK__ALP_LIBRO__cod_i__10E07F16" />
+        <AssociationConnector Association="BDBoticasModel.FK__ALP_LIBRO__cod_l__047AA831" />
+        <AssociationConnector Association="BDBoticasModel.FK__ALP_LIBRO__cod_l__0EF836A4" />
+        <AssociationConnector Association="BDBoticasModel.FK__ALP_LIBRO__cod_q__0C1BC9F9" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
