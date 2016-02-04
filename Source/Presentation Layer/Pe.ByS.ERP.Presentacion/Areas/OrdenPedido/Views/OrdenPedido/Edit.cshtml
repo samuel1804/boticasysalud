@@ -7,6 +7,13 @@
 <div class="grupocontenido2 scrollTotal">
     <div class="form-horizontal">
         <div class="row">
+            <div class="col-md-12">
+                <div class="text-center" style="padding-bottom: 20px;">
+                    <h2>Actualizar Orden de Pedido</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-5">
                 <div class="form-group form-group-sm">
                     <label class="control-label col-md-4 col-sm-4 col-xs-12">Número Pedido:</label>
@@ -75,7 +82,7 @@
                 <div class="form-group form-group-sm">
                     <label class="control-label col-md-4 col-sm-4 col-xs-12">Estado:</label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
-                        @Html.TextBoxFor(model => model.Estado, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.TextBoxFor(model => model.Estado, new {@class = "form-control", @disabled = "disabled"})
                         @*@Html.DropDownListFor(model => model.Estado, new SelectList(Model.EstadoList, "Key", "Value", Model.Estado), new {@class = "form-control"})*@
                     </div>
                 </div>
