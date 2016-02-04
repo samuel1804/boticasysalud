@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActaRecepcionRepository.cs" />
+    <Compile Include="DetalleOrdenPedidoRepository.cs" />
     <Compile Include="EmpleadoRepository.cs" />
     <Compile Include="GuiaRemisionRepository.cs" />
     <Compile Include="OrdenPedidoRepository.cs" />

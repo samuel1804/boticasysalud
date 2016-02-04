@@ -14,10 +14,12 @@ namespace Pe.ByS.ERP.Services.BusinessLogic
     public class OrdenPedidoBL : IOrdenPedidoBL
     {
         private readonly IOrdenPedidoRepository _ordenRepository;
+        private readonly IDetalleOrdenPedidoRepository _detalleRepository;
 
-        public OrdenPedidoBL(IOrdenPedidoRepository ordenRepository)
+        public OrdenPedidoBL(IOrdenPedidoRepository ordenRepository, IDetalleOrdenPedidoRepository detalleRepository)
         {
             _ordenRepository = ordenRepository;
+            _detalleRepository = detalleRepository;
         }
 
         [TryCatch(ExceptionTypeExpected = typeof(Exception), RethrowException = true)]
@@ -41,8 +43,13 @@ namespace Pe.ByS.ERP.Services.BusinessLogic
 
         [CommitsOperation]
         [TryCatch(ExceptionTypeExpected = typeof(Exception), RethrowException = true)]
-        public void Update(OrdenPedido entity)
+        public void Update(OrdenPedido entity, List<int> detalleEliminar)
         {
+            foreach (var id in detalleEliminar)
+            {
+                var item = entity.DetalleOrdenPedidoList.First(p => p.ProductoId == id);
+                _detalleRepository.Delete(item);
+            }
             _ordenRepository.Update(entity);
         }
 

@@ -19,6 +19,7 @@
                     <label class="control-label col-md-4 col-sm-4 col-xs-12">Número Pedido:</label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
                         @Html.TextBoxFor(model => model.NumeroPedido, new {@class = "form-control", @disabled = "disabled"})
+                        @Html.HiddenFor(model => model.Id)
                     </div>
                 </div>
             </div>
@@ -180,8 +181,8 @@
             { name: 'ProductoId', index: 'ProductoId', align: 'center', width: 60 },
             { name: 'ProductoNombre', index: 'ProductoNombre', align: 'left', width: 150 },
             { name: 'UnidadMedida', index: 'UnidadMedida', align: 'center', width: 60 },
-            { name: 'Cantidad', index: 'Cantidad', align: 'right', width: 65 },
-            { name: 'Observacion', index: 'Observacion', align: 'left', width: 200 },
+            { name: 'Cantidad', index: 'Cantidad', align: 'right', width: 65, editable: true },
+            { name: 'Observacion', index: 'Observacion', align: 'left', width: 200, editable: true },
             {
                 name: 'Eliminar',
                 index: 'Eliminar',
@@ -221,7 +222,12 @@
             pgbuttons: false,
             rowNumbers: [],
             viewrecords: false,
-            pginput: false
+            pginput: false,
+            EditingOptions: {
+                canEditRowInline: true,
+                editUrl: 'clientArray'
+                //AfterSaveFunc: afterSaveDetalle
+            }
         };
 
         var $grilla = $("#" + grdDetalle);
@@ -236,7 +242,6 @@
     }
 
     function CargarData() {
-        debugger;
         var datos = '@Html.Raw(Json.Encode(@Model.DetalleList))';
         if (datos !== 'null') {
             var datosJson = JSON.parse(datos);
@@ -279,13 +284,13 @@
         }
 
         var opciones = {
-            url: '@Url.Action("ArgregarPedido", "OrdenPedido", new { area = "OrdenPedido" })',
+            url: '@Url.Action(Model.Id == 0 ? "ArgregarPedido" : "ActualizarPedido", "OrdenPedido", new { area = "OrdenPedido" })',
             parametros: model
         };
 
         SIG.Ajax(opciones, function (response) {
             if (response.Success) {
-                SIG.Alert('Alerta', 'Pedido registrado correctamente.<br/>El Número Pedido generado es: ' + response.Data, redirectIndex, redirectIndex);
+                SIG.Alert('Alerta', response.Message, redirectIndex, redirectIndex);
             } else {
                 SIG.Alert('Alerta', response.Message, null);
             }

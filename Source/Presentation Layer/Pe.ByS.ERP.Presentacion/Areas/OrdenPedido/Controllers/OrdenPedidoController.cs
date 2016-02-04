@@ -117,12 +117,15 @@ namespace Pe.ByS.ERP.Presentacion.Areas.OrdenPedido.Controllers
             var jsonResponse = new JsonResponse { Success = false };
             try
             {
-                var ultimoPedido = _ordenBL.FindAll(p => true).OrderByDescending(p => p.Id).FirstOrDefault();
+                var ultimoPedido = _ordenBL.FindAll(p => true).OrderByDescending(p => p.NumeroPedido).FirstOrDefault();
                 if (ultimoPedido != null)
                     pedido.NumeroPedido = ultimoPedido.NumeroPedido;
                 
                 _ordenBL.Add(OrdenPedidoConverter.DtoToDomain(pedido));
-                jsonResponse.Data = pedido.NumeroPedido;
+
+                jsonResponse.Message =
+                    string.Format("Pedido registrado correctamente.<br/>El Número Pedido generado es: {0}",
+                        pedido.NumeroPedido);
                 jsonResponse.Success = true;
             }
             catch (Exception ex)
@@ -140,6 +143,27 @@ namespace Pe.ByS.ERP.Presentacion.Areas.OrdenPedido.Controllers
             var empleadoList = _empleadoBL.FindAll(p => true).ToList();
 
             return View("Edit", OrdenPedidoConverter.DomainToDto(pedido, sucursalList, empleadoList));
+        }
+
+        [HttpPost]
+        public virtual JsonResult ActualizarPedido(OrdenPedidoDto pedidoDto)
+        {
+            var jsonResponse = new JsonResponse { Success = false };
+            try
+            {
+                var pedidoDomain = _ordenBL.Get(p => p.Id == pedidoDto.Id);
+                var list = OrdenPedidoConverter.DtoToDomain(pedidoDomain, pedidoDto);
+                _ordenBL.Update(pedidoDomain, list);
+
+                jsonResponse.Message = "Pedido actualizado correctamente.";
+                jsonResponse.Success = true;
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                jsonResponse.Message = "Ocurrió un error";
+            }
+            return Json(jsonResponse, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

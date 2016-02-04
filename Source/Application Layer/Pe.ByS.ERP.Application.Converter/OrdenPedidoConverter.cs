@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Caching;
 using Pe.ByS.ERP.Application.DTO;
 using Pe.ByS.ERP.CrossCutting.Common;
 using Pe.ByS.ERP.CrossCutting.Common.Enums;
@@ -52,10 +53,56 @@ namespace Pe.ByS.ERP.Application.Converter
             };
         }
 
+        public static List<int> DtoToDomain(OrdenPedido pedidoDomain, OrdenPedidoDto pedidoDto)
+        {
+            pedidoDomain.FechaEntrega = Convert.ToDateTime(pedidoDto.FechaEntrega);
+            pedidoDomain.FechaPedido = Convert.ToDateTime(pedidoDto.FechaPedido);
+            pedidoDomain.SucursalId = pedidoDto.SucursalId;
+            pedidoDomain.SolicitanteId = pedidoDto.SolicitanteId;
+            pedidoDomain.Glosa = pedidoDto.Glosa;
+
+            var detalleEliminar = new List<int>();
+            foreach (var item in pedidoDomain.DetalleOrdenPedidoList)
+            {
+                var itemDto = pedidoDto.DetalleList.FirstOrDefault(p => p.ProductoId == item.ProductoId);
+                if (itemDto != null)
+                {
+                    item.Cantidad = itemDto.Cantidad;
+                    item.Observacion = itemDto.Observacion;
+                    item.UsuarioModificacion = "Aministrador";
+                    item.FechaModificacion = DateTime.Now;
+                    pedidoDto.DetalleList.Remove(itemDto);
+                }
+                else
+                {
+                    detalleEliminar.Add(item.ProductoId);
+                }
+            }
+
+            foreach (var item in pedidoDto.DetalleList)
+            {
+                pedidoDomain.DetalleOrdenPedidoList.Add(new DetalleOrdenPedido
+                {
+                    Cantidad = item.Cantidad,
+                    ProductoId = item.ProductoId,
+                    UnidadMedida = item.UnidadMedida,
+                    Observacion = item.Observacion,
+                    UsuarioCreacion = "Aministrador",
+                    FechaCreacion = DateTime.Now
+                });
+            }
+
+            pedidoDomain.UsuarioModificacion = "Aministrador";
+            pedidoDomain.FechaModificacion = DateTime.Now;
+
+            return detalleEliminar;
+        }
+
         public static OrdenPedidoDto DomainToDto(OrdenPedido pedido, List<Sucursal> sucursalList, List<Empleado> empleadoList)
         {
             return new OrdenPedidoDto
             {
+                Id = pedido.Id,
                 SucursalList = SucursalConverter.ListToKeyValueList(sucursalList),
                 SolicitanteList = EmpleadoConverter.ListToKeyValueList(empleadoList),
                 NumeroPedido = pedido.NumeroPedido,
