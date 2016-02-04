@@ -33,9 +33,9 @@ namespace WebBS.Models
         public Nullable<System.DateTime> fec_usu_modi { get; set; }
     
         public virtual ICollection<ALP_CONSTANCIA_PREPARADO> ALP_CONSTANCIA_PREPARADO { get; set; }
-        public virtual RRH_Empleado RRH_Empleado { get; set; }
+        public virtual RRH_EMPLEADO RRH_EMPLEADO { get; set; }
         public virtual ALP_RECETA ALP_RECETA { get; set; }
-        public virtual RRH_Sucursal RRH_Sucursal { get; set; }
+        public virtual RRH_SUCURSAL RRH_SUCURSAL { get; set; }
         public virtual ICollection<ALP_ORDEN_PREPARADO_INSUMO> ALP_ORDEN_PREPARADO_INSUMO { get; set; }
     }
 }

@@ -25,24 +25,24 @@ namespace WebBS.Controllers.ALP
         public ActionResult Nuevo(string num_constancia = null)
         {
 
-            var quimico = db.RRH_Empleado.Where(x => x.Cod_puesto == 3).FirstOrDefault();
+            var quimico = db.RRH_EMPLEADO.Where(x => x.Cod_puesto == 3).FirstOrDefault();
 
             List<SelectListItem> selectList = new List<SelectListItem>();
 
             SelectListItem t = new SelectListItem();
 
-            foreach (RRH_Sucursal c in db.RRH_Sucursal.ToList())
+            foreach (RRH_SUCURSAL c in db.RRH_SUCURSAL.ToList())
             {
                 SelectListItem i = new SelectListItem();
-                i.Text = c.Nom_sucursal.ToString();
-                i.Value = c.Cod_sucursal.ToString();
+                i.Text = c.Descripcion.ToString();
+                i.Value = c.cod_sucursal.ToString();
                 selectList.Add(i);
             }
 
             var constancia = db.ALP_CONSTANCIA_PREPARADO.Where(x => x.num_constancia_preparado == num_constancia).FirstOrDefault();
 
             ViewBag.fechaSolicitud = DateTime.Today.Date.ToString("dd/MM/yyyy");
-            ViewBag.SelSucursal = constancia.ALP_ORDEN_PREPARADO.RRH_Sucursal.Cod_sucursal;
+            ViewBag.SelSucursal = constancia.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal;
             ViewBag.Sucursales = selectList;
             ViewBag.Quimico = quimico.GetEmpleado();
 
@@ -55,17 +55,17 @@ namespace WebBS.Controllers.ALP
 
             SelectListItem t = new SelectListItem();
 
-            foreach (RRH_Sucursal c in db.RRH_Sucursal.ToList())
+            foreach (RRH_SUCURSAL c in db.RRH_SUCURSAL.ToList())
             {
                 SelectListItem i = new SelectListItem();
-                i.Text = c.Nom_sucursal.ToString();
-                i.Value = c.Cod_sucursal.ToString();
+                i.Text = c.Descripcion.ToString();
+                i.Value = c.cod_sucursal.ToString();
                 selectList.Add(i);
             }
 
             var solicitud = db.ALP_SOLICITUD_TRANSPORTE.Where(x => x.num_solicitud == num_solicitud).FirstOrDefault();
 
-            ViewBag.quimico = solicitud.RRH_Empleado.GetEmpleado();
+            ViewBag.quimico = solicitud.RRH_EMPLEADO.GetEmpleado();
             ViewBag.fechaSolicitud = solicitud.fec_solicitud.ToString("dd/MM/yyyy");
             ViewBag.SelSucursal = solicitud.cod_sucursal_destino;
             ViewBag.Sucursales = selectList;
@@ -85,11 +85,11 @@ namespace WebBS.Controllers.ALP
             t.Value = "-1";
             selectList.Add(t);
 
-            foreach (RRH_Sucursal c in db.RRH_Sucursal.ToList())
+            foreach (RRH_SUCURSAL c in db.RRH_SUCURSAL.ToList())
             {
                 SelectListItem i = new SelectListItem();
-                i.Text = c.Nom_sucursal.ToString();
-                i.Value = c.Cod_sucursal.ToString();
+                i.Text = c.Descripcion.ToString();
+                i.Value = c.cod_sucursal.ToString();
                 selectList.Add(i);
             }
 
@@ -108,11 +108,11 @@ namespace WebBS.Controllers.ALP
             t.Value = "-1";
             selectList.Add(t);
 
-            foreach (RRH_Sucursal c in db.RRH_Sucursal.ToList())
+            foreach (RRH_SUCURSAL c in db.RRH_SUCURSAL.ToList())
             {
                 SelectListItem i = new SelectListItem();
-                i.Text = c.Nom_sucursal.ToString();
-                i.Value = c.Cod_sucursal.ToString();
+                i.Text = c.Descripcion.ToString();
+                i.Value = c.cod_sucursal.ToString();
                 selectList.Add(i);
             }
 
@@ -157,8 +157,8 @@ namespace WebBS.Controllers.ALP
                 {
                     num_solicitud = nextNroSolicitud,
                     num_constancia_preparado = nroConstancia,
-                    observacion = obs,
-                    cod_empleado = 3,
+                    motivo = obs,
+                    cod_quimico_laboratorista = 3,
                     fec_solicitud = DateTime.Now.Date,
                     cod_usu_regi = 3,
                     fec_usu_regi = DateTime.Now.Date,
@@ -193,7 +193,7 @@ namespace WebBS.Controllers.ALP
 
                 ALP_SOLICITUD_TRANSPORTE solicitud = db.ALP_SOLICITUD_TRANSPORTE.Where(x=> x.num_solicitud == nroSolicitud).FirstOrDefault();
                 solicitud.cod_sucursal_destino = int.Parse(codSucursal);
-                solicitud.observacion = obs;
+                solicitud.motivo = obs;
 
                 db.ALP_SOLICITUD_TRANSPORTE.Attach(solicitud);
                 manager.ChangeObjectState(solicitud, EntityState.Modified);
@@ -222,7 +222,7 @@ namespace WebBS.Controllers.ALP
                 var solicitud = db.ALP_SOLICITUD_TRANSPORTE.Where(o => o.estado == "01" &&
                                                               o.num_solicitud.Contains(String.IsNullOrEmpty(nroSolicitud) ? o.num_solicitud : nroSolicitud) &&
                                                               o.ALP_CONSTANCIA_PREPARADO.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado.Contains(String.IsNullOrEmpty(nomPreparado) ? o.ALP_CONSTANCIA_PREPARADO.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado : nomPreparado) &&
-                                                              o.ALP_CONSTANCIA_PREPARADO.ALP_ORDEN_PREPARADO.RRH_Sucursal.Cod_sucursal == (sucursal == -1 ? o.ALP_CONSTANCIA_PREPARADO.ALP_ORDEN_PREPARADO.RRH_Sucursal.Cod_sucursal : sucursal) &&
+                                                              o.ALP_CONSTANCIA_PREPARADO.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal == (sucursal == -1 ? o.ALP_CONSTANCIA_PREPARADO.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal : sucursal) &&
                                                               o.fec_solicitud.Year == (tmpFechaConstancia.Year > 0 ? tmpFechaConstancia.Year : o.fec_solicitud.Year) &&
                                                               o.fec_solicitud.Month == (tmpFechaConstancia.Month > 0 ? tmpFechaConstancia.Month : o.fec_solicitud.Month) &&
                                                               o.fec_solicitud.Day == (tmpFechaConstancia.Day > 0 ? tmpFechaConstancia.Day : o.fec_solicitud.Day)).ToList()
@@ -231,8 +231,8 @@ namespace WebBS.Controllers.ALP
                                 nroSolicitud = x.num_solicitud,
                                 nomPreparado = x.ALP_CONSTANCIA_PREPARADO.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado,
                                 fechaSolicitud = x.fec_solicitud.ToString("dd/MM/yyyy"),
-                                quimico = x.RRH_Empleado.GetEmpleado(),
-                                sucursal = x.ALP_CONSTANCIA_PREPARADO.ALP_ORDEN_PREPARADO.RRH_Sucursal.Nom_sucursal
+                                quimico = x.RRH_EMPLEADO.GetEmpleado(),
+                                sucursal = x.ALP_CONSTANCIA_PREPARADO.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.Descripcion
                             }).ToList();
 
 

@@ -24,11 +24,11 @@ namespace WebBS.Controllers.ALP
             t.Value = "-1";
             selectList.Add(t);
 
-            foreach (RRH_Sucursal c in db.RRH_Sucursal.ToList())
+            foreach (RRH_SUCURSAL c in db.RRH_SUCURSAL.ToList())
             {
                 SelectListItem i = new SelectListItem();
-                i.Text = c.Nom_sucursal.ToString();
-                i.Value = c.Cod_sucursal.ToString();
+                i.Text = c.Descripcion.ToString();
+                i.Value = c.cod_sucursal.ToString();
                 selectList.Add(i);
             }
 
@@ -40,16 +40,16 @@ namespace WebBS.Controllers.ALP
         public ActionResult Nuevo(string num_constancia = null)
         {
 
-            var quimico = db.RRH_Empleado.Where(x => x.Cod_puesto == 3).FirstOrDefault();
+            var quimico = db.RRH_EMPLEADO.Where(x => x.Cod_puesto == 3).FirstOrDefault();
 
             var constancia = db.ALP_CONSTANCIA_PREPARADO.Where(x => x.num_constancia_preparado == num_constancia).FirstOrDefault();
 
-            ViewBag.lstRecetaInsumo = constancia.ALP_CONSTANCIA_PREPARADO_INSUMO.Where(x => x.ALP_INSUMO.psicotropico == false).Select(x=> new { nro = x.ALP_INSUMO.cod_insumo }).ToList();
-            ViewBag.lstRecetaPsicotropico = constancia.ALP_CONSTANCIA_PREPARADO_INSUMO.Where(x => x.ALP_INSUMO.psicotropico == true).ToList();
+            ViewBag.lstRecetaInsumo = constancia.ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN.Where(x => x.ALP_ORDEN_PREPARADO_INSUMO.ALP_INSUMO.psicotropico == false).Select(x=> new { nro = x.cod_insumo }).ToList();
+            ViewBag.lstRecetaPsicotropico = constancia.ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN.Where(x => x.ALP_ORDEN_PREPARADO_INSUMO.ALP_INSUMO.psicotropico == true).ToList();
 
-            ViewBag.psicotropico = constancia.ALP_CONSTANCIA_PREPARADO_INSUMO.Where(x => x.ALP_INSUMO.psicotropico == true).Count();
+            ViewBag.psicotropico = constancia.ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN.Where(x => x.ALP_ORDEN_PREPARADO_INSUMO.ALP_INSUMO.psicotropico == true).Count();
 
-            ViewBag.laboratorista = constancia.RRH_Empleado.GetEmpleado();
+            ViewBag.laboratorista = constancia.RRH_EMPLEADO.GetEmpleado();
             ViewBag.fechaElaboracion = constancia.fec_elaboracion.ToString("dd/MM/yyyy");
             ViewBag.fechaVencimiento = constancia.fec_elaboracion.AddDays(100).ToString("dd/MM/yyyy");
             ViewBag.quimico = quimico.GetEmpleado();
@@ -90,7 +90,7 @@ namespace WebBS.Controllers.ALP
 
                 var constancia = db.ALP_CONSTANCIA_PREPARADO.Where(o => o.num_constancia_preparado == nroConstancia).FirstOrDefault();
 
-                var psicotropico = constancia.ALP_CONSTANCIA_PREPARADO_INSUMO.Where(x => x.ALP_INSUMO.psicotropico == true).Count();
+                var psicotropico = constancia.ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN.Where(x => x.ALP_ORDEN_PREPARADO_INSUMO.ALP_INSUMO.psicotropico == true).Count();
 
                 ALP_LIBRO_RECETA libro = new ALP_LIBRO_RECETA() { 
                     cod_libro_receta = nextNroLibro,
@@ -99,7 +99,7 @@ namespace WebBS.Controllers.ALP
                     fec_preparado = constancia.fec_elaboracion,
                     fec_vencimiento = constancia.fec_elaboracion.AddYears(1).Date,
                     nom_medico = constancia.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_medico,
-                    num_colegiatura_medico = constancia.ALP_ORDEN_PREPARADO.ALP_RECETA.num_colegiatura,
+                    num_colegiatura_medico = constancia.ALP_ORDEN_PREPARADO.ALP_RECETA.num_colegiatura_medico,
                     cod_usu_regi = 3,
                     fec_usu_regi = DateTime.Now.Date,
                     cod_usu_modi = 3,
@@ -108,14 +108,14 @@ namespace WebBS.Controllers.ALP
 
                 db.ALP_LIBRO_RECETA.Add(libro);
 
-                var lstReceta = constancia.ALP_CONSTANCIA_PREPARADO_INSUMO.Where(x => x.ALP_INSUMO.psicotropico == false).ToList();
+                var lstReceta = constancia.ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN.Where(x => x.ALP_ORDEN_PREPARADO_INSUMO.ALP_INSUMO.psicotropico == false).ToList();
 
-                foreach(ALP_CONSTANCIA_PREPARADO_INSUMO item in lstReceta)
+                foreach(ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN item in lstReceta)
                 {
                     db.ALP_LIBRO_RECETA_INSUMO.Add(new ALP_LIBRO_RECETA_INSUMO() {
                         cod_libro_receta = nextNroLibro,
                         cod_insumo = item.cod_insumo,
-                        cant_insumo_real = item.cant_insumo_constancia,
+                        cant_insumo_constancia = item.cant_insumo_constancia,
                         cod_usu_regi = 3,
                         fec_usu_regi = DateTime.Now.Date,
                         cod_usu_modi = 3,
@@ -158,7 +158,7 @@ namespace WebBS.Controllers.ALP
                         fec_preparado = constancia.fec_elaboracion,
                         fec_vencimiento = constancia.fec_elaboracion.AddYears(1).Date,
                         nom_medico = constancia.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_medico,
-                        num_colegiatura_medico = constancia.ALP_ORDEN_PREPARADO.ALP_RECETA.num_colegiatura,
+                        num_colegiatura_medico = constancia.ALP_ORDEN_PREPARADO.ALP_RECETA.num_colegiatura_medico,
                         cod_usu_regi = 3,
                         fec_usu_regi = DateTime.Now.Date,
                         cod_usu_modi = 3,
@@ -167,9 +167,9 @@ namespace WebBS.Controllers.ALP
 
                     db.ALP_LIBRO_RECETA_PSICOTROPICO.Add(libroPsico);
 
-                    var lstRecetaPsico = constancia.ALP_CONSTANCIA_PREPARADO_INSUMO.Where(x => x.ALP_INSUMO.psicotropico == true).ToList();
+                    var lstRecetaPsico = constancia.ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN.Where(x => x.ALP_ORDEN_PREPARADO_INSUMO.ALP_INSUMO.psicotropico == true).ToList();
 
-                    foreach (ALP_CONSTANCIA_PREPARADO_INSUMO item in lstRecetaPsico)
+                    foreach (ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN item in lstRecetaPsico)
                     {
                         db.ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO.Add(new ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO()
                         {

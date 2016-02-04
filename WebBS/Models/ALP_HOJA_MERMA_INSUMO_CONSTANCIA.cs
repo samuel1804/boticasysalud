@@ -12,17 +12,21 @@ namespace WebBS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DIS_HojaRutaDetalle
+    public partial class ALP_HOJA_MERMA_INSUMO_CONSTANCIA
     {
-        public int Cod_hoja_ruta_detalle { get; set; }
-        public Nullable<int> Cod_hoja_ruta { get; set; }
-        public Nullable<int> Cod_pedido { get; set; }
-        public Nullable<int> cod_usu_regi { get; set; }
+        public string num_hoja_merma { get; set; }
+        public string num_orden_preparado { get; set; }
+        public string num_constancia_preparado { get; set; }
+        public string cod_insumo { get; set; }
+        public int cant_insumo_orden { get; set; }
+        public int cant_insumo_constancia { get; set; }
+        public int cant_insumo_merma { get; set; }
+        public string motivo { get; set; }
+        public int cod_usu_regi { get; set; }
+        public System.DateTime fec_usu_regi { get; set; }
         public Nullable<int> cod_usu_modi { get; set; }
-        public Nullable<System.DateTime> fec_usu_regi { get; set; }
         public Nullable<System.DateTime> fec_usu_modi { get; set; }
     
-        public virtual DIS_HojaRuta DIS_HojaRuta { get; set; }
-        public virtual DIS_Pedido DIS_Pedido { get; set; }
+        public virtual ALP_HOJA_MERMA ALP_HOJA_MERMA { get; set; }
     }
 }

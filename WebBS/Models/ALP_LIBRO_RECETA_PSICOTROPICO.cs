@@ -35,6 +35,6 @@ namespace WebBS.Models
     
         public virtual ALP_CONSTANCIA_PREPARADO ALP_CONSTANCIA_PREPARADO { get; set; }
         public virtual ICollection<ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO> ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO { get; set; }
-        public virtual RRH_Empleado RRH_Empleado { get; set; }
+        public virtual RRH_EMPLEADO RRH_EMPLEADO { get; set; }
     }
 }

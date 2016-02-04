@@ -22,17 +22,17 @@ namespace WebBS.Models
         public string cod_libro_receta { get; set; }
         public string num_constancia_preparado { get; set; }
         public int cod_quimico_laboratorista { get; set; }
+        public string nom_medico { get; set; }
+        public Nullable<int> num_colegiatura_medico { get; set; }
         public System.DateTime fec_preparado { get; set; }
+        public System.DateTime fec_vencimiento { get; set; }
         public int cod_usu_regi { get; set; }
         public System.DateTime fec_usu_regi { get; set; }
         public Nullable<int> cod_usu_modi { get; set; }
         public Nullable<System.DateTime> fec_usu_modi { get; set; }
-        public Nullable<System.DateTime> fec_vencimiento { get; set; }
-        public string nom_medico { get; set; }
-        public Nullable<int> num_colegiatura_medico { get; set; }
     
         public virtual ALP_CONSTANCIA_PREPARADO ALP_CONSTANCIA_PREPARADO { get; set; }
-        public virtual RRH_Empleado RRH_Empleado { get; set; }
         public virtual ICollection<ALP_LIBRO_RECETA_INSUMO> ALP_LIBRO_RECETA_INSUMO { get; set; }
+        public virtual RRH_EMPLEADO RRH_EMPLEADO { get; set; }
     }
 }

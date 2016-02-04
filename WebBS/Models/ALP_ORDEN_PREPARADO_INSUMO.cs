@@ -14,6 +14,11 @@ namespace WebBS.Models
     
     public partial class ALP_ORDEN_PREPARADO_INSUMO
     {
+        public ALP_ORDEN_PREPARADO_INSUMO()
+        {
+            this.ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN = new HashSet<ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN>();
+        }
+    
         public string num_orden_preparado { get; set; }
         public string cod_insumo { get; set; }
         public int cant_insumo { get; set; }
@@ -22,6 +27,7 @@ namespace WebBS.Models
         public Nullable<int> cod_usu_modi { get; set; }
         public Nullable<System.DateTime> fec_usu_modi { get; set; }
     
+        public virtual ICollection<ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN> ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN { get; set; }
         public virtual ALP_INSUMO ALP_INSUMO { get; set; }
         public virtual ALP_ORDEN_PREPARADO ALP_ORDEN_PREPARADO { get; set; }
     }

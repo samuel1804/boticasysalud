@@ -26,11 +26,11 @@ namespace WebBS.Controllers.ALP
             t.Value = "-1";
             selectList.Add(t);
 
-            foreach (RRH_Sucursal c in db.RRH_Sucursal.ToList())
+            foreach (RRH_SUCURSAL c in db.RRH_SUCURSAL.ToList())
             {
                 SelectListItem i = new SelectListItem();
-                i.Text = c.Nom_sucursal.ToString();
-                i.Value = c.Cod_sucursal.ToString();
+                i.Text = c.Descripcion.ToString();
+                i.Value = c.cod_sucursal.ToString();
                 selectList.Add(i);
             }
 
@@ -43,9 +43,9 @@ namespace WebBS.Controllers.ALP
         {
             var constancia = db.ALP_CONSTANCIA_PREPARADO.Where(o => o.num_constancia_preparado.Contains(num_constancia)).FirstOrDefault();
 
-            ViewBag.cantidadMerma = constancia.ALP_CONSTANCIA_PREPARADO_INSUMO.Where(x => x.cant_insumo_diferencia > 0).Count();
-            ViewBag.tecnicoLaboratorista = constancia.RRH_Empleado.Nom_empleado + " " + constancia.RRH_Empleado.Ap_paterno + " " + constancia.RRH_Empleado.Ap_materno;
-            ViewBag.tecnicoFarmaceutico = constancia.ALP_ORDEN_PREPARADO.RRH_Empleado.Nom_empleado + " " + constancia.ALP_ORDEN_PREPARADO.RRH_Empleado.Ap_paterno + " " + constancia.ALP_ORDEN_PREPARADO.RRH_Empleado.Ap_materno;
+            //ViewBag.cantidadMerma = constancia.ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN.Where(x => x.cant_insumo_diferencia > 0).Count();
+            ViewBag.tecnicoLaboratorista = constancia.RRH_EMPLEADO.GetEmpleado();
+            ViewBag.tecnicoFarmaceutico = constancia.ALP_ORDEN_PREPARADO.RRH_EMPLEADO.GetEmpleado();
             ViewBag.fechaConstancia = constancia.fec_elaboracion.ToString("dd/MM/yyyy");
 
 
@@ -101,13 +101,13 @@ namespace WebBS.Controllers.ALP
 
                     string[] insumoSplit = insumos[i].Split('|');
 
-                    db.ALP_HOJA_MERMA_INSUMO.Add(new ALP_HOJA_MERMA_INSUMO()
+                    db.ALP_HOJA_MERMA_INSUMO_CONSTANCIA.Add(new ALP_HOJA_MERMA_INSUMO_CONSTANCIA()
                     {
                         num_hoja_merma = nextNroMerma,
                         cod_insumo = insumoSplit[0],
-                        cant_insumo = int.Parse(insumoSplit[1]),
-                        cant_constancia = int.Parse(insumoSplit[2]),
-                        cant_diferencia = int.Parse(insumoSplit[3]),
+                        cant_insumo_orden = int.Parse(insumoSplit[1]),
+                        cant_insumo_constancia = int.Parse(insumoSplit[2]),
+                        cant_insumo_merma = int.Parse(insumoSplit[3]),
                         motivo = insumoSplit[4]
                     });
 

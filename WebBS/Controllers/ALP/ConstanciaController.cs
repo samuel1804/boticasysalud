@@ -25,11 +25,11 @@ namespace WebBS.Controllers.ALP
             t.Value = "-1";
             selectList.Add(t);
 
-            foreach (RRH_Sucursal c in db.RRH_Sucursal.ToList())
+            foreach (RRH_SUCURSAL c in db.RRH_SUCURSAL.ToList())
             {
                 SelectListItem i = new SelectListItem();
-                i.Text = c.Nom_sucursal.ToString();
-                i.Value = c.Cod_sucursal.ToString();
+                i.Text = c.Descripcion.ToString();
+                i.Value = c.cod_sucursal.ToString();
                 selectList.Add(i);
             }
 
@@ -47,11 +47,11 @@ namespace WebBS.Controllers.ALP
             t.Value = "-1";
             selectList.Add(t);
 
-            foreach (RRH_Sucursal c in db.RRH_Sucursal.ToList())
+            foreach (RRH_SUCURSAL c in db.RRH_SUCURSAL.ToList())
             {
                 SelectListItem i = new SelectListItem();
-                i.Text = c.Nom_sucursal.ToString();
-                i.Value = c.Cod_sucursal.ToString();
+                i.Text = c.Descripcion.ToString();
+                i.Value = c.cod_sucursal.ToString();
                 selectList.Add(i);
             }
 
@@ -73,7 +73,7 @@ namespace WebBS.Controllers.ALP
                                                               o.ALP_HOJA_MERMA.Count > 0 &&
                                                               o.num_constancia_preparado.Contains(String.IsNullOrEmpty(nroConstancia) ? o.num_constancia_preparado : nroConstancia) &&
                                                               o.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado.Contains(String.IsNullOrEmpty(nomPreparado) ? o.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado : nomPreparado) &&
-                                                              o.ALP_ORDEN_PREPARADO.RRH_Sucursal.Cod_sucursal == (sucursal == -1 ? o.ALP_ORDEN_PREPARADO.RRH_Sucursal.Cod_sucursal : sucursal) &&
+                                                              o.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal == (sucursal == -1 ? o.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal: sucursal) &&
                                                               o.fec_elaboracion.Year == (tmpFechaConstancia.Year > 0 ? tmpFechaConstancia.Year : o.fec_elaboracion.Year) &&
                                                               o.fec_elaboracion.Month == (tmpFechaConstancia.Month > 0 ? tmpFechaConstancia.Month : o.fec_elaboracion.Month) &&
                                                               o.fec_elaboracion.Day == (tmpFechaConstancia.Day > 0 ? tmpFechaConstancia.Day : o.fec_elaboracion.Day)).ToList()
@@ -82,7 +82,7 @@ namespace WebBS.Controllers.ALP
                                 nroConstancia = x.num_constancia_preparado,
                                 nomPreparado = x.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado,
                                 fechaConstancia = x.fec_elaboracion.ToString("dd/MM/yyyy"),
-                                sucursal = x.ALP_ORDEN_PREPARADO.RRH_Sucursal.Nom_sucursal
+                                sucursal = x.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.Descripcion
                             }).ToList();
 
 
@@ -110,7 +110,7 @@ namespace WebBS.Controllers.ALP
                                                               o.ALP_SOLICITUD_TRANSPORTE.Count == 0 &&
                                                               o.num_constancia_preparado.Contains(String.IsNullOrEmpty(nroConstancia) ? o.num_constancia_preparado : nroConstancia) &&
                                                               o.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado.Contains(String.IsNullOrEmpty(nomPreparado) ? o.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado : nomPreparado) &&
-                                                              o.ALP_ORDEN_PREPARADO.RRH_Sucursal.Cod_sucursal == (sucursal == -1 ? o.ALP_ORDEN_PREPARADO.RRH_Sucursal.Cod_sucursal : sucursal) &&
+                                                              o.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal== (sucursal == -1 ? o.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal : sucursal) &&
                                                               o.fec_elaboracion.Year == (tmpFechaConstancia.Year > 0 ? tmpFechaConstancia.Year : o.fec_elaboracion.Year) &&
                                                               o.fec_elaboracion.Month == (tmpFechaConstancia.Month > 0 ? tmpFechaConstancia.Month : o.fec_elaboracion.Month) &&
                                                               o.fec_elaboracion.Day == (tmpFechaConstancia.Day > 0 ? tmpFechaConstancia.Day : o.fec_elaboracion.Day)).ToList()
@@ -119,7 +119,7 @@ namespace WebBS.Controllers.ALP
                                 nroConstancia = x.num_constancia_preparado,
                                 nomPreparado = x.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado,
                                 fechaConstancia = x.fec_elaboracion.ToString("dd/MM/yyyy"),
-                                sucursal = x.ALP_ORDEN_PREPARADO.RRH_Sucursal.Nom_sucursal
+                                sucursal = x.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.Descripcion
                             }).ToList();
                
                 return Json(JsonResponseFactory.SuccessResponse(lstConstancia));
@@ -146,7 +146,7 @@ namespace WebBS.Controllers.ALP
                                                               o.ALP_HOJA_MERMA.Count() == 0 &&
                                                               o.num_constancia_preparado.Contains(String.IsNullOrEmpty(nroConstancia) ? o.num_constancia_preparado : nroConstancia) &&
                                                               o.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado.Contains(String.IsNullOrEmpty(nomPreparado) ? o.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado : nomPreparado) &&
-                                                              o.ALP_ORDEN_PREPARADO.RRH_Sucursal.Cod_sucursal == (sucursal == -1 ? o.ALP_ORDEN_PREPARADO.RRH_Sucursal.Cod_sucursal : sucursal) &&
+                                                              o.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal == (sucursal == -1 ? o.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal : sucursal) &&
                                                               o.fec_elaboracion.Year == (tmpFechaConstancia.Year > 0 ? tmpFechaConstancia.Year : o.fec_elaboracion.Year) &&
                                                               o.fec_elaboracion.Month == (tmpFechaConstancia.Month > 0 ? tmpFechaConstancia.Month : o.fec_elaboracion.Month) &&
                                                               o.fec_elaboracion.Day == (tmpFechaConstancia.Day > 0 ? tmpFechaConstancia.Day : o.fec_elaboracion.Day)).ToList()
@@ -155,7 +155,7 @@ namespace WebBS.Controllers.ALP
                                 nroConstancia = x.num_constancia_preparado,
                                 nomPreparado = x.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado,
                                 fechaConstancia = x.fec_elaboracion.ToString("dd/MM/yyyy"),
-                                sucursal = x.ALP_ORDEN_PREPARADO.RRH_Sucursal.Nom_sucursal
+                                sucursal = x.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.Descripcion
                             }).ToList();
 
                 return Json(JsonResponseFactory.SuccessResponse(lstConstancia));
@@ -172,7 +172,7 @@ namespace WebBS.Controllers.ALP
         public ActionResult Nuevo(string num_orden = null)
         {
 
-            var empleado = db.RRH_Empleado.Where(x => x.Cod_empleado == 2).FirstOrDefault();
+            var empleado = db.RRH_EMPLEADO.Where(x => x.cod_empleado == 2).FirstOrDefault();
 
             ViewBag.empleado = empleado.Nom_empleado + " " + empleado.Ap_paterno + " " + empleado.Ap_materno;
             ViewBag.fechaConstancia = DateTime.Today.Date.ToString("dd/MM/yyyy");
@@ -186,8 +186,8 @@ namespace WebBS.Controllers.ALP
 
             var constancia = db.ALP_CONSTANCIA_PREPARADO.Where(o => o.num_constancia_preparado.Contains(num_constancia)).FirstOrDefault();
 
-            ViewBag.tecnicoLaboratorista = constancia.RRH_Empleado.Nom_empleado + " " + constancia.RRH_Empleado.Ap_paterno + " " + constancia.RRH_Empleado.Ap_materno;
-            ViewBag.tecnicoFarmaceutico = constancia.ALP_ORDEN_PREPARADO.RRH_Empleado.Nom_empleado + " " + constancia.ALP_ORDEN_PREPARADO.RRH_Empleado.Ap_paterno + " " + constancia.ALP_ORDEN_PREPARADO.RRH_Empleado.Ap_materno;
+            ViewBag.tecnicoLaboratorista = constancia.RRH_EMPLEADO.GetEmpleado();
+            ViewBag.tecnicoFarmaceutico = constancia.ALP_ORDEN_PREPARADO.RRH_EMPLEADO.GetEmpleado();
             ViewBag.fechaConstancia = constancia.fec_elaboracion.ToString("dd/MM/yyyy");
 
 
@@ -244,13 +244,14 @@ namespace WebBS.Controllers.ALP
 
                     string[] insumoSplit = insumos[i].Split('|');
 
-                    db.ALP_CONSTANCIA_PREPARADO_INSUMO.Add(new ALP_CONSTANCIA_PREPARADO_INSUMO()
+                    db.ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN.Add(new ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN()
                     {
                         num_constancia_preparado = nextNroConstancia,
+                        num_orden_preparado = nroOrden,
                         cod_insumo = insumoSplit[0],
-                        cant_insumo_orden = int.Parse(insumoSplit[1]),
+                        //cant_insumo_orden = int.Parse(insumoSplit[1]),
                         cant_insumo_constancia = int.Parse(insumoSplit[2]),
-                        cant_insumo_diferencia = int.Parse(insumoSplit[3])
+                        //cant_insumo_diferencia = int.Parse(insumoSplit[3])
                     });
 
                 }
@@ -290,11 +291,11 @@ namespace WebBS.Controllers.ALP
                 manager.ChangeObjectState(constancia, EntityState.Modified);
 
 
-                var constanciaXInsumoDel = db.ALP_CONSTANCIA_PREPARADO_INSUMO.Where(x => x.num_constancia_preparado == nroConstancia).ToList();
+                var constanciaXInsumoDel = db.ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN.Where(x => x.num_constancia_preparado == nroConstancia).ToList();
 
-                foreach (ALP_CONSTANCIA_PREPARADO_INSUMO item in constanciaXInsumoDel)
+                foreach (ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN item in constanciaXInsumoDel)
                 {
-                    db.ALP_CONSTANCIA_PREPARADO_INSUMO.Remove(item);
+                    db.ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN.Remove(item);
                     manager.ChangeObjectState(item, EntityState.Deleted);
                 }
 
@@ -302,13 +303,13 @@ namespace WebBS.Controllers.ALP
                 {
                     string[] insumoSplit = insumos[i].Split('|');
 
-                    db.ALP_CONSTANCIA_PREPARADO_INSUMO.Add(new ALP_CONSTANCIA_PREPARADO_INSUMO()
+                    db.ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN.Add(new ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN()
                     {
                         num_constancia_preparado = nroConstancia,
                         cod_insumo = insumoSplit[0],
-                        cant_insumo_orden = int.Parse(insumoSplit[1]),
+                        //cant_insumo_orden = int.Parse(insumoSplit[1]),
                         cant_insumo_constancia = int.Parse(insumoSplit[2]),
-                        cant_insumo_diferencia = int.Parse(insumoSplit[3])
+                        //cant_insumo_diferencia = int.Parse(insumoSplit[3])
 
                     });
                 }

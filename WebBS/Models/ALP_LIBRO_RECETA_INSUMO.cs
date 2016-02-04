@@ -15,14 +15,15 @@ namespace WebBS.Models
     public partial class ALP_LIBRO_RECETA_INSUMO
     {
         public string cod_libro_receta { get; set; }
+        public string num_orden_preparado { get; set; }
+        public string num_constancia_preparado { get; set; }
         public string cod_insumo { get; set; }
-        public int cant_insumo_real { get; set; }
+        public int cant_insumo_constancia { get; set; }
         public int cod_usu_regi { get; set; }
         public System.DateTime fec_usu_regi { get; set; }
         public Nullable<int> cod_usu_modi { get; set; }
         public Nullable<System.DateTime> fec_usu_modi { get; set; }
     
-        public virtual ALP_INSUMO ALP_INSUMO { get; set; }
         public virtual ALP_LIBRO_RECETA ALP_LIBRO_RECETA { get; set; }
     }
 }

@@ -63,20 +63,20 @@
                         </tr>
                     </thead>
                     <tbody id="tbConstanciaInsumoContent">
-                        @foreach (var item in Model.ALP_CONSTANCIA_PREPARADO_INSUMO)
+                        @foreach (var item in Model.ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN)
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ALP_INSUMO.cod_insumo)
+                                    @Html.DisplayFor(modelItem => item.ALP_ORDEN_PREPARADO_INSUMO.ALP_INSUMO.cod_insumo)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ALP_INSUMO.nom_insumo)
+                                    @Html.DisplayFor(modelItem => item.ALP_ORDEN_PREPARADO_INSUMO.ALP_INSUMO.nom_insumo)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ALP_INSUMO.unidad_medida)
+                                    @Html.DisplayFor(modelItem => item.ALP_ORDEN_PREPARADO_INSUMO.ALP_INSUMO.unidad_medida)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.cant_insumo_orden)
+                                    @Html.DisplayFor(modelItem => item.cant_insumo_constancia)
                                 </td>
                                 <td>
                                     <div class="form-group disabled">
@@ -86,7 +86,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(model => item.cant_insumo_diferencia)
+                                    
                                 </td>
                             </tr>
                         }

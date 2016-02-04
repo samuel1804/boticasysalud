@@ -16,21 +16,20 @@ namespace WebBS.Models
     {
         public ALP_HOJA_MERMA()
         {
-            this.ALP_HOJA_MERMA_INSUMO = new HashSet<ALP_HOJA_MERMA_INSUMO>();
+            this.ALP_HOJA_MERMA_INSUMO_CONSTANCIA = new HashSet<ALP_HOJA_MERMA_INSUMO_CONSTANCIA>();
         }
     
         public string num_hoja_merma { get; set; }
         public string num_constancia_preparado { get; set; }
+        public int cod_tecnico_laboratorista { get; set; }
+        public string estado { get; set; }
         public int cod_usu_regi { get; set; }
         public System.DateTime fec_usu_regi { get; set; }
         public Nullable<int> cod_usu_modi { get; set; }
         public Nullable<System.DateTime> fec_usu_modi { get; set; }
-        public System.DateTime fec_merma { get; set; }
-        public string estado { get; set; }
-        public Nullable<int> cod_empleado { get; set; }
     
         public virtual ALP_CONSTANCIA_PREPARADO ALP_CONSTANCIA_PREPARADO { get; set; }
-        public virtual ICollection<ALP_HOJA_MERMA_INSUMO> ALP_HOJA_MERMA_INSUMO { get; set; }
-        public virtual RRH_Empleado RRH_Empleado { get; set; }
+        public virtual RRH_EMPLEADO RRH_EMPLEADO { get; set; }
+        public virtual ICollection<ALP_HOJA_MERMA_INSUMO_CONSTANCIA> ALP_HOJA_MERMA_INSUMO_CONSTANCIA { get; set; }
     }
 }

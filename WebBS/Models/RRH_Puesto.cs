@@ -14,12 +14,6 @@ namespace WebBS.Models
     
     public partial class RRH_Puesto
     {
-        public RRH_Puesto()
-        {
-            this.RRH_Empleado = new HashSet<RRH_Empleado>();
-            this.RRH_Perfil = new HashSet<RRH_Perfil>();
-        }
-    
         public int Cod_puesto { get; set; }
         public string Nom_puesto { get; set; }
         public Nullable<int> Cod_area { get; set; }
@@ -28,9 +22,5 @@ namespace WebBS.Models
         public Nullable<System.DateTime> Fec_usu_regi { get; set; }
         public string Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
-    
-        public virtual RRH_Area RRH_Area { get; set; }
-        public virtual ICollection<RRH_Empleado> RRH_Empleado { get; set; }
-        public virtual ICollection<RRH_Perfil> RRH_Perfil { get; set; }
     }
 }

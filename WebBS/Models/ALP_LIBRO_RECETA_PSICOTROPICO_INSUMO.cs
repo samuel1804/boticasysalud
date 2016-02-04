@@ -15,6 +15,8 @@ namespace WebBS.Models
     public partial class ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO
     {
         public string cod_libro_receta_psicotropico { get; set; }
+        public string num_orden_preparado { get; set; }
+        public string num_constancia_preparado { get; set; }
         public string cod_insumo { get; set; }
         public int cant_insumo_constancia { get; set; }
         public int cod_usu_regi { get; set; }
@@ -22,7 +24,6 @@ namespace WebBS.Models
         public Nullable<int> cod_usu_modi { get; set; }
         public Nullable<System.DateTime> fec_usu_modi { get; set; }
     
-        public virtual ALP_INSUMO ALP_INSUMO { get; set; }
         public virtual ALP_LIBRO_RECETA_PSICOTROPICO ALP_LIBRO_RECETA_PSICOTROPICO { get; set; }
     }
 }

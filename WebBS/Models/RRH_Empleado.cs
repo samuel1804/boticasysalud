@@ -12,24 +12,19 @@ namespace WebBS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class RRH_Empleado
+    public partial class RRH_EMPLEADO
     {
-        public RRH_Empleado()
+        public RRH_EMPLEADO()
         {
-            this.ALP_LIBRO_RECETA = new HashSet<ALP_LIBRO_RECETA>();
-            this.ALP_ORDEN_PREPARADO = new HashSet<ALP_ORDEN_PREPARADO>();
-            this.ALP_SOLICITUD_TRANSPORTE = new HashSet<ALP_SOLICITUD_TRANSPORTE>();
-            this.GCC_EMPLEADO_INF_CREDITICIO = new HashSet<GCC_EMPLEADO_INF_CREDITICIO>();
-            this.GCC_EMPLEADO_SOL_CREDITO = new HashSet<GCC_EMPLEADO_SOL_CREDITO>();
-            this.IMP_ACTIVIDAD_PLANIFICADA = new HashSet<IMP_ACTIVIDAD_PLANIFICADA>();
-            this.RRH_PruebaAuotoevaluacion = new HashSet<RRH_PruebaAuotoevaluacion>();
-            this.RRH_PruebaEvaluacionTecnica = new HashSet<RRH_PruebaEvaluacionTecnica>();
             this.ALP_CONSTANCIA_PREPARADO = new HashSet<ALP_CONSTANCIA_PREPARADO>();
             this.ALP_HOJA_MERMA = new HashSet<ALP_HOJA_MERMA>();
+            this.ALP_LIBRO_RECETA = new HashSet<ALP_LIBRO_RECETA>();
             this.ALP_LIBRO_RECETA_PSICOTROPICO = new HashSet<ALP_LIBRO_RECETA_PSICOTROPICO>();
+            this.ALP_ORDEN_PREPARADO = new HashSet<ALP_ORDEN_PREPARADO>();
+            this.ALP_SOLICITUD_TRANSPORTE = new HashSet<ALP_SOLICITUD_TRANSPORTE>();
         }
     
-        public int Cod_empleado { get; set; }
+        public int cod_empleado { get; set; }
         public string Nom_empleado { get; set; }
         public string Ap_paterno { get; set; }
         public string Ap_materno { get; set; }
@@ -44,18 +39,12 @@ namespace WebBS.Models
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
         public Nullable<int> Cod_puesto { get; set; }
     
-        public virtual ICollection<ALP_LIBRO_RECETA> ALP_LIBRO_RECETA { get; set; }
-        public virtual ICollection<ALP_ORDEN_PREPARADO> ALP_ORDEN_PREPARADO { get; set; }
-        public virtual ICollection<ALP_SOLICITUD_TRANSPORTE> ALP_SOLICITUD_TRANSPORTE { get; set; }
-        public virtual ICollection<GCC_EMPLEADO_INF_CREDITICIO> GCC_EMPLEADO_INF_CREDITICIO { get; set; }
-        public virtual ICollection<GCC_EMPLEADO_SOL_CREDITO> GCC_EMPLEADO_SOL_CREDITO { get; set; }
-        public virtual ICollection<IMP_ACTIVIDAD_PLANIFICADA> IMP_ACTIVIDAD_PLANIFICADA { get; set; }
-        public virtual RRH_Puesto RRH_Puesto { get; set; }
-        public virtual ICollection<RRH_PruebaAuotoevaluacion> RRH_PruebaAuotoevaluacion { get; set; }
-        public virtual ICollection<RRH_PruebaEvaluacionTecnica> RRH_PruebaEvaluacionTecnica { get; set; }
         public virtual ICollection<ALP_CONSTANCIA_PREPARADO> ALP_CONSTANCIA_PREPARADO { get; set; }
         public virtual ICollection<ALP_HOJA_MERMA> ALP_HOJA_MERMA { get; set; }
+        public virtual ICollection<ALP_LIBRO_RECETA> ALP_LIBRO_RECETA { get; set; }
         public virtual ICollection<ALP_LIBRO_RECETA_PSICOTROPICO> ALP_LIBRO_RECETA_PSICOTROPICO { get; set; }
+        public virtual ICollection<ALP_ORDEN_PREPARADO> ALP_ORDEN_PREPARADO { get; set; }
+        public virtual ICollection<ALP_SOLICITUD_TRANSPORTE> ALP_SOLICITUD_TRANSPORTE { get; set; }
 
         internal dynamic GetEmpleado()
         {

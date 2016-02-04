@@ -16,17 +16,17 @@ namespace WebBS.Models
     {
         public string num_solicitud { get; set; }
         public string num_constancia_preparado { get; set; }
-        public int cod_empleado { get; set; }
-        public string observacion { get; set; }
+        public int cod_quimico_laboratorista { get; set; }
         public System.DateTime fec_solicitud { get; set; }
+        public string motivo { get; set; }
+        public string estado { get; set; }
         public int cod_usu_regi { get; set; }
         public System.DateTime fec_usu_regi { get; set; }
-        public int cod_usu_modi { get; set; }
-        public System.DateTime fec_usu_modi { get; set; }
-        public string estado { get; set; }
+        public Nullable<int> cod_usu_modi { get; set; }
+        public Nullable<System.DateTime> fec_usu_modi { get; set; }
         public Nullable<int> cod_sucursal_destino { get; set; }
     
         public virtual ALP_CONSTANCIA_PREPARADO ALP_CONSTANCIA_PREPARADO { get; set; }
-        public virtual RRH_Empleado RRH_Empleado { get; set; }
+        public virtual RRH_EMPLEADO RRH_EMPLEADO { get; set; }
     }
 }

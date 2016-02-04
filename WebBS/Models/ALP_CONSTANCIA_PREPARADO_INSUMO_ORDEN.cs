@@ -12,20 +12,18 @@ namespace WebBS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DIS_TipoProducto
+    public partial class ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN
     {
-        public DIS_TipoProducto()
-        {
-            this.DIS_Producto = new HashSet<DIS_Producto>();
-        }
-    
-        public int Cod_tipo_producto { get; set; }
-        public string Des_tipo_producto { get; set; }
-        public Nullable<int> cod_usu_regi { get; set; }
+        public string num_constancia_preparado { get; set; }
+        public string num_orden_preparado { get; set; }
+        public string cod_insumo { get; set; }
+        public int cant_insumo_constancia { get; set; }
+        public int cod_usu_regi { get; set; }
+        public System.DateTime fec_usu_regi { get; set; }
         public Nullable<int> cod_usu_modi { get; set; }
-        public Nullable<System.DateTime> fec_usu_regi { get; set; }
         public Nullable<System.DateTime> fec_usu_modi { get; set; }
     
-        public virtual ICollection<DIS_Producto> DIS_Producto { get; set; }
+        public virtual ALP_CONSTANCIA_PREPARADO ALP_CONSTANCIA_PREPARADO { get; set; }
+        public virtual ALP_ORDEN_PREPARADO_INSUMO ALP_ORDEN_PREPARADO_INSUMO { get; set; }
     }
 }
