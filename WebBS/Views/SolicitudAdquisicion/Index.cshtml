@@ -87,7 +87,7 @@
                     @Html.DisplayFor(modelItem => item.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Numero)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Fec_emision)
+                    @Html.Raw(item.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Fec_emision.Value.ToString("dd/MM/yyyy"))
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.IMP_SOLICITUD_IMPORTACION.IMP_ORDEN_COMPRA.Num_orden_compra)

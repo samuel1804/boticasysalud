@@ -32,6 +32,7 @@ namespace WebBS.Controllers
                     bistacora = desadunaje.IMP_BITACORA_EVENTO.ToList();
                     TempData["alerta"] = db.IMP_ALERTA_EVENTO.Where(a => a.Cod_desaduanaje == desadunaje.Cod_desaduanaje).ToList();
                     TempData["desaduanaje"] = desadunaje.Cod_desaduanaje;
+                    TempData["activo"] = desadunaje.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado == WebBS.Implement.DatosConstantes.EstadoSolicitud.Proceso;
                 }
                 TempData["bitacora"] = bistacora;
             }
