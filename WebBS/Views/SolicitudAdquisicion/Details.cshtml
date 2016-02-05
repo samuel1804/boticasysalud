@@ -408,6 +408,9 @@
                     action: '@Url.Action("GuardarAgent")',
                     autoSubmit: false,
                     onSuccess: function () {
+                        $('#divSinAgenteCerrar').hide();
+                        $('#divCerrarSolicitud').show();
+
                         setTimeout(function () {
                             mensaje.Information({
                                 title: 'Rechazar Solicitud de Adquisición',

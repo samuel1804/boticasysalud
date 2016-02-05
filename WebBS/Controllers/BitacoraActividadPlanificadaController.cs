@@ -73,6 +73,7 @@ namespace WebBS.Controllers
                 iMP_ACCION.Evidencia = UploadFile(iMP_ACCION.Cod_actividad_planificada);
                 iMP_ACCION.Cod_usu_regi = 1;
                 iMP_ACCION.Fec_usu_regi = System.DateTime.Now;
+                
                 db.IMP_ACCION.Add(iMP_ACCION);
                 var actividad = await db.IMP_ACTIVIDAD_PLANIFICADA.FindAsync(iMP_ACCION.Cod_actividad_planificada);
                 TempData["ActividadPlanificada"] = actividad;

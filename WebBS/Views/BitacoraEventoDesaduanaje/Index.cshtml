@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "Index";
-    var imp_adquisicion = @Model.IMP_SOLICITUD_IMPORTACION.IMP_ORDEN_COMPRA.IMP_SOLICITUD_IMPORTACION.FirstOrDefault(s => s.IMP_ADQUISICION.Count > 0).IMP_ADQUISICION.FirstOrDefault();
+    var imp_adquisicion = Model.IMP_SOLICITUD_IMPORTACION.IMP_ORDEN_COMPRA.IMP_SOLICITUD_IMPORTACION.Any() ? Model.IMP_SOLICITUD_IMPORTACION.IMP_ORDEN_COMPRA.IMP_SOLICITUD_IMPORTACION.FirstOrDefault(s => s.IMP_ADQUISICION.Count > 0).IMP_ADQUISICION.FirstOrDefault() : null;
 }
 
 <h2>Bitacora de Eventos de Desaduanaje</h2>
@@ -132,70 +132,73 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                        Agentes Asignados
-                    </a>
-                </h4>
-            </div>
-            <div id="collapse2" class="panel-collapse collapse">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Agentes Carga
-                                </div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <label class="col-md-3">Agente  :</label>
-                                        <div class="col-md-5">
-                                            @imp_adquisicion.IMP_SOLICITUD_IMPORTACION.IMP_PROVEEDOR.Razon_social
-                                        </div>
+        @if (Model.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado == WebBS.Implement.DatosConstantes.EstadoSolicitud.Proceso)
+            {
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                            Agentes Asignados
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Agentes Carga
                                     </div>
-
-                                    <div class="row">
-                                        <label class="col-md-3">RUC :</label>
-                                        <div class="col-md-2">
-                                            @imp_adquisicion.IMP_SOLICITUD_IMPORTACION.IMP_PROVEEDOR.Ruc
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <label class="col-md-3">Agente  :</label>
+                                            <div class="col-md-5">
+                                                @imp_adquisicion.IMP_SOLICITUD_IMPORTACION.IMP_PROVEEDOR.Razon_social
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <label class="col-md-3">Telefono :</label>
-                                        <div class="col-md-2">
-                                            @imp_adquisicion.IMP_SOLICITUD_IMPORTACION.IMP_PROVEEDOR.Telefono
+                                        <div class="row">
+                                            <label class="col-md-3">RUC :</label>
+                                            <div class="col-md-2">
+                                                @imp_adquisicion.IMP_SOLICITUD_IMPORTACION.IMP_PROVEEDOR.Ruc
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <label class="col-md-3">Telefono :</label>
+                                            <div class="col-md-2">
+                                                @imp_adquisicion.IMP_SOLICITUD_IMPORTACION.IMP_PROVEEDOR.Telefono
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Agentes Aduanas
-                                </div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <label class="col-md-3">Agente  :</label>
-                                        <div class="col-md-5">
-                                            @Model.IMP_SOLICITUD_IMPORTACION.IMP_PROVEEDOR.Razon_social
-                                        </div>
+                            <div class="col-sm-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Agentes Aduanas
                                     </div>
-
-                                    <div class="row">
-                                        <label class="col-md-3">RUC :</label>
-                                        <div class="col-md-2">
-                                            @Model.IMP_SOLICITUD_IMPORTACION.IMP_PROVEEDOR.Ruc
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <label class="col-md-3">Agente  :</label>
+                                            <div class="col-md-5">
+                                                @Model.IMP_SOLICITUD_IMPORTACION.IMP_PROVEEDOR.Razon_social
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <label class="col-md-3">Telefono :</label>
-                                        <div class="col-md-2">
-                                            @Model.IMP_SOLICITUD_IMPORTACION.IMP_PROVEEDOR.Telefono
+                                        <div class="row">
+                                            <label class="col-md-3">RUC :</label>
+                                            <div class="col-md-2">
+                                                @Model.IMP_SOLICITUD_IMPORTACION.IMP_PROVEEDOR.Ruc
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <label class="col-md-3">Telefono :</label>
+                                            <div class="col-md-2">
+                                                @Model.IMP_SOLICITUD_IMPORTACION.IMP_PROVEEDOR.Telefono
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -204,55 +207,75 @@
                     </div>
                 </div>
             </div>
-        </div>
+        }
 
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                        Datos de la Adquisición
-                    </a>
-                </h4>
-            </div>
-            <div id="collapse3" class="panel-collapse collapse">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <label class="control-label col-md-2" for="Fec_accion">Fecha de Embarque :</label>
-                                <div class="col-md-2">
-                                    @imp_adquisicion.Fec_Embarque.Value.ToString("dd/MM/yyyy")
+        @if (imp_adquisicion != null)
+        {
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                            Datos de la Adquisición
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="Fec_accion">Fecha de Embarque :</label>
+                                    <div class="col-md-2">
+                                        @if (imp_adquisicion.Fec_Embarque.HasValue)
+                                        {
+                                            @imp_adquisicion.Fec_Embarque.Value.ToString("dd/MM/yyyy")
+                                        }
+                                    </div>
+                                    <label class="control-label col-md-2" for="Fec_accion">Fecha de llegada :</label>
+                                    <div class="col-md-2">
+                                        @if (imp_adquisicion.Fec_programada_llegada.HasValue)
+                                        {
+                                            @imp_adquisicion.Fec_programada_llegada.Value.ToString("dd/MM/yyyy")
+                                        }
+                                    </div>
                                 </div>
-                                <label class="control-label col-md-2" for="Fec_accion">Fecha de llegada :</label>
-                                <div class="col-md-2">
-                                    @imp_adquisicion.Fec_programada_llegada.Value.ToString("dd/MM/yyyy")
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="Fec_accion">Puerto de llegada :</label>
+                                    <div class="col-md-3">
+                                        @if (imp_adquisicion.IMP_PUERTO != null)
+                                        {
+                                            @imp_adquisicion.IMP_PUERTO.Nombre
+                                        }
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-2" for="Fec_accion">Puerto de llegada :</label>
-                                <div class="col-md-3">
-                                    @imp_adquisicion.IMP_PUERTO.Nombre
-                                </div>
-                            </div>
+                                @if (imp_adquisicion.IMP_FACTURA_COMERCIAL != null && imp_adquisicion.IMP_FACTURA_COMERCIAL.Any())
+                                {
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2" for="Fec_accion">Factura Comercial :</label>
+                                        <div class="col-md-3">
+                                            <a href="@Url.Content(imp_adquisicion.IMP_FACTURA_COMERCIAL.FirstOrDefault().Archivo)" class="control-table text-center" target="_blank"><i class="fa fa-file-archive-o"></i></a>
+                                        </div>
+                                    </div>
+                                }
 
-                            <div class="form-group">
-                                <label class="control-label col-md-2" for="Fec_accion">Factura Comercial :</label>
-                                <div class="col-md-3">
-                                    <a href="@Url.Content(imp_adquisicion.IMP_FACTURA_COMERCIAL.FirstOrDefault().Archivo)" class="control-table text-center" target="_blank"><i class="fa fa-file-archive-o"></i></a>
-                                </div>
-                            </div>
+                                @if (imp_adquisicion.IMP_BL != null && imp_adquisicion.IMP_BL.Any())
+                                {
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2" for="Fec_accion">Bill of lading :</label>
+                                        <div class="col-md-3">
+                                            <a href="@Url.Content(imp_adquisicion.IMP_BL.FirstOrDefault().Archivo)" class="control-table text-center" target="_blank"><i class="fa fa-file-archive-o"></i></a>
+                                        </div>
+                                    </div>
+                                }
 
-                            <div class="form-group">
-                                <label class="control-label col-md-2" for="Fec_accion">Bill of lading :</label>
-                                <div class="col-md-3">
-                                    <a href="@Url.Content(imp_adquisicion.IMP_BL.FirstOrDefault().Archivo)" class="control-table text-center" target="_blank"><i class="fa fa-file-archive-o"></i></a>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        }
+
+
     </div>
 
 

@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebBS.Models;
+using System.Net.Mail;
 
 namespace WebBS.Controllers
 {
@@ -84,7 +85,13 @@ namespace WebBS.Controllers
             {
                 db.IMP_BITACORA_EVENTO.Add(iMP_BITACORA_EVENTO);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                try
+                {
+                    EnviarCorreo(iMP_BITACORA_EVENTO.Cod_evento, iMP_BITACORA_EVENTO.Cod_desaduanaje);
+                }
+                catch (Exception e) {
+                }
+                return RedirectToAction("Index", new { id = iMP_BITACORA_EVENTO.Cod_desaduanaje });
             }
 
             TempData["Desaduanaje"] = db.IMP_DESADUANAJE.Find(iMP_BITACORA_EVENTO.Cod_desaduanaje);
@@ -134,7 +141,7 @@ namespace WebBS.Controllers
             {
                 db.Entry(iMP_BITACORA_EVENTO).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = iMP_BITACORA_EVENTO.Cod_desaduanaje });
             }
 
             TempData["Desaduanaje"] = db.IMP_DESADUANAJE.Find(iMP_BITACORA_EVENTO.Cod_desaduanaje);
@@ -175,7 +182,7 @@ namespace WebBS.Controllers
             IMP_BITACORA_EVENTO iMP_BITACORA_EVENTO = await db.IMP_BITACORA_EVENTO.FindAsync(id);
             db.IMP_BITACORA_EVENTO.Remove(iMP_BITACORA_EVENTO);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = iMP_BITACORA_EVENTO.Cod_desaduanaje });
         }
 
         protected override void Dispose(bool disposing)
@@ -185,6 +192,36 @@ namespace WebBS.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private void EnviarCorreo(int cod_Evento, int cod_Desaduanaje)
+        {
+            try
+            {
+                var alerta = db.IMP_ALERTA_EVENTO.Where(a => a.Cod_desaduanaje == cod_Desaduanaje && a.Cod_evento == cod_Evento).FirstOrDefault();
+
+                if (alerta != null)
+                {
+                    var evento = db.IMP_EVENTO.Find(cod_Evento);
+                    MailMessage mail = new MailMessage("emelgarejo@gmd.com.pe", "emelgarejo@gmd.com.pe");
+                    NetworkCredential basicCredential =
+        new NetworkCredential("emelgarejo", "");
+                    SmtpClient client = new SmtpClient();
+                    client.Port = 25;
+                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    client.UseDefaultCredentials = false;
+                    client.Credentials = basicCredential;
+                    client.Host = "";
+                    mail.Subject = "Alerta de evento activado";
+                    mail.Body = "Se ha registrado el evento :" + evento.IMP_TIPO_EVENTO.Nombre + " - " + evento.Nombre;
+                    client.Send(mail);
+                }
+
+            }
+            catch (Exception e)
+            {
+
+            }
         }
     }
 }

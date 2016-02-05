@@ -214,7 +214,7 @@ namespace WebBS.Controllers
             var entidad = await db.IMP_SOLICITUD_IMPORTACION.FindAsync(codigoSolicitud);
             entidad.Cod_proveedor = codigoProveedor;
             entidad.IMP_SOLICITUD.Estado = DatosConstantes.EstadoSolicitud.Proceso;
-            
+            var prov = await db.IMP_PROVEEDOR.FindAsync(codigoProveedor);
             db.IMP_BITACORA_EVENTO.Add(new IMP_BITACORA_EVENTO {
                 Cod_desaduanaje = entidad.IMP_DESADUANAJE.FirstOrDefault().Cod_desaduanaje,
                 Cod_evento = 100,
@@ -222,7 +222,7 @@ namespace WebBS.Controllers
                 Cod_usu_regi = 1,
                 Fec_usu_regi = DateTime.Now,
                 Descripcion = "Evento registrado de modo automático",
-                Observaciones = "No aplica"
+                Observaciones = "Agente :" + prov.Razon_social
             });
 
             await db.SaveChangesAsync();
