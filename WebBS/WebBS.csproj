@@ -375,6 +375,9 @@
     <Compile Include="Models\IMP_ALERTA_EVENTO.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IMP_ALMACEN_ADUANAS.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IMP_ARTICULO.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>

@@ -17,6 +17,7 @@ namespace WebBS.Models
         public IMP_PUERTO()
         {
             this.IMP_ADQUISICION = new HashSet<IMP_ADQUISICION>();
+            this.IMP_ALMACEN_ADUANAS = new HashSet<IMP_ALMACEN_ADUANAS>();
         }
     
         public int Cod_puerto { get; set; }
@@ -30,6 +31,7 @@ namespace WebBS.Models
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
     
         public virtual ICollection<IMP_ADQUISICION> IMP_ADQUISICION { get; set; }
+        public virtual ICollection<IMP_ALMACEN_ADUANAS> IMP_ALMACEN_ADUANAS { get; set; }
         public virtual IMP_DISTRITO IMP_DISTRITO { get; set; }
     }
 }

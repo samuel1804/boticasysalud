@@ -3,6 +3,7 @@
 
 @{
     ViewBag.Title = "Solicitud de Desaduanaje";
+    //var imp_adquisicion = @Model.IMP_SOLICITUD_IMPORTACION.IMP_ORDEN_COMPRA.IMP_SOLICITUD_IMPORTACION.FirstOrDefault(s => s.IMP_ADQUISICION.Count > 0).IMP_ADQUISICION.FirstOrDefault();
 }
 
 <h2>Solicitud de Desaduanaje</h2>
@@ -33,10 +34,10 @@
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a data-toggle="tab" href="#home">Orden de Compra</a></li>
         @if (Model.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado == WebBS.Implement.DatosConstantes.EstadoSolicitud.Pendiente ||
-            Model.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado == WebBS.Implement.DatosConstantes.EstadoSolicitud.Proceso ||
-            Model.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado == WebBS.Implement.DatosConstantes.EstadoSolicitud.Cerrado)
+                Model.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado == WebBS.Implement.DatosConstantes.EstadoSolicitud.Proceso ||
+                Model.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado == WebBS.Implement.DatosConstantes.EstadoSolicitud.Cerrado)
         {
-            <li role="presentation"><a data-toggle="tab" href="#menu1">Agente de Carga</a></li>
+            <li role="presentation"><a data-toggle="tab" href="#menu1">Agente de Aduanas</a></li>
             <li role="presentation"><a data-toggle="tab" href="#menu2">Cierre de solicitud</a></li>
         }
     </ul>
@@ -44,20 +45,11 @@
     <div class="tab-content">
         <div id="home" role="tabpanel" class="tab-pane fade in active">
             <br />
-            @if (Model.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado == WebBS.Implement.DatosConstantes.EstadoSolicitud.Pendiente)
-            {
-                <div class="row">
-                    <div class="col-sm-12 text-right">
-                        <div class="form-group">
-                            <button id="btnRechazar" class="btn btn-primary" data-toggle="modal" data-target="#divRechazar">Rechazar Solicitud</button>
-                        </div>
-                    </div>
-                </div>
-            }
+
             <div class="row">
                 <div class="col-sm-1"></div>
                 <div class="col-sm-2">
-                    Número
+                    Número:
                 </div>
 
                 <div class="col-sm-3">
@@ -65,7 +57,7 @@
                 </div>
                 <div class="col-sm-1"></div>
                 <div class="col-sm-2">
-                    Proveedor
+                    Proveedor:
                 </div>
 
                 <div class="col-sm-3">
@@ -76,15 +68,15 @@
             <div class="row">
                 <div class="col-sm-1"></div>
                 <div class="col-sm-2">
-                    Fecha
+                    Fecha:
                 </div>
 
                 <div class="col-sm-3">
-                    @Model.IMP_SOLICITUD_IMPORTACION.IMP_ORDEN_COMPRA.Fec_orden_compra
+                    @Model.IMP_SOLICITUD_IMPORTACION.IMP_ORDEN_COMPRA.Fec_orden_compra.Value.ToString("dd/MM/yyyy")
                 </div>
                 <div class="col-sm-1"></div>
                 <div class="col-sm-2">
-                    Origen
+                    Origen:
                 </div>
 
                 <div class="col-sm-3">
@@ -154,7 +146,7 @@
                     <div class="row">
                         <div class="col-sm-12 text-center">
 
-                            <h4>Aun no se ha agregado un agente de carga</h4>
+                            <h4>Aun no se ha agregado un agente de Aduana</h4>
 
                         </div>
                     </div>
@@ -217,7 +209,7 @@
                     <div class="row">
                         <div class="col-sm-12 text-center">
 
-                            <h4>Primero debe agregar un agente de carga</h4>
+                            <h4>Primero debe agregar un agente de aduana</h4>
 
                         </div>
                     </div>
@@ -235,19 +227,10 @@
             <div id="divCerrarSolicitud" hidden>
                 <div class="form-horizontal">
 
-                    <div class="form-group">
-                        <label class="control-label col-md-2" for="Fec_accion">Fecha de Embarque :</label>
-                        <div class="col-md-2">
-                            @Html.EditorFor(model => model.Fec_inicio_desaduanaje, new { htmlAttributes = new { @class = "form-control", id = "txtFechaEmbarque", required = "", placeholder = "Fecha de embarque" } })
-                        </div>
-                        <label class="control-label col-md-2" for="Fec_accion">Fecha de llegada :</label>
-                        <div class="col-md-2">
-                            @Html.EditorFor(model => model.Fec_retiro_mercaderia, new { htmlAttributes = new { @class = "form-control", id = "txtFechaLlegada", required = "", placeholder = "Fecha de llegada" } })
-                        </div>
-                    </div>
+
 
                     <div class="form-group">
-                        <label class="control-label col-md-2" for="Fec_accion">Puerto de llegada :</label>
+                        <label class="control-label col-md-2" for="Fec_accion">Almacen de ADUANAS :</label>
                         <div class="col-md-3">
                             <select id="slcPuerto" class="form-control">
                                 <option value="0">Seleccione</option>
@@ -256,33 +239,30 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="control-label col-md-2" for="Fec_accion">Fecha de retiro :</label>
+
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.Fec_retiro_mercaderia, new { htmlAttributes = new { @class = "form-control", id = "txtFechaRetiro", required = "", placeholder = "dd/mm/yyyy" } })
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group">
+
                         <label class="control-label col-md-2" for="Fec_accion">DAM :</label>
-                        <div class="col-md-3">
-                            
-                            @if (Model.IMP_DAM.FirstOrDefault() == null)
-                            {
-                                <p>No se ha registrado la factura comercial</p>
-                            }
-                            else
+                        <div class="col-md-5">
+                            <input id="uplFile" type="file" name="inputFile" class="file" data-show-upload="false" required />
+                        </div>
+                        <div class="col-md-1">
+                            @if (Model.IMP_DAM != null && Model.IMP_DAM.FirstOrDefault() != null && Model.IMP_DAM.FirstOrDefault().Archivo != null)
                             {
                                 <a href="@Url.Content(Model.IMP_DAM.FirstOrDefault().Archivo)" class="control-table text-center" target="_blank"><i class="fa fa-file-archive-o"></i></a>
                             }
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-md-2" for="Fec_accion">Bitacora :</label>
-                        <div class="col-md-3">
-                            @if (Model.IMP_BITACORA_EVENTO.FirstOrDefault() == null)
-                            {
-                                <p>No se ha registrado Bitacora</p>
-                            }
-                            else
-                            {
-                                <a href="@Url.Content(Model.IMP_BITACORA_EVENTO.FirstOrDefault().Observaciones)" class="control-table text-center" target="_blank"><i class="fa fa-file-archive-o"></i></a>
-                            }
-                        </div>
-                    </div>
+
                     @if (Model.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado != WebBS.Implement.DatosConstantes.EstadoSolicitud.Cerrado)
                     {
 
@@ -292,16 +272,9 @@
                                 <input type="button" id="btnGuardarCierre" value="Solo Guardar" class="btn btn-primary" />
                             </div>
                             <div class="col-md-8 text-right">
-                                @if (Model.IMP_DAM.FirstOrDefault() == null || Model.IMP_BITACORA_EVENTO.FirstOrDefault() == null)
-                                {
-                                    <span title="No puede cerrar la solicitud si falta registrar el DAM o la Bitacora" data-toggle="tooltip" data-html="true" data-placement="left">
-                                        <input type="button" id="btnGuardarFinalizarCierre" value="Guardar y finalizar solicitud" class="btn btn-primary" disabled="disabled" />
-                                    </span>
-                                }
-                                else
-                                {
-                                    <input type="button" id="btnGuardarFinalizarCierre" value="Guardar y finalizar solicitud" class="btn btn-primary" />
-                                }
+
+                                <input type="button" id="btnGuardarFinalizarCierre" value="Guardar y finalizar solicitud" class="btn btn-primary" />
+
 
                             </div>
                         </div>
@@ -318,60 +291,24 @@
         <a id="btnCancelar" class="btn btn-default" href="@Url.Action("Index", "SolicitudDesaduanaje")">Salir</a>
     </div>
 </div>
-<div id="divRechazar" class="modal fade" tabindex="-1" role="dialog">
-    <form>
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Rechazar Solicitud</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-horizontal">
-                        <h4>Atención</h4>
-                        <table class="table-bordered">
-                            <tr class="rowGroup" data-toggle="collapse">
-                                <td>
-                                    <h4>Está a punto de rechazar la solicitud</h4>
-                                    <p>Al rechazar la solicitud esta solo quedará disponible en modo "solo lectura". No podrá realizar ninguna otra acción sobre ella</p>
-                                    <h5>Tenga en cuenta que debe especificar un motivo del rechazo</h5>
-                                </td>
-                            </tr>
-                        </table>
-                        <hr />
-
-                        <div class="form-group">
-                            <label class="control-label col-md-2" for="Fec_accion">Motivo :</label>
-                            <div class="col-md-8">
-                                @Html.TextArea("observacion", new { id = "txtObservacion", @class = "form-control", required = "", rows = "5", placeholder = "Agregar las observaciones o consideraciones" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="button" id="btnProcederRechazo" class="btn btn-primary">Proceder</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/Controls")
     <script>
+
+
         $(document).ready(
             function(){
-                var lista= @Html.Raw(Json.Encode(TempData["ActividadPlanificada"]));
-                var listaPuerto= @Html.Raw(Json.Encode(TempData["ListaPuerto"]));
+                var lista= @Html.Raw(Json.Encode(TempData["Proveedor"]));
+                var listaAlmacenAduanas= @Html.Raw(Json.Encode(TempData["ListaAlmacenAduanas"]));
                 var mensaje = new Pe.GMD.UI.Web.Components.Message();
 
                 $.each(lista , function(index,value){
                     $('<option/>').appendTo($('#slcAgente')).val(value.Cod_proveedor).html(value.Razon_social);
                 });
 
-                $.each(listaPuerto , function(index,value){
-                    $('<option/>').appendTo($('#slcPuerto')).val(value.Cod_puerto).html(value.Nombre);
+                $.each(listaAlmacenAduanas , function(index,value){
+                    $('<option/>').appendTo($('#slcPuerto')).val(value.Cod_almacen_aduanas).html(value.Nombre);
                 });
 
                 $('#slcAgente').change(function(){
@@ -386,7 +323,9 @@
                     });
                 });
                 var seleccionado = @Html.Raw(Model.IMP_SOLICITUD_IMPORTACION.IMP_PROVEEDOR != null ? Model.IMP_SOLICITUD_IMPORTACION.IMP_PROVEEDOR.Cod_proveedor : 0);
-                var seleccionadoPuerto = ''; //Html.Raw(Model.Cod_Puerto.HasValue? Model.Cod_Puerto : 0);
+                //var seleccionadoPuerto = @@Html.Raw(Model.Cod_Puerto.HasValue? Model.Cod_Puerto : 0);@@
+                var seleccionadoPuerto = @Html.Raw(Model.Cod_almacen_aduanas.HasValue? Model.Cod_almacen_aduanas : 0);
+                var fecRetiro = ''; //Html.Raw(Model.Fec_retiro_mercaderia);
 
                 $('#slcAgente').val(seleccionado);
                 $('#slcAgente').change();
@@ -399,7 +338,7 @@
 
                         setTimeout(function () {
                             mensaje.Information({
-                                title: 'Rechazar Solicitud de Adquisición',
+                                title: 'Rechazar Solicitud de Desaduanaje',
                                 message: 'Se cerro la actividad correctamente',
                                 onClose: function () {
                                     window.location.href = $('#btnCancelar').attr("href");
@@ -414,8 +353,8 @@
                     onSuccess: function () {
                         setTimeout(function () {
                             mensaje.Information({
-                                title: 'Rechazar Solicitud de Adquisición',
-                                message: 'Se asignó el agente de carga correctamente'
+                                title: 'Solicitud de Desaduanaje',
+                                message: 'Se asignó el agente de aduana correctamente'
                             });
                         }, 500);
                     }
@@ -424,10 +363,13 @@
                 var ajaxCierre = new Pe.GMD.UI.Web.Components.Ajax({
                     action: '@Url.Action("CerrarSolicitud")',
                     autoSubmit: false,
+                    hasFile: true,
+                    contentType: false,
+                    processData: false,
                     onSuccess: function () {
                         setTimeout(function () {
                             mensaje.Information({
-                                title: 'Cerrar Solicitud de Adquisición',
+                                title: 'Cerrar Solicitud de Desaduanaje',
                                 message: 'La acción finalizó correctamente'
                             });
                         }, 500);
@@ -437,7 +379,7 @@
                 $('#btnAsignarAgente').click(function () {
                     mensaje.Confirmation({
                         title: 'Asignar Agente',
-                        message: 'Al asignar un agente de carga dar por conforme la solicitud. La solicitud ya no podra ser rechaza.<br/> ¿Desea Continuar? ',
+                        message: 'Al asignar un agente de aduana da por conforme la solicitud. La solicitud ya no podra ser rechaza.<br/> ¿Desea Continuar? ',
                         onAccept: function () {
                             $('#divSinAgente').empty();
                             $('#divAsignarAgente').show();
@@ -448,7 +390,7 @@
                 $('#btnProcederRechazo').click(function () {
                     if($('#txtObservacion').val()=="" || $('#txtObservacion').val()==null){
                         mensaje.Warning({
-                            title: 'Rechazar Solicitud de Adquisición',
+                            title: 'Rechazar Solicitud de Desaduanaje',
                             message: 'Debe especificar un motivo'
                         });
                     }
@@ -469,31 +411,41 @@
                 $('#btnGuardarAgente').click(function () {
                     if($('#slcAgente').val()=="0"){
                         mensaje.Warning({
-                            title: 'Agente de Carga',
+                            title: 'Agente de Aduana',
                             message: 'Debe seleccionar el agente'
                         });
                     }
                     else{
                         mensaje.Confirmation({
-                            title: 'Asignar agente de carga',
+                            title: 'Asignar agente de aduana',
                             message: '¿Está seguro de proceder con la asignación? ',
                             onAccept: function () {
                                 ajaxAgente.send({
                                     codigoSolicitud:@Model.IMP_SOLICITUD_IMPORTACION.Cod_solicitudimportacion,
-                                    codigoProveedor : $('#slcAgente').val()});
+                                    codigoProveedor : $('#slcAgente').val()
+                                });
                             }
                         });
                     }
                 });
 
                 function GuardarCierre(finalizar){
-                    ajaxCierre.send({
+                    var actividad ={
                         codigoSolicitud:@Model.Cod_desaduanaje,
                         codigoPuerto : $('#slcPuerto').val(),
-                        fechaEmbarque : $('#txtFechaEmbarque').val(),
-                        fechaLlegada  : $('#txtFechaLlegada').val(),
+                        fechaRetiro : $('#txtFechaRetiro').val(),
                         finalizar : finalizar
+                    };
+
+                    var files = $('#uplFile')[0].files;
+                    var Frmdata = new FormData();
+                    for (var i = 0; i < files.length; i++) {
+                        Frmdata.append(files[i].name, files[i]);
+                    };
+                    $.each(actividad, function (index, value) {
+                        Frmdata.append(index, value);
                     });
+                    ajaxCierre.send(Frmdata);
                 }
 
                 $('#btnGuardarCierre').click(function(){
@@ -501,7 +453,7 @@
                 });
 
                 $('#btnGuardarFinalizarCierre').click(function(){
-                    if($('#slcPuerto').val()=="0" ||  $('#txtFechaEmbarque').val()=='' ||  $('#txtFechaLlegada').val()=='' ){
+                    if($('#slcPuerto').val()=="0" ){
                         mensaje.Warning({
                             title: 'Cierre Solicitud',
                             message: 'Todos los campos de la pestaña son requeridos'
@@ -518,11 +470,10 @@
                     }
                 });
                 new Pe.GMD.UI.Web.Components.Calendar({
-                    inputFrom: $("#txtFechaEmbarque"),
-                    maxDateFrom: new Date(),
-                    inputTo: $("#txtFechaLlegada"),
-                    maxDateTo: new Date()
+                    inputFrom: $("#txtFechaRetiro"),
+                    maxDateFrom: new Date()
                 });
+
                 $('[data-toggle="tooltip"]').tooltip();
 
                 var cerrada=@Html.Raw(Json.Encode(Model.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado == WebBS.Implement.DatosConstantes.EstadoSolicitud.Cerrado));

@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using WebBS.Models;
 using System.Globalization;
+using WebBS.Implement;
+using System.IO;
 
 namespace WebBS.Controllers
 {
@@ -60,6 +62,24 @@ namespace WebBS.Controllers
             {
                 return HttpNotFound();
             }
+
+            var lista = await db.IMP_PROVEEDOR.Where(p => p.Tipo == DatosConstantes.TipoProveedor.AgenteAduana).ToListAsync();
+            var listaAlmacenAduanas = await db.IMP_ALMACEN_ADUANAS.ToListAsync();
+            TempData["ListaAlmacenAduanas"] = listaAlmacenAduanas.Select(p => new IMP_ALMACEN_ADUANAS()
+            {
+                //Cod_puerto = p.Cod_puerto,
+                //Nombre = p.IMP_DISTRITO.IMP_PROVINCIA.IMP_DEPARTAMENTO.Nombre + " - " + p.Nombre
+                Cod_almacen_aduanas = p.Cod_almacen_aduanas,
+                Nombre = p.Nombre
+            });
+            TempData["Proveedor"] = lista.Select(a => new IMP_PROVEEDOR()
+            {
+                Cod_proveedor = a.Cod_proveedor,
+                Razon_social = a.Razon_social,
+                Ruc = a.Ruc,
+                Telefono = a.Telefono
+            }).ToList();
+
             return View(iMP_DESADUANAJE);
         }
 
@@ -86,6 +106,29 @@ namespace WebBS.Controllers
 
             ViewBag.Cod_solicitud_importacion = new SelectList(db.IMP_SOLICITUD_IMPORTACION, "Cod_solicitudimportacion", "Cod_solicitudimportacion", iMP_DESADUANAJE.Cod_solicitud_importacion);
             return View(iMP_DESADUANAJE);
+        }
+
+
+        [HttpPost]
+
+        public async Task<ActionResult> Create([Bind(Include = "Cod_actividad_planificada,Fec_accion,Observaciones")] IMP_ACCION iMP_ACCION)
+        {
+            ViewBag.Cod_actividad_planificada = iMP_ACCION.Cod_actividad_planificada;
+            if (ModelState.IsValid)
+            {
+                iMP_ACCION.Evidencia = UploadFile(iMP_ACCION.Cod_actividad_planificada);
+                iMP_ACCION.Cod_usu_regi = 1;
+                iMP_ACCION.Fec_usu_regi = System.DateTime.Now;
+                db.IMP_ACCION.Add(iMP_ACCION);
+                var actividad = await db.IMP_ACTIVIDAD_PLANIFICADA.FindAsync(iMP_ACCION.Cod_actividad_planificada);
+                TempData["ActividadPlanificada"] = actividad;
+                actividad.Estado = DatosConstantes.EstadoActividadPlanificada.Proceso;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index", new { Id = iMP_ACCION.Cod_actividad_planificada });
+            }
+
+
+            return View(iMP_ACCION);
         }
 
         // GET: SolicitudDesaduanaje/Edit/5
@@ -155,5 +198,117 @@ namespace WebBS.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public async Task<ActionResult> RechazarSolicitud(int codigoSolicitud, string motivo)
+        {
+            var entidad = await db.IMP_SOLICITUD.FindAsync(codigoSolicitud);
+            entidad.Estado = DatosConstantes.EstadoSolicitud.Rechazado;
+            entidad.Observaciones = motivo;
+            await db.SaveChangesAsync();
+            return Json(new { IsSuccess = true });
+        }
+
+
+        public async Task<ActionResult> GuardarAgent(int codigoSolicitud, int codigoProveedor)
+        {
+            var entidad = await db.IMP_SOLICITUD_IMPORTACION.FindAsync(codigoSolicitud);
+            entidad.Cod_proveedor = codigoProveedor;
+            entidad.IMP_SOLICITUD.Estado = DatosConstantes.EstadoSolicitud.Proceso;
+            
+            db.IMP_BITACORA_EVENTO.Add(new IMP_BITACORA_EVENTO {
+                Cod_desaduanaje = entidad.IMP_DESADUANAJE.FirstOrDefault().Cod_desaduanaje,
+                Cod_evento = 100,
+                Fec_evento = DateTime.Now,
+                Cod_usu_regi = 1,
+                Fec_usu_regi = DateTime.Now,
+                Descripcion = "Evento registrado de modo automático",
+                Observaciones = "No aplica"
+            });
+
+            await db.SaveChangesAsync();
+            return Json(new { IsSuccess = true });
+        }
+
+
+        public async Task<ActionResult> CerrarSolicitud(int codigoSolicitud, int codigoPuerto, string fechaRetiro, bool finalizar)
+        {
+            //var entidad = await db.IMP_ADQUISICION.FindAsync(codigoSolicitud);
+
+            var entidad = await db.IMP_DESADUANAJE.FindAsync(codigoSolicitud);
+
+
+            if (!string.IsNullOrWhiteSpace(fechaRetiro))
+            {
+                entidad.Fec_retiro_mercaderia = DateTime.ParseExact(fechaRetiro, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
+
+            if (codigoPuerto > 0)
+            {
+                entidad.Cod_almacen_aduanas = codigoPuerto;
+            }
+            if (finalizar)
+            {
+                entidad.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado = DatosConstantes.EstadoSolicitud.Cerrado;
+                db.IMP_BITACORA_EVENTO.Add(new IMP_BITACORA_EVENTO
+                {
+                    Cod_desaduanaje = entidad.Cod_desaduanaje,
+                    Cod_evento = 101,
+                    Fec_evento = DateTime.Now,
+                    Cod_usu_regi = 1,
+                    Fec_usu_regi = DateTime.Now,
+                    Descripcion = "Evento registrado de modo automático",
+                    Observaciones = "No aplica"
+                });
+            }
+
+            if (entidad.IMP_DAM.Any())
+            {
+                entidad.IMP_DAM.FirstOrDefault().Archivo = UploadFile(entidad.Cod_desaduanaje);
+
+            }
+            else
+            {
+                var archivo = UploadFile(entidad.Cod_desaduanaje);
+                if (archivo != null)
+                {
+                    db.IMP_DAM.Add(new IMP_DAM()
+                    {
+                        Archivo = archivo,
+                        Cod_desaduanaje = entidad.Cod_desaduanaje,
+                        Cod_usu_regi = 1,
+                        Fec_usu_regi = DateTime.Now
+                    });
+                }
+            }
+
+
+            entidad.Fec_usu_modi = DateTime.Now;
+            entidad.Cod_usu_modi = 1;
+
+
+            await db.SaveChangesAsync();
+            return Json(new { IsSuccess = true });
+        }
+
+
+
+
+        private string UploadFile(int actividad)
+        {
+            string result = null;
+            if (Request.Files.Count > 0)
+            {
+                var file = Request.Files[0];
+                if (file != null && file.ContentLength > 0)
+                {
+                    var fileName = actividad + "_" + DateTime.Now.ToString("ddMMyyyyHHmmss") + "_" + Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Evidencias"), fileName);
+                    file.SaveAs(path);
+                    result = "~/Evidencias/" + fileName;
+                }
+            }
+            return result;
+        }
+
     }
 }

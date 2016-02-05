@@ -33,6 +33,7 @@ namespace WebBS.Controllers
                     TempData["alerta"] = db.IMP_ALERTA_EVENTO.Where(a => a.Cod_desaduanaje == desadunaje.Cod_desaduanaje).ToList();
                     TempData["desaduanaje"] = desadunaje.Cod_desaduanaje;
                     TempData["activo"] = desadunaje.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Estado == WebBS.Implement.DatosConstantes.EstadoSolicitud.Proceso;
+                    TempData["entidad"] = desadunaje;
                 }
                 TempData["bitacora"] = bistacora;
             }

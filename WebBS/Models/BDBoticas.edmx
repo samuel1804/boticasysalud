@@ -569,6 +569,17 @@
           <Property Name="Cod_usu_modi" Type="int" />
           <Property Name="Fec_usu_modi" Type="datetime" />
         </EntityType>
+        <EntityType Name="IMP_ALMACEN_ADUANAS">
+          <Key>
+            <PropertyRef Name="Cod_almacen_aduanas" />
+          </Key>
+          <Property Name="Cod_almacen_aduanas" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Razon_social" Type="varchar" MaxLength="150" />
+          <Property Name="Direccion" Type="varchar" MaxLength="150" />
+          <Property Name="Telefono" Type="varchar" MaxLength="20" />
+          <Property Name="Cod_puerto" Type="int" />
+        </EntityType>
         <EntityType Name="IMP_ARTICULO">
           <Key>
             <PropertyRef Name="Cod_articulo" />
@@ -663,7 +674,7 @@
           <Key>
             <PropertyRef Name="Cod_DAM" />
           </Key>
-          <Property Name="Cod_DAM" Type="int" Nullable="false" />
+          <Property Name="Cod_DAM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Cod_desaduanaje" Type="int" />
           <Property Name="Descripcion" Type="varchar" MaxLength="150" />
           <Property Name="Observaciones" Type="varbinary" MaxLength="150" />
@@ -696,6 +707,7 @@
           <Property Name="Fec_usu_regi" Type="datetime" Nullable="false" />
           <Property Name="Cod_usu_modi" Type="int" />
           <Property Name="Fec_usu_modi" Type="datetime" />
+          <Property Name="Cod_almacen_aduanas" Type="int" />
         </EntityType>
         <EntityType Name="IMP_DETALLE_FACTURA_COMERCIAL">
           <Key>
@@ -1908,6 +1920,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IMP_ALMACEN_ADUANAS_IMP_PUERTO">
+          <End Role="IMP_PUERTO" Type="Self.IMP_PUERTO" Multiplicity="0..1" />
+          <End Role="IMP_ALMACEN_ADUANAS" Type="Self.IMP_ALMACEN_ADUANAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMP_PUERTO">
+              <PropertyRef Name="Cod_puerto" />
+            </Principal>
+            <Dependent Role="IMP_ALMACEN_ADUANAS">
+              <PropertyRef Name="Cod_puerto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IMP_BITACORA_EVENTO_IMP_DESADUANAJE">
           <End Role="IMP_DESADUANAJE" Type="Self.IMP_DESADUANAJE" Multiplicity="1" />
           <End Role="IMP_BITACORA_EVENTO" Type="Self.IMP_BITACORA_EVENTO" Multiplicity="*" />
@@ -2709,6 +2733,7 @@
           <EntitySet Name="IMP_ADQUISICION" EntityType="Self.IMP_ADQUISICION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMP_ALERTA_ACTIVIDAD" EntityType="Self.IMP_ALERTA_ACTIVIDAD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMP_ALERTA_EVENTO" EntityType="Self.IMP_ALERTA_EVENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IMP_ALMACEN_ADUANAS" EntityType="Self.IMP_ALMACEN_ADUANAS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMP_ARTICULO" EntityType="Self.IMP_ARTICULO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMP_BITACORA_EVENTO" EntityType="Self.IMP_BITACORA_EVENTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMP_BL" EntityType="Self.IMP_BL" Schema="dbo" store:Type="Tables" />
@@ -2933,6 +2958,10 @@
           <AssociationSet Name="FK_IMP_ALERTA_IMP_ACTIVIDAD_PLANIFICADA" Association="Self.FK_IMP_ALERTA_IMP_ACTIVIDAD_PLANIFICADA">
             <End Role="IMP_ACTIVIDAD_PLANIFICADA" EntitySet="IMP_ACTIVIDAD_PLANIFICADA" />
             <End Role="IMP_ALERTA_ACTIVIDAD" EntitySet="IMP_ALERTA_ACTIVIDAD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMP_ALMACEN_ADUANAS_IMP_PUERTO" Association="Self.FK_IMP_ALMACEN_ADUANAS_IMP_PUERTO">
+            <End Role="IMP_PUERTO" EntitySet="IMP_PUERTO" />
+            <End Role="IMP_ALMACEN_ADUANAS" EntitySet="IMP_ALMACEN_ADUANAS" />
           </AssociationSet>
           <AssociationSet Name="FK_IMP_BITACORA_EVENTO_IMP_DESADUANAJE" Association="Self.FK_IMP_BITACORA_EVENTO_IMP_DESADUANAJE">
             <End Role="IMP_DESADUANAJE" EntitySet="IMP_DESADUANAJE" />
@@ -3276,6 +3305,7 @@
           <EntitySet Name="IMP_ADQUISICION" EntityType="BDBoticasModel.IMP_ADQUISICION" />
           <EntitySet Name="IMP_ALERTA_ACTIVIDAD" EntityType="BDBoticasModel.IMP_ALERTA_ACTIVIDAD" />
           <EntitySet Name="IMP_ALERTA_EVENTO" EntityType="BDBoticasModel.IMP_ALERTA_EVENTO" />
+          <EntitySet Name="IMP_ALMACEN_ADUANAS" EntityType="BDBoticasModel.IMP_ALMACEN_ADUANAS" />
           <EntitySet Name="IMP_ARTICULO" EntityType="BDBoticasModel.IMP_ARTICULO" />
           <EntitySet Name="IMP_BITACORA_EVENTO" EntityType="BDBoticasModel.IMP_BITACORA_EVENTO" />
           <EntitySet Name="IMP_BL" EntityType="BDBoticasModel.IMP_BL" />
@@ -3528,6 +3558,10 @@
           <AssociationSet Name="FK_IMP_ALERTA_EVENTO_IMP_EVENTO" Association="BDBoticasModel.FK_IMP_ALERTA_EVENTO_IMP_EVENTO">
             <End Role="IMP_EVENTO" EntitySet="IMP_EVENTO" />
             <End Role="IMP_ALERTA_EVENTO" EntitySet="IMP_ALERTA_EVENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMP_ALMACEN_ADUANAS_IMP_PUERTO" Association="BDBoticasModel.FK_IMP_ALMACEN_ADUANAS_IMP_PUERTO">
+            <End Role="IMP_PUERTO" EntitySet="IMP_PUERTO" />
+            <End Role="IMP_ALMACEN_ADUANAS" EntitySet="IMP_ALMACEN_ADUANAS" />
           </AssociationSet>
           <AssociationSet Name="FK_IMP_DETALLE_FACTURA_COMERCIAL_IMP_ARTICULO" Association="BDBoticasModel.FK_IMP_DETALLE_FACTURA_COMERCIAL_IMP_ARTICULO">
             <End Role="IMP_ARTICULO" EntitySet="IMP_ARTICULO" />
@@ -4409,6 +4443,18 @@
           <NavigationProperty Name="IMP_DESADUANAJE" Relationship="BDBoticasModel.FK_IMP_ALERTA_EVENTO_IMP_DESADUANAJE" FromRole="IMP_ALERTA_EVENTO" ToRole="IMP_DESADUANAJE" />
           <NavigationProperty Name="IMP_EVENTO" Relationship="BDBoticasModel.FK_IMP_ALERTA_EVENTO_IMP_EVENTO" FromRole="IMP_ALERTA_EVENTO" ToRole="IMP_EVENTO" />
         </EntityType>
+        <EntityType Name="IMP_ALMACEN_ADUANAS">
+          <Key>
+            <PropertyRef Name="Cod_almacen_aduanas" />
+          </Key>
+          <Property Name="Cod_almacen_aduanas" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Razon_social" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_puerto" Type="Int32" />
+          <NavigationProperty Name="IMP_PUERTO" Relationship="BDBoticasModel.FK_IMP_ALMACEN_ADUANAS_IMP_PUERTO" FromRole="IMP_ALMACEN_ADUANAS" ToRole="IMP_PUERTO" />
+        </EntityType>
         <EntityType Name="IMP_ARTICULO">
           <Key>
             <PropertyRef Name="Cod_articulo" />
@@ -4512,7 +4558,7 @@
           <Key>
             <PropertyRef Name="Cod_DAM" />
           </Key>
-          <Property Name="Cod_DAM" Type="Int32" Nullable="false" />
+          <Property Name="Cod_DAM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Cod_desaduanaje" Type="Int32" />
           <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Observaciones" Type="Binary" MaxLength="150" FixedLength="false" />
@@ -4547,6 +4593,7 @@
           <Property Name="Fec_usu_regi" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Cod_usu_modi" Type="Int32" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
+          <Property Name="Cod_almacen_aduanas" Type="Int32" />
           <NavigationProperty Name="IMP_ALERTA_EVENTO" Relationship="BDBoticasModel.FK_IMP_ALERTA_EVENTO_IMP_DESADUANAJE" FromRole="IMP_DESADUANAJE" ToRole="IMP_ALERTA_EVENTO" />
           <NavigationProperty Name="IMP_BITACORA_EVENTO" Relationship="BDBoticasModel.FK_IMP_BITACORA_EVENTO_IMP_DESADUANAJE" FromRole="IMP_DESADUANAJE" ToRole="IMP_BITACORA_EVENTO" />
           <NavigationProperty Name="IMP_DAM" Relationship="BDBoticasModel.FK_IMP_DAM_IMP_DESADUANAJE" FromRole="IMP_DESADUANAJE" ToRole="IMP_DAM" />
@@ -4719,6 +4766,7 @@
           <Property Name="Cod_usu_modi" Type="Int32" />
           <Property Name="Fec_usu_modi" Type="DateTime" Precision="3" />
           <NavigationProperty Name="IMP_ADQUISICION" Relationship="BDBoticasModel.FK_IMP_ADQUISICION_IMP_PUERTO" FromRole="IMP_PUERTO" ToRole="IMP_ADQUISICION" />
+          <NavigationProperty Name="IMP_ALMACEN_ADUANAS" Relationship="BDBoticasModel.FK_IMP_ALMACEN_ADUANAS_IMP_PUERTO" FromRole="IMP_PUERTO" ToRole="IMP_ALMACEN_ADUANAS" />
           <NavigationProperty Name="IMP_DISTRITO" Relationship="BDBoticasModel.FK_IMP_PUERTO_IMP_DISTRITO" FromRole="IMP_PUERTO" ToRole="IMP_DISTRITO" />
         </EntityType>
         <EntityType Name="IMP_RESOLUCION_DIGEMID">
@@ -5957,6 +6005,18 @@
             </Principal>
             <Dependent Role="IMP_ALERTA_EVENTO">
               <PropertyRef Name="Cod_evento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMP_ALMACEN_ADUANAS_IMP_PUERTO">
+          <End Type="BDBoticasModel.IMP_PUERTO" Role="IMP_PUERTO" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.IMP_ALMACEN_ADUANAS" Role="IMP_ALMACEN_ADUANAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMP_PUERTO">
+              <PropertyRef Name="Cod_puerto" />
+            </Principal>
+            <Dependent Role="IMP_ALMACEN_ADUANAS">
+              <PropertyRef Name="Cod_puerto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7244,6 +7304,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="IMP_ALMACEN_ADUANAS">
+            <EntityTypeMapping TypeName="BDBoticasModel.IMP_ALMACEN_ADUANAS">
+              <MappingFragment StoreEntitySet="IMP_ALMACEN_ADUANAS">
+                <ScalarProperty Name="Cod_puerto" ColumnName="Cod_puerto" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Razon_social" ColumnName="Razon_social" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Cod_almacen_aduanas" ColumnName="Cod_almacen_aduanas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="IMP_ARTICULO">
             <EntityTypeMapping TypeName="BDBoticasModel.IMP_ARTICULO">
               <MappingFragment StoreEntitySet="IMP_ARTICULO">
@@ -7370,6 +7442,7 @@
           <EntitySetMapping Name="IMP_DESADUANAJE">
             <EntityTypeMapping TypeName="BDBoticasModel.IMP_DESADUANAJE">
               <MappingFragment StoreEntitySet="IMP_DESADUANAJE">
+                <ScalarProperty Name="Cod_almacen_aduanas" ColumnName="Cod_almacen_aduanas" />
                 <ScalarProperty Name="Fec_usu_modi" ColumnName="Fec_usu_modi" />
                 <ScalarProperty Name="Cod_usu_modi" ColumnName="Cod_usu_modi" />
                 <ScalarProperty Name="Fec_usu_regi" ColumnName="Fec_usu_regi" />
