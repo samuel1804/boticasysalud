@@ -16,23 +16,18 @@ namespace WebBS.Models
     {
         public RRH_PreguntaEvaluacionTecnica()
         {
-            this.RRH_EvaluacionTecnica = new HashSet<RRH_EvaluacionTecnica>();
+            this.RRH_RespuestaEvaluacionTecnica = new HashSet<RRH_RespuestaEvaluacionTecnica>();
         }
     
-        public int Cod_preg_eva_tec { get; set; }
-        public string Titulo { get; set; }
+        public int Cod_preg_evaltec { get; set; }
         public string Pregunta { get; set; }
-        public Nullable<System.DateTime> Fec_creacion { get; set; }
-        public Nullable<int> Cod_criterio { get; set; }
+        public Nullable<int> Cod_evaltec { get; set; }
         public string Cod_usu_regi { get; set; }
         public Nullable<System.DateTime> Fec_usu_regi { get; set; }
         public string Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
-        public Nullable<int> Cod_alternativa_evaluaciontec { get; set; }
-        public Nullable<int> Cod_perfil { get; set; }
     
-        public virtual RRH_Criterio RRH_Criterio { get; set; }
-        public virtual ICollection<RRH_EvaluacionTecnica> RRH_EvaluacionTecnica { get; set; }
-        public virtual RRH_Perfil RRH_Perfil { get; set; }
+        public virtual RRH_EvaluacionTecnica RRH_EvaluacionTecnica { get; set; }
+        public virtual ICollection<RRH_RespuestaEvaluacionTecnica> RRH_RespuestaEvaluacionTecnica { get; set; }
     }
 }

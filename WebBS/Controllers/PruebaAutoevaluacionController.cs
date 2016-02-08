@@ -71,7 +71,7 @@ namespace WebBS.Controllers
             Session["Criterios"]=db.RRH_Criterio.ToList();
             }
             List<RRH_Criterio> Criterios=(List<RRH_Criterio>)Session["Criterios"];
-            RRH_Criterio Criterio=Criterios.Where(t=>t.completado==false).FirstOrDefault();
+            RRH_Criterio Criterio=Criterios.Where(t=>t.completado==false || t.completado==null).FirstOrDefault();
 
             if (Session["Respuestas"] == null)
             {
@@ -143,7 +143,7 @@ namespace WebBS.Controllers
 
                
                     List<RRH_Criterio> Criterios = (List<RRH_Criterio>)Session["Criterios"];
-                    Criterios.Where(t => t.completado == false).FirstOrDefault().completado=true;
+                    Criterios.Where(t => t.completado == false || t.completado==null).FirstOrDefault().completado=true;
                     Session["Criterios"] = Criterios;
                 
                     List<RRH_PruebaAutoevaluacion_Respuesta> respuestas = (List<RRH_PruebaAutoevaluacion_Respuesta>)Session["Respuestas"];

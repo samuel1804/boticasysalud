@@ -36,16 +36,16 @@ namespace WebBS.Models
         public string Direccion { get; set; }
         public string Foto { get; set; }
         public Nullable<System.DateTime> Fec_Ingreso { get; set; }
-        public string Cod_usu_regi { get; set; }
-        public Nullable<System.DateTime> Fec_usu_regi { get; set; }
-        public string Cod_usu_modi { get; set; }
-        public Nullable<System.DateTime> Fec_usu_modi { get; set; }
-        public Nullable<bool> Evaluado { get; set; }
-        public Nullable<int> Cod_Puesto { get; set; }
+        public Nullable<int> Evaluado { get; set; }
+        public Nullable<int> Cod_puesto { get; set; }
         public Nullable<int> Cod_Jefe { get; set; }
-        public Nullable<int> Cod_Sucursal { get; set; }
-        public Nullable<int> Cod_Perfil { get; set; }
-        public Nullable<int> Cod_Area { get; set; }
+        public Nullable<int> Cod_sucursal { get; set; }
+        public Nullable<int> Cod_perfil { get; set; }
+        public Nullable<int> Cod_area { get; set; }
+        public Nullable<int> Cod_usu_regi { get; set; }
+        public Nullable<System.DateTime> Fec_usu_regi { get; set; }
+        public Nullable<int> Cod_usu_modi { get; set; }
+        public Nullable<System.DateTime> Fec_usu_modi { get; set; }
     
         public virtual ICollection<ALP_LIBRO_RECETA> ALP_LIBRO_RECETA { get; set; }
         public virtual ICollection<ALP_ORDEN_PREPARADO> ALP_ORDEN_PREPARADO { get; set; }
@@ -55,8 +55,8 @@ namespace WebBS.Models
         public virtual RRH_Area RRH_Area { get; set; }
         public virtual ICollection<RRH_Empleado> RRH_Empleado1 { get; set; }
         public virtual RRH_Empleado RRH_Empleado2 { get; set; }
-        public virtual RRH_Puesto RRH_Puesto { get; set; }
         public virtual RRH_Perfil RRH_Perfil { get; set; }
+        public virtual RRH_Puesto RRH_Puesto { get; set; }
         public virtual RRH_Sucursal RRH_Sucursal { get; set; }
         public virtual ICollection<RRH_PruebaAutoevaluacion> RRH_PruebaAutoevaluacion { get; set; }
         public virtual ICollection<RRH_PruebaEvaluacionTecnica> RRH_PruebaEvaluacionTecnica { get; set; }

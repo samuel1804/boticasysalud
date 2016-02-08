@@ -14,9 +14,9 @@ namespace WebBS.Models
     
     public partial class RRH_Puesto_Option
     {
-        public Nullable<int> Cod_Puesto_Option { get; set; }
-        public int Cod_Puesto { get; set; }
-        public int OptionId { get; set; }
+        public int Cod_Puesto_Option { get; set; }
+        public Nullable<int> Cod_Puesto { get; set; }
+        public Nullable<int> Optionid { get; set; }
     
         public virtual RRH_Option RRH_Option { get; set; }
         public virtual RRH_Puesto RRH_Puesto { get; set; }

@@ -17,8 +17,8 @@ namespace WebBS.Models
         public RRH_Perfil()
         {
             this.RRH_Empleado = new HashSet<RRH_Empleado>();
+            this.RRH_EvaluacionTecnica = new HashSet<RRH_EvaluacionTecnica>();
             this.RRH_OfertaLaboral = new HashSet<RRH_OfertaLaboral>();
-            this.RRH_PreguntaEvaluacionTecnica = new HashSet<RRH_PreguntaEvaluacionTecnica>();
         }
     
         public int Cod_perfil { get; set; }
@@ -36,8 +36,8 @@ namespace WebBS.Models
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
     
         public virtual ICollection<RRH_Empleado> RRH_Empleado { get; set; }
+        public virtual ICollection<RRH_EvaluacionTecnica> RRH_EvaluacionTecnica { get; set; }
         public virtual ICollection<RRH_OfertaLaboral> RRH_OfertaLaboral { get; set; }
         public virtual RRH_Puesto RRH_Puesto { get; set; }
-        public virtual ICollection<RRH_PreguntaEvaluacionTecnica> RRH_PreguntaEvaluacionTecnica { get; set; }
     }
 }

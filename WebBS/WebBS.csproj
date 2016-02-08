@@ -505,6 +505,9 @@
     <Compile Include="Models\RRH_Criterio.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RRH_Detalle_PruebaEvaluacionTecnica.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RRH_Distrito.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
@@ -569,6 +572,9 @@
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RRH_RespuestaAutoevaluacion.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RRH_RespuestaEvaluacionTecnica.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RRH_Sucursal.cs">

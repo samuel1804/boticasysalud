@@ -28,7 +28,7 @@ namespace WebBS.Models
         public int Cod_candidato { get; set; }
         [Required(ErrorMessage = "Ingrese Nombre")]
 
-        public string Nombre { get; set; }
+        public string Nombres { get; set; }
         [Required(ErrorMessage = "Ingrese Apellido Paterno")]
 
         public string ApellidoPaterno { get; set; }
@@ -42,6 +42,8 @@ namespace WebBS.Models
         public string Direccion { get; set; }
         public string Foto { get; set; }
         public string Email { get; set; }
+
+        public string Sexo { get; set; }
         public Nullable<int> Cod_distrito { get; set; }
         public Nullable<System.DateTime> Fec_Nacimiento { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]

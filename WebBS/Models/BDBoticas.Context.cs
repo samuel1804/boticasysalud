@@ -96,6 +96,7 @@ namespace WebBS.Models
         public virtual DbSet<RRH_Area> RRH_Area { get; set; }
         public virtual DbSet<RRH_Candidato> RRH_Candidato { get; set; }
         public virtual DbSet<RRH_Criterio> RRH_Criterio { get; set; }
+        public virtual DbSet<RRH_Detalle_PruebaEvaluacionTecnica> RRH_Detalle_PruebaEvaluacionTecnica { get; set; }
         public virtual DbSet<RRH_Distrito> RRH_Distrito { get; set; }
         public virtual DbSet<RRH_Empleado> RRH_Empleado { get; set; }
         public virtual DbSet<RRH_EvaluacionTecnica> RRH_EvaluacionTecnica { get; set; }
@@ -110,8 +111,10 @@ namespace WebBS.Models
         public virtual DbSet<RRH_PruebaAutoevaluacion_Respuesta> RRH_PruebaAutoevaluacion_Respuesta { get; set; }
         public virtual DbSet<RRH_PruebaEvaluacionTecnica> RRH_PruebaEvaluacionTecnica { get; set; }
         public virtual DbSet<RRH_Puesto> RRH_Puesto { get; set; }
+        public virtual DbSet<RRH_Puesto_Option> RRH_Puesto_Option { get; set; }
         public virtual DbSet<RRH_ReferenciaLaboral> RRH_ReferenciaLaboral { get; set; }
         public virtual DbSet<RRH_RespuestaAutoevaluacion> RRH_RespuestaAutoevaluacion { get; set; }
+        public virtual DbSet<RRH_RespuestaEvaluacionTecnica> RRH_RespuestaEvaluacionTecnica { get; set; }
         public virtual DbSet<RRH_Sucursal> RRH_Sucursal { get; set; }
         public virtual DbSet<RRH_Usuario> RRH_Usuario { get; set; }
         public virtual DbSet<RYA_ACTARECEP_CAB> RYA_ACTARECEP_CAB { get; set; }
@@ -127,7 +130,6 @@ namespace WebBS.Models
         public virtual DbSet<RYA_SUCURSALES> RYA_SUCURSALES { get; set; }
         public virtual DbSet<RYA_TRANSA_ALMA> RYA_TRANSA_ALMA { get; set; }
         public virtual DbSet<RYA_UBICACIONES> RYA_UBICACIONES { get; set; }
-        public virtual DbSet<RRH_Puesto_Option> RRH_Puesto_Option { get; set; }
     
         public virtual int sp_DetalleReceta_Buscar(string wHERE)
         {

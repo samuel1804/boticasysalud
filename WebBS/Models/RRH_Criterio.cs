@@ -16,7 +16,7 @@ namespace WebBS.Models
     {
         public RRH_Criterio()
         {
-            this.RRH_PreguntaEvaluacionTecnica = new HashSet<RRH_PreguntaEvaluacionTecnica>();
+            this.RRH_EvaluacionTecnica = new HashSet<RRH_EvaluacionTecnica>();
             this.RRH_RespuestaAutoevaluacion = new HashSet<RRH_RespuestaAutoevaluacion>();
         }
     
@@ -27,8 +27,9 @@ namespace WebBS.Models
         public Nullable<System.DateTime> Fec_usu_regi { get; set; }
         public string Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
-        public bool completado { get; set; }
-        public virtual ICollection<RRH_PreguntaEvaluacionTecnica> RRH_PreguntaEvaluacionTecnica { get; set; }
+        public Nullable<bool> completado { get; set; }
+    
+        public virtual ICollection<RRH_EvaluacionTecnica> RRH_EvaluacionTecnica { get; set; }
         public virtual ICollection<RRH_RespuestaAutoevaluacion> RRH_RespuestaAutoevaluacion { get; set; }
     }
 }

@@ -20,8 +20,8 @@ namespace WebBS.Controllers
             RRH_Usuario usuario = (RRH_Usuario)Session["Usuario"];
 
             List<RRH_Option> options = (from p in db.RRH_Puesto_Option
-                             join e in db.RRH_Option on p.OptionId equals e.OptionId
-                             where p.Cod_Puesto == usuario.RRH_Empleado.Cod_Puesto select e).ToList();
+                             join e in db.RRH_Option on p.Optionid equals e.Optionid
+                             where p.Cod_Puesto == usuario.RRH_Empleado.Cod_puesto select e).ToList();
                 return View(options);
         }
 

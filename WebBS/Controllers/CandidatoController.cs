@@ -469,7 +469,7 @@ namespace WebBS.Controllers
                 return RedirectToAction("Index");
             }
 
-           // ViewBag.Cod_ofertalaboral = new SelectList(db.RRH_OfertaLaboral, "Cod_ofertalaboral", "Titulo", rrh_candidato.Cod_ofertalaboral);
+            //ViewBag.Cod_ofertalaboral = new SelectList(db.RRH_OfertaLaboral, "Cod_ofertalaboral", "Titulo", rrh_candidato.Cod_ofertalaboral);
 
 
             if (ModelState.IsValid)

@@ -12,25 +12,23 @@ namespace WebBS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class RRH_PruebaAutoevaluacion
+    public partial class RRH_RespuestaEvaluacionTecnica
     {
-        public RRH_PruebaAutoevaluacion()
+        public RRH_RespuestaEvaluacionTecnica()
         {
-            this.RRH_PruebaAutoevaluacion_Respuesta = new HashSet<RRH_PruebaAutoevaluacion_Respuesta>();
+            this.RRH_Detalle_PruebaEvaluacionTecnica = new HashSet<RRH_Detalle_PruebaEvaluacionTecnica>();
         }
-
-        public int Cod_ofertalaboral { get; set; }
-        public int Cod_prueba_autoevaluacion { get; set; }
-        public Nullable<System.DateTime> Fec_evaluacion { get; set; }
+    
+        public int Cod_respevaltec { get; set; }
+        public Nullable<int> Cod_alternativa_evaltec { get; set; }
+        public Nullable<int> Cod_preg_evaltec { get; set; }
         public string Cod_usu_regi { get; set; }
         public Nullable<System.DateTime> Fec_usu_regi { get; set; }
         public string Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
-        public Nullable<int> Cod_empleado { get; set; }
-        public Nullable<int> Cod_resp_autoevaluacion { get; set; }
-        public Nullable<int> PuntajeTotal { get; set; }
     
-        public virtual RRH_Empleado RRH_Empleado { get; set; }
-        public virtual ICollection<RRH_PruebaAutoevaluacion_Respuesta> RRH_PruebaAutoevaluacion_Respuesta { get; set; }
+        public virtual RRH_AlternativaEvaluacionTecnica RRH_AlternativaEvaluacionTecnica { get; set; }
+        public virtual ICollection<RRH_Detalle_PruebaEvaluacionTecnica> RRH_Detalle_PruebaEvaluacionTecnica { get; set; }
+        public virtual RRH_PreguntaEvaluacionTecnica RRH_PreguntaEvaluacionTecnica { get; set; }
     }
 }

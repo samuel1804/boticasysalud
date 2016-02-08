@@ -12,13 +12,13 @@ namespace WebBS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class RRH_PruebaAutoevaluacion_Respuesta
+    public partial class RRH_Usuario
     {
-        public int Cod_PruebaAutoevaluacion_Respuesta { get; set; }
-        public Nullable<int> Cod_prueba_autoevaluacion { get; set; }
-        public Nullable<int> Cod_resp_autoevaluacion { get; set; }
+        public string Cod_usuario { get; set; }
+        public int Cod_Empleado { get; set; }
+        public string UserName { get; set; }
+        public string Contrasena { get; set; }
     
-        public virtual RRH_PruebaAutoevaluacion RRH_PruebaAutoevaluacion { get; set; }
-        public virtual RRH_RespuestaAutoevaluacion RRH_RespuestaAutoevaluacion { get; set; }
+        public virtual RRH_Empleado RRH_Empleado { get; set; }
     }
 }

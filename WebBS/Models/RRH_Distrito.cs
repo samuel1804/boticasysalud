@@ -12,25 +12,20 @@ namespace WebBS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class RRH_PruebaAutoevaluacion
+    public partial class RRH_Distrito
     {
-        public RRH_PruebaAutoevaluacion()
+        public RRH_Distrito()
         {
-            this.RRH_PruebaAutoevaluacion_Respuesta = new HashSet<RRH_PruebaAutoevaluacion_Respuesta>();
+            this.RRH_Candidato = new HashSet<RRH_Candidato>();
         }
-
-        public int Cod_ofertalaboral { get; set; }
-        public int Cod_prueba_autoevaluacion { get; set; }
-        public Nullable<System.DateTime> Fec_evaluacion { get; set; }
+    
+        public int Cod_distrito { get; set; }
+        public string Nom_distrito { get; set; }
         public string Cod_usu_regi { get; set; }
         public Nullable<System.DateTime> Fec_usu_regi { get; set; }
         public string Cod_usu_modi { get; set; }
         public Nullable<System.DateTime> Fec_usu_modi { get; set; }
-        public Nullable<int> Cod_empleado { get; set; }
-        public Nullable<int> Cod_resp_autoevaluacion { get; set; }
-        public Nullable<int> PuntajeTotal { get; set; }
     
-        public virtual RRH_Empleado RRH_Empleado { get; set; }
-        public virtual ICollection<RRH_PruebaAutoevaluacion_Respuesta> RRH_PruebaAutoevaluacion_Respuesta { get; set; }
+        public virtual ICollection<RRH_Candidato> RRH_Candidato { get; set; }
     }
 }
