@@ -78,7 +78,6 @@ namespace WebBS.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Cod_bitacora_evento,Cod_desaduanaje,Descripcion,Fec_evento,Observaciones,Cod_evento,Cod_pago_importacion,Cod_usu_regi,Fec_usu_regi,Cod_usu_modi,Fec_usu_modi")] IMP_BITACORA_EVENTO iMP_BITACORA_EVENTO)
         {
             if (ModelState.IsValid)
@@ -134,7 +133,6 @@ namespace WebBS.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Cod_bitacora_evento,Cod_desaduanaje,Descripcion,Fec_evento,Observaciones,Cod_evento,Cod_pago_importacion,Cod_usu_regi,Fec_usu_regi,Cod_usu_modi,Fec_usu_modi")] IMP_BITACORA_EVENTO iMP_BITACORA_EVENTO)
         {
             if (ModelState.IsValid)
@@ -176,7 +174,6 @@ namespace WebBS.Controllers
 
         // POST: BitacoraEventoDesaduanaje/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             IMP_BITACORA_EVENTO iMP_BITACORA_EVENTO = await db.IMP_BITACORA_EVENTO.FindAsync(id);
@@ -203,7 +200,7 @@ namespace WebBS.Controllers
                 if (alerta != null)
                 {
                     var evento = db.IMP_EVENTO.Find(cod_Evento);
-                    MailMessage mail = new MailMessage("emelgarejo@gmd.com.pe", "emelgarejo@gmd.com.pe");
+                    MailMessage mail = new MailMessage("emelgarejo", "emelgarejo");
                     NetworkCredential basicCredential =
         new NetworkCredential("emelgarejo", "");
                     SmtpClient client = new SmtpClient();

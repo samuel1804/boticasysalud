@@ -119,6 +119,10 @@
     <Content Include="Content\js\app.js" />
     <Content Include="Content\js\util.js" />
     <Content Include="Content\js\ViewModel\NotaIngreso.js" />
+    <Content Include="Evidencias\BL-201600014182550.jpg" />
+    <Content Include="Evidencias\FC-201600014182550.jpg" />
+    <Content Include="Evidencias\FC_201600127184.gif" />
+    <Content Include="Evidencias\FC_20160128_210747.jpg" />
     <Content Include="fonts\font-awesome-4.3.0\css\font-awesome.css" />
     <Content Include="fonts\font-awesome-4.3.0\css\font-awesome.min.css" />
     <Content Include="fonts\font-awesome-4.3.0\fonts\fontawesome-webfont.svg" />
@@ -176,6 +180,7 @@
       <DependentUpon>BDBoticas.edmx</DependentUpon>
       <LastGenOutput>BDBoticas.cs</LastGenOutput>
     </Content>
+    <None Include="Properties\PublishProfiles\Public.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Ajax\Ajax.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -612,7 +617,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Evidencias\" />
     <Folder Include="Scripts\images\" />
   </ItemGroup>
   <ItemGroup>

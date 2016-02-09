@@ -11,7 +11,18 @@
     <span id="lblMensajeInformativo">Complete los campos para editar su acción.</span>
 </div>
 <hr />
+@if (ViewBag.mensaje != null)
+{
 
+    foreach (var error in ((ModelStateDictionary)ViewBag.mensaje))
+    {
+        <p>@error.Key</p>
+        foreach (var mensaje in @error.Value.Errors)
+        {
+            <p>@mensaje.ErrorMessage</p>
+        }
+    }
+}
 @using (Html.BeginForm("Edit", "BitacoraActividadPlanificada", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()

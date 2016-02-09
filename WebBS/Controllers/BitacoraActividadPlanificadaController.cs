@@ -107,7 +107,6 @@ namespace WebBS.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Cod_accion,Fec_accion,Evidencia,Observaciones,Cod_actividad_planificada")] IMP_ACCION iMP_ACCION)
         {
             if (ModelState.IsValid)
@@ -120,11 +119,13 @@ namespace WebBS.Controllers
                 iMP_ACCIONTemp.Observaciones = iMP_ACCION.Observaciones;
                 iMP_ACCION.Cod_usu_modi = 1;
                 iMP_ACCION.Fec_usu_modi = DateTime.Now;
-                //db.Entry(iMP_ACCION).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index", new { Id = iMP_ACCION.Cod_actividad_planificada });
             }
+            iMP_ACCION = await db.IMP_ACCION.FindAsync(iMP_ACCION.Cod_accion);
+            TempData["ActividadPlanificada"] = await db.IMP_ACTIVIDAD_PLANIFICADA.FindAsync(iMP_ACCION.Cod_actividad_planificada);
             ViewBag.Cod_actividad_planificada = new SelectList(db.IMP_ACTIVIDAD_PLANIFICADA, "Cod_actividad_planificada", "Observacion", iMP_ACCION.Cod_actividad_planificada);
+            ViewBag.mensaje = ModelState;
             return View(iMP_ACCION);
         }
 
@@ -146,7 +147,6 @@ namespace WebBS.Controllers
 
         // POST: BitacoraActividadPlanificada/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             IMP_ACCION iMP_ACCION = await db.IMP_ACCION.FindAsync(id);

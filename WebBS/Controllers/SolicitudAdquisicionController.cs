@@ -123,7 +123,6 @@ namespace WebBS.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Cod_adquisicion,Fec_programada_llegada,Fec_real_llegada,Cod_solicitud_importacion,Cod_usu_regi,Fec_usu_regi,Cod_usu_modi,Fec_usu_modi")] IMP_ADQUISICION iMP_ADQUISICION)
         {
             if (ModelState.IsValid)
@@ -153,7 +152,6 @@ namespace WebBS.Controllers
 
         // POST: SolicitudAdquisicion/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             IMP_ADQUISICION iMP_ADQUISICION = await db.IMP_ADQUISICION.FindAsync(id);

@@ -94,7 +94,6 @@ namespace WebBS.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Cod_desaduanaje,Cod_solicitud_importacion,Fec_inicio_desaduanaje,Fec_retiro_mercaderia,Cod_usu_regi,Fec_usu_regi,Cod_usu_modi,Fec_usu_modi")] IMP_DESADUANAJE iMP_DESADUANAJE)
         {
             if (ModelState.IsValid)
@@ -151,7 +150,6 @@ namespace WebBS.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Cod_desaduanaje,Cod_solicitud_importacion,Fec_inicio_desaduanaje,Fec_retiro_mercaderia,Cod_usu_regi,Fec_usu_regi,Cod_usu_modi,Fec_usu_modi")] IMP_DESADUANAJE iMP_DESADUANAJE)
         {
             if (ModelState.IsValid)
@@ -181,7 +179,6 @@ namespace WebBS.Controllers
 
         // POST: SolicitudDesaduanaje/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             IMP_DESADUANAJE iMP_DESADUANAJE = await db.IMP_DESADUANAJE.FindAsync(id);

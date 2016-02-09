@@ -20,6 +20,8 @@ namespace WebBS.Models
         public BDBoticasEntities()
             : base("name=BDBoticasEntities")
         {
+            this.Configuration.LazyLoadingEnabled = true;
+            this.Configuration.ProxyCreationEnabled = true;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
