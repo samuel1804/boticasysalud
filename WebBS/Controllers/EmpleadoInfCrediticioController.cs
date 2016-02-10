@@ -136,7 +136,7 @@ namespace WebBS.Controllers
                 GCC_EMPLEADO_INF_CREDITICIO objEmpleadoInfCred = db.GCC_EMPLEADO_INF_CREDITICIO.Find(gCC_EMPLEADO_INF_CREDITICIO.Cod_registro);
                 var inicio = objEmpleadoInfCred.GCC_INFORME_CREDITICIO.GCC_POLITICA_CREDITO.GCC_PLAN_CREDITO.Rango_inicio;
                 var fin = objEmpleadoInfCred.GCC_INFORME_CREDITICIO.GCC_POLITICA_CREDITO.GCC_PLAN_CREDITO.Rango_fin;
-                if (gCC_EMPLEADO_INF_CREDITICIO.GCC_INFORME_CREDITICIO.Monto_linea_credito_eval >= inicio && gCC_EMPLEADO_INF_CREDITICIO.GCC_INFORME_CREDITICIO.Monto_linea_credito_eval <= fin)
+                if (gCC_EMPLEADO_INF_CREDITICIO.GCC_INFORME_CREDITICIO.Monto_linea_credito_aprob >= inicio && gCC_EMPLEADO_INF_CREDITICIO.GCC_INFORME_CREDITICIO.Monto_linea_credito_aprob <= fin)
                 {
                     GCC_EMPLEADO_SOL_CREDITO gccEstSol = new GCC_EMPLEADO_SOL_CREDITO();
                     gccEstSol.Cod_solicitud_credito = objEmpleadoInfCred.GCC_INFORME_CREDITICIO.Cod_solicitud_credito;
@@ -158,7 +158,7 @@ namespace WebBS.Controllers
                     db.GCC_EMPLEADO_INF_CREDITICIO.Add(gccEstInf);
                     db.SaveChanges();
 
-                    objEmpleadoInfCred.GCC_INFORME_CREDITICIO.Monto_linea_credito_eval = gCC_EMPLEADO_INF_CREDITICIO.GCC_INFORME_CREDITICIO.Monto_linea_credito_eval;
+                    objEmpleadoInfCred.GCC_INFORME_CREDITICIO.Monto_linea_credito_aprob = gCC_EMPLEADO_INF_CREDITICIO.GCC_INFORME_CREDITICIO.Monto_linea_credito_aprob;
                     GCC_INFORME_CREDITICIO objInformeCrediticio = objEmpleadoInfCred.GCC_INFORME_CREDITICIO;
                     objInformeCrediticio.Fec_usu_modi = DateTime.Now;
                     objInformeCrediticio.Cod_usu_modi = 1;

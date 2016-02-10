@@ -402,11 +402,13 @@ namespace WebBS.Controllers
                 db.GCC_CONTRATO_CREDITO.Add(gccCont);
                 db.SaveChanges();
 
+                GCC_INFORME_CREDITICIO informe = db.GCC_INFORME_CREDITICIO.Find(gccInf.Cod_informe_crediticio);
+
                 GCC_CUENTA_CLIENTE gccCta = new GCC_CUENTA_CLIENTE();
                 gccCta.Cod_contrato_credito = gccCont.Cod_contrato_credito;
                 gccCta.Num_cuenta = "00001";
-                gccCta.Linea_credito = gccInf.Monto_linea_credito_aprob;
-                gccCta.Linea_disponible = gccInf.Monto_linea_credito_aprob;
+                gccCta.Linea_credito = informe.Monto_linea_credito_aprob;
+                gccCta.Linea_disponible = informe.Monto_linea_credito_aprob;
                 gccCta.Estado_cuenta = "A";
                 gccCta.Cod_usu_regi = 1;
                 gccCta.Fec_usu_regi = DateTime.Now;
