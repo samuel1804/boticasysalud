@@ -306,6 +306,7 @@ namespace WebBS.Controllers.ALP
                     db.ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN.Add(new ALP_CONSTANCIA_PREPARADO_INSUMO_ORDEN()
                     {
                         num_constancia_preparado = nroConstancia,
+                        num_orden_preparado = constancia.num_orden_preparado,
                         cod_insumo = insumoSplit[0],
                         //cant_insumo_orden = int.Parse(insumoSplit[1]),
                         cant_insumo_constancia = int.Parse(insumoSplit[2]),

@@ -76,7 +76,7 @@
                                     @Html.DisplayFor(modelItem => item.ALP_ORDEN_PREPARADO_INSUMO.ALP_INSUMO.unidad_medida)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.cant_insumo_constancia)
+                                    @Html.DisplayFor(modelItem => item.ALP_ORDEN_PREPARADO_INSUMO.cant_insumo)
                                 </td>
                                 <td>
                                     <div class="form-group disabled">
@@ -86,7 +86,10 @@
                                     </div>
                                 </td>
                                 <td>
-                                    
+                                    @{
+                                        ViewBag.diferencia = item.cant_insumo_constancia - item.ALP_ORDEN_PREPARADO_INSUMO.cant_insumo;
+                                    }
+                                    @ViewBag.diferencia
                                 </td>
                             </tr>
                         }

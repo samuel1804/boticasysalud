@@ -83,11 +83,14 @@ namespace WebBS.Controllers.ALP
                     nextNroMerma = String.Format("{0}-{1}-{2}", "CM", DateTime.Now.ToString("ddMMyyyy"), nextMerma);
                 }
 
+                var constancia = db.ALP_CONSTANCIA_PREPARADO.Where(x => x.num_constancia_preparado == nroConstancia).FirstOrDefault();
+
                 ALP_HOJA_MERMA hoja_merma = new ALP_HOJA_MERMA()
                 {
                     num_hoja_merma = nextNroMerma,
                     num_constancia_preparado = nroConstancia,
                     estado = "01",
+                    cod_tecnico_laboratorista = 2,
                     cod_usu_regi = 2,
                     fec_usu_regi = DateTime.Now.Date,
                     cod_usu_modi = 2,
@@ -104,11 +107,17 @@ namespace WebBS.Controllers.ALP
                     db.ALP_HOJA_MERMA_INSUMO_CONSTANCIA.Add(new ALP_HOJA_MERMA_INSUMO_CONSTANCIA()
                     {
                         num_hoja_merma = nextNroMerma,
+                        num_orden_preparado = constancia.num_orden_preparado,
+                        num_constancia_preparado = nroConstancia,
                         cod_insumo = insumoSplit[0],
                         cant_insumo_orden = int.Parse(insumoSplit[1]),
                         cant_insumo_constancia = int.Parse(insumoSplit[2]),
                         cant_insumo_merma = int.Parse(insumoSplit[3]),
-                        motivo = insumoSplit[4]
+                        motivo = insumoSplit[4],
+                        cod_usu_regi = 2,
+                        fec_usu_regi = DateTime.Now.Date,
+                        cod_usu_modi = 2,
+                        fec_usu_modi = DateTime.Now.Date
                     });
 
                 }
