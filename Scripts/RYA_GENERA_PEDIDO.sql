@@ -81,6 +81,7 @@ IF @LINEAS > 0
 	
 	BEGIN
 			/* Insertamos la cabecera del pedido */
+			
 			DECLARE @newPedido varchar(10)
 
 			Select @newPedido = 'OP'+substring(cast(1000000 + MAX(id)+1 as varchar),2,6) from RYA_PEDIDO_CAB 
