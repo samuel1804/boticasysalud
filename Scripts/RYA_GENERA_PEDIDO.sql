@@ -86,7 +86,7 @@ IF @LINEAS > 0
 			Select @newPedido = 'OP'+substring(cast(1000000 + MAX(id)+1 as varchar),2,6) from RYA_PEDIDO_CAB 
 
 			INSERT INTO [BDBoticas].[dbo].[RYA_PEDIDO_CAB] ([NumPedido], [FchPedido],[FchEntrega],[Cod_sucursal],[CodSolicitante],[Glosa],[Estado]) 
-			VALUES (@newPedido, GETDATE(),GETDATE(),@sucursal,@usuario,'','2')
+			VALUES (@newPedido, GETDATE(),GETDATE(),@sucursal,@usuario,'','1')
 
 			/* Identificamos el ultimo registro insertado */
 
