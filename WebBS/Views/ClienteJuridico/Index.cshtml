@@ -20,7 +20,7 @@
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;</td>
                 <td>Ruc</td>
-                <td><input type="number" name="ruc"><br></td>
+                <td><input type="number" name="ruc" onkeydown="if(this.value.length==11 && event.keyCode!=8) return false;"><br></td>
                 <td>Estado</td>
                 <td>
                 <select name="estado"><option></option><option value="A">Activo</option><option value="D">Inactivo</option></select></td>
@@ -30,7 +30,7 @@
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;</td>
                 <td>Razón Social</td>
-                <td><input type="text" name="razonSocial"><br></td>
+                <td><input type="text" name="razonSocial" onkeydown="if(this.value.length==150 && event.keyCode!=8) return false;"><br></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -63,6 +63,9 @@
             @Html.ActionLink("Razón Social", "Index", new { sortOrder = ViewBag.RazonSocialSortParm })
         </th>
         <th>
+            Categoria
+        </th>
+        <th>
             Dirección
         </th>
         <th>
@@ -85,6 +88,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.GCC_CLIENTE_JURIDICO.Razon_social)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GCC_CLIENTE_JURIDICO.Categoria_str)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Direccion)

@@ -22,7 +22,8 @@ namespace WebBS.Models
 
         public int Cod_cliente { get; set; }
         [Display(Name = "Razón Social")]
-        [Required(ErrorMessage = "Razon social es requerido.")]
+        [Required(ErrorMessage = "Razón social es requerido.")]
+        [StringLength(150, MinimumLength = 1, ErrorMessage = "No puede superar 150 caracteres")]
         public string Razon_social { get; set; }
         public string Categoria { get; set; }
         public int Cod_usu_regi { get; set; }
@@ -32,5 +33,21 @@ namespace WebBS.Models
 
         public virtual GCC_CLIENTE GCC_CLIENTE { get; set; }
         public virtual ICollection<GCC_SOLICITUD_CREDITO> GCC_SOLICITUD_CREDITO { get; set; }
+        public string Categoria_str {
+
+            get
+            {
+
+                if (Categoria == "P")
+                {
+                    return "Potencial";
+                }
+                if (Categoria == "C")
+                {
+                    return "Corporativo";
+                }
+                return "";
+            }
+        }
     }
 }

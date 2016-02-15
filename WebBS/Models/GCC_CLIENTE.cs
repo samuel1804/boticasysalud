@@ -22,17 +22,19 @@ namespace WebBS.Models
 
         public int Cod_cliente { get; set; }
         public string Tipo_doc_identidad { get; set; }
-        [Required(ErrorMessage = "Ruc es requerido.")]
+        [Required(ErrorMessage = "RUC es requerido.")]
         [RegularExpression("([0-9]+)", ErrorMessage = "Ingrese solo números")]
         [StringLength(11, MinimumLength = 11, ErrorMessage = "Ingrese 11 digitos")]
         public string Num_doc_identidad { get; set; }
         [Required(ErrorMessage = "Dirección es requerido.")]
+        [StringLength(150, MinimumLength = 1, ErrorMessage = "No puede superar 150 caracteres")]
         public string Direccion { get; set; }
         [Required(ErrorMessage = "Teléfono es requerido.")]
         [RegularExpression("([0-9]+)", ErrorMessage = "Ingrese solo números")]
         public string Telefono { get; set; }
         [Required(ErrorMessage = "Email es requerido.")]
-        [RegularExpression("^([a-zA-Z0-9_\\-\\.]+)@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,3})$", ErrorMessage = "Email ingresado no es válido")]
+        [RegularExpression("^([a-zA-Z0-9_\\-\\.]+)@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{2,3})$", ErrorMessage = "Email ingresado no es válido")]
+        //[RegularExpression("^([a-zA-Z0-9_\\-\\.]+)@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,3})$", ErrorMessage = "Email ingresado no es válido")]
         public string Correo { get; set; }
         public string Estado { get; set; }
         public int Cod_usu_regi { get; set; }

@@ -106,6 +106,7 @@ namespace WebBS.Controllers
                 cliente.GCC_CLIENTE_JURIDICO.Cod_usu_regi = 1;
                 cliente.GCC_CLIENTE_JURIDICO.GCC_CLIENTE = cliente;
                 cliente.Estado = "A";
+                cliente.Correo = cliente.Correo.ToLower();
                 cliente.GCC_CLIENTE_JURIDICO.Categoria = "P";
 
                 cliente.Fec_usu_regi = DateTime.Now;
@@ -146,6 +147,14 @@ namespace WebBS.Controllers
         {
             try
             {
+                List<GCC_CLIENTE> clienteEncontrado = db.GCC_CLIENTE.Where(b => b.Num_doc_identidad.Contains(cliente.Num_doc_identidad)).ToList();
+
+                if (clienteEncontrado != null && clienteEncontrado.Count != 0)
+                {
+                    ModelState.AddModelError("Num_doc_identidad", "RUC ya esta registrado");
+                    return View();
+                }
+
                 cliente.GCC_CLIENTE_JURIDICO.Fec_usu_modi = DateTime.Now;
                 cliente.GCC_CLIENTE_JURIDICO.Fec_usu_regi = cliente.Fec_usu_regi;
                 cliente.GCC_CLIENTE_JURIDICO.Cod_cliente = cliente.Cod_cliente;
@@ -154,6 +163,7 @@ namespace WebBS.Controllers
                 cliente.GCC_CLIENTE_JURIDICO.GCC_CLIENTE = cliente;
                 cliente.Estado = "A";
                 cliente.GCC_CLIENTE_JURIDICO.Categoria = "P";
+                cliente.Correo = cliente.Correo.ToLower();
 
                 cliente.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Cod_usu_regi = 1;
                 cliente.Cod_usu_regi = 1;

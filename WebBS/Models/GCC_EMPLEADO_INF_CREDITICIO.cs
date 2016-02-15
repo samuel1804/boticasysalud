@@ -26,5 +26,18 @@ namespace WebBS.Models
     
         public virtual GCC_INFORME_CREDITICIO GCC_INFORME_CREDITICIO { get; set; }
         public virtual RRH_Empleado RRH_Empleado { get; set; }
+        public string Estado_str
+        {
+            get
+            {
+
+                if (Estado == "R")
+                {
+                    return "Registrado";
+                }
+
+                return "";
+            }
+        }
     }
 }

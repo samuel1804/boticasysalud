@@ -7,6 +7,7 @@ using WebBS.Models;
 using PagedList;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
+using System.Data.Entity;
 
 namespace WebBS.Controllers
 {
@@ -278,7 +279,7 @@ namespace WebBS.Controllers
         [HttpPost, ActionName("Create")]
         public ActionResult CreatPost(GCC_INFORME_CREDITICIO informeCrediticio)
         {
-           
+            String estadoInforme = informeCrediticio.GCC_SOLICITUD_CREDITO.Estado_informe;
             informeCrediticio.Monto_linea_credito_eval = informeCrediticio.GCC_SOLICITUD_CREDITO.Cantidad_credito;
             informeCrediticio.Monto_linea_credito_aprob = informeCrediticio.GCC_SOLICITUD_CREDITO.Cantidad_credito;
             informeCrediticio.Capacidad_crediticia = informeCrediticio.GCC_SOLICITUD_CREDITO.Capacidad_crediticia_str.Substring(0,1);
@@ -299,20 +300,29 @@ namespace WebBS.Controllers
             estado.Cod_empleado = informeCrediticio.GCC_SOLICITUD_CREDITO.Cod_cliente;
             estado.Cod_informe_crediticio = informeCrediticio.Cod_informe_crediticio;
             estado.Cod_usu_regi = 1;
-            estado.Estado = "R";
+            estado.Estado = estadoInforme;
             estado.Fec_usu_regi = DateTime.Now;
             estado.Fec_registro = DateTime.Now;
             estado.RRH_Empleado = db.RRH_Empleado.Where(b => b.Cod_empleado == 1).Single();
             informeCrediticio.GCC_EMPLEADO_INF_CREDITICIO.Add(estado);
 
             db.GCC_INFORME_CREDITICIO.Add(informeCrediticio);
-            db.SaveChanges();                
+            db.SaveChanges();
 
             GCC_EMPLEADO_SOL_CREDITO esc = new GCC_EMPLEADO_SOL_CREDITO();
             esc.Cod_empleado = informeCrediticio.GCC_SOLICITUD_CREDITO.Cod_cliente;
             esc.Cod_solicitud_credito = informeCrediticio.GCC_SOLICITUD_CREDITO.Cod_solicitud_credito;
             esc.Cod_usu_regi = 1;
-            esc.Estado = "C";
+
+            if (estadoInforme == "R")
+            {
+                esc.Estado = "C";
+            }
+            else
+            {
+                esc.Estado = "Z";
+            }
+
             esc.Fec_usu_regi = DateTime.Now;
             esc.Fec_registro = DateTime.Now;
             esc.RRH_Empleado = db.RRH_Empleado.Where(b => b.Cod_empleado == 1).Single();
@@ -372,6 +382,10 @@ namespace WebBS.Controllers
         {
             try
             {
+                GCC_CLIENTE_JURIDICO gccCliente = db.GCC_CLIENTE_JURIDICO.Find(gccInf.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.Cod_cliente);
+                gccCliente.Categoria = "C";
+                db.Entry(gccCliente).State = EntityState.Modified;
+                db.SaveChanges();
 
                 GCC_EMPLEADO_SOL_CREDITO gccEstSol = new GCC_EMPLEADO_SOL_CREDITO();
                 gccEstSol.Cod_solicitud_credito = gccInf.Cod_solicitud_credito;

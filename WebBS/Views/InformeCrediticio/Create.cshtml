@@ -95,6 +95,14 @@
             </div>
         </div>
 
+        <div class="form-group" style="display: none;">
+            @Html.LabelFor(model => model.GCC_SOLICITUD_CREDITO.Estado_informe, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.GCC_SOLICITUD_CREDITO.Estado_informe)
+                @Html.ValidationMessageFor(model => model.GCC_SOLICITUD_CREDITO.Estado_informe)
+            </div>
+        </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.GCC_SOLICITUD_CREDITO.Nivel_riesgo_str, new { @class = "control-label col-md-2" })
             <div class="col-md-10">

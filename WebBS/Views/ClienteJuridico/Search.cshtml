@@ -16,12 +16,12 @@
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;</td>
                 <td>Razón Social</td>
-                <td><input type="text" name="razonSocial"><br></td>
+                <td><input type="text" name="razonSocial" onkeydown="if(this.value.length==150 && event.keyCode!=8) return false;"><br></td>
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;</td>
                 <td>Ruc</td>
-                <td><input type="number" name="ruc"><br></td>
+                <td><input type="number" name="ruc" onkeydown="if(this.value.length==11 && event.keyCode!=8) return false;"><br></td>
             </tr>
             <tr>
                 <td></td>

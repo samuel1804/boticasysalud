@@ -16,6 +16,9 @@
             <div class="col-md-10" style="display: none;">
                 @Html.EditorFor(model => model.Cod_solicitud_credito)
             </div>
+        <div class="col-md-10" style="display: none;">
+            @Html.EditorFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.Cod_cliente)
+        </div>
 
         <div class="form-group">
             <label class="control-label col-md-3" for="GCC_SOLICITUD_CREDITO.Num_solicitud">Nro Solicitud</label>
