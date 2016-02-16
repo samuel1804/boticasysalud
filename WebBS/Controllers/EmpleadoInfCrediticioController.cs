@@ -15,7 +15,7 @@ namespace WebBS.Controllers
         private BDBoticasEntities db = new BDBoticasEntities();
 
         // GET: EmpleadoInfCrediticio
-        public ActionResult Index(int? codSolicitudCredito, string ruc, DateTime? fechaSolicitudInicio, DateTime? fechaSolicitudFin)
+        public ActionResult Index(string codSolicitudCredito, string ruc, DateTime? fechaSolicitudInicio, DateTime? fechaSolicitudFin)
         {
 
             //var gCC_EMPLEADO_INF_CREDITICIO = db.GCC_EMPLEADO_INF_CREDITICIO.Include(g => g.Estado == "R");
@@ -24,7 +24,7 @@ namespace WebBS.Controllers
                         select s;
 
 
-            if ((codSolicitudCredito != null && codSolicitudCredito != 0) || (ruc != null && ruc != "") || fechaSolicitudInicio != null || fechaSolicitudFin != null)
+            if ((!string.IsNullOrEmpty(codSolicitudCredito)) || (ruc != null && ruc != "") || fechaSolicitudInicio != null || fechaSolicitudFin != null)
             {
                 if (fechaSolicitudInicio != null)
                 {
@@ -38,9 +38,9 @@ namespace WebBS.Controllers
                 {
                     gCC_EMPLEADO_INF_CREDITICIO = gCC_EMPLEADO_INF_CREDITICIO.Where(b => b.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad.Contains(ruc));
                 }
-                if (codSolicitudCredito != 0 && codSolicitudCredito != null)
+                if (!string.IsNullOrEmpty(codSolicitudCredito))
                 {
-                    gCC_EMPLEADO_INF_CREDITICIO = gCC_EMPLEADO_INF_CREDITICIO.Where(b => b.Cod_solicitud_credito == codSolicitudCredito);
+                    gCC_EMPLEADO_INF_CREDITICIO = gCC_EMPLEADO_INF_CREDITICIO.Where(b => b.GCC_SOLICITUD_CREDITO.Num_solicitud == codSolicitudCredito);
                 }
 
             }
@@ -63,6 +63,22 @@ namespace WebBS.Controllers
 
 
             return View(filteredList.ToList());
+        }
+
+        public FileContentResult DownloadFile(int? id)
+        {
+            byte[] fileContent = null;
+
+            string fileType = "";
+
+            string file_Name = "";
+
+
+            GCC_INFORME_CREDITICIO informe = db.GCC_INFORME_CREDITICIO.Find(id);
+            fileContent = informe.Reporte_infocorp;
+            file_Name = informe.GCC_SOLICITUD_CREDITO.Num_solicitud + "-"+informe.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.Razon_social+".pdf";
+            fileType = "application/pdf";
+            return File(fileContent, fileType, file_Name);
         }
 
         // GET: EmpleadoInfCrediticio/Details/5
@@ -162,7 +178,6 @@ namespace WebBS.Controllers
                     GCC_INFORME_CREDITICIO objInformeCrediticio = objEmpleadoInfCred.GCC_INFORME_CREDITICIO;
                     objInformeCrediticio.Fec_usu_modi = DateTime.Now;
                     objInformeCrediticio.Cod_usu_modi = 1;
-                    objInformeCrediticio.Reporte_infocorp = new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 };
 
                     if (ModelState.IsValid)
                     {

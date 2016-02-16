@@ -278,7 +278,8 @@ namespace WebBS.Controllers
         // POST: InformeCrediticio/Create
         [HttpPost, ActionName("Create")]
         public ActionResult CreatPost(GCC_INFORME_CREDITICIO informeCrediticio)
-        {
+        {            
+
             String estadoInforme = informeCrediticio.GCC_SOLICITUD_CREDITO.Estado_informe;
             informeCrediticio.Monto_linea_credito_eval = informeCrediticio.GCC_SOLICITUD_CREDITO.Cantidad_credito;
             informeCrediticio.Monto_linea_credito_aprob = informeCrediticio.GCC_SOLICITUD_CREDITO.Cantidad_credito;
@@ -293,9 +294,6 @@ namespace WebBS.Controllers
             informeCrediticio.Fecha_informe = DateTime.Now;
             informeCrediticio.Fec_ultima_evaluacion = DateTime.Now;
 
-            var sevenItems = new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 };
-            informeCrediticio.Reporte_infocorp = sevenItems;
-
             GCC_EMPLEADO_INF_CREDITICIO estado = new GCC_EMPLEADO_INF_CREDITICIO();
             estado.Cod_empleado = informeCrediticio.GCC_SOLICITUD_CREDITO.Cod_cliente;
             estado.Cod_informe_crediticio = informeCrediticio.Cod_informe_crediticio;
@@ -305,6 +303,19 @@ namespace WebBS.Controllers
             estado.Fec_registro = DateTime.Now;
             estado.RRH_Empleado = db.RRH_Empleado.Where(b => b.Cod_empleado == 1).Single();
             informeCrediticio.GCC_EMPLEADO_INF_CREDITICIO.Add(estado);
+
+            if (Request.Files != null && Request.Files.Count == 1)
+            {
+                var file = Request.Files[0];
+                if (file != null && file.ContentLength > 0)
+                {
+                    var content = new byte[file.ContentLength];
+                    file.InputStream.Read(content, 0, file.ContentLength);
+                    informeCrediticio.Reporte_infocorp = content;
+
+                    // the rest of your db code here
+                }
+            }
 
             db.GCC_INFORME_CREDITICIO.Add(informeCrediticio);
             db.SaveChanges();
@@ -356,6 +367,17 @@ namespace WebBS.Controllers
                 esc.Fec_registro = DateTime.Now;
                 esc.RRH_Empleado = db.RRH_Empleado.Where(b => b.Cod_empleado == 1).Single();
                 db.GCC_EMPLEADO_INF_CREDITICIO.Add(esc);
+                db.SaveChanges();
+
+                GCC_EMPLEADO_SOL_CREDITO estSc = new GCC_EMPLEADO_SOL_CREDITO();
+                estSc.Cod_empleado = 1;
+                estSc.Cod_solicitud_credito = db.GCC_INFORME_CREDITICIO.Find(id).GCC_SOLICITUD_CREDITO.Cod_solicitud_credito;
+                estSc.Cod_usu_regi = 1;
+                estSc.Estado = "O";
+                estSc.Fec_usu_regi = DateTime.Now;
+                estSc.Fec_registro = DateTime.Now;
+                estSc.RRH_Empleado = db.RRH_Empleado.Where(b => b.Cod_empleado == 1).Single();
+                db.GCC_EMPLEADO_SOL_CREDITO.Add(estSc);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

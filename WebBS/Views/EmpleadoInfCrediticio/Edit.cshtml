@@ -28,7 +28,7 @@
         <div class="form-group">
             <label class="control-label col-md-3">Fecha Solicitud</label>
             <div class="col-md-2">
-                @Html.TextBox("nro", Model.GCC_INFORME_CREDITICIO.GCC_SOLICITUD_CREDITO.Num_solicitud, new { @class = "form-control", @readonly = "true" })
+                @Html.TextBox("nro", Model.GCC_INFORME_CREDITICIO.GCC_SOLICITUD_CREDITO.Fec_solicitud, new { @class = "form-control", @readonly = "true" })
             </div>
         </div>
 
@@ -47,6 +47,13 @@
             <label class="control-label col-md-3" >Rango de Línea de Crédito</label>
             <div class="col-md-3">
                 @Html.TextBox("rango", "<<" + Model.GCC_INFORME_CREDITICIO.GCC_POLITICA_CREDITO.GCC_PLAN_CREDITO.Rango_inicio.ToString("#,##0.00") + " a " + Model.GCC_INFORME_CREDITICIO.GCC_POLITICA_CREDITO.GCC_PLAN_CREDITO.Rango_fin.ToString("#,##0.00") + ">>", new { @class = "form-control", @readonly = "true", @style = "text-align:center" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3">Reporte Infocorp</label>
+            <div class="col-md-3">
+                @Html.ActionLink("Descargar", "DownloadFile", new { id = Model.GCC_INFORME_CREDITICIO.Cod_informe_crediticio }, new { @class = "btn btn-primary" })
             </div>
         </div>
 

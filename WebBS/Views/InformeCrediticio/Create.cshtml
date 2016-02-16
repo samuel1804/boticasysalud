@@ -6,7 +6,7 @@
 
 <h2>Registrar Informe Crediticio</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "InformeCrediticio", FormMethod.Post, new { enctype = "multipart/form-data" })) 
 {
     @Html.AntiForgeryToken()
     
@@ -101,7 +101,7 @@
                 @Html.TextBoxFor(model => model.GCC_SOLICITUD_CREDITO.Estado_informe)
                 @Html.ValidationMessageFor(model => model.GCC_SOLICITUD_CREDITO.Estado_informe)
             </div>
-        </div>
+        </div>        
 
         <div class="form-group">
             @Html.LabelFor(model => model.GCC_SOLICITUD_CREDITO.Nivel_riesgo_str, new { @class = "control-label col-md-2" })
@@ -142,6 +142,11 @@
                 @Html.TextBoxFor(model => model.GCC_SOLICITUD_CREDITO.Cantidad_credito, new { @readonly = "readonly", Style = "background:#D3D3D3;" })
                 @Html.ValidationMessageFor(model => model.GCC_SOLICITUD_CREDITO.Cantidad_credito)
             </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Reporte INFOCORP</label>
+            <input type="file" id="file" name="file" accept="application/pdf" />
         </div>
 
         <div class="form-group">
