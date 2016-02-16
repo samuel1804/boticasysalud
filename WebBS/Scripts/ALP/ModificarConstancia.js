@@ -1,4 +1,4 @@
-﻿var modified = false;
+﻿var modified = true;
 
 $(document).ready(function () {
 
