@@ -67,16 +67,16 @@ namespace WebBS.Controllers.ALP
             try
             {
 
-                DateTime tmpFechaConstancia = DateTime.Parse(fechaConstancia);
+                DateTime defaultDate = new DateTime(1970, 1, 1);
+
+                DateTime tmpFechaConstancia = String.IsNullOrEmpty(fechaConstancia) ? defaultDate : DateTime.Parse(fechaConstancia);
 
                 var constancia = db.ALP_CONSTANCIA_PREPARADO.Where(o => o.estado == "01" &&
                                                               o.ALP_HOJA_MERMA.Count > 0 &&
                                                               o.num_constancia_preparado.Contains(String.IsNullOrEmpty(nroConstancia) ? o.num_constancia_preparado : nroConstancia) &&
                                                               o.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado.Contains(String.IsNullOrEmpty(nomPreparado) ? o.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado : nomPreparado) &&
-                                                              o.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal == (sucursal == -1 ? o.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal: sucursal) &&
-                                                              o.fec_elaboracion.Year == (tmpFechaConstancia.Year > 0 ? tmpFechaConstancia.Year : o.fec_elaboracion.Year) &&
-                                                              o.fec_elaboracion.Month == (tmpFechaConstancia.Month > 0 ? tmpFechaConstancia.Month : o.fec_elaboracion.Month) &&
-                                                              o.fec_elaboracion.Day == (tmpFechaConstancia.Day > 0 ? tmpFechaConstancia.Day : o.fec_elaboracion.Day)).ToList()
+                                                              o.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal == (sucursal == -1 ? o.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal: sucursal)).ToList()
+                                                              .Where(o => o.fec_elaboracion == (tmpFechaConstancia == defaultDate ? o.fec_elaboracion : tmpFechaConstancia))
                             .Select(x => new
                             {
                                 nroConstancia = x.num_constancia_preparado,
@@ -104,16 +104,16 @@ namespace WebBS.Controllers.ALP
             try
             {
 
-                DateTime tmpFechaConstancia = DateTime.Parse(fechaConstancia);
+                DateTime defaultDate = new DateTime(1970, 1, 1);
+
+                DateTime tmpFechaConstancia = String.IsNullOrEmpty(fechaConstancia) ? defaultDate : DateTime.Parse(fechaConstancia);
 
                 var lstConstancia = db.ALP_CONSTANCIA_PREPARADO.Where(o => o.estado == "03" &&
                                                               o.ALP_SOLICITUD_TRANSPORTE.Count == 0 &&
                                                               o.num_constancia_preparado.Contains(String.IsNullOrEmpty(nroConstancia) ? o.num_constancia_preparado : nroConstancia) &&
                                                               o.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado.Contains(String.IsNullOrEmpty(nomPreparado) ? o.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado : nomPreparado) &&
-                                                              o.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal== (sucursal == -1 ? o.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal : sucursal) &&
-                                                              o.fec_elaboracion.Year == (tmpFechaConstancia.Year > 0 ? tmpFechaConstancia.Year : o.fec_elaboracion.Year) &&
-                                                              o.fec_elaboracion.Month == (tmpFechaConstancia.Month > 0 ? tmpFechaConstancia.Month : o.fec_elaboracion.Month) &&
-                                                              o.fec_elaboracion.Day == (tmpFechaConstancia.Day > 0 ? tmpFechaConstancia.Day : o.fec_elaboracion.Day)).ToList()
+                                                              o.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal== (sucursal == -1 ? o.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal : sucursal)).ToList()
+                                                              .Where(o => o.fec_elaboracion == (tmpFechaConstancia == defaultDate ? o.fec_elaboracion : tmpFechaConstancia))
                             .Select(x => new
                             {
                                 nroConstancia = x.num_constancia_preparado,
@@ -140,16 +140,16 @@ namespace WebBS.Controllers.ALP
             try
             {
 
-                DateTime tmpFechaConstancia = DateTime.Parse(fechaConstancia);
+                DateTime defaultDate = new DateTime(1970, 1, 1);
+
+                DateTime tmpFechaConstancia = String.IsNullOrEmpty(fechaConstancia) ? defaultDate : DateTime.Parse(fechaConstancia);
 
                 var lstConstancia = db.ALP_CONSTANCIA_PREPARADO.Where(o => o.estado == "01" &&
                                                               o.ALP_HOJA_MERMA.Count() == 0 &&
                                                               o.num_constancia_preparado.Contains(String.IsNullOrEmpty(nroConstancia) ? o.num_constancia_preparado : nroConstancia) &&
                                                               o.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado.Contains(String.IsNullOrEmpty(nomPreparado) ? o.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado : nomPreparado) &&
-                                                              o.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal == (sucursal == -1 ? o.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal : sucursal) &&
-                                                              o.fec_elaboracion.Year == (tmpFechaConstancia.Year > 0 ? tmpFechaConstancia.Year : o.fec_elaboracion.Year) &&
-                                                              o.fec_elaboracion.Month == (tmpFechaConstancia.Month > 0 ? tmpFechaConstancia.Month : o.fec_elaboracion.Month) &&
-                                                              o.fec_elaboracion.Day == (tmpFechaConstancia.Day > 0 ? tmpFechaConstancia.Day : o.fec_elaboracion.Day)).ToList()
+                                                              o.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal == (sucursal == -1 ? o.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal : sucursal)).ToList()
+                                                              .Where(o => o.fec_elaboracion == (tmpFechaConstancia == defaultDate ? o.fec_elaboracion : tmpFechaConstancia))
                             .Select(x => new
                             {
                                 nroConstancia = x.num_constancia_preparado,
@@ -174,11 +174,14 @@ namespace WebBS.Controllers.ALP
 
             var empleado = db.RRH_EMPLEADO.Where(x => x.cod_empleado == 2).FirstOrDefault();
 
-            ViewBag.empleado = empleado.Nom_empleado + " " + empleado.Ap_paterno + " " + empleado.Ap_materno;
+            ViewBag.empleado = empleado.GetEmpleado();
             ViewBag.fechaConstancia = DateTime.Today.Date.ToString("dd/MM/yyyy");
 
-            var ordenPreparado = db.ALP_ORDEN_PREPARADO.Where( o => o.num_orden_preparado.Contains(num_orden));
-            return View("~/Views/ALP/Constancia/Nuevo.cshtml", ordenPreparado.FirstOrDefault());
+            var ordenPreparado = db.ALP_ORDEN_PREPARADO.Where( o => o.num_orden_preparado.Contains(num_orden)).FirstOrDefault();
+
+            ViewBag.tecnico = ordenPreparado.RRH_EMPLEADO.GetEmpleado();
+
+            return View("~/Views/ALP/Constancia/Nuevo.cshtml", ordenPreparado);
         }
 
         public ActionResult Modificar(string num_constancia = null)

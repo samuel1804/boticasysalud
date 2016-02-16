@@ -5,9 +5,9 @@
     var day = ("0" + now.getDate()).slice(-2);
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
 
-    var today = now.getFullYear() + "-" + (month) + "-" + (day);
+    /*var today = now.getFullYear() + "-" + (month) + "-" + (day);
 
-    $('#txtFecSolicitud').val(today);
+    $('#txtFecSolicitud').val(today);*/
 
     $("#btnBuscar").on("click", BuscarSolicitud);
 

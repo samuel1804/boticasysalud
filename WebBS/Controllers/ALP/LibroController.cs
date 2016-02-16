@@ -176,6 +176,8 @@ namespace WebBS.Controllers.ALP
                         db.ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO.Add(new ALP_LIBRO_RECETA_PSICOTROPICO_INSUMO()
                         {
                             cod_libro_receta_psicotropico = nextNroLibroPsico,
+                            num_constancia_preparado = nroConstancia,
+                            num_orden_preparado = constancia.num_orden_preparado,
                             cod_insumo = item.cod_insumo,
                             cant_insumo_constancia = item.cant_insumo_constancia,
                             cod_usu_regi = 3,

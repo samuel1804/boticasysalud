@@ -217,15 +217,15 @@ namespace WebBS.Controllers.ALP
             try
             {
 
-                DateTime tmpFechaConstancia = DateTime.Parse(fechaSolicitud);
+                DateTime defaultDate = new DateTime(1970, 1, 1);
+
+                DateTime tmpFechaSolicitud = String.IsNullOrEmpty(fechaSolicitud) ? defaultDate : DateTime.Parse(fechaSolicitud);
 
                 var solicitud = db.ALP_SOLICITUD_TRANSPORTE.Where(o => o.estado == "01" &&
                                                               o.num_solicitud.Contains(String.IsNullOrEmpty(nroSolicitud) ? o.num_solicitud : nroSolicitud) &&
                                                               o.ALP_CONSTANCIA_PREPARADO.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado.Contains(String.IsNullOrEmpty(nomPreparado) ? o.ALP_CONSTANCIA_PREPARADO.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado : nomPreparado) &&
-                                                              o.ALP_CONSTANCIA_PREPARADO.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal == (sucursal == -1 ? o.ALP_CONSTANCIA_PREPARADO.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal : sucursal) &&
-                                                              o.fec_solicitud.Year == (tmpFechaConstancia.Year > 0 ? tmpFechaConstancia.Year : o.fec_solicitud.Year) &&
-                                                              o.fec_solicitud.Month == (tmpFechaConstancia.Month > 0 ? tmpFechaConstancia.Month : o.fec_solicitud.Month) &&
-                                                              o.fec_solicitud.Day == (tmpFechaConstancia.Day > 0 ? tmpFechaConstancia.Day : o.fec_solicitud.Day)).ToList()
+                                                              o.ALP_CONSTANCIA_PREPARADO.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal == (sucursal == -1 ? o.ALP_CONSTANCIA_PREPARADO.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.cod_sucursal : sucursal)).ToList()
+                                                              .Where(o => o.fec_solicitud == (tmpFechaSolicitud == defaultDate ? o.fec_solicitud : tmpFechaSolicitud))
                             .Select(x => new
                             {
                                 nroSolicitud = x.num_solicitud,
