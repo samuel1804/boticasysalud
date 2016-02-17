@@ -252,7 +252,7 @@
 
                         <label class="control-label col-md-2" for="Fec_accion">DAM :</label>
                         <div class="col-md-5">
-                            <input id="uplFile" type="file" name="inputFile" class="file" data-show-upload="false" required />
+                            <input id="uplFile" type="file" name="inputFile" class="file" data-show-upload="false" data-allowed-file-extensions='["pdf","jpg","png","gif"]' required />
                         </div>
                         <div class="col-md-1">
                             @if (Model.IMP_DAM != null && Model.IMP_DAM.FirstOrDefault() != null && Model.IMP_DAM.FirstOrDefault().Archivo != null)

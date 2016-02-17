@@ -16,32 +16,7 @@
     <hr />
 
     <table class="table-bordered">
-        <tr>
-            <th>
-                Clasificación
-            </th>
-            <th>
-                Título
-            </th>
-
-            <th>
-                Fecha de Cierre Planificado
-            </th>
-
-            <th>
-                Estado
-            </th>
-            <th>
-                Prioridad
-            </th>
-            <th>
-                Observación
-            </th>
-            <th>
-                Responsable
-            </th>
-            <th></th>
-        </tr>
+       
         @{
 
             var codigoSolicitud = 0;
@@ -58,11 +33,39 @@
                 <tr class="rowGroup" data-toggle="collapse" data-target="#Panel_@item.Cod_solicitud_gestion_permiso">
                     <td colspan="8">
                         <h4>Solicitud : @item.IMP_SOLICITUD_GESTION_PERMISO.IMP_SOLICITUD.Numero</h4>
+                        <h5>Fecha : @item.IMP_SOLICITUD_GESTION_PERMISO.IMP_SOLICITUD.Fec_emision.Value.ToString("dd/MM/yyyy") </h5>
                         <h5>Artículo : @item.IMP_SOLICITUD_GESTION_PERMISO.IMP_ARTICULO.Nombre</h5>
                         <p>@item.IMP_SOLICITUD_GESTION_PERMISO.IMP_SOLICITUD.Observaciones</p>
                     </td>
                 </tr>
+              
                 @Html.Raw("<tbody" + " Id='Panel_" + item.Cod_solicitud_gestion_permiso + "' class='collapse'>")
+                <tr>
+                    <th>
+                        Clasificación
+                    </th>
+                    <th>
+                        Título
+                    </th>
+
+                    <th>
+                        Fecha de Cierre Planificado
+                    </th>
+
+                    <th>
+                        Estado
+                    </th>
+                    <th>
+                        Prioridad
+                    </th>
+                    <th>
+                        Observación
+                    </th>
+                    <th>
+                        Responsable
+                    </th>
+                    <th></th>
+                </tr>
             }
 
 

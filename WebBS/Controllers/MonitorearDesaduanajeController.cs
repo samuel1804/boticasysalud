@@ -28,7 +28,8 @@ namespace WebBS.Controllers
                 var bistacora = new List<IMP_BITACORA_EVENTO>();
                 if (oc != null)
                 {
-                    var desadunaje = oc.IMP_SOLICITUD_IMPORTACION.FirstOrDefault(s => s.IMP_DESADUANAJE != null && s.IMP_DESADUANAJE.Any()).IMP_DESADUANAJE.FirstOrDefault();
+                    var solicitud = oc.IMP_SOLICITUD_IMPORTACION.FirstOrDefault(s => s.IMP_DESADUANAJE != null && s.IMP_DESADUANAJE.Any());
+                    var desadunaje = solicitud.IMP_DESADUANAJE.FirstOrDefault();
                     bistacora = desadunaje.IMP_BITACORA_EVENTO.ToList();
                     TempData["alerta"] = db.IMP_ALERTA_EVENTO.Where(a => a.Cod_desaduanaje == desadunaje.Cod_desaduanaje).ToList();
                     TempData["desaduanaje"] = desadunaje.Cod_desaduanaje;

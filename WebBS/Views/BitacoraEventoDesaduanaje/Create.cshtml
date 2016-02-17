@@ -43,7 +43,7 @@
         <div class="form-group">
             <label class="control-label col-md-2" for="Descripcion">Título</label>
             <div class="col-md-5">
-                @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control", required = "", placeholder = "Título" } })
+                @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control", required = "", placeholder = "Título", maxLength = "50" } })
             </div>
             <div class="col-md-2">
                 @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
@@ -63,7 +63,7 @@
         <div class="form-group">
             <label class="control-label col-md-2" for="Observaciones">Observaciones</label>
             <div class="col-md-8">
-                @Html.TextAreaFor(model => model.Observaciones, new { @class = "form-control", required = "", rows = "5", placeholder = "Agregar las observaciones o consideraciones" })
+                @Html.TextAreaFor(model => model.Observaciones, new { @class = "form-control", required = "", rows = "5", placeholder = "Agregar las observaciones o consideraciones", maxLength = "150" })
             </div>
             <div class="col-md-2">
                 @Html.ValidationMessageFor(model => model.Observaciones, "", new { @class = "text-danger" })
@@ -116,7 +116,8 @@
         $(document).ready(function () {
             new Pe.GMD.UI.Web.Components.Calendar({
                 inputFrom: $("#txtFechaEvento"),
-                maxDateFrom: new Date
+                maxDateFrom: new Date,
+                minDateFrom: '@iMP_DESADUANAJE.IMP_SOLICITUD_IMPORTACION.IMP_SOLICITUD.Fec_emision.Value.ToString("dd/MM/yyyy")'
             });
 
 
