@@ -157,4 +157,20 @@
         </div>
     </div>
 }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}
+<script type="text/javascript">
+@if (TempData["message"] != null)
+{
+
+    <Text>
+    alert('@TempData["message"]');
+    </text>
+
+}
+</script>
+
 

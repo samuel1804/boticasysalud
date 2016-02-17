@@ -147,7 +147,8 @@ namespace WebBS.Controllers
         {
             try
             {
-                List<GCC_CLIENTE> clienteEncontrado = db.GCC_CLIENTE.Where(b => b.Num_doc_identidad.Contains(cliente.Num_doc_identidad)).ToList();
+                List<GCC_CLIENTE> clienteEncontrado = db.GCC_CLIENTE.Where(b => b.Num_doc_identidad.Contains(cliente.Num_doc_identidad) && b.
+                    Cod_cliente != cliente.Cod_cliente).ToList();
 
                 if (clienteEncontrado != null && clienteEncontrado.Count != 0)
                 {

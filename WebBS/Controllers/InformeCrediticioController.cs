@@ -317,6 +317,17 @@ namespace WebBS.Controllers
                 }
             }
 
+            if(informeCrediticio.Reporte_infocorp==null){
+                List<SelectListItem> items = new List<SelectListItem>();
+
+                items.Add(new SelectListItem { Text = "Alto", Value = "A", Selected = true });
+                items.Add(new SelectListItem { Text = "Media", Value = "M" });
+                items.Add(new SelectListItem { Text = "Baja", Value = "B" });
+                ViewBag.RiesgoSelection = items;
+                TempData["message"] = "Reporte INFOCORP es requerido";
+                return View();
+            }
+
             db.GCC_INFORME_CREDITICIO.Add(informeCrediticio);
             db.SaveChanges();
 
