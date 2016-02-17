@@ -233,7 +233,7 @@ namespace WebBS.Controllers.ALP
                                 fechaSolicitud = x.fec_solicitud.ToString("dd/MM/yyyy"),
                                 quimico = x.RRH_EMPLEADO.GetEmpleado(),
                                 sucursal = x.ALP_CONSTANCIA_PREPARADO.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.Descripcion
-                            }).ToList();
+                            }).ToList().OrderByDescending(x => x.fechaSolicitud);
 
 
                 return Json(JsonResponseFactory.SuccessResponse(solicitud.ToList()));

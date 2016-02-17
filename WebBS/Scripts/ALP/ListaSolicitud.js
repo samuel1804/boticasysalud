@@ -15,7 +15,7 @@
 
     function BuscarSolicitud() {
 
-        var nroSolicitud = $("#txtNroOrden").val();
+        var nroSolicitud = $("#txtNroConstancia").val();
         var fechaSolicitud = $("#txtFecSolicitud").val();
         var nomPreparado = $("#txtNomPreparado").val();
         var sucursal = parseInt($("#selSucursal").val());

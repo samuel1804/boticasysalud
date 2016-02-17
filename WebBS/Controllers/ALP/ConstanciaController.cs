@@ -83,7 +83,7 @@ namespace WebBS.Controllers.ALP
                                 nomPreparado = x.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado,
                                 fechaConstancia = x.fec_elaboracion.ToString("dd/MM/yyyy"),
                                 sucursal = x.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.Descripcion
-                            }).ToList();
+                            }).ToList().OrderByDescending(x => x.fechaConstancia);
 
 
                 return Json(JsonResponseFactory.SuccessResponse(constancia.ToList()));
@@ -120,7 +120,7 @@ namespace WebBS.Controllers.ALP
                                 nomPreparado = x.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado,
                                 fechaConstancia = x.fec_elaboracion.ToString("dd/MM/yyyy"),
                                 sucursal = x.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.Descripcion
-                            }).ToList();
+                            }).ToList().OrderByDescending(x => x.fechaConstancia);
                
                 return Json(JsonResponseFactory.SuccessResponse(lstConstancia));
 
@@ -156,7 +156,7 @@ namespace WebBS.Controllers.ALP
                                 nomPreparado = x.ALP_ORDEN_PREPARADO.ALP_RECETA.nom_preparado,
                                 fechaConstancia = x.fec_elaboracion.ToString("dd/MM/yyyy"),
                                 sucursal = x.ALP_ORDEN_PREPARADO.RRH_SUCURSAL.Descripcion
-                            }).ToList();
+                            }).ToList().OrderByDescending(x => x.fechaConstancia);
 
                 return Json(JsonResponseFactory.SuccessResponse(lstConstancia));
 
