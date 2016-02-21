@@ -59,7 +59,7 @@
                     <label class="control-label col-md-4 col-sm-4 col-xs-12">Número de Orden de Pedido:</label>
                     <div class="col-sm-8">
                         <div class="input-group">
-                            @Html.TextBoxFor(model => model.NumeroPedido, new {@class = "form-control"})
+                            @Html.TextBoxFor(model => model.NumeroPedido, new { @class = "form-control", @disabled = "disabled" })
                             @Html.HiddenFor(p => p.OrdenPedidoId)
                             <span class="input-group-btn">
                                     <button type="button" id="btnPedidos" class="btn btn-info btn-flat">...</button>

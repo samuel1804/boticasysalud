@@ -181,7 +181,14 @@
             { name: 'ProductoId', index: 'ProductoId', align: 'center', width: 60 },
             { name: 'ProductoNombre', index: 'ProductoNombre', align: 'left', width: 150 },
             { name: 'UnidadMedida', index: 'UnidadMedida', align: 'center', width: 60 },
-            { name: 'Cantidad', index: 'Cantidad', align: 'right', width: 65, editable: true },
+            {
+                name: 'Cantidad',
+                index: 'Cantidad',
+                align: 'right',
+                width: 65,
+                editable: true,
+                editrules: { custom: true, custom_func: validarCantidad }
+            },
             { name: 'Observacion', index: 'Observacion', align: 'left', width: 200, editable: true },
             {
                 name: 'Eliminar',
@@ -190,7 +197,7 @@
                 align: "center",
                 sortable: false,
                 search: false,
-                formatter: function () {
+                formatter: function() {
                     return "<img src='@Url.Content("~/Content/Images/delete.png")' class='btnEliminar' title='Eliminar'/>";
                 }
             }
@@ -239,6 +246,16 @@
 
         SIG.GrillaUpgrade(opciones);
         CargarData();
+    }
+
+    function validarCantidad(value, colname) {
+        var rowKey = $(this).getGridParam('selrow');
+        var data = $(this).getRowData(rowKey);
+
+        if (value * 1 > 0)
+            return [true, "", ""];
+
+        return [false, "Ingrese una cantidad mayor a cero", ""];
     }
 
     function CargarData() {
