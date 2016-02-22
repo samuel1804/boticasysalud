@@ -24,6 +24,12 @@ namespace WebBS.Controllers
             if (nroInformeCredito != null || ruc != null || estado != null || fechaInformeInicio != null || fechaInformeFin != null)
             {
 
+                if(fechaInformeFin!=null && fechaInformeInicio!=null && fechaInformeInicio>fechaInformeFin){
+                    TempData["message"] = "Fecha Hasta no puede ser superior a Fecha Inicio";
+                    return RedirectToAction("Index");
+                }
+
+
                 var query = from s in db.GCC_INFORME_CREDITICIO
                             select s;
 
@@ -90,6 +96,12 @@ namespace WebBS.Controllers
 
             var query = from s in db.GCC_INFORME_CREDITICIO
                         select s;
+
+            if (fechaInformeFin != null && fechaInformeInicio != null && fechaInformeInicio > fechaInformeFin)
+            {
+                TempData["message"] = "Fecha Hasta no puede ser superior a Fecha Inicio";
+                return RedirectToAction("GenerarContratoIndex");
+            }
 
             if (fechaInformeInicio != null)
             {

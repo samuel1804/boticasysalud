@@ -20,7 +20,7 @@
                 <tr>
                     <td>&nbsp;&nbsp;&nbsp;</td>
                     <td>Nro. Inf. Créd.</td>
-                    <td><input type="text" name="nroInformeCredito"></td>
+                    <td><input type="number" name="nroInformeCredito"></td>
                     <td>RUC</td>
                     <td><input type="number" name="ruc"></td>
                     <td>Estado</td>
@@ -31,9 +31,9 @@
                 <tr>
                     <td>&nbsp;&nbsp;&nbsp;</td>
                     <td>Fecha Inicio Informe Crediticio</td>
-                    <td><input type="date" name="fechaInformeInicio" /></td>
+                    <td><input type="date" name="fechaInformeInicio" min="1970-01-01" max="2038-12-31" /></td>
                     <td>Hasta</td>
-                    <td><input type="date" name="fechaInformeFin" /></td>
+                    <td><input type="date" name="fechaInformeFin" min="1970-01-01" max="2038-12-31" /></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -113,3 +113,14 @@ Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.P
 
 @Html.PagedListPager(Model, page => Url.Action("Index",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+<script type="text/javascript">
+@if (TempData["message"] != null)
+{
+
+    <Text>
+    alert('@TempData["message"]');
+    </text>
+
+}
+</script>

@@ -30,6 +30,7 @@ namespace WebBS.Models
         [StringLength(150, MinimumLength = 1, ErrorMessage = "No puede superar 150 caracteres")]
         public string Direccion { get; set; }
         [Required(ErrorMessage = "Teléfono es requerido.")]
+        [StringLength(150, MinimumLength = 5, ErrorMessage = "Lingitud minima 5 caracteres")]
         [RegularExpression("([0-9]+)", ErrorMessage = "Ingrese solo números")]
         public string Telefono { get; set; }
         [Required(ErrorMessage = "Email es requerido.")]

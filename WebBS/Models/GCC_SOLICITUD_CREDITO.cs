@@ -29,7 +29,7 @@ namespace WebBS.Models
         [Display(Name = "Fecha Solicitud")]
         [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime Fec_solicitud { get; set; }
         [Display(Name = "Nro. Solicitud")]
         public string Num_solicitud { get; set; }

@@ -88,7 +88,7 @@ namespace WebBS.Controllers
             GCC_SOLICITUD_CREDITO solicitud = db.GCC_SOLICITUD_CREDITO.Find(id);
             if (solicitud.GCC_CLIENTE_JURIDICO.Categoria == "P")
             {
-                solicitud.Estado_cliente_str = "Cliente Nuevo";
+                solicitud.Estado_cliente_str = "Cliente Potencial";
             }
             else
             {
@@ -96,11 +96,11 @@ namespace WebBS.Controllers
 
                 if (comprobantes == null || comprobantes.Count == 0)
                 {
-                    solicitud.Estado_cliente_str = "Cliente Sin Historial";
+                    solicitud.Estado_cliente_str = "Cliente Corporativo : Sin Historial";
                 }
                 else
                 {
-                    solicitud.Estado_cliente_str = "Cliente Con Historial";
+                    solicitud.Estado_cliente_str = "Cliente Corporativo: Con Historial";
                 }
             }
             return View(solicitud);
@@ -147,15 +147,15 @@ namespace WebBS.Controllers
                 //estado cliente
 
                 if(sc.GCC_CLIENTE_JURIDICO.Categoria == "P"){
-                    sc.Estado_cliente_str = "Cliente Nuevo";
+                    sc.Estado_cliente_str = "Cliente Potencial";
                 } else {
                     List<GCC_COMPROBANTE> comprobantes = sc.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.GCC_COMPROBANTE.ToList();
 
                     if(comprobantes==null || comprobantes.Count==0){
-                        sc.Estado_cliente_str = "Cliente Sin Historial";
+                        sc.Estado_cliente_str = "Cliente Corporativo : Sin Historial";
                     }
                     else {
-                        sc.Estado_cliente_str = "Cliente Con Historial";
+                        sc.Estado_cliente_str = "Cliente Corporativo: Con Historial";
                     }
                 }
 
@@ -191,15 +191,15 @@ namespace WebBS.Controllers
                 if (solicitud.Observacion == null)
                     solicitud.Observacion = "";
 
-                if (solicitud.Estado_cliente_str == "Cliente Nuevo")
+                if (solicitud.Estado_cliente_str == "Cliente Potencial")
                 {
                     solicitud.Estado_cliente = "N";
                 }
-                else if (solicitud.Estado_cliente_str == "Cliente Sin Historial")
+                else if (solicitud.Estado_cliente_str == "Cliente Corporativo : Sin Historial")
                 {
                     solicitud.Estado_cliente = "S";
                 }
-                else if (solicitud.Estado_cliente_str == "Cliente Con Historial")
+                else if (solicitud.Estado_cliente_str == "Cliente Corporativo: Con Historial")
                 {
                     solicitud.Estado_cliente = "C";
                 }
@@ -228,15 +228,15 @@ namespace WebBS.Controllers
             // cliente estado
             if (solicitud.Estado_cliente == "N")
             {
-                solicitud.Estado_cliente_str = "Cliente Nuevo";
+                solicitud.Estado_cliente_str = "Cliente Potencial";
             }
             else if (solicitud.Estado_cliente == "S")
             {
-                solicitud.Estado_cliente_str = "Cliente Sin Historial";
+                solicitud.Estado_cliente_str = "Cliente Corporativo : Sin Historial";
             }
             else if (solicitud.Estado_cliente == "C")
             {
-                solicitud.Estado_cliente_str = "Cliente Con Historial";
+                solicitud.Estado_cliente_str = "Cliente Corporativo: Con Historial";
             }
 
             return View(solicitud);
@@ -298,7 +298,7 @@ namespace WebBS.Controllers
 
             if (solicitud.GCC_CLIENTE_JURIDICO.Categoria == "P")
             {
-                solicitud.Estado_cliente_str = "Cliente Nuevo";
+                solicitud.Estado_cliente_str = "Cliente Potencial";
             }
             else
             {
@@ -306,11 +306,11 @@ namespace WebBS.Controllers
 
                 if (comprobantes == null || comprobantes.Count == 0)
                 {
-                    solicitud.Estado_cliente_str = "Cliente Sin Historial";
+                    solicitud.Estado_cliente_str = "Cliente Corporativo : Sin Historial";
                 }
                 else
                 {
-                    solicitud.Estado_cliente_str = "Cliente Con Historial";
+                    solicitud.Estado_cliente_str = "Cliente Corporativo: Con Historial";
                 }
             }
 

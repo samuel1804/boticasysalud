@@ -17,7 +17,7 @@
         <div class="form-group">
             <label class="control-label col-md-2" for="Num_doc_identidad">RUC</label>
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad)*
+                @Html.TextBoxFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad, new { @class = "text-danger", @type = "number" })*
                 @Html.ValidationMessageFor(model => model.GCC_SOLICITUD_CREDITO.GCC_CLIENTE_JURIDICO.GCC_CLIENTE.Num_doc_identidad, null, new { @class = "text-danger" }) <button type="submit" formaction="/InformeCrediticio/BuscarCliente">Buscar Cliente</button>
             </div>
         </div>

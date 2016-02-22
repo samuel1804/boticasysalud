@@ -48,7 +48,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Fec_solicitud, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Fec_solicitud, new {  id = "datepicker" })*
+                @Html.TextBoxFor(model => model.Fec_solicitud, new { id = "datepicker", @readonly = "readonly", Style = "background:#D3D3D3;" })*
                 @Html.ValidationMessageFor(model => model.Fec_solicitud, null, new { @class = "text-danger" })
             </div>
         </div>
